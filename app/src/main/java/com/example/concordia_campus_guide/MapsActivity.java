@@ -39,7 +39,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     //Some Used variables which don't need to be changed
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
-    private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final float DEFAULT_ZOOM = 17f;
 
@@ -55,7 +54,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager()
                         .findFragmentById(R.id.map);
@@ -83,7 +82,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void onCompleteListenerCurrentLocation(Task location){
-        location.addOnCompleteListener(new OnCompleteListener() {
+        location.addOnCompleteListener(this, new OnCompleteListener() {
             @Override
             public void onComplete(@NonNull Task task) {
                 if(task.isSuccessful()){
@@ -198,8 +197,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Manifest.permission.ACCESS_COARSE_LOCATION};
         if(requestPermission()){
                 myLocationPermissionsGranted = true;
-                initMap();
-
         }else{
             ActivityCompat.requestPermissions(this,
                     permissions,
@@ -209,8 +206,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private boolean requestPermission(){
         if (ActivityCompat.checkSelfPermission(this, FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
-                COURSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                != PackageManager.PERMISSION_GRANTED) {
             return false;
         }
         return true;
@@ -223,19 +219,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         switch(requestCode){
             case LOCATION_PERMISSION_REQUEST_CODE:{
                 if(grantResults.length > 0){
-                    for(int i = 0; i < grantResults.length; i++) {
-
-                        //onRequestPermissionsResult: permission failed
-                        if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
-                            myLocationPermissionsGranted = false;
-                            return;
-                        }
-                    }
                     //onRequestPermissionsResult: permission granted
-                    myLocationPermissionsGranted = true;
-                    initMap();
+                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        myLocationPermissionsGranted = true;
+                    }
+
                 }
             }
         }
+        initMap();
     }
 }
