@@ -63,6 +63,7 @@ captures/
 # Google Services (e.g. APIs or Firebase)
 # google-services.json
 
+values/google_maps_api.xml
 app/release/res/values/google_maps_api.xml
 app/debug/res/values/google_maps_api.xml
 
