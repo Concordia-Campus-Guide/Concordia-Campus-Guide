@@ -10,6 +10,8 @@ import android.location.Location;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -17,30 +19,21 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CustomCap;
-import com.google.android.gms.maps.model.Dash;
-import com.google.android.gms.maps.model.Dot;
-import com.google.android.gms.maps.model.Gap;
-import com.google.android.gms.maps.model.JointType;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import com.google.android.gms.maps.model.PatternItem;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
-import com.google.android.gms.maps.model.Polyline;
-import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.android.gms.maps.model.RoundCap;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    private Button loyolaBtn;
+    private Button sgwBtn;
     //For Debugging
     private static final String TAG = "MapsActivity";
 
@@ -61,19 +54,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Retrieve the content view that renders the map.
         setContentView(R.layout.activity_maps);
-
-        // Get the SupportMapFragment and register for the callback
-        // when the map is ready for use.
+        
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager()
                         .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         attributesInit();
         initMap();
+        setupClickListeners();
         getLocationPermission();
     }
+
 
     private void attributesInit(){
     }
@@ -105,16 +97,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
@@ -131,6 +113,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+        setupPolyGonSGW(googleMap);
+        uiSettingsForMap(mMap);
+        zoomInLocation(45.494999, -73.577854);
+    }
+
+    private void setupPolyGonSGW(GoogleMap googleMap) {
         Polygon polygon1 = googleMap.addPolygon(new PolygonOptions()
                 .clickable(true)
                 .add(
@@ -139,24 +128,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         new LatLng(45.497385, -73.578332),
                         new LatLng(45.496832, -73.578842),
                         new LatLng(45.497178, -73.579550)));
-// Store a data object with the polygon, used here to indicate an arbitrary type.
+        // Store a data object with the polygon, used here to indicate an arbitrary type.
         polygon1.setTag("alpha");
         stylePolygon(polygon1);
-        uiSettingsForMap(mMap);
-
-        //Tarek's work
-        // Add a marker in Sydney and move the camera
-        LatLng curr = new LatLng(45.494999, -73.577854);
-        float zoomLevel = 16.0f; //This goes up to 21
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(curr, zoomLevel));
     }
 
     private void stylePolygon(Polygon polygon) {
-        String type = "";
-        // Get the data object stored with the polygon.
-        if (polygon.getTag() != null) {
-            type = polygon.getTag().toString();
-        }
 
         List<PatternItem> pattern = null;
         int strokeColor = COLOR_BLACK_ARGB;
@@ -182,8 +159,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void initMap(){
+        sgwBtn = findViewById(R.id.SGWBtn);
+        loyolaBtn = findViewById(R.id.loyolaBtn);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(MapsActivity.this);
+    }
+    private void setupClickListeners() {
+        setupLoyolaBtnClickListener();
+        setupSGWBtnClickListener();
+    }
+
+    private void setupLoyolaBtnClickListener() {
+        loyolaBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                zoomInLocation(45.458205, -73.640438);
+            }
+        });
+    }
+
+    private void setupSGWBtnClickListener(){
+        sgwBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                zoomInLocation(45.494999, -73.577854);
+            }
+        });
+    }
+
+    private void zoomInLocation(double latitude, double longitude) {
+        LatLng curr = new LatLng(latitude,longitude);
+        float zoomLevel = 16.0f;
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(curr, zoomLevel));
     }
 
     private void getLocationPermission(){
@@ -224,7 +231,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             return;
                         }
                     }
-
                     //onRequestPermissionsResult: permission granted
                     myLocationPermissionsGranted = true;
                     initMap();

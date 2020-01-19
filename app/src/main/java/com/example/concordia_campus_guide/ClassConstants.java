@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class  ClassConstants {
-    public static final int COLOR_WHITE_ARGB = 0x3CFFFFFF;
+    public static final int COLOR_WHITE_ARGB = 0x3C967bb6;
     public static final int COLOR_GREEN_ARGB = 0xff388E3C;
     public static final int COLOR_PURPLE_ARGB = 0xff81C784;
     public static final int COLOR_ORANGE_ARGB = 0xffF57F17;
