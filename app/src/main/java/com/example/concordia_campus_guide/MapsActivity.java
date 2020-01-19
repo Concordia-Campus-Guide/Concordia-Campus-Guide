@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -16,11 +17,27 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CustomCap;
+import com.google.android.gms.maps.model.Dash;
+import com.google.android.gms.maps.model.Dot;
+import com.google.android.gms.maps.model.Gap;
+import com.google.android.gms.maps.model.JointType;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import com.google.android.gms.maps.model.PatternItem;
+import com.google.android.gms.maps.model.Polygon;
+import com.google.android.gms.maps.model.PolygonOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.maps.model.RoundCap;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -36,12 +53,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //Attributes
     private Boolean myLocationPermissionsGranted = false;
     private GoogleMap mMap;
+    private static final int COLOR_BLACK_ARGB = 0xff000000;
+    private static final int POLYLINE_STROKE_WIDTH_PX = 12;
+
     private FusedLocationProviderClient fusedLocationProviderClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Retrieve the content view that renders the map.
         setContentView(R.layout.activity_maps);
+
+        // Get the SupportMapFragment and register for the callback
+        // when the map is ready for use.
+        SupportMapFragment mapFragment =
+                (SupportMapFragment) getSupportFragmentManager()
+                        .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
         attributesInit();
         initMap();
         getLocationPermission();
@@ -86,9 +114,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
+        try {
+            boolean success = googleMap.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(
+                            this, R.raw.mapstyle_retro));
+
+            if (!success) {
+                Log.e("MAPACTIVITY", "Style parsing failed.");
+            }
+        } catch (Resources.NotFoundException e) {
+            Log.e("MAPACTIVITY", "Can't find style. Error: ", e);
+        }
         mMap = googleMap;
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        Polygon polygon1 = googleMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(
+                        new LatLng(45.497178, -73.579550),
+                        new LatLng(45.497708, -73.579035),
+                        new LatLng(45.497385, -73.578332),
+                        new LatLng(45.496832, -73.578842),
+                        new LatLng(45.497178, -73.579550)));
+// Store a data object with the polygon, used here to indicate an arbitrary type.
+        polygon1.setTag("alpha");
+        stylePolygon(polygon1);
         uiSettingsForMap(mMap);
 
         //Tarek's work
@@ -96,10 +149,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng curr = new LatLng(45.494999, -73.577854);
         float zoomLevel = 16.0f; //This goes up to 21
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(curr, zoomLevel));
-        mMap.addMarker(new MarkerOptions().position(curr).title("I am here"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(curr));
     }
 
+    private void stylePolygon(Polygon polygon) {
+        String type = "";
+        // Get the data object stored with the polygon.
+        if (polygon.getTag() != null) {
+            type = polygon.getTag().toString();
+        }
+
+        List<PatternItem> pattern = null;
+        int strokeColor = COLOR_BLACK_ARGB;
+        int fillColor = ClassConstants.COLOR_WHITE_ARGB;
+
+        polygon.setStrokePattern(pattern);
+        polygon.setStrokeWidth(ClassConstants.POLYGON_STROKE_WIDTH_PX);
+        polygon.setStrokeColor(strokeColor);
+        polygon.setFillColor(fillColor); //half-transparent green color
+    }
     //Basically to decide what to display on the map
     private void uiSettingsForMap(GoogleMap mMap){
         if(myLocationPermissionsGranted){
