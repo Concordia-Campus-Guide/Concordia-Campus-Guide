@@ -10,7 +10,7 @@ Create an Android application that helps navigate through Concordia's buildings 
 |:------------------------|:--------:|:------------------:
 | Thomas Gauvin           | 40064853 | Team Lead          |
 | Tarek Ait Hamouda       | 40044119 | Technical Lead     | 
-| Hambrsoom Baboyan       | 40054395 |                    | 
+| Hambrsoom Baboyan       | 40054395 | Documentation Lead | 
 | Viveka Anban            | 40063308 |                    | 
 | Abhijit Gupta           | 40066502 |                    |
 | Ethel Narra Pangan      | 40061530 |                    | 
