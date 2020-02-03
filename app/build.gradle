@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'jacoco-android'
 
+def properties = new Properties()
+properties.load(project.rootProject.file("local.properties").newDataInputStream())
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -11,6 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [google_api_key: properties.getProperty('default.account.google_maps_key')]
     }
     buildTypes {
         debug {
