@@ -21,7 +21,7 @@ public class UITestExample {
 
     @Test
     public void dummyTest(){
-        onView(allOf(withId(R.id.helloWorld), withText("Hello World!")));
+        onView(allOf(withId(R.id.MainActivityText), withText("Hello World!")));
     }
 
 }
