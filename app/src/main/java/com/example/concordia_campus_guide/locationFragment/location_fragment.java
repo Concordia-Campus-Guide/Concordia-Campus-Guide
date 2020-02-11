@@ -1,37 +1,41 @@
-package com.example.concordia_campus_guide;
+package com.example.concordia_campus_guide.locationFragment;
 
-import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.content.res.Resources;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
+import com.example.concordia_campus_guide.ClassConstants;
+import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-
 import com.google.android.gms.maps.model.PatternItem;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
 
 import java.util.List;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class location_fragment extends Fragment{
 
+    MapView mMapView;
     private Button loyolaBtn;
     private Button sgwBtn;
     //For Debugging
@@ -48,76 +52,107 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final int COLOR_BLACK_ARGB = 0xff000000;
     private static final int POLYLINE_STROKE_WIDTH_PX = 12;
 
-    private FusedLocationProviderClient fusedLocationProviderClient;
+    private LocationFragmentViewModel mViewModel;
+
+    public static location_fragment newInstance() {
+        return new location_fragment();
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        SupportMapFragment mapFragment =
-                (SupportMapFragment) getSupportFragmentManager()
-                        .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-        attributesInit();
-        initMap();
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.location_fragment_fragment, container, false);
+
+        mMapView = (MapView) rootView.findViewById(R.id.mapView);
+        mMapView.onCreate(savedInstanceState);
+
+        mMapView.onResume(); // needed to get the map to display immediately
+
+        try {
+            MapsInitializer.initialize(getActivity().getApplicationContext());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mMapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                try {
+                    boolean success = googleMap.setMapStyle(
+                            MapStyleOptions.loadRawResourceStyle(
+                                    getContext(), R.raw.mapstyle_night));
+
+                    if (!success) {
+                        Log.e("MAPACTIVITY", "Style parsing failed.");
+                    }
+                } catch (Resources.NotFoundException e) {
+                    Log.e("MAPACTIVITY", "Can't find style. Error: ", e);
+                }
+                mMap = googleMap;
+                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+                setupPolyGonSGW(googleMap);
+                uiSettingsForMap(mMap);
+                zoomInLocation(45.494999, -73.577854);
+            }
+        });
+        sgwBtn = rootView.findViewById(R.id.SGWBtn);
+        loyolaBtn = rootView.findViewById(R.id.loyolaBtn);
         setupClickListeners();
         getLocationPermission();
+
+        return rootView;
     }
 
-
-    private void attributesInit(){
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mViewModel = ViewModelProviders.of(this).get(LocationFragmentViewModel.class);
+        // TODO: Use the ViewModel
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        mMapView.onResume();
     }
 
-    private void getDeviceLocation(){
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        try{
-            if(myLocationPermissionsGranted){
-                final Task location = fusedLocationProviderClient.getLastLocation();
-                onCompleteListenerCurrentLocation(location);
-            }
-        }catch (SecurityException e){
-            Log.e(TAG, "getDeviceLocation: SecurityException: " + e.getMessage() );
-        }
+    @Override
+    public void onPause() {
+        super.onPause();
+        mMapView.onPause();
     }
 
-    private void onCompleteListenerCurrentLocation(Task location){
-        location.addOnCompleteListener(this, new OnCompleteListener() {
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mMapView.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mMapView.onLowMemory();
+    }
+    private void setupClickListeners() {
+        setupLoyolaBtnClickListener();
+        setupSGWBtnClickListener();
+    }
+    private void setupLoyolaBtnClickListener() {
+        loyolaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onComplete(@NonNull Task task) {
-                if(task.isSuccessful()){
-                    Location currentLocation = (Location) task.getResult();
-                    moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
-                            DEFAULT_ZOOM);
-                }else{
-                    Log.d(TAG, "onComplete: current location is null");
-                }
+            public void onClick(View view) {
+                zoomInLocation(45.458205, -73.640438);
             }
         });
     }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-
-        try {
-            boolean success = googleMap.setMapStyle(
-                    MapStyleOptions.loadRawResourceStyle(
-                            this, R.raw.mapstyle_retro));
-
-            if (!success) {
-                Log.e("MAPACTIVITY", "Style parsing failed.");
+    private void setupSGWBtnClickListener(){
+        sgwBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                zoomInLocation(45.494999, -73.577854);
             }
-        } catch (Resources.NotFoundException e) {
-            Log.e("MAPACTIVITY", "Can't find style. Error: ", e);
-        }
-        mMap = googleMap;
-        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-
-        setupPolyGonSGW(googleMap);
-        uiSettingsForMap(mMap);
-        zoomInLocation(45.494999, -73.577854);
+        });
     }
-
     private void setupPolyGonSGW(GoogleMap googleMap) {
         Polygon polygon1 = googleMap.addPolygon(new PolygonOptions()
                 .clickable(true)
@@ -156,36 +191,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void moveCamera(LatLng latLng, float zoom){
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
     }
-
-    private void initMap(){
-        sgwBtn = findViewById(R.id.SGWBtn);
-        loyolaBtn = findViewById(R.id.loyolaBtn);
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(MapsActivity.this);
-    }
-    private void setupClickListeners() {
-        setupLoyolaBtnClickListener();
-        setupSGWBtnClickListener();
-    }
-
-    private void setupLoyolaBtnClickListener() {
-        loyolaBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                zoomInLocation(45.458205, -73.640438);
-            }
-        });
-    }
-
-    private void setupSGWBtnClickListener(){
-        sgwBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                zoomInLocation(45.494999, -73.577854);
-            }
-        });
-    }
-
     private void zoomInLocation(double latitude, double longitude) {
         LatLng curr = new LatLng(latitude,longitude);
         float zoomLevel = 16.0f;
@@ -196,16 +201,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
         if(requestPermission()){
-                myLocationPermissionsGranted = true;
+            myLocationPermissionsGranted = true;
         }else{
-            ActivityCompat.requestPermissions(this,
+            ActivityCompat.requestPermissions(getActivity(),
                     permissions,
                     LOCATION_PERMISSION_REQUEST_CODE);
         }
     }
 
     private boolean requestPermission(){
-        if (ActivityCompat.checkSelfPermission(this, FINE_LOCATION)
+        if (ActivityCompat.checkSelfPermission(getContext(), FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             return false;
         }
@@ -227,6 +232,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         }
-        initMap();
     }
+
+
 }
