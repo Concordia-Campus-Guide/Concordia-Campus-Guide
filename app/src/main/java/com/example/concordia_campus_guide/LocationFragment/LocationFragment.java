@@ -99,12 +99,9 @@ public class LocationFragment extends Fragment{
 
     private void setMapStyle(GoogleMap googleMap) {
         try {
-            boolean success = googleMap.setMapStyle(
+            googleMap.setMapStyle(
                     MapStyleOptions.loadRawResourceStyle(
-                            getContext(), R.raw.mapstyle_retro));
-            if (!success) {
-                Log.e("MAPACTIVITY", "Style parsing failed.");
-            }
+                            getContext(), mViewModel.getMapStyle()));
         } catch (Resources.NotFoundException e) {
             Log.e("MAPACTIVITY", "Can't find style. Error: ", e);
         }
@@ -134,15 +131,7 @@ public class LocationFragment extends Fragment{
     }
 
     private void setupPolyGonSGW(GoogleMap googleMap) {
-        Polygon polygon1 = googleMap.addPolygon(new PolygonOptions()
-                .clickable(true)
-                .add(
-                        new LatLng(45.497178, -73.579550),
-                        new LatLng(45.497708, -73.579035),
-                        new LatLng(45.497385, -73.578332),
-                        new LatLng(45.496832, -73.578842),
-                        new LatLng(45.497178, -73.579550)));
-
+        Polygon polygon1 = googleMap.addPolygon(mViewModel.getPolygon());
         stylePolygon(polygon1);
     }
 
