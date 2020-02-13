@@ -27,7 +27,6 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
-import com.google.android.gms.maps.model.PatternItem;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
 
@@ -38,19 +37,13 @@ import static androidx.core.content.ContextCompat.checkSelfPermission;
 public class LocationFragment extends Fragment{
 
     MapView mMapView;
+    private GoogleMap mMap;
+    private LocationFragmentViewModel mViewModel;
+
     private Button loyolaBtn;
     private Button sgwBtn;
 
-    //Some Used variables which don't need to be changed
-    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-
-    //Attributes
     private Boolean myLocationPermissionsGranted = false;
-    private GoogleMap mMap;
-    private static final int COLOR_BLACK_ARGB = 0xff000000;
-
-    private com.example.concordia_campus_guide.LocationFragment.LocationFragmentViewModel mViewModel;
 
     public static LocationFragment newInstance() {
         return new LocationFragment();
@@ -108,7 +101,7 @@ public class LocationFragment extends Fragment{
         try {
             boolean success = googleMap.setMapStyle(
                     MapStyleOptions.loadRawResourceStyle(
-                            getContext(), R.raw.mapstyle_night));
+                            getContext(), R.raw.mapstyle_retro));
             if (!success) {
                 Log.e("MAPACTIVITY", "Style parsing failed.");
             }
@@ -121,6 +114,7 @@ public class LocationFragment extends Fragment{
         setupLoyolaBtnClickListener();
         setupSGWBtnClickListener();
     }
+
     private void setupLoyolaBtnClickListener() {
         loyolaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,6 +132,7 @@ public class LocationFragment extends Fragment{
             }
         });
     }
+
     private void setupPolyGonSGW(GoogleMap googleMap) {
         Polygon polygon1 = googleMap.addPolygon(new PolygonOptions()
                 .clickable(true)
@@ -147,23 +142,17 @@ public class LocationFragment extends Fragment{
                         new LatLng(45.497385, -73.578332),
                         new LatLng(45.496832, -73.578842),
                         new LatLng(45.497178, -73.579550)));
-        // Store a data object with the polygon, used here to indicate an arbitrary type.
-        polygon1.setTag("alpha");
+
         stylePolygon(polygon1);
     }
 
     private void stylePolygon(Polygon polygon) {
 
-        List<PatternItem> pattern = null;
-        int strokeColor = COLOR_BLACK_ARGB;
-        int fillColor = ClassConstants.COLOR_WHITE_ARGB;
-
-        polygon.setStrokePattern(pattern);
         polygon.setStrokeWidth(ClassConstants.POLYGON_STROKE_WIDTH_PX);
-        polygon.setStrokeColor(strokeColor);
-        polygon.setFillColor(fillColor); //half-transparent green color
+        polygon.setStrokeColor(ClassConstants.COLOR_BLACK_ARGB);
+        polygon.setFillColor(ClassConstants.COLOR_WHITE_ARGB);
     }
-    //Basically to decide what to display on the map
+
     private void uiSettingsForMap(GoogleMap mMap){
         if(myLocationPermissionsGranted){
             mMap.setMyLocationEnabled(true);
@@ -187,18 +176,18 @@ public class LocationFragment extends Fragment{
         }else{
             ActivityCompat.requestPermissions(getActivity(),
                     permissions,
-                    LOCATION_PERMISSION_REQUEST_CODE);
+                    ClassConstants.LOCATION_PERMISSION_REQUEST_CODE);
         }
     }
 
     private boolean requestPermission(){
-        return (checkSelfPermission(getContext(), FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
+        return (checkSelfPermission(getContext(), ClassConstants.FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
-        if(requestCode == LOCATION_PERMISSION_REQUEST_CODE)
+        if(requestCode == ClassConstants.LOCATION_PERMISSION_REQUEST_CODE)
             myLocationPermissionsGranted = (grantResults.length > 0 &&
                     grantResults[0] == PackageManager.PERMISSION_GRANTED);
     }
