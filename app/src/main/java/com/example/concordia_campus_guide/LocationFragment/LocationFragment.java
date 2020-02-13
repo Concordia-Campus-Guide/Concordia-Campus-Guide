@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.locationFragment;
+package com.example.concordia_campus_guide.LocationFragment;
 
 import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProviders;
@@ -33,29 +33,27 @@ import com.google.android.gms.maps.model.PolygonOptions;
 
 import java.util.List;
 
-public class location_fragment extends Fragment{
+import static androidx.core.content.ContextCompat.checkSelfPermission;
+
+public class LocationFragment extends Fragment{
 
     MapView mMapView;
     private Button loyolaBtn;
     private Button sgwBtn;
-    //For Debugging
-    private static final String TAG = "MapsActivity";
 
     //Some Used variables which don't need to be changed
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-    private static final float DEFAULT_ZOOM = 17f;
 
     //Attributes
     private Boolean myLocationPermissionsGranted = false;
     private GoogleMap mMap;
     private static final int COLOR_BLACK_ARGB = 0xff000000;
-    private static final int POLYLINE_STROKE_WIDTH_PX = 12;
 
-    private LocationFragmentViewModel mViewModel;
+    private com.example.concordia_campus_guide.LocationFragment.LocationFragmentViewModel mViewModel;
 
-    public static location_fragment newInstance() {
-        return new location_fragment();
+    public static LocationFragment newInstance() {
+        return new LocationFragment();
     }
 
     @Override
@@ -63,11 +61,30 @@ public class location_fragment extends Fragment{
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.location_fragment_fragment, container, false);
 
-        mMapView = (MapView) rootView.findViewById(R.id.mapView);
+        initComponent(rootView);
         mMapView.onCreate(savedInstanceState);
+        mMapView.onResume();
 
-        mMapView.onResume(); // needed to get the map to display immediately
+        initMap();
+        setupClickListeners();
+        getLocationPermission();
 
+        return rootView;
+    }
+
+    private void initComponent(View rootView) {
+        mMapView = rootView.findViewById(R.id.mapView);
+        sgwBtn = rootView.findViewById(R.id.SGWBtn);
+        loyolaBtn = rootView.findViewById(R.id.loyolaBtn);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mViewModel = ViewModelProviders.of(this).get(com.example.concordia_campus_guide.LocationFragment.LocationFragmentViewModel.class);
+    }
+
+    private void initMap() {
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
         } catch (Exception e) {
@@ -76,17 +93,7 @@ public class location_fragment extends Fragment{
         mMapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
-                try {
-                    boolean success = googleMap.setMapStyle(
-                            MapStyleOptions.loadRawResourceStyle(
-                                    getContext(), R.raw.mapstyle_night));
-
-                    if (!success) {
-                        Log.e("MAPACTIVITY", "Style parsing failed.");
-                    }
-                } catch (Resources.NotFoundException e) {
-                    Log.e("MAPACTIVITY", "Can't find style. Error: ", e);
-                }
+                setMapStyle(googleMap);
                 mMap = googleMap;
                 mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
@@ -95,43 +102,21 @@ public class location_fragment extends Fragment{
                 zoomInLocation(45.494999, -73.577854);
             }
         });
-        sgwBtn = rootView.findViewById(R.id.SGWBtn);
-        loyolaBtn = rootView.findViewById(R.id.loyolaBtn);
-        setupClickListeners();
-        getLocationPermission();
-
-        return rootView;
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(LocationFragmentViewModel.class);
-        // TODO: Use the ViewModel
-    }
-    @Override
-    public void onResume() {
-        super.onResume();
-        mMapView.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mMapView.onPause();
+    private void setMapStyle(GoogleMap googleMap) {
+        try {
+            boolean success = googleMap.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(
+                            getContext(), R.raw.mapstyle_night));
+            if (!success) {
+                Log.e("MAPACTIVITY", "Style parsing failed.");
+            }
+        } catch (Resources.NotFoundException e) {
+            Log.e("MAPACTIVITY", "Can't find style. Error: ", e);
+        }
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mMapView.onDestroy();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mMapView.onLowMemory();
-    }
     private void setupClickListeners() {
         setupLoyolaBtnClickListener();
         setupSGWBtnClickListener();
@@ -188,9 +173,6 @@ public class location_fragment extends Fragment{
         mMap.getUiSettings().setTiltGesturesEnabled(true);
     }
 
-    private void moveCamera(LatLng latLng, float zoom){
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
-    }
     private void zoomInLocation(double latitude, double longitude) {
         LatLng curr = new LatLng(latitude,longitude);
         float zoomLevel = 16.0f;
@@ -210,29 +192,40 @@ public class location_fragment extends Fragment{
     }
 
     private boolean requestPermission(){
-        if (ActivityCompat.checkSelfPermission(getContext(), FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            return false;
-        }
-        return true;
+        return (checkSelfPermission(getContext(), FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        myLocationPermissionsGranted = false;
 
-        switch(requestCode){
-            case LOCATION_PERMISSION_REQUEST_CODE:{
-                if(grantResults.length > 0){
-                    //onRequestPermissionsResult: permission granted
-                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                        myLocationPermissionsGranted = true;
-                    }
-
-                }
-            }
-        }
+        if(requestCode == LOCATION_PERMISSION_REQUEST_CODE)
+            myLocationPermissionsGranted = (grantResults.length > 0 &&
+                    grantResults[0] == PackageManager.PERMISSION_GRANTED);
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        mMapView.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mMapView.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mMapView.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mMapView.onLowMemory();
+    }
+
 
 
 }

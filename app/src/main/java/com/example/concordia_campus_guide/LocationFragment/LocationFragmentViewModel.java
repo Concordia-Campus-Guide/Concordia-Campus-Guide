@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.locationFragment;
+package com.example.concordia_campus_guide.LocationFragment;
 
 import androidx.lifecycle.ViewModel;
 
