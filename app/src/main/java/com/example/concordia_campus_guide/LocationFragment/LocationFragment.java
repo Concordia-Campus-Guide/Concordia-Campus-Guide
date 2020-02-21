@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProviders;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.concordia_campus_guide.ClassConstants;
+
+import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,17 +31,14 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Polygon;
-import com.google.android.gms.maps.model.PolygonOptions;
-
-import java.util.List;
 
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 
 public class LocationFragment extends Fragment{
-
     MapView mMapView;
     private GoogleMap mMap;
     private LocationFragmentViewModel mViewModel;
+    private Buildings buildings;
 
     private Button loyolaBtn;
     private Button sgwBtn;
@@ -53,7 +53,6 @@ public class LocationFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.location_fragment_fragment, container, false);
-
         initComponent(rootView);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
@@ -75,6 +74,7 @@ public class LocationFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(com.example.concordia_campus_guide.LocationFragment.LocationFragmentViewModel.class);
+        buildings = mViewModel.readJsonFile(getContext());
     }
 
     private void initMap() {
@@ -131,12 +131,12 @@ public class LocationFragment extends Fragment{
     }
 
     private void setupPolyGonSGW(GoogleMap googleMap) {
-        Polygon polygon1 = googleMap.addPolygon(mViewModel.getPolygon());
-        stylePolygon(polygon1);
+        mViewModel.createListOfPolyons(buildings,googleMap);
+        // Polygon polygon1 = googleMap.addPolygon(mViewModel.getPolygon());
+        //stylePolygon(polygon1);
     }
 
     private void stylePolygon(Polygon polygon) {
-
         polygon.setStrokeWidth(ClassConstants.POLYGON_STROKE_WIDTH_PX);
         polygon.setStrokeColor(ClassConstants.COLOR_BLACK_ARGB);
         polygon.setFillColor(ClassConstants.COLOR_WHITE_ARGB);
@@ -203,7 +203,4 @@ public class LocationFragment extends Fragment{
         super.onLowMemory();
         mMapView.onLowMemory();
     }
-
-
-
 }
