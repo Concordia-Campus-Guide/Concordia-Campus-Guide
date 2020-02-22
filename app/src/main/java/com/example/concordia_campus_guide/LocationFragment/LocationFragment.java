@@ -74,7 +74,7 @@ public class LocationFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(com.example.concordia_campus_guide.LocationFragment.LocationFragmentViewModel.class);
-        buildings = mViewModel.readJsonFile(getContext());
+        mViewModel.readJsonFile(getContext());
     }
 
     private void initMap() {
@@ -131,7 +131,7 @@ public class LocationFragment extends Fragment{
     }
 
     private void setupPolyGonSGW(GoogleMap googleMap) {
-        mViewModel.createListOfPolyons(buildings,googleMap);
+       // mViewModel.createListOfPolyons(buildings,googleMap);
         // Polygon polygon1 = googleMap.addPolygon(mViewModel.getPolygon());
         //stylePolygon(polygon1);
     }
