@@ -74,7 +74,6 @@ public class LocationFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(com.example.concordia_campus_guide.LocationFragment.LocationFragmentViewModel.class);
-        mViewModel.readJsonFile(getContext());
     }
 
     private void initMap() {
@@ -90,7 +89,7 @@ public class LocationFragment extends Fragment{
                 mMap = googleMap;
                 mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-                setupPolyGonSGW(googleMap);
+                setupPolygons(mMap);
                 uiSettingsForMap(mMap);
                 zoomInLocation(45.494999, -73.577854);
             }
@@ -130,10 +129,8 @@ public class LocationFragment extends Fragment{
         });
     }
 
-    private void setupPolyGonSGW(GoogleMap googleMap) {
-       // mViewModel.createListOfPolyons(buildings,googleMap);
-        // Polygon polygon1 = googleMap.addPolygon(mViewModel.getPolygon());
-        //stylePolygon(polygon1);
+    private void setupPolygons(GoogleMap map) {
+        mViewModel.loadPolygons(map, getContext());
     }
 
     private void stylePolygon(Polygon polygon) {
