@@ -1,26 +1,28 @@
 package com.example.concordia_campus_guide.Models;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class BuildingInfo {
+public class PolygonObject {
     public long getId() {
         return buildingId;
     }
     public void setId(long id) {
         this.buildingId = id;
     }
+    @SerializedName("count")
     private long buildingId;
     private String buildingName;
     private String buildingLabel;
     private List<Double> buildingCoordinates;
     private List<List<Double>> coordinates;
 
-    public BuildingInfo() {
+    public PolygonObject() {
     }
 
-    public BuildingInfo(long id, String buildingName, String buildingLabel, List<Double> buildingCoordinates, List<List<Double>> coordinates) {
+    public PolygonObject(long id, String buildingName, String buildingLabel, List<Double> buildingCoordinates, List<List<Double>> coordinates) {
         this.buildingId = id;
         this.buildingName = buildingName;
         this.buildingLabel = buildingLabel;

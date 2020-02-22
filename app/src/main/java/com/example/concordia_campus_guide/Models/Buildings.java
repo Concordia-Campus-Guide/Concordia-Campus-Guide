@@ -2,22 +2,36 @@ package com.example.concordia_campus_guide.Models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class Buildings {
-    private List<BuildingInfo> buildings;
+    private Properties properties;
 
-    public  Buildings(){
-        buildings = new ArrayList<BuildingInfo>();
-    }
-    public List<BuildingInfo> getBuildings() {
-        return buildings;
-    }
+    private String type;
 
-    public Buildings(List<BuildingInfo> buildings) {
-        this.buildings = buildings;
+    private Geometry geometry;
+
+    public Properties getProperties() {
+        return properties;
     }
 
-    public void setBuildings(List<BuildingInfo> buildings) {
-        this.buildings = buildings;
+    public void setProperties(Properties properties) {
+        this.properties = properties;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Geometry getGeometry() {
+        return geometry;
+    }
+
+    public void setGeometry(Geometry geometry) {
+        this.geometry = geometry;
     }
 }
