@@ -3,20 +3,13 @@ package com.example.concordia_campus_guide.LocationFragment;
 
 import android.app.Application;
 import android.content.Context;
-import android.graphics.Color;
-import android.renderscript.ScriptGroup;
+
+import com.example.concordia_campus_guide.Models.Features;
+import com.example.concordia_campus_guide.Models.Geometry;
 import com.google.android.gms.maps.model.LatLng;
-import com.example.concordia_campus_guide.Models.BuildingInfo;
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.R;
-import com.google.android.gms.common.util.IOUtils;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.GroundOverlayOptions;
-import com.google.android.gms.maps.model.LatLng;
 
-import com.google.android.gms.maps.model.Polygon;
-import com.google.android.gms.maps.model.PolygonOptions;
 
 
 import androidx.lifecycle.ViewModel;
@@ -36,43 +29,35 @@ public class LocationFragmentViewModel extends ViewModel {
         return R.raw.mapstyle_night;
     }
 
-    public List<Polygon> createListOfPolyons(Buildings buildings, GoogleMap googleMap){
-        List<Polygon> polygons = new ArrayList<>();
-        for(BuildingInfo building : buildings.getBuildings()){
-            Polygon polygon = googleMap.addPolygon(getPolygon(building));
-            polygons.add(polygon);
-        }
-        return polygons;
-    }
-    public void addOverlay(GoogleMap map){
-        GroundOverlayOptions mOverlayOptions = new GroundOverlayOptions()
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.ninth_floor_floormap))
-                .position(new LatLng(45.4972685, -73.5789475), (float) 68, (float) 68)
-                .bearing((float) 34).zIndex(2);
-         map.addGroundOverlay(mOverlayOptions);
-    }
+//    public List<Polygon> createListOfPolyons(Buildings buildings, GoogleMap googleMap){
+//        List<Polygon> polygons = new ArrayList<>();
+//        for(BuildingInfo building : buildings.getBuildings()){
+//            Polygon polygon = googleMap.addPolygon(getPolygon(building));
+//            polygons.add(polygon);
+//        }
+//        return polygons;
+//    }
+//
+//    public List<LatLng> createListOfCoordinates(List<List<Double>> points){
+//        List <LatLng> listOfCoordinates= new ArrayList<>();
+//        for (List <Double> point : points){
+//            listOfCoordinates.add(new LatLng(point.get(0),point.get(1)));
+//        }
+//        return  listOfCoordinates;
+//    }
+//
+//
+//    public PolygonOptions getPolygon(BuildingInfo buildingInfo){
+//        List<LatLng> listOfLatLng  = createListOfCoordinates(buildingInfo.getCoordinates());
+//        PolygonOptions opts=new PolygonOptions();
+//        for (LatLng point : listOfLatLng) {
+//            opts.add(point);
+//        }
+//        return opts;
+//    }
 
-    public List<LatLng> createListOfCoordinates(List<List<Double>> points){
-        List <LatLng> listOfCoordinates= new ArrayList<>();
-        for (List <Double> point : points){
-            listOfCoordinates.add(new LatLng(point.get(0),point.get(1)));
-        }
-        return  listOfCoordinates;
-    }
-
-
-    public PolygonOptions getPolygon(BuildingInfo buildingInfo){
-        List<LatLng> listOfLatLng  = createListOfCoordinates(buildingInfo.getCoordinates());
-        PolygonOptions opts=new PolygonOptions();
-        for (LatLng point : listOfLatLng) {
-            opts.add(point);
-        }
-        return opts;
-    }
-
-    public Buildings readJsonFile(Context context){
+    public void readJsonFile(Context context){
         String json;
-        Buildings buildings = new Buildings();
         try {
             InputStream is = context.getAssets().open("buildingsCoordinates.json");
             int size = is.available();
@@ -80,11 +65,14 @@ public class LocationFragmentViewModel extends ViewModel {
             is.read(buffer);
             is.close();
             json = new String(buffer, "UTF-8");
-            buildings = new Gson().fromJson(json, Buildings.class);
+            //GeoJSONObject geoJSON = GeoJSON.parse(json);
+            Features ko = new Gson().fromJson(json,Features.class);
+            int x =4;
+            //buildings = new Gson().fromJson(json, Buildings.class);
         } catch (IOException e){
             e.printStackTrace();
         }
-        return buildings;
+       // return buildings;
     }
 
 
