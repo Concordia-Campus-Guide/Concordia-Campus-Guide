@@ -25,7 +25,7 @@ public class LocationFragmentViewModel extends ViewModel {
     public void loadPolygons(GoogleMap map, Context applicationContext){
         GeoJsonLayer layer = null;
         try {
-            layer = new GeoJsonLayer(map, R.raw.google, applicationContext);
+            layer = new GeoJsonLayer(map, R.raw.buildingcoordinates, applicationContext);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
@@ -37,7 +37,6 @@ public class LocationFragmentViewModel extends ViewModel {
         for (GeoJsonFeature feature : layer.getFeatures()){
             feature.setPolygonStyle(geoJsonPolygonStyle);
         }
-
         layer.addLayerToMap();
     }
 

@@ -21,7 +21,6 @@ import android.widget.Button;
 
 import com.example.concordia_campus_guide.ClassConstants;
 
-import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -38,7 +37,6 @@ public class LocationFragment extends Fragment{
     MapView mMapView;
     private GoogleMap mMap;
     private LocationFragmentViewModel mViewModel;
-    private Buildings buildings;
 
     private Button loyolaBtn;
     private Button sgwBtn;
