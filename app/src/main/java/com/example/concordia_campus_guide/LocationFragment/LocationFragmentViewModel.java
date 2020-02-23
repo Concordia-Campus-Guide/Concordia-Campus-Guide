@@ -1,13 +1,8 @@
 package com.example.concordia_campus_guide.LocationFragment;
 
-
 import com.example.concordia_campus_guide.R;
-import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
-
 import com.google.android.gms.maps.model.PolygonOptions;
-
-
 import androidx.lifecycle.ViewModel;
 
 public class LocationFragmentViewModel extends ViewModel {
