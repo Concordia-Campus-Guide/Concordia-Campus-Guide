@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
@@ -32,10 +33,15 @@ public class LocationFragmentViewModel extends ViewModel {
             e.printStackTrace();
         }
         GeoJsonPolygonStyle geoJsonPolygonStyle = new GeoJsonPolygonStyle();
-        geoJsonPolygonStyle.setFillColor(Color.GREEN);
+        geoJsonPolygonStyle.setFillColor(Color.argb(51, 18, 125, 159));
+        geoJsonPolygonStyle.setStrokeColor(Color.argb(255, 18, 125, 159));
+        geoJsonPolygonStyle.setStrokeWidth(6);
+
 
         for (GeoJsonFeature feature : layer.getFeatures()){
             feature.setPolygonStyle(geoJsonPolygonStyle);
+//            LatLng center = feature.getBoundingBox().getCenter();
+
         }
         layer.addLayerToMap();
     }
