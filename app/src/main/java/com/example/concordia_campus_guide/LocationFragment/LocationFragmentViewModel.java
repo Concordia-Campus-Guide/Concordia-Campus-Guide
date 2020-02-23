@@ -6,6 +6,7 @@ import com.example.concordia_campus_guide.BuildingCode;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -16,13 +17,19 @@ import org.json.JSONException;
 import java.io.IOException;
 import static java.lang.Double.parseDouble;
 
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.PolygonOptions;
+
+
+import androidx.lifecycle.ViewModel;
+
 public class LocationFragmentViewModel extends ViewModel {
 
     /**
      * @return return the map style
      */
     public int getMapStyle(){
-        return R.raw.mapstyle_retro;
+        return R.raw.mapstyle_night;
     }
 
     /**
@@ -35,6 +42,13 @@ public class LocationFragmentViewModel extends ViewModel {
         GeoJsonLayer layer = initLayer(map, applicationContext);
         setPolygonStyle(layer,map);
         return  layer;
+    }
+    public void addOverlay(GoogleMap map){
+        GroundOverlayOptions mOverlayOptions = new GroundOverlayOptions()
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.ninth_floor_floormap))
+                .position(new LatLng(45.4972685, -73.5789475), (float) 68, (float) 68)
+                .bearing((float) 34).zIndex(2);
+         map.addGroundOverlay(mOverlayOptions);
     }
 
     /**

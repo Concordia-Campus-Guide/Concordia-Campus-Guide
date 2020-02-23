@@ -129,8 +129,10 @@ public class LocationFragment extends Fragment{
         mLayer = mViewModel.loadPolygons(map, getContext());
         setupPolygonClickListener();
         mLayer.addLayerToMap();
-        setupMarkerClickListener(map);
+        setupMarkerClickListener(map); 
     }
+
+    
 
     public void setupPolygonClickListener(){
         mLayer.setOnFeatureClickListener(new GeoJsonLayer.GeoJsonOnFeatureClickListener() {
