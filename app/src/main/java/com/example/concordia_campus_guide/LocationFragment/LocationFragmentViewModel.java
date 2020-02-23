@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
@@ -16,6 +17,8 @@ import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 import org.json.JSONException;
 
 import java.io.IOException;
+
+import static java.lang.Double.parseDouble;
 
 
 public class LocationFragmentViewModel extends ViewModel {
@@ -40,7 +43,13 @@ public class LocationFragmentViewModel extends ViewModel {
 
         for (GeoJsonFeature feature : layer.getFeatures()){
             feature.setPolygonStyle(geoJsonPolygonStyle);
-//            LatLng center = feature.getBoundingBox().getCenter();
+            String[] coordinates = feature.getProperty("center").split(", ");
+            LatLng center = new LatLng(parseDouble(coordinates[1]), parseDouble(coordinates[0]));
+            map.addMarker(
+                    new MarkerOptions()
+                    .position(center)
+                    .title(feature.getProperty("code"))
+            );
 
         }
         layer.addLayerToMap();
