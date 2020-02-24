@@ -7,13 +7,9 @@ public enum BuildingCode {
     EV,
     LB,
     FG,
-    FB
-
-//    CJ,
-//    SP,
-//    FB,
-//
-//    AD,
-//    CC,
-
+    FB,
+    CJ,
+    SP,
+    AD,
+    CC,
 }
