@@ -58,8 +58,8 @@ public class LocationFragmentViewModel extends ViewModel {
 
 
     /**
-     * @param layer
-     * @param map
+     * @param layer the GeoJson layer containing features to style.
+     * @param map the google map where layer will be displayed and markers will be added.
      */
     private void setPolygonStyle(GeoJsonLayer layer, GoogleMap map){
         for (GeoJsonFeature feature : layer.getFeatures()){
@@ -130,6 +130,50 @@ public class LocationFragmentViewModel extends ViewModel {
                 return R.drawable.fb;
             case SP:
                 return R.drawable.sp;
+            case BB:
+                return R.drawable.bb;
+            case FC:
+                return R.drawable.fc;
+            case DO:
+                return R.drawable.dome;
+            case GE:
+                return R.drawable.ge;
+            case HA:
+                return R.drawable.ha;
+            case HB:
+                return R.drawable.hb;
+            case HC:
+                return R.drawable.hc;
+            case BH:
+                return R.drawable.bh;
+            case JR:
+                return R.drawable.jr;
+            case PC:
+                return R.drawable.pc;
+            case PS:
+                return R.drawable.ps;
+            case PT:
+                return R.drawable.pt;
+            case PY:
+                return R.drawable.py;
+            case QA:
+                return R.drawable.qa;
+            case RA:
+                return R.drawable.ra;
+            case RF:
+                return R.drawable.rf;
+            case SC:
+                return R.drawable.sc;
+            case SH:
+                return R.drawable.sh;
+            case SI:
+                return R.drawable.si;
+            case TA:
+                return R.drawable.ta;
+            case VE:
+                return R.drawable.ve;
+            case VL:
+                return R.drawable.vl;
         }
         return  -1;
     }

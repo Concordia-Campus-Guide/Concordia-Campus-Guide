@@ -30,7 +30,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.Polygon;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 
@@ -128,27 +127,30 @@ public class LocationFragment extends Fragment{
 
     private void setupPolygons(GoogleMap map) {
         mLayer = mViewModel.loadPolygons(map, getContext());
-        onClickPolygonRequest();
+        setupPolygonClickListener();
         mLayer.addLayerToMap();
-        onClickMarkerRequest(map);
+        setupMarkerClickListener(map);
     }
 
-    public void onClickPolygonRequest(){
+    public void setupPolygonClickListener(){
         mLayer.setOnFeatureClickListener(new GeoJsonLayer.GeoJsonOnFeatureClickListener() {
             @Override
             public void onFeatureClick(GeoJsonFeature geoJsonFeature) {
                 //TODO: Make function that pops up the info card for the building (via the building-code)
+                //Important null check do not remove!
                 if(geoJsonFeature != null){
+                    //replace code here
                     System.out.println("Clicked on "+geoJsonFeature.getProperty("code"));
                 }
             }
         });
     }
 
-    public boolean onClickMarkerRequest(GoogleMap map) {
+    public boolean setupMarkerClickListener(GoogleMap map) {
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
+                //TODO: Make function that pops up the info card for the building (via the building-code)
                 System.out.println(marker.getTag());
                 return false;
             }
