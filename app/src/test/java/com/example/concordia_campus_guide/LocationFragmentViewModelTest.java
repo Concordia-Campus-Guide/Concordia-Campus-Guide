@@ -1,9 +1,13 @@
 package com.example.concordia_campus_guide;
 
+import android.graphics.Color;
+
 import com.example.concordia_campus_guide.LocationFragment.LocationFragmentViewModel;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolygonOptions;
+import com.google.maps.android.geojson.GeoJsonLayer;
+import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 
 import org.junit.Test;
 import org.junit.Before;
@@ -26,20 +30,28 @@ public class LocationFragmentViewModelTest {
         MockitoAnnotations.initMocks(this);
         viewModel = new LocationFragmentViewModel();
     }
+
     @Test
-    public void getPolygonTest(){
-        PolygonOptions polygonOptions = new PolygonOptions()
-                .clickable(true)
-                .add(
-                        new LatLng(45.497178, -73.579550),
-                        new LatLng(45.497708, -73.579035),
-                        new LatLng(45.497385, -73.578332),
-                        new LatLng(45.496832, -73.578842),
-                        new LatLng(45.497178, -73.579550));
-        assertEquals(polygonOptions.getPoints(), viewModel.getPolygon().getPoints());
-        assertEquals(polygonOptions.getFillColor(), viewModel.getPolygon().getFillColor());
-        assertEquals(polygonOptions.getHoles(), viewModel.getPolygon().getHoles());
-        assertEquals(polygonOptions.getStrokeColor(), viewModel.getPolygon().getStrokeColor());
+    public void getIconTest(){
+        assertEquals(R.drawable.h, viewModel.getIcon(BuildingCode.H));
+        assertEquals(R.drawable.ad,viewModel.getIcon(BuildingCode.AD));
+        assertEquals(R.drawable.cc, viewModel.getIcon(BuildingCode.CC));
+        assertEquals(R.drawable.cj, viewModel.getIcon(BuildingCode.CJ));
+        assertEquals(R.drawable.ev, viewModel.getIcon(BuildingCode.EV));
+        assertEquals(R.drawable.fb, viewModel.getIcon(BuildingCode.FB));
+        assertEquals(R.drawable.fg, viewModel.getIcon(BuildingCode.FG));
+        assertEquals(R.drawable.gm, viewModel.getIcon(BuildingCode.GM));
+        assertEquals(R.drawable.lb, viewModel.getIcon(BuildingCode.LB));
+        assertEquals(R.drawable.mb, viewModel.getIcon(BuildingCode.MB));
+        assertEquals(R.drawable.sp, viewModel.getIcon(BuildingCode.SP));
+    }
+
+    @Test
+    public void getPolygonStyleTest(){
+        GeoJsonPolygonStyle  geoJsonPolygonStyle = viewModel.getPolygonStyle();
+        assertEquals(geoJsonPolygonStyle.getFillColor(), Color.argb(51, 18, 125, 159));
+        assertEquals(Color.argb(255, 18, 125, 159), geoJsonPolygonStyle.getStrokeColor());
+        assertEquals(6, geoJsonPolygonStyle.getStrokeWidth());
     }
 
     @Test

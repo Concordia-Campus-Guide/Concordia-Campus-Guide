@@ -29,7 +29,10 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.Polygon;
+import com.google.maps.android.geojson.GeoJsonFeature;
+import com.google.maps.android.geojson.GeoJsonLayer;
 
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 
@@ -37,10 +40,9 @@ public class LocationFragment extends Fragment{
     MapView mMapView;
     private GoogleMap mMap;
     private LocationFragmentViewModel mViewModel;
-
+    private GeoJsonLayer mLayer;
     private Button loyolaBtn;
     private Button sgwBtn;
-
     private Boolean myLocationPermissionsGranted = false;
 
     public static LocationFragment newInstance() {
@@ -54,11 +56,9 @@ public class LocationFragment extends Fragment{
         initComponent(rootView);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
-
         initMap();
         setupClickListeners();
         getLocationPermission();
-
         return rootView;
     }
 
@@ -85,8 +85,7 @@ public class LocationFragment extends Fragment{
             public void onMapReady(GoogleMap googleMap) {
                 setMapStyle(googleMap);
                 mMap = googleMap;
-                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-
+                //mMap.setMapType(googleMap.MAP_TYPE_TERRAIN);
                 setupPolygons(mMap);
                 uiSettingsForMap(mMap);
                 zoomInLocation(45.494999, -73.577854);
@@ -128,13 +127,33 @@ public class LocationFragment extends Fragment{
     }
 
     private void setupPolygons(GoogleMap map) {
-        mViewModel.loadPolygons(map, getContext());
+        mLayer = mViewModel.loadPolygons(map, getContext());
+        onClickPolygonRequest();
+        mLayer.addLayerToMap();
+        onClickMarkerRequest(map);
     }
 
-    private void stylePolygon(Polygon polygon) {
-        polygon.setStrokeWidth(ClassConstants.POLYGON_STROKE_WIDTH_PX);
-        polygon.setStrokeColor(ClassConstants.COLOR_BLACK_ARGB);
-        polygon.setFillColor(ClassConstants.COLOR_WHITE_ARGB);
+    public void onClickPolygonRequest(){
+        mLayer.setOnFeatureClickListener(new GeoJsonLayer.GeoJsonOnFeatureClickListener() {
+            @Override
+            public void onFeatureClick(GeoJsonFeature geoJsonFeature) {
+                //TODO: Make function that pops up the info card for the building (via the building-code)
+                if(geoJsonFeature != null){
+                    System.out.println("Clicked on "+geoJsonFeature.getProperty("code"));
+                }
+            }
+        });
+    }
+
+    public boolean onClickMarkerRequest(GoogleMap map) {
+        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                System.out.println(marker.getTag());
+                return false;
+            }
+        });
+        return true;
     }
 
     private void uiSettingsForMap(GoogleMap mMap){
@@ -142,13 +161,13 @@ public class LocationFragment extends Fragment{
             mMap.setMyLocationEnabled(true);
         }
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
-        mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setTiltGesturesEnabled(true);
+        mMap.getUiSettings().setMapToolbarEnabled(true);
     }
 
     private void zoomInLocation(double latitude, double longitude) {
         LatLng curr = new LatLng(latitude,longitude);
-        float zoomLevel = 16.0f;
+        float zoomLevel = 18.0f;
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(curr, zoomLevel));
     }
 
