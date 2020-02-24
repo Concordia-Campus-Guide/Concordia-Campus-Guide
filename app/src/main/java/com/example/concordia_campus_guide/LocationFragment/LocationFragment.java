@@ -1,26 +1,25 @@
 package com.example.concordia_campus_guide.LocationFragment;
 
-import androidx.core.app.ActivityCompat;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.example.concordia_campus_guide.ClassConstants;
 
+import com.example.concordia_campus_guide.MainActivity;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -32,6 +31,7 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
+import com.google.android.gms.maps.model.Polygon;
 
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 
