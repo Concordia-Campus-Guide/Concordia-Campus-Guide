@@ -2,10 +2,18 @@ package com.example.concordia_campus_guide;
 
 public enum BuildingCode {
     H,
+    MB,
+    GM,
     EV,
     LB,
-    MB,
     FG,
-    CJ,
-    SP
+    FB
+
+//    CJ,
+//    SP,
+//    FB,
+//
+//    AD,
+//    CC,
+
 }

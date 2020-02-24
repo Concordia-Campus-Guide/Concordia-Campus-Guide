@@ -95,9 +95,28 @@ public class LocationFragmentViewModel extends ViewModel {
 
         switch (buildingCode){
             case H:
-                return R.drawable.hall;
+                return R.drawable.h;
             case LB:
-                return R.drawable.hall;
+                return R.drawable.lb;
+//            case CJ:
+//                return R.drawable.cj;
+//            case AD:
+//                return R.drawable.ad;
+//            case CC:
+//                return R.drawable.cc;
+            case EV:
+                return R.drawable.ev;
+            case FG:
+                return R.drawable.fg;
+            case GM:
+                return R.drawable.gm;
+            case MB:
+                return R.drawable.mb;
+            case FB:
+                return R.drawable.fb;
+//            case SP:
+//                return R.drawable.sp;
+
         }
         return  -1;
     }
