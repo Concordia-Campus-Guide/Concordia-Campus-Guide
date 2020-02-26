@@ -1,19 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    tools:context=".MainActivity">-->
 
-    <fragment
-        android:id="@+id/fragment"
-        android:name="com.example.concordia_campus_guide.LocationFragment.LocationFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <fragment-->
+<!--        android:id="@+id/fragment"-->
+<!--        android:name="com.example.concordia_campus_guide.LocationFragment.LocationFragment"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--<RelativeLayout-->
+<!--    xmlns:android = "http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:tools = "http://schemas.android.com/tools"-->
+<!--    android:layout_width = "match_parent"-->
+<!--    android:layout_height = "match_parent">-->
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/infoCard"-->
+<!--        android:layout_width="387dp"-->
+<!--        android:layout_height="531dp"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginBottom="-6dp"-->
+<!--        android:layout_marginEnd="20dp"-->
+<!--        android:layout_marginLeft="20dp"-->
+<!--        android:layout_marginRight="20dp"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:background="#A7A7A7"-->
+<!--        android:orientation="vertical"-->
+<!--        android:textAlignment="center">-->
+
+<!--    </LinearLayout>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/button"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="47dp"-->
+<!--        android:layout_marginBottom="563dp"-->
+<!--        android:layout_marginTop="100dp"-->
+<!--        android:text="Click" />-->
+<!--</RelativeLayout>-->
+
+<RelativeLayout
+    xmlns:android = "http://schemas.android.com/apk/res/android"
+    xmlns:tools = "http://schemas.android.com/tools"
+    android:layout_width = "match_parent"
+    android:layout_height = "match_parent">
+    <Button
+        android:id = "@+id/button"
+        android:layout_centerHorizontal = "true"
+        android:layout_marginTop = "100dp"
+        android:layout_width = "150dp"
+        android:text = "Click"
+        android:layout_height = "wrap_content"/>
+
+    <LinearLayout
+        android:id="@+id/infoCard"
+        android:layout_width="match_parent"
+        android:layout_height="305dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80dp"
+        android:layout_marginTop="20dp"
+        android:background="#a6e1aa"
+        android:orientation="vertical">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="User name" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password" />
+    </LinearLayout>
+</RelativeLayout>
