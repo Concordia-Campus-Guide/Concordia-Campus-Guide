@@ -3,7 +3,6 @@ package com.example.concordia_campus_guide.LocationFragment;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,8 +16,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.concordia_campus_guide.BuildingCode;
 import com.example.concordia_campus_guide.ClassConstants;
-
 import com.example.concordia_campus_guide.MainActivity;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -31,7 +30,6 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
-import com.google.android.gms.maps.model.Polygon;
 
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 
@@ -140,7 +138,9 @@ public class LocationFragment extends Fragment{
                 //Important null check do not remove!
                 if(geoJsonFeature != null){
                     //replace code here
-                    System.out.println("Clicked on "+geoJsonFeature.getProperty("code"));
+                    String buildingCode = geoJsonFeature.getProperty("code");
+                    ((MainActivity)getActivity()).showInfoCard(buildingCode);
+                    System.out.println("Clicked on "+buildingCode);
                 }
             }
         });
@@ -151,7 +151,9 @@ public class LocationFragment extends Fragment{
             @Override
             public boolean onMarkerClick(Marker marker) {
                 //TODO: Make function that pops up the info card for the building (via the building-code)
-                System.out.println(marker.getTag());
+                String buildingCode = ((BuildingCode) marker.getTag()).toString();
+                ((MainActivity)getActivity()).showInfoCard(buildingCode);
+                System.out.println(buildingCode);
                 return false;
             }
         });

@@ -3,35 +3,49 @@ package com.example.concordia_campus_guide;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.database.Cursor;
 
 import com.example.concordia_campus_guide.InfoCardFragment.InfoCardFragment;
 
 public class MainActivity extends AppCompatActivity {
 
     FragmentTransaction fragmentTransaction;
-
-    InfoCardFragment infoCardFragment = new InfoCardFragment();
+    FragmentManager fragmentManager;
+    InfoCardFragment infoCardFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentManager = getSupportFragmentManager();
     }
 
-    public void showInfoCard(){
+    public void showInfoCard(String buildingCode){
+        Bundle bundle = new Bundle();
+        bundle.putString("buildingCode", buildingCode );
+        infoCardFragment = new InfoCardFragment();
+        infoCardFragment.setArguments(bundle);
+        fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.info_card_frame, infoCardFragment);
         fragmentTransaction.commit();
     }
 
     public void hideInfoCard(){
+        fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.remove(infoCardFragment);
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onBackPressed(){
+        Fragment fragment = fragmentManager.findFragmentById(R.id.info_card_frame);
+        if(fragment!=null){
+            hideInfoCard();
+        }
+        else{
+            super.onBackPressed();
+        }
     }
 }
