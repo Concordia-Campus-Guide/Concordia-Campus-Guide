@@ -23,6 +23,7 @@ import android.widget.GridView;
 import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
 import com.example.concordia_campus_guide.BuildingCode;
 import com.example.concordia_campus_guide.ClassConstants;
+import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -41,7 +42,7 @@ import java.util.logging.Logger;
 
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 
-public class LocationFragment extends Fragment{
+public class LocationFragment extends Fragment implements OnFloorPickerOnClickListener {
 
     MapView mMapView;
 
@@ -93,23 +94,8 @@ public class LocationFragment extends Fragment{
             return;
         }
         mFloorPickerGv.setVisibility(View.VISIBLE);
-        currentFloorPickerAdapter = new FloorPickerAdapter(getContext(), floorsAvailable, BuildingCode.valueOf(buildingCode));
+        currentFloorPickerAdapter = new FloorPickerAdapter(getContext(), floorsAvailable, BuildingCode.valueOf(buildingCode), this);
         mFloorPickerGv.setAdapter(currentFloorPickerAdapter);
-    }
-
-    private void onFloorClicked(int i, long l, View view, AdapterView<?> adapterView) {
-        System.out.print("onFloorClicked: " + i + ", buildingcode: " + currentFloorPickerAdapter.getBuildingCode());
-        switch(currentFloorPickerAdapter.getBuildingCode()){
-            case H:
-                mViewModel.setHallFloorplan(hallGroundOverlay, i==0?9:8);
-                break;
-            case MB:
-                mViewModel.setMBFloorplan(mbGroundOverlay, i==0?1:-1);
-                break;
-            case VL:
-                mViewModel.setVLFloorplan(vlGroundOverlay, i==0?2:1);
-                break;
-        }
     }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -157,7 +143,7 @@ public class LocationFragment extends Fragment{
         System.out.println("setup listeners");
         setupLoyolaBtnClickListener();
         setupSGWBtnClickListener();
-        setupFloorPickerGvClickListener();
+//        setupFloorPickerGvClickListener();
     }
 
     private void setupLoyolaBtnClickListener() {
@@ -178,15 +164,15 @@ public class LocationFragment extends Fragment{
         });
     }
 
-    private void setupFloorPickerGvClickListener(){
-        mFloorPickerGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                onFloorClicked(i, l, view, adapterView);
-            }
-        });
-    }
+//    private void setupFloorPickerGvClickListener(){
+//        mFloorPickerGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//
+//                onFloorClicked(i, l, view, adapterView);
+//            }
+//        });
+//    }
 
     private void setupPolygons(GoogleMap map) {
         mLayer = mViewModel.loadPolygons(map, getContext());
@@ -247,6 +233,7 @@ public class LocationFragment extends Fragment{
         }
     }
 
+
     private boolean requestPermission(){
         return (checkSelfPermission(getContext(), ClassConstants.FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
     }
@@ -283,5 +270,19 @@ public class LocationFragment extends Fragment{
     }
 
 
-
+    @Override
+    public void onFloorPickerOnClick(int i, View view) {
+        System.out.print("onFloorClicked: " + i + ", buildingcode: " + currentFloorPickerAdapter.getBuildingCode());
+        switch(currentFloorPickerAdapter.getBuildingCode()){
+            case H:
+                mViewModel.setHallFloorplan(hallGroundOverlay, i==0?9:8);
+                break;
+            case MB:
+                mViewModel.setMBFloorplan(mbGroundOverlay, i==0?1:-1);
+                break;
+            case VL:
+                mViewModel.setVLFloorplan(vlGroundOverlay, i==0?2:1);
+                break;
+        }
+    }
 }

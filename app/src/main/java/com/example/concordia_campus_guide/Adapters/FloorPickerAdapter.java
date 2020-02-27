@@ -2,7 +2,6 @@ package com.example.concordia_campus_guide.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -10,18 +9,21 @@ import android.widget.Button;
 import android.widget.GridView;
 
 import com.example.concordia_campus_guide.BuildingCode;
+import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
 
 import java.util.ArrayList;
 
 public class FloorPickerAdapter extends BaseAdapter {
+    private OnFloorPickerOnClickListener listener;
     private Context context;
     private BuildingCode buildingCode;
     private ArrayList<String> floorsAvailable;
 
-    public FloorPickerAdapter(Context context, ArrayList floorsAvailable, BuildingCode buildingCode){
+    public FloorPickerAdapter(Context context, ArrayList floorsAvailable, BuildingCode buildingCode, OnFloorPickerOnClickListener listener){
         this.context = context;
         this.floorsAvailable = floorsAvailable;
         this.buildingCode = buildingCode;
+        this.listener = listener;
         System.out.println("DEBUGGER: floorsavailable" + floorsAvailable.get(0) + "\tsize: " + floorsAvailable.size());
     }
 
@@ -41,7 +43,7 @@ public class FloorPickerAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, final View view, ViewGroup viewGroup) {
         Button button;
         if (view == null) {
             button = new Button(context);
@@ -51,6 +53,12 @@ public class FloorPickerAdapter extends BaseAdapter {
             floor = floor.substring(floor.indexOf('_') + 1);
             System.out.print("testing substring + " + floor);
             button.setText(floor);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onFloorPickerOnClick(i, view);
+                }
+            });
         } else {
             button = (Button) view;
         }
