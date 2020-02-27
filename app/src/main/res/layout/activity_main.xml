@@ -23,8 +23,4 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-<<<<<<< HEAD
 </androidx.constraintlayout.widget.ConstraintLayout>
-=======
-</androidx.constraintlayout.widget.ConstraintLayout>
->>>>>>> 18a8b6d85ba9745ed9b8147e4a76a3b8b1543cff

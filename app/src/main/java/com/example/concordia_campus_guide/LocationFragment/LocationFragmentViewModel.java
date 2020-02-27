@@ -1,11 +1,4 @@
 package com.example.concordia_campus_guide.LocationFragment;
-<<<<<<< HEAD
-
-import com.example.concordia_campus_guide.R;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.PolygonOptions;
-import androidx.lifecycle.ViewModel;
-=======
 import android.content.Context;
 import android.graphics.Color;
 import androidx.lifecycle.ViewModel;
@@ -22,7 +15,6 @@ import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 import org.json.JSONException;
 import java.io.IOException;
 import static java.lang.Double.parseDouble;
->>>>>>> 18a8b6d85ba9745ed9b8147e4a76a3b8b1543cff
 
 public class LocationFragmentViewModel extends ViewModel {
 
