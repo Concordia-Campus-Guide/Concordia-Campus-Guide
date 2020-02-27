@@ -51,7 +51,7 @@ public class LocationFragmentViewModel extends ViewModel {
          map.addGroundOverlay(mOverlayOptions);
     }
 
-    private GroundOverlayOptions getHall8Building(){
+
     /**
      * The purpose of this method is to initiate the layer
      * @param map is the map used in our application.
@@ -71,6 +71,7 @@ public class LocationFragmentViewModel extends ViewModel {
         return layer;
     }
 
+    private GroundOverlayOptions getHall8Building(){
         LatLngBounds bounds = new LatLngBounds(
                 new LatLng(45.497729, -73.579032),
                 new LatLng(45.496832, -73.578849));
