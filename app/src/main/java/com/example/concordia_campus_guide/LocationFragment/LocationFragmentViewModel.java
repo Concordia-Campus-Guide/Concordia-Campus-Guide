@@ -16,6 +16,7 @@ import org.json.JSONException;
 import java.io.IOException;
 import static java.lang.Double.parseDouble;
 //test
+//test2
 
 public class LocationFragmentViewModel extends ViewModel {
 
