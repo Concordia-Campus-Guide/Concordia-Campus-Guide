@@ -15,6 +15,7 @@ import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 import org.json.JSONException;
 import java.io.IOException;
 import static java.lang.Double.parseDouble;
+//test
 
 public class LocationFragmentViewModel extends ViewModel {
 
