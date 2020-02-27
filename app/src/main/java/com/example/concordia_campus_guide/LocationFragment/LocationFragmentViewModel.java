@@ -6,6 +6,7 @@ import com.example.concordia_campus_guide.BuildingCode;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -15,6 +16,8 @@ import com.google.maps.android.geojson.GeoJsonLayer;
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 import org.json.JSONException;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import static java.lang.Double.parseDouble;
 
 public class LocationFragmentViewModel extends ViewModel {
@@ -57,79 +60,87 @@ public class LocationFragmentViewModel extends ViewModel {
         return layer;
     }
 
-
-    public GroundOverlayOptions[] getFloorplanGroundOverlays(){
-        GroundOverlayOptions[] overlayOptions = {getHall8Building(), getHall9Building(),
-                                                getMBS2Building(), getMB1Building(),
-                                                getVL1Building(), getVL2Building()};
-        return overlayOptions;
-    }
-
     /**
      * Generate the hall building overlays
      * @return the generate ground overlay option
      */
-    private GroundOverlayOptions getHallBuildingOverlay(){
+    public GroundOverlayOptions getHallBuildingOverlay(){
         return new GroundOverlayOptions()
                 .position(new LatLng(45.4972685, -73.5789475), (float) 68, (float) 68)
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.hall_9))
                 .bearing((float) 34);
     }
 
-    private GroundOverlayOptions getHall8Building(){
-        return getHallBuildingOverlay()
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.hall_8))
-                .zIndex(8);
+    public GroundOverlay setHallFloorplan(GroundOverlay groundOverlay, int floorNb){
+        if(floorNb == 8) return setHall8Floorplan(groundOverlay);
+        else if(floorNb == 9)return setHall9Floorplan(groundOverlay);
+        else return null;
     }
 
-    private GroundOverlayOptions getHall9Building(){
-        //TODO: Change
-        return getHallBuildingOverlay()
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.hall_9))
-                .zIndex(9);
+    private GroundOverlay setHall8Floorplan(GroundOverlay groundOverlay){
+        groundOverlay.setImage(BitmapDescriptorFactory.fromResource(R.drawable.hall_8));
+        return groundOverlay;
+    }
+
+    private GroundOverlay setHall9Floorplan(GroundOverlay groundOverlay){
+        groundOverlay.setImage(BitmapDescriptorFactory.fromResource(R.drawable.hall_9));
+        return groundOverlay;
     }
 
     /**
      * Generate the John Molson  building overlays
      * @return the generate ground overlay option
      */
-    private GroundOverlayOptions getMBBuildingOverlay(){
+    public GroundOverlayOptions getMBBuildingOverlay(){
         return new GroundOverlayOptions()
-                .position(new LatLng( 45.495212, -73.578926), (float) 68, (float) 68);
-//                .bearing((float) 34);
-    }
-
-    private GroundOverlayOptions getMB1Building(){
-        return getMBBuildingOverlay()
+                .position(new LatLng( 45.495212, -73.578926), (float) 68, (float) 68)
                 .image(BitmapDescriptorFactory.fromResource(R.drawable.mb_1))
-                .zIndex(1);
+                .bearing((float) 34);
     }
 
-    private GroundOverlayOptions getMBS2Building(){
-        return getMBBuildingOverlay()
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.mb_s2))
-                .zIndex(-1);
+    public GroundOverlay setMBFloorplan(GroundOverlay groundOverlay, int floorNb){
+        if(floorNb == -1) return setMBS2Floorplan(groundOverlay);
+        else if(floorNb == 1) return setMB1Floorplan(groundOverlay);
+        else return null;
+    }
+
+    private GroundOverlay setMBS2Floorplan(GroundOverlay groundOverlay){
+        groundOverlay.setImage(BitmapDescriptorFactory.fromResource(R.drawable.mb_s2));
+        return groundOverlay;
+    }
+
+    private GroundOverlay setMB1Floorplan(GroundOverlay groundOverlay){
+        groundOverlay.setImage(BitmapDescriptorFactory.fromResource(R.drawable.mb_1));
+        return groundOverlay;
     }
 
     /**
      * Generate the Vanier Library building overlays
      * @return the generate ground overlay option
      */
-    private GroundOverlayOptions getVLBuildingOverlay(){
+    public GroundOverlayOptions getVLBuildingOverlay(){
         return new GroundOverlayOptions()
-                .position(new LatLng( 45.45902065060446, -73.6383318901062), (float) 68, (float) 68);
-//                .bearing((float) 34);
+                .position(new LatLng( 45.45902065060446, -73.6383318901062), (float) 68, (float) 68)
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.vl_2))
+                .bearing((float) 34);
     }
 
-    private GroundOverlayOptions getVL1Building(){
-        return getVLBuildingOverlay()
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.vl_1))
-                .zIndex(1);
+    public GroundOverlay setVLFloorplan(GroundOverlay groundOverlay, int floorNb){
+        if(floorNb == 1) return setVL1Floorplan(groundOverlay);
+        else if(floorNb == 1)return setVL2Floorplan(groundOverlay);
+        else return null;
     }
-    private GroundOverlayOptions getVL2Building(){
-        return getVLBuildingOverlay()
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.vl_2))
-                .zIndex(2);
+
+    private GroundOverlay setVL1Floorplan(GroundOverlay groundOverlay){
+        groundOverlay.setImage(BitmapDescriptorFactory.fromResource(R.drawable.vl_1));
+        return groundOverlay;
     }
+
+    private GroundOverlay setVL2Floorplan(GroundOverlay groundOverlay){
+        groundOverlay.setImage(BitmapDescriptorFactory.fromResource(R.drawable.vl_2));
+        return groundOverlay;
+    }
+
     /**
      * @param layer the GeoJson layer containing features to style.
      * @param map the google map where layer will be displayed and markers will be added.
@@ -172,6 +183,25 @@ public class LocationFragmentViewModel extends ViewModel {
         geoJsonPolygonStyle.setStrokeColor(Color.argb(255, 18, 125, 159));
         geoJsonPolygonStyle.setStrokeWidth(6);
         return geoJsonPolygonStyle;
+    }
+
+    public ArrayList<String> getFloorsAvailable(BuildingCode buildingCode){
+        ArrayList<String> floorsAvailable = new ArrayList<>();
+        switch(buildingCode){
+            case H:
+                floorsAvailable.add("hall_9");
+                floorsAvailable.add("hall_8");
+                return floorsAvailable;
+            case MB:
+                floorsAvailable.add("mb_1");
+                floorsAvailable.add("mb_S2");
+                return floorsAvailable;
+            case VL:
+                floorsAvailable.add("vl_2");
+                floorsAvailable.add("vl_1");
+            default:
+                return floorsAvailable;
+        }
     }
 
 
