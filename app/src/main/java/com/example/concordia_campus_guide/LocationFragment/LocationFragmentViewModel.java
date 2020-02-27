@@ -45,12 +45,13 @@ public class LocationFragmentViewModel extends ViewModel {
     }
     public void addOverlay(GoogleMap map){
         GroundOverlayOptions mOverlayOptions = new GroundOverlayOptions()
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.ninth_floor_floormap))
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.hall_9))
                 .position(new LatLng(45.4972685, -73.5789475), (float) 68, (float) 68)
-                .bearing((float) 34).zIndex(2);
+                .bearing((float) 34).zIndex(9);
          map.addGroundOverlay(mOverlayOptions);
     }
 
+    private GroundOverlayOptions getHall8Building(){
     /**
      * The purpose of this method is to initiate the layer
      * @param map is the map used in our application.
@@ -70,7 +71,59 @@ public class LocationFragmentViewModel extends ViewModel {
         return layer;
     }
 
+        LatLngBounds bounds = new LatLngBounds(
+                new LatLng(45.497729, -73.579032),
+                new LatLng(45.496832, -73.578849));
+        return new GroundOverlayOptions()
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.hall_9))
+//                .positionFromBounds(bounds);
+                .position(new LatLng(45.497267, -73.579000), (float)72.36,(float) 65.59)
+                .bearing((float) 120.0);
 
+        /*
+         * 45.496832, -73.578849 - SW corner of the building
+         * 45.497729, -73.579032 - NE corner of the building
+         * */
+    }
+
+    public GroundOverlayOptions getHall9Building(){
+        //TODO: Change
+        return new GroundOverlayOptions()
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.hall_9))
+                .position(new LatLng(45.4972685, -73.5789475), (float) 68, (float) 68)
+                .bearing((float) 34)
+                .zIndex(9);
+    }
+
+    private GroundOverlayOptions getMB1Building(){
+        //TODO: Change
+        return new GroundOverlayOptions()
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.hall_9))
+                .position(new LatLng(45.497267, -73.579000), (float)72.36,(float) 65.63)
+                .bearing((float) 35.0);
+    }
+
+    private GroundOverlayOptions getMB_S2Building(){
+        //TODO: Change
+        return new GroundOverlayOptions()
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.hall_9))
+                .position(new LatLng(45.497267, -73.579000), (float)72.36,(float) 65.63)
+                .bearing((float) 35.0);
+    }
+    private GroundOverlayOptions getVL1Building(){
+        //TODO: Change
+        return new GroundOverlayOptions()
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.hall_9))
+                .position(new LatLng(45.497267, -73.579000), (float)72.36,(float) 65.63)
+                .bearing((float) 35.0);
+    }
+    private GroundOverlayOptions getVL2Building(){
+        //TODO: Change
+        return new GroundOverlayOptions()
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.hall_9))
+                .position(new LatLng(45.497267, -73.579000), (float)72.36,(float) 65.63)
+                .bearing((float) 35.0);
+    }
     /**
      * @param layer the GeoJson layer containing features to style.
      * @param map the google map where layer will be displayed and markers will be added.
