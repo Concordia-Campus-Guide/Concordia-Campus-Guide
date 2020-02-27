@@ -19,8 +19,9 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:background="@android:color/darker_gray"
-            android:text="SGW"></Button>
+            android:background="@color/colorAccent"
+            android:text="SGW"
+            android:textColor="@color/colorAppTheme"></Button>
 
         <Button
             android:id="@+id/loyolaBtn"
@@ -28,6 +29,16 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
-            android:text="Loyola"></Button>
+            android:background="@color/colorAccent"
+            android:text="Loyola"
+            android:textColor="@color/colorAppTheme"></Button>
     </LinearLayout>
+    <GridView
+        android:id="@+id/FloorPickerGv"
+        android:layout_width="50dp"
+        android:layout_height="100dp"
+        android:layout_alignRight="@id/mapView"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:numColumns="1" />
 </RelativeLayout>
