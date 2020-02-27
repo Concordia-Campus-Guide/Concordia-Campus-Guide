@@ -27,6 +27,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
@@ -100,10 +101,16 @@ public class LocationFragment extends Fragment{
                 setMapStyle(googleMap);
                 mMap = googleMap;
                 setupPolygons(mMap);
+                addFloorplans();
                 uiSettingsForMap(mMap);
                 zoomInLocation(45.494999, -73.577854);
             }
         });
+    }
+
+    private void addFloorplans() {
+        for(GroundOverlayOptions overlayOptions: mViewModel.getFloorplanGroundOverlays())
+            mMap.addGroundOverlay(overlayOptions);
     }
 
     private void setMapStyle(GoogleMap googleMap) {
