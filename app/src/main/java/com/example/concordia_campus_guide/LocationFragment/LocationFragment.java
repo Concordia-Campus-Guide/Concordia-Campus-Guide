@@ -72,6 +72,7 @@ public class LocationFragment extends Fragment{
         sgwBtn = rootView.findViewById(R.id.SGWBtn);
         loyolaBtn = rootView.findViewById(R.id.loyolaBtn);
         mFloorPickerGv = rootView.findViewById(R.id.FloorPickerGv);
+        mFloorPickerGv.setVisibility(View.GONE);
         setupFloorPickerAdapter();
 
     }
@@ -107,6 +108,7 @@ public class LocationFragment extends Fragment{
 
     private void setMapStyle(GoogleMap googleMap) {
         try {
+            googleMap.setIndoorEnabled(false);
             googleMap.setMapStyle(
                     MapStyleOptions.loadRawResourceStyle(
                             getContext(), mViewModel.getMapStyle()));
@@ -150,7 +152,6 @@ public class LocationFragment extends Fragment{
             @Override
             public void onFeatureClick(GeoJsonFeature geoJsonFeature) {
                 //TODO: Make function that pops up the info card for the building (via the building-code)
-                //Important null check do not remove!
                 if(geoJsonFeature != null){
                     //replace code here
                     System.out.println("Clicked on "+geoJsonFeature.getProperty("code"));
@@ -163,8 +164,11 @@ public class LocationFragment extends Fragment{
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                //TODO: Make function that pops up the info card for the building (via the building-code)
-                System.out.println(marker.getTag());
+                System.out.println("This is a tag: " + marker.getTag());
+                if (marker.getTag().toString().equals("H"))
+                    mFloorPickerGv.setVisibility(View.VISIBLE);
+                else
+                    mFloorPickerGv.setVisibility(View.GONE);
                 return false;
             }
         });
