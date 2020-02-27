@@ -149,7 +149,7 @@ public class LocationFragmentViewModel extends ViewModel {
             feature.setPolygonStyle(getPolygonStyle());
             String[] coordinates = feature.getProperty("center").split(", ");
             LatLng centerPos = new LatLng(parseDouble(coordinates[1]), parseDouble(coordinates[0]));
-            addMarker(map, centerPos, Enum.valueOf(BuildingCode.class, feature.getProperty("code")));
+            addBuildingMarker(map, centerPos, Enum.valueOf(BuildingCode.class, feature.getProperty("code")));
         }
     }
 
@@ -159,7 +159,7 @@ public class LocationFragmentViewModel extends ViewModel {
      * @param centerPos is the latitude and longitude of the building's center
      * @param buildingCode is the Building on which the method will add a marker
      */
-    private void addMarker(GoogleMap map, LatLng centerPos, BuildingCode buildingCode) {
+    private void addBuildingMarker(GoogleMap map, LatLng centerPos, BuildingCode buildingCode) {
         Marker marker = map.addMarker(
                 new MarkerOptions()
                         .position(centerPos)
@@ -169,6 +169,24 @@ public class LocationFragmentViewModel extends ViewModel {
                         .alpha(0.90f)
         );
         marker.setTag(buildingCode);
+    }
+
+    /**
+     * Add classroom markers to map
+     * @param map
+     * @param centerPos
+     * @param classNumber
+     */
+    private void addClassroomMarker(GoogleMap map, LatLng centerPos, String classNumber) {
+        Marker marker = map.addMarker(
+                new MarkerOptions()
+                        .position(centerPos)
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.h))
+                        .flat(true)
+                        .anchor(0.5f,0.5f)
+                        .alpha(0.0f)
+        );
+        marker.setTag(classNumber);
     }
 
     /**

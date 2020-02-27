@@ -1,23 +1,21 @@
 package com.example.concordia_campus_guide.LocationFragment;
 
-import androidx.core.app.ActivityCompat;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
 import com.example.concordia_campus_guide.BuildingCode;
@@ -37,6 +35,7 @@ import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 
 import java.util.ArrayList;
+
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 
 public class LocationFragment extends Fragment implements OnFloorPickerOnClickListener {
@@ -163,9 +162,28 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     private void setupPolygons(GoogleMap map) {
         mLayer = mViewModel.loadPolygons(map, getContext());
-        setupPolygonClickListener();
         mLayer.addLayerToMap();
-        setupMarkerClickListener(map);
+
+        setupPolygonClickListener();
+        setupBuildingMarkerClickListener(map);
+        setupZoomListener(map);
+        classRoomCoordinateTool(map);
+    }
+
+    private void setupZoomListener(final GoogleMap map) {
+        map.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
+            @Override
+            public void onCameraMove() {
+                if(map.getCameraPosition().zoom > 20){
+                    mLayer.removeLayerFromMap();
+                    //setup a different marker clickListener
+                }
+                else{
+                    mLayer.addLayerToMap();
+                    setupBuildingMarkerClickListener(map);
+                }
+            }
+        });
     }
 
     public void setupPolygonClickListener(){
@@ -181,7 +199,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         });
     }
 
-    public boolean setupMarkerClickListener(GoogleMap map) {
+    public boolean setupBuildingMarkerClickListener(GoogleMap map) {
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
@@ -192,6 +210,18 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         return true;
     }
 
+    public boolean setupClassMarkerClickListener(GoogleMap map) {
+        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                System.out.println(marker.getTag());
+                return false;
+            }
+        });
+        return true;
+    }
+
+
     private void uiSettingsForMap(GoogleMap mMap){
         if(myLocationPermissionsGranted){
             mMap.setMyLocationEnabled(true);
@@ -199,6 +229,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
         mMap.getUiSettings().setTiltGesturesEnabled(true);
         mMap.getUiSettings().setMapToolbarEnabled(true);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
     }
 
     private void zoomInLocation(double latitude, double longitude) {
@@ -217,6 +248,15 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                     permissions,
                     ClassConstants.LOCATION_PERMISSION_REQUEST_CODE);
         }
+    }
+
+    private void classRoomCoordinateTool(GoogleMap map){
+        map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                System.out.println("\"coordinates\" : [" + latLng.longitude + ", " + latLng.latitude + "]");
+            }
+        });
     }
 
 
