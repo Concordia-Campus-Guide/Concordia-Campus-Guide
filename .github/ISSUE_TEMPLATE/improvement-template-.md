@@ -1,6 +1,6 @@
 ---
 name: 'Improvement Template '
-about: Describe this issue template's purpose here.
+about: A suggestion for improving the UI 
 title: ''
 labels: Improvement
 assignees: ''
