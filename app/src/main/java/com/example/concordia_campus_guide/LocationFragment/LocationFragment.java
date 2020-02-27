@@ -16,7 +16,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 
@@ -38,8 +37,6 @@ import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
-
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 
 public class LocationFragment extends Fragment implements OnFloorPickerOnClickListener {
@@ -53,6 +50,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private Button sgwBtn;
     private GridView mFloorPickerGv;
 
+    private static final String TAG = "LocationFragment";
     private Boolean myLocationPermissionsGranted = false;
     private GroundOverlay hallGroundOverlay;
     private GroundOverlay mbGroundOverlay;
@@ -87,8 +85,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     }
 
     private void setupFloorPickerAdapter(String buildingCode) {
-        System.out.println("setting up floor picker -> " + BuildingCode.valueOf(buildingCode));
-        ArrayList<String> floorsAvailable = mViewModel.getFloorsAvailable(BuildingCode.valueOf(buildingCode));
+        Log.i(TAG,"setting up floor picker -> " + BuildingCode.valueOf(buildingCode));
+        ArrayList<String> floorsAvailable = (ArrayList<String>) mViewModel.getFloorsAvailable(BuildingCode.valueOf(buildingCode));
         if (floorsAvailable.isEmpty()){
             mFloorPickerGv.setVisibility(View.GONE);
             return;
@@ -107,7 +105,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(TAG,e.getMessage());
         }
         mMapView.getMapAsync(new OnMapReadyCallback() {
             @Override
@@ -140,10 +138,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     }
 
     private void setupClickListeners() {
-        System.out.println("setup listeners");
         setupLoyolaBtnClickListener();
         setupSGWBtnClickListener();
-//        setupFloorPickerGvClickListener();
     }
 
     private void setupLoyolaBtnClickListener() {
@@ -164,16 +160,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         });
     }
 
-//    private void setupFloorPickerGvClickListener(){
-//        mFloorPickerGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//
-//                onFloorClicked(i, l, view, adapterView);
-//            }
-//        });
-//    }
-
     private void setupPolygons(GoogleMap map) {
         mLayer = mViewModel.loadPolygons(map, getContext());
         setupPolygonClickListener();
@@ -188,7 +174,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                 //TODO: Make function that pops up the info card for the building (via the building-code)
                 if(geoJsonFeature != null){
                     //replace code here
-                    System.out.println("Clicked on "+geoJsonFeature.getProperty("code"));
+                    Log.i(TAG,"Clicked on "+geoJsonFeature.getProperty("code"));
                 }
             }
         });
@@ -198,7 +184,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                System.out.println("This is a tag: " + marker.getTag());
                 setupFloorPickerAdapter(marker.getTag().toString());
                 return false;
             }
@@ -237,6 +222,23 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private boolean requestPermission(){
         return (checkSelfPermission(getContext(), ClassConstants.FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
     }
+    @Override
+    public void onFloorPickerOnClick(int i, View view) {
+        switch(currentFloorPickerAdapter.getBuildingCode()){
+            case H:
+                mViewModel.setHallFloorplan(hallGroundOverlay, i==0?9:8);
+                break;
+            case MB:
+                mViewModel.setMBFloorplan(mbGroundOverlay, i==0?1:-1);
+                break;
+            case VL:
+                mViewModel.setVLFloorplan(vlGroundOverlay, i==0?2:1);
+                break;
+
+                default:
+                    return;
+        }
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -245,6 +247,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             myLocationPermissionsGranted = (grantResults.length > 0 &&
                     grantResults[0] == PackageManager.PERMISSION_GRANTED);
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -267,22 +270,5 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     public void onLowMemory() {
         super.onLowMemory();
         mMapView.onLowMemory();
-    }
-
-
-    @Override
-    public void onFloorPickerOnClick(int i, View view) {
-        System.out.print("onFloorClicked: " + i + ", buildingcode: " + currentFloorPickerAdapter.getBuildingCode());
-        switch(currentFloorPickerAdapter.getBuildingCode()){
-            case H:
-                mViewModel.setHallFloorplan(hallGroundOverlay, i==0?9:8);
-                break;
-            case MB:
-                mViewModel.setMBFloorplan(mbGroundOverlay, i==0?1:-1);
-                break;
-            case VL:
-                mViewModel.setVLFloorplan(vlGroundOverlay, i==0?2:1);
-                break;
-        }
     }
 }

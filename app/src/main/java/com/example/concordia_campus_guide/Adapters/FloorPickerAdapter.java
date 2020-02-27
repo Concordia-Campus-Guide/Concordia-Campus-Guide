@@ -2,6 +2,7 @@ package com.example.concordia_campus_guide.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -24,7 +25,7 @@ public class FloorPickerAdapter extends BaseAdapter {
         this.floorsAvailable = floorsAvailable;
         this.buildingCode = buildingCode;
         this.listener = listener;
-        System.out.println("DEBUGGER: floorsavailable" + floorsAvailable.get(0) + "\tsize: " + floorsAvailable.size());
+        Log.i("FloorPickerAdapter", "DEBUGGER: floorsavailable" + floorsAvailable.get(0) + "\tsize: " + floorsAvailable.size());
     }
 
     @Override
@@ -51,7 +52,7 @@ public class FloorPickerAdapter extends BaseAdapter {
             button.setLayoutParams(new GridView.LayoutParams(120, 120));
             String floor = floorsAvailable.get(i);
             floor = floor.substring(floor.indexOf('_') + 1);
-            System.out.print("testing substring + " + floor);
+            Log.i("FloorPickerAdapter","testing substring + " + floor);
             button.setText(floor);
             button.setOnClickListener(new View.OnClickListener() {
                 @Override

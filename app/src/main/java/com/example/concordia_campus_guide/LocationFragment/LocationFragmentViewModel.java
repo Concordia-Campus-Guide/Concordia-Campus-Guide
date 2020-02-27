@@ -17,6 +17,7 @@ import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 import org.json.JSONException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.Double.parseDouble;
 
@@ -52,9 +53,7 @@ public class LocationFragmentViewModel extends ViewModel {
         GeoJsonLayer layer = null;
         try {
             layer = new GeoJsonLayer(map, R.raw.buildingcoordinates, applicationContext);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
         return layer;
@@ -127,7 +126,7 @@ public class LocationFragmentViewModel extends ViewModel {
 
     public GroundOverlay setVLFloorplan(GroundOverlay groundOverlay, int floorNb){
         if(floorNb == 1) return setVL1Floorplan(groundOverlay);
-        else if(floorNb == 1)return setVL2Floorplan(groundOverlay);
+        else if(floorNb == 2)return setVL2Floorplan(groundOverlay);
         else return null;
     }
 
@@ -185,7 +184,7 @@ public class LocationFragmentViewModel extends ViewModel {
         return geoJsonPolygonStyle;
     }
 
-    public ArrayList<String> getFloorsAvailable(BuildingCode buildingCode){
+    public List<String> getFloorsAvailable(BuildingCode buildingCode){
         ArrayList<String> floorsAvailable = new ArrayList<>();
         switch(buildingCode){
             case H:
@@ -199,6 +198,7 @@ public class LocationFragmentViewModel extends ViewModel {
             case VL:
                 floorsAvailable.add("vl_2");
                 floorsAvailable.add("vl_1");
+                return floorsAvailable;
             default:
                 return floorsAvailable;
         }
@@ -277,7 +277,7 @@ public class LocationFragmentViewModel extends ViewModel {
                 return R.drawable.ve;
             case VL:
                 return R.drawable.vl;
+                default: return -1;
         }
-        return  -1;
     }
 }
