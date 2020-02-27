@@ -3,15 +3,15 @@ package com.example.concordia_campus_guide.InfoCardFragment;
 import android.app.Application;
 import android.content.Context;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
-
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.R;
 import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 
 // This class is for the business logic
 public class InfoCardFragmentViewModel extends AndroidViewModel {
