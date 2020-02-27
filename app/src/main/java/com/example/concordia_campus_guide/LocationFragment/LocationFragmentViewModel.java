@@ -56,16 +56,80 @@ public class LocationFragmentViewModel extends ViewModel {
         }
         return layer;
     }
-    public void addOverlay(GoogleMap map){
-        GroundOverlayOptions mOverlayOptions = new GroundOverlayOptions()
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.ninth_floor_floormap))
-                .position(new LatLng(45.4972685, -73.5789475), (float) 68, (float) 68)
-                .bearing((float) 34).zIndex(2);
-         map.addGroundOverlay(mOverlayOptions);
+
+
+    public GroundOverlayOptions[] getFloorplanGroundOverlays(){
+        GroundOverlayOptions[] overlayOptions = {getHall8Building(), getHall9Building(),
+                                                getMBS2Building(), getMB1Building(),
+                                                getVL1Building(), getVL2Building()};
+        return overlayOptions;
     }
 
+    /**
+     * Generate the hall building overlays
+     * @return the generate ground overlay option
+     */
+    private GroundOverlayOptions getHallBuildingOverlay(){
+        return new GroundOverlayOptions()
+                .position(new LatLng(45.4972685, -73.5789475), (float) 68, (float) 68)
+                .bearing((float) 34);
+    }
 
+    private GroundOverlayOptions getHall8Building(){
+        return getHallBuildingOverlay()
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.hall_8))
+                .zIndex(8);
+    }
 
+    private GroundOverlayOptions getHall9Building(){
+        //TODO: Change
+        return getHallBuildingOverlay()
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.hall_9))
+                .zIndex(9);
+    }
+
+    /**
+     * Generate the John Molson  building overlays
+     * @return the generate ground overlay option
+     */
+    private GroundOverlayOptions getMBBuildingOverlay(){
+        return new GroundOverlayOptions()
+                .position(new LatLng( 45.495212, -73.578926), (float) 68, (float) 68);
+//                .bearing((float) 34);
+    }
+
+    private GroundOverlayOptions getMB1Building(){
+        return getMBBuildingOverlay()
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.mb_1))
+                .zIndex(1);
+    }
+
+    private GroundOverlayOptions getMBS2Building(){
+        return getMBBuildingOverlay()
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.mb_s2))
+                .zIndex(-1);
+    }
+
+    /**
+     * Generate the Vanier Library building overlays
+     * @return the generate ground overlay option
+     */
+    private GroundOverlayOptions getVLBuildingOverlay(){
+        return new GroundOverlayOptions()
+                .position(new LatLng( 45.45902065060446, -73.6383318901062), (float) 68, (float) 68);
+//                .bearing((float) 34);
+    }
+
+    private GroundOverlayOptions getVL1Building(){
+        return getVLBuildingOverlay()
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.vl_1))
+                .zIndex(1);
+    }
+    private GroundOverlayOptions getVL2Building(){
+        return getVLBuildingOverlay()
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.vl_2))
+                .zIndex(2);
+    }
     /**
      * @param layer the GeoJson layer containing features to style.
      * @param map the google map where layer will be displayed and markers will be added.
