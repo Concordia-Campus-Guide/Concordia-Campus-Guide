@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 
@@ -80,6 +81,14 @@ public class LocationFragment extends Fragment{
 
     private void setupFloorPickerAdapter(String buildingCode) {
 
+        mFloorPickerGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                onFloorClicked(i, l, view, adapterView);
+            }
+        });
+
         ArrayList<Integer> floorsAvailable = new ArrayList<Integer>();
         switch(buildingCode){
             case ("H"):
@@ -87,12 +96,9 @@ public class LocationFragment extends Fragment{
                 floorsAvailable.add(9);
                 break;
             case ("MB"):
+            case ("VL"):
                 floorsAvailable.add(1);
                 floorsAvailable.add(2);
-                break;
-            case ("VL"):
-                floorsAvailable.add(4);
-                floorsAvailable.add(5);
                 break;
         }
         if (floorsAvailable.isEmpty()){
@@ -104,6 +110,9 @@ public class LocationFragment extends Fragment{
         mFloorPickerGv.setAdapter(floorPickerAdapter);
     }
 
+    private void onFloorClicked(int i, long l, View view, AdapterView<?> adapterView) {
+        //TODO: logic for floor clicked
+    }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
