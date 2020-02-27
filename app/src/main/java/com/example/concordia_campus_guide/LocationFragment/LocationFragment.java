@@ -16,6 +16,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.concordia_campus_guide.BuildingCode;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.MainActivity;
 import com.example.concordia_campus_guide.R;
@@ -26,19 +27,19 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
-import com.google.android.gms.maps.model.Polygon;
+import com.google.android.gms.maps.model.Marker;
+import com.google.maps.android.geojson.GeoJsonFeature;
+import com.google.maps.android.geojson.GeoJsonLayer;
 
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 
 public class LocationFragment extends Fragment{
-
     MapView mMapView;
     private GoogleMap mMap;
     private LocationFragmentViewModel mViewModel;
-
+    private GeoJsonLayer mLayer;
     private Button loyolaBtn;
     private Button sgwBtn;
-
     private Boolean myLocationPermissionsGranted = false;
 
     public static LocationFragment newInstance() {
@@ -49,15 +50,12 @@ public class LocationFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.location_fragment_fragment, container, false);
-
         initComponent(rootView);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
-
         initMap();
         setupClickListeners();
         getLocationPermission();
-
         return rootView;
     }
 
@@ -84,9 +82,8 @@ public class LocationFragment extends Fragment{
             public void onMapReady(GoogleMap googleMap) {
                 setMapStyle(googleMap);
                 mMap = googleMap;
-                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-
-                setupPolyGonSGW(googleMap);
+                //mMap.setMapType(googleMap.MAP_TYPE_TERRAIN);
+                setupPolygons(mMap);
                 uiSettingsForMap(mMap);
                 zoomInLocation(45.494999, -73.577854);
             }
@@ -126,22 +123,41 @@ public class LocationFragment extends Fragment{
         });
     }
 
-    private void setupPolyGonSGW(GoogleMap googleMap) {
-        Polygon polygon1 = googleMap.addPolygon(mViewModel.getPolygon());
-        googleMap.setOnPolygonClickListener(new GoogleMap.OnPolygonClickListener() {
-            @Override
-            public void onPolygonClick(Polygon polygon) {
-                ((MainActivity)getActivity()).showInfoCard();
-            }
-        });
-        stylePolygon(polygon1);
+    private void setupPolygons(GoogleMap map) {
+        mLayer = mViewModel.loadPolygons(map, getContext());
+        setupPolygonClickListener();
+        mLayer.addLayerToMap();
+        setupMarkerClickListener(map);
     }
 
-    private void stylePolygon(Polygon polygon) {
+    public void setupPolygonClickListener(){
+        mLayer.setOnFeatureClickListener(new GeoJsonLayer.GeoJsonOnFeatureClickListener() {
+            @Override
+            public void onFeatureClick(GeoJsonFeature geoJsonFeature) {
+                //TODO: Make function that pops up the info card for the building (via the building-code)
+                //Important null check do not remove!
+                if(geoJsonFeature != null){
+                    //replace code here
+                    String buildingCode = geoJsonFeature.getProperty("code");
+                    ((MainActivity)getActivity()).showInfoCard(buildingCode);
+                    System.out.println("Clicked on "+buildingCode);
+                }
+            }
+        });
+    }
 
-        polygon.setStrokeWidth(ClassConstants.POLYGON_STROKE_WIDTH_PX);
-        polygon.setStrokeColor(ClassConstants.COLOR_BLACK_ARGB);
-        polygon.setFillColor(ClassConstants.COLOR_WHITE_ARGB);
+    public boolean setupMarkerClickListener(GoogleMap map) {
+        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                //TODO: Make function that pops up the info card for the building (via the building-code)
+                String buildingCode = ((BuildingCode) marker.getTag()).toString();
+                ((MainActivity)getActivity()).showInfoCard(buildingCode);
+                System.out.println(buildingCode);
+                return false;
+            }
+        });
+        return true;
     }
 
     private void uiSettingsForMap(GoogleMap mMap){
@@ -149,13 +165,13 @@ public class LocationFragment extends Fragment{
             mMap.setMyLocationEnabled(true);
         }
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
-        mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setTiltGesturesEnabled(true);
+        mMap.getUiSettings().setMapToolbarEnabled(true);
     }
 
     private void zoomInLocation(double latitude, double longitude) {
         LatLng curr = new LatLng(latitude,longitude);
-        float zoomLevel = 16.0f;
+        float zoomLevel = 18.0f;
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(curr, zoomLevel));
     }
 
@@ -205,7 +221,4 @@ public class LocationFragment extends Fragment{
         super.onLowMemory();
         mMapView.onLowMemory();
     }
-
-
-
 }
