@@ -57,6 +57,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private GroundOverlay vlGroundOverlay;
     private FloorPickerAdapter currentFloorPickerAdapter;
 
+    private Button selectedFloor;
     public static LocationFragment newInstance() {
         return new LocationFragment();
     }
@@ -113,14 +114,14 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                 setMapStyle(googleMap);
                 mMap = googleMap;
                 setupPolygons(mMap);
-                initFloorplans();
+                initFloorPlans();
                 uiSettingsForMap(mMap);
                 zoomInLocation(45.494999, -73.577854);
             }
         });
     }
 
-    private void initFloorplans() {
+    private void initFloorPlans() {
         hallGroundOverlay = mMap.addGroundOverlay(mViewModel.getHallBuildingOverlay());
         mbGroundOverlay = mMap.addGroundOverlay(mViewModel.getMBBuildingOverlay());
         vlGroundOverlay = mMap.addGroundOverlay(mViewModel.getVLBuildingOverlay());
@@ -224,6 +225,9 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     }
     @Override
     public void onFloorPickerOnClick(int i, View view) {
+        if (selectedFloor != null) selectedFloor.setEnabled(true);
+        selectedFloor = (Button)view;
+        view.setEnabled(false);
         switch(currentFloorPickerAdapter.getBuildingCode()){
             case H:
                 mViewModel.setHallFloorplan(hallGroundOverlay, i==0?9:8);

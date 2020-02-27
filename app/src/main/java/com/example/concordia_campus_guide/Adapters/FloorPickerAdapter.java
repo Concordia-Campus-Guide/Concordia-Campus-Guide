@@ -11,8 +11,11 @@ import android.widget.GridView;
 
 import com.example.concordia_campus_guide.BuildingCode;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
+import com.example.concordia_campus_guide.R;
 
 import java.util.ArrayList;
+
+import androidx.core.content.ContextCompat;
 
 public class FloorPickerAdapter extends BaseAdapter {
     private OnFloorPickerOnClickListener listener;
@@ -25,7 +28,7 @@ public class FloorPickerAdapter extends BaseAdapter {
         this.floorsAvailable = floorsAvailable;
         this.buildingCode = buildingCode;
         this.listener = listener;
-        Log.i("FloorPickerAdapter", "DEBUGGER: floorsavailable" + floorsAvailable.get(0) + "\tsize: " + floorsAvailable.size());
+        Log.i("FloorPickerAdapter", "floors available" + floorsAvailable.get(0) + "\tsize: " + floorsAvailable.size());
     }
 
     @Override
@@ -57,9 +60,11 @@ public class FloorPickerAdapter extends BaseAdapter {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onFloorPickerOnClick(i, view);
+                    listener.onFloorPickerOnClick(i, v);
                 }
             });
+            button.setBackground(ContextCompat.getDrawable(context, R.drawable.button_highlights));
+//            if (i ==0) button.setEnabled(false);
         } else {
             button = (Button) view;
         }
