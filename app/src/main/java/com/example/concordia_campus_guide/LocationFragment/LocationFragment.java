@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 
@@ -35,6 +36,7 @@ import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 
@@ -263,6 +265,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private boolean requestPermission(){
         return (checkSelfPermission(getContext(), ClassConstants.FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
     }
+
     @Override
     public void onFloorPickerOnClick(int i, View view) {
         if (selectedFloor != null) selectedFloor.setEnabled(true);

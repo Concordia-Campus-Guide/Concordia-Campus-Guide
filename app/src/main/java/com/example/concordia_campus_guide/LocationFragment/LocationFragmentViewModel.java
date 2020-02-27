@@ -17,7 +17,6 @@ import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 import org.json.JSONException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import static java.lang.Double.parseDouble;
 
@@ -91,10 +90,13 @@ public class LocationFragmentViewModel extends ViewModel {
      * @return the generate ground overlay option
      */
     public GroundOverlayOptions getMBBuildingOverlay(){
+        //400 x 570 / 645 x 645
+        //actual dimensions 22.58 x 64 -> 36.41 x 72
         return new GroundOverlayOptions()
-                .position(new LatLng( 45.495212, -73.578926), (float) 68, (float) 68)
+                //45.495245, -73.578941
+                .position(new LatLng( 45.495305, -73.578885), (float) 65, (float) 65)
                 .image(BitmapDescriptorFactory.fromResource(R.drawable.mb_1))
-                .bearing((float) 34);
+                .bearing((float) 127);
     }
 
     public GroundOverlay setMBFloorplan(GroundOverlay groundOverlay, int floorNb){
@@ -118,10 +120,12 @@ public class LocationFragmentViewModel extends ViewModel {
      * @return the generate ground overlay option
      */
     public GroundOverlayOptions getVLBuildingOverlay(){
+        //w: 66.5   h: 69.98
+        //80x45
         return new GroundOverlayOptions()
-                .position(new LatLng( 45.45902065060446, -73.6383318901062), (float) 68, (float) 68)
+                .position(new LatLng( 45.45892, -73.638321), (float) 80, (float) 45)
                 .image(BitmapDescriptorFactory.fromResource(R.drawable.vl_2))
-                .bearing((float) 34);
+                .bearing((float) 210);
     }
 
     public GroundOverlay setVLFloorplan(GroundOverlay groundOverlay, int floorNb){
@@ -202,7 +206,7 @@ public class LocationFragmentViewModel extends ViewModel {
         return geoJsonPolygonStyle;
     }
 
-    public List<String> getFloorsAvailable(BuildingCode buildingCode){
+    public ArrayList<String> getFloorsAvailable(BuildingCode buildingCode){
         ArrayList<String> floorsAvailable = new ArrayList<>();
         switch(buildingCode){
             case H:
@@ -216,7 +220,6 @@ public class LocationFragmentViewModel extends ViewModel {
             case VL:
                 floorsAvailable.add("vl_2");
                 floorsAvailable.add("vl_1");
-                return floorsAvailable;
             default:
                 return floorsAvailable;
         }

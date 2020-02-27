@@ -4,6 +4,8 @@ import android.graphics.Color;
 
 import com.example.concordia_campus_guide.LocationFragment.LocationFragmentViewModel;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.maps.android.geojson.GeoJsonLayer;
@@ -29,6 +31,13 @@ public class LocationFragmentViewModelTest {
     public void init() {
         MockitoAnnotations.initMocks(this);
         viewModel = new LocationFragmentViewModel();
+    }
+
+    @Test
+    public void getBuildingOverlaysTest(){
+        BitmapDescriptor expected = BitmapDescriptorFactory.fromResource(R.drawable.hall_9);
+        BitmapDescriptor actual = viewModel.getHallBuildingOverlay().getImage();
+        assertEquals(expected,actual);
     }
 
     @Test
