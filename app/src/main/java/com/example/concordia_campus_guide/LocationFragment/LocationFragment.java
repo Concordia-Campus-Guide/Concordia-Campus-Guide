@@ -33,6 +33,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 
+import java.util.ArrayList;
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 
 public class LocationFragment extends Fragment{
@@ -73,12 +74,32 @@ public class LocationFragment extends Fragment{
         loyolaBtn = rootView.findViewById(R.id.loyolaBtn);
         mFloorPickerGv = rootView.findViewById(R.id.FloorPickerGv);
         mFloorPickerGv.setVisibility(View.GONE);
-        setupFloorPickerAdapter();
 
     }
 
-    private void setupFloorPickerAdapter() {
-        FloorPickerAdapter floorPickerAdapter = new FloorPickerAdapter(getContext(), 2);
+    private void setupFloorPickerAdapter(String buildingCode) {
+
+        ArrayList<Integer> floorsAvailable = new ArrayList<Integer>();
+        switch(buildingCode){
+            case ("H"):
+                floorsAvailable.add(8);
+                floorsAvailable.add(9);
+                break;
+            case ("MB"):
+                floorsAvailable.add(1);
+                floorsAvailable.add(2);
+                break;
+            case ("VL"):
+                floorsAvailable.add(4);
+                floorsAvailable.add(5);
+                break;
+        }
+        if (floorsAvailable.isEmpty()){
+            mFloorPickerGv.setVisibility(View.GONE);
+            return;
+        }
+        mFloorPickerGv.setVisibility(View.VISIBLE);
+        FloorPickerAdapter floorPickerAdapter = new FloorPickerAdapter(getContext(), floorsAvailable);
         mFloorPickerGv.setAdapter(floorPickerAdapter);
     }
 
@@ -165,10 +186,7 @@ public class LocationFragment extends Fragment{
             @Override
             public boolean onMarkerClick(Marker marker) {
                 System.out.println("This is a tag: " + marker.getTag());
-                if (marker.getTag().toString().equals("H"))
-                    mFloorPickerGv.setVisibility(View.VISIBLE);
-                else
-                    mFloorPickerGv.setVisibility(View.GONE);
+                setupFloorPickerAdapter(marker.getTag().toString());
                 return false;
             }
         });

@@ -33,12 +33,15 @@
             android:text="Loyola"
             android:textColor="@color/colorAppTheme"></Button>
     </LinearLayout>
+
     <GridView
         android:id="@+id/FloorPickerGv"
         android:layout_width="50dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_alignRight="@id/mapView"
         android:layout_centerVertical="true"
+        android:stretchMode="none"
         android:layout_marginRight="10dp"
-        android:numColumns="1" />
+        android:numColumns="1"
+        android:verticalSpacing="0dp" />
 </RelativeLayout>

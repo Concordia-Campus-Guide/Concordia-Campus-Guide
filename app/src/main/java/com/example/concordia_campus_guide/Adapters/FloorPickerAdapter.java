@@ -7,18 +7,19 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+import java.util.ArrayList;
 
 public class FloorPickerAdapter extends BaseAdapter {
     private Context context;
-    private int size;
-    public FloorPickerAdapter(Context context, int size){
+    ArrayList<Integer> floorsAvailable;
+    public FloorPickerAdapter(Context context, ArrayList floorsAvailable){
         this.context = context;
-        this.size = size;
+        this.floorsAvailable = floorsAvailable;
     }
 
     @Override
     public int getCount() {
-        return size;
+        return floorsAvailable.size();
     }
 
     @Override
@@ -38,8 +39,7 @@ public class FloorPickerAdapter extends BaseAdapter {
             button = new Button(context);
             button.setTextColor(Color.parseColor("#FFFFFF"));
             button.setLayoutParams(new GridView.LayoutParams(120, 120));
-            button.setText("3");
-            button.setPadding(8, 8, 8, 8);
+            button.setText(String.valueOf(String.valueOf(floorsAvailable.get(i))));
         }
         else {
             button = (Button) view;
