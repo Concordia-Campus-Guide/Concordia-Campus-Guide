@@ -51,7 +51,7 @@ public class LocationFragmentViewModelTest {
         GeoJsonPolygonStyle  geoJsonPolygonStyle = viewModel.getPolygonStyle();
         assertEquals(geoJsonPolygonStyle.getFillColor(), Color.argb(51, 18, 125, 159));
         assertEquals(Color.argb(255, 18, 125, 159), geoJsonPolygonStyle.getStrokeColor());
-        assertEquals(6, geoJsonPolygonStyle.getStrokeWidth());
+        assertEquals(6.0f, geoJsonPolygonStyle.getStrokeWidth());
     }
 
     @Test
