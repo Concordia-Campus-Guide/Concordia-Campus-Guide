@@ -84,6 +84,7 @@ public class LocationFragmentViewModel extends ViewModel {
                         .flat(true)
                         .anchor(0.5f,0.5f)
                         .alpha(0.90f)
+                        .title(buildingCode.toString())
         );
         marker.setTag(buildingCode);
     }
