@@ -23,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showInfoCard(String buildingCode){
+        if(infoCardFragment!=null){
+            hideInfoCard();
+        }
         Bundle bundle = new Bundle();
         bundle.putString("buildingCode", buildingCode );
         infoCardFragment = new InfoCardFragment();
