@@ -2,10 +2,12 @@ package com.example.concordia_campus_guide.InfoCardFragment;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,6 +33,9 @@ public class InfoCardFragment extends Fragment {
     private TextView servicesList;
     private ImageView buildingImage;
 
+    private LinearLayout services;
+    private LinearLayout departments;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -42,6 +47,8 @@ public class InfoCardFragment extends Fragment {
         departmentsList = (TextView) view.findViewById(R.id.departments_list);
         servicesList = (TextView) view.findViewById(R.id.services_list);
         buildingImage = (ImageView) view.findViewById(R.id.building_image);
+        services = view.findViewById(R.id.services);
+        departments = view.findViewById(R.id.departments);
         return view;
     }
 
@@ -64,12 +71,21 @@ public class InfoCardFragment extends Fragment {
 
     private void setDepartmentsList(){
         String text = building.getDepartmentsString();
-        departmentsList.setText(text);
+
+        if(text.isEmpty())
+            departments.setVisibility(View.GONE);
+        else
+            departmentsList.setText(text);
     }
 
     private void setServicesList() {
         String text = building.getServicesString();
-        servicesList.setText(text);
+        System.out.println("Text is: " + text);
+        if(text.isEmpty())
+            services.setVisibility(View.GONE);
+
+        else
+            servicesList.setText(text);
     }
 
     private void setBuildingImage(String buildingCode){
