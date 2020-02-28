@@ -38,7 +38,7 @@ public class InfoCardFragment extends Fragment {
 
         infoCardTitle = (TextView) view.findViewById(R.id.info_card_title);
         buildingAddress = (TextView) view.findViewById(R.id.building_address);
-        contextualDescription = (TextView) view.findViewById(R.id.building_description);
+        contextualDescription = (TextView) view.findViewById(R.id.departments_list);
         buildingImage = (ImageView) view.findViewById(R.id.building_image);
         return view;
     }
