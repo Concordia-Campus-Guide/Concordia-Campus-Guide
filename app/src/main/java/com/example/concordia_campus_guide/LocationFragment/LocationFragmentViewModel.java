@@ -1,7 +1,9 @@
 package com.example.concordia_campus_guide.LocationFragment;
 import android.content.Context;
 import android.graphics.Color;
+
 import androidx.lifecycle.ViewModel;
+
 import com.example.concordia_campus_guide.BuildingCode;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.GoogleMap;
@@ -151,6 +153,7 @@ public class LocationFragmentViewModel extends ViewModel {
             LatLng centerPos = new LatLng(parseDouble(coordinates[1]), parseDouble(coordinates[0]));
             addMarker(map, centerPos, Enum.valueOf(BuildingCode.class, feature.getProperty("code")));
         }
+        int x =213;
     }
 
     /**
@@ -167,6 +170,7 @@ public class LocationFragmentViewModel extends ViewModel {
                         .flat(true)
                         .anchor(0.5f,0.5f)
                         .alpha(0.90f)
+                        .title(buildingCode.toString())
         );
         marker.setTag(buildingCode);
     }
@@ -210,7 +214,7 @@ public class LocationFragmentViewModel extends ViewModel {
      * @return Int of drawable resource's bitmap representation
      */
     public int getIcon(BuildingCode buildingCode){
-        switch (buildingCode){
+        switch (buildingCode) {
             case H:
                 return R.drawable.h;
             case LB:
@@ -277,7 +281,8 @@ public class LocationFragmentViewModel extends ViewModel {
                 return R.drawable.ve;
             case VL:
                 return R.drawable.vl;
-                default: return -1;
+            default:
+                return -1;
         }
     }
 }
