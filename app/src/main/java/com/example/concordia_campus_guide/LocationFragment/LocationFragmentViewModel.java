@@ -71,20 +71,17 @@ public class LocationFragmentViewModel extends ViewModel {
                 .bearing((float) 34);
     }
 
-    public GroundOverlay setHallFloorplan(GroundOverlay groundOverlay, int floorNb){
-        if(floorNb == 8) return setHall8Floorplan(groundOverlay);
-        else if(floorNb == 9)return setHall9Floorplan(groundOverlay);
-        else return null;
+    public void setHallFloorplan(GroundOverlay groundOverlay, int floorNb){
+        if(floorNb == 8)  setHall8Floorplan(groundOverlay);
+        else if(floorNb == 9) setHall9Floorplan(groundOverlay);
     }
 
-    private GroundOverlay setHall8Floorplan(GroundOverlay groundOverlay){
+    private void setHall8Floorplan(GroundOverlay groundOverlay){
         groundOverlay.setImage(BitmapDescriptorFactory.fromResource(R.drawable.hall_8));
-        return groundOverlay;
     }
 
-    private GroundOverlay setHall9Floorplan(GroundOverlay groundOverlay){
+    private void setHall9Floorplan(GroundOverlay groundOverlay){
         groundOverlay.setImage(BitmapDescriptorFactory.fromResource(R.drawable.hall_9));
-        return groundOverlay;
     }
 
     /**
@@ -101,20 +98,17 @@ public class LocationFragmentViewModel extends ViewModel {
                 .bearing((float) 127);
     }
 
-    public GroundOverlay setMBFloorplan(GroundOverlay groundOverlay, int floorNb){
-        if(floorNb == -1) return setMBS2Floorplan(groundOverlay);
-        else if(floorNb == 1) return setMB1Floorplan(groundOverlay);
-        else return null;
+    public void setMBFloorplan(GroundOverlay groundOverlay, int floorNb){
+        if(floorNb == -1)  setMBS2Floorplan(groundOverlay);
+        else if(floorNb == 1)  setMB1Floorplan(groundOverlay);
     }
 
-    private GroundOverlay setMBS2Floorplan(GroundOverlay groundOverlay){
+    private void setMBS2Floorplan(GroundOverlay groundOverlay){
         groundOverlay.setImage(BitmapDescriptorFactory.fromResource(R.drawable.mb_s2));
-        return groundOverlay;
     }
 
-    private GroundOverlay setMB1Floorplan(GroundOverlay groundOverlay){
+    private void setMB1Floorplan(GroundOverlay groundOverlay){
         groundOverlay.setImage(BitmapDescriptorFactory.fromResource(R.drawable.mb_1));
-        return groundOverlay;
     }
 
     /**
@@ -130,20 +124,17 @@ public class LocationFragmentViewModel extends ViewModel {
                 .bearing((float) 210);
     }
 
-    public GroundOverlay setVLFloorplan(GroundOverlay groundOverlay, int floorNb){
-        if(floorNb == 1) return setVL1Floorplan(groundOverlay);
-        else if(floorNb == 2)return setVL2Floorplan(groundOverlay);
-        else return null;
+    public void setVLFloorplan(GroundOverlay groundOverlay, int floorNb){
+        if(floorNb == 1)  setVL1Floorplan(groundOverlay);
+        else if(floorNb == 2) setVL2Floorplan(groundOverlay);
     }
 
-    private GroundOverlay setVL1Floorplan(GroundOverlay groundOverlay){
+    private void setVL1Floorplan(GroundOverlay groundOverlay){
         groundOverlay.setImage(BitmapDescriptorFactory.fromResource(R.drawable.vl_1));
-        return groundOverlay;
     }
 
-    private GroundOverlay setVL2Floorplan(GroundOverlay groundOverlay){
+    private void setVL2Floorplan(GroundOverlay groundOverlay){
         groundOverlay.setImage(BitmapDescriptorFactory.fromResource(R.drawable.vl_2));
-        return groundOverlay;
     }
 
     /**

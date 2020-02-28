@@ -4,6 +4,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
+import com.example.concordia_campus_guide.Activities.MainActivity;
+
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.rule.GrantPermissionRule;
