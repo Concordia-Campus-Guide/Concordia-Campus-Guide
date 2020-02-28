@@ -11,10 +11,10 @@
         android:id="@+id/info_card"
         android:layout_width="380dp"
         android:layout_height="600dp"
-        android:layout_marginBottom="-25dp"
-        android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="-25dp"
         android:background="@drawable/rounded_corners"
         android:orientation="vertical">
 
@@ -23,46 +23,77 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="TextView" />
+            android:padding="15dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:text="TextView"
+            android:textAllCaps="false"
+            android:textColor="#932339"
+            android:textColorHighlight="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:textColorLink="#FFFFFF"
+            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="30sp"
+            android:layout_marginEnd="30sp"
+            android:layout_marginBottom="20sp"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/directions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="15sp"
                 android:layout_weight="1"
-                android:text="Directions" />
+                android:backgroundTint="#C85563"
+                android:drawableLeft="@drawable/ic_directions_black_24dp"
+                android:elegantTextHeight="false"
+                android:minHeight="23dip"
+                android:text="Directions"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                app:iconPadding="5dp" />
 
             <Button
                 android:id="@+id/indoor_map"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="15sp"
                 android:layout_weight="1"
-                android:text="Indoor Map" />
+                android:backgroundTint="#C85563"
+                android:drawableLeft="@drawable/ic_layers_black_24dp"
+                android:minHeight="23dip"
+                android:text="Indoor Map"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                app:iconPadding="5dp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:layout_weight="0"
             android:orientation="horizontal"
             android:visibility="visible">
 
             <ImageView
                 android:id="@+id/building_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="158dp"
+                android:layout_height="164dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="15dp"
                 tools:srcCompat="@tools:sample/avatars[2]" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:orientation="horizontal"
                 android:weightSum="6">
@@ -71,6 +102,7 @@
                     android:id="@+id/red_pin"
                     android:layout_width="5dp"
                     android:layout_height="match_parent"
+                    android:layout_marginEnd="5dp"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/red_pin" />
 
@@ -79,7 +111,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textColor="#C85563"
+                    android:textColorHighlight="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    android:textColorLink="#FFFFFF" />
             </LinearLayout>
         </LinearLayout>
 
@@ -111,3 +147,4 @@
 
     </LinearLayout>
 </RelativeLayout>
+
