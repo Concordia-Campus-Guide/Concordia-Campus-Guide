@@ -27,7 +27,8 @@ public class InfoCardFragment extends Fragment {
 
     private TextView infoCardTitle;
     private TextView buildingAddress;
-    private TextView contextualDescription;
+    private TextView departmentsList;
+    private TextView servicesList;
     private ImageView buildingImage;
 
     @Override
@@ -38,7 +39,8 @@ public class InfoCardFragment extends Fragment {
 
         infoCardTitle = (TextView) view.findViewById(R.id.info_card_title);
         buildingAddress = (TextView) view.findViewById(R.id.building_address);
-        contextualDescription = (TextView) view.findViewById(R.id.departments_list);
+        departmentsList = (TextView) view.findViewById(R.id.departments_list);
+        servicesList = (TextView) view.findViewById(R.id.services_list);
         buildingImage = (ImageView) view.findViewById(R.id.building_image);
         return view;
     }
@@ -55,14 +57,19 @@ public class InfoCardFragment extends Fragment {
     private void setInfoCard(){
         infoCardTitle.setText(building.getBuilding_Long_Name());
         buildingAddress.setText(building.getAddress());
-        setDescription();
+        setDepartmentsList();
+        setServicesList();
         setBuildingImage(buildingCode);
     }
 
-    private void setDescription(){
+    private void setDepartmentsList(){
         String text = building.getDepartmentsString();
-        text += "\n\n\n" + building.getServicesString();
-        contextualDescription.setText(text);
+        departmentsList.setText(text);
+    }
+
+    private void setServicesList() {
+        String text = building.getServicesString();
+        servicesList.setText(text);
     }
 
     private void setBuildingImage(String buildingCode){
