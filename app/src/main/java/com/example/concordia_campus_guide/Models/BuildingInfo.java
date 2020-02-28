@@ -1,5 +1,7 @@
 package com.example.concordia_campus_guide.Models;
 
+import android.text.TextUtils;
+
 import java.util.List;
 
 public class BuildingInfo {
@@ -68,7 +70,21 @@ public class BuildingInfo {
         return Services;
     }
 
+    public String getServicesString(){
+        if(Services.isEmpty()){
+            return "";
+        }
+        return TextUtils.join(", ", Services);
+    }
+
     public List<String> getDepartments() {
         return Departments;
+    }
+
+    public String getDepartmentsString(){
+        if(Departments.isEmpty()){
+            return "";
+        }
+        return TextUtils.join(", ", Departments);
     }
 }
