@@ -40,8 +40,8 @@
 
     <FrameLayout
         android:id="@+id/info_card_frame"
-        android:layout_width="411dp"
-        android:layout_height="674dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="@+id/fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
