@@ -1,7 +1,9 @@
 package com.example.concordia_campus_guide.LocationFragment;
 import android.content.Context;
 import android.graphics.Color;
+
 import androidx.lifecycle.ViewModel;
+
 import com.example.concordia_campus_guide.BuildingCode;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.GoogleMap;
@@ -14,6 +16,7 @@ import com.google.maps.android.geojson.GeoJsonLayer;
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 import org.json.JSONException;
 import java.io.IOException;
+
 import static java.lang.Double.parseDouble;
 
 public class LocationFragmentViewModel extends ViewModel {
@@ -68,6 +71,7 @@ public class LocationFragmentViewModel extends ViewModel {
             LatLng centerPos = new LatLng(parseDouble(coordinates[1]), parseDouble(coordinates[0]));
             addMarker(map, centerPos, Enum.valueOf(BuildingCode.class, feature.getProperty("code")));
         }
+        int x =213;
     }
 
     /**
@@ -101,7 +105,6 @@ public class LocationFragmentViewModel extends ViewModel {
         geoJsonPolygonStyle.setStrokeWidth(6);
         return geoJsonPolygonStyle;
     }
-
 
     /**
      * @param buildingCode it represents which building we will be covering

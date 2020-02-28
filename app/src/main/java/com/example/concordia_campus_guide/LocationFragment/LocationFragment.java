@@ -44,9 +44,14 @@ public class LocationFragment extends Fragment{
     private Button sgwBtn;
     private Boolean myLocationPermissionsGranted = false;
 
+
+    /**
+     * @return it will return a new object of this fragment
+     */
     public static LocationFragment newInstance() {
         return new LocationFragment();
     }
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -61,11 +66,16 @@ public class LocationFragment extends Fragment{
         return rootView;
     }
 
+
+    /**
+     * @param rootView is the object that contains the parts displayed on the fragment
+     */
     private void initComponent(View rootView) {
         mMapView = rootView.findViewById(R.id.mapView);
         sgwBtn = rootView.findViewById(R.id.SGWBtn);
         loyolaBtn = rootView.findViewById(R.id.loyolaBtn);
     }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -73,6 +83,11 @@ public class LocationFragment extends Fragment{
         mViewModel = ViewModelProviders.of(this).get(com.example.concordia_campus_guide.LocationFragment.LocationFragmentViewModel.class);
     }
 
+
+    /**
+     * The purpose of this method is to init the map and fill it up with the required
+     * information to display them to the user
+     */
     private void initMap() {
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
@@ -92,6 +107,11 @@ public class LocationFragment extends Fragment{
         });
     }
 
+
+    /**
+     * The purpose of this method is to figure the style of the map to display
+     * @param googleMap is the map that is used in the application
+     */
     private void setMapStyle(GoogleMap googleMap) {
         try {
             googleMap.setMapStyle(
@@ -102,11 +122,20 @@ public class LocationFragment extends Fragment{
         }
     }
 
+
+    /**
+     * The purpose of this method is to setup the click listener for both
+     * SGW and LOYALA Campuses buttons.
+     */
     private void setupClickListeners() {
         setupLoyolaBtnClickListener();
         setupSGWBtnClickListener();
     }
 
+
+    /**
+     * The purpose of this method is to handle the "on click" of Loyala button
+     */
     private void setupLoyolaBtnClickListener() {
         loyolaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +145,9 @@ public class LocationFragment extends Fragment{
         });
     }
 
+    /**
+     * The purpose of this method is to handle the "on click" of SGW button
+     */
     private void setupSGWBtnClickListener(){
         sgwBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,6 +157,11 @@ public class LocationFragment extends Fragment{
         });
     }
 
+    /**
+     * The purpose of this method is display the polygon on the map and
+     * call the right method for onClick polygon or on click the marker.
+     * @param map is the map to be used in our application
+     */
     private void setupPolygons(GoogleMap map) {
         mLayer = mViewModel.loadPolygons(map, getContext());
         setupPolygonClickListener();
@@ -132,11 +169,16 @@ public class LocationFragment extends Fragment{
         setupMarkerClickListener(map);
     }
 
+
+    /**
+     * The purpose of this method is handle the onclick polygon
+     * and to open the info card according to the clicked building.
+     */
     public void setupPolygonClickListener(){
         mLayer.setOnFeatureClickListener(new GeoJsonLayer.GeoJsonOnFeatureClickListener() {
             @Override
             public void onFeatureClick(GeoJsonFeature geoJsonFeature) {
-                //TODO: Make function that pops up the info card for the building (via the building-code)
+                //TODO: CCG-4 Make function that pops up the info card for the building (via the building-code)
                 //Important null check do not remove!
                 if(geoJsonFeature != null){
                     //replace code here
@@ -146,11 +188,15 @@ public class LocationFragment extends Fragment{
         });
     }
 
+    /**
+     * The purpose of this method is handle the onclick marker
+     * and to open the info card according to the clicked building.
+     */
     public boolean setupMarkerClickListener(GoogleMap map) {
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                //TODO: Make function that pops up the info card for the building (via the building-code)
+                //TODO: CCG-4 Make function that pops up the info card for the building (via the building-code)
                 System.out.println(marker.getTag());
                 return false;
             }
@@ -158,6 +204,11 @@ public class LocationFragment extends Fragment{
         return true;
     }
 
+    /**
+     * The purpose of this method is to display the tools used with google
+     * maps such as Current Location
+     * @param mMap is the map used in the application
+     */
     private void uiSettingsForMap(GoogleMap mMap){
         if(myLocationPermissionsGranted){
             mMap.setMyLocationEnabled(true);
@@ -167,12 +218,21 @@ public class LocationFragment extends Fragment{
         mMap.getUiSettings().setMapToolbarEnabled(true);
     }
 
+
+    /**
+     * @param latitude is the chosen latitude on the map to zoom in
+     * @param longitude is the chosen longitude on the map to zoom in
+     */
     private void zoomInLocation(double latitude, double longitude) {
         LatLng curr = new LatLng(latitude,longitude);
         float zoomLevel = 18.0f;
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(curr, zoomLevel));
     }
 
+    /**
+     * The purpose of this application is to ask the user for their permission
+     * of using their current location.
+     */
     private void getLocationPermission(){
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
@@ -185,6 +245,11 @@ public class LocationFragment extends Fragment{
         }
     }
 
+
+    /**
+     * @return the method returns true if the user accepts to give the application permission
+     * for using their current location.
+     */
     private boolean requestPermission(){
         return (checkSelfPermission(getContext(), ClassConstants.FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
     }

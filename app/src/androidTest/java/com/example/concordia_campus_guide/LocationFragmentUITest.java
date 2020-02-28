@@ -41,6 +41,11 @@ public class LocationFragmentUITest {
                     "android.permission.ACCESS_FINE_LOCATION",
                     "android.permission.ACCESS_COARSE_LOCATION");
 
+    /**
+     * The purpose of this test is to validate the existance of EV marker
+     * on the screen once opening the application.
+     * @throws UiObjectNotFoundException
+     */
     @Test
     public void testMarker() throws UiObjectNotFoundException {
         UiDevice device = UiDevice.getInstance(getInstrumentation());
@@ -48,6 +53,10 @@ public class LocationFragmentUITest {
         marker.click();
     }
 
+    /**
+     * The purpose of this test is to validate the existance of the switch button
+     * between the campuses.
+     */
     @Test
     public void SwitchButtonTest() {
         ViewInteraction materialButton = onView(
