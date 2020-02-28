@@ -119,7 +119,7 @@ public class LocationFragmentViewModel extends ViewModel {
         //w: 66.5   h: 69.98
         //80x45
         return new GroundOverlayOptions()
-                .position(new LatLng( 45.45892, -73.638321), (float) 80, (float) 45)
+                .position(new LatLng( 45.45909, -73.63844), (float) 80, (float) 45)
                 .image(BitmapDescriptorFactory.fromResource(R.drawable.vl_2))
                 .bearing((float) 210);
     }

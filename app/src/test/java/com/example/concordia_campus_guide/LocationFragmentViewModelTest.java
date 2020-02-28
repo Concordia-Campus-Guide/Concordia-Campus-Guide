@@ -28,7 +28,6 @@ import static junit.framework.TestCase.assertEquals;
 public class LocationFragmentViewModelTest {
     private LocationFragmentViewModel viewModel;
 
-
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
