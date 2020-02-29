@@ -2,7 +2,7 @@
   "Buildings": [
     {
       "Campus": "LOY",
-      "Building": "AD",
+      "Building_Code": "AD",
       "Building_Long_Name": "Administration Building",
       "Address": "7141 Sherbrooke West",
       "Departments": [
@@ -23,7 +23,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "B",
+      "Building_Code": "B",
       "Building_Long_Name": "B Annex",
       "Address": "2160 Bishop Street",
       "Departments": [],
@@ -33,7 +33,7 @@
     },
     {
       "Campus": "LOY",
-      "Building": "BB",
+      "Building_Code": "BB",
       "Building_Long_Name": "BB-BH Annex",
       "Address": "3502 Bermore Avenue",
       "Departments": [],
@@ -43,7 +43,7 @@
     },
     {
       "Campus": "LOY",
-      "Building": "BH",
+      "Building_Code": "BH",
       "Building_Long_Name": "BB-BH Annex",
       "Address": "3500 Bermore Avenue",
       "Departments": [],
@@ -53,7 +53,7 @@
     },
     {
       "Campus": "LOY",
-      "Building": "CC",
+      "Building_Code": "CC",
       "Building_Long_Name": "Central Building",
       "Address": "7141 Sherbrooke West",
       "Departments": [],
@@ -64,7 +64,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "CI",
+      "Building_Code": "CI",
       "Building_Long_Name": "CI Annex",
       "Address": "2149 Mackay Street",
       "Departments": [
@@ -74,7 +74,7 @@
     },
     {
       "Campus": "LOY",
-      "Building": "CJ",
+      "Building_Code": "CJ",
       "Building_Long_Name": "Communication Studies and Journalism Building",
       "Address": "7141 Sherbrooke West",
       "Departments": [
@@ -87,7 +87,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "CL",
+      "Building_Code": "CL",
       "Building_Long_Name": "CL Annex",
       "Address": "1665 Ste-Catherine West",
       "Departments": [],
@@ -97,7 +97,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "D",
+      "Building_Code": "D",
       "Building_Long_Name": "D Annex",
       "Address": "2140 Bishop Street",
       "Departments": [
@@ -107,7 +107,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "EN",
+      "Building_Code": "EN",
       "Building_Long_Name": "EN Annex",
       "Address": "2070 Mackay Street",
       "Departments": [],
@@ -115,7 +115,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "ER",
+      "Building_Code": "ER",
       "Building_Long_Name": "ER Building",
       "Address": "2155 Guy Street",
       "Departments": [],
@@ -123,7 +123,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "EV",
+      "Building_Code": "EV",
       "Building_Long_Name": "Engineering, Computer Science and Visual Arts Integrated Complex",
       "Address": "1515 Ste-Catherine West",
       "Departments": [
@@ -149,7 +149,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "FA",
+      "Building_Code": "FA",
       "Building_Long_Name": "FA Annex",
       "Address": "2060 Mackay Street",
       "Departments": [
@@ -159,7 +159,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "FB",
+      "Building_Code": "FB",
       "Building_Long_Name": "Faubourg Building",
       "Address": "1250 Guy Street",
       "Departments": [],
@@ -167,7 +167,7 @@
     },
     {
       "Campus": "LOY",
-      "Building": "FC",
+      "Building_Code": "FC",
       "Building_Long_Name": "F.C. Smith Building",
       "Address": "7141 Sherbrooke West",
       "Departments": [],
@@ -179,7 +179,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "FG",
+      "Building_Code": "FG",
       "Building_Long_Name": "Faubourg Ste-Catherine Building",
       "Address": "1610 Ste-Catherine West",
       "Departments": [],
@@ -187,7 +187,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "GA",
+      "Building_Code": "GA",
       "Building_Long_Name": "Grey Nuns Annex",
       "Address": "1211-1215 St-Mathieu Street",
       "Departments": [],
@@ -195,7 +195,7 @@
     },
     {
       "Campus": "LOY",
-      "Building": "GE",
+      "Building_Code": "GE",
       "Building_Long_Name": "Centre for Structural and Functional Genomics",
       "Address": "7141 Sherbrooke West",
       "Departments": [],
@@ -205,7 +205,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "GM",
+      "Building_Code": "GM",
       "Building_Long_Name": "Guy-De Maisonneuve Building",
       "Address": "1550 De Maisonneuve West",
       "Departments": [
@@ -236,7 +236,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "GN",
+      "Building_Code": "GN",
       "Building_Long_Name": "Grey Nuns Building",
       "Address": "1190 Guy Street",
       "Departments": [],
@@ -249,7 +249,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "GS",
+      "Building_Code": "GS",
       "Building_Long_Name": "Guy-Sherbrooke Building",
       "Address": "1538 Sherbrooke West",
       "Departments": [],
@@ -257,7 +257,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "H",
+      "Building_Code": "H",
       "Building_Long_Name": "Henry F. Hall Building",
       "Address": "1455 De Maisonneuve West",
       "Departments": [
@@ -282,7 +282,7 @@
     },
     {
       "Campus": "LOY",
-      "Building": "HA",
+      "Building_Code": "HA",
       "Building_Long_Name": "Hingston Hall, wing HA",
       "Address": "7141 Sherbrooke West",
       "Departments": [],
@@ -292,7 +292,7 @@
     },
     {
       "Campus": "LOY",
-      "Building": "HB",
+      "Building_Code": "HB",
       "Building_Long_Name": "Hingston Hall, wing HB",
       "Address": "7141 Sherbrooke West",
       "Departments": [],
@@ -303,7 +303,7 @@
     },
     {
       "Campus": "LOY",
-      "Building": "HC",
+      "Building_Code": "HC",
       "Building_Long_Name": "Hingston Hall, wing HC",
       "Address": "7141 Sherbrooke West",
       "Departments": [],
@@ -313,7 +313,7 @@
     },
     {
       "Campus": "LOY",
-      "Building": "HU",
+      "Building_Code": "HU",
       "Building_Long_Name": "Applied Science Hub",
       "Address": "7141, Sherbrooke West",
       "Departments": [],
@@ -321,7 +321,7 @@
     },
     {
       "Campus": "LOY",
-      "Building": "JR",
+      "Building_Code": "JR",
       "Building_Long_Name": "Jesuit Residence",
       "Address": "7141 Sherbrooke West",
       "Departments": [],
@@ -331,7 +331,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "K",
+      "Building_Code": "K",
       "Building_Long_Name": "K Annex",
       "Address": "2150 Bishop Street",
       "Departments": [
@@ -341,7 +341,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "LB",
+      "Building_Code": "LB",
       "Building_Long_Name": "J.W. McConnell Building",
       "Address": "1400 De Maisonneuve West",
       "Departments": [
@@ -365,7 +365,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "LD",
+      "Building_Code": "LD",
       "Building_Long_Name": "LD Building",
       "Address": "1424 Bishop Street",
       "Departments": [],
@@ -375,7 +375,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "LS",
+      "Building_Code": "LS",
       "Building_Long_Name": "Learning Square (LS Building)",
       "Address": "1535 De Maisonneuve West",
       "Departments": [],
@@ -385,7 +385,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "M",
+      "Building_Code": "M",
       "Building_Long_Name": "M Annex",
       "Address": "2135 Mackay Street",
       "Departments": [],
@@ -393,7 +393,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "MB",
+      "Building_Code": "MB",
       "Building_Long_Name": "John Molson Building",
       "Address": "1450 Guy Street",
       "Departments": [
@@ -416,7 +416,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "MI",
+      "Building_Code": "MI",
       "Building_Long_Name": "MI Annex",
       "Address": "2130 Bishop Street",
       "Departments": [],
@@ -431,7 +431,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "MU",
+      "Building_Code": "MU",
       "Building_Long_Name": "MU Annex",
       "Address": "2170 Bishop Street",
       "Departments": [],
@@ -441,7 +441,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "P",
+      "Building_Code": "P",
       "Building_Long_Name": "P Annex",
       "Address": "2020 Mackay Street",
       "Departments": [],
@@ -449,7 +449,7 @@
     },
     {
       "Campus": "LOY",
-      "Building": "PB",
+      "Building_Code": "PB",
       "Building_Long_Name": "PB Building",
       "Address": "7200 Sherbrooke West",
       "Departments": [],
@@ -457,7 +457,7 @@
     },
     {
       "Campus": "LOY",
-      "Building": "PC",
+      "Building_Code": "PC",
       "Building_Long_Name": "PERFORM centre",
       "Address": "7200 Sherbrooke West",
       "Departments": [],
@@ -467,7 +467,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "PR",
+      "Building_Code": "PR",
       "Building_Long_Name": "PR Annex",
       "Address": "2100 Mackay Street",
       "Departments": [],
@@ -475,7 +475,7 @@
     },
     {
       "Campus": "LOY",
-      "Building": "PS",
+      "Building_Code": "PS",
       "Building_Long_Name": "Physical Services Building",
       "Address": "7141 Sherbrooke West",
       "Departments": [],
@@ -486,7 +486,7 @@
     },
     {
       "Campus": "LOY",
-      "Building": "PT",
+      "Building_Code": "PT",
       "Building_Long_Name": "Oscar Peterson Concert Hall",
       "Address": "7141 Sherbrooke West",
       "Departments": [
@@ -498,7 +498,7 @@
     },
     {
       "Campus": "LOY",
-      "Building": "PY",
+      "Building_Code": "PY",
       "Building_Long_Name": "Psychology Building",
       "Address": "7141 Sherbrooke West",
       "Departments": [
@@ -509,7 +509,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "Q",
+      "Building_Code": "Q",
       "Building_Long_Name": "Q Annex",
       "Address": "2010 Mackay Street",
       "Departments": [],
@@ -519,7 +519,7 @@
     },
     {
       "Campus": "LOY",
-      "Building": "QA",
+      "Building_Code": "QA",
       "Building_Long_Name": "Quadrangle",
       "Address": "7141 Sherbrooke West",
       "Departments": [],
@@ -527,7 +527,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "R",
+      "Building_Code": "R",
       "Building_Long_Name": "R Annex",
       "Address": "2050 Mackay Street",
       "Departments": [
@@ -537,7 +537,7 @@
     },
     {
       "Campus": "LOY",
-      "Building": "RA",
+      "Building_Code": "RA",
       "Building_Long_Name": "Recreation and Athletics Complex",
       "Address": "7200 Sherbrooke West",
       "Departments": [],
@@ -548,7 +548,7 @@
     },
     {
       "Campus": "LOY",
-      "Building": "RF",
+      "Building_Code": "RF",
       "Building_Long_Name": "Loyola Jesuit Hall and Conference Centre",
       "Address": "7141 Sherbrooke West",
       "Departments": [],
@@ -559,7 +559,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "RR",
+      "Building_Code": "RR",
       "Building_Long_Name": "RR Annex",
       "Address": "2040 Mackay Street",
       "Departments": [
@@ -569,7 +569,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "S",
+      "Building_Code": "S",
       "Building_Long_Name": "S Annex",
       "Address": "2145 Mackay Street",
       "Departments": [
@@ -579,7 +579,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "SB",
+      "Building_Code": "SB",
       "Building_Long_Name": "Samuel Bronfman Building",
       "Address": "1590 Doctor Penfield Avenue",
       "Departments": [],
@@ -589,7 +589,7 @@
     },
     {
       "Campus": "LOY",
-      "Building": "SC",
+      "Building_Code": "SC",
       "Building_Long_Name": "Student Centre",
       "Address": "7141 Sherbrooke West",
       "Departments": [],
@@ -602,7 +602,7 @@
     },
     {
       "Campus": "LOY",
-      "Building": "SH",
+      "Building_Code": "SH",
       "Building_Long_Name": "Solar House",
       "Address": "7141 Sherbrooke West",
       "Departments": [],
@@ -610,7 +610,7 @@
     },
     {
       "Campus": "LOY",
-      "Building": "SI",
+      "Building_Code": "SI",
       "Building_Long_Name": "St. Ignatius of Loyola Church",
       "Address": "4455 Broadway Street",
       "Departments": [],
@@ -618,7 +618,7 @@
     },
     {
       "Campus": "LOY",
-      "Building": "SP",
+      "Building_Code": "SP",
       "Building_Long_Name": "Richard J. Renaud Science Complex",
       "Address": "7141 Sherbrooke West",
       "Departments": [
@@ -642,7 +642,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "T",
+      "Building_Code": "T",
       "Building_Long_Name": "T Annex",
       "Address": "2030 Mackay Street",
       "Departments": [],
@@ -652,7 +652,7 @@
     },
     {
       "Campus": "LOY",
-      "Building": "TA",
+      "Building_Code": "TA",
       "Building_Long_Name": "Terrebonne Building",
       "Address": "7079 Terrebonne Street",
       "Departments": [],
@@ -660,7 +660,7 @@
     },
     {
       "Campus": "LOY",
-      "Building": "TB",
+      "Building_Code": "TB",
       "Building_Long_Name": "TB Annex",
       "Address": "7075 Terrebonne Street",
       "Departments": [],
@@ -668,7 +668,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "TD",
+      "Building_Code": "TD",
       "Building_Long_Name": "Toronto-Dominion Building",
       "Address": "1410 Guy Street",
       "Departments": [],
@@ -678,7 +678,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "V",
+      "Building_Code": "V",
       "Building_Long_Name": "V Annex",
       "Address": "2110 Mackay Street",
       "Departments": [],
@@ -689,7 +689,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "VA",
+      "Building_Code": "VA",
       "Building_Long_Name": "Visual Arts Building",
       "Address": "1395 Rene Levesque West",
       "Departments": [
@@ -705,7 +705,7 @@
     },
     {
       "Campus": "LOY",
-      "Building": "VE",
+      "Building_Code": "VE",
       "Building_Long_Name": "Vanier Extension",
       "Address": "7141 Sherbrooke West",
       "Departments": [
@@ -717,7 +717,7 @@
     },
     {
       "Campus": "LOY",
-      "Building": "VL",
+      "Building_Code": "VL",
       "Building_Long_Name": "Vanier Library Building",
       "Address": "7141 Sherbrooke West",
       "Departments": [],
@@ -727,7 +727,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "X",
+      "Building_Code": "X",
       "Building_Long_Name": "X Annex",
       "Address": "2080 Mackay Street",
       "Departments": [],
@@ -737,7 +737,7 @@
     },
     {
       "Campus": "SGW",
-      "Building": "Z",
+      "Building_Code": "Z",
       "Building_Long_Name": "Z Annex",
       "Address": "2090 Mackay Street",
       "Departments": [],
