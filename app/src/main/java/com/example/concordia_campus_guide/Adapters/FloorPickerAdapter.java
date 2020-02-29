@@ -50,7 +50,7 @@ public class FloorPickerAdapter extends BaseAdapter {
         Button button;
         if (view == null) {
             button = new Button(context);
-            button.setTextColor(Color.parseColor("#FFFFFF"));
+            button.setTextColor(context.getResources().getColor(R.color.floorPickerTextColor));
             button.setLayoutParams(new GridView.LayoutParams(120, 120));
             String floor = floorsAvailable.get(position);
             floor = floor.substring(floor.indexOf('_') + 1);
