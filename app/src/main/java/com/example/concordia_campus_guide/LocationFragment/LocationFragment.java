@@ -148,7 +148,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     private void setMapStyle(GoogleMap googleMap) {
         try {
-            googleMap.setIndoorEnabled(false);
             googleMap.setMapStyle(
                     MapStyleOptions.loadRawResourceStyle(
                             getContext(), mViewModel.getMapStyle()));
@@ -278,6 +277,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         if(myLocationPermissionsGranted){
             mMap.setMyLocationEnabled(true);
         }
+        mMap.setIndoorEnabled(false);
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
         mMap.getUiSettings().setTiltGesturesEnabled(true);
         mMap.getUiSettings().setMapToolbarEnabled(true);
