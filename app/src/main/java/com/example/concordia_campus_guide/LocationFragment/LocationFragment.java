@@ -1,6 +1,7 @@
 package com.example.concordia_campus_guide.LocationFragment;
 
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.Manifest;
@@ -57,12 +58,12 @@ public class LocationFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.location_fragment_fragment, container, false);
+        getLocationPermission();
         initComponent(rootView);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
-        initMap();
         setupClickListeners();
-        getLocationPermission();
+        initMap();
         return rootView;
     }
 
@@ -243,6 +244,7 @@ public class LocationFragment extends Fragment{
                     permissions,
                     ClassConstants.LOCATION_PERMISSION_REQUEST_CODE);
         }
+
     }
 
 
@@ -256,7 +258,7 @@ public class LocationFragment extends Fragment{
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
+        initMap();
         if(requestCode == ClassConstants.LOCATION_PERMISSION_REQUEST_CODE)
             myLocationPermissionsGranted = (grantResults.length > 0 &&
                     grantResults[0] == PackageManager.PERMISSION_GRANTED);
