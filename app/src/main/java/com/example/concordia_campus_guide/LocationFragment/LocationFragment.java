@@ -3,25 +3,25 @@ package com.example.concordia_campus_guide.LocationFragment;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
-
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
-
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.concordia_campus_guide.ClassConstants;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
+import com.example.concordia_campus_guide.BuildingCode;
+import com.example.concordia_campus_guide.ClassConstants;
+import com.example.concordia_campus_guide.MainActivity;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -183,7 +183,9 @@ public class LocationFragment extends Fragment{
                 //Important null check do not remove!
                 if(geoJsonFeature != null){
                     //replace code here
-                    System.out.println("Clicked on "+geoJsonFeature.getProperty("code"));
+                    String buildingCode = geoJsonFeature.getProperty("code");
+                    ((MainActivity)getActivity()).showInfoCard(buildingCode);
+                    System.out.println("Clicked on "+buildingCode);
                 }
             }
         });
@@ -197,8 +199,10 @@ public class LocationFragment extends Fragment{
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                //TODO: CCG-4 Make function that pops up the info card for the building (via the building-code)
-                System.out.println(marker.getTag());
+                //TODO: Make function that pops up the info card for the building (via the building-code)
+                String buildingCode = ((BuildingCode) marker.getTag()).toString();
+                ((MainActivity)getActivity()).showInfoCard(buildingCode);
+                System.out.println(buildingCode);
                 return false;
             }
         });
