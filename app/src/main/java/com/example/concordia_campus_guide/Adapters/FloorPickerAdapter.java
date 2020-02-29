@@ -28,7 +28,6 @@ public class FloorPickerAdapter extends BaseAdapter {
         this.floorsAvailable = floorsAvailable;
         this.buildingCode = buildingCode;
         this.listener = listener;
-        Log.i("FloorPickerAdapter", "floors available" + floorsAvailable.get(0) + "\tsize: " + floorsAvailable.size());
     }
 
     @Override
@@ -37,34 +36,33 @@ public class FloorPickerAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
-        return floorsAvailable.get(i);
+    public Object getItem(int position) {
+        return floorsAvailable.get(position);
     }
 
     @Override
-    public long getItemId(int i) {
-        return i;
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
-    public View getView(final int i, final View view, ViewGroup viewGroup) {
+    public View getView(final int position, final View view, ViewGroup viewGroup) {
         Button button;
         if (view == null) {
             button = new Button(context);
             button.setTextColor(Color.parseColor("#FFFFFF"));
             button.setLayoutParams(new GridView.LayoutParams(120, 120));
-            String floor = floorsAvailable.get(i);
+            String floor = floorsAvailable.get(position);
             floor = floor.substring(floor.indexOf('_') + 1);
             Log.i("FloorPickerAdapter","testing substring + " + floor);
             button.setText(floor);
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onFloorPickerOnClick(i, v);
+                    listener.onFloorPickerOnClick(position, v);
                 }
             });
             button.setBackground(ContextCompat.getDrawable(context, R.drawable.button_highlights));
-//            if (i ==0) button.setEnabled(false);
         } else {
             button = (Button) view;
         }

@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 
@@ -36,7 +35,6 @@ import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 
@@ -97,14 +95,16 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private void setupFloorPickerAdapter(String buildingCode) {
         Log.i(TAG,"setting up floor picker -> " + BuildingCode.valueOf(buildingCode));
         ArrayList<String> floorsAvailable = (ArrayList<String>) mViewModel.getFloorsAvailable(BuildingCode.valueOf(buildingCode));
-        if (floorsAvailable.isEmpty()){
-            mFloorPickerGv.setVisibility(View.GONE);
-            return;
-        }
-        mFloorPickerGv.setVisibility(View.VISIBLE);
+        setupFloorPickerVisibility(floorsAvailable);
+
         currentFloorPickerAdapter = new FloorPickerAdapter(getContext(), floorsAvailable, BuildingCode.valueOf(buildingCode), this);
         mFloorPickerGv.setAdapter(currentFloorPickerAdapter);
     }
+
+    private void setupFloorPickerVisibility(ArrayList<String> floorsAvailable) {
+            mFloorPickerGv.setVisibility(floorsAvailable.isEmpty()?View.GONE:View.VISIBLE);
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -266,7 +266,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                System.out.println(marker.getTag());
+                Log.i(TAG,marker.getTag().toString());
                 return false;
             }
         });
@@ -315,7 +315,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-                System.out.println("\"coordinates\" : [" + latLng.longitude + ", " + latLng.latitude + "]");
+                Log.i(TAG,"\"coordinates\" : [" + latLng.longitude + ", " + latLng.latitude + "]");
             }
         });
     }
@@ -330,23 +330,20 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     }
 
     @Override
-    public void onFloorPickerOnClick(int i, View view) {
+    public void onFloorPickerOnClick(int position, View view) {
         if (selectedFloor != null) selectedFloor.setEnabled(true);
         selectedFloor = (Button)view;
         view.setEnabled(false);
         switch(currentFloorPickerAdapter.getBuildingCode()){
             case H:
-                mViewModel.setHallFloorplan(hallGroundOverlay, i==0?9:8);
+                mViewModel.setHallFloorplan(hallGroundOverlay, position==0?9:8);
                 break;
             case MB:
-                mViewModel.setMBFloorplan(mbGroundOverlay, i==0?1:-1);
+                mViewModel.setMBFloorplan(mbGroundOverlay, position==0?1:-1);
                 break;
             case VL:
-                mViewModel.setVLFloorplan(vlGroundOverlay, i==0?2:1);
+                mViewModel.setVLFloorplan(vlGroundOverlay, position==0?2:1);
                 break;
-
-                default:
-                    return;
         }
     }
 
