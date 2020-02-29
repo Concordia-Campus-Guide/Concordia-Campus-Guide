@@ -1,0 +1,754 @@
+{
+  "Buildings": [
+    {
+      "Campus": "LOY",
+      "Building": "AD",
+      "Building_Long_Name": "Administration Building",
+      "Address": "7141 Sherbrooke West",
+      "Departments": [
+        "Faculty of Arts & Science"
+      ],
+      "Services": [
+        "Welcome Crew Office",
+        "Centre for Teaching & Learning",
+        "Loyola International College",
+        "Provost and VP, Academic",
+        "Dean of Students",
+        "Concordia Multi-Faith and Spirituality Centre",
+        "Advocacy & Support Services",
+        "Access Centre for Students with Disabilities",
+        "Counselling and Development",
+        "Health Services"
+      ]
+    },
+    {
+      "Campus": "SGW",
+      "Building": "B",
+      "Building_Long_Name": "B Annex",
+      "Address": "2160 Bishop Street",
+      "Departments": [],
+      "Services": [
+        "Engineering and Computer Science Association"
+      ]
+    },
+    {
+      "Campus": "LOY",
+      "Building": "BB",
+      "Building_Long_Name": "BB-BH Annex",
+      "Address": "3502 Bermore Avenue",
+      "Departments": [],
+      "Services": [
+        "CPE Les P'tits Profs Daycare"
+      ]
+    },
+    {
+      "Campus": "LOY",
+      "Building": "BH",
+      "Building_Long_Name": "BB-BH Annex",
+      "Address": "3500 Bermore Avenue",
+      "Departments": [],
+      "Services": [
+        "CPE Les P'tits Profs Daycare"
+      ]
+    },
+    {
+      "Campus": "LOY",
+      "Building": "CC",
+      "Building_Long_Name": "Central Building",
+      "Address": "7141 Sherbrooke West",
+      "Departments": [],
+      "Services": [
+        "Concordia Student Union",
+        "Loyola College for Diversity and Sustainability and Loyola"
+      ]
+    },
+    {
+      "Campus": "SGW",
+      "Building": "CI",
+      "Building_Long_Name": "CI Annex",
+      "Address": "2149 Mackay Street",
+      "Departments": [
+        "School of Community and Public Affairs"
+      ],
+      "Services": []
+    },
+    {
+      "Campus": "LOY",
+      "Building": "CJ",
+      "Building_Long_Name": "Communication Studies and Journalism Building",
+      "Address": "7141 Sherbrooke West",
+      "Departments": [
+        "Communication Studies",
+        "Journalism"
+      ],
+      "Services": [
+        "Campus Retail Stores"
+      ]
+    },
+    {
+      "Campus": "SGW",
+      "Building": "CL",
+      "Building_Long_Name": "CL Annex",
+      "Address": "1665 Ste-Catherine West",
+      "Departments": [],
+      "Services": [
+        "Concordia Continuing Education"
+      ]
+    },
+    {
+      "Campus": "SGW",
+      "Building": "D",
+      "Building_Long_Name": "D Annex",
+      "Address": "2140 Bishop Street",
+      "Departments": [
+        "Theological Studies"
+      ],
+      "Services": []
+    },
+    {
+      "Campus": "SGW",
+      "Building": "EN",
+      "Building_Long_Name": "EN Annex",
+      "Address": "2070 Mackay Street",
+      "Departments": [],
+      "Services": []
+    },
+    {
+      "Campus": "SGW",
+      "Building": "ER",
+      "Building_Long_Name": "ER Building",
+      "Address": "2155 Guy Street",
+      "Departments": [],
+      "Services": []
+    },
+    {
+      "Campus": "SGW",
+      "Building": "EV",
+      "Building_Long_Name": "Engineering, Computer Science and Visual Arts Integrated Complex",
+      "Address": "1515 Ste-Catherine West",
+      "Departments": [
+        "Gina Cody School of Engineering and Computer Science",
+        "Electrical and Computer Engineering",
+        "Building, Civil and Environmental Engineering",
+        "Mechanical, Industrial and Aerospace Engineering",
+        "Design and Computation Arts",
+        "Faculty of Fine Arts",
+        "Studio Arts",
+        "Art Education",
+        "Art History",
+        "Contemporary Dance",
+        "Recreation and Athletics",
+        "Centre for Zero Energy Building Studies",
+        "Centre for Pattern Recognition and Machine Intelligence (CENPARMI)",
+        "Center for Composites (CONCOM)"
+      ],
+      "Services": [
+        "LeGym",
+        "FOFA Gallery"
+      ]
+    },
+    {
+      "Campus": "SGW",
+      "Building": "FA",
+      "Building_Long_Name": "FA Annex",
+      "Address": "2060 Mackay Street",
+      "Departments": [
+        "Department of Religions and Cultures"
+      ],
+      "Services": []
+    },
+    {
+      "Campus": "SGW",
+      "Building": "FB",
+      "Building_Long_Name": "Faubourg Building",
+      "Address": "1250 Guy Street",
+      "Departments": [],
+      "Services": []
+    },
+    {
+      "Campus": "LOY",
+      "Building": "FC",
+      "Building_Long_Name": "F.C. Smith Building",
+      "Address": "7141 Sherbrooke West",
+      "Departments": [],
+      "Services": [
+        "F.C. Smith Auditorium",
+        "Cazalet Theater",
+        "Concordia Multi-Faith and Spirituality Centre"
+      ]
+    },
+    {
+      "Campus": "SGW",
+      "Building": "FG",
+      "Building_Long_Name": "Faubourg Ste-Catherine Building",
+      "Address": "1610 Ste-Catherine West",
+      "Departments": [],
+      "Services": []
+    },
+    {
+      "Campus": "SGW",
+      "Building": "GA",
+      "Building_Long_Name": "Grey Nuns Annex",
+      "Address": "1211-1215 St-Mathieu Street",
+      "Departments": [],
+      "Services": []
+    },
+    {
+      "Campus": "LOY",
+      "Building": "GE",
+      "Building_Long_Name": "Centre for Structural and Functional Genomics",
+      "Address": "7141 Sherbrooke West",
+      "Departments": [],
+      "Services": [
+        "Centre for Structural and Functional Genomics"
+      ]
+    },
+    {
+      "Campus": "SGW",
+      "Building": "GM",
+      "Building_Long_Name": "Guy-De Maisonneuve Building",
+      "Address": "1550 De Maisonneuve West",
+      "Departments": [
+        "Contemporary Dance",
+        "Music",
+        "Theatre"
+      ],
+      "Services": [
+        "Access Centre for Students with Disabilities",
+        "Environmental health and Safety",
+        "Facilities Management",
+        "Financial Aid & Awards Office",
+        "Financial Services",
+        "Graduate Studies",
+        "Health Services",
+        "Institute for Co-operative Education",
+        "International Students Office",
+        "Office of Rights and Responsabilities",
+        "Office of Sustainability",
+        "Office of the Chief Communications Officer",
+        "Office of the President",
+        "Office of the Provost & VP, Academic",
+        "Office of the VP, Institutional Relations and Secretary General",
+        "Office of the VP, Research & Graduate Studies",
+        "Ombuds Office",
+        "University Communications Services"
+      ]
+    },
+    {
+      "Campus": "SGW",
+      "Building": "GN",
+      "Building_Long_Name": "Grey Nuns Building",
+      "Address": "1190 Guy Street",
+      "Departments": [],
+      "Services": [
+        "Residences",
+        "Grey Nuns Library (Reading Room and Group Study Rooms)",
+        "Daycare Centre",
+        "Summer Accommodation"
+      ]
+    },
+    {
+      "Campus": "SGW",
+      "Building": "GS",
+      "Building_Long_Name": "Guy-Sherbrooke Building",
+      "Address": "1538 Sherbrooke West",
+      "Departments": [],
+      "Services": []
+    },
+    {
+      "Campus": "SGW",
+      "Building": "H",
+      "Building_Long_Name": "Henry F. Hall Building",
+      "Address": "1455 De Maisonneuve West",
+      "Departments": [
+        "Geography, Planning and Environment",
+        "Political Science, Socialogy and Anthropology, Economics",
+        "School of Irish Studies"
+      ],
+      "Services": [
+        "Welcome Crew Office",
+        "DB Clarke Theatre",
+        "Dean of Students",
+        "Aboriginal Student Resource Centre",
+        "Concordia Student Union",
+        "IT Service Desk",
+        "Security Office",
+        "Student Success Centre",
+        "Mail Services",
+        "Archives",
+        "Career and Planning Services",
+        "Sexual Assault Resource Centre (SARC)"
+      ]
+    },
+    {
+      "Campus": "LOY",
+      "Building": "HA",
+      "Building_Long_Name": "Hingston Hall, wing HA",
+      "Address": "7141 Sherbrooke West",
+      "Departments": [],
+      "Services": [
+        "Student Residence"
+      ]
+    },
+    {
+      "Campus": "LOY",
+      "Building": "HB",
+      "Building_Long_Name": "Hingston Hall, wing HB",
+      "Address": "7141 Sherbrooke West",
+      "Departments": [],
+      "Services": [
+        "Student Residence",
+        "CUFA"
+      ]
+    },
+    {
+      "Campus": "LOY",
+      "Building": "HC",
+      "Building_Long_Name": "Hingston Hall, wing HC",
+      "Address": "7141 Sherbrooke West",
+      "Departments": [],
+      "Services": [
+        "Student Residence"
+      ]
+    },
+    {
+      "Campus": "LOY",
+      "Building": "HU",
+      "Building_Long_Name": "Applied Science Hub",
+      "Address": "7141, Sherbrooke West",
+      "Departments": [],
+      "Services": []
+    },
+    {
+      "Campus": "LOY",
+      "Building": "JR",
+      "Building_Long_Name": "Jesuit Residence",
+      "Address": "7141 Sherbrooke West",
+      "Departments": [],
+      "Services": [
+        "Student Residence"
+      ]
+    },
+    {
+      "Campus": "SGW",
+      "Building": "K",
+      "Building_Long_Name": "K Annex",
+      "Address": "2150 Bishop Street",
+      "Departments": [
+        "Theological Studies"
+      ],
+      "Services": []
+    },
+    {
+      "Campus": "SGW",
+      "Building": "LB",
+      "Building_Long_Name": "J.W. McConnell Building",
+      "Address": "1400 De Maisonneuve West",
+      "Departments": [
+        "English",
+        "History",
+        "Études françaises",
+        "Mathematics and Statistics",
+        "Centre for Interdisciplinary Studies in Society and Culture (CISSC)",
+        "Centre for the Study of Learning and Performance"
+      ],
+      "Services": [
+        "R. Howard Webster Library",
+        "Welcome Centre",
+        "Leonard and Bina Ellen Art Gallery",
+        "J.A de Sève Cinema",
+        "Birks Student Services Centre",
+        "Campus Stores",
+        "Instructional & Information Technology Services (IITS)",
+        "4TH SPACE"
+      ]
+    },
+    {
+      "Campus": "SGW",
+      "Building": "LD",
+      "Building_Long_Name": "LD Building",
+      "Address": "1424 Bishop Street",
+      "Departments": [],
+      "Services": [
+        "CSU Daycare & Nursery"
+      ]
+    },
+    {
+      "Campus": "SGW",
+      "Building": "LS",
+      "Building_Long_Name": "Learning Square (LS Building)",
+      "Address": "1535 De Maisonneuve West",
+      "Departments": [],
+      "Services": [
+        "IT Services"
+      ]
+    },
+    {
+      "Campus": "SGW",
+      "Building": "M",
+      "Building_Long_Name": "M Annex",
+      "Address": "2135 Mackay Street",
+      "Departments": [],
+      "Services": []
+    },
+    {
+      "Campus": "SGW",
+      "Building": "MB",
+      "Building_Long_Name": "John Molson Building",
+      "Address": "1450 Guy Street",
+      "Departments": [
+        "Accountancy",
+        "Supply Chain & Business Technology Management",
+        "Finance",
+        "Management",
+        "Marketing",
+        "Goodman Institute of Investment Management",
+        "Executive MBA Program",
+        "Music",
+        "Theatre",
+        "Contemporary Dance"
+      ],
+      "Services": [
+        "Career Management Services",
+        "John Molson Executive Centre",
+        "Performing Arts Facilities"
+      ]
+    },
+    {
+      "Campus": "SGW",
+      "Building": "MI",
+      "Building_Long_Name": "MI Annex",
+      "Address": "2130 Bishop Street",
+      "Departments": [],
+      "Services": [
+        "Association of Concordia University Management and Administrative Employees (ACUMAE)",
+        "Concordia University Support Staff Union (CUSSU)",
+        "Concordia University Union of Support Staff - Technical Sector (CUSSU-TS)",
+        "Concordia University Library Employees' Union (CULEU)",
+        "Concordia University Professional Employee Union (CUPEU)",
+        "Concordia University  Continuing Education Part-time Faculty Union (CUCEPTFU)"
+      ]
+    },
+    {
+      "Campus": "SGW",
+      "Building": "MU",
+      "Building_Long_Name": "MU Annex",
+      "Address": "2170 Bishop Street",
+      "Departments": [],
+      "Services": [
+        "Simone de Beauvoir Institute"
+      ]
+    },
+    {
+      "Campus": "SGW",
+      "Building": "P",
+      "Building_Long_Name": "P Annex",
+      "Address": "2020 Mackay Street",
+      "Departments": [],
+      "Services": []
+    },
+    {
+      "Campus": "LOY",
+      "Building": "PB",
+      "Building_Long_Name": "PB Building",
+      "Address": "7200 Sherbrooke West",
+      "Departments": [],
+      "Services": []
+    },
+    {
+      "Campus": "LOY",
+      "Building": "PC",
+      "Building_Long_Name": "PERFORM centre",
+      "Address": "7200 Sherbrooke West",
+      "Departments": [],
+      "Services": [
+        "PERFORM Centre"
+      ]
+    },
+    {
+      "Campus": "SGW",
+      "Building": "PR",
+      "Building_Long_Name": "PR Annex",
+      "Address": "2100 Mackay Street",
+      "Departments": [],
+      "Services": []
+    },
+    {
+      "Campus": "LOY",
+      "Building": "PS",
+      "Building_Long_Name": "Physical Services Building",
+      "Address": "7141 Sherbrooke West",
+      "Departments": [],
+      "Services": [
+        "Environmental Health and Safety",
+        "Facilities Management"
+      ]
+    },
+    {
+      "Campus": "LOY",
+      "Building": "PT",
+      "Building_Long_Name": "Oscar Peterson Concert Hall",
+      "Address": "7141 Sherbrooke West",
+      "Departments": [
+        "Oscar Peterson Concert Hall"
+      ],
+      "Services": [
+        "Concert Hall"
+      ]
+    },
+    {
+      "Campus": "LOY",
+      "Building": "PY",
+      "Building_Long_Name": "Psychology Building",
+      "Address": "7141 Sherbrooke West",
+      "Departments": [
+        "Psychology",
+        "Centre for clinical research in health (CCRH)"
+      ],
+      "Services": []
+    },
+    {
+      "Campus": "SGW",
+      "Building": "Q",
+      "Building_Long_Name": "Q Annex",
+      "Address": "2010 Mackay Street",
+      "Departments": [],
+      "Services": [
+        "Ethnic Students' Association"
+      ]
+    },
+    {
+      "Campus": "LOY",
+      "Building": "QA",
+      "Building_Long_Name": "Quadrangle",
+      "Address": "7141 Sherbrooke West",
+      "Departments": [],
+      "Services": []
+    },
+    {
+      "Campus": "SGW",
+      "Building": "R",
+      "Building_Long_Name": "R Annex",
+      "Address": "2050 Mackay Street",
+      "Departments": [
+        "Religions and Cultures"
+      ],
+      "Services": []
+    },
+    {
+      "Campus": "LOY",
+      "Building": "RA",
+      "Building_Long_Name": "Recreation and Athletics Complex",
+      "Address": "7200 Sherbrooke West",
+      "Departments": [],
+      "Services": [
+        "Ed Meagher Arena",
+        "Gymnasium"
+      ]
+    },
+    {
+      "Campus": "LOY",
+      "Building": "RF",
+      "Building_Long_Name": "Loyola Jesuit Hall and Conference Centre",
+      "Address": "7141 Sherbrooke West",
+      "Departments": [],
+      "Services": [
+        "Loyola Jesuit Hall and Conference Centre",
+        "Conference services"
+      ]
+    },
+    {
+      "Campus": "SGW",
+      "Building": "RR",
+      "Building_Long_Name": "RR Annex",
+      "Address": "2040 Mackay Street",
+      "Departments": [
+        "Liberal Arts College"
+      ],
+      "Services": []
+    },
+    {
+      "Campus": "SGW",
+      "Building": "S",
+      "Building_Long_Name": "S Annex",
+      "Address": "2145 Mackay Street",
+      "Departments": [
+        "Department of Philosophy"
+      ],
+      "Services": []
+    },
+    {
+      "Campus": "SGW",
+      "Building": "SB",
+      "Building_Long_Name": "Samuel Bronfman Building",
+      "Address": "1590 Doctor Penfield Avenue",
+      "Departments": [],
+      "Services": [
+        "Arts and Science Research Groups"
+      ]
+    },
+    {
+      "Campus": "LOY",
+      "Building": "SC",
+      "Building_Long_Name": "Student Centre",
+      "Address": "7141 Sherbrooke West",
+      "Departments": [],
+      "Services": [
+        "Campus Centre",
+        "Food Services",
+        "Cafeteria",
+        "Café"
+      ]
+    },
+    {
+      "Campus": "LOY",
+      "Building": "SH",
+      "Building_Long_Name": "Solar House",
+      "Address": "7141 Sherbrooke West",
+      "Departments": [],
+      "Services": []
+    },
+    {
+      "Campus": "LOY",
+      "Building": "SI",
+      "Building_Long_Name": "St. Ignatius of Loyola Church",
+      "Address": "4455 Broadway Street",
+      "Departments": [],
+      "Services": []
+    },
+    {
+      "Campus": "LOY",
+      "Building": "SP",
+      "Building_Long_Name": "Richard J. Renaud Science Complex",
+      "Address": "7141 Sherbrooke West",
+      "Departments": [
+        "Biology",
+        "Chemistry and Biochemistry",
+        "Health, Kinesiology & Applied Physiology",
+        "Physics",
+        "Psychology",
+        "Centre for Biological Applications of Mass Spectrometry",
+        "Centre for NanoScience Research",
+        "Center for Studies in Behavioral Neurobiology",
+        "Centre for Research in Molecular Modeling"
+      ],
+      "Services": [
+        "Science College",
+        "Science Technical Centre",
+        "Animal Care Facilities",
+        "Security Office",
+        "Café"
+      ]
+    },
+    {
+      "Campus": "SGW",
+      "Building": "T",
+      "Building_Long_Name": "T Annex",
+      "Address": "2030 Mackay Street",
+      "Departments": [],
+      "Services": [
+        "Graduate Students Asociation"
+      ]
+    },
+    {
+      "Campus": "LOY",
+      "Building": "TA",
+      "Building_Long_Name": "Terrebonne Building",
+      "Address": "7079 Terrebonne Street",
+      "Departments": [],
+      "Services": []
+    },
+    {
+      "Campus": "LOY",
+      "Building": "TB",
+      "Building_Long_Name": "TB Annex",
+      "Address": "7075 Terrebonne Street",
+      "Departments": [],
+      "Services": []
+    },
+    {
+      "Campus": "SGW",
+      "Building": "TD",
+      "Building_Long_Name": "Toronto-Dominion Building",
+      "Address": "1410 Guy Street",
+      "Departments": [],
+      "Services": [
+        "Concordia University Student Parents Centre (CUSP)"
+      ]
+    },
+    {
+      "Campus": "SGW",
+      "Building": "V",
+      "Building_Long_Name": "V Annex",
+      "Address": "2110 Mackay Street",
+      "Departments": [],
+      "Services": [
+        "Concordia University Television (CUTV)",
+        "Centre for Gender Advocacy"
+      ]
+    },
+    {
+      "Campus": "SGW",
+      "Building": "VA",
+      "Building_Long_Name": "Visual Arts Building",
+      "Address": "1395 Rene Levesque West",
+      "Departments": [
+        "Studio Arts",
+        "Art History",
+        "Art Education",
+        "Creative Arts Therapies"
+      ],
+      "Services": [
+        "VAV Art Gallery",
+        "Art Supply Store"
+      ]
+    },
+    {
+      "Campus": "LOY",
+      "Building": "VE",
+      "Building_Long_Name": "Vanier Extension",
+      "Address": "7141 Sherbrooke West",
+      "Departments": [
+        "Applied Human Sciences"
+      ],
+      "Services": [
+        "Library"
+      ]
+    },
+    {
+      "Campus": "LOY",
+      "Building": "VL",
+      "Building_Long_Name": "Vanier Library Building",
+      "Address": "7141 Sherbrooke West",
+      "Departments": [],
+      "Services": [
+        "Library"
+      ]
+    },
+    {
+      "Campus": "SGW",
+      "Building": "X",
+      "Building_Long_Name": "X Annex",
+      "Address": "2080 Mackay Street",
+      "Departments": [],
+      "Services": [
+        "Concordia International"
+      ]
+    },
+    {
+      "Campus": "SGW",
+      "Building": "Z",
+      "Building_Long_Name": "Z Annex",
+      "Address": "2090 Mackay Street",
+      "Departments": [],
+      "Services": [
+        "Multi-Faith and Spirituality Centre",
+        "Sustainable Concordia"
+      ]
+    }
+  ]
+}
+
+
+
+
