@@ -197,7 +197,6 @@ public class LocationFragment extends Fragment{
             @Override
             public boolean onMarkerClick(Marker marker) {
                 //TODO: CCG-4 Make function that pops up the info card for the building (via the building-code)
-                System.out.println(marker.getTag());
                 return false;
             }
         });
@@ -215,7 +214,7 @@ public class LocationFragment extends Fragment{
         }
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
         mMap.getUiSettings().setTiltGesturesEnabled(true);
-        mMap.getUiSettings().setMapToolbarEnabled(true);
+        mMap.getUiSettings().setMapToolbarEnabled(false);
     }
 
 
