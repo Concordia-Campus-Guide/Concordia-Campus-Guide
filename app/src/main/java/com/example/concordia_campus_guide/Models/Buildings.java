@@ -7,25 +7,21 @@ public class Buildings {
 
     private List<BuildingInfo> Buildings;
 
-    public Buildings(){
-        Buildings = new ArrayList<BuildingInfo>();
-    }
-    public List<BuildingInfo> getBuildings(){
-        return Buildings;
-    }
+    public Buildings(){ this.Buildings = new ArrayList<BuildingInfo>(); }
+
+    public Buildings(List<BuildingInfo> buildings){ this.Buildings = buildings; }
+
     public BuildingInfo getBuilding(String buildingCode){
         for(BuildingInfo building: Buildings){
-            if(building.getBuilding().equals(buildingCode)){
+            if(building.getBuilding_Code().equals(buildingCode)){
                 return building;
             }
         }
         return null;
     }
-    public Buildings(List<BuildingInfo> buildings){
-        this.Buildings = buildings;
-    }
-    public void setBuildings(List<BuildingInfo> buildings){
-        this.Buildings = buildings;
-    }
+
+    public List<BuildingInfo> getBuildings(){ return Buildings; }
+
+    public void setBuildings(List<BuildingInfo> buildings){ this.Buildings = buildings; }
 
 }

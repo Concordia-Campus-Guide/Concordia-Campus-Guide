@@ -7,7 +7,7 @@ import java.util.List;
 public class BuildingInfo {
 
     private String Campus;
-    private String Building;
+    private String Building_Code;
     private String Building_Long_Name;
     private String Address;
     private List<String> Departments;
@@ -16,10 +16,10 @@ public class BuildingInfo {
     public BuildingInfo(){
     }
 
-    public BuildingInfo(String campus, String building, String building_Long_Name, String address, List<String> departments, List<String> services){
+    public BuildingInfo(String campus, String buildingCode, String building_Long_Name, String address, List<String> departments, List<String> services){
         this.Address = address;
         this.Campus = campus;
-        this.Building = building;
+        this.Building_Code = buildingCode;
         this.Building_Long_Name = building_Long_Name;
         this.Departments = departments;
         this.Services = services;
@@ -38,8 +38,8 @@ public class BuildingInfo {
         Campus = campus;
     }
 
-    public void setBuilding(String building) {
-        Building = building;
+    public void setBuilding_Code(String building_Code) {
+        Building_Code = building_Code;
     }
 
     public void setBuilding_Long_Name(String building_Long_Name) {
@@ -54,8 +54,8 @@ public class BuildingInfo {
         return Campus;
     }
 
-    public String getBuilding() {
-        return Building;
+    public String getBuilding_Code() {
+        return Building_Code;
     }
 
     public String getBuilding_Long_Name() {
