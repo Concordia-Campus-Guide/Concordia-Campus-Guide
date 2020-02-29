@@ -24,6 +24,8 @@ import java.util.HashMap;
 import static java.lang.Double.parseDouble;
 
 public class LocationFragmentViewModel extends ViewModel {
+    private GeoJsonLayer floorLayer;
+
     private HashMap<String, GroundOverlayOptions> buildingsGroundOverlays = new HashMap<>();
     /**
      * @return return the map style
@@ -38,9 +40,8 @@ public class LocationFragmentViewModel extends ViewModel {
      * @param applicationContext is the Context of the LocationFragmentView page
      * @return It will return the layer to the LocationFragmentView to display on the map
      */
-    public GeoJsonLayer loadPolygons(GoogleMap map, Context applicationContext){
-        GeoJsonLayer layer = initLayer(map, applicationContext);
-        setPolygonStyle(layer,map);
+    public GeoJsonLayer loadPolygons(GoogleMap map, Context applicationContext, int jsonFile){
+        GeoJsonLayer layer = initLayer(map, applicationContext, jsonFile);
         return  layer;
     }
 
@@ -51,10 +52,10 @@ public class LocationFragmentViewModel extends ViewModel {
      * @return the initiated layer or it will throw an exception if it didn't find the
      *  GeoJson File
      */
-    private GeoJsonLayer initLayer(GoogleMap map, Context applicationContext){
+    private GeoJsonLayer initLayer(GoogleMap map, Context applicationContext, int jsonFile){
         GeoJsonLayer layer = null;
         try {
-            layer = new GeoJsonLayer(map, R.raw.buildingcoordinates, applicationContext);
+            layer = new GeoJsonLayer(map, jsonFile, applicationContext);
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
@@ -82,7 +83,7 @@ public class LocationFragmentViewModel extends ViewModel {
      * @param layer the GeoJson layer containing features to style.
      * @param map the google map where layer will be displayed and markers will be added.
      */
-    private void setPolygonStyle(GeoJsonLayer layer, GoogleMap map){
+    public void setPolygonStyle(GeoJsonLayer layer, GoogleMap map){
         for (GeoJsonFeature feature : layer.getFeatures()){
             feature.setPolygonStyle(getPolygonStyle());
 
@@ -243,7 +244,14 @@ public class LocationFragmentViewModel extends ViewModel {
         }
     }
 
-    public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, Context context) {
+    public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, Context context, GoogleMap mMap) {
+        if (floorLayer != null) {
+            floorLayer.removeLayerFromMap();
+        }
+        //TODO: dynamic floors
+        floorLayer = loadPolygons(mMap, context,  R.raw.ninthhall);
+        floorLayer.addLayerToMap();
         groundOverlay.setImage(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+buildingCode.toLowerCase()+"_"+floor.toLowerCase()+".png"));
+
     }
 }

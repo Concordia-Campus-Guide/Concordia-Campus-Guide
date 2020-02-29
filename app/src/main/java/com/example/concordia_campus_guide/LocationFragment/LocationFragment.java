@@ -194,7 +194,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
      * @param map is the map to be used in our application
      */
     private void setupPolygons(GoogleMap map) {
-        mLayer = mViewModel.loadPolygons(map, getContext());
+        mLayer = mViewModel.loadPolygons(map, getContext(), R.raw.buildingcoordinates);
+        mViewModel.setPolygonStyle(mLayer,map);
         mLayer.addLayerToMap();
 
         setupPolygonClickListener();
@@ -344,7 +345,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         if (selectedFloor != null) selectedFloor.setEnabled(true);
         selectedFloor = (Button)view;
         view.setEnabled(false);
-        mViewModel.setFloorPlan(buildingsGroundOverlays.get(currentFloorPickerAdapter.getBuildingCode()), currentFloorPickerAdapter.getBuildingCode(), currentFloorPickerAdapter.getFloorsAvailable()[position], getContext());
+        mViewModel.setFloorPlan(buildingsGroundOverlays.get(currentFloorPickerAdapter.getBuildingCode()), currentFloorPickerAdapter.getBuildingCode(), currentFloorPickerAdapter.getFloorsAvailable()[position], getContext(), mMap);
 
     }
 
