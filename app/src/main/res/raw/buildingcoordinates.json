@@ -5,7 +5,11 @@
       "type": "Feature",
       "properties": {
         "code": "H",
-        "center": "-73.578880, 45.497248"
+        "center": "-73.5789475, 45.4972685",
+        "height": 68,
+        "width": 68,
+        "bearing": 34,
+        "floorsAvailable": "8,9"
       },
       "geometry": {
         "type": "Polygon",
@@ -36,7 +40,11 @@
       "type": "Feature",
       "properties": {
         "code": "MB",
-        "center": "-73.578926, 45.495212"
+        "center": "-73.578885, 45.495305",
+        "height": 65,
+        "width": 65,
+        "bearing": 127,
+        "floorsAvailable": "S2,1"
       },
       "geometry": {
         "type": "Polygon",
@@ -900,7 +908,11 @@
       "type": "Feature",
       "properties": {
         "code": "VL",
-        "center": "-73.6383318901062, 45.45902065060446"
+        "center": "-73.63844, 45.45909",
+        "height": 45,
+        "width": 80,
+        "bearing": 210,
+        "floorsAvailable": "1,2"
       },
       "geometry": {
         "type": "Polygon",
