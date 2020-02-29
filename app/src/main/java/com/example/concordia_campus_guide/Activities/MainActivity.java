@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide;
+package com.example.concordia_campus_guide.Activities;
 
 import android.os.Bundle;
 
@@ -8,6 +8,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.concordia_campus_guide.InfoCardFragment.InfoCardFragment;
+
+import com.example.concordia_campus_guide.R;
 
 public class MainActivity extends AppCompatActivity {
 
