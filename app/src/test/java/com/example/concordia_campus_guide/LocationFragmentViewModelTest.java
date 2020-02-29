@@ -31,20 +31,6 @@ public class LocationFragmentViewModelTest {
         viewModel = new LocationFragmentViewModel();
     }
 
-    @Test
-    public void getIconTest(){
-        assertEquals(R.drawable.h, viewModel.getIcon(BuildingCode.H));
-        assertEquals(R.drawable.ad,viewModel.getIcon(BuildingCode.AD));
-        assertEquals(R.drawable.cc, viewModel.getIcon(BuildingCode.CC));
-        assertEquals(R.drawable.cj, viewModel.getIcon(BuildingCode.CJ));
-        assertEquals(R.drawable.ev, viewModel.getIcon(BuildingCode.EV));
-        assertEquals(R.drawable.fb, viewModel.getIcon(BuildingCode.FB));
-        assertEquals(R.drawable.fg, viewModel.getIcon(BuildingCode.FG));
-        assertEquals(R.drawable.gm, viewModel.getIcon(BuildingCode.GM));
-        assertEquals(R.drawable.lb, viewModel.getIcon(BuildingCode.LB));
-        assertEquals(R.drawable.mb, viewModel.getIcon(BuildingCode.MB));
-        assertEquals(R.drawable.sp, viewModel.getIcon(BuildingCode.SP));
-    }
 
     @Test
     public void getPolygonStyleTest(){
