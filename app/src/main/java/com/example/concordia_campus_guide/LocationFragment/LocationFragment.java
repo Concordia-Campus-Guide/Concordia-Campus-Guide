@@ -17,7 +17,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
+import com.example.concordia_campus_guide.BuildingCode;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.R;
@@ -226,11 +228,14 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         mLayer.setOnFeatureClickListener(new GeoJsonLayer.GeoJsonOnFeatureClickListener() {
             @Override
             public void onFeatureClick(GeoJsonFeature geoJsonFeature) {
-                //TODO: CCG-4 Make function that pops up the info card for the building (via the building-code)
-                //Important null check do not remove!
-                if(geoJsonFeature != null && geoJsonFeature.getProperty("floorsAvailable")!= null){
-                    String[] floorsAvailable = geoJsonFeature.getProperty("floorsAvailable").split(",");
-                    setupFloorPickerAdapter(geoJsonFeature.getProperty("code"), floorsAvailable);
+                if(geoJsonFeature != null){
+                    if(geoJsonFeature.getProperty("floorsAvailable")!= null) {
+                        String[] floorsAvailable = geoJsonFeature.getProperty("floorsAvailable").split(",");
+                        setupFloorPickerAdapter(geoJsonFeature.getProperty("code"), floorsAvailable);
+                    }
+                    String buildingCode = geoJsonFeature.getProperty("code");
+                    ((MainActivity)getActivity()).showInfoCard(buildingCode);
+                    System.out.println("Clicked on "+buildingCode);
                 }
                 else {
                     mFloorPickerGv.setVisibility(View.GONE);
@@ -247,6 +252,10 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
+                //TODO: Make function that pops up the info card for the building (via the building-code)
+                String buildingCode = ((BuildingCode) marker.getTag()).toString();
+                ((MainActivity)getActivity()).showInfoCard(buildingCode);
+                System.out.println(buildingCode);
                 return false;
             }
         });
