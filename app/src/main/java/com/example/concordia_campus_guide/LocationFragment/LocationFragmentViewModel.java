@@ -127,6 +127,4 @@ public class LocationFragmentViewModel extends ViewModel {
         geoJsonPolygonStyle.setStrokeWidth(6);
         return geoJsonPolygonStyle;
     }
-
-
 }
