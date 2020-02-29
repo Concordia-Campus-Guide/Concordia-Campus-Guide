@@ -273,6 +273,10 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     }
 
 
+    /**
+     * set up related to UI for the map
+     * @param mMap
+     */
     private void uiSettingsForMap(GoogleMap mMap){
         if(myLocationPermissionsGranted){
             mMap.setMyLocationEnabled(true);

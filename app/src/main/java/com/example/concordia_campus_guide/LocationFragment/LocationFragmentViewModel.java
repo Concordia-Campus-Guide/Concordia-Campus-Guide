@@ -71,15 +71,27 @@ public class LocationFragmentViewModel extends ViewModel {
                 .bearing((float) 34);
     }
 
+    /**
+     * @param groundOverlay
+     * @param floorNb
+     */
     public void setHallFloorplan(GroundOverlay groundOverlay, int floorNb){
         if(floorNb == 8)  setHall8Floorplan(groundOverlay);
         else if(floorNb == 9) setHall9Floorplan(groundOverlay);
     }
 
+    /**
+     * set ground overlay image for Hall 8th building
+     * @param groundOverlay
+     */
     private void setHall8Floorplan(GroundOverlay groundOverlay){
         groundOverlay.setImage(BitmapDescriptorFactory.fromResource(R.drawable.hall_8));
     }
 
+    /**
+     * set ground overlay image for Hall 9th building
+     * @param groundOverlay
+     */
     private void setHall9Floorplan(GroundOverlay groundOverlay){
         groundOverlay.setImage(BitmapDescriptorFactory.fromResource(R.drawable.hall_9));
     }
@@ -98,15 +110,28 @@ public class LocationFragmentViewModel extends ViewModel {
                 .bearing((float) 127);
     }
 
+    /**
+     * set ground overlay image for Mb floors
+     * @param groundOverlay
+     * @param floorNb
+     */
     public void setMBFloorplan(GroundOverlay groundOverlay, int floorNb){
         if(floorNb == -1)  setMBS2Floorplan(groundOverlay);
         else if(floorNb == 1)  setMB1Floorplan(groundOverlay);
     }
 
+    /**
+     * set ground overlay image for Mb S2 floor
+     * @param groundOverlay
+     */
     private void setMBS2Floorplan(GroundOverlay groundOverlay){
         groundOverlay.setImage(BitmapDescriptorFactory.fromResource(R.drawable.mb_s2));
     }
 
+    /**
+     * set ground overlay image for Mb 1st floor
+     * @param groundOverlay
+     */
     private void setMB1Floorplan(GroundOverlay groundOverlay){
         groundOverlay.setImage(BitmapDescriptorFactory.fromResource(R.drawable.mb_1));
     }
@@ -124,15 +149,28 @@ public class LocationFragmentViewModel extends ViewModel {
                 .bearing((float) 210);
     }
 
+    /**
+     * set ground overlay image for VL floors
+     * @param groundOverlay
+     * @param floorNb
+     */
     public void setVLFloorplan(GroundOverlay groundOverlay, int floorNb){
         if(floorNb == 1)  setVL1Floorplan(groundOverlay);
         else if(floorNb == 2) setVL2Floorplan(groundOverlay);
     }
 
+    /**
+     * set ground overlay image for VL 1st floor
+     * @param groundOverlay
+     */
     private void setVL1Floorplan(GroundOverlay groundOverlay){
         groundOverlay.setImage(BitmapDescriptorFactory.fromResource(R.drawable.vl_1));
     }
 
+    /**
+     * set ground overlay image for VL 2nd floor
+     * @param groundOverlay
+     */
     private void setVL2Floorplan(GroundOverlay groundOverlay){
         groundOverlay.setImage(BitmapDescriptorFactory.fromResource(R.drawable.vl_2));
     }
