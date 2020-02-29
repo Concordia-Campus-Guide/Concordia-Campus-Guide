@@ -1,12 +1,3 @@
----
-name: 'Improvement Template '
-about:
-title: ''
-labels: Improvement
-assignees: ''
-
----
-
 **Description**
 Describe what the problem is.
 
