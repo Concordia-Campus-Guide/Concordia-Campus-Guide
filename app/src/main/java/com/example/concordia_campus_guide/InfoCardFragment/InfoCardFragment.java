@@ -2,7 +2,6 @@ package com.example.concordia_campus_guide.InfoCardFragment;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.concordia_campus_guide.Models.BuildingInfo;
+import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.R;
 
 import java.io.InputStream;
@@ -25,7 +24,7 @@ public class InfoCardFragment extends Fragment {
 
     private InfoCardFragmentViewModel mViewModel;
     private String buildingCode;
-    private BuildingInfo building;
+    private Building building;
 
     private TextView infoCardTitle;
     private TextView buildingAddress;

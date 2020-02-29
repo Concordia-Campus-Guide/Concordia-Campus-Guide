@@ -4,7 +4,7 @@ import android.text.TextUtils;
 
 import java.util.List;
 
-public class BuildingInfo {
+public class Building {
 
     private String Campus;
     private String Building_Code;
@@ -13,10 +13,10 @@ public class BuildingInfo {
     private List<String> Departments;
     private List<String> Services;
 
-    public BuildingInfo(){
+    public Building(){
     }
 
-    public BuildingInfo(String campus, String buildingCode, String building_Long_Name, String address, List<String> departments, List<String> services){
+    public Building(String campus, String buildingCode, String building_Long_Name, String address, List<String> departments, List<String> services){
         this.Address = address;
         this.Campus = campus;
         this.Building_Code = buildingCode;

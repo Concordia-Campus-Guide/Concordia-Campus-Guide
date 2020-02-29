@@ -5,14 +5,14 @@ import java.util.List;
 
 public class Buildings {
 
-    private List<BuildingInfo> Buildings;
+    private List<Building> Buildings;
 
-    public Buildings(){ this.Buildings = new ArrayList<BuildingInfo>(); }
+    public Buildings(){ this.Buildings = new ArrayList<Building>(); }
 
-    public Buildings(List<BuildingInfo> buildings){ this.Buildings = buildings; }
+    public Buildings(List<Building> buildings){ this.Buildings = buildings; }
 
-    public BuildingInfo getBuilding(String buildingCode){
-        for(BuildingInfo building: Buildings){
+    public Building getBuilding(String buildingCode){
+        for(Building building: Buildings){
             if(building.getBuilding_Code().equals(buildingCode)){
                 return building;
             }
@@ -20,8 +20,8 @@ public class Buildings {
         return null;
     }
 
-    public List<BuildingInfo> getBuildings(){ return Buildings; }
+    public List<Building> getBuildings(){ return Buildings; }
 
-    public void setBuildings(List<BuildingInfo> buildings){ this.Buildings = buildings; }
+    public void setBuildings(List<Building> buildings){ this.Buildings = buildings; }
 
 }
