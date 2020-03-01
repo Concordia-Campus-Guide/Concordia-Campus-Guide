@@ -1,5 +1,8 @@
 package com.example.concordia_campus_guide.LocationFragment;
 
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProviders;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -70,13 +73,12 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.location_fragment_fragment, container, false);
+        getLocationPermission();
         initComponent(rootView);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
-
-        initMap();
         setupClickListeners();
-        getLocationPermission();
+        initMap();
 
         return rootView;
     }
@@ -319,6 +321,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                     permissions,
                     ClassConstants.LOCATION_PERMISSION_REQUEST_CODE);
         }
+
     }
 
     private void classRoomCoordinateTool(GoogleMap map){
@@ -350,7 +353,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
         if(requestCode == ClassConstants.LOCATION_PERMISSION_REQUEST_CODE)
             myLocationPermissionsGranted = (grantResults.length > 0 &&
                     grantResults[0] == PackageManager.PERMISSION_GRANTED);
