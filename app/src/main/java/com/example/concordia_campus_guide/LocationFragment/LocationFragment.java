@@ -4,6 +4,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -22,7 +23,6 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
-import com.example.concordia_campus_guide.BuildingCode;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.R;
@@ -61,12 +61,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     private Button selectedFloor;
 
-    /**
-     * @return it will return a new object of this fragment
-     */
-    public static LocationFragment newInstance() {
-        return new LocationFragment();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -253,7 +247,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             @Override
             public boolean onMarkerClick(Marker marker) {
                 //TODO: Make function that pops up the info card for the building (via the building-code)
-                String buildingCode = ((BuildingCode) marker.getTag()).toString();
+                String buildingCode = (marker.getTag()).toString();
                 ((MainActivity)getActivity()).showInfoCard(buildingCode);
                 System.out.println(buildingCode);
                 return false;
@@ -265,7 +259,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     /**
      * The purpose of this method is to display the tools used with google
      * maps such as Current Location
-     * @param mMap is the map used in the application
+     * @param map is the map used in the application
      */
     public boolean setupClassMarkerClickListener(GoogleMap map) {
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {

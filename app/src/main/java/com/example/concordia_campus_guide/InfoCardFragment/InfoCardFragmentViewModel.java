@@ -5,11 +5,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.ViewModel;
 
 import com.example.concordia_campus_guide.Models.Building;
 
 // This class is for the business logic
-public class InfoCardFragmentViewModel extends AndroidViewModel {
+public class InfoCardFragmentViewModel extends ViewModel {
 
     private Building building;
     private TextView infoCardTitle;
@@ -24,6 +25,7 @@ public class InfoCardFragmentViewModel extends AndroidViewModel {
 
     public Building getBuilding() {
         return building;
+
     }
 
     public void setBuilding(Building building) {
