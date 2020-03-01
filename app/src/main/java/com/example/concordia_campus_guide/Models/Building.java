@@ -231,6 +231,10 @@ public class Building extends Place {
 
         return toReturn;
     }
+    
+    public String getDisplayName(){
+        return this.Building_Long_Name;
+    }
 
     private List<List<Double>> cornerCoordinatesToListDouble(){
         List<List<Double>> toReturn = new ArrayList<>();

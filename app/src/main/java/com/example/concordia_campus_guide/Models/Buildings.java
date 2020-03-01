@@ -18,6 +18,14 @@ public class Buildings {
         return Buildings;
     }
 
+    public List<Place> getPlaces(){
+        List<Place> toReturn = new ArrayList<Place>();
+        for(Building building: Buildings){
+            toReturn.add(building);
+        }
+        return toReturn;
+    }
+
     public Building getBuilding(String buildingCode){
         for(Building building: Buildings){
             if(building.getBuildingCode().equals(buildingCode)){

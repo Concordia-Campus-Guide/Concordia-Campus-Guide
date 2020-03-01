@@ -8,6 +8,7 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import static androidx.room.ForeignKey.CASCADE;
+import java.util.List;
 
 @Entity(tableName = "floors",
         foreignKeys = {
@@ -67,6 +68,10 @@ public class Floor extends Place {
 
     public void setAltitude(float altitude) {
         this.altitude = altitude;
+    }
+
+    public String getDisplayName(){
+        return number;
     }
 }
 

@@ -12,7 +12,7 @@ import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
 
 @Entity(tableName = "places")
-public class Place {
+public abstract class Place {
 
     @Ignore
     private long id;
@@ -20,6 +20,7 @@ public class Place {
     @TypeConverters(DoubleListConverter.class)
     @ColumnInfo(name ="center_coordinates")
     protected Double[] centerCoordinates;
+    protected String displayName;
 
     public Place(Double[] centerCoordinates) {
         this.centerCoordinates = centerCoordinates;
@@ -48,4 +49,6 @@ public class Place {
     public void setId(long id) {
         this.id = id;
     }
+    
+    public abstract String getDisplayName();
 }
