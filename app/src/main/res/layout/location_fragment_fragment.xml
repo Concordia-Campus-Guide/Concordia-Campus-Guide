@@ -24,7 +24,7 @@
             android:layout_weight="1"
             android:background="@color/colorAccent"
             android:text="SGW"
-            android:textColor="@color/colorAppTheme"></Button>
+            android:textColor="@color/textColor"></Button>
 
         <Button
             android:id="@+id/loyolaBtn"
@@ -34,7 +34,7 @@
             android:layout_weight="1"
             android:background="@color/colorAccent"
             android:text="Loyola"
-            android:textColor="@color/colorAppTheme"></Button>
+            android:textColor="@color/textColor"></Button>
 
     </LinearLayout>
 
