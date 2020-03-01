@@ -1,6 +1,9 @@
 package com.example.concordia_campus_guide.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,9 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragment;
 import com.example.concordia_campus_guide.R;
@@ -52,8 +52,11 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if(id == R.id.search){
-            //TODO onClick of search button
-            Toast.makeText(getApplicationContext(), "You clicked search!", Toast.LENGTH_SHORT).show();
+            //TODO onClick of search_activity button
+            Intent openSearch = new Intent(MainActivity.this,
+                    SearchActivity.class);
+            startActivity(openSearch);
+            return false;
         }
 
         return true;
