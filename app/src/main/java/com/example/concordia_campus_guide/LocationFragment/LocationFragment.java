@@ -131,11 +131,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         });
     }
 
-
-    /**
-     * The purpose of this method is to figure the style of the map to display
-     * @param googleMap is the map that is used in the application
-     */
     private void initFloorPlans() {
         HashMap<String, GroundOverlayOptions> temp = mViewModel.getBuildingGroundOverlays();
         for(String key: temp.keySet()){
@@ -194,7 +189,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
      * @param map is the map to be used in our application
      */
     private void setupPolygons(GoogleMap map) {
-        mLayer = mViewModel.loadPolygons(map, getContext(), R.raw.buildingcoordinates);
+        mLayer = mViewModel.loadPolygons(map, getContext(), mViewModel.getJsonObject("buildingcoordinates.json", getContext()));
         mViewModel.setPolygonStyle(mLayer,map);
         mLayer.addLayerToMap();
 
@@ -263,11 +258,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         return true;
     }
 
-    /**
-     * The purpose of this method is to display the tools used with google
-     * maps such as Current Location
-     * @param mMap is the map used in the application
-     */
     public boolean setupClassMarkerClickListener(GoogleMap map) {
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override

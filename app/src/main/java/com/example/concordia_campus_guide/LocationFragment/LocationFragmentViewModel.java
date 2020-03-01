@@ -13,11 +13,23 @@ import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -40,8 +52,8 @@ public class LocationFragmentViewModel extends ViewModel {
      * @param applicationContext is the Context of the LocationFragmentView page
      * @return It will return the layer to the LocationFragmentView to display on the map
      */
-    public GeoJsonLayer loadPolygons(GoogleMap map, Context applicationContext, int jsonFile){
-        GeoJsonLayer layer = initLayer(map, applicationContext, jsonFile);
+    public GeoJsonLayer loadPolygons(GoogleMap map, Context applicationContext, JSONObject jsonObject){
+        GeoJsonLayer layer = initLayer(map, applicationContext, jsonObject);
         return  layer;
     }
 
@@ -52,11 +64,11 @@ public class LocationFragmentViewModel extends ViewModel {
      * @return the initiated layer or it will throw an exception if it didn't find the
      *  GeoJson File
      */
-    private GeoJsonLayer initLayer(GoogleMap map, Context applicationContext, int jsonFile){
+    private GeoJsonLayer initLayer(GoogleMap map, Context applicationContext, JSONObject jsonFile){
         GeoJsonLayer layer = null;
         try {
-            layer = new GeoJsonLayer(map, jsonFile, applicationContext);
-        } catch (IOException | JSONException e) {
+            layer = new GeoJsonLayer(map, jsonFile);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return layer;
@@ -245,13 +257,32 @@ public class LocationFragmentViewModel extends ViewModel {
     }
 
     public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, Context context, GoogleMap mMap) {
+        String fileName = buildingCode.toLowerCase()+"_"+floor.toLowerCase();
         if (floorLayer != null) {
             floorLayer.removeLayerFromMap();
         }
-        //TODO: dynamic floors
-        floorLayer = loadPolygons(mMap, context,  R.raw.ninthhall);
+        floorLayer = loadPolygons(mMap, context, getJsonObject("buildings_floors_json/" + fileName  + ".json", context));
         floorLayer.addLayerToMap();
-        groundOverlay.setImage(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+buildingCode.toLowerCase()+"_"+floor.toLowerCase()+".png"));
+        groundOverlay.setImage(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+fileName+".png"));
 
+    }
+
+    public JSONObject getJsonObject(String fileName, Context context) {
+        JSONObject jObect = null;
+        try {
+            InputStream is = context.getAssets().open(fileName);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            String json = new String(buffer, "UTF-8");
+            jObect = new JSONObject(json);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jObect;
     }
 }
