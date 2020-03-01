@@ -6,6 +6,9 @@ import android.graphics.Color;
 
 import androidx.lifecycle.ViewModel;
 
+import com.example.concordia_campus_guide.BuildingCode;
+import com.example.concordia_campus_guide.Global.ApplicationState;
+import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
@@ -18,6 +21,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
+import org.json.JSONObject;
 import org.json.JSONException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,7 +30,7 @@ import java.util.HashMap;
 import static java.lang.Double.parseDouble;
 
 public class LocationFragmentViewModel extends ViewModel {
-    private HashMap<String, GroundOverlayOptions> buildingsGroundOverlays = new HashMap<>();
+    private HashMap<String, GroundOverlayOptions> buildingsGroundOverlayOptions = new HashMap<>();
     /**
      * @return return the map style
      */
@@ -57,30 +61,41 @@ public class LocationFragmentViewModel extends ViewModel {
         GeoJsonLayer layer = null;
 
         try {
-            layer = new GeoJsonLayer(map, R.raw.buildingcoordinates, applicationContext);
-        } catch (IOException | JSONException e) {
+            JSONObject geoJsonLayer = ApplicationState.getInstance(applicationContext).getBuildings().getGeoJson();
+            layer = new GeoJsonLayer(map, geoJsonLayer);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return layer;
     }
 
-    /**
-     * Generate the hall building overlays
-     * @return the generate ground overlay option
-     */
-    public void getBuildingOverlay( GeoJsonFeature feature){
-        String[] coordinates = feature.getProperty("center").split(", ");
-        LatLng centerPos = new LatLng(parseDouble(coordinates[1]), parseDouble(coordinates[0]));
-        String[] floorsAvailable = feature.getProperty("floorsAvailable").split(",");
-        buildingsGroundOverlays.put(feature.getProperty("code"), new GroundOverlayOptions()
-                .position(centerPos, Float.parseFloat(feature.getProperty("width")), Float.parseFloat(feature.getProperty("height")))
-                .image(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+feature.getProperty("code").toLowerCase()+"_"+floorsAvailable[floorsAvailable.length-1].toLowerCase()+".png"))
+    public void setBuildingGroundOverlayOptions(GeoJsonFeature feature){
+        Building building = getBuildingFromGeoJsonFeature(feature);
+        buildingsGroundOverlayOptions.put(feature.getProperty("code"), new GroundOverlayOptions()
+                .position(building.getCenterCoordinates(), building.getWidth(), building.getHeight())
+                .image(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+building.getBuildingCode()+"_"+building.getAvailableFloors()[building.getAvailableFloors().length-1].toLowerCase()+".png"))
                 .bearing(Float.parseFloat(feature.getProperty("bearing"))));
     }
 
+    public Building getBuildingFromGeoJsonFeature(GeoJsonFeature feature){
+        LatLng centerPos = getCenterPositionBuildingFromGeoJsonFeature(feature);
+        String[] floorsAvailable = feature.getProperty("floorsAvailable").split(",");
+        float building_width = Float.parseFloat(feature.getProperty("width"));
+        float building_height = Float.parseFloat(feature.getProperty("height"));
+        String building_code = feature.getProperty("code").toLowerCase();
 
-    public HashMap<String, GroundOverlayOptions> getBuildingGroundOverlays(){
-        return buildingsGroundOverlays;
+        return new Building(centerPos, floorsAvailable, building_code, building_width, building_height);
+    }
+
+
+    public LatLng getCenterPositionBuildingFromGeoJsonFeature(GeoJsonFeature feature){
+        String[] coordinates = feature.getProperty("center").split(", ");
+        LatLng centerPos = new LatLng(parseDouble(coordinates[1]), parseDouble(coordinates[0]));
+        return centerPos;
+    }
+  
+    public HashMap<String, GroundOverlayOptions> getBuildingGroundOverlaysOptions(){
+        return buildingsGroundOverlayOptions;
     }
 
     /**
@@ -92,7 +107,7 @@ public class LocationFragmentViewModel extends ViewModel {
             feature.setPolygonStyle(getPolygonStyle());
 
             if(feature.getProperty("floorsAvailable") != null)
-                getBuildingOverlay(feature);
+                setBuildingGroundOverlayOptions(feature);
 
             String[] coordinates = feature.getProperty("center").split(", ");
             LatLng centerPos = new LatLng(parseDouble(coordinates[1]), parseDouble(coordinates[0]));
@@ -172,7 +187,83 @@ public class LocationFragmentViewModel extends ViewModel {
         return geoJsonPolygonStyle;
     }
 
-
+    /**
+     * @param buildingCode it represents which building we will be covering
+     * @return Int of drawable resource's bitmap representation
+     */
+    public int getIcon(BuildingCode buildingCode){
+        switch (buildingCode) {
+            case H:
+                return R.drawable.h;
+            case LB:
+                return R.drawable.lb;
+            case CJ:
+                return R.drawable.cj;
+            case AD:
+                return R.drawable.ad;
+            case CC:
+                return R.drawable.cc;
+            case EV:
+                return R.drawable.ev;
+            case FG:
+                return R.drawable.fg;
+            case GM:
+                return R.drawable.gm;
+            case MB:
+                return R.drawable.mb;
+            case FB:
+                return R.drawable.fb;
+            case SP:
+                return R.drawable.sp;
+            case BB:
+                return R.drawable.bb;
+            case FC:
+                return R.drawable.fc;
+            case DO:
+                return R.drawable.dome;
+            case GE:
+                return R.drawable.ge;
+            case HA:
+                return R.drawable.ha;
+            case HB:
+                return R.drawable.hb;
+            case HC:
+                return R.drawable.hc;
+            case BH:
+                return R.drawable.bh;
+            case JR:
+                return R.drawable.jr;
+            case PC:
+                return R.drawable.pc;
+            case PS:
+                return R.drawable.ps;
+            case PT:
+                return R.drawable.pt;
+            case PY:
+                return R.drawable.py;
+            case QA:
+                return R.drawable.qa;
+            case RA:
+                return R.drawable.ra;
+            case RF:
+                return R.drawable.rf;
+            case SC:
+                return R.drawable.sc;
+            case SH:
+                return R.drawable.sh;
+            case SI:
+                return R.drawable.si;
+            case TA:
+                return R.drawable.ta;
+            case VE:
+                return R.drawable.ve;
+            case VL:
+                return R.drawable.vl;
+            default:
+                return -1;
+        }
+    }
+  
     public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, Context context) {
         groundOverlay.setImage(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+buildingCode.toLowerCase()+"_"+floor.toLowerCase()+".png"));
     }

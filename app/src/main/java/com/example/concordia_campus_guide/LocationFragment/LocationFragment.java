@@ -39,7 +39,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 
-
 import java.util.HashMap;
 
 import static androidx.core.content.ContextCompat.checkSelfPermission;
@@ -132,7 +131,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
      * The purpose of this method is to figure the style of the map to display
      */
     private void initFloorPlans() {
-        HashMap<String, GroundOverlayOptions> temp = mViewModel.getBuildingGroundOverlays();
+        HashMap<String, GroundOverlayOptions> temp = mViewModel.getBuildingGroundOverlaysOptions();
         for(String key: temp.keySet()){
             buildingsGroundOverlays.put(key, mMap.addGroundOverlay(temp.get(key)));
         }
