@@ -8,20 +8,33 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="Divider">
-        <item name="android:background">?android:attr/listDivider</item>
-        <item name="android:fillColor">#C85563</item>
+    <style name="InfoCardButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+        <item name="android:minHeight">23dip</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">13sp</item>
     </style>
 
-    <style name="Divider.Horizontal" parent="Divider">
+    <style name="InfoCardDescription">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">5dp</item> // You can change thickness here.
-
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:text">TextView</item>
     </style>
 
-    <style name="Divider.Vertical" parent="Divider">
-        <item name="android:layout_width">1dp</item>
-        <item name="android:layout_height">match_parent</item>
+    <style name="InfoCardDescriptionTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:text">TextView</item>
+        <item name="android:textColor">@color/colorAppTheme</item>
+        <item name="android:textSize">16sp</item>
     </style>
+
+
 
 </resources>

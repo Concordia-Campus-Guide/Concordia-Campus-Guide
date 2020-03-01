@@ -15,6 +15,9 @@ public class InfoCardFragmentViewModel extends AndroidViewModel {
     private TextView infoCardTitle;
     private TextView buildingAddress;
 
+    /**
+     * Constructor
+     */
     public InfoCardFragmentViewModel(@NonNull Application application) {
         super(application);
     }
@@ -27,18 +30,38 @@ public class InfoCardFragmentViewModel extends AndroidViewModel {
         this.building = building;
     }
 
+    /**
+     * Returns infoCardTitle attribute
+     *
+     * @return infoCardTitle
+     */
     public TextView getInfoCardTitle() {
         return infoCardTitle;
     }
 
+    /**
+     * Sets infoCardTitle attribute
+     *
+     * @param infoCardTitle is set to the TextView infoCardTitle attribute
+     */
     public void setInfoCardTitle(TextView infoCardTitle) {
         this.infoCardTitle = infoCardTitle;
     }
 
+    /**
+     * Returns buildingAddress attribute
+     *
+     * @return buildingAddress
+     */
     public TextView getBuildingAddress() {
         return buildingAddress;
     }
 
+    /**
+     * Sets buildingAddress attribute
+     *
+     * @param buildingAddress is set to the TextView buildingAddress attribute
+     */
     public void setBuildingAddress(TextView buildingAddress) {
         this.buildingAddress = buildingAddress;
     }
