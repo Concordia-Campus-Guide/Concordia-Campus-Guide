@@ -22,6 +22,7 @@ import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
 import com.example.concordia_campus_guide.BuildingCode;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
+import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -94,10 +95,10 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         buildingsGroundOverlays = new HashMap<>();
     }
 
-    private void setupFloorPickerAdapter(String buildingCode, String[] availableFloors) {
+    private void setupFloorPickerAdapter(Building building) {
         mFloorPickerGv.setVisibility(View.VISIBLE);
 
-        currentFloorPickerAdapter = new FloorPickerAdapter(getContext(), availableFloors, buildingCode, this);
+        currentFloorPickerAdapter = new FloorPickerAdapter(getContext(), building.getAvailableFloors(), building.getBuildingCode(), this);
         mFloorPickerGv.setAdapter(currentFloorPickerAdapter);
     }
 
@@ -137,9 +138,10 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
      * @param googleMap is the map that is used in the application
      */
     private void initFloorPlans() {
-        HashMap<String, GroundOverlayOptions> temp = mViewModel.getBuildingGroundOverlaysOptions();
+        HashMap<String, Building> temp = mViewModel.getBuildings();
         for(String key: temp.keySet()){
-            buildingsGroundOverlays.put(key, mMap.addGroundOverlay(temp.get(key)));
+            if (temp.get(key).getGroundOverlayOption() != null)
+                buildingsGroundOverlays.put(key, mMap.addGroundOverlay(temp.get(key).getGroundOverlayOption()));
         }
     }
 
@@ -209,7 +211,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             public void onCameraMove() {
                 if(map.getCameraPosition().zoom > 20){
                     mLayer.removeLayerFromMap();
-                    //setup a different marker clickListener
                 }
                 else{
                     mLayer.addLayerToMap();
@@ -218,7 +219,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             }
         });
     }
-
 
     /**
      * The purpose of this method is handle the onclick polygon
@@ -229,19 +229,21 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             @Override
             public void onFeatureClick(GeoJsonFeature geoJsonFeature) {
                 if(geoJsonFeature != null){
-                    if(geoJsonFeature.getProperty("floorsAvailable")!= null) {
-                        String[] floorsAvailable = geoJsonFeature.getProperty("floorsAvailable").split(",");
-                        setupFloorPickerAdapter(geoJsonFeature.getProperty("code"), floorsAvailable);
-                    }
-                    String buildingCode = geoJsonFeature.getProperty("code");
-                    ((MainActivity)getActivity()).showInfoCard(buildingCode);
-                    System.out.println("Clicked on "+buildingCode);
+                    Building building = mViewModel.getBuildingFromGeoJsonFeature(geoJsonFeature);
+                    onBuildingClick(building);
                 }
-                else {
-                    mFloorPickerGv.setVisibility(View.GONE);
-                }
+                String buildingCode = geoJsonFeature.getProperty("code");
+                ((MainActivity)getActivity()).showInfoCard(buildingCode);
             }
         });
+    }
+
+    private void onBuildingClick(Building building) {
+        if(building.getAvailableFloors() != null) {
+            setupFloorPickerAdapter(building);
+        } else {
+            mFloorPickerGv.setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -252,10 +254,10 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                //TODO: Make function that pops up the info card for the building (via the building-code)
+                 Building building = mViewModel.getBuildingFromeCode(marker.getTag().toString());
                 String buildingCode = ((BuildingCode) marker.getTag()).toString();
                 ((MainActivity)getActivity()).showInfoCard(buildingCode);
-                System.out.println(buildingCode);
+                onBuildingClick(building);
                 return false;
             }
         });

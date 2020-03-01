@@ -1,6 +1,7 @@
 package com.example.concordia_campus_guide.Models;
 
 
+import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 
 public class Building {
@@ -10,14 +11,19 @@ public class Building {
     private String buildingCode;
     private float width;
     private float height;
+    private float bearing;
     private BuildingInfo buildingInformation;
 
-    public Building(LatLng centerCoordinates, String[] availableFloors, String buildingCode, float width, float height) {
+    private GroundOverlayOptions groundOverlayOption;
+
+    public Building(LatLng centerCoordinates, String[] availableFloors, String buildingCode, float width, float height, float bearing) {
         this.centerCoordinates = centerCoordinates;
         this.availableFloors = availableFloors;
         this.buildingCode = buildingCode;
         this.width = width;
         this.height = height;
+        this.groundOverlayOption = null;
+        this.bearing = bearing;
     }
 
     public LatLng getCenterCoordinates() {
@@ -58,5 +64,20 @@ public class Building {
 
     public void setHeight(float height) {
         this.height = height;
+    }
+
+    public GroundOverlayOptions getGroundOverlayOption() {
+        return groundOverlayOption;
+    }
+
+    public void setGroundOverlayOption(GroundOverlayOptions groundOverlayOption) {
+        this.groundOverlayOption = groundOverlayOption;
+    }
+    public float getBearing() {
+        return bearing;
+    }
+
+    public void setBearing(float bearing) {
+        this.bearing = bearing;
     }
 }
