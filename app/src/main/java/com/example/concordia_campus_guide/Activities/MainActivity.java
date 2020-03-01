@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -28,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
         mViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         fragmentManager = getSupportFragmentManager();
         mViewModel.importBuildings(getApplicationContext());
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
+        MainActivity.this.setTitle("ConUMaps");
 
         View infoCard = findViewById(R.id.info_card);
         swipeableInfoCard = BottomSheetBehavior.from(infoCard);

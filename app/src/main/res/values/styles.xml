@@ -34,7 +34,10 @@
         <item name="android:textColor">@color/colorAppTheme</item>
         <item name="android:textSize">16sp</item>
     </style>
-
+    <style name="toolbarTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:background">@color/colorAppTheme</item>
+    </style>
 
 
 </resources>
