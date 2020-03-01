@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.InfoCardFragment;
+package com.example.concordia_campus_guide.Fragments.InfoCardFragment;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -72,7 +72,7 @@ public class InfoCardFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(com.example.concordia_campus_guide.InfoCardFragment.InfoCardFragmentViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragmentViewModel.class);
         mViewModel.setBuilding(ApplicationState.getInstance(getContext()).getBuildings().getBuilding(this.buildingCode));
         setInfoCard();
     }

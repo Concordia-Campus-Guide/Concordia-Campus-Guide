@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.InfoCardFragment;
+package com.example.concordia_campus_guide.Fragments.InfoCardFragment;
 
 import android.widget.TextView;
 import androidx.lifecycle.ViewModel;
