@@ -4,26 +4,28 @@ package com.example.concordia_campus_guide.Models;
 import android.text.TextUtils;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.List;
 
 public class Building {
 
-    private Float[] centerCoordinates;
+    private Double[] centerCoordinates;
     private String[] availableFloors;
-    private float width;
-    private float height;
-    private float bearing;
+    private Float width;
+    private Float height;
+    private Float bearing;
     private String Campus;
     private String BuildingCode;
     private String Building_Long_Name;
     private String Address;
     private List<String> Departments;
     private List<String> Services;
-    private List<List<List<Float>>> coordinates;
+    private List<List<List<Double>>> coordinates;
 
-    public Building(Float[] centerCoordinates, String[] availableFloors, float width, float height, String campus, String buildingCode, String building_Long_Name, String address, List<String> departments, List<String> services, List<List<List<Float>>> coordinates) {
+    public Building(Double[] centerCoordinates, String[] availableFloors, float width, float height, String campus, String buildingCode, String building_Long_Name, String address, List<String> departments, List<String> services, List<List<List<Double>>> coordinates) {
         this.centerCoordinates = centerCoordinates;
         this.availableFloors = availableFloors;
         this.width = width;
@@ -38,7 +40,7 @@ public class Building {
     }
 
     public Building(LatLng centerPos, String[] floorsAvailable, String building_code, float building_width, float building_height) {
-        centerCoordinates = new Float[]{ (float)centerPos.latitude, (float)centerPos.longitude };
+        centerCoordinates = new Double[]{ (double)centerPos.latitude, (double)centerPos.longitude };
         availableFloors = floorsAvailable;
         BuildingCode = building_code;
         width = building_width;
@@ -50,7 +52,7 @@ public class Building {
     }
 
     public void setCenterCoordinates(LatLng centerCoordinates) {
-        this.centerCoordinates = new Float[]{ (float)centerCoordinates.latitude, (float)centerCoordinates.longitude };
+        this.centerCoordinates = new Double[]{ (double)centerCoordinates.latitude, (double)centerCoordinates.longitude };
     }
 
     public String[] getAvailableFloors() {
@@ -125,11 +127,11 @@ public class Building {
         Services = services;
     }
 
-    public List<List<List<Float>>> getCoordinates() {
+    public List<List<List<Double>>> getCoordinates() {
         return coordinates;
     }
 
-    public void setCoordinates(List<List<List<Float>>> coordinates) {
+    public void setCoordinates(List<List<List<Double>>> coordinates) {
         this.coordinates = coordinates;
     }
 
@@ -147,7 +149,32 @@ public class Building {
         return TextUtils.join(", ", Departments);
     }
 
-    public JsonObject toGeoJson(){
-        return null;
+    public JSONObject getGeoJson(){
+        JSONObject toReturn = new JSONObject();
+        JSONObject properties = new JSONObject();
+        JSONObject geometry = new JSONObject();
+
+        try{
+            properties.put("code", BuildingCode);
+            if(centerCoordinates!=null) properties.put("center", ""+centerCoordinates[0]+", "+centerCoordinates[1]);
+            if(height!=null) properties.put("height", height);
+            if(width!=null) properties.put("width", width);
+            if(bearing!=null) properties.put("bearing", bearing);
+            if(availableFloors!=null) properties.put("floorsAvailable", TextUtils.join(", ", availableFloors));
+
+            if(coordinates==null) return null;
+
+            geometry.put("type", "Polygon");
+            geometry.put("coordinates", new JSONArray(coordinates));
+
+            toReturn.put("type", "Feature");
+            toReturn.put("properties", properties);
+            toReturn.put("geometry", geometry);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return toReturn;
     }
 }

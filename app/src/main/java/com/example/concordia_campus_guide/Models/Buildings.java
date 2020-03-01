@@ -1,6 +1,7 @@
 package com.example.concordia_campus_guide.Models;
 
-import com.google.gson.JsonObject;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +35,33 @@ public class Buildings {
         this.Buildings = buildings;
     }
 
-    public JsonObject toGeoJson(){
-        return null;
+    public JSONObject getGeoJson(){
+        JSONObject toReturn = new JSONObject();
+        try{
+            toReturn.put("type", "FeatureCollection");
+            toReturn.put("features", getInnerGeoJson());
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return toReturn;
+    }
+
+    public JSONArray getInnerGeoJson(){
+        JSONArray features = new JSONArray();
+
+        try{
+            for(Building building: Buildings){
+                JSONObject buildingGeoJson = building.getGeoJson();
+                if(buildingGeoJson!=null) features.put(building.getGeoJson());
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return features;
     }
 
 }

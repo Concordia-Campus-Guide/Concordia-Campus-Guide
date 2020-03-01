@@ -5,6 +5,7 @@ import android.graphics.Color;
 import androidx.lifecycle.ViewModel;
 
 import com.example.concordia_campus_guide.BuildingCode;
+import com.example.concordia_campus_guide.Global.ApplicationState;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.GoogleMap;
@@ -17,8 +18,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
-import org.json.JSONException;
-import java.io.IOException;
+
+import org.json.JSONObject;
+
 import java.util.HashMap;
 
 import static java.lang.Double.parseDouble;
@@ -54,8 +56,9 @@ public class LocationFragmentViewModel extends ViewModel {
     private GeoJsonLayer initLayer(GoogleMap map, Context applicationContext){
         GeoJsonLayer layer = null;
         try {
-            layer = new GeoJsonLayer(map, R.raw.buildingcoordinates, applicationContext);
-        } catch (IOException | JSONException e) {
+            JSONObject geoJsonLayer = ApplicationState.getInstance(applicationContext).getBuildings().getGeoJson();
+            layer = new GeoJsonLayer(map, geoJsonLayer);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return layer;
