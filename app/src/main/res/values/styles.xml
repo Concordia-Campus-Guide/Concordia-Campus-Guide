@@ -14,7 +14,7 @@
         <item name="android:layout_weight">1</item>
         <item name="android:backgroundTint">@color/colorPrimary</item>
         <item name="android:minHeight">23dip</item>
-        <item name="android:textAllCaps">true</item>
+        <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/textColor</item>
         <item name="android:textSize">13sp</item>
     </style>

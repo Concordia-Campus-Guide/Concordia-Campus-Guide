@@ -3,7 +3,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-
 import androidx.lifecycle.ViewModel;
 
 import com.example.concordia_campus_guide.Global.ApplicationState;
@@ -21,7 +20,6 @@ import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 import org.json.JSONObject;
-import org.json.JSONException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -188,6 +186,11 @@ public class LocationFragmentViewModel extends ViewModel {
         geoJsonPolygonStyle.setStrokeWidth(6);
         return geoJsonPolygonStyle;
     }
+
+    /**
+     * @param buildingCode it represents which building we will be covering
+     * @return Int of drawable resource's bitmap representation
+     */
 
     public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, Context context) {
         groundOverlay.setImage(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+buildingCode.toLowerCase()+"_"+floor.toLowerCase()+".png"));
