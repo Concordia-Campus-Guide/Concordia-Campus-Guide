@@ -2,6 +2,7 @@ package com.example.concordia_campus_guide.InstrumentalTests;
 import android.content.Context;
 import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.InfoCardFragment.InfoCardFragmentViewModel;
+import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Buildings;
 import org.junit.Rule;
 import org.junit.Test;
@@ -24,32 +25,5 @@ public class InfoCardFragmentViewModelTest {
     @Before
     public void init() {
         viewModel = new InfoCardFragmentViewModel();
-    }
-
-    /**
-     * The purpose of this test is to validate that all buildings have been retrieved from the Json file
-     */
-    @Test
-    public void readJsonFileTest(){
-        Context appContext = mActivityRule.getActivity().getApplicationContext();
-        Buildings b = viewModel.readJsonFile(appContext);
-        assertNotNull(b);
-        assertEquals(64, b.getBuildings().size());
-    }
-
-    @Test
-    public void getBuildingsTest()
-    {
-        viewModel.setBuildings(new Buildings());
-        Buildings buildings = viewModel.getBuildings();
-        assertNotNull(buildings);
-    }
-
-    @Test
-    public void setBuildingsTest()
-    {
-        Buildings buildings = new Buildings();
-        viewModel.setBuildings(buildings);
-        assertEquals(viewModel.getBuildings(), buildings);
     }
 }
