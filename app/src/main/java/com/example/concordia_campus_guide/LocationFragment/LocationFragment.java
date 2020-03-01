@@ -136,7 +136,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     /**
      * The purpose of this method is to figure the style of the map to display
-     * @param googleMap is the map that is used in the application
      */
     private void initFloorPlans() {
         HashMap<String, GroundOverlayOptions> temp = mViewModel.getBuildingGroundOverlays();
