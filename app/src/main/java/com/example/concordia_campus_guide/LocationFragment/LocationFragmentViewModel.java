@@ -21,7 +21,6 @@ import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 import org.json.JSONException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import static java.lang.Double.parseDouble;
@@ -56,6 +55,7 @@ public class LocationFragmentViewModel extends ViewModel {
      */
     private GeoJsonLayer initLayer(GoogleMap map, Context applicationContext){
         GeoJsonLayer layer = null;
+
         try {
             layer = new GeoJsonLayer(map, R.raw.buildingcoordinates, applicationContext);
         } catch (IOException | JSONException e) {
@@ -77,6 +77,8 @@ public class LocationFragmentViewModel extends ViewModel {
                 .image(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+feature.getProperty("code").toLowerCase()+"_"+floorsAvailable[floorsAvailable.length-1].toLowerCase()+".png"))
                 .bearing(Float.parseFloat(feature.getProperty("bearing"))));
     }
+
+
     public HashMap<String, GroundOverlayOptions> getBuildingGroundOverlays(){
         return buildingsGroundOverlays;
     }
@@ -104,16 +106,16 @@ public class LocationFragmentViewModel extends ViewModel {
      * @param centerPos is the latitude and longitude of the building's center
      * @param buildingLabel is the Building on which the method will add a marker
      */
-    private void addBuildingMarker(GoogleMap map, LatLng centerPos, String buildingLabel, Context context) {
+    public void addBuildingMarker(GoogleMap map, LatLng centerPos, String buildingLabel, Context context) {
         Marker marker = map.addMarker(
                 new MarkerOptions()
                         .position(centerPos)
-                        .icon(setupMarker(buildingLabel,context))
+                        .icon(styleMarker(buildingLabel,context))
                         .flat(true)
                         .anchor(0.5f,0.5f)
                         .alpha(0.90f)
                         //This line should be included whenever we test the UI for the marker:
-                        //.title(buildingCode.toString())
+                        .title(buildingLabel)
         );
         marker.setTag(buildingLabel);
     }
@@ -124,7 +126,7 @@ public class LocationFragmentViewModel extends ViewModel {
      * @param context the context of the LocationFragment
      * @return it will BitmapDescriptor object to use it as an icon for the marker on the map.
      */
-    private BitmapDescriptor setupMarker(String buildingLabel, Context context) {
+    public BitmapDescriptor styleMarker(String buildingLabel, Context context) {
         int height = 150;
         int width = 150;
         InputStream deckFile = null;

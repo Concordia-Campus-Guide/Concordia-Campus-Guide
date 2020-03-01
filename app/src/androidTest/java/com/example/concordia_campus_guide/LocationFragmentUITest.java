@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 
 import com.example.concordia_campus_guide.Activities.MainActivity;
+import com.example.concordia_campus_guide.LocationFragment.LocationFragmentViewModel;
 
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.rule.ActivityTestRule;
@@ -18,12 +19,17 @@ import androidx.test.uiautomator.UiSelector;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.TreeMap;
+import java.util.concurrent.TimeUnit;
+
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -33,7 +39,7 @@ import static org.hamcrest.Matchers.allOf;
 
 @RunWith(AndroidJUnit4.class)
 public class LocationFragmentUITest {
-
+    private UiDevice device;
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
@@ -43,6 +49,10 @@ public class LocationFragmentUITest {
                     "android.permission.ACCESS_FINE_LOCATION",
                     "android.permission.ACCESS_COARSE_LOCATION");
 
+    @Before
+    public void init() {
+         device = UiDevice.getInstance(getInstrumentation());
+    }
     /**
      * The purpose of this test is to validate the existance of EV marker
      * on the screen once opening the application.
@@ -50,9 +60,18 @@ public class LocationFragmentUITest {
      */
     @Test
     public void testMarker() throws UiObjectNotFoundException {
-        UiDevice device = UiDevice.getInstance(getInstrumentation());
         UiObject marker = device.findObject(new UiSelector().descriptionContains("EV"));
         marker.click();
+    }
+
+    /**
+     * The purpose of this test is to validate the existance of my location button.
+     * @throws UiObjectNotFoundException In case if it didn't find the my location button
+     */
+    @Test
+    public void CurrentLocationButtonTest() throws  UiObjectNotFoundException{
+        UiObject button = device.findObject(new UiSelector().descriptionContains("My Location"));
+        button.click();
     }
 
     /**
@@ -109,5 +128,13 @@ public class LocationFragmentUITest {
                         && view.equals(((ViewGroup) parent).getChildAt(position));
             }
         };
+    }
+
+    private void wait(int seconds) {
+        try {
+            Thread.sleep(1000*seconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

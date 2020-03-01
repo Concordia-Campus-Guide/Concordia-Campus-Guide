@@ -4,6 +4,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -61,12 +62,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     private Button selectedFloor;
 
-    /**
-     * @return it will return a new object of this fragment
-     */
-    public static LocationFragment newInstance() {
-        return new LocationFragment();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
