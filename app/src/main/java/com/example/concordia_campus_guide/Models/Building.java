@@ -10,6 +10,7 @@ public class Building {
     private String buildingCode;
     private float width;
     private float height;
+    private BuildingInfo buildingInformation;
 
     public Building(LatLng centerCoordinates, String[] availableFloors, String buildingCode, float width, float height) {
         this.centerCoordinates = centerCoordinates;

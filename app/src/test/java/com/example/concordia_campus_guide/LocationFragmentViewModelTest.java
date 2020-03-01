@@ -53,49 +53,19 @@ public class LocationFragmentViewModelTest {
         assertEquals(viewModel.getMapStyle(), R.raw.mapstyle_retro);
     }
 
+    @Test
+    public void getBuildingFromGeoJsonFeatureTest(){
 
-//    @Test
-//    public void getFloorPlansHBuildingTest(){
-//        ArrayList<String> expectedFloorPlansAvailable = new ArrayList<>();
-//        expectedFloorPlansAvailable.add("hall_9");
-//        expectedFloorPlansAvailable.add("hall_8");
-//
-//        assertEquals(expectedFloorPlansAvailable, viewModel.getFloorsAvailable(BuildingCode.H));
-//    }
-//
-//    @Test
-//    public void getFloorPlansMBBuildingTest(){
-//        ArrayList<String> expectedFloorPlansAvailable = new ArrayList<>();
-//        expectedFloorPlansAvailable.add("mb_1");
-//        expectedFloorPlansAvailable.add("mb_S2");
-//
-//        assertEquals(expectedFloorPlansAvailable, viewModel.getFloorsAvailable(BuildingCode.MB));
-//    }
-//    @Test
-//    public void getFloorPlansVLBuildingTest(){
-//        ArrayList<String> expectedFloorPlansAvailable = new ArrayList<>();
-//        expectedFloorPlansAvailable.add("vl_2");
-//        expectedFloorPlansAvailable.add("vl_1");
-//
-//        assertEquals(expectedFloorPlansAvailable, viewModel.getFloorsAvailable(BuildingCode.VL));
-//    }
-//    @Test
-//    public void getFloorPlansNotSupportedBuildingTest(){
-//        ArrayList<String> expectedFloorPlansAvailable = new ArrayList<>();
-//
-//        assertEquals(expectedFloorPlansAvailable, viewModel.getFloorsAvailable(BuildingCode.EV));
-//    }
-//
-//    @Ignore
-//    @Test
-//    public void getHallBuildingOverlayTest(){
-//        GroundOverlayOptions actualGOO = viewModel.get();
-//        GroundOverlayOptions expectedGOO = new GroundOverlayOptions().position(new LatLng(45.4972685, -73.5789475), (float) 68, (float) 68).image(BitmapDescriptorFactory.fromResource(R.drawable.h_9)).bearing((float) 34);
-//
-//        assertEquals(expectedGOO.getLocation(), actualGOO.getLocation());
-//        assertEquals(expectedGOO.getImage(), actualGOO.getImage());
-//        assertEquals(expectedGOO.getHeight(), actualGOO.getHeight());
-//        assertEquals(expectedGOO.getWidth(), actualGOO.getWidth());
-//        assertEquals(expectedGOO.getBearing(), actualGOO.getBearing());
-//    }
+    }
+ /**
+  *     public Building getBuildingFromGeoJsonFeature(GeoJsonFeature feature){
+  *         LatLng centerPos = getCenterPositionBuildingFromGeoJsonFeature(feature);
+  *         String[] floorsAvailable = feature.getProperty("floorsAvailable").split(",");
+  *         float building_width = Float.parseFloat(feature.getProperty("width"));
+  *         float building_height = Float.parseFloat(feature.getProperty("height"));
+  *         String building_code = feature.getProperty("code").toLowerCase();
+  *
+  *         return new Building(centerPos,floorsAvailable, building_code, building_width, building_height);
+  *     }
+ */
 }

@@ -137,7 +137,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
      * @param googleMap is the map that is used in the application
      */
     private void initFloorPlans() {
-        HashMap<String, GroundOverlayOptions> temp = mViewModel.getBuildingGroundOverlays();
+        HashMap<String, GroundOverlayOptions> temp = mViewModel.getBuildingGroundOverlaysOptions();
         for(String key: temp.keySet()){
             buildingsGroundOverlays.put(key, mMap.addGroundOverlay(temp.get(key)));
         }
