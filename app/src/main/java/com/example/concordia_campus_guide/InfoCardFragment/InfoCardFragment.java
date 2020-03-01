@@ -86,7 +86,7 @@ public class InfoCardFragment extends Fragment {
      * services, departements
      */
     private void setInfoCard(){
-        infoCardTitle.setText(mViewModel.getBuilding().getBuilding_Long_Name());
+        infoCardTitle.setText(mViewModel.getBuilding().getBuildingName());
         buildingAddress.setText(mViewModel.getBuilding().getAddress());
         setDepartmentsList();
         setServicesList();

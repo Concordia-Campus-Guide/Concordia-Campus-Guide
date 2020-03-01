@@ -68,7 +68,7 @@ public class LocationFragmentViewModel extends ViewModel {
 
     public void setBuildingGroundOverlayOptions(Building building){
         building.setGroundOverlayOption(new GroundOverlayOptions()
-                .position(building.getCenterCoordinates(), building.getWidth(), building.getHeight())
+                .position(new LatLng(building.getCenterCoordinates()[0], building.getCenterCoordinates()[1]), building.getWidth(), building.getHeight())
                 .image(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+building.getBuildingCode().toLowerCase()+"_"+building.getAvailableFloors()[building.getAvailableFloors().length-1].toLowerCase()+".png"))
                 .bearing(building.getBearing()));
     }
