@@ -50,14 +50,14 @@ public class InfoCardFragmentIntegrationTest {
 
     @Before
     public void init() { device = UiDevice.getInstance(getInstrumentation()); }
-    /**
-     * The purpose of this test is to validate the existance of EV marker
-     * on the screen once opening the application.
-     * @throws UiObjectNotFoundException
-     */
 
+    /**
+     * This test validates that the collapsed info card contains the correct title
+     * @throws UiObjectNotFoundException
+     * @throws InterruptedException
+     */
     @Test
-    public void correctInfoCardPopsUpWhenSpecificMarkerIsClickedTest() throws UiObjectNotFoundException, InterruptedException {
+    public void correctCollapsedInfoCardPopsUpWhenSpecificMarkerIsClickedTest() throws UiObjectNotFoundException, InterruptedException {
         UiObject marker = device.findObject(new UiSelector().descriptionContains("EV"));
         marker.click();
         Thread.sleep(1500);
@@ -82,6 +82,17 @@ public class InfoCardFragmentIntegrationTest {
                                 0),
                         isDisplayed()));
         textView.check(matches(withText("Engineering, Computer Science and Visual Arts Integrated Complex")));
+    }
+
+    /**
+     * This test validates that the expanded info card contains the correct departments, services and address
+     * @throws UiObjectNotFoundException
+     * @throws InterruptedException
+     */
+    public void correctExpandedInfoCardAppearsWhenSwipingUpCardTest() throws UiObjectNotFoundException, InterruptedException {
+        UiObject marker = device.findObject(new UiSelector().descriptionContains("EV"));
+        marker.click();
+        Thread.sleep(1500);
 
         // The rest of the test requires the card to be swiped up/expanded which I am unable to simulate so I'll leave it commented for now
 //        // Ui automator section
@@ -123,6 +134,9 @@ public class InfoCardFragmentIntegrationTest {
 //        textView4.check(matches(withText("LeGym, FOFA Gallery")));
     }
 
+    /**
+     * Helper method
+     */
     private static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {
 
