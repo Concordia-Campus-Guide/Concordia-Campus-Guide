@@ -17,7 +17,7 @@
     {
       "type": "Feature",
       "properties": {
-        "roomNumber": "1.294"
+        "roomNumber": "294"
       },
       "geometry": {
         "type": "Point",
@@ -43,7 +43,7 @@
     {
       "type": "Feature",
       "properties": {
-        "roomNumber": "1.347"
+        "roomNumber": "347"
       },
       "geometry": {
         "type": "Point",
@@ -56,7 +56,7 @@
     {
       "type": "Feature",
       "properties": {
-        "roomNumber": "1.345"
+        "roomNumber": "345"
       },
       "geometry": {
         "type": "Point",
@@ -69,7 +69,7 @@
     {
       "type": "Feature",
       "properties": {
-        "roomNumber": "1.210"
+        "roomNumber": "210"
       },
       "geometry": {
         "type": "Point",
@@ -82,7 +82,7 @@
     {
       "type": "Feature",
       "properties": {
-        "roomNumber": "1.301"
+        "roomNumber": "301"
       },
       "geometry": {
         "type": "Point",
@@ -108,7 +108,7 @@
     {
       "type": "Feature",
       "properties": {
-        "roomNumber": "1.310"
+        "roomNumber": "310"
       },
       "geometry": {
         "type": "Point",
@@ -121,7 +121,7 @@
     {
       "type": "Feature",
       "properties": {
-        "roomNumber": "1.335"
+        "roomNumber": "335"
       },
       "geometry": {
         "type": "Point",
@@ -134,7 +134,7 @@
     {
       "type": "Feature",
       "properties": {
-        "roomNumber": "1.309"
+        "roomNumber": "309"
       },
       "geometry": {
         "type": "Point",
@@ -147,7 +147,7 @@
     {
       "type": "Feature",
       "properties": {
-        "roomNumber": "1.315"
+        "roomNumber": "315"
       },
       "geometry": {
         "type": "Point",
@@ -199,7 +199,7 @@
     {
       "type": "Feature",
       "properties": {
-        "roomNumber": "1.338"
+        "roomNumber": "338"
       },
       "geometry": {
         "type": "Point",
@@ -212,7 +212,7 @@
     {
       "type": "Feature",
       "properties": {
-        "roomNumber": "1.424"
+        "roomNumber": "424"
       },
       "geometry": {
         "type": "Point",
@@ -225,7 +225,7 @@
     {
       "type": "Feature",
       "properties": {
-        "roomNumber": "1.134"
+        "roomNumber": "134"
       },
       "geometry": {
         "type": "Point",
@@ -241,7 +241,7 @@
         "marker-color": "#7e7e7e",
         "marker-size": "medium",
         "marker-symbol": "",
-        "roomNumber": 1.437
+        "roomNumber": "437"
       },
       "geometry": {
         "type": "Point",
@@ -280,7 +280,7 @@
     {
       "type": "Feature",
       "properties": {
-        "roomnumber": "1.132"
+        "roomnumber": "132"
       },
       "geometry": {
         "type": "Point",
@@ -293,7 +293,7 @@
     {
       "type": "Feature",
       "properties": {
-        "roomnumber": "1.130"
+        "roomnumber": "130"
       },
       "geometry": {
         "type": "Point",
@@ -306,7 +306,7 @@
     {
       "type": "Feature",
       "properties": {
-        "roomNumber": "1.494"
+        "roomNumber": "494"
       },
       "geometry": {
         "type": "Point",
@@ -319,7 +319,7 @@
     {
       "type": "Feature",
       "properties": {
-        "roomnumber": "1.132"
+        "roomnumber": "132"
       },
       "geometry": {
         "type": "Point",
@@ -332,7 +332,7 @@
     {
       "type": "Feature",
       "properties": {
-        "roomnumber": "1.130"
+        "roomnumber": "130"
       },
       "geometry": {
         "type": "Point",
@@ -348,7 +348,7 @@
         "marker-color": "#7e7e7e",
         "marker-size": "medium",
         "marker-symbol": "",
-        "roomNumber": 1.115
+        "roomNumber": "115"
       },
       "geometry": {
         "type": "Point",
@@ -364,7 +364,7 @@
         "marker-color": "#7e7e7e",
         "marker-size": "medium",
         "marker-symbol": "",
-        "roomNumber": 1.494
+        "roomNumber": "494"
       },
       "geometry": {
         "type": "Point",
@@ -396,7 +396,7 @@
         "marker-color": "#7e7e7e",
         "marker-size": "medium",
         "marker-symbol": "",
-        "roomNumber": 1.434
+        "roomNumber": "434"
       },
       "geometry": {
         "type": "Point",
