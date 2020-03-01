@@ -10,6 +10,9 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class Building extends Place {
+    /**
+     * These following attributes NEED to match the fields in the JSON file. Do not change them.
+     */
     //Attributes needed to create the ground overlays [ui]
     private String[] availableFloors;
     private Float width;
@@ -17,29 +20,29 @@ public class Building extends Place {
     private Float bearing;
     private List<List<List<Double>>> coordinates;
 
-    //Descriptive attributes
-    private String campus;
-    private String buildingCode;
-    private String buildingName;
-    private String address;
-    private List<String> departments;
-    private List<String> services;
+    //Descriptive Attributes
+    private String Campus;
+    private String BuildingCode;
+    private String Building_Long_Name;
+    private String Address;
+    private List<String> Departments;
+    private List<String> Services;
 
     private GroundOverlayOptions groundOverlayOption;
 
     public Building(Double[] centerCoordinates, String[] availableFloors, float width, float height, float bearing,
-                    String campus, String buildingCode, String buildingName, String address,
+                    String campus, String buildingCode, String Building_Long_Name, String address,
                     List<String> departments, List<String> services, List<List<List<Double>>> coordinates) {
         super(centerCoordinates);
         this.availableFloors = availableFloors;
         this.width = width;
         this.height = height;
-        this.campus = campus;
-        this.buildingCode = buildingCode;
-        this.buildingName = buildingName;
-        this.address = address;
-        this.departments = departments;
-        this.services = services;
+        this.Campus = campus;
+        this.BuildingCode = buildingCode;
+        this.Building_Long_Name = Building_Long_Name;
+        this.Address = address;
+        this.Departments = departments;
+        this.Services = services;
         this.bearing = bearing;
         this.coordinates = coordinates;
         this.groundOverlayOption = null;
@@ -86,51 +89,51 @@ public class Building extends Place {
     }
 
     public String getCampus() {
-        return campus;
+        return Campus;
     }
 
     public void setCampus(String campus) {
-        this.campus = campus;
+        this.Campus = campus;
     }
 
     public String getBuildingCode() {
-        return buildingCode;
+        return BuildingCode;
     }
 
     public void setBuildingCode(String buildingCode) {
-        this.buildingCode = buildingCode;
+        this.BuildingCode = buildingCode;
     }
 
-    public String getBuildingName() {
-        return buildingName;
+    public String getBuilding_Long_Name() {
+        return Building_Long_Name;
     }
 
-    public void setBuildingName(String buildingName) {
-        this.buildingName = buildingName;
+    public void setBuilding_Long_Name(String building_Long_Name) {
+        this.Building_Long_Name = building_Long_Name;
     }
 
     public String getAddress() {
-        return address;
+        return Address;
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        this.Address = address;
     }
 
     public List<String> getDepartments() {
-        return departments;
+        return Departments;
     }
 
     public void setDepartments(List<String> departments) {
-        this.departments = departments;
+        this.Departments = departments;
     }
 
     public List<String> getServices() {
-        return services;
+        return Services;
     }
 
     public void setServices(List<String> services) {
-        this.services = services;
+        this.Services = services;
     }
 
     public List<List<List<Double>>> getCoordinates() {
@@ -142,17 +145,17 @@ public class Building extends Place {
     }
 
     public String getServicesString(){
-        if(services.isEmpty()){
+        if(Services.isEmpty()){
             return "";
         }
-        return TextUtils.join(", ", services);
+        return TextUtils.join(", ", Services);
     }
 
     public String getDepartmentsString(){
-        if(departments.isEmpty()){
+        if(Departments.isEmpty()){
             return "";
         }
-        return TextUtils.join(", ", departments);
+        return TextUtils.join(", ", Departments);
     }
 
     public JSONObject getGeoJson(){
@@ -161,7 +164,7 @@ public class Building extends Place {
         JSONObject geometry = new JSONObject();
 
         try{
-            properties.put("code", buildingCode);
+            properties.put("code", BuildingCode);
             if(centerCoordinates!=null) properties.put("center", ""+centerCoordinates[0]+", "+centerCoordinates[1]);
             if(height!=null) properties.put("height", height);
             if(width!=null) properties.put("width", width);

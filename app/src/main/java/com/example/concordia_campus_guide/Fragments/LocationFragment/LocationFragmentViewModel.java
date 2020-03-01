@@ -206,13 +206,13 @@ public class LocationFragmentViewModel extends ViewModel {
         this.buildings = buildings;
     }
     public LatLng getInitialZoomLocation(){
-                return buildings.get("EV").getCenterCoordinates();
+                return new LatLng(buildings.get("EV").getCenterCoordinates()[0], buildings.get("EV").getCenterCoordinates()[1]);
     }
     public LatLng getLoyolaZoomLocation(){
-        return buildings.get("VL").getCenterCoordinates();
+        return new LatLng(buildings.get("VL").getCenterCoordinates()[0], buildings.get("VL").getCenterCoordinates()[1]);
     }
     public LatLng getSGWZoomLocation(){
-        return buildings.get("H").getCenterCoordinates();
+        return new LatLng(buildings.get("H").getCenterCoordinates()[0], buildings.get("H").getCenterCoordinates()[1]);
     }
 
 
