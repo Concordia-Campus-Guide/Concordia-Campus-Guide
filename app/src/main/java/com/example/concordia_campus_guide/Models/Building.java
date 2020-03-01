@@ -1,60 +1,51 @@
 package com.example.concordia_campus_guide.Models;
 
-
-import android.text.TextUtils;
-
 import android.text.TextUtils;
 
 import com.google.android.gms.maps.model.GroundOverlayOptions;
-import com.google.android.gms.maps.model.LatLng;
-
-import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.List;
 
-public class Building {
-
-    private Double[] centerCoordinates;
+public class Building extends Place {
+    /**
+     * These following attributes NEED to match the fields in the JSON file. Do not change them.
+     */
+    //Attributes needed to create the ground overlays [ui]
     private String[] availableFloors;
     private Float width;
     private Float height;
     private Float bearing;
+    private List<List<List<Double>>> coordinates;
+
+    //Descriptive Attributes
     private String Campus;
     private String BuildingCode;
     private String Building_Long_Name;
     private String Address;
     private List<String> Departments;
     private List<String> Services;
-    private List<List<List<Double>>> coordinates;
-    private String buildingCode;
 
     private GroundOverlayOptions groundOverlayOption;
 
-    public Building(Double[] centerCoordinates, String[] availableFloors, float width, float height, float bearing, String campus, String buildingCode, String building_Long_Name, String address, List<String> departments, List<String> services, List<List<List<Double>>> coordinates) {
-        this.centerCoordinates = centerCoordinates;
+    public Building(Double[] centerCoordinates, String[] availableFloors, float width, float height, float bearing,
+                    String campus, String buildingCode, String Building_Long_Name, String address,
+                    List<String> departments, List<String> services, List<List<List<Double>>> coordinates) {
+        super(centerCoordinates);
         this.availableFloors = availableFloors;
         this.width = width;
         this.height = height;
         this.Campus = campus;
         this.BuildingCode = buildingCode;
-        this.Building_Long_Name = building_Long_Name;
+        this.Building_Long_Name = Building_Long_Name;
         this.Address = address;
         this.Departments = departments;
         this.Services = services;
         this.bearing = bearing;
         this.coordinates = coordinates;
-            this.groundOverlayOption = null;
-    }
-
-    public LatLng getCenterCoordinates() {
-        return new LatLng(centerCoordinates[0], centerCoordinates[1]);
-    }
-
-    public void setCenterCoordinates(LatLng centerCoordinates) {
-        this.centerCoordinates = new Double[]{ (double)centerCoordinates.latitude, (double)centerCoordinates.longitude };
+        this.groundOverlayOption = null;
     }
 
     public String[] getAvailableFloors() {
@@ -92,17 +83,9 @@ public class Building {
         return bearing;
     }
 
+
     public void setBearing(float bearing) {
         this.bearing = bearing;
-    }
-
-    /**
-     * Sets departments param to Departments attribute
-     *
-     * @param departments represents list of strings of department names
-     */
-    public void setDepartments(List<String> departments) {
-        Departments = departments;
     }
 
     public String getCampus() {
@@ -110,7 +93,7 @@ public class Building {
     }
 
     public void setCampus(String campus) {
-        Campus = campus;
+        this.Campus = campus;
     }
 
     public String getBuildingCode() {
@@ -118,7 +101,7 @@ public class Building {
     }
 
     public void setBuildingCode(String buildingCode) {
-        BuildingCode = buildingCode;
+        this.BuildingCode = buildingCode;
     }
 
     public String getBuilding_Long_Name() {
@@ -126,7 +109,7 @@ public class Building {
     }
 
     public void setBuilding_Long_Name(String building_Long_Name) {
-        Building_Long_Name = building_Long_Name;
+        this.Building_Long_Name = building_Long_Name;
     }
 
     public String getAddress() {
@@ -134,11 +117,15 @@ public class Building {
     }
 
     public void setAddress(String address) {
-        Address = address;
+        this.Address = address;
     }
 
     public List<String> getDepartments() {
         return Departments;
+    }
+
+    public void setDepartments(List<String> departments) {
+        this.Departments = departments;
     }
 
     public List<String> getServices() {
@@ -146,7 +133,7 @@ public class Building {
     }
 
     public void setServices(List<String> services) {
-        Services = services;
+        this.Services = services;
     }
 
     public List<List<List<Double>>> getCoordinates() {

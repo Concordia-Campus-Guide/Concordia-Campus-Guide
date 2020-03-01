@@ -68,7 +68,7 @@ public class LocationFragmentViewModel extends ViewModel {
 
     public void setBuildingGroundOverlayOptions(Building building){
         building.setGroundOverlayOption(new GroundOverlayOptions()
-                .position(building.getCenterCoordinates(), building.getWidth(), building.getHeight())
+                .position(new LatLng(building.getCenterCoordinates()[0], building.getCenterCoordinates()[1]), building.getWidth(), building.getHeight())
                 .image(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+building.getBuildingCode().toLowerCase()+"_"+building.getAvailableFloors()[building.getAvailableFloors().length-1].toLowerCase()+".png"))
                 .bearing(building.getBearing()));
     }
@@ -206,13 +206,13 @@ public class LocationFragmentViewModel extends ViewModel {
         this.buildings = buildings;
     }
     public LatLng getInitialZoomLocation(){
-                return buildings.get("EV").getCenterCoordinates();
+                return buildings.get("EV").getCenterCoordinatesLatLng();
     }
     public LatLng getLoyolaZoomLocation(){
-        return buildings.get("VL").getCenterCoordinates();
+        return buildings.get("VL").getCenterCoordinatesLatLng();
     }
     public LatLng getSGWZoomLocation(){
-        return buildings.get("H").getCenterCoordinates();
+        return buildings.get("H").getCenterCoordinatesLatLng();
     }
 
 
