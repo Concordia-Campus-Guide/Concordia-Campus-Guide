@@ -1,0 +1,343 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "stairs"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57870370149612,
+          45.49528334871586
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.294"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57865005731583,
+          45.495116015773306
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "stairs"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57870370149612,
+          45.49506901204833
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.347"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57877612113953,
+          45.494997566311206
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.345"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.5788244009018,
+          45.49503328919109
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.210"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57895582914352,
+          45.49517242019154
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "stairs"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57904970645905,
+          45.49543375992525
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.115"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57937693595886,
+          45.49536419479084
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.434"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57925355434416,
+          45.49538111604765
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "stairs"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57931524515152,
+          45.49534351324784
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.494"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57936084270477,
+          45.495313430989874
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.437"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57928037643433,
+          45.49525702671291
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.432"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57922673225403,
+          45.49529838985487
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.301"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57916235923767,
+          45.49527206785894
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "womens"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57917577028275,
+          45.49533223240299
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.132"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.5791677236557,
+          45.495362314650876
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.130"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57912480831146,
+          45.49538675646546
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.134"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57908725738525,
+          45.49537547562928
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.424"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57904970645905,
+          45.49534351324784
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "elevators"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57906579971313,
+          45.49529462957051
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "elevators"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57902556657791,
+          45.49527206785894
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.310"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57896387577057,
+          45.495277708287695
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "stairs"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57916504144669,
+          45.4952025025248
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.335"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57912480831146,
+          45.49518370106838
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.309"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.5791140794754,
+          45.4952401054188
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.315"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57906848192215,
+          45.4952231841196
+        ]
+      }
+    }
+  ]
+}

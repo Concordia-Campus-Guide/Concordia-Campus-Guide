@@ -1,0 +1,426 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "stairs"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57870370149612,
+          45.49528334871586
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.294"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57867687940598,
+          45.49514045769481
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "stairs"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57878953218459,
+          45.49510473488291
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.347"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57879489660263,
+          45.49504833039692
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.345"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57882708311081,
+          45.495059611298636
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.210"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57888609170914,
+          45.49517242019154
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.301"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57916504144669,
+          45.49524386570682
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "elevators"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.5789906978607,
+          45.49526266714314
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.310"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57897460460663,
+          45.495241985562835
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.335"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.5790953040123,
+          45.495185581214294
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.309"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57907384634018,
+          45.49520626281534
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.315"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57903897762299,
+          45.49518746136017
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "stairs"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57912480831146,
+          45.495213783395656
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "elevators"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.579041659832,
+          45.49528334871586
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "stairs"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57885926961899,
+          45.49527206785894
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.338"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57903361320496,
+          45.495215663540556
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.424"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.5790765285492,
+          45.49529838985487
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.134"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57910871505737,
+          45.49531531113147
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 1.437
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57922941446304,
+          45.49519310179736
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "mens"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57921868562698,
+          45.495277708287695
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "womens"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57916235923767,
+          45.49530967070648
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomnumber": "1.132"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57918113470078,
+          45.49532095155587
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomnumber": "1.130"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57914358377457,
+          45.49534727352894
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "1.494"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57932597398758,
+          45.49532095155587
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomnumber": "1.132"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57918113470078,
+          45.49532095155587
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomnumber": "1.130"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57914358377457,
+          45.49534727352894
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 1.115
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57932597398758,
+          45.49532095155587
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 1.494
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57933133840561,
+          45.49524950613837
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": "stairs"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57929110527039,
+          45.495307790564716
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 1.434
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57925355434416,
+          45.49533223240299
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": "stairs"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57895314693451,
+          45.495369835210354
+        ]
+      }
+    }
+  ]
+}

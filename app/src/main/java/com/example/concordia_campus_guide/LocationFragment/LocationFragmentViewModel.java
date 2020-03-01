@@ -95,7 +95,7 @@ public class LocationFragmentViewModel extends ViewModel {
      * @param layer the GeoJson layer containing features to style.
      * @param map the google map where layer will be displayed and markers will be added.
      */
-    private void setPolygonStyle(GeoJsonLayer layer, GoogleMap map, Context context){
+    public void setPolygonStyle(GeoJsonLayer layer, GoogleMap map, Context context){
         for (GeoJsonFeature feature : layer.getFeatures()){
             feature.setPolygonStyle(getPolygonStyle());
 
