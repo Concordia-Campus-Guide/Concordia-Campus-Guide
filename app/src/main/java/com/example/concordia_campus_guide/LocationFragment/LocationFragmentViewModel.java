@@ -10,6 +10,8 @@ import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.GroundOverlay;
+import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -19,11 +21,13 @@ import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 import org.json.JSONException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import static java.lang.Double.parseDouble;
 
 public class LocationFragmentViewModel extends ViewModel {
-
+    private HashMap<String, GroundOverlayOptions> buildingsGroundOverlays = new HashMap<>();
     /**
      * @return return the map style
      */
@@ -54,14 +58,28 @@ public class LocationFragmentViewModel extends ViewModel {
         GeoJsonLayer layer = null;
         try {
             layer = new GeoJsonLayer(map, R.raw.buildingcoordinates, applicationContext);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
         return layer;
     }
 
+    /**
+     * Generate the hall building overlays
+     * @return the generate ground overlay option
+     */
+    public void getBuildingOverlay( GeoJsonFeature feature){
+        String[] coordinates = feature.getProperty("center").split(", ");
+        LatLng centerPos = new LatLng(parseDouble(coordinates[1]), parseDouble(coordinates[0]));
+        String[] floorsAvailable = feature.getProperty("floorsAvailable").split(",");
+        buildingsGroundOverlays.put(feature.getProperty("code"), new GroundOverlayOptions()
+                .position(centerPos, Float.parseFloat(feature.getProperty("width")), Float.parseFloat(feature.getProperty("height")))
+                .image(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+feature.getProperty("code").toLowerCase()+"_"+floorsAvailable[floorsAvailable.length-1].toLowerCase()+".png"))
+                .bearing(Float.parseFloat(feature.getProperty("bearing"))));
+    }
+    public HashMap<String, GroundOverlayOptions> getBuildingGroundOverlays(){
+        return buildingsGroundOverlays;
+    }
 
     /**
      * @param layer the GeoJson layer containing features to style.
@@ -70,9 +88,13 @@ public class LocationFragmentViewModel extends ViewModel {
     private void setPolygonStyle(GeoJsonLayer layer, GoogleMap map, Context context){
         for (GeoJsonFeature feature : layer.getFeatures()){
             feature.setPolygonStyle(getPolygonStyle());
+
+            if(feature.getProperty("floorsAvailable") != null)
+                getBuildingOverlay(feature);
+
             String[] coordinates = feature.getProperty("center").split(", ");
             LatLng centerPos = new LatLng(parseDouble(coordinates[1]), parseDouble(coordinates[0]));
-            addMarker(map, centerPos, feature.getProperty("code"), context);
+            addBuildingMarker(map, centerPos, feature.getProperty("code"), context);
         }
     }
 
@@ -82,7 +104,7 @@ public class LocationFragmentViewModel extends ViewModel {
      * @param centerPos is the latitude and longitude of the building's center
      * @param buildingLabel is the Building on which the method will add a marker
      */
-    private void addMarker(GoogleMap map, LatLng centerPos, String buildingLabel, Context context) {
+    private void addBuildingMarker(GoogleMap map, LatLng centerPos, String buildingLabel, Context context) {
         Marker marker = map.addMarker(
                 new MarkerOptions()
                         .position(centerPos)
@@ -90,6 +112,8 @@ public class LocationFragmentViewModel extends ViewModel {
                         .flat(true)
                         .anchor(0.5f,0.5f)
                         .alpha(0.90f)
+                        //This line should be included whenever we test the UI for the marker:
+                        //.title(buildingCode.toString())
         );
         marker.setTag(buildingLabel);
     }
@@ -115,6 +139,24 @@ public class LocationFragmentViewModel extends ViewModel {
         return  smallMarkerIcon;
     }
 
+//    /**
+//     * Add classroom markers to map
+//     * @param map
+//     * @param centerPos
+//     * @param classNumber
+//     */
+//    private void addClassroomMarker(GoogleMap map, LatLng centerPos, String classNumber) {
+//        Marker marker = map.addMarker(
+//                new MarkerOptions()
+//                        .position(centerPos)
+//                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.h))
+//                        .flat(true)
+//                        .anchor(0.5f,0.5f)
+//                        .alpha(0.0f)
+//        );
+//        marker.setTag(classNumber);
+//    }
+
     /**
      * The purpose of this method is the polygons style after setting their
      * FillColor, StrokeColor and StrokeWidth
@@ -129,4 +171,7 @@ public class LocationFragmentViewModel extends ViewModel {
     }
 
 
+    public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, Context context) {
+        groundOverlay.setImage(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+buildingCode.toLowerCase()+"_"+floor.toLowerCase()+".png"));
+    }
 }

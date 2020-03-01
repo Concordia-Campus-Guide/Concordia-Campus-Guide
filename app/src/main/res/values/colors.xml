@@ -5,6 +5,7 @@
     <color name="colorAppTheme">#932339</color>
     <color name="colorAccent">#E0E0E0</color>
     <color name="toolbarIconColor">#FFFFFF</color>
+    <color name="floorPickerTextColor">#FFFFFF</color>
     <color name="loginPageBackgroundColor">#FFFFFF</color>
     <color name="productGridBackgroundColor">#FFFFFF</color>
 </resources>
