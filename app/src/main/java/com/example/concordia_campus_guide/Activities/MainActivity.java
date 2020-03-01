@@ -12,8 +12,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.concordia_campus_guide.InfoCardFragment.InfoCardFragment;
-
 import com.example.concordia_campus_guide.R;
+import com.example.concordia_campus_guide.SearchActivity;
 
 public class MainActivity extends AppCompatActivity {
 
