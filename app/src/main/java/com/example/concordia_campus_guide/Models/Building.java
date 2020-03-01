@@ -160,7 +160,7 @@ public class Building {
             if(height!=null) properties.put("height", height);
             if(width!=null) properties.put("width", width);
             if(bearing!=null) properties.put("bearing", bearing);
-            if(availableFloors!=null) properties.put("floorsAvailable", TextUtils.join(", ", availableFloors));
+            if(availableFloors!=null) properties.put("floorsAvailable", TextUtils.join(",", availableFloors));
 
             if(coordinates==null) return null;
 
