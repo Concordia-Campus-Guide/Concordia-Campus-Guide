@@ -13,6 +13,10 @@ public class Place {
         return centerCoordinates;
     }
 
+    public LatLng getCenterCoordinatesLatLng() {
+        return new LatLng(centerCoordinates[0], centerCoordinates[1]);
+    }
+
     public void setCenterCoordinates(Double[] centerCoordinates) {
         this.centerCoordinates = centerCoordinates;
     }
