@@ -10,5 +10,6 @@
     <color name="productGridBackgroundColor">#FFFFFF</color>
     <color name="textColor">#FFFFFF</color>
     <color name="divider">#DEBCC0</color>
+    <color name="backgroundGrey">#E5E5E5</color>
 
 </resources>
