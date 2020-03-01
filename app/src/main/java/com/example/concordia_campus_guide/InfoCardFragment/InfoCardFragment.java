@@ -82,20 +82,19 @@ public class InfoCardFragment extends Fragment {
         System.out.println("Text is: " + text);
         if(text.isEmpty())
             services.setVisibility(View.GONE);
-
         else
             servicesList.setText(text);
     }
 
     private void setBuildingImage(String buildingCode){
         try{
-            InputStream inputStream = getActivity().getAssets().open("buildings_images/"+buildingCode+".jpg");
+            InputStream inputStream = getActivity().getAssets().open("buildings_images/"+ buildingCode +".jpg");
             Drawable d = Drawable.createFromStream(inputStream, null);
             buildingImage.setImageDrawable(d);
         }
         catch(Exception e){
             try{
-                InputStream inputStream = getActivity().getAssets().open("buildings_images/"+buildingCode+".PNG");
+                InputStream inputStream = getActivity().getAssets().open("buildings_images/"+ buildingCode +".PNG");
                 Drawable d = Drawable.createFromStream(inputStream, null);
                 buildingImage.setImageDrawable(d);
             }
