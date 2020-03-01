@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -35,6 +36,9 @@ public class InfoCardFragment extends Fragment {
     private LinearLayout services;
     private LinearLayout departments;
 
+    private Button directionsBt;
+    private Button inddorMapBt;
+
     /**
      * Defines the view and initializes text views of the view
      *
@@ -49,13 +53,15 @@ public class InfoCardFragment extends Fragment {
         buildingCode = this.getArguments().getString("buildingCode");
         View view = inflater.inflate(R.layout.info_card_fragment, container, false);
 
-        infoCardTitle = (TextView) view.findViewById(R.id.info_card_title);
-        buildingAddress = (TextView) view.findViewById(R.id.building_address);
-        departmentsList = (TextView) view.findViewById(R.id.departments_list);
-        servicesList = (TextView) view.findViewById(R.id.services_list);
-        buildingImage = (ImageView) view.findViewById(R.id.building_image);
+        infoCardTitle = view.findViewById(R.id.info_card_title);
+        buildingAddress = view.findViewById(R.id.building_address);
+        departmentsList = view.findViewById(R.id.departments_list);
+        servicesList = view.findViewById(R.id.services_list);
+        buildingImage = view.findViewById(R.id.building_image);
         services = view.findViewById(R.id.services);
         departments = view.findViewById(R.id.departments);
+        directionsBt = view.findViewById(R.id.directions);
+        inddorMapBt = view.findViewById(R.id.indoor_map);
         return view;
     }
 
@@ -135,5 +141,7 @@ public class InfoCardFragment extends Fragment {
         }
 
     }
+
+
 
 }

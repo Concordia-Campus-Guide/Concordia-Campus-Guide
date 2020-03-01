@@ -19,8 +19,6 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
     InfoCardFragment infoCardFragment;
     private BottomSheetBehavior swipeableInfoCard;
-    private Button directions;
-    private Button inddor_map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +28,6 @@ public class MainActivity extends AppCompatActivity {
 
         View infoCard = findViewById(R.id.info_card);
         swipeableInfoCard = BottomSheetBehavior.from(infoCard);
-
-        directions = findViewById(R.id.directions);
-        inddor_map = findViewById(R.id.indoor_map);
     }
 
     /**
