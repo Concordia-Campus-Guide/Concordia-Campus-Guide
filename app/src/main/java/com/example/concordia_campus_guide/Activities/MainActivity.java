@@ -37,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
         inddor_map = findViewById(R.id.indoor_map);
     }
 
+    /**
+     * Show the info card fragment in the view
+     */
     public void showInfoCard(String buildingCode){
         if(infoCardFragment!=null){
             hideInfoCard();
@@ -62,12 +65,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Hides the info card fragment from the view.
+     */
     public void hideInfoCard(){
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.remove(infoCardFragment);
         fragmentTransaction.commit();
     }
 
+    /**
+     * Defines the desired behavior on backpress
+     */
     @Override
     public void onBackPressed(){
         Fragment fragment = fragmentManager.findFragmentById(R.id.info_card_frame);

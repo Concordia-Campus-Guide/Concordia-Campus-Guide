@@ -35,6 +35,14 @@ public class InfoCardFragment extends Fragment {
     private LinearLayout services;
     private LinearLayout departments;
 
+    /**
+     * Defines the view and initializes text views of the view
+     *
+     * @param inflater: the LayoutInflater as specified in Android docs
+     * @param container: the ViewGroup as specified in Android docs
+     * @param savedInstanceState: the Bundle as specified in Android docs
+     *
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -51,6 +59,13 @@ public class InfoCardFragment extends Fragment {
         return view;
     }
 
+     /**
+     * Defines the behavior expected after the activity is created, such as initialization of
+     * the view
+     *
+     * @param savedInstanceState: the Bundle as specified in Android docs
+     *
+     */
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
@@ -60,6 +75,10 @@ public class InfoCardFragment extends Fragment {
         setInfoCard();
     }
 
+    /**
+     * Initializes specifics of info card view such as building name, address, building image,
+     * services, departements
+     */
     private void setInfoCard(){
         infoCardTitle.setText(building.getBuilding_Long_Name());
         buildingAddress.setText(building.getAddress());
@@ -68,6 +87,9 @@ public class InfoCardFragment extends Fragment {
         setBuildingImage(buildingCode);
     }
 
+    /**
+     * Intializes the department list text to be displayed
+     */
     private void setDepartmentsList(){
         String text = building.getDepartmentsString();
 
@@ -77,6 +99,9 @@ public class InfoCardFragment extends Fragment {
             departmentsList.setText(text);
     }
 
+    /**
+     * Intializes the services list text to be displayed
+     */
     private void setServicesList() {
         String text = building.getServicesString();
         System.out.println("Text is: " + text);
@@ -86,6 +111,9 @@ public class InfoCardFragment extends Fragment {
             servicesList.setText(text);
     }
 
+    /**
+     * Intializes the building image to the image view
+     */
     private void setBuildingImage(String buildingCode){
         try{
             InputStream inputStream = getActivity().getAssets().open("buildings_images/"+ buildingCode +".jpg");
