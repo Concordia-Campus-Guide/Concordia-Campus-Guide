@@ -174,4 +174,5 @@ public class LocationFragmentViewModel extends ViewModel {
     public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, Context context) {
         groundOverlay.setImage(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+buildingCode.toLowerCase()+"_"+floor.toLowerCase()+".png"));
     }
+
 }
