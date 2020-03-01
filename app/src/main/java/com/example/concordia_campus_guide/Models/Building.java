@@ -1,31 +1,56 @@
 package com.example.concordia_campus_guide.Models;
 
 
+import android.text.TextUtils;
+
 import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.JsonObject;
+
+import java.util.List;
 
 public class Building {
 
-    private LatLng centerCoordinates;
+    private Float[] centerCoordinates;
     private String[] availableFloors;
-    private String buildingCode;
     private float width;
     private float height;
-    private BuildingInfo buildingInformation;
+    private float bearing;
+    private String Campus;
+    private String BuildingCode;
+    private String Building_Long_Name;
+    private String Address;
+    private List<String> Departments;
+    private List<String> Services;
+    private List<List<List<Float>>> coordinates;
 
-    public Building(LatLng centerCoordinates, String[] availableFloors, String buildingCode, float width, float height) {
+    public Building(Float[] centerCoordinates, String[] availableFloors, float width, float height, String campus, String buildingCode, String building_Long_Name, String address, List<String> departments, List<String> services, List<List<List<Float>>> coordinates) {
         this.centerCoordinates = centerCoordinates;
         this.availableFloors = availableFloors;
-        this.buildingCode = buildingCode;
         this.width = width;
         this.height = height;
+        Campus = campus;
+        BuildingCode = buildingCode;
+        Building_Long_Name = building_Long_Name;
+        Address = address;
+        Departments = departments;
+        Services = services;
+        this.coordinates = coordinates;
+    }
+
+    public Building(LatLng centerPos, String[] floorsAvailable, String building_code, float building_width, float building_height) {
+        centerCoordinates = new Float[]{ (float)centerPos.latitude, (float)centerPos.longitude };
+        availableFloors = floorsAvailable;
+        BuildingCode = building_code;
+        width = building_width;
+        height = building_height;
     }
 
     public LatLng getCenterCoordinates() {
-        return centerCoordinates;
+        return new LatLng(centerCoordinates[0], centerCoordinates[1]);
     }
 
     public void setCenterCoordinates(LatLng centerCoordinates) {
-        this.centerCoordinates = centerCoordinates;
+        this.centerCoordinates = new Float[]{ (float)centerCoordinates.latitude, (float)centerCoordinates.longitude };
     }
 
     public String[] getAvailableFloors() {
@@ -34,14 +59,6 @@ public class Building {
 
     public void setAvailableFloors(String[] availableFloors) {
         this.availableFloors = availableFloors;
-    }
-
-    public String getBuildingCode() {
-        return buildingCode;
-    }
-
-    public void setBuildingCode(String buildingCode) {
-        this.buildingCode = buildingCode;
     }
 
     public float getWidth() {
@@ -58,5 +75,79 @@ public class Building {
 
     public void setHeight(float height) {
         this.height = height;
+    }
+
+    public String getCampus() {
+        return Campus;
+    }
+
+    public void setCampus(String campus) {
+        Campus = campus;
+    }
+
+    public String getBuildingCode() {
+        return BuildingCode;
+    }
+
+    public void setBuildingCode(String buildingCode) {
+        BuildingCode = buildingCode;
+    }
+
+    public String getBuilding_Long_Name() {
+        return Building_Long_Name;
+    }
+
+    public void setBuilding_Long_Name(String building_Long_Name) {
+        Building_Long_Name = building_Long_Name;
+    }
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String address) {
+        Address = address;
+    }
+
+    public List<String> getDepartments() {
+        return Departments;
+    }
+
+    public void setDepartments(List<String> departments) {
+        Departments = departments;
+    }
+
+    public List<String> getServices() {
+        return Services;
+    }
+
+    public void setServices(List<String> services) {
+        Services = services;
+    }
+
+    public List<List<List<Float>>> getCoordinates() {
+        return coordinates;
+    }
+
+    public void setCoordinates(List<List<List<Float>>> coordinates) {
+        this.coordinates = coordinates;
+    }
+
+    public String getServicesString(){
+        if(Services.isEmpty()){
+            return "";
+        }
+        return TextUtils.join(", ", Services);
+    }
+
+    public String getDepartmentsString(){
+        if(Departments.isEmpty()){
+            return "";
+        }
+        return TextUtils.join(", ", Departments);
+    }
+
+    public JsonObject toGeoJson(){
+        return null;
     }
 }

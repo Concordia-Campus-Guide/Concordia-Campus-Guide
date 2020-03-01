@@ -1,31 +1,41 @@
 package com.example.concordia_campus_guide.Models;
 
+import com.google.gson.JsonObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Buildings {
 
-    private List<BuildingInfo> Buildings;
+    private List<Building> Buildings;
 
     public Buildings(){
-        Buildings = new ArrayList<BuildingInfo>();
+        Buildings = new ArrayList<Building>();
     }
-    public List<BuildingInfo> getBuildings(){
+
+    public List<Building> getBuildings(){
         return Buildings;
     }
-    public BuildingInfo getBuilding(String buildingCode){
-        for(BuildingInfo building: Buildings){
-            if(building.getBuilding().equals(buildingCode)){
+
+    public Building getBuilding(String buildingCode){
+        for(Building building: Buildings){
+            if(building.getBuildingCode().equals(buildingCode)){
                 return building;
             }
         }
         return null;
     }
-    public Buildings(List<BuildingInfo> buildings){
+
+    public Buildings(List<Building> buildings){
         this.Buildings = buildings;
     }
-    public void setBuildings(List<BuildingInfo> buildings){
+
+    public void setBuildings(List<Building> buildings){
         this.Buildings = buildings;
+    }
+
+    public JsonObject toGeoJson(){
+        return null;
     }
 
 }

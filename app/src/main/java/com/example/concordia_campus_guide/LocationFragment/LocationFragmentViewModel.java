@@ -76,7 +76,7 @@ public class LocationFragmentViewModel extends ViewModel {
         float building_height = Float.parseFloat(feature.getProperty("height"));
         String building_code = feature.getProperty("code").toLowerCase();
 
-        return new Building(centerPos,floorsAvailable, building_code, building_width, building_height);
+        return new Building(centerPos, floorsAvailable, building_code, building_width, building_height);
     }
 
 
