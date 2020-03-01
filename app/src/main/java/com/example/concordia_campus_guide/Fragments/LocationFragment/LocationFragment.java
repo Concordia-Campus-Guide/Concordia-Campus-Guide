@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.LocationFragment;
+package com.example.concordia_campus_guide.Fragments.LocationFragment;
 
 import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProviders;
@@ -95,7 +95,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(com.example.concordia_campus_guide.LocationFragment.LocationFragmentViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel.class);
     }
 
 
@@ -117,7 +117,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                 setupPolygons(mMap);
                 initFloorPlans();
                 uiSettingsForMap(mMap);
-                zoomInLocation(45.494999, -73.577854);
+                zoomInLocation(mViewModel.getInitialZoomLocation());
             }
         });
     }
@@ -162,7 +162,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         loyolaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                zoomInLocation(45.458205, -73.640438);
+                zoomInLocation(mViewModel.getLoyolaZoomLocation());
             }
         });
     }
@@ -174,7 +174,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         sgwBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                zoomInLocation(45.494999, -73.577854);
+                zoomInLocation(mViewModel.getSGWZoomLocation());
             }
         });
     }
@@ -286,15 +286,9 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         mMap.getUiSettings().setZoomControlsEnabled(true);
     }
 
-
-    /**
-     * @param latitude is the chosen latitude on the map to zoom in
-     * @param longitude is the chosen longitude on the map to zoom in
-     */
-    private void zoomInLocation(double latitude, double longitude) {
-        LatLng curr = new LatLng(latitude,longitude);
+    private void zoomInLocation(LatLng center) {
         float zoomLevel = 18.0f;
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(curr, zoomLevel));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(center, zoomLevel));
     }
 
     /**

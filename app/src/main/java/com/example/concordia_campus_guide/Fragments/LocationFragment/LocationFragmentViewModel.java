@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.LocationFragment;
+package com.example.concordia_campus_guide.Fragments.LocationFragment;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -202,5 +202,18 @@ public class LocationFragmentViewModel extends ViewModel {
     public HashMap<String, Building> getBuildings() {
         return buildings;
     }
+    public void setBuildings(HashMap<String, Building> buildings) {
+        this.buildings = buildings;
+    }
+    public LatLng getInitialZoomLocation(){
+                return buildings.get("EV").getCenterCoordinates();
+    }
+    public LatLng getLoyolaZoomLocation(){
+        return buildings.get("VL").getCenterCoordinates();
+    }
+    public LatLng getSGWZoomLocation(){
+        return buildings.get("H").getCenterCoordinates();
+    }
+
 
 }

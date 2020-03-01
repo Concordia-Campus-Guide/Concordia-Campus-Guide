@@ -2,7 +2,6 @@ package com.example.concordia_campus_guide.Activities;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -10,7 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.concordia_campus_guide.InfoCardFragment.InfoCardFragment;
+import com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragment;
 import com.example.concordia_campus_guide.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
