@@ -1,0 +1,85 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "mens"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates" : [-73.57875902205706, 45.4973251465936]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "womens"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates" : [-73.57902523130178, 45.49745816170439]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "elevator"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates" : [-73.57897024601698, 45.4973972944047]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "stairs"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates" : [-73.57901651412249, 45.4974099848896]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "867"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates" : [-73.57904501259327, 45.49759846175456]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "838"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates" : [-73.57907216995955, 45.49716392997806]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "837"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates" : [-73.57903897762299, 45.49702785903522]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "825"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates" : [-73.57865910977125, 45.49712726840923]
+      }
+    }
+  ]
+}
