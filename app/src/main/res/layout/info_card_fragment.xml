@@ -1,205 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/info_card_frame"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#48B9B6B8"
-    android:gravity="bottom|center_horizontal">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/info_card"
+    <TextView
+        android:id="@+id/info_card_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/rounded_corners"
-        app:behavior_hideable="true"
-        app:behavior_peekHeight="120dp"
-        app:layout_behavior="@string/bottom_sheet_behavior">
+        android:drawableTop="@drawable/ic_line_grey"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:text="TextView"
+        android:textAllCaps="false"
+        android:textColor="#932339"
+        android:textColorHighlight="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textColorLink="#FFFFFF"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30sp"
+        android:layout_marginEnd="30sp"
+        android:layout_marginBottom="10sp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/directions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15sp"
+            android:layout_weight="1"
+            android:backgroundTint="#C85563"
+            android:drawableLeft="@drawable/ic_directions_black_24dp"
+            android:elegantTextHeight="false"
+            android:elevation="10dp"
+            android:minHeight="23dip"
+            android:text="Directions"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            app:iconPadding="5dp" />
+
+        <Button
+            android:id="@+id/indoor_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15sp"
+            android:layout_weight="1"
+            android:backgroundTint="#C85563"
+            android:drawableLeft="@drawable/ic_layers_black_24dp"
+            android:minHeight="23dip"
+            android:text="Indoor Map"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            app:iconPadding="5dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_weight="0"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/building_image"
+            android:layout_width="170dp"
+            android:layout_height="168dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            tools:srcCompat="@tools:sample/avatars[2]" />
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="6">
+
+            <ImageView
+                android:id="@+id/red_pin"
+                android:layout_width="11dp"
+                android:layout_height="19dp"
+                android:layout_marginEnd="8dp"
+                app:srcCompat="@drawable/red_pin" />
+
+            <TextView
+                android:id="@+id/building_address"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="5"
+                android:text="TextView"
+                android:textColor="#C85563"
+                android:textColorHighlight="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:textColorLink="#FFFFFF" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="15dp"
+            android:background="#DEBCC0"
+            android:backgroundTint="#DEBCC0"
+            tools:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/departments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/info_card_title"
+                android:id="@+id/departments_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableTop="@drawable/ic_line_grey"
                 android:gravity="center"
-                android:paddingLeft="10dp"
-                android:paddingTop="5dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="10dp"
-                android:text="TextView"
-                android:textAllCaps="false"
+                android:text="Departments"
                 android:textColor="#932339"
                 android:textColorHighlight="#FFFFFF"
                 android:textColorHint="#FFFFFF"
                 android:textColorLink="#FFFFFF"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/departments_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30sp"
-                android:layout_marginEnd="30sp"
-                android:layout_marginBottom="10sp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/directions"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="15sp"
-                    android:layout_weight="1"
-                    android:backgroundTint="#C85563"
-                    android:drawableLeft="@drawable/ic_directions_black_24dp"
-                    android:elegantTextHeight="false"
-                    android:elevation="10dp"
-                    android:minHeight="23dip"
-                    android:text="Directions"
-                    android:textAllCaps="false"
-                    android:textColor="#FFFFFF"
-                    android:textSize="13sp"
-                    app:iconPadding="5dp" />
-
-                <Button
-                    android:id="@+id/indoor_map"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15sp"
-                    android:layout_weight="1"
-                    android:backgroundTint="#C85563"
-                    android:drawableLeft="@drawable/ic_layers_black_24dp"
-                    android:minHeight="23dip"
-                    android:text="Indoor Map"
-                    android:textAllCaps="false"
-                    android:textColor="#FFFFFF"
-                    android:textSize="13sp"
-                    app:iconPadding="5dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_weight="0"
-                android:orientation="horizontal"
-                android:visibility="visible">
-
-                <ImageView
-                    android:id="@+id/building_image"
-                    android:layout_width="170dp"
-                    android:layout_height="168dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    tools:srcCompat="@tools:sample/avatars[2]" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:weightSum="6">
-
-                    <ImageView
-                        android:id="@+id/red_pin"
-                        android:layout_width="11dp"
-                        android:layout_height="19dp"
-                        android:layout_marginEnd="8dp"
-                        app:srcCompat="@drawable/red_pin" />
-
-                    <TextView
-                        android:id="@+id/building_address"
-                        android:layout_width="80dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="10dp"
-                        android:layout_weight="5"
-                        android:text="TextView"
-                        android:textColor="#C85563"
-                        android:textColorHighlight="#FFFFFF"
-                        android:textColorHint="#FFFFFF"
-                        android:textColorLink="#FFFFFF" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/description"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:orientation="vertical">
-
-                <View
-                    android:id="@+id/divider"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="15dp"
-                    android:background="#DEBCC0"
-                    android:backgroundTint="#DEBCC0"
-                    tools:visibility="visible" />
-
-                <LinearLayout
-                    android:id="@+id/departments"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/departments_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Departments"
-                        android:textColor="#932339"
-                        android:textColorHighlight="#FFFFFF"
-                        android:textColorHint="#FFFFFF"
-                        android:textColorLink="#FFFFFF"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/departments_list"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="TextView" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/services"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/services_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center"
-                        android:text="Services"
-                        android:textColor="#932339"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/services_list"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="20dp"
-                        android:text="TextView" />
-                </LinearLayout>
-
-            </LinearLayout>
-
+                android:layout_marginTop="10dp"
+                android:text="TextView" />
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <LinearLayout
+            android:id="@+id/services"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/services_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="Services"
+                android:textColor="#932339"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/services_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:text="TextView" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
+
 
