@@ -89,6 +89,7 @@ public class InfoCardFragmentIntegrationTest {
      * @throws UiObjectNotFoundException
      * @throws InterruptedException
      */
+    @Test
     public void correctExpandedInfoCardAppearsWhenSwipingUpCardTest() throws UiObjectNotFoundException, InterruptedException {
         UiObject marker = device.findObject(new UiSelector().descriptionContains("EV"));
         marker.click();
