@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Show the info card fragment in the view
+     *
+     * @param buildingCode: the Building code
      */
     public void showInfoCard(String buildingCode){
         if(infoCardFragment!=null){
@@ -49,15 +51,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.info_card_frame, infoCardFragment);
         fragmentTransaction.commit();
-
-//        BottomSheetDialog swipeableInfoCard = new BottomSheetDialog(MainActivity.this);
-//        swipeableInfoCard.setContentView(R.layout.info_card_fragment);
-//        swipeableInfoCard.setCanceledOnTouchOutside(true);
-//
-//        Button directions = swipeableInfoCard.findViewById(R.id.directions);
-//        Button indoor_map = swipeableInfoCard.findViewById(R.id.indoor_map);
-//
-//        swipeableInfoCard.show();
 
         swipeableInfoCard.setState(BottomSheetBehavior.STATE_COLLAPSED);
 

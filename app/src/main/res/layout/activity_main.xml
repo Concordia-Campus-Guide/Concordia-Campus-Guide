@@ -35,7 +35,7 @@
             android:layout_marginEnd="10dp"
             android:background="@drawable/rounded_corners"
             app:behavior_hideable="true"
-            app:behavior_peekHeight="120dp"
+            app:behavior_peekHeight="140dp"
             app:layout_behavior="@string/bottom_sheet_behavior">
 
             <FrameLayout

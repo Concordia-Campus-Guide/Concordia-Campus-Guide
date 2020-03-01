@@ -113,6 +113,8 @@ public class InfoCardFragment extends Fragment {
 
     /**
      * Intializes the building image to the image view
+     *
+     * @param buildingCode: the Building code
      */
     private void setBuildingImage(String buildingCode){
         try{
