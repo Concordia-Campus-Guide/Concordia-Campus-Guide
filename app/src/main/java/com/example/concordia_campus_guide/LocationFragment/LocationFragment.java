@@ -1,6 +1,10 @@
 package com.example.concordia_campus_guide.LocationFragment;
 
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProviders;
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -19,7 +23,6 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
-import com.example.concordia_campus_guide.BuildingCode;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.R;
@@ -70,6 +73,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.location_fragment_fragment, container, false);
+        getLocationPermission();
         initComponent(rootView);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
@@ -131,6 +135,10 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         });
     }
 
+
+    /**
+     * The purpose of this method is to figure the style of the map to display
+     */
     private void initFloorPlans() {
         HashMap<String, GroundOverlayOptions> temp = mViewModel.getBuildingGroundOverlays();
         for(String key: temp.keySet()){
@@ -249,7 +257,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             @Override
             public boolean onMarkerClick(Marker marker) {
                 //TODO: Make function that pops up the info card for the building (via the building-code)
-                String buildingCode = ((BuildingCode) marker.getTag()).toString();
+                String buildingCode = (marker.getTag()).toString();
                 ((MainActivity)getActivity()).showInfoCard(buildingCode);
                 System.out.println(buildingCode);
                 return false;
@@ -258,6 +266,11 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         return true;
     }
 
+    /**
+     * The purpose of this method is to display the tools used with google
+     * maps such as Current Location
+     * @param map is the map used in the application
+     */
     public boolean setupClassMarkerClickListener(GoogleMap map) {
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
@@ -341,7 +354,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
         if(requestCode == ClassConstants.LOCATION_PERMISSION_REQUEST_CODE)
             myLocationPermissionsGranted = (grantResults.length > 0 &&
                     grantResults[0] == PackageManager.PERMISSION_GRANTED);
