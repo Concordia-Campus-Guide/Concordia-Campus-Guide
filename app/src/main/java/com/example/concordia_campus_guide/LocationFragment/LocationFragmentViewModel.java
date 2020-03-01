@@ -3,10 +3,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-
 import androidx.lifecycle.ViewModel;
-
-import com.example.concordia_campus_guide.BuildingCode;
 import com.example.concordia_campus_guide.Global.ApplicationState;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.R;
@@ -22,7 +19,6 @@ import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 import org.json.JSONObject;
-import org.json.JSONException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -191,78 +187,6 @@ public class LocationFragmentViewModel extends ViewModel {
      * @param buildingCode it represents which building we will be covering
      * @return Int of drawable resource's bitmap representation
      */
-    public int getIcon(BuildingCode buildingCode){
-        switch (buildingCode) {
-            case H:
-                return R.drawable.h;
-            case LB:
-                return R.drawable.lb;
-            case CJ:
-                return R.drawable.cj;
-            case AD:
-                return R.drawable.ad;
-            case CC:
-                return R.drawable.cc;
-            case EV:
-                return R.drawable.ev;
-            case FG:
-                return R.drawable.fg;
-            case GM:
-                return R.drawable.gm;
-            case MB:
-                return R.drawable.mb;
-            case FB:
-                return R.drawable.fb;
-            case SP:
-                return R.drawable.sp;
-            case BB:
-                return R.drawable.bb;
-            case FC:
-                return R.drawable.fc;
-            case DO:
-                return R.drawable.dome;
-            case GE:
-                return R.drawable.ge;
-            case HA:
-                return R.drawable.ha;
-            case HB:
-                return R.drawable.hb;
-            case HC:
-                return R.drawable.hc;
-            case BH:
-                return R.drawable.bh;
-            case JR:
-                return R.drawable.jr;
-            case PC:
-                return R.drawable.pc;
-            case PS:
-                return R.drawable.ps;
-            case PT:
-                return R.drawable.pt;
-            case PY:
-                return R.drawable.py;
-            case QA:
-                return R.drawable.qa;
-            case RA:
-                return R.drawable.ra;
-            case RF:
-                return R.drawable.rf;
-            case SC:
-                return R.drawable.sc;
-            case SH:
-                return R.drawable.sh;
-            case SI:
-                return R.drawable.si;
-            case TA:
-                return R.drawable.ta;
-            case VE:
-                return R.drawable.ve;
-            case VL:
-                return R.drawable.vl;
-            default:
-                return -1;
-        }
-    }
   
     public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, Context context) {
         groundOverlay.setImage(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+buildingCode.toLowerCase()+"_"+floor.toLowerCase()+".png"));

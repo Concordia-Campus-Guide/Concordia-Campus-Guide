@@ -16,12 +16,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.concordia_campus_guide.Global.ApplicationState;
-import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.R;
 
 import java.io.InputStream;
 
-// This class is the view (UI) related things
 public class InfoCardFragment extends Fragment {
 
     private InfoCardFragmentViewModel mViewModel;
