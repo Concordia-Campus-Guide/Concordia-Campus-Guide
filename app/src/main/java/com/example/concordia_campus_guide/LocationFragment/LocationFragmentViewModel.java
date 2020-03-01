@@ -75,21 +75,9 @@ public class LocationFragmentViewModel extends ViewModel {
         LatLng centerPos = getCenterPositionBuildingFromGeoJsonFeature(feature);
 
         String[] floorsAvailable = getFloorsFromBuildingFromGeoJsonFeature(feature);
-
-        float building_width = -1;
-
-        if(feature.getProperty("width") != null)
-            building_width = Float.parseFloat(feature.getProperty("width"));
-
-        float building_height = -1;
-
-        if(feature.getProperty("height") != null)
-            building_height  = Float.parseFloat(feature.getProperty("height"));
-
-        float building_bearing = -1;
-        if (feature.getProperty("bearing") != null)
-            building_bearing = Float.parseFloat(feature.getProperty("bearing"));
-
+        float building_width = (feature.getProperty("width") != null)? Float.parseFloat(feature.getProperty("width")): -1;
+        float building_height  = (feature.getProperty("height") != null)? Float.parseFloat(feature.getProperty("height")) : -1;
+        float building_bearing = (feature.getProperty("bearing") != null)? Float.parseFloat(feature.getProperty("bearing")) : -1;
         String building_code = feature.getProperty("code");
 
         return new Building(centerPos,floorsAvailable, building_code, building_width, building_height, building_bearing);
