@@ -11,7 +11,9 @@ public class InfoCardFragmentViewModel extends ViewModel {
     private TextView infoCardTitle;
     private TextView buildingAddress;
 
-    public Building getBuilding() { return building; }
+    public Building getBuilding() {
+        return building;
+    }
     public void setBuilding(Building building) {
         this.building = building;
     }

@@ -4,10 +4,17 @@ import android.graphics.Color;
 
 import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.LocationFragment.LocationFragmentViewModel;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.maps.android.geojson.GeoJsonPolygonStyle;
+
+
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 import org.junit.Test;
 import org.junit.Before;
 import org.mockito.MockitoAnnotations;
+
+
+
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 
@@ -38,7 +45,7 @@ public class LocationFragmentViewModelTest  {
     public void getMapStyle(){
         assertEquals(viewModel.getMapStyle(), R.raw.mapstyle_retro);
     }
-  
+
     @Test
     public void getBuildingFromGeoJsonFeatureTest(){
 

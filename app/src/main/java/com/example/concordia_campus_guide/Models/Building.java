@@ -3,7 +3,12 @@ package com.example.concordia_campus_guide.Models;
 
 import android.text.TextUtils;
 
+import android.text.TextUtils;
+
+import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
+
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -24,27 +29,24 @@ public class Building {
     private List<String> Departments;
     private List<String> Services;
     private List<List<List<Double>>> coordinates;
+    private String buildingCode;
 
-    public Building(Double[] centerCoordinates, String[] availableFloors, float width, float height, String campus, String buildingCode, String building_Long_Name, String address, List<String> departments, List<String> services, List<List<List<Double>>> coordinates) {
+    private GroundOverlayOptions groundOverlayOption;
+
+    public Building(Double[] centerCoordinates, String[] availableFloors, float width, float height, float bearing, String campus, String buildingCode, String building_Long_Name, String address, List<String> departments, List<String> services, List<List<List<Double>>> coordinates) {
         this.centerCoordinates = centerCoordinates;
         this.availableFloors = availableFloors;
         this.width = width;
         this.height = height;
-        Campus = campus;
-        BuildingCode = buildingCode;
-        Building_Long_Name = building_Long_Name;
-        Address = address;
-        Departments = departments;
-        Services = services;
+        this.Campus = campus;
+        this.BuildingCode = buildingCode;
+        this.Building_Long_Name = building_Long_Name;
+        this.Address = address;
+        this.Departments = departments;
+        this.Services = services;
+        this.bearing = bearing;
         this.coordinates = coordinates;
-    }
-
-    public Building(LatLng centerPos, String[] floorsAvailable, String building_code, float building_width, float building_height) {
-        centerCoordinates = new Double[]{ (double)centerPos.latitude, (double)centerPos.longitude };
-        availableFloors = floorsAvailable;
-        BuildingCode = building_code;
-        width = building_width;
-        height = building_height;
+            this.groundOverlayOption = null;
     }
 
     public LatLng getCenterCoordinates() {
@@ -77,6 +79,30 @@ public class Building {
 
     public void setHeight(float height) {
         this.height = height;
+    }
+
+    public GroundOverlayOptions getGroundOverlayOption() {
+        return groundOverlayOption;
+    }
+
+    public void setGroundOverlayOption(GroundOverlayOptions groundOverlayOption) {
+        this.groundOverlayOption = groundOverlayOption;
+    }
+    public float getBearing() {
+        return bearing;
+    }
+
+    public void setBearing(float bearing) {
+        this.bearing = bearing;
+    }
+
+    /**
+     * Sets departments param to Departments attribute
+     *
+     * @param departments represents list of strings of department names
+     */
+    public void setDepartments(List<String> departments) {
+        Departments = departments;
     }
 
     public String getCampus() {
@@ -113,10 +139,6 @@ public class Building {
 
     public List<String> getDepartments() {
         return Departments;
-    }
-
-    public void setDepartments(List<String> departments) {
-        Departments = departments;
     }
 
     public List<String> getServices() {
