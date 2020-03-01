@@ -5,6 +5,7 @@ import android.graphics.Color;
 import androidx.lifecycle.ViewModel;
 
 import com.example.concordia_campus_guide.BuildingCode;
+import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -66,14 +67,24 @@ public class LocationFragmentViewModel extends ViewModel {
      * @return the generate ground overlay option
      */
     public void getBuildingOverlay( GeoJsonFeature feature){
+        Building building = getBuilding(feature);
+        buildingsGroundOverlays.put(feature.getProperty("code"), new GroundOverlayOptions()
+                .position(building.getCenterCoordinates(), building.getWidth(), building.getHeight())
+                .image(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+building.getBuildingCode()+"_"+building.getAvailableFloors()[building.getAvailableFloors().length-1].toLowerCase()+".png"))
+                .bearing(Float.parseFloat(feature.getProperty("bearing"))));
+    }
+
+    public Building getBuilding(GeoJsonFeature feature){
         String[] coordinates = feature.getProperty("center").split(", ");
         LatLng centerPos = new LatLng(parseDouble(coordinates[1]), parseDouble(coordinates[0]));
         String[] floorsAvailable = feature.getProperty("floorsAvailable").split(",");
-        buildingsGroundOverlays.put(feature.getProperty("code"), new GroundOverlayOptions()
-                .position(centerPos, Float.parseFloat(feature.getProperty("width")), Float.parseFloat(feature.getProperty("height")))
-                .image(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+feature.getProperty("code").toLowerCase()+"_"+floorsAvailable[floorsAvailable.length-1].toLowerCase()+".png"))
-                .bearing(Float.parseFloat(feature.getProperty("bearing"))));
+        float building_width = Float.parseFloat(feature.getProperty("width"));
+        float building_height = Float.parseFloat(feature.getProperty("height"));
+        String building_code = feature.getProperty("code").toLowerCase();
+        return new Building(centerPos,floorsAvailable, building_code, building_width, building_height);
     }
+
+
     public HashMap<String, GroundOverlayOptions> getBuildingGroundOverlays(){
         return buildingsGroundOverlays;
     }
@@ -145,27 +156,6 @@ public class LocationFragmentViewModel extends ViewModel {
         geoJsonPolygonStyle.setStrokeWidth(6);
         return geoJsonPolygonStyle;
     }
-
-    public ArrayList<String> getFloorsAvailable(BuildingCode buildingCode){
-        ArrayList<String> floorsAvailable = new ArrayList<>();
-        switch(buildingCode){
-            case H:
-                floorsAvailable.add("hall_9");
-                floorsAvailable.add("hall_8");
-                return floorsAvailable;
-            case MB:
-                floorsAvailable.add("mb_1");
-                floorsAvailable.add("mb_S2");
-                return floorsAvailable;
-            case VL:
-                floorsAvailable.add("vl_2");
-                floorsAvailable.add("vl_1");
-            default:
-                return floorsAvailable;
-        }
-    }
-
-
     /**
      * @param buildingCode it represents which building we will be covering
      * @return Int of drawable resource's bitmap representation
