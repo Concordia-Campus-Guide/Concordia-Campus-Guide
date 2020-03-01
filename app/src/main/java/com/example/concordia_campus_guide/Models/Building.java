@@ -1,130 +1,140 @@
 package com.example.concordia_campus_guide.Models;
 
+
 import android.text.TextUtils;
+
+import com.google.android.gms.maps.model.LatLng;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.List;
 
 public class Building {
 
+    private Double[] centerCoordinates;
+    private String[] availableFloors;
+    private Float width;
+    private Float height;
+    private Float bearing;
     private String Campus;
-    private String Building_Code;
+    private String BuildingCode;
     private String Building_Long_Name;
     private String Address;
     private List<String> Departments;
     private List<String> Services;
+    private List<List<List<Double>>> coordinates;
 
-    /**
-     * Constructor
-     */
-    public Building(){
-    }
-
-    /**
-     * Constructor
-     */
-    public Building(String campus, String buildingCode, String building_Long_Name, String address, List<String> departments, List<String> services){
-        this.Address = address;
-        this.Campus = campus;
-        this.Building_Code = buildingCode;
-        this.Building_Long_Name = building_Long_Name;
-        this.Departments = departments;
-        this.Services = services;
-    }
-
-    /**
-     * Sets departments param to Departments attribute
-     *
-     * @param departments represents list of strings of department names
-     */
-    public void setDepartments(List<String> departments) {
-        Departments = departments;
-    }
-
-    /**
-     * Sets services param to Services attribute
-     *
-     * @param services represents list of strings of service names
-     */
-    public void setServices(List<String> services) {
-        Services = services;
-    }
-
-    /**
-     * Sets campus param to Departments attribute
-     *
-     * @param campus represents string campus name
-     */
-    public void setCampus(String campus) {
+    public Building(Double[] centerCoordinates, String[] availableFloors, float width, float height, String campus, String buildingCode, String building_Long_Name, String address, List<String> departments, List<String> services, List<List<List<Double>>> coordinates) {
+        this.centerCoordinates = centerCoordinates;
+        this.availableFloors = availableFloors;
+        this.width = width;
+        this.height = height;
         Campus = campus;
-    }
-
-    /**
-     * Sets building_Code param to Building_Code attribute
-     *
-     * @param building_Code represents string of building code
-     */
-    public void setBuilding_Code(String building_Code) {
-        Building_Code = building_Code;
-    }
-
-    /**
-     * Sets building_Long_Name param to building_Long_Name attribute
-     *
-     * @param building_Long_Name represents string of building long name
-     */
-    public void setBuilding_Long_Name(String building_Long_Name) {
+        BuildingCode = buildingCode;
         Building_Long_Name = building_Long_Name;
-    }
-
-    /**
-     * Sets address param to Address attribute
-     *
-     * @param address represents string of address
-     */
-    public void setAddress(String address) {
         Address = address;
+        Departments = departments;
+        Services = services;
+        this.coordinates = coordinates;
     }
 
-    /**
-     * @return campus as string
-     */
+    public Building(LatLng centerPos, String[] floorsAvailable, String building_code, float building_width, float building_height) {
+        centerCoordinates = new Double[]{ (double)centerPos.latitude, (double)centerPos.longitude };
+        availableFloors = floorsAvailable;
+        BuildingCode = building_code;
+        width = building_width;
+        height = building_height;
+    }
+
+    public LatLng getCenterCoordinates() {
+        return new LatLng(centerCoordinates[0], centerCoordinates[1]);
+    }
+
+    public void setCenterCoordinates(LatLng centerCoordinates) {
+        this.centerCoordinates = new Double[]{ (double)centerCoordinates.latitude, (double)centerCoordinates.longitude };
+    }
+
+    public String[] getAvailableFloors() {
+        return availableFloors;
+    }
+
+    public void setAvailableFloors(String[] availableFloors) {
+        this.availableFloors = availableFloors;
+    }
+
+    public float getWidth() {
+        return width;
+    }
+
+    public void setWidth(float width) {
+        this.width = width;
+    }
+
+    public float getHeight() {
+        return height;
+    }
+
+    public void setHeight(float height) {
+        this.height = height;
+    }
+
     public String getCampus() {
         return Campus;
     }
 
-    /**
-     * @return building code as string
-     */
-    public String getBuilding_Code() {
-        return Building_Code;
+    public void setCampus(String campus) {
+        Campus = campus;
     }
 
-    /**
-     * @return building long name as string
-     */
+    public String getBuildingCode() {
+        return BuildingCode;
+    }
+
+    public void setBuildingCode(String buildingCode) {
+        BuildingCode = buildingCode;
+    }
+
     public String getBuilding_Long_Name() {
         return Building_Long_Name;
     }
 
-    /**
-     * @return building address as string
-     */
+    public void setBuilding_Long_Name(String building_Long_Name) {
+        Building_Long_Name = building_Long_Name;
+    }
+
     public String getAddress() {
         return Address;
     }
 
-    /**
-     * @return services as list of strings
-     */
+    public void setAddress(String address) {
+        Address = address;
+    }
+
+    public List<String> getDepartments() {
+        return Departments;
+    }
+
+    public void setDepartments(List<String> departments) {
+        Departments = departments;
+    }
+
     public List<String> getServices() {
         return Services;
     }
 
-    /**
-     * Returns services joined in a string for easy display
-     *
-     * @return string of all services joined by comma ", "
-     */
+    public void setServices(List<String> services) {
+        Services = services;
+    }
+
+    public List<List<List<Double>>> getCoordinates() {
+        return coordinates;
+    }
+
+    public void setCoordinates(List<List<List<Double>>> coordinates) {
+        this.coordinates = coordinates;
+    }
+
     public String getServicesString(){
         if(Services.isEmpty()){
             return "";
@@ -132,22 +142,39 @@ public class Building {
         return TextUtils.join(", ", Services);
     }
 
-    /**
-     * @return departments as list of strings
-     */
-    public List<String> getDepartments() {
-        return Departments;
-    }
-
-    /**
-     * Returns departments joined in a string for easy display
-     *
-     * @return string of all departments joined by comma ", "
-     */
     public String getDepartmentsString(){
         if(Departments.isEmpty()){
             return "";
         }
         return TextUtils.join(", ", Departments);
+    }
+
+    public JSONObject getGeoJson(){
+        JSONObject toReturn = new JSONObject();
+        JSONObject properties = new JSONObject();
+        JSONObject geometry = new JSONObject();
+
+        try{
+            properties.put("code", BuildingCode);
+            if(centerCoordinates!=null) properties.put("center", ""+centerCoordinates[0]+", "+centerCoordinates[1]);
+            if(height!=null) properties.put("height", height);
+            if(width!=null) properties.put("width", width);
+            if(bearing!=null) properties.put("bearing", bearing);
+            if(availableFloors!=null) properties.put("floorsAvailable", TextUtils.join(",", availableFloors));
+
+            if(coordinates==null) return null;
+
+            geometry.put("type", "Polygon");
+            geometry.put("coordinates", new JSONArray(coordinates));
+
+            toReturn.put("type", "Feature");
+            toReturn.put("properties", properties);
+            toReturn.put("geometry", geometry);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return toReturn;
     }
 }
