@@ -5,6 +5,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 
 import androidx.lifecycle.ViewModel;
+
+import com.example.concordia_campus_guide.Global.ApplicationState;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.GoogleMap;
@@ -18,6 +20,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
+import org.json.JSONObject;
 import org.json.JSONException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -57,8 +60,9 @@ public class LocationFragmentViewModel extends ViewModel {
         GeoJsonLayer layer = null;
 
         try {
-            layer = new GeoJsonLayer(map, R.raw.buildingcoordinates, applicationContext);
-        } catch (IOException | JSONException e) {
+            JSONObject geoJsonLayer = ApplicationState.getInstance(applicationContext).getBuildings().getGeoJson();
+            layer = new GeoJsonLayer(map, geoJsonLayer);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return layer;
@@ -72,21 +76,20 @@ public class LocationFragmentViewModel extends ViewModel {
     }
 
     public Building getBuildingFromGeoJsonFeature(GeoJsonFeature feature){
-        LatLng centerPos = getCenterPositionBuildingFromGeoJsonFeature(feature);
+        Double[] centerPos = getCenterPositionBuildingFromGeoJsonFeature(feature);
 
         String[] floorsAvailable = getFloorsFromBuildingFromGeoJsonFeature(feature);
         float building_width = (feature.getProperty("width") != null)? Float.parseFloat(feature.getProperty("width")): -1;
         float building_height  = (feature.getProperty("height") != null)? Float.parseFloat(feature.getProperty("height")) : -1;
         float building_bearing = (feature.getProperty("bearing") != null)? Float.parseFloat(feature.getProperty("bearing")) : -1;
         String building_code = feature.getProperty("code");
-
-        return new Building(centerPos,floorsAvailable, building_code, building_width, building_height, building_bearing);
+        return new Building(centerPos, floorsAvailable, building_width, building_height, building_bearing, null, building_code, null, null, null, null, null);
     }
 
-    public LatLng getCenterPositionBuildingFromGeoJsonFeature(GeoJsonFeature feature){
-        String[] coordinates = feature.getProperty("center").split(", ");
-        LatLng centerPos = new LatLng(parseDouble(coordinates[1]), parseDouble(coordinates[0]));
-        return centerPos;
+    public Double[] getCenterPositionBuildingFromGeoJsonFeature(GeoJsonFeature feature){
+        String[] coordinatesString = feature.getProperty("center").split(", ");
+        Double[] coordinatesDouble = new Double[]{Double.parseDouble(coordinatesString[1]), Double.parseDouble(coordinatesString[0])};
+        return coordinatesDouble;
     }
     public String[] getFloorsFromBuildingFromGeoJsonFeature(GeoJsonFeature feature) {
         String[] floorsAvailable = null;
@@ -96,7 +99,6 @@ public class LocationFragmentViewModel extends ViewModel {
 
         return floorsAvailable;
     }
-
     /**
      * @param layer the GeoJson layer containing features to style.
      * @param map the google map where layer will be displayed and markers will be added.

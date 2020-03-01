@@ -35,7 +35,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 
-
 import java.util.HashMap;
 
 import static androidx.core.content.ContextCompat.checkSelfPermission;

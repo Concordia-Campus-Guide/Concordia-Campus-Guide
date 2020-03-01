@@ -8,6 +8,7 @@ import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 
 
+import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 import org.junit.Test;
 import org.junit.Before;
 import org.mockito.MockitoAnnotations;
