@@ -4,21 +4,539 @@
     {
       "type": "Feature",
       "properties": {
-        "roomNumber": "mens"
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 819
       },
       "geometry": {
         "type": "Point",
-        "coordinates" : [-73.57875902205706, 45.4973251465936]
+        "coordinates": [
+          -73.5789605230093,
+          45.496951715566176
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "roomNumber": "womens"
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 821
       },
       "geometry": {
         "type": "Point",
-        "coordinates" : [-73.57902523130178, 45.49745816170439]
+        "coordinates": [
+          -73.57902321964502,
+          45.49699848270905
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 823
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57907921075821,
+          45.49702057370776
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 827
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57921063899994,
+          45.49707133596979
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 825
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57913553714752,
+          45.497045014802595
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 929
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.5792750120163,
+          45.49710329737056
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 829.01
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57933938503265,
+          45.49712773842951
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "929"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57940711081028,
+          45.49717897061476
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 833
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57936888933182,
+          45.49723114279224
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 835
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57933938503265,
+          45.497268744331606
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": "stairs"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57923444360495,
+          45.49721069694468
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 843
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57915431261063,
+          45.49745299151158
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 845
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57911944389343,
+          45.497490592902814
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 847
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57906579971313,
+          45.497556395277044
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 849
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57902020215988,
+          45.49761091718603
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 851.03
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57892632484436,
+          45.49759963679541
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 851.02
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57888340950012,
+          45.49758083613932
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 853
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57885658740997,
+          45.49752443413345
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 857
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.5787358880043,
+          45.497479312488096
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 859
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57867419719696,
+          45.49745299151158
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 861
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57859943062067,
+          45.49742549547835
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 817
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57885725796223,
+          45.49693267968286
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 815
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57880663126707,
+          45.49698226697044
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 813
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57876639813185,
+          45.49702268880291
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 811
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.578727170825,
+          45.49706405064796
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 807
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57863128185272,
+          45.497157819718254
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 803
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57855349779129,
+          45.497233022869814
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 801
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57850220054388,
+          45.49729083522429
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 863.01
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57847839593887,
+          45.49738154879908
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 886
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57897393405437,
+          45.49708473155909
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": "stairs"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57891358435154,
+          45.49710306236033
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": "mens"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57885994017124,
+          45.49713008853076
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 820
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57904769480228,
+          45.49712092313529
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "roomNumber": "904"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57871174812317,
+          45.49724077818911
+        ]
       }
     },
     {
@@ -28,57 +546,407 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates" : [-73.57897024601698, 45.4973972944047]
+        "coordinates": [
+          -73.5787643864751,
+          45.49729389034705
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
         "roomNumber": "stairs"
       },
       "geometry": {
         "type": "Point",
-        "coordinates" : [-73.57901651412249, 45.4974099848896]
+        "coordinates": [
+          -73.57874695211649,
+          45.49731504119247
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "roomNumber": "867"
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": "stairs"
       },
       "geometry": {
         "type": "Point",
-        "coordinates" : [-73.57904501259327, 45.49759846175456]
+        "coordinates": [
+          -73.578928001225,
+          45.49731363113635
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "roomNumber": "838"
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 842
       },
       "geometry": {
         "type": "Point",
-        "coordinates" : [-73.57907216995955, 45.49716392997806]
+        "coordinates": [
+          -73.5789343714714,
+          45.49737026836251
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "roomNumber": "837"
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": "elevator"
       },
       "geometry": {
         "type": "Point",
-        "coordinates" : [-73.57903897762299, 45.49702785903522]
+        "coordinates": [
+          -73.57901249080896,
+          45.49740434467443
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "roomNumber": "825"
+        "roomNumber": "977"
       },
       "geometry": {
         "type": "Point",
-        "coordinates" : [-73.57865910977125, 45.49712726840923]
+        "coordinates": [
+          -73.57898935675621,
+          45.49743889098341
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 837
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57929378747939,
+          45.497321386444554
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 832.01
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57919454574585,
+          45.497233022869814
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 832.02
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57917577028275,
+          45.497259343949125
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 832.03
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57917845249176,
+          45.49730070562033
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 832.04
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57913821935654,
+          45.49728942516756
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 832.05
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57910603284836,
+          45.49727250448419
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 805.3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57858836650847,
+          45.49717662051555
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 806.02
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57862055301666,
+          45.49719166114888
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 806.01
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57865005731583,
+          45.49720106154266
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 867
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57843816280365,
+          45.49733830711327
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 863
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57852935791016,
+          45.497409749880624
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 841
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57919722795486,
+          45.497419150238024
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": "womens"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57868492603302,
+          45.49733454696509
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 855
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57879221439362,
+          45.4974999932467
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 851.01
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57893973588943,
+          45.49754323480837
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 822
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.5791328549385,
+          45.497186020911855
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 838
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57908993959427,
+          45.4973571078503
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 852
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57892096042633,
+          45.497447351300735
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 854
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57887804508209,
+          45.49742855059384
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "roomNumber": 881
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.57904702425003,
+          45.497419150238024
+        ]
       }
     }
   ]
