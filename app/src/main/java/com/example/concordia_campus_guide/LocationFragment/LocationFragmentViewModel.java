@@ -17,6 +17,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
+import com.google.maps.android.geojson.GeoJsonPointStyle;
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -162,6 +163,15 @@ public class LocationFragmentViewModel extends ViewModel {
         return geoJsonPolygonStyle;
     }
 
+    private void getPointStyle(GeoJsonLayer layer) {
+        GeoJsonPointStyle geoJsonPointStyle = new GeoJsonPointStyle();
+        geoJsonPointStyle.setVisible(false);
+
+        for (GeoJsonFeature feature : layer.getFeatures()) {
+            feature.setPointStyle(geoJsonPointStyle);
+        }
+    }
+
 
     public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, Context context, GoogleMap mMap) {
         String fileName = buildingCode.toLowerCase()+"_"+floor.toLowerCase();
@@ -169,6 +179,8 @@ public class LocationFragmentViewModel extends ViewModel {
             floorLayer.removeLayerFromMap();
         }
         floorLayer = loadPolygons(mMap, context, getJsonObject("buildings_floors_json/" + fileName  + ".json", context));
+        getPointStyle(floorLayer);
+        System.out.println(floorLayer.getFeatures());
         floorLayer.addLayerToMap();
         groundOverlay.setImage(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+fileName+".png"));
 
