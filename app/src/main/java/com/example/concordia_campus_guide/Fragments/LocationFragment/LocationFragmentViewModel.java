@@ -18,8 +18,11 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
+import com.google.maps.android.geojson.GeoJsonPointStyle;
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
+import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -27,6 +30,7 @@ import java.util.HashMap;
 import static java.lang.Double.parseDouble;
 
 public class LocationFragmentViewModel extends ViewModel {
+    private GeoJsonLayer floorLayer;
     private HashMap<String, Building> buildings = new HashMap<>();
     /**
      * @return return the map style
@@ -60,6 +64,17 @@ public class LocationFragmentViewModel extends ViewModel {
         try {
             JSONObject geoJsonLayer = ApplicationState.getInstance(applicationContext).getBuildings().getGeoJson();
             layer = new GeoJsonLayer(map, geoJsonLayer);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return layer;
+    }
+
+
+    public GeoJsonLayer initMarkersLayer(GoogleMap map, JSONObject jsonFile){
+        GeoJsonLayer layer = null;
+        try {
+            layer = new GeoJsonLayer(map, jsonFile);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -101,7 +116,7 @@ public class LocationFragmentViewModel extends ViewModel {
      * @param layer the GeoJson layer containing features to style.
      * @param map the google map where layer will be displayed and markers will be added.
      */
-    private void setPolygonStyle(GeoJsonLayer layer, GoogleMap map, Context context){
+    public void setPolygonStyle(GeoJsonLayer layer, GoogleMap map, Context context){
         for (GeoJsonFeature feature : layer.getFeatures()){
             feature.setPolygonStyle(getPolygonStyle());
             Building building = getBuildingFromGeoJsonFeature(feature);
@@ -156,24 +171,6 @@ public class LocationFragmentViewModel extends ViewModel {
         return  smallMarkerIcon;
     }
 
-//    /**
-//     * Add classroom markers to map
-//     * @param map
-//     * @param centerPos
-//     * @param classNumber
-//     */
-//    private void addClassroomMarker(GoogleMap map, LatLng centerPos, String classNumber) {
-//        Marker marker = map.addMarker(
-//                new MarkerOptions()
-//                        .position(centerPos)
-//                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.h))
-//                        .flat(true)
-//                        .anchor(0.5f,0.5f)
-//                        .alpha(0.0f)
-//        );
-//        marker.setTag(classNumber);
-//    }
-
     /**
      * The purpose of this method is the polygons style after setting their
      * FillColor, StrokeColor and StrokeWidth
@@ -187,15 +184,48 @@ public class LocationFragmentViewModel extends ViewModel {
         return geoJsonPolygonStyle;
     }
 
+    private void getPointStyle(GeoJsonLayer layer) {
+        GeoJsonPointStyle geoJsonPointStyle = new GeoJsonPointStyle();
+        geoJsonPointStyle.setVisible(false);
+
+        for (GeoJsonFeature feature : layer.getFeatures()) {
+            feature.setPointStyle(geoJsonPointStyle);
+        }
+    }
+
     /**
      * @param buildingCode it represents which building we will be covering
      * @return Int of drawable resource's bitmap representation
      */
-
-    public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, Context context) {
-        groundOverlay.setImage(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+buildingCode.toLowerCase()+"_"+floor.toLowerCase()+".png"));
+    public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, Context context, GoogleMap mMap) {
+        String fileName = buildingCode.toLowerCase()+"_"+floor.toLowerCase();
+        groundOverlay.setImage(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+fileName+".png"));
+        if (floorLayer != null) {
+            floorLayer.removeLayerFromMap();
+        }
+        floorLayer = initMarkersLayer(mMap, getJsonObject("buildings_floors_json/" + fileName  + ".json", context));
+        getPointStyle(floorLayer);
+        floorLayer.addLayerToMap();
     }
 
+    public JSONObject getJsonObject(String fileName, Context context) {
+        JSONObject jObect = null;
+        try {
+            InputStream is = context.getAssets().open(fileName);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            String json = new String(buffer, "UTF-8");
+            jObect = new JSONObject(json);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jObect;
+    }
     public Building getBuildingFromeCode(String buildingCode) {
         return buildings.get(buildingCode);
     }

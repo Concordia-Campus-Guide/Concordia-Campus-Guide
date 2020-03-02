@@ -57,6 +57,12 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     private Button selectedFloor;
 
+    /**
+     * @return it will return a new object of this fragment
+     */
+    public static LocationFragment newInstance() {
+        return new LocationFragment();
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -66,8 +72,10 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         initComponent(rootView);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
-        setupClickListeners();
+
         initMap();
+        setupClickListeners();
+        getLocationPermission();
 
         return rootView;
     }
@@ -305,7 +313,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                     permissions,
                     ClassConstants.LOCATION_PERMISSION_REQUEST_CODE);
         }
-
     }
 
     private void classRoomCoordinateTool(GoogleMap map){
@@ -331,7 +338,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         if (selectedFloor != null) selectedFloor.setEnabled(true);
         selectedFloor = (Button)view;
         view.setEnabled(false);
-        mViewModel.setFloorPlan(buildingsGroundOverlays.get(currentFloorPickerAdapter.getBuildingCode()), currentFloorPickerAdapter.getBuildingCode(), currentFloorPickerAdapter.getFloorsAvailable()[position], getContext());
+        mViewModel.setFloorPlan(buildingsGroundOverlays.get(currentFloorPickerAdapter.getBuildingCode()), currentFloorPickerAdapter.getBuildingCode(), currentFloorPickerAdapter.getFloorsAvailable()[position], getContext(), mMap);
 
     }
 
