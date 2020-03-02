@@ -18,23 +18,24 @@ import androidx.test.uiautomator.UiSelector;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.core.IsInstanceOf;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
 import static org.hamcrest.Matchers.allOf;
 
 @RunWith(AndroidJUnit4.class)
-public class LocationFragmentUITest {
+public class InfoCardFragmentUITest {
+
     private UiDevice device;
+
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
@@ -45,67 +46,78 @@ public class LocationFragmentUITest {
                     "android.permission.ACCESS_COARSE_LOCATION");
 
     @Before
-    public void init() {
-         device = UiDevice.getInstance(getInstrumentation());
-    }
+    public void init() { device = UiDevice.getInstance(getInstrumentation()); }
+
     /**
-     * The purpose of this test is to validate the existance of EV marker
-     * on the screen once opening the application.
+     * This test validates that the info card pops up when a marker is clicked
      * @throws UiObjectNotFoundException
+     * @throws InterruptedException
      */
     @Test
-    public void testMarker() throws UiObjectNotFoundException {
+    public void collapsedInfoCardPopsUpWhenMarkerIsClickedTest() throws UiObjectNotFoundException, InterruptedException {
         UiObject marker = device.findObject(new UiSelector().descriptionContains("EV"));
         marker.click();
+        Thread.sleep(1500);
+
+        ViewInteraction scrollView = onView(
+                allOf(withId(R.id.info_card),
+                        childAtPosition(
+                                allOf(withId(R.id.info_card_coordinator_layout),
+                                        childAtPosition(
+                                                IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class),
+                                                1)),
+                                0),
+                        isDisplayed()));
+        scrollView.check(matches(isDisplayed()));
     }
 
     /**
-     * The purpose of this test is to validate the existance of my location button.
-     * @throws UiObjectNotFoundException In case if it didn't find the my location button
+     * This test validates that there is the Directions button on the info card
+     * @throws UiObjectNotFoundException
+     * @throws InterruptedException
      */
     @Test
-    public void CurrentLocationButtonTest() throws  UiObjectNotFoundException{
-        UiObject button = device.findObject(new UiSelector().descriptionContains("My Location"));
-        button.click();
+    public void collapedInfoCardContainsDirectionsButtonTest() throws UiObjectNotFoundException, InterruptedException {
+        UiObject marker = device.findObject(new UiSelector().descriptionContains("EV"));
+        marker.click();
+        Thread.sleep(1500);
+
+        ViewInteraction directions = onView(
+                allOf(withId(R.id.directions),
+                        childAtPosition(
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                        1),
+                                0),
+                        isDisplayed()));
+        directions.check(matches(isDisplayed()));
     }
 
     /**
-     * The purpose of this test is to validate the existance of the switch button
-     * between the campuses.
+     * This test validates that there is the Indoor Map button on the info card
+     * @throws UiObjectNotFoundException
+     * @throws InterruptedException
      */
     @Test
-    public void SwitchButtonTest() {
-        ViewInteraction materialButton = onView(
-                allOf(withId(R.id.SGWBtn), withText("SGW"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.fragment),
-                                        1),
-                                0),
-                        isDisplayed()));
-        materialButton.perform(click());
+    public void collapsedInfoCardContainsIndoorMapButtonTest() throws UiObjectNotFoundException, InterruptedException {
+        UiObject marker = device.findObject(new UiSelector().descriptionContains("EV"));
+        marker.click();
+        Thread.sleep(1500);
 
-        ViewInteraction button = onView(
-                allOf(withId(R.id.SGWBtn),
+        ViewInteraction indoorMap = onView(
+                allOf(withId(R.id.indoor_map),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(R.id.fragment),
-                                        1),
-                                0),
-                        isDisplayed()));
-        button.check(matches(isDisplayed()));
-
-        ViewInteraction button2 = onView(
-                allOf(withId(R.id.loyolaBtn),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.fragment),
+                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
                                         1),
                                 1),
                         isDisplayed()));
-        button2.check(matches(isDisplayed()));
+        indoorMap.check(matches(isDisplayed()));
     }
 
+    /**
+     * Helper method
+     */
     private static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {
 
@@ -123,13 +135,5 @@ public class LocationFragmentUITest {
                         && view.equals(((ViewGroup) parent).getChildAt(position));
             }
         };
-    }
-
-    private void wait(int seconds) {
-        try {
-            Thread.sleep(1000*seconds);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }

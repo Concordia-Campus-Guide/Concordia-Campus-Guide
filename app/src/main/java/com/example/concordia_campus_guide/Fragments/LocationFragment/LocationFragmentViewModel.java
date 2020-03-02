@@ -1,11 +1,12 @@
-package com.example.concordia_campus_guide.LocationFragment;
+package com.example.concordia_campus_guide.Fragments.LocationFragment;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-
 import androidx.lifecycle.ViewModel;
 
+import com.example.concordia_campus_guide.Global.ApplicationState;
+import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
@@ -22,24 +23,15 @@ import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
-import java.nio.Buffer;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import static java.lang.Double.parseDouble;
 
 public class LocationFragmentViewModel extends ViewModel {
     private GeoJsonLayer floorLayer;
-
-    private HashMap<String, GroundOverlayOptions> buildingsGroundOverlays = new HashMap<>();
+    private HashMap<String, Building> buildings = new HashMap<>();
     /**
      * @return return the map style
      */
@@ -53,8 +45,9 @@ public class LocationFragmentViewModel extends ViewModel {
      * @param applicationContext is the Context of the LocationFragmentView page
      * @return It will return the layer to the LocationFragmentView to display on the map
      */
-    public GeoJsonLayer loadPolygons(GoogleMap map, Context applicationContext, JSONObject jsonObject){
-        GeoJsonLayer layer = initLayer(map, applicationContext, jsonObject);
+    public GeoJsonLayer loadPolygons(GoogleMap map, Context applicationContext){
+        GeoJsonLayer layer = initLayer(map, applicationContext);
+        setPolygonStyle(layer,map, applicationContext);
         return  layer;
     }
 
@@ -65,7 +58,20 @@ public class LocationFragmentViewModel extends ViewModel {
      * @return the initiated layer or it will throw an exception if it didn't find the
      *  GeoJson File
      */
-    private GeoJsonLayer initLayer(GoogleMap map, Context applicationContext, JSONObject jsonFile){
+    private GeoJsonLayer initLayer(GoogleMap map, Context applicationContext){
+        GeoJsonLayer layer = null;
+
+        try {
+            JSONObject geoJsonLayer = ApplicationState.getInstance(applicationContext).getBuildings().getGeoJson();
+            layer = new GeoJsonLayer(map, geoJsonLayer);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return layer;
+    }
+
+
+    public GeoJsonLayer initMarkersLayer(GoogleMap map, JSONObject jsonFile){
         GeoJsonLayer layer = null;
         try {
             layer = new GeoJsonLayer(map, jsonFile);
@@ -75,23 +81,37 @@ public class LocationFragmentViewModel extends ViewModel {
         return layer;
     }
 
-    /**
-     * Generate the hall building overlays
-     * @return the generate ground overlay option
-     */
-    public void getBuildingOverlay( GeoJsonFeature feature){
-        String[] coordinates = feature.getProperty("center").split(", ");
-        LatLng centerPos = new LatLng(parseDouble(coordinates[1]), parseDouble(coordinates[0]));
-        String[] floorsAvailable = feature.getProperty("floorsAvailable").split(",");
-        buildingsGroundOverlays.put(feature.getProperty("code"), new GroundOverlayOptions()
-                .position(centerPos, Float.parseFloat(feature.getProperty("width")), Float.parseFloat(feature.getProperty("height")))
-                .image(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+feature.getProperty("code").toLowerCase()+"_"+floorsAvailable[floorsAvailable.length-1].toLowerCase()+".png"))
-                .bearing(Float.parseFloat(feature.getProperty("bearing"))));
-    }
-    public HashMap<String, GroundOverlayOptions> getBuildingGroundOverlays(){
-        return buildingsGroundOverlays;
+    public void setBuildingGroundOverlayOptions(Building building){
+        building.setGroundOverlayOption(new GroundOverlayOptions()
+                .position(new LatLng(building.getCenterCoordinates()[0], building.getCenterCoordinates()[1]), building.getWidth(), building.getHeight())
+                .image(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+building.getBuildingCode().toLowerCase()+"_"+building.getAvailableFloors()[building.getAvailableFloors().length-1].toLowerCase()+".png"))
+                .bearing(building.getBearing()));
     }
 
+    public Building getBuildingFromGeoJsonFeature(GeoJsonFeature feature){
+        Double[] centerPos = getCenterPositionBuildingFromGeoJsonFeature(feature);
+
+        String[] floorsAvailable = getFloorsFromBuildingFromGeoJsonFeature(feature);
+        float building_width = (feature.getProperty("width") != null)? Float.parseFloat(feature.getProperty("width")): -1;
+        float building_height  = (feature.getProperty("height") != null)? Float.parseFloat(feature.getProperty("height")) : -1;
+        float building_bearing = (feature.getProperty("bearing") != null)? Float.parseFloat(feature.getProperty("bearing")) : -1;
+        String building_code = feature.getProperty("code");
+        return new Building(centerPos, floorsAvailable, building_width, building_height, building_bearing, null, building_code, null, null, null, null, null);
+    }
+
+    public Double[] getCenterPositionBuildingFromGeoJsonFeature(GeoJsonFeature feature){
+        String[] coordinatesString = feature.getProperty("center").split(", ");
+        Double[] coordinatesDouble = new Double[]{Double.parseDouble(coordinatesString[1]), Double.parseDouble(coordinatesString[0])};
+        return coordinatesDouble;
+    }
+    public String[] getFloorsFromBuildingFromGeoJsonFeature(GeoJsonFeature feature) {
+        String[] floorsAvailable = null;
+
+        if (feature.getProperty("floorsAvailable") != null)
+            floorsAvailable = feature.getProperty("floorsAvailable").split(",");
+
+        return floorsAvailable;
+    }
     /**
      * @param layer the GeoJson layer containing features to style.
      * @param map the google map where layer will be displayed and markers will be added.
@@ -99,9 +119,10 @@ public class LocationFragmentViewModel extends ViewModel {
     public void setPolygonStyle(GeoJsonLayer layer, GoogleMap map, Context context){
         for (GeoJsonFeature feature : layer.getFeatures()){
             feature.setPolygonStyle(getPolygonStyle());
-
+            Building building = getBuildingFromGeoJsonFeature(feature);
+            buildings.put(feature.getProperty("code"), building);
             if(feature.getProperty("floorsAvailable") != null)
-                getBuildingOverlay(feature);
+                setBuildingGroundOverlayOptions(building);
 
             String[] coordinates = feature.getProperty("center").split(", ");
             LatLng centerPos = new LatLng(parseDouble(coordinates[1]), parseDouble(coordinates[0]));
@@ -172,18 +193,19 @@ public class LocationFragmentViewModel extends ViewModel {
         }
     }
 
-
+    /**
+     * @param buildingCode it represents which building we will be covering
+     * @return Int of drawable resource's bitmap representation
+     */
     public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, Context context, GoogleMap mMap) {
         String fileName = buildingCode.toLowerCase()+"_"+floor.toLowerCase();
+        groundOverlay.setImage(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+fileName+".png"));
         if (floorLayer != null) {
             floorLayer.removeLayerFromMap();
         }
-        floorLayer = loadPolygons(mMap, context, getJsonObject("buildings_floors_json/" + fileName  + ".json", context));
+        floorLayer = initMarkersLayer(mMap, getJsonObject("buildings_floors_json/" + fileName  + ".json", context));
         getPointStyle(floorLayer);
-        System.out.println(floorLayer.getFeatures());
         floorLayer.addLayerToMap();
-        groundOverlay.setImage(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+fileName+".png"));
-
     }
 
     public JSONObject getJsonObject(String fileName, Context context) {
@@ -204,4 +226,24 @@ public class LocationFragmentViewModel extends ViewModel {
         }
         return jObect;
     }
+    public Building getBuildingFromeCode(String buildingCode) {
+        return buildings.get(buildingCode);
+    }
+    public HashMap<String, Building> getBuildings() {
+        return buildings;
+    }
+    public void setBuildings(HashMap<String, Building> buildings) {
+        this.buildings = buildings;
+    }
+    public LatLng getInitialZoomLocation(){
+                return buildings.get("EV").getCenterCoordinatesLatLng();
+    }
+    public LatLng getLoyolaZoomLocation(){
+        return buildings.get("VL").getCenterCoordinatesLatLng();
+    }
+    public LatLng getSGWZoomLocation(){
+        return buildings.get("H").getCenterCoordinatesLatLng();
+    }
+
+
 }

@@ -1,10 +1,8 @@
-package com.example.concordia_campus_guide.LocationFragment;
+package com.example.concordia_campus_guide.Fragments.LocationFragment;
 
 import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -17,14 +15,13 @@ import android.widget.GridView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
+import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -32,13 +29,11 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.GroundOverlay;
-import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
-
 
 import java.util.HashMap;
 
@@ -98,17 +93,17 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         buildingsGroundOverlays = new HashMap<>();
     }
 
-    private void setupFloorPickerAdapter(String buildingCode, String[] availableFloors) {
+    private void setupFloorPickerAdapter(Building building) {
         mFloorPickerGv.setVisibility(View.VISIBLE);
 
-        currentFloorPickerAdapter = new FloorPickerAdapter(getContext(), availableFloors, buildingCode, this);
+        currentFloorPickerAdapter = new FloorPickerAdapter(getContext(), building.getAvailableFloors(), building.getBuildingCode(), this);
         mFloorPickerGv.setAdapter(currentFloorPickerAdapter);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(com.example.concordia_campus_guide.LocationFragment.LocationFragmentViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel.class);
     }
 
 
@@ -130,7 +125,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                 setupPolygons(mMap);
                 initFloorPlans();
                 uiSettingsForMap(mMap);
-                zoomInLocation(45.494999, -73.577854);
+                zoomInLocation(mViewModel.getInitialZoomLocation());
             }
         });
     }
@@ -140,9 +135,10 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
      * The purpose of this method is to figure the style of the map to display
      */
     private void initFloorPlans() {
-        HashMap<String, GroundOverlayOptions> temp = mViewModel.getBuildingGroundOverlays();
+        HashMap<String, Building> temp = mViewModel.getBuildings();
         for(String key: temp.keySet()){
-            buildingsGroundOverlays.put(key, mMap.addGroundOverlay(temp.get(key)));
+            if (temp.get(key).getGroundOverlayOption() != null)
+                buildingsGroundOverlays.put(key, mMap.addGroundOverlay(temp.get(key).getGroundOverlayOption()));
         }
     }
 
@@ -174,7 +170,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         loyolaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                zoomInLocation(45.458205, -73.640438);
+                zoomInLocation(mViewModel.getLoyolaZoomLocation());
             }
         });
     }
@@ -186,7 +182,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         sgwBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                zoomInLocation(45.494999, -73.577854);
+                zoomInLocation(mViewModel.getSGWZoomLocation());
             }
         });
     }
@@ -197,8 +193,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
      * @param map is the map to be used in our application
      */
     private void setupPolygons(GoogleMap map) {
-        mLayer = mViewModel.loadPolygons(map, getContext(), mViewModel.getJsonObject("buildingcoordinates.json", getContext()));
-        mViewModel.setPolygonStyle(mLayer,map, getContext());
+        mLayer = mViewModel.loadPolygons(map, getContext());
         mLayer.addLayerToMap();
 
         setupPolygonClickListener();
@@ -213,7 +208,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             public void onCameraMove() {
                 if(map.getCameraPosition().zoom > 20){
                     mLayer.removeLayerFromMap();
-                    //setup a different marker clickListener
                 }
                 else{
                     mLayer.addLayerToMap();
@@ -222,7 +216,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             }
         });
     }
-
 
     /**
      * The purpose of this method is handle the onclick polygon
@@ -233,19 +226,21 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             @Override
             public void onFeatureClick(GeoJsonFeature geoJsonFeature) {
                 if(geoJsonFeature != null){
-                    if(geoJsonFeature.getProperty("floorsAvailable")!= null) {
-                        String[] floorsAvailable = geoJsonFeature.getProperty("floorsAvailable").split(",");
-                        setupFloorPickerAdapter(geoJsonFeature.getProperty("code"), floorsAvailable);
-                    }
-                    String buildingCode = geoJsonFeature.getProperty("code");
-                    ((MainActivity)getActivity()).showInfoCard(buildingCode);
-                    System.out.println("Clicked on "+buildingCode);
+                    Building building = mViewModel.getBuildingFromGeoJsonFeature(geoJsonFeature);
+                    onBuildingClick(building);
                 }
-                else {
-                    mFloorPickerGv.setVisibility(View.GONE);
-                }
+                String buildingCode = geoJsonFeature.getProperty("code");
+                ((MainActivity)getActivity()).showInfoCard(buildingCode);
             }
         });
+    }
+
+    private void onBuildingClick(Building building) {
+        if(building.getAvailableFloors() != null) {
+            setupFloorPickerAdapter(building);
+        } else {
+            mFloorPickerGv.setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -256,10 +251,11 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
+                 Building building = mViewModel.getBuildingFromeCode(marker.getTag().toString());
                 //TODO: Make function that pops up the info card for the building (via the building-code)
                 String buildingCode = (marker.getTag()).toString();
                 ((MainActivity)getActivity()).showInfoCard(buildingCode);
-                System.out.println(buildingCode);
+                onBuildingClick(building);
                 return false;
             }
         });
@@ -298,15 +294,9 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         mMap.getUiSettings().setZoomControlsEnabled(true);
     }
 
-
-    /**
-     * @param latitude is the chosen latitude on the map to zoom in
-     * @param longitude is the chosen longitude on the map to zoom in
-     */
-    private void zoomInLocation(double latitude, double longitude) {
-        LatLng curr = new LatLng(latitude,longitude);
+    private void zoomInLocation(LatLng center) {
         float zoomLevel = 18.0f;
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(curr, zoomLevel));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(center, zoomLevel));
     }
 
     /**

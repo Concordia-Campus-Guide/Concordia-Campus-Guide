@@ -2,9 +2,9 @@ package com.example.concordia_campus_guide;
 
 import android.graphics.Color;
 
-import com.example.concordia_campus_guide.Activities.MainActivity;
-import com.example.concordia_campus_guide.LocationFragment.LocationFragmentViewModel;
-import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel;
+import com.example.concordia_campus_guide.Models.Building;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 
 
@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.mockito.MockitoAnnotations;
 
 
+import java.util.HashMap;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
@@ -25,11 +26,20 @@ import static junit.framework.TestCase.assertNotNull;
  */
 public class LocationFragmentViewModelTest  {
     private LocationFragmentViewModel viewModel;
-
+    private HashMap<String, Building> buildings;
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
         viewModel = new LocationFragmentViewModel();
+        buildings = new HashMap<>();
+        setupBuildings();
+    }
+
+    private void setupBuildings() {
+        buildings.put("H", new Building(new Double[]{45.4972685, -73.5789475}, new String[]{"8","9"}, 68, 68, 34, null, "H", null, null, null, null, null));
+        buildings.put("EV", new Building(new Double[]{45.495638, -73.578258}, new String[]{"8","9"}, 68, 68, 34, null, "H", null, null, null, null, null));
+        buildings.put("VL", new Building(new Double[]{45.45909, -73.63844}, new String[]{"1","2"}, 80, 45, 210, null, "VL", null, null, null, null, null));
+        viewModel.setBuildings(buildings);
     }
 
     @Test
@@ -44,50 +54,30 @@ public class LocationFragmentViewModelTest  {
     public void getMapStyle(){
         assertEquals(viewModel.getMapStyle(), R.raw.mapstyle_retro);
     }
+    @Test
+    public void getBuildingsTest(){
+        HashMap<String, Building> temp = new HashMap<>();
+        temp.put("H", new Building(new Double[]{45.4972685, -73.5789475}, new String[]{"8","9"}, 68, 68, 34, null, "H", null, null, null, null, null));
+        viewModel.setBuildings(temp);
+        assertEquals(temp, viewModel.getBuildings());
+        viewModel.setBuildings(buildings);
+        assertEquals(buildings, viewModel.getBuildings());
+    }
+    @Test
+    public void getInitialZoomLocationTest(){
+        assertEquals(new LatLng( 45.495638, -73.578258), viewModel.getInitialZoomLocation());
+    }
+    @Test
+    public void getSGWZoomLocationTest(){
+        assertEquals(new LatLng( 45.4972685, -73.5789475), viewModel.getSGWZoomLocation());
+    }
+    @Test
+    public void getLoyolaZoomLocationTest(){
+        assertEquals(new LatLng( 45.45909, -73.63844), viewModel.getLoyolaZoomLocation());
+    }
+    @Test
+    public void getBuildingFromeCodeTest(){
+        assertEquals(buildings.get("EV"), viewModel.getBuildingFromeCode("EV"));
+    }
 
-
-//    @Test
-//    public void getFloorPlansHBuildingTest(){
-//        ArrayList<String> expectedFloorPlansAvailable = new ArrayList<>();
-//        expectedFloorPlansAvailable.add("hall_9");
-//        expectedFloorPlansAvailable.add("hall_8");
-//
-//        assertEquals(expectedFloorPlansAvailable, viewModel.getFloorsAvailable(BuildingCode.H));
-//    }
-//
-//    @Test
-//    public void getFloorPlansMBBuildingTest(){
-//        ArrayList<String> expectedFloorPlansAvailable = new ArrayList<>();
-//        expectedFloorPlansAvailable.add("mb_1");
-//        expectedFloorPlansAvailable.add("mb_S2");
-//
-//        assertEquals(expectedFloorPlansAvailable, viewModel.getFloorsAvailable(BuildingCode.MB));
-//    }
-//    @Test
-//    public void getFloorPlansVLBuildingTest(){
-//        ArrayList<String> expectedFloorPlansAvailable = new ArrayList<>();
-//        expectedFloorPlansAvailable.add("vl_2");
-//        expectedFloorPlansAvailable.add("vl_1");
-//
-//        assertEquals(expectedFloorPlansAvailable, viewModel.getFloorsAvailable(BuildingCode.VL));
-//    }
-//    @Test
-//    public void getFloorPlansNotSupportedBuildingTest(){
-//        ArrayList<String> expectedFloorPlansAvailable = new ArrayList<>();
-//
-//        assertEquals(expectedFloorPlansAvailable, viewModel.getFloorsAvailable(BuildingCode.EV));
-//    }
-//
-//    @Ignore
-//    @Test
-//    public void getHallBuildingOverlayTest(){
-//        GroundOverlayOptions actualGOO = viewModel.get();
-//        GroundOverlayOptions expectedGOO = new GroundOverlayOptions().position(new LatLng(45.4972685, -73.5789475), (float) 68, (float) 68).image(BitmapDescriptorFactory.fromResource(R.drawable.h_9)).bearing((float) 34);
-//
-//        assertEquals(expectedGOO.getLocation(), actualGOO.getLocation());
-//        assertEquals(expectedGOO.getImage(), actualGOO.getImage());
-//        assertEquals(expectedGOO.getHeight(), actualGOO.getHeight());
-//        assertEquals(expectedGOO.getWidth(), actualGOO.getWidth());
-//        assertEquals(expectedGOO.getBearing(), actualGOO.getBearing());
-//    }
 }

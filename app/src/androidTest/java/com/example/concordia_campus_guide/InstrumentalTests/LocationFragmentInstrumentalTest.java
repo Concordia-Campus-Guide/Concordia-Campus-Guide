@@ -3,9 +3,8 @@ package com.example.concordia_campus_guide.InstrumentalTests;
 import android.content.Context;
 
 import com.example.concordia_campus_guide.Activities.MainActivity;
-import com.example.concordia_campus_guide.InfoCardFragment.InfoCardFragmentViewModel;
-import com.example.concordia_campus_guide.LocationFragment.LocationFragmentViewModel;
-import com.example.concordia_campus_guide.Models.Buildings;
+import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel;
+import com.example.concordia_campus_guide.Models.Building;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 
 import org.junit.Rule;
@@ -41,6 +40,14 @@ public class LocationFragmentInstrumentalTest {
         BitmapDescriptor bitmap2 = viewModel.styleMarker("EV",appContext);
         assertNotNull(bitmap1);
         assertNotNull(bitmap2);
+    }
+
+    @Test
+    public void setBuildingGroundOverlayOptionsTest(){
+        Double[] coordinatecenter = new Double[]{45.495305, -73.578885};
+        Building building = new Building(coordinatecenter, new String[]{"S2","1"}, 65, 65, 127, null, "MB", null, null, null, null, null);
+        viewModel.setBuildingGroundOverlayOptions(building);
+        assertNotNull(building.getGroundOverlayOption());
     }
 
 }

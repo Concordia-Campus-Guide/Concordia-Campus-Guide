@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.InfoCardFragment;
+package com.example.concordia_campus_guide.Fragments.InfoCardFragment;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -15,17 +15,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.concordia_campus_guide.Models.Building;
+import com.example.concordia_campus_guide.Global.ApplicationState;
 import com.example.concordia_campus_guide.R;
 
 import java.io.InputStream;
 
-// This class is the view (UI) related things
 public class InfoCardFragment extends Fragment {
 
     private InfoCardFragmentViewModel mViewModel;
     private String buildingCode;
-    private Building building;
 
     private TextView infoCardTitle;
     private TextView buildingAddress;
@@ -50,7 +48,6 @@ public class InfoCardFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        buildingCode = this.getArguments().getString("buildingCode");
         View view = inflater.inflate(R.layout.info_card_fragment, container, false);
 
         infoCardTitle = view.findViewById(R.id.info_card_title);
@@ -75,10 +72,13 @@ public class InfoCardFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(com.example.concordia_campus_guide.InfoCardFragment.InfoCardFragmentViewModel.class);
-        mViewModel.setBuildings(mViewModel.readJsonFile(getContext()));
-        building = mViewModel.getBuildings().getBuilding(buildingCode);
+        mViewModel = ViewModelProviders.of(this).get(com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragmentViewModel.class);
+        mViewModel.setBuilding(ApplicationState.getInstance(getContext()).getBuildings().getBuilding(this.buildingCode));
         setInfoCard();
+    }
+
+    public void setBuildingCode(String buildingCode){
+        this.buildingCode = buildingCode;
     }
 
     /**
@@ -86,8 +86,8 @@ public class InfoCardFragment extends Fragment {
      * services, departements
      */
     private void setInfoCard(){
-        infoCardTitle.setText(building.getBuilding_Long_Name());
-        buildingAddress.setText(building.getAddress());
+        infoCardTitle.setText(mViewModel.getBuilding().getBuilding_Long_Name());
+        buildingAddress.setText(mViewModel.getBuilding().getAddress());
         setDepartmentsList();
         setServicesList();
         setBuildingImage(buildingCode);
@@ -97,7 +97,7 @@ public class InfoCardFragment extends Fragment {
      * Intializes the department list text to be displayed
      */
     private void setDepartmentsList(){
-        String text = building.getDepartmentsString();
+        String text = mViewModel.getBuilding().getDepartmentsString();
 
         if(text.isEmpty())
             departments.setVisibility(View.GONE);
@@ -109,7 +109,7 @@ public class InfoCardFragment extends Fragment {
      * Intializes the services list text to be displayed
      */
     private void setServicesList() {
-        String text = building.getServicesString();
+        String text = mViewModel.getBuilding().getServicesString();
         System.out.println("Text is: " + text);
         if(text.isEmpty())
             services.setVisibility(View.GONE);

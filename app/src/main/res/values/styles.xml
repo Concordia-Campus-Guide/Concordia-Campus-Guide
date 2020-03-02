@@ -14,7 +14,7 @@
         <item name="android:layout_weight">1</item>
         <item name="android:backgroundTint">@color/colorPrimary</item>
         <item name="android:minHeight">23dip</item>
-        <item name="android:textAllCaps">true</item>
+        <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/textColor</item>
         <item name="android:textSize">13sp</item>
     </style>
@@ -34,7 +34,18 @@
         <item name="android:textColor">@color/colorAppTheme</item>
         <item name="android:textSize">16sp</item>
     </style>
+    <style name="toolbarTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:background">@color/colorAppTheme</item>
+    </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
