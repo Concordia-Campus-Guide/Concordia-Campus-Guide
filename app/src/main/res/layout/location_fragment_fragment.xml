@@ -10,32 +10,45 @@
         android:layout_height="match_parent"
         android:visibility="visible"
         tools:visibility="visible" />
+
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp">
+        android:id="@+id/topMapContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/SGWBtn"
+        <LinearLayout
+            android:id="@+id/campusSwitchBtnContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:background="@color/colorAccent"
-            android:text="SGW"
-            android:textColor="@color/textColor"></Button>
+            android:layout_marginStart="1dp"
+            android:layout_marginEnd="1dp"
+            android:foregroundGravity="center"
+            android:orientation="horizontal"
+            android:padding="10dp">
 
-        <Button
-            android:id="@+id/loyolaBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_weight="1"
-            android:background="@color/colorAccent"
-            android:text="Loyola"
-            android:textColor="@color/textColor"></Button>
+            <Button
+                android:id="@+id/SGWBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:text="SGW"
+                android:textColor="@color/textColor"></Button>
 
+            <Button
+                android:id="@+id/loyolaBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:text="Loyola"
+                android:textColor="@color/textColor"></Button>
+
+        </LinearLayout>
     </LinearLayout>
 
     <GridView
