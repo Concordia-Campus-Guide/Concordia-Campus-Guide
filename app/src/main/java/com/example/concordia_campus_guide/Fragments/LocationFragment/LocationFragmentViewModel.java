@@ -242,7 +242,7 @@ public class LocationFragmentViewModel extends ViewModel {
         return buildings.get("VL").getCenterCoordinatesLatLng();
     }
     public LatLng getSGWZoomLocation(){
-        return buildings.get("H").getCenterCoordinatesLatLng();
+        return buildings.get("EV").getCenterCoordinatesLatLng();
     }
 
 

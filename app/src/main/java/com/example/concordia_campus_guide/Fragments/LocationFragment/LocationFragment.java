@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProviders;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +24,8 @@ import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.R;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -32,6 +35,9 @@ import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 
@@ -49,6 +55,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private Button loyolaBtn;
     private Button sgwBtn;
     private GridView mFloorPickerGv;
+    private FusedLocationProviderClient fusedLocationProviderClient;
 
     private static final String TAG = "LocationFragment";
     private Boolean myLocationPermissionsGranted = false;
@@ -91,6 +98,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         mFloorPickerGv = rootView.findViewById(R.id.FloorPickerGv);
         mFloorPickerGv.setVisibility(View.GONE);
         buildingsGroundOverlays = new HashMap<>();
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
     }
 
     private void setupFloorPickerAdapter(Building building) {
@@ -125,6 +133,35 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                 setupPolygons(mMap);
                 initFloorPlans();
                 uiSettingsForMap(mMap);
+                setFirstLocationToDisplay();
+            }
+        });
+    }
+
+
+    private void setFirstLocationToDisplay(){
+        setFirstLocationToDisplayOnSuccess();
+        setFirstLocationToDisplayOnFailure();
+    }
+
+    private void setFirstLocationToDisplayOnSuccess(){
+        fusedLocationProviderClient.getLastLocation()
+                .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        if (location != null) {
+                            zoomInLocation(new LatLng(location.getLatitude(),location.getLongitude()));
+                        }
+                        else {
+                            zoomInLocation(mViewModel.getInitialZoomLocation());
+                        }
+                    }
+                });
+    }
+    private void setFirstLocationToDisplayOnFailure(){
+        fusedLocationProviderClient.getLastLocation().addOnFailureListener(getActivity(), new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
                 zoomInLocation(mViewModel.getInitialZoomLocation());
             }
         });
@@ -295,7 +332,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     }
 
     private void zoomInLocation(LatLng center) {
-        float zoomLevel = 18.0f;
+        float zoomLevel = 18.5f;
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(center, zoomLevel));
     }
 
