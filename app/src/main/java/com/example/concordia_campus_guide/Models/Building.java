@@ -9,25 +9,60 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverter;
+
+@Entity (tableName = "buildings")
 public class Building extends Place {
     /**
      * These following attributes NEED to match the fields in the JSON file. Do not change them.
      */
-    //Attributes needed to create the ground overlays [ui]
+
+    //Needs to be modified to list of floors instead.
+    @ColumnInfo(name = "availableFloors")
     private String[] availableFloors;
+
+    @ColumnInfo(name = "width")
     private Float width;
+
+    @ColumnInfo(name = "height")
     private Float height;
+
+    @ColumnInfo(name = "bearing")
     private Float bearing;
+
+    //Not sure what to do here yet
+    //
+    //
+    @ColumnInfo(name = "coordinates")
     private List<List<List<Double>>> coordinates;
 
     //Descriptive Attributes
+    @ColumnInfo(name = "campus")
     private String Campus;
+
+    @ColumnInfo(name = "buildingCode")
+    @PrimaryKey
+    @NonNull
     private String BuildingCode;
+
+    @ColumnInfo(name = "building_long_name")
     private String Building_Long_Name;
+
+    @ColumnInfo(name = "address")
     private String Address;
+
+    @ColumnInfo(name = "departments")
     private List<String> Departments;
+
+    @ColumnInfo(name = "services")
     private List<String> Services;
 
+    @Ignore
     private GroundOverlayOptions groundOverlayOption;
 
     public Building(Double[] centerCoordinates, String[] availableFloors, float width, float height, float bearing,

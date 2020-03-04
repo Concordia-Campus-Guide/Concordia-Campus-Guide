@@ -5,6 +5,8 @@ import com.google.android.gms.maps.model.LatLng;
 public class Place {
     protected Double[] centerCoordinates;
 
+    //Should we have a variable Description here ?
+
     public Place(Double[] centerCoordinates) {
         this.centerCoordinates = centerCoordinates;
     }
