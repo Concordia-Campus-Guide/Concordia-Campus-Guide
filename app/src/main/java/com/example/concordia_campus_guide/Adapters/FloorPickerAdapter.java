@@ -17,6 +17,7 @@ public class FloorPickerAdapter extends BaseAdapter {
     private Context context;
     private String buildingCode;
     private String[] floorsAvailable;
+    private Button selectedButton;
 
     public FloorPickerAdapter(Context context, String[] floorsAvailable, String buildingCode, OnFloorPickerOnClickListener listener){
         this.context = context;
@@ -41,22 +42,32 @@ public class FloorPickerAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int position, final View view, ViewGroup viewGroup) {
+    public View getView(final int position, final View convertView, ViewGroup viewGroup) {
         Button button;
-        if (view == null) {
+        if (convertView == null) {
             button = new Button(context);
             button.setTextColor(context.getResources().getColor(R.color.floorPickerTextColor));
             button.setLayoutParams(new GridView.LayoutParams(120, 120));
             button.setText(floorsAvailable[position]);
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    listener.onFloorPickerOnClick(position, v);
+                public void onClick(View view) {
+                    if(selectedButton != null && !selectedButton.equals((Button)view)){
+                        selectedButton.setEnabled(true);
+                    }
+                    selectedButton = (Button)view;
+                    selectedButton.setEnabled(false);
+                    listener.onFloorPickerOnClick(position, view);
                 }
             });
             button.setBackground(ContextCompat.getDrawable(context, R.drawable.button_highlights));
         } else {
-            button = (Button) view;
+            button = (Button) convertView;
+        }
+
+        if(position == floorsAvailable.length - 1){
+            selectedButton = button;
+            selectedButton.setEnabled(false);
         }
         return button;
     }

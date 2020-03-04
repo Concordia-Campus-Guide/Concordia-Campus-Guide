@@ -335,11 +335,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     @Override
     public void onFloorPickerOnClick(int position, View view) {
-        if (selectedFloor != null) selectedFloor.setEnabled(true);
-        selectedFloor = (Button)view;
-        view.setEnabled(false);
         mViewModel.setFloorPlan(buildingsGroundOverlays.get(currentFloorPickerAdapter.getBuildingCode()), currentFloorPickerAdapter.getBuildingCode(), currentFloorPickerAdapter.getFloorsAvailable()[position], getContext(), mMap);
-
     }
 
     @Override
