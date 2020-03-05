@@ -10,16 +10,18 @@ import android.widget.GridView;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.R;
 
+import java.util.List;
+
 import androidx.core.content.ContextCompat;
 
 public class FloorPickerAdapter extends BaseAdapter {
     private OnFloorPickerOnClickListener listener;
     private Context context;
     private String buildingCode;
-    private String[] floorsAvailable;
+    private List<String> floorsAvailable;
     private Button selectedButton;
 
-    public FloorPickerAdapter(Context context, String[] floorsAvailable, String buildingCode, OnFloorPickerOnClickListener listener){
+    public FloorPickerAdapter(Context context, List<String> floorsAvailable, String buildingCode, OnFloorPickerOnClickListener listener){
         this.context = context;
         this.floorsAvailable = floorsAvailable;
         this.buildingCode = buildingCode;
@@ -28,13 +30,11 @@ public class FloorPickerAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return floorsAvailable.length;
+        return floorsAvailable.size();
     }
 
     @Override
-    public Object getItem(int position) {
-        return floorsAvailable[position];
-    }
+    public Object getItem(int position) { return floorsAvailable.get(position); }
 
     @Override
     public long getItemId(int position) {
@@ -48,7 +48,7 @@ public class FloorPickerAdapter extends BaseAdapter {
             button = new Button(context);
             button.setTextColor(context.getResources().getColor(R.color.floorPickerTextColor));
             button.setLayoutParams(new GridView.LayoutParams(120, 120));
-            button.setText(floorsAvailable[position]);
+            button.setText(floorsAvailable.get(position));
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -65,7 +65,7 @@ public class FloorPickerAdapter extends BaseAdapter {
             button = (Button) convertView;
         }
 
-        if(position == floorsAvailable.length - 1){
+        if(position == floorsAvailable.size() - 1){
             selectedButton = button;
             selectedButton.setEnabled(false);
         }
@@ -75,11 +75,11 @@ public class FloorPickerAdapter extends BaseAdapter {
     public String getBuildingCode(){
         return buildingCode;
     }
-    public String[] getFloorsAvailable() {
+    public List<String> getFloorsAvailable() {
         return floorsAvailable;
     }
 
-    public void setFloorsAvailable(String[] floorsAvailable) {
+    public void setFloorsAvailable(List<String> floorsAvailable) {
         this.floorsAvailable = floorsAvailable;
     }
 }

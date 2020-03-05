@@ -2,6 +2,7 @@ package com.example.concordia_campus_guide.Models;
 
 import android.text.TextUtils;
 
+import com.example.concordia_campus_guide.Database.Converters.StringListConverter;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 
 import org.json.JSONArray;
@@ -13,10 +14,14 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverter;
+import androidx.room.TypeConverters;
 
-@Entity (tableName = "buildings")
+@Entity (tableName = "buildings",
+        primaryKeys = {"building_code"}
+        )
 public class Building extends Place {
     /**
      * These following attributes NEED to match the fields in the JSON file. Do not change them.
@@ -24,7 +29,8 @@ public class Building extends Place {
 
     //Needs to be modified to list of floors instead.
     @ColumnInfo(name = "availableFloors")
-    private String[] availableFloors;
+    @TypeConverters(StringListConverter.class)
+    private List<String> availableFloors;
 
     @ColumnInfo(name = "width")
     private Float width;
@@ -38,15 +44,14 @@ public class Building extends Place {
     //Not sure what to do here yet
     //
     //
-    @ColumnInfo(name = "coordinates")
+    @Ignore
     private List<List<List<Double>>> coordinates;
 
     //Descriptive Attributes
     @ColumnInfo(name = "campus")
     private String Campus;
 
-    @ColumnInfo(name = "buildingCode")
-    @PrimaryKey
+    @ColumnInfo(name = "building_code")
     @NonNull
     private String BuildingCode;
 
@@ -57,15 +62,18 @@ public class Building extends Place {
     private String Address;
 
     @ColumnInfo(name = "departments")
+    @TypeConverters(StringListConverter.class)
     private List<String> Departments;
 
     @ColumnInfo(name = "services")
+    @TypeConverters(StringListConverter.class)
     private List<String> Services;
 
     @Ignore
     private GroundOverlayOptions groundOverlayOption;
 
-    public Building(Double[] centerCoordinates, String[] availableFloors, float width, float height, float bearing,
+    public Building(){}
+    public Building(Double[] centerCoordinates, List<String> availableFloors, float width, float height, float bearing,
                     String campus, String buildingCode, String Building_Long_Name, String address,
                     List<String> departments, List<String> services, List<List<List<Double>>> coordinates) {
         super(centerCoordinates);
@@ -83,11 +91,11 @@ public class Building extends Place {
         this.groundOverlayOption = null;
     }
 
-    public String[] getAvailableFloors() {
+    public List<String> getAvailableFloors() {
         return availableFloors;
     }
 
-    public void setAvailableFloors(String[] availableFloors) {
+    public void setAvailableFloors(List<String> availableFloors) {
         this.availableFloors = availableFloors;
     }
 

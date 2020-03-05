@@ -1,17 +1,15 @@
 package com.example.concordia_campus_guide.Models;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Embedded;
 
 public class Event {
-    @ColumnInfo (name = "id")
+   // @ColumnInfo (name = "id")
     private long id;
 
-    @ColumnInfo(name = "description")
+    //@ColumnInfo(name = "description")
     private String description;
 
-    @ColumnInfo(name ="location")
-    @Embedded
+   // @ColumnInfo(name ="location")
+   // @Embedded
     private Place location;
 
     public Event(String description, Place location) {
