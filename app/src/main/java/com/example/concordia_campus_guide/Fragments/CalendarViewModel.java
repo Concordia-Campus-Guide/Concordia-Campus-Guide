@@ -20,11 +20,14 @@ public class CalendarViewModel extends ViewModel {
     // The indices for the projection array above.
     private static final int PROJECTION_TITLE_INDEX = 0;
     private static final int PROJECTION_LOCATION_INDEX = 1;
+    private static final int PROJECTION_START_INDEX = 2;
+    private static final int PROJECTION_END_INDEX = 3;
 
     public static final String[] INSTANCE_PROJECTION = new String[] {
             Instances.TITLE,
             Instances.EVENT_LOCATION,
-            Instances.DURATION
+            Instances.DTSTART,
+            Instances.DTEND
     };
 
     public List<CalendarEvent> getCalendarEvents(Context context) {
@@ -49,11 +52,15 @@ public class CalendarViewModel extends ViewModel {
         while (cursor.moveToNext()) {
             String eventTitle = null;
             String eventLocation = null;
+            String eventStart = null;
+            String eventEnd = null;
 
             eventTitle = cursor.getString(PROJECTION_TITLE_INDEX);
             eventLocation = cursor.getString(PROJECTION_LOCATION_INDEX);
+            eventStart = cursor.getString(PROJECTION_START_INDEX);
+            eventEnd = cursor.getString(PROJECTION_END_INDEX);
 
-            list.add(new CalendarEvent(eventTitle, eventLocation));
+            list.add(new CalendarEvent(eventTitle, eventLocation, eventStart, eventEnd));
         }
 
         return list;
