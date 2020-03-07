@@ -15,11 +15,17 @@ public class StringListConverter  {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @TypeConverter
     public String convertToDatabaseColumn(List<String> stringList) {
-        return String.join(SPLIT_CHAR, stringList);
+        if(stringList != null){
+            return String.join(SPLIT_CHAR, stringList);
+        }
+            return null;
     }
 
     @TypeConverter
     public List<String> convertToEntityAttribute(String string) {
-        return Arrays.asList(string.split(SPLIT_CHAR));
+        if (string !=null){
+            return Arrays.asList(string.split(SPLIT_CHAR));
+        }
+        return null;
     }
 }

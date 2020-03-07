@@ -17,10 +17,10 @@ public interface BuildingDao {
     List<Building> getAll();
 
     @Query("SELECT * FROM buildings WHERE building_code=:buildingCode")
-    List<Building> findRepositoriesForUser(final String buildingCode);
+    List<Building> findRepositoriesForUser(String buildingCode);
 
     @Insert
-    void insertAll(Building... buildings);
+    void insertAll(List<Building> buildings);
 
     @Delete
     void deleteAll(Building... buildings);

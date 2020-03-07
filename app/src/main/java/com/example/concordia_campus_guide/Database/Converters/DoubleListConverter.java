@@ -14,14 +14,20 @@ public class DoubleListConverter {
 
     @TypeConverter
     public String convertToDatabaseColumn(Double[] array) {
-        return array[0] + SPLIT_CHAR +array[1];
+        if(array != null ){
+            return array[0] + SPLIT_CHAR +array[1];
+        }
+        return null;
     }
 
     @TypeConverter
     public Double[] convertToEntityAttribute(String string) {
-        int index = string.indexOf(SPLIT_CHAR);
-        Double[] coordinates = {Double.parseDouble(string.substring(0,index)),
-                Double.parseDouble(string.substring(index+1))};
-        return coordinates;
+        if(string != null){
+            int index = string.indexOf(SPLIT_CHAR);
+            Double[] coordinates = {Double.parseDouble(string.substring(0,index)),
+                    Double.parseDouble(string.substring(index+1))};
+            return coordinates;
+        }
+        return null;
     }
 }

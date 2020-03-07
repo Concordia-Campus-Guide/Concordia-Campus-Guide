@@ -17,8 +17,13 @@ import androidx.room.Room;
 
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragment;
+import com.example.concordia_campus_guide.Global.ApplicationState;
+import com.example.concordia_campus_guide.Models.Building;
+import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         swipeableInfoCard = BottomSheetBehavior.from(infoCard);
 
         AppDatabase appDB = AppDatabase.getInstance(this);
+        List<Building> listBuildings = appDB.buildingDao().getAll();
+        String s ="Assa";
     }
 
     @Override
@@ -60,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
             //TODO onClick of search_activity button
             Intent openSearch = new Intent(MainActivity.this,
                     SearchActivity.class);
+            Buildings buildings = ApplicationState.getInstance(this).getBuildings();
+            AppDatabase appDb = AppDatabase.getInstance(this);
+            appDb.buildingDao().insertAll(buildings.getBuildings());
             startActivity(openSearch);
             return false;
         }

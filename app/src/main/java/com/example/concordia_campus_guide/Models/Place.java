@@ -6,6 +6,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
@@ -13,9 +14,7 @@ import androidx.room.TypeConverters;
 @Entity(tableName = "places")
 public class Place {
 
-
-
-    @ColumnInfo(name ="place_id")
+    @Ignore
     private long id;
 
     @TypeConverters(DoubleListConverter.class)

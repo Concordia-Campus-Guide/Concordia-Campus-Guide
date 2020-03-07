@@ -30,8 +30,6 @@ public class RoomModel extends Place {
     @NonNull
     private String floorNumber;
 
-
-
     @ColumnInfo (name = "building_code")
     @NonNull
     private String buildingCode;

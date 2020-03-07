@@ -33,13 +33,13 @@ public class Building extends Place {
     private List<String> availableFloors;
 
     @ColumnInfo(name = "width")
-    private Float width;
+    private float width;
 
     @ColumnInfo(name = "height")
-    private Float height;
+    private float height;
 
     @ColumnInfo(name = "bearing")
-    private Float bearing;
+    private float bearing;
 
     //Not sure what to do here yet
     //
@@ -209,9 +209,9 @@ public class Building extends Place {
         try{
             properties.put("code", BuildingCode);
             if(centerCoordinates!=null) properties.put("center", ""+centerCoordinates[0]+", "+centerCoordinates[1]);
-            if(height!=null) properties.put("height", height);
-            if(width!=null) properties.put("width", width);
-            if(bearing!=null) properties.put("bearing", bearing);
+            if(height!=0) properties.put("height", height);
+            if(width!=0) properties.put("width", width);
+            if(bearing!=0) properties.put("bearing", bearing);
             if(availableFloors!=null) properties.put("floorsAvailable", TextUtils.join(",", availableFloors));
 
             if(coordinates==null) return null;

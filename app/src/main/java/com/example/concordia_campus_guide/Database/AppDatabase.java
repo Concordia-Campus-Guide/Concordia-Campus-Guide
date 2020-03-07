@@ -16,26 +16,24 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-@Database(entities = {Building.class, Floor.class, RoomModel.class},exportSchema = false, version = 1)
+@Database(entities = {Building.class, Floor.class, RoomModel.class},exportSchema = false, version = 2)
 @TypeConverters({StringListConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
-    private static final String DB_NAME = "ConUMaps";
+    private static final String DB_NAME = "ConUMaps.db";
     private static AppDatabase instance;
 
     public abstract FloorDao floorDao();
     public abstract RoomDao roomDao();
     public abstract BuildingDao buildingDao();
-    
-    private AppDatabase () {}
 
     public static synchronized AppDatabase getInstance(Context context) {
         if (instance == null) {
 
             instance = Room.databaseBuilder(context.getApplicationContext(),
-                    AppDatabase.class, DB_NAME).build();
+                    AppDatabase.class, DB_NAME)
+                    .allowMainThreadQueries()
+                    .build();
         }
         return instance;
     }
-
-
 }
