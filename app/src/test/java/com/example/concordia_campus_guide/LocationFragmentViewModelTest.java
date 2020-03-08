@@ -56,7 +56,7 @@ public class LocationFragmentViewModelTest  {
     @Test
     public void getBuildingsTest(){
         HashMap<String, Building> temp = new HashMap<>();
-        temp.put("H", new Building(new Double[]{45.4972685, -73.5789475}, new String[]{"8","9"}, 68, 68, 34, null, "H", null, null, null, null, null));
+        temp.put("H", new Building(new Double[]{45.4972685, -73.5789475}, new ArrayList<String>(Arrays.asList("8","9")), 68, 68, 34, null, "H", null, null, null, null, null));
         viewModel.setBuildings(temp);
         assertEquals(temp, viewModel.getBuildings());
         viewModel.setBuildings(buildings);
