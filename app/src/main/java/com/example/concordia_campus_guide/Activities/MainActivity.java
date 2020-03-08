@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         View infoCard = findViewById(R.id.info_card);
         swipeableInfoCard = BottomSheetBehavior.from(infoCard);
 
+        getApplication().getApplicationContext().deleteDatabase(AppDatabase.DB_NAME);
+
         //load buildings
         Buildings buildings = ApplicationState.getInstance(this).getBuildings();
         AppDatabase appDb = AppDatabase.getInstance(this);
@@ -68,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         List<Building> listBuildings = appDB.buildingDao().getAll();
         List<BuildingWithFloors> buildingWithFloorsList = appDB.buildingDao().getBuildingsWithFloors();
         List<FloorWithRooms> floorWithRooms = appDB.floorDao().getFloorWithRooms();
-        String s ="Assa";
+        String y = "blab";
     }
 
     @Override

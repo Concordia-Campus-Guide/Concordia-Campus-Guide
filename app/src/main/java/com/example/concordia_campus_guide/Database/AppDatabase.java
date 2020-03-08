@@ -15,10 +15,10 @@ import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Floor;
 import com.example.concordia_campus_guide.Models.RoomModel;
 
-@Database(entities = {Building.class, Floor.class, RoomModel.class},exportSchema = false, version = 19)
+@Database(entities = {Building.class, Floor.class, RoomModel.class},exportSchema = false, version = 1)
 @TypeConverters({StringListConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
-    private static final String DB_NAME = "ConUMaps.db";
+    public static final String DB_NAME = "ConUMaps.db";
     private static AppDatabase instance;
 
     public abstract FloorDao floorDao();
