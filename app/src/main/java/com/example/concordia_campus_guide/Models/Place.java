@@ -1,15 +1,12 @@
 package com.example.concordia_campus_guide.Models;
 
-import com.example.concordia_campus_guide.Database.Converters.DoubleListConverter;
-import com.example.concordia_campus_guide.Database.Converters.StringListConverter;
-import com.google.android.gms.maps.model.LatLng;
-
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
-import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
+
+import com.example.concordia_campus_guide.Database.Converters.DoubleListConverter;
+import com.google.android.gms.maps.model.LatLng;
 
 @Entity(tableName = "places")
 public abstract class Place {
@@ -20,15 +17,12 @@ public abstract class Place {
     @TypeConverters(DoubleListConverter.class)
     @ColumnInfo(name ="center_coordinates")
     protected Double[] centerCoordinates;
-    protected String displayName;
 
     public Place(Double[] centerCoordinates) {
         this.centerCoordinates = centerCoordinates;
     }
 
-    public Place() {
-
-    }
+    public Place() {}
 
     public Double[] getCenterCoordinates() {
         return centerCoordinates;

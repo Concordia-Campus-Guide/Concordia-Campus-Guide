@@ -56,13 +56,15 @@ public class RoomModel extends Place {
         super();
     }
 
-
-
     public void setRoomId(Integer roomId) {
         this.roomId = roomId;
     }
 
     public void setFloorCode(@NonNull String floorCode) {
         this.floorCode = floorCode;
+    }
+
+    public String getDisplayName(){
+        return roomCode;
     }
 }
