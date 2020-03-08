@@ -1,7 +1,5 @@
 package com.example.concordia_campus_guide.Fragments.LocationFragment;
 
-import androidx.core.app.ActivityCompat;
-import androidx.lifecycle.ViewModelProviders;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -16,7 +14,9 @@ import android.widget.GridView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
@@ -372,7 +372,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     @Override
     public void onFloorPickerOnClick(int position, View view) {
-        mViewModel.setFloorPlan(buildingsGroundOverlays.get(currentFloorPickerAdapter.getBuildingCode()), currentFloorPickerAdapter.getBuildingCode(), currentFloorPickerAdapter.getFloorsAvailable()[position], getContext(), mMap);
+        mViewModel.setFloorPlan(buildingsGroundOverlays.get(currentFloorPickerAdapter.getBuildingCode()), currentFloorPickerAdapter.getBuildingCode(), currentFloorPickerAdapter.getFloorsAvailable().get(position), getContext(), mMap);
     }
 
     @Override

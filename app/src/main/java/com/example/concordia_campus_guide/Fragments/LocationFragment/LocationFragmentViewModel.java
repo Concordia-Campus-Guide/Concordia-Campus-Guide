@@ -25,7 +25,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import static java.lang.Double.parseDouble;
 
@@ -84,14 +86,14 @@ public class LocationFragmentViewModel extends ViewModel {
     public void setBuildingGroundOverlayOptions(Building building){
         building.setGroundOverlayOption(new GroundOverlayOptions()
                 .position(new LatLng(building.getCenterCoordinates()[0], building.getCenterCoordinates()[1]), building.getWidth(), building.getHeight())
-                .image(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+building.getBuildingCode().toLowerCase()+"_"+building.getAvailableFloors()[building.getAvailableFloors().length-1].toLowerCase()+".png"))
+                .image(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+building.getBuildingCode().toLowerCase()+"_"+building.getAvailableFloors().get(building.getAvailableFloors().size()-1).toLowerCase()+".png"))
                 .bearing(building.getBearing()));
     }
 
     public Building getBuildingFromGeoJsonFeature(GeoJsonFeature feature){
         Double[] centerPos = getCenterPositionBuildingFromGeoJsonFeature(feature);
 
-        String[] floorsAvailable = getFloorsFromBuildingFromGeoJsonFeature(feature);
+        List<String> floorsAvailable = getFloorsFromBuildingFromGeoJsonFeature(feature);
         float building_width = (feature.getProperty("width") != null)? Float.parseFloat(feature.getProperty("width")): -1;
         float building_height  = (feature.getProperty("height") != null)? Float.parseFloat(feature.getProperty("height")) : -1;
         float building_bearing = (feature.getProperty("bearing") != null)? Float.parseFloat(feature.getProperty("bearing")) : -1;
@@ -104,11 +106,11 @@ public class LocationFragmentViewModel extends ViewModel {
         Double[] coordinatesDouble = new Double[]{Double.parseDouble(coordinatesString[1]), Double.parseDouble(coordinatesString[0])};
         return coordinatesDouble;
     }
-    public String[] getFloorsFromBuildingFromGeoJsonFeature(GeoJsonFeature feature) {
-        String[] floorsAvailable = null;
+    public List<String> getFloorsFromBuildingFromGeoJsonFeature(GeoJsonFeature feature) {
+        List<String> floorsAvailable = null;
 
         if (feature.getProperty("floorsAvailable") != null)
-            floorsAvailable = feature.getProperty("floorsAvailable").split(",");
+            floorsAvailable = Arrays.asList(feature.getProperty("floorsAvailable").split(","));
 
         return floorsAvailable;
     }

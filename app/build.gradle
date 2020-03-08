@@ -46,6 +46,7 @@ jacocoAndroidUnitTestReport {
     xml.enabled true
 }
 dependencies {
+    annotationProcessor "androidx.room:room-compiler:2.2.4"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'androidx.test:core:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -58,6 +59,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.google.maps.android:android-maps-utils:0.4+'
+    implementation "androidx.room:room-runtime:2.2.4"
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -65,6 +67,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     testImplementation 'junit:junit:4.12'
+    testImplementation "androidx.room:room-testing:2.2.4"
     // Optional -- Mockito framework
     testImplementation 'org.mockito:mockito-core:1.10.19'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
@@ -73,4 +76,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:0.2'
     androidTestImplementation 'com.android.support.test:rules:0.2'
     androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.1'
+    implementation group: 'javax.persistence', name: 'persistence-api', version: '1.0'
+
+
+
 }
