@@ -2,6 +2,12 @@ package com.example.concordia_campus_guide.Models;
 
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.TypeConverters;
+
 import com.example.concordia_campus_guide.Database.Converters.StringListConverter;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 
@@ -9,15 +15,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.Ignore;
-import androidx.room.Index;
-import androidx.room.PrimaryKey;
-import androidx.room.TypeConverter;
-import androidx.room.TypeConverters;
 
 @Entity (tableName = "buildings",
         primaryKeys = {"building_code"}

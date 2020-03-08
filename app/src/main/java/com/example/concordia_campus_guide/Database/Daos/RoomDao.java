@@ -1,17 +1,14 @@
 package com.example.concordia_campus_guide.Database.Daos;
 
 
-import com.example.concordia_campus_guide.Models.Building;
-import com.example.concordia_campus_guide.Models.Floor;
-import com.example.concordia_campus_guide.Models.RoomModel;
-
-import java.util.List;
-
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Room;
+
+import com.example.concordia_campus_guide.Models.RoomModel;
+
+import java.util.List;
 
 @Dao
 public interface RoomDao {
@@ -22,7 +19,7 @@ public interface RoomDao {
 
 
     @Insert
-    void insertAllRooms(RoomModel... rooms);
+    void insertAll(List<RoomModel> rooms);
 
 
     @Delete

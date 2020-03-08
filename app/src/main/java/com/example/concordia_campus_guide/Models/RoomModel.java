@@ -1,11 +1,11 @@
 package com.example.concordia_campus_guide.Models;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
+import androidx.room.PrimaryKey;
 
 import static androidx.room.ForeignKey.CASCADE;
 
@@ -13,69 +13,56 @@ import static androidx.room.ForeignKey.CASCADE;
         foreignKeys = {
                 @ForeignKey(
                         entity = Floor.class,
-                        parentColumns = {"floor_number","building_code"},
-                        childColumns = {"floor_number","building_code"},
+                        parentColumns = {"floor_code"},
+                        childColumns = {"floor_code"},
                         onDelete = CASCADE
                 ),
                 },
-        primaryKeys = {"room_number","floor_number","building_code"},
-        indices = {@Index(value = {"room_number"},
+        indices = {@Index(value = {"room_code"},
         unique = true)})
 public class RoomModel extends Place {
-    @ColumnInfo(name = "room_number")
-    @NonNull
-    private String number;
 
-    @ColumnInfo(name = "floor_number")
-    @NonNull
-    private String floorNumber;
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "room_id")
+    private Integer roomId;
 
-    @ColumnInfo (name = "building_code")
+    @ColumnInfo(name = "room_code")
     @NonNull
-    private String buildingCode;
+    private String roomCode;
 
+    @ColumnInfo(name = "floor_code")
     @NonNull
-    public String getNumber() {
-        return number;
+    private String floorCode;
+
+    public Integer getRoomId() {
+        return roomId;
     }
-
-
 
     @NonNull
-    public String getFloorNumber() {
-        return floorNumber;
+    public String getFloorCode() {
+        return floorCode;
     }
 
-    public void setFloorNumber(@NonNull String floorNumber) {
-        this.floorNumber = floorNumber;
+    @NonNull
+    public String getRoomCode() {
+        return roomCode;
     }
 
-    public void setNumber(@NonNull String number) {
-        this.number = number;
+    public void setRoomCode(@NonNull String number) {
+        this.roomCode = number;
     }
-    public String getBuidlingCode() {
-        return buildingCode;
-    }
-
-    public void setBuidlingCode(String buidlingCode) {
-        this.buildingCode = buidlingCode;
-    }
-    public String getBuildingCode() {
-        return buildingCode;
-    }
-
-    public void setBuildingCode(String buildingCode) {
-        this.buildingCode = buildingCode;
-    }
-
-
 
     public RoomModel(){
         super();
     }
-    public RoomModel(Double[] coordinates, String number) {
-        super(coordinates);
-        this.number = number;
+
+
+
+    public void setRoomId(Integer roomId) {
+        this.roomId = roomId;
     }
 
+    public void setFloorCode(@NonNull String floorCode) {
+        this.floorCode = floorCode;
+    }
 }

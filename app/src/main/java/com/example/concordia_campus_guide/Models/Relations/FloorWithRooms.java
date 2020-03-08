@@ -1,30 +1,26 @@
 package com.example.concordia_campus_guide.Models.Relations;
 
+import androidx.room.Embedded;
+import androidx.room.Relation;
+
 import com.example.concordia_campus_guide.Models.Floor;
 import com.example.concordia_campus_guide.Models.RoomModel;
 
 import java.util.List;
 
-import androidx.room.Embedded;
-import androidx.room.Relation;
-
-public class FloorToRooms {
+public class FloorWithRooms {
 
     @Embedded
     private Floor floor;
 
-    public FloorToRooms() {
+    public FloorWithRooms() {
     }
 
     @Relation(
-            parentColumn = "floor_number",
-            entityColumn = "floor_number",
-            entity = Floor.class
+            parentColumn = "floor_code",
+            entityColumn = "floor_code"
     )
     private List<RoomModel> rooms;
-
-
-
 
     public Floor getFloor() {
         return floor;

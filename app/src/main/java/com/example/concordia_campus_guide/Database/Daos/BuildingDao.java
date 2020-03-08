@@ -1,14 +1,15 @@
 package com.example.concordia_campus_guide.Database.Daos;
 
-import com.example.concordia_campus_guide.Global.User;
-import com.example.concordia_campus_guide.Models.Building;
-
-import java.util.List;
-
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
+
+import com.example.concordia_campus_guide.Models.Building;
+import com.example.concordia_campus_guide.Models.Relations.BuildingWithFloors;
+
+import java.util.List;
 
 @Dao
 public interface BuildingDao {
@@ -25,5 +26,7 @@ public interface BuildingDao {
     @Delete
     void deleteAll(Building... buildings);
 
-
+    @Transaction
+    @Query("SELECT * FROM buildings")
+    public List<BuildingWithFloors> getBuildingsWithFloors();
 }

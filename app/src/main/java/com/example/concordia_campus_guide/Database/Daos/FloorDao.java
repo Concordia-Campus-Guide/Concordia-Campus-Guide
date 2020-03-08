@@ -1,14 +1,15 @@
 package com.example.concordia_campus_guide.Database.Daos;
 
-import com.example.concordia_campus_guide.Models.Building;
-import com.example.concordia_campus_guide.Models.Floor;
-
-import java.util.List;
-
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
+
+import com.example.concordia_campus_guide.Models.Floor;
+import com.example.concordia_campus_guide.Models.Relations.FloorWithRooms;
+
+import java.util.List;
 
 @Dao
 public interface FloorDao {
@@ -17,8 +18,12 @@ public interface FloorDao {
     List<Floor> getAll();
 
     @Insert
-    void insertAll(Floor... floors);
+    void insertAll(List<Floor> floors);
 
     @Delete
     void deleteAll(Floor... floors);
+
+    @Transaction
+    @Query("SELECT * FROM floors")
+    public List<FloorWithRooms> getFloorWithRooms();
 }
