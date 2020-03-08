@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         fragmentManager = getSupportFragmentManager();
-        mViewModel.importBuildings(getApplicationContext());
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
@@ -50,27 +49,15 @@ public class MainActivity extends AppCompatActivity {
         View infoCard = findViewById(R.id.info_card);
         swipeableInfoCard = BottomSheetBehavior.from(infoCard);
 
-        getApplication().getApplicationContext().deleteDatabase(AppDatabase.DB_NAME);
+        setUpDb();
 
-        //load buildings
-        Buildings buildings = ApplicationState.getInstance(this).getBuildings();
-        AppDatabase appDb = AppDatabase.getInstance(this);
-        appDb.buildingDao().insertAll(buildings.getBuildings());
-
-        //load floors
-        Floors floors = ApplicationState.getInstance(this).getFloors();
-        appDb.floorDao().insertAll(floors.getFloors());
-
-        //load rooms
-        Rooms rooms = ApplicationState.getInstance(this).getRooms();
-        appDb.roomDao().insertAll(rooms.getRooms());
-
-
+        //examples on how to get objects from db
+        //begin
         AppDatabase appDB = AppDatabase.getInstance(this);
         List<Building> listBuildings = appDB.buildingDao().getAll();
         List<BuildingWithFloors> buildingWithFloorsList = appDB.buildingDao().getBuildingsWithFloors();
         List<FloorWithRooms> floorWithRooms = appDB.floorDao().getFloorWithRooms();
-        String y = "blab";
+        //end
     }
 
     @Override
@@ -137,5 +124,23 @@ public class MainActivity extends AppCompatActivity {
         else{
             super.onBackPressed();
         }
+    }
+
+    private void setUpDb(){
+        //delete previous db
+        getApplication().getApplicationContext().deleteDatabase(AppDatabase.DB_NAME);
+
+        //load buildings
+        Buildings buildings = ApplicationState.getInstance(this).getBuildings();
+        AppDatabase appDb = AppDatabase.getInstance(this);
+        appDb.buildingDao().insertAll(buildings.getBuildings());
+
+        //load floors
+        Floors floors = ApplicationState.getInstance(this).getFloors();
+        appDb.floorDao().insertAll(floors.getFloors());
+
+        //load rooms
+        Rooms rooms = ApplicationState.getInstance(this).getRooms();
+        appDb.roomDao().insertAll(rooms.getRooms());
     }
 }
