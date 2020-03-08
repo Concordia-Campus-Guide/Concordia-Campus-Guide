@@ -8,7 +8,7 @@ import java.util.List;
 //@Entity (tableName = "users")
 public class User {
 
-  //  @Ignore
+    //@Ignore
     public static User instance;
 
     //@ColumnInfo (name ="id")
