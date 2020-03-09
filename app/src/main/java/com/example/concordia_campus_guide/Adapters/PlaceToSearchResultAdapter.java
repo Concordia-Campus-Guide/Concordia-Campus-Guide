@@ -21,6 +21,7 @@ public class PlaceToSearchResultAdapter extends ArrayAdapter<Place> implements F
 
     Context c;
     List<Place> places;
+    List<Place> originalPlaces;
     CustomFilter cs;
 
     private static class ViewHolder {
@@ -31,6 +32,7 @@ public class PlaceToSearchResultAdapter extends ArrayAdapter<Place> implements F
         super(context, textViewResourceId, items);
         c = context;
         places = items;
+        originalPlaces = items;
     }
 
     @Override
@@ -90,9 +92,9 @@ public class PlaceToSearchResultAdapter extends ArrayAdapter<Place> implements F
 
                 ArrayList<Place> filters = new ArrayList();
 
-                for(int i = 0; i<places.size(); i++){
-                    if(places.get(i).getDisplayName().toUpperCase().contains(constraint)){
-                        filters.add(places.get(i));
+                for(int i = 0; i<originalPlaces.size(); i++){
+                    if(originalPlaces.get(i).getDisplayName().toUpperCase().contains(constraint)){
+                        filters.add(originalPlaces.get(i));
                     }
                 }
 
@@ -100,8 +102,8 @@ public class PlaceToSearchResultAdapter extends ArrayAdapter<Place> implements F
                 results.values = filters;
             }
             else{
-                results.count = places.size();
-                results.values = places;
+                results.count = originalPlaces.size();
+                results.values = originalPlaces;
             }
 
             return results;
