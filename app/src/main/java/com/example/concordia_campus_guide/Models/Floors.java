@@ -15,5 +15,11 @@ public class Floors {
         return Floors;
     }
 
-
+    public List<Place> getPlaces(){
+        List<Place> toReturn = new ArrayList<Place>();
+        for(Floor floor: Floors){
+            toReturn.add(floor);
+        }
+        return toReturn;
+    }
 }

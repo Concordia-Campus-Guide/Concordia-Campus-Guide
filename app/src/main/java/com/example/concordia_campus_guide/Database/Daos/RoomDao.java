@@ -15,7 +15,7 @@ public interface RoomDao {
 
 //    Fix the query here later
     @Query("SELECT *  FROM rooms")
-    List<RoomModel> getAllRoomsForFloorInBuiling();
+    List<RoomModel> getAll();
 
 
     @Insert

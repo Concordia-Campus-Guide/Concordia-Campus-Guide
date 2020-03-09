@@ -30,9 +30,8 @@ public class SearchActivity extends AppCompatActivity {
         searchResults = (ListView) findViewById(R.id.searchResults);
         searchText = (EditText) findViewById(R.id.searchText);
         mViewModel = ViewModelProviders.of(this).get(SearchActivityViewModel.class);
-        mViewModel.importBuildings(getApplicationContext());
 
-        adapter = new PlaceToSearchResultAdapter(this, R.layout.list_item_layout, mViewModel.getBuildings().getPlaces());
+        adapter = new PlaceToSearchResultAdapter(this, R.layout.list_item_layout, mViewModel.getAllPlaces());
         searchResults.setAdapter(adapter);
 
         searchText.addTextChangedListener(new TextWatcher(){

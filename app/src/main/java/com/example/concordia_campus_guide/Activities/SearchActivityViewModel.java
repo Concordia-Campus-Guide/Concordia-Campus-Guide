@@ -1,45 +1,55 @@
 package com.example.concordia_campus_guide.Activities;
 
 import android.app.Application;
-import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
-import com.example.concordia_campus_guide.Global.ApplicationState;
+import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Models.Building;
-import com.example.concordia_campus_guide.Models.Buildings;
+import com.example.concordia_campus_guide.Models.Floor;
+import com.example.concordia_campus_guide.Models.Place;
+import com.example.concordia_campus_guide.Models.RoomModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SearchActivityViewModel extends AndroidViewModel {
 
-    Buildings buildings;
+    List<Building> buildings;
+    List<RoomModel> rooms;
+    List<Floor> floors;
+
+    AppDatabase appDB;
 
     public SearchActivityViewModel(@NonNull Application application) {
         super(application);
+
+        appDB = AppDatabase.getInstance(application.getApplicationContext());
+        buildings = appDB.buildingDao().getAll();
+        floors = appDB.floorDao().getAll();
+        rooms = appDB.roomDao().getAll();
     }
 
-    public Buildings getBuildings() {
-        return ApplicationState.getInstance(getApplication().getApplicationContext()).getBuildings();
+    public List<Building> getBuildings() {
+        return buildings;
     }
 
-    public List<Building> getFilteredBuildings(String filter){
-        List<Building> unfilteredBuildings = getBuildings().getBuildings();
-        List<Building> filteredBuildings = new ArrayList<Building>();
-
-        for(Building building: unfilteredBuildings){
-            if(building.getBuilding_Long_Name().startsWith(filter)){
-                filteredBuildings.add(building);
-            }
-        }
-
-        return filteredBuildings;
+    public List<Floor> getFloors(){
+        return floors;
     }
 
-    public void importBuildings(Context context){
-        buildings = ApplicationState.getInstance(context).getBuildings();
+    public List<RoomModel> getRooms(){
+        return rooms;
     }
+
+    public List<Place> getAllPlaces(){
+        List<Place> toReturn = new ArrayList<Place>();
+        toReturn.addAll(buildings);
+        toReturn.addAll(floors);
+        toReturn.addAll(rooms);
+        return toReturn;
+    }
+
 
 }
