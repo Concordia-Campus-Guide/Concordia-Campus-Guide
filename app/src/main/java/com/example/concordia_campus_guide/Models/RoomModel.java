@@ -56,8 +56,6 @@ public class RoomModel extends Place {
         super();
     }
 
-
-
     public void setRoomId(Integer roomId) {
         this.roomId = roomId;
     }
@@ -66,3 +64,6 @@ public class RoomModel extends Place {
         this.floorCode = floorCode;
     }
 }
+
+//enum Type
+//STAFF_ELEVETOR, ELEVETOR, CLASSROOM, WASHROOM, STAIRS
