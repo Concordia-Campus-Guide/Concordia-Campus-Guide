@@ -213,8 +213,8 @@ public class LocationFragmentViewModel extends ViewModel {
         if (floorLayer != null) {
             floorLayer.removeLayerFromMap();
         }
-        floorLayer = initMarkersLayer(mMap, getGeoJson(context, floor));
-        getPointStyle(floorLayer);
+        floorLayer = initMarkersLayer(mMap, getGeoJson(context, buildingCode+"-"+floor.toLowerCase()));
+        // getPointStyle(floorLayer);
         floorLayer.addLayerToMap();
     }
 

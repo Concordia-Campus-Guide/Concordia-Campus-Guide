@@ -216,7 +216,7 @@ public class Building extends Place {
 
             if(cornerCoordinates ==null) return null;
 
-            geometry.put("type", "Point");
+            geometry.put("type", "Polygon");
             List<List<List<Double>>> geoJsonCoordinates = new ArrayList<>(Arrays.asList(cornerCoordinatesToListDouble()));
 
             geometry.put("coordinates", new JSONArray(geoJsonCoordinates));
