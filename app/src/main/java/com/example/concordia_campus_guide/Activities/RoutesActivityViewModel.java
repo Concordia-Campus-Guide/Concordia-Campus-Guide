@@ -56,7 +56,12 @@ public class RoutesActivityViewModel extends AndroidViewModel {
     }
 
     public void setMyCurrentLocation(Location myCurrentLocation) {
-        this.myCurrentLocation = myCurrentLocation;
-        this.from = new MyCurrentPlace(myCurrentLocation.getLatitude(), myCurrentLocation.getLongitude());
+        if(myCurrentLocation!= null){
+            this.myCurrentLocation = myCurrentLocation;
+            this.from = new MyCurrentPlace(myCurrentLocation.getLatitude(), myCurrentLocation.getLongitude());
+        }
+        else{
+            this.from = new MyCurrentPlace();
+        }
     }
 }
