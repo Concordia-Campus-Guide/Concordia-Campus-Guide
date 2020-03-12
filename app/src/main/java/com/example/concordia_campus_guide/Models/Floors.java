@@ -14,6 +14,4 @@ public class Floors {
     public List<Floor> getFloors(){
         return Floors;
     }
-
-
 }
