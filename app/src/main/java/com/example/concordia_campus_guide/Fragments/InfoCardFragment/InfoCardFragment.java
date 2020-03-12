@@ -1,5 +1,6 @@
 package com.example.concordia_campus_guide.Fragments.InfoCardFragment;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,7 +16,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.concordia_campus_guide.Global.ApplicationState;
+import com.example.concordia_campus_guide.Activities.MainActivity;
+import com.example.concordia_campus_guide.Activities.RoutesActivity;
+import com.example.concordia_campus_guide.Models.Building;
+import com.example.concordia_campus_guide.Models.Floor;
+import com.example.concordia_campus_guide.Models.Place;
+import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.R;
 
 import java.io.InputStream;
@@ -35,7 +41,7 @@ public class InfoCardFragment extends Fragment {
     private LinearLayout departments;
 
     private Button directionsBt;
-    private Button inddorMapBt;
+    private Button indoorMapBt;
 
     /**
      * Defines the view and initializes text views of the view
@@ -58,7 +64,7 @@ public class InfoCardFragment extends Fragment {
         services = view.findViewById(R.id.services);
         departments = view.findViewById(R.id.departments);
         directionsBt = view.findViewById(R.id.directions);
-        inddorMapBt = view.findViewById(R.id.indoor_map);
+        indoorMapBt = view.findViewById(R.id.indoor_map);
         return view;
     }
 
@@ -73,8 +79,9 @@ public class InfoCardFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragmentViewModel.class);
-        mViewModel.setBuilding(ApplicationState.getInstance(getContext()).getBuildings().getBuilding(this.buildingCode));
+        mViewModel.setBuilding(this.buildingCode);
         setInfoCard();
+        setOnClickListeners();
     }
 
     public void setBuildingCode(String buildingCode){
@@ -117,6 +124,24 @@ public class InfoCardFragment extends Fragment {
             servicesList.setText(text);
     }
 
+    private void setOnClickListeners(){
+        this.directionsBt.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                onClickDirections(v);
+            }
+        });
+    }
+
+    public void onClickDirections(View v){
+        Intent openRoutes= new Intent(getActivity(), RoutesActivity.class);
+
+        openRoutes.putExtra("classExtendsPlaceType", Building.class.getSimpleName());
+        openRoutes.putExtra("placeId", mViewModel.getBuilding().getId());
+        openRoutes.putExtra("myCurrentLocation", ((MainActivity) getActivity()).getMyCurrentLocation());
+
+        startActivity(openRoutes);
+    }
+
     /**
      * Intializes the building image to the image view
      *
@@ -142,6 +167,11 @@ public class InfoCardFragment extends Fragment {
 
     }
 
+    private String getPlaceType(Place place){
+        if(place instanceof RoomModel) return RoomModel.class.getSimpleName();
+        if(place instanceof Floor) return Floor.class.getSimpleName();
+        if(place instanceof Building) return Building.class.getSimpleName();
 
-
+        return null;
+    }
 }

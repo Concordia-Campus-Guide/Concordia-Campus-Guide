@@ -51,7 +51,9 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_arrow_back_24dp" />
 
-            <EditText
+            <TextView
+                android:onClick="onClickTo"
+                android:clickable="true"
                 android:id="@+id/toText"
                 android:layout_width="303dp"
                 android:layout_height="39dp"
@@ -67,7 +69,9 @@
                 app:layout_constraintStart_toEndOf="@+id/routesPageBackButton"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
+            <TextView
+                android:onClick="onClickFrom"
+                android:clickable="true"
                 android:id="@+id/fromText"
                 android:layout_width="303dp"
                 android:layout_height="39dp"

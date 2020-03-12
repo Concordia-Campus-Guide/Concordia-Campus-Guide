@@ -1,6 +1,7 @@
 package com.example.concordia_campus_guide.Activities;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -133,5 +134,9 @@ public class MainActivity extends AppCompatActivity {
         //load rooms
         Rooms rooms = ApplicationState.getInstance(this).getRooms();
         appDb.roomDao().insertAll(rooms.getRooms());
+    }
+
+    public Location getMyCurrentLocation(){
+        return this.locationFragment.getCurrentLocation();
     }
 }

@@ -1,5 +1,6 @@
 package com.example.concordia_campus_guide.Activities;
 
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
@@ -46,6 +47,14 @@ public class RoutesActivity extends AppCompatActivity {
         setBackButtonOnClick();
     }
 
+    public void onClickTo(View v){
+        openSearchPage("to");
+    }
+
+    public void onClickFrom(View v){
+        openSearchPage("from");
+    }
+
     private void setBackButtonOnClick(){
         ImageButton backButton = (ImageButton)this.findViewById(R.id.routesPageBackButton);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -54,5 +63,14 @@ public class RoutesActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void openSearchPage(String toOrFrom){
+        Intent openSearch= new Intent(RoutesActivity.this,
+                SearchActivity.class);
+
+        openSearch.putExtra("toOrFrom", toOrFrom);
+
+        startActivity(openSearch);
     }
 }
