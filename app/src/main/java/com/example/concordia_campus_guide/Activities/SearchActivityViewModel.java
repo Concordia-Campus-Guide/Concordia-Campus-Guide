@@ -1,6 +1,7 @@
 package com.example.concordia_campus_guide.Activities;
 
 import android.app.Application;
+import android.location.Location;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -19,6 +20,8 @@ public class SearchActivityViewModel extends AndroidViewModel {
     List<Building> buildings;
     List<RoomModel> rooms;
     List<Floor> floors;
+
+    Location myCurrentLocation;
 
     AppDatabase appDB;
 
@@ -51,5 +54,11 @@ public class SearchActivityViewModel extends AndroidViewModel {
         return toReturn;
     }
 
+    public Location getMyCurrentLocation() {
+        return myCurrentLocation;
+    }
 
+    public void setMyCurrentLocation(Location myCurrentLocation) {
+        this.myCurrentLocation = myCurrentLocation;
+    }
 }

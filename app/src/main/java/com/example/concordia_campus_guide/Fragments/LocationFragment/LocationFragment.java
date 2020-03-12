@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +49,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     MapView mMapView;
 
+    private Location currentLocation;
     private GoogleMap mMap;
     private LocationFragmentViewModel mViewModel;
     private GeoJsonLayer mLayer;
@@ -82,6 +84,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         initMap();
         setupClickListeners();
         getLocationPermission();
+        updateLocationEvery5Seconds();
 
         return rootView;
     }
@@ -403,5 +406,33 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     public void onLowMemory() {
         super.onLowMemory();
         mMapView.onLowMemory();
+    }
+
+    private void updateLocationEvery5Seconds(){
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable(){
+            @Override
+            public void run(){
+                fusedLocationProviderClient.getLastLocation().addOnSuccessListener(getActivity(), new updateLocationListener());
+                handler.postDelayed(this, 5000);
+            }
+        }, 5000);
+    }
+
+    public void setCurrentLocation(Location location){
+        this.currentLocation = location;
+    }
+
+    public Location getCurrentLocation(){
+        return currentLocation;
+    }
+
+    private class updateLocationListener implements OnSuccessListener {
+        @Override
+        public void onSuccess(Object location) {
+            if(location != null && location instanceof Location) {
+                LocationFragment.this.setCurrentLocation((android.location.Location) location);
+            }
+        }
     }
 }

@@ -1,28 +1,20 @@
 package com.example.concordia_campus_guide;
 
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
-
-import com.example.concordia_campus_guide.Activities.MainActivity;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.hamcrest.core.IsInstanceOf;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.filters.LargeTest;
-import androidx.test.rule.ActivityTestRule;
 import androidx.test.rule.GrantPermissionRule;
 import androidx.test.runner.AndroidJUnit4;
 import androidx.test.uiautomator.UiDevice;
@@ -59,7 +51,7 @@ public class FloorPickerUITest {
         ViewInteraction gridView = onView(
                 allOf(withId(R.id.FloorPickerGv),
                         childAtPosition(
-                                allOf(withId(R.id.fragment),
+                                allOf(withId(R.id.locationFragment),
                                         childAtPosition(
                                                 IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class),
                                                 0)),
@@ -77,7 +69,7 @@ public class FloorPickerUITest {
         ViewInteraction gridView = onView(
                 allOf(withId(R.id.FloorPickerGv),
                         childAtPosition(
-                                allOf(withId(R.id.fragment),
+                                allOf(withId(R.id.locationFragment),
                                         childAtPosition(
                                                 IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class),
                                                 0)),

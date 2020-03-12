@@ -1,6 +1,7 @@
 package com.example.concordia_campus_guide.Activities;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,6 +26,7 @@ public class SearchActivity extends AppCompatActivity {
     ListView searchResults;
     EditText searchText;
     SearchActivityViewModel mViewModel;
+
     private PlaceToSearchResultAdapter adapter;
 
     @Override
@@ -37,6 +39,10 @@ public class SearchActivity extends AppCompatActivity {
         searchResults = (ListView) findViewById(R.id.searchResults);
         searchText = (EditText) findViewById(R.id.searchText);
         mViewModel = ViewModelProviders.of(this).get(SearchActivityViewModel.class);
+
+        //get passed parameters
+        mViewModel.setMyCurrentLocation((Location) getIntent().getParcelableExtra("myCurrentLocation"));
+        mViewModel.getMyCurrentLocation();
 
         //android adapter for list view
         adapter = new PlaceToSearchResultAdapter(this, R.layout.list_item_layout, mViewModel.getAllPlaces());
@@ -70,6 +76,7 @@ public class SearchActivity extends AppCompatActivity {
 
         openRoutes.putExtra("classExtendsPlaceType", classExtendsPlaceType);
         openRoutes.putExtra("placeId", placeId);
+        openRoutes.putExtra("myCurrentLocation", mViewModel.getMyCurrentLocation());
 
         startActivity(openRoutes);
     }

@@ -15,23 +15,20 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragment;
+import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragment;
 import com.example.concordia_campus_guide.Global.ApplicationState;
-import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.Floors;
-import com.example.concordia_campus_guide.Models.Relations.BuildingWithFloors;
-import com.example.concordia_campus_guide.Models.Relations.FloorWithRooms;
 import com.example.concordia_campus_guide.Models.Rooms;
 import com.example.concordia_campus_guide.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     FragmentTransaction fragmentTransaction;
     FragmentManager fragmentManager;
     InfoCardFragment infoCardFragment;
+    LocationFragment locationFragment;
     MainActivityViewModel mViewModel;
     private BottomSheetBehavior swipeableInfoCard;
 
@@ -49,15 +46,9 @@ public class MainActivity extends AppCompatActivity {
         View infoCard = findViewById(R.id.info_card);
         swipeableInfoCard = BottomSheetBehavior.from(infoCard);
 
-        setUpDb();
+        locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
 
-        //examples on how to get objects from db
-        //begin
-        AppDatabase appDB = AppDatabase.getInstance(this);
-        List<Building> listBuildings = appDB.buildingDao().getAll();
-        List<BuildingWithFloors> buildingWithFloorsList = appDB.buildingDao().getBuildingsWithFloors();
-        List<FloorWithRooms> floorWithRooms = appDB.floorDao().getFloorWithRooms();
-        //end
+        setUpDb();
     }
 
     @Override
@@ -73,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
         if(id == R.id.search){
             Intent openSearch = new Intent(MainActivity.this,
                     SearchActivity.class);
+
+            openSearch.putExtra("myCurrentLocation", locationFragment.getCurrentLocation());
 
             startActivity(openSearch);
             return false;
@@ -93,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
 
         infoCardFragment = new InfoCardFragment();
         infoCardFragment.setBuildingCode(buildingCode);
-
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.info_card_frame, infoCardFragment);
         fragmentTransaction.commit();
