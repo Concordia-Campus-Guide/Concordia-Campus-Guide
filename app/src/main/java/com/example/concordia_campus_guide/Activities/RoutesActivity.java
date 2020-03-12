@@ -69,7 +69,10 @@ public class RoutesActivity extends AppCompatActivity {
         Intent openSearch= new Intent(RoutesActivity.this,
                 SearchActivity.class);
 
-        openSearch.putExtra("toOrFrom", toOrFrom);
+        openSearch.putExtra("fromId", mViewModel.getFrom().getId());
+        openSearch.putExtra("toId", mViewModel.getTo().getId());
+        openSearch.putExtra("selectingToOrFrom", toOrFrom);
+        openSearch.putExtra("myCurrentLocation", mViewModel.getMyCurrentLocation());
 
         startActivity(openSearch);
     }

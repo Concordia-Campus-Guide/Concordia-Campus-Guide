@@ -42,7 +42,9 @@ public class SearchActivity extends AppCompatActivity {
 
         //get passed parameters
         mViewModel.setMyCurrentLocation((Location) getIntent().getParcelableExtra("myCurrentLocation"));
-        mViewModel.getMyCurrentLocation();
+        mViewModel.setFromId(getIntent().getLongExtra("fromId", 0));
+        mViewModel.setToId(getIntent().getLongExtra("toId", 0));
+        mViewModel.setSelectingToOrFrom(getIntent().getStringExtra("selectingToOrFrom"));
 
         //android adapter for list view
         adapter = new PlaceToSearchResultAdapter(this, R.layout.list_item_layout, mViewModel.getAllPlaces());
@@ -74,6 +76,8 @@ public class SearchActivity extends AppCompatActivity {
         Intent openRoutes= new Intent(SearchActivity.this,
                 RoutesActivity.class);
 
+        openRoutes.putExtra("selectingToOrFrom", mViewModel.getSelectingToOrFrom());
+        openRoutes.putExtra()
         openRoutes.putExtra("classExtendsPlaceType", classExtendsPlaceType);
         openRoutes.putExtra("placeId", placeId);
         openRoutes.putExtra("myCurrentLocation", mViewModel.getMyCurrentLocation());

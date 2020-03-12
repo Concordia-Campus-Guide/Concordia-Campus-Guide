@@ -21,7 +21,10 @@ public class SearchActivityViewModel extends AndroidViewModel {
     List<RoomModel> rooms;
     List<Floor> floors;
 
+    Long fromId;
+    Long toId;
     Location myCurrentLocation;
+    String selectingToOrFrom;
 
     AppDatabase appDB;
 
@@ -60,5 +63,29 @@ public class SearchActivityViewModel extends AndroidViewModel {
 
     public void setMyCurrentLocation(Location myCurrentLocation) {
         this.myCurrentLocation = myCurrentLocation;
+    }
+
+    public Long getFromId() {
+        return fromId;
+    }
+
+    public void setFromId(Long fromId) {
+        this.fromId = fromId;
+    }
+
+    public Long getToId() {
+        return toId;
+    }
+
+    public void setToId(Long toId) {
+        this.toId = toId;
+    }
+
+    public String getSelectingToOrFrom() {
+        return selectingToOrFrom;
+    }
+
+    public void setSelectingToOrFrom(String selectingToOrFrom) {
+        this.selectingToOrFrom = selectingToOrFrom;
     }
 }
