@@ -8,6 +8,7 @@
     <color name="floorPickerTextColor">#FFFFFF</color>
     <color name="loginPageBackgroundColor">#FFFFFF</color>
     <color name="productGridBackgroundColor">#FFFFFF</color>
+    <color name="whiteBackgroundColor">#FFFFFF</color>
     <color name="textColor">#FFFFFF</color>
     <color name="divider">#DEBCC0</color>
     <color name="backgroundGrey">#E5E5E5</color>
