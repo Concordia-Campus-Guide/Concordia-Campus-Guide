@@ -35,7 +35,7 @@ public class LocationFragmentViewModelTest  {
     }
 
     private void setupBuildings() {
-        buildings.put("H", new Building(new Double[]{45.4972685, -73.5789475}, new ArrayList<String>(Arrays.asList("8","9")), 68, 68, 34, null, "H", null, null, null, null, null));
+        buildings.put( new Building(new Double[]{45.4972685, -73.5789475}, new ArrayList<String>(Arrays.asList("8","9")), 68, 68, 34, null, "H", null, null, null, null, null));
         buildings.put("EV", new Building(new Double[]{45.495638, -73.578258}, new ArrayList<String>(Arrays.asList("8","9")), 68, 68, 34, null, "H", null, null, null, null, null));
         buildings.put("VL", new Building(new Double[]{45.45909, -73.63844}, new ArrayList<String>(Arrays.asList("8","9")), 80, 45, 210, null, "VL", null, null, null, null, null));
         viewModel.setBuildings(buildings);
