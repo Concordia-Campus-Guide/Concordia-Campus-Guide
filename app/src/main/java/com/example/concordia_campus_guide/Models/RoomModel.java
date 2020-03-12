@@ -26,9 +26,7 @@ import static androidx.room.ForeignKey.CASCADE;
                         childColumns = {"floor_code"},
                         onDelete = CASCADE
                 ),
-                },
-        indices = {@Index(value = {"room_code"},
-        unique = true)})
+                })
 public class RoomModel extends Place {
 
     @PrimaryKey(autoGenerate = true)

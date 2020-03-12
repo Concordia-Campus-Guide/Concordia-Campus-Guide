@@ -21,6 +21,7 @@ import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.Floors;
 import com.example.concordia_campus_guide.Models.Relations.BuildingWithFloors;
 import com.example.concordia_campus_guide.Models.Relations.FloorWithRooms;
+import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.Rooms;
 import com.example.concordia_campus_guide.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -57,20 +58,21 @@ public class MainActivity extends AppCompatActivity {
         List<Building> listBuildings = appDB.buildingDao().getAll();
         List<BuildingWithFloors> buildingWithFloorsList = appDB.buildingDao().getBuildingsWithFloors();
         List<FloorWithRooms> floorWithRooms = appDB.floorDao().getFloorWithRooms();
-        //end
+        List<RoomModel> jas = appDB.roomDao().getAllRoomsByFloorCode("H-8");
+        String gs = "Asda" ;
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if(id == R.id.search){
+        if (id == R.id.search) {
             //TODO onClick of search_activity button
             Intent openSearch = new Intent(MainActivity.this,
                     SearchActivity.class);
@@ -87,8 +89,8 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param buildingCode: the Building code
      */
-    public void showInfoCard(String buildingCode){
-        if(infoCardFragment!=null){
+    public void showInfoCard(String buildingCode) {
+        if (infoCardFragment != null) {
             hideInfoCard();
         }
 
@@ -106,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Hides the info card fragment from the view.
      */
-    public void hideInfoCard(){
+    public void hideInfoCard() {
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.remove(infoCardFragment);
         fragmentTransaction.commit();
@@ -116,17 +118,16 @@ public class MainActivity extends AppCompatActivity {
      * Defines the desired behavior on backpress
      */
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         Fragment fragment = fragmentManager.findFragmentById(R.id.info_card_frame);
-        if(fragment!=null){
+        if (fragment != null) {
             hideInfoCard();
-        }
-        else{
+        } else {
             super.onBackPressed();
         }
     }
 
-    private void setUpDb(){
+    private void setUpDb() {
         //delete previous db
         getApplication().getApplicationContext().deleteDatabase(AppDatabase.DB_NAME);
 
