@@ -4,13 +4,11 @@ public class CalendarEvent {
     private String title;
     private String location;
     private String startTime;
-    private String endTime;
 
-    public CalendarEvent(String title, String location, String startTime, String endTime) {
+    public CalendarEvent(String title, String location, String startTime) {
         this.title = title;
         this.location = location;
         this.startTime = startTime;
-        this.endTime = endTime;
     }
 
     public String getTitle() {
@@ -37,21 +35,12 @@ public class CalendarEvent {
         this.startTime = startTime;
     }
 
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-    }
-
     @Override
     public String toString() {
         return "CalendarEvent{" +
                 "title='" + title + '\'' +
                 ", location='" + location + '\'' +
                 ", startTime='" + startTime + '\'' +
-                ", endTime='" + endTime + '\'' +
                 '}';
     }
 }
