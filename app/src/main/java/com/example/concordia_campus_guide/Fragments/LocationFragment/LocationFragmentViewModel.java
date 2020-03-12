@@ -1,8 +1,10 @@
 package com.example.concordia_campus_guide.Fragments.LocationFragment;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+
 import androidx.lifecycle.ViewModel;
 
 import com.example.concordia_campus_guide.Global.ApplicationState;
@@ -20,6 +22,7 @@ import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 import com.google.maps.android.geojson.GeoJsonPointStyle;
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -147,7 +150,7 @@ public class LocationFragmentViewModel extends ViewModel {
                         .anchor(0.5f,0.5f)
                         .alpha(0.90f)
                         //This line should be included whenever we test the UI for the marker:
-                        .title(buildingLabel)
+                        //.title(buildingLabel)
         );
         marker.setTag(buildingLabel);
     }

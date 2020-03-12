@@ -2,16 +2,20 @@ package com.example.concordia_campus_guide.Models;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Ignore;
+import androidx.room.Index;
+import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 import com.example.concordia_campus_guide.Database.Converters.DoubleListConverter;
 import com.google.android.gms.maps.model.LatLng;
 
-@Entity(tableName = "places")
+@Entity(tableName = "places",
+        indices = {@Index("id")}
+        )
 public abstract class Place {
 
-    @Ignore
+    @ColumnInfo(name = "id")
+    @PrimaryKey(autoGenerate = true)
     private long id;
 
     @TypeConverters(DoubleListConverter.class)

@@ -5,7 +5,6 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
-import androidx.room.PrimaryKey;
 
 import static androidx.room.ForeignKey.CASCADE;
 
@@ -22,10 +21,6 @@ import static androidx.room.ForeignKey.CASCADE;
         unique = true)})
 public class RoomModel extends Place {
 
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "room_id")
-    private Integer roomId;
-
     @ColumnInfo(name = "room_code")
     @NonNull
     private String roomCode;
@@ -33,10 +28,6 @@ public class RoomModel extends Place {
     @ColumnInfo(name = "floor_code")
     @NonNull
     private String floorCode;
-
-    public Integer getRoomId() {
-        return roomId;
-    }
 
     @NonNull
     public String getFloorCode() {
@@ -54,10 +45,6 @@ public class RoomModel extends Place {
 
     public RoomModel(){
         super();
-    }
-
-    public void setRoomId(Integer roomId) {
-        this.roomId = roomId;
     }
 
     public void setFloorCode(@NonNull String floorCode) {

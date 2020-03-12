@@ -29,4 +29,7 @@ public interface BuildingDao {
     @Transaction
     @Query("SELECT * FROM buildings")
     public List<BuildingWithFloors> getBuildingsWithFloors();
+
+    @Query("SELECT * FROM buildings WHERE id=:buildingId")
+    public Building getBuildingById(long buildingId);
 }
