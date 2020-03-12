@@ -1,0 +1,34 @@
+{
+  "Floors": [
+    {
+      "buildingCode": "H",
+      "floorCode": "H-9",
+      "altitude": 0
+    },
+    {
+      "buildingCode": "H",
+      "floorCode": "H-8",
+      "altitude": 0
+    },
+    {
+      "buildingCode": "MB",
+      "floorCode": "MB-S2",
+      "altitude": 0
+    },
+    {
+      "buildingCode": "MB",
+      "floorCode": "MB-1",
+      "altitude": 0
+    },
+    {
+      "buildingCode": "VL",
+      "floorCode": "VL-1",
+      "altitude": 0
+    },
+    {
+      "buildingCode": "VL",
+      "floorCode": "VL-2",
+      "altitude": 0
+    }
+  ]
+}

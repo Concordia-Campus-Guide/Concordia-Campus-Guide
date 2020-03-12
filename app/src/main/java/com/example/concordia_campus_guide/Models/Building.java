@@ -2,37 +2,80 @@ package com.example.concordia_campus_guide.Models;
 
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.TypeConverters;
+
+import com.example.concordia_campus_guide.Database.Converters.CoordinatesListConverter;
+import com.example.concordia_campus_guide.Database.Converters.StringListConverter;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+@Entity (tableName = "buildings",
+        primaryKeys = {"building_code"}
+        )
 public class Building extends Place {
     /**
      * These following attributes NEED to match the fields in the JSON file. Do not change them.
      */
-    //Attributes needed to create the ground overlays [ui]
-    private String[] availableFloors;
-    private Float width;
-    private Float height;
-    private Float bearing;
-    private List<List<List<Double>>> coordinates;
+
+    //Needs to be modified to list of floors instead.
+    @ColumnInfo(name = "availableFloors")
+    @TypeConverters(StringListConverter.class)
+    private List<String> availableFloors;
+
+    @ColumnInfo(name = "width")
+    private float width;
+
+    @ColumnInfo(name = "height")
+    private float height;
+
+    @ColumnInfo(name = "bearing")
+    private float bearing;
+
+    //Not sure what to do here yet
+    @Embedded
+    @TypeConverters(CoordinatesListConverter.class)
+    private ListOfCoordinates cornerCoordinates = new ListOfCoordinates();
 
     //Descriptive Attributes
+    @ColumnInfo(name = "campus")
     private String Campus;
+
+    @ColumnInfo(name = "building_code")
+    @NonNull
     private String BuildingCode;
+
+    @ColumnInfo(name = "building_long_name")
     private String Building_Long_Name;
+
+    @ColumnInfo(name = "address")
     private String Address;
+
+    @ColumnInfo(name = "departments")
+    @TypeConverters(StringListConverter.class)
     private List<String> Departments;
+
+    @ColumnInfo(name = "services")
+    @TypeConverters(StringListConverter.class)
     private List<String> Services;
 
+    @Ignore
     private GroundOverlayOptions groundOverlayOption;
 
-    public Building(Double[] centerCoordinates, String[] availableFloors, float width, float height, float bearing,
+    public Building(){}
+    public Building(Double[] centerCoordinates, List<String> availableFloors, float width, float height, float bearing,
                     String campus, String buildingCode, String Building_Long_Name, String address,
-                    List<String> departments, List<String> services, List<List<List<Double>>> coordinates) {
+                    List<String> departments, List<String> services, ListOfCoordinates cornerCoordinates) {
         super(centerCoordinates);
         this.availableFloors = availableFloors;
         this.width = width;
@@ -44,15 +87,15 @@ public class Building extends Place {
         this.Departments = departments;
         this.Services = services;
         this.bearing = bearing;
-        this.coordinates = coordinates;
+        this.cornerCoordinates = cornerCoordinates;
         this.groundOverlayOption = null;
     }
 
-    public String[] getAvailableFloors() {
+    public List<String> getAvailableFloors() {
         return availableFloors;
     }
 
-    public void setAvailableFloors(String[] availableFloors) {
+    public void setAvailableFloors(List<String> availableFloors) {
         this.availableFloors = availableFloors;
     }
 
@@ -136,12 +179,12 @@ public class Building extends Place {
         this.Services = services;
     }
 
-    public List<List<List<Double>>> getCoordinates() {
-        return coordinates;
+    public ListOfCoordinates getCornerCoordinates() {
+        return cornerCoordinates;
     }
 
-    public void setCoordinates(List<List<List<Double>>> coordinates) {
-        this.coordinates = coordinates;
+    public void setCornerCoordinates(ListOfCoordinates cornerCoordinates) {
+        this.cornerCoordinates = cornerCoordinates;
     }
 
     public String getServicesString(){
@@ -166,15 +209,17 @@ public class Building extends Place {
         try{
             properties.put("code", BuildingCode);
             if(centerCoordinates!=null) properties.put("center", ""+centerCoordinates[0]+", "+centerCoordinates[1]);
-            if(height!=null) properties.put("height", height);
-            if(width!=null) properties.put("width", width);
-            if(bearing!=null) properties.put("bearing", bearing);
+            if(height!=0) properties.put("height", height);
+            if(width!=0) properties.put("width", width);
+            if(bearing!=0) properties.put("bearing", bearing);
             if(availableFloors!=null) properties.put("floorsAvailable", TextUtils.join(",", availableFloors));
 
-            if(coordinates==null) return null;
+            if(cornerCoordinates ==null) return null;
 
             geometry.put("type", "Polygon");
-            geometry.put("coordinates", new JSONArray(coordinates));
+            List<List<List<Double>>> geoJsonCoordinates = new ArrayList<>(Arrays.asList(cornerCoordinatesToListDouble()));
+
+            geometry.put("coordinates", new JSONArray(geoJsonCoordinates));
 
             toReturn.put("type", "Feature");
             toReturn.put("properties", properties);
@@ -182,6 +227,18 @@ public class Building extends Place {
         }
         catch (Exception e){
             e.printStackTrace();
+        }
+
+        return toReturn;
+    }
+
+    private List<List<Double>> cornerCoordinatesToListDouble(){
+        List<List<Double>> toReturn = new ArrayList<>();
+
+        List<Coordinates> listOfCoordinatesObject = cornerCoordinates.getListOfCoordinates();
+
+        for(Coordinates coordinates: listOfCoordinatesObject){
+            toReturn.add(coordinates.toListDouble());
         }
 
         return toReturn;

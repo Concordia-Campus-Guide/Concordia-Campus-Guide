@@ -13,9 +13,19 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragment;
+import com.example.concordia_campus_guide.Global.ApplicationState;
+import com.example.concordia_campus_guide.Models.Building;
+import com.example.concordia_campus_guide.Models.Buildings;
+import com.example.concordia_campus_guide.Models.Floors;
+import com.example.concordia_campus_guide.Models.Relations.BuildingWithFloors;
+import com.example.concordia_campus_guide.Models.Relations.FloorWithRooms;
+import com.example.concordia_campus_guide.Models.Rooms;
 import com.example.concordia_campus_guide.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         fragmentManager = getSupportFragmentManager();
-        mViewModel.importBuildings(getApplicationContext());
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
@@ -39,6 +48,16 @@ public class MainActivity extends AppCompatActivity {
 
         View infoCard = findViewById(R.id.info_card);
         swipeableInfoCard = BottomSheetBehavior.from(infoCard);
+
+        setUpDb();
+
+        //examples on how to get objects from db
+        //begin
+        AppDatabase appDB = AppDatabase.getInstance(this);
+        List<Building> listBuildings = appDB.buildingDao().getAll();
+        List<BuildingWithFloors> buildingWithFloorsList = appDB.buildingDao().getBuildingsWithFloors();
+        List<FloorWithRooms> floorWithRooms = appDB.floorDao().getFloorWithRooms();
+        //end
     }
 
     @Override
@@ -55,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
             //TODO onClick of search_activity button
             Intent openSearch = new Intent(MainActivity.this,
                     SearchActivity.class);
+
             startActivity(openSearch);
             return false;
         }
@@ -104,5 +124,23 @@ public class MainActivity extends AppCompatActivity {
         else{
             super.onBackPressed();
         }
+    }
+
+    private void setUpDb(){
+        //delete previous db
+        getApplication().getApplicationContext().deleteDatabase(AppDatabase.DB_NAME);
+
+        //load buildings
+        Buildings buildings = ApplicationState.getInstance(this).getBuildings();
+        AppDatabase appDb = AppDatabase.getInstance(this);
+        appDb.buildingDao().insertAll(buildings.getBuildings());
+
+        //load floors
+        Floors floors = ApplicationState.getInstance(this).getFloors();
+        appDb.floorDao().insertAll(floors.getFloors());
+
+        //load rooms
+        Rooms rooms = ApplicationState.getInstance(this).getRooms();
+        appDb.roomDao().insertAll(rooms.getRooms());
     }
 }
