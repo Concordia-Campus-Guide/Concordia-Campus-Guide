@@ -16,8 +16,7 @@ import androidx.room.TypeConverters;
 
 import static androidx.room.ForeignKey.CASCADE;
 
-//Nodes of our search graph
-@Entity(tableName = "walkingpoints",
+@Entity(tableName = "walkingPoints",
         foreignKeys = {
                 @ForeignKey(
                         entity = Floor.class,
@@ -39,21 +38,23 @@ public class WalkingPoint {
     @ColumnInfo(name = "floor_code")
     private String floor_code;
 
-    @ColumnInfo(name = "connectedPoints")
+    @ColumnInfo(name = "connected_points")
     @TypeConverters(CoordinatesListConverter.class)
-    private List<Coordinates> connectedPoints;
+    private ListOfCoordinates connectedPoints;
 
-    @ColumnInfo(name = "connectedAccessPoint")
-    private List<WalkingPoint> connectedAccessPoint;
+
+
+//    @ColumnInfo(name = "connected_access_point")
+//    private List<WalkingPoint> connectedAccessPoint;
+
     // This will be a list connecting it to other accessPoints on other floors ...
     // If this is null, then we know that this WalkingPoint is NOT an accessPoint.
 
 
-    public WalkingPoint(@NonNull Coordinates coordinate, @NonNull String floor_code, List<Coordinates> connectedPoints, List<WalkingPoint> connectedAccessPoint) {
+    public WalkingPoint(@NonNull Coordinates coordinate, @NonNull String floor_code, ListOfCoordinates connectedPoints) {
         this.coordinate = coordinate;
         this.floor_code = floor_code;
         this.connectedPoints = connectedPoints;
-        this.connectedAccessPoint = connectedAccessPoint;
     }
 
     @Override

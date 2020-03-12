@@ -65,5 +65,4 @@ public class RoomModel extends Place {
     }
 }
 
-//enum Type
-//STAFF_ELEVETOR, ELEVETOR, CLASSROOM, WASHROOM, STAIRS
+
