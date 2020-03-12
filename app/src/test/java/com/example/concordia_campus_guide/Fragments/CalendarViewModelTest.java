@@ -1,8 +1,8 @@
 package com.example.concordia_campus_guide.Fragments;
 
 import android.database.Cursor;
-import androidx.lifecycle.ViewModel;
-import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel;
+
+import com.example.concordia_campus_guide.Fragments.CalendarFragment.CalendarViewModel;
 import com.example.concordia_campus_guide.Models.CalendarEvent;
 import org.junit.Before;
 import org.junit.Test;

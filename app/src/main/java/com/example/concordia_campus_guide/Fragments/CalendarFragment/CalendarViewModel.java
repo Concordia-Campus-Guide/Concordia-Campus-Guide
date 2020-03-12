@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.Fragments;
+package com.example.concordia_campus_guide.Fragments.CalendarFragment;
 
 import android.content.ContentUris;
 import android.content.Context;
@@ -37,8 +37,7 @@ public class CalendarViewModel extends ViewModel {
         ContentUris.appendId(eventsUriBuilder, startTime);
         ContentUris.appendId(eventsUriBuilder, endTime);
         Uri eventsUri = eventsUriBuilder.build();
-        Cursor cursor = null;
-        cursor = context.getContentResolver().query(
+        Cursor cursor = context.getContentResolver().query(
                 eventsUri,
                 INSTANCE_PROJECTION,
                 null,
@@ -54,15 +53,11 @@ public class CalendarViewModel extends ViewModel {
         ArrayList<CalendarEvent> list = new ArrayList<>();
 
         while (cursor.moveToNext()) {
-            String eventTitle = null;
-            String eventLocation = null;
-            String eventStart = null;
+           String eventTitle = cursor.getString(PROJECTION_TITLE_INDEX);
+           String eventLocation = cursor.getString(PROJECTION_LOCATION_INDEX);
+           String eventStart = cursor.getString(PROJECTION_START_INDEX);
 
-            eventTitle = cursor.getString(PROJECTION_TITLE_INDEX);
-            eventLocation = cursor.getString(PROJECTION_LOCATION_INDEX);
-            eventStart = cursor.getString(PROJECTION_START_INDEX);
-
-            list.add(new CalendarEvent(eventTitle, eventLocation, eventStart));
+           list.add(new CalendarEvent(eventTitle, eventLocation, eventStart));
         }
 
         return list;

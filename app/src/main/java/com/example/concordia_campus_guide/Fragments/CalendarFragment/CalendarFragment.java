@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.Fragments;
+package com.example.concordia_campus_guide.Fragments.CalendarFragment;
 
 import android.database.Cursor;
 import androidx.core.app.ActivityCompat;

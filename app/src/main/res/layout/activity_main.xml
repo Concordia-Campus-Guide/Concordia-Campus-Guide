@@ -63,7 +63,7 @@
 
     <fragment
         android:id="@+id/fragment2"
-        android:name="com.example.concordia_campus_guide.Fragments.CalendarFragment"
+        android:name="com.example.concordia_campus_guide.Fragments.CalendarFragment.CalendarFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
