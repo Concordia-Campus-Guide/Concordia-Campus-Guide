@@ -62,7 +62,6 @@ public class LocationFragmentViewModel extends ViewModel {
      */
     private GeoJsonLayer initLayer(GoogleMap map, Context applicationContext){
         GeoJsonLayer layer = null;
-
         try {
             JSONObject geoJsonLayer = ApplicationState.getInstance(applicationContext).getBuildings().getGeoJson();
             layer = new GeoJsonLayer(map, geoJsonLayer);
@@ -206,7 +205,7 @@ public class LocationFragmentViewModel extends ViewModel {
             floorLayer.removeLayerFromMap();
         }
         floorLayer = initMarkersLayer(mMap, getJsonObject("buildings_floors_json/" + fileName  + ".json", context));
-        getPointStyle(floorLayer);
+        // getPointStyle(floorLayer);
         floorLayer.addLayerToMap();
     }
 

@@ -1,0 +1,354 @@
+{ "Rooms" : [
+    {
+        "roomCode": 101.5,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.6379536986351,
+            45.45904134548314
+        ]
+    },
+    {
+        "roomCode": 140,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63864570856094,
+            45.459291564778844
+        ]
+    },
+    {
+        "roomCode": 197.1,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.6386752128601,
+            45.45924829385221
+        ]
+    },
+    {
+        "roomCode": 103.1,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63860815763474,
+            45.45922571770342
+        ]
+    },
+    {
+        "roomCode": "mens",
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63866180181503,
+            45.459043226835355
+        ]
+    },
+    {
+        "roomCode": "womens",
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63864302635193,
+            45.45906580305725
+        ]
+    },
+    {
+        "roomCode": 101.7,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63798320293427,
+            45.45901500654529
+        ]
+    },
+    {
+        "roomCode": "staff washrooms",
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63799929618835,
+            45.45899995571817
+        ]
+    },
+    {
+        "roomCode": 101.6,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63796979188918,
+            45.45902817601576
+        ]
+    },
+    {
+        "roomCode": 102,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63801538944244,
+            45.458983023532845
+        ]
+    },
+    {
+        "roomCode": 102.2,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63810390233994,
+            45.4589924303031
+        ]
+    },
+    {
+        "roomCode": 102.4,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63810390233994,
+            45.45896797269717
+        ]
+    },
+    {
+        "roomCode": "stairs",
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63868594169617,
+            45.45922571770342
+        ]
+    },
+    {
+        "roomCode": "mens",
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63871812820435,
+            45.45909778602276
+        ]
+    },
+    {
+        "roomCode": "womens",
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63873690366745,
+            45.4590714471113
+        ]
+    },
+    {
+        "roomCode": 102.3,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63815218210219,
+            45.458983023532845
+        ]
+    },
+    {
+        "roomCode": 194.3,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63818436861038,
+            45.459003718425315
+        ]
+    },
+    {
+        "roomCode": "elevators",
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63819777965546,
+            45.458994311656944
+        ]
+    },
+    {
+        "roomCode": "stairs",
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63821655511856,
+            45.458954803212656
+        ]
+    },
+    {
+        "roomCode": 120,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63871812820435,
+            45.45912224357239
+        ]
+    },
+    {
+        "roomCode": 106.2,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63870203495026,
+            45.4591372943669
+        ]
+    },
+    {
+        "roomCode": 106.1,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63867789506912,
+            45.45915422650591
+        ]
+    },
+    {
+        "roomCode": 104,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.6385303735733,
+            45.45922195501108
+        ]
+    },
+    {
+        "roomCode": 104.1,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63849818706512,
+            45.45924641250684
+        ]
+    },
+    {
+        "roomCode": 101.2,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63844454288483,
+            45.45922195501108
+        ]
+    },
+    {
+        "roomCode": 101.1,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63847404718398,
+            45.45919749750468
+        ]
+    },
+    {
+        "roomCode": 124,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.6382782459259,
+            45.45895856592281
+        ]
+    },
+    {
+        "roomCode": 122.1,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63826751708984,
+            45.45897926082429
+        ]
+    },
+    {
+        "roomCode": 122,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63835871219635,
+            45.45900183707178
+        ]
+    },
+    {
+        "roomCode": 128,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63836407661438,
+            45.45893222694632
+        ]
+    },
+    {
+        "roomCode": 130,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.6383318901062,
+            45.458898362529894
+        ]
+    },
+    {
+        "roomCode": 126,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63846331834793,
+            45.45896797269717
+        ]
+    },
+    {
+        "roomCode": "stairs",
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63854110240936,
+            45.45901876925146
+        ]
+    },
+    {
+        "roomCode": 127.5,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.6384043097496,
+            45.45888331167162
+        ]
+    },
+    {
+        "roomCode": 121,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63868057727814,
+            45.45899054894915
+        ]
+    },
+    {
+        "roomCode": 121.3,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63877177238464,
+            45.45901876925146
+        ]
+    },
+    {
+        "roomCode": 127.4,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63846063613892,
+            45.458898362529894
+        ]
+    },
+    {
+        "roomCode": 127.3,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63849818706512,
+            45.45890965067096
+        ]
+    },
+    {
+        "roomCode": 127.2,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.6385652422905,
+            45.45893034559038
+        ]
+    },
+    {
+        "roomCode": 121.2,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63860547542572,
+            45.458945396436086
+        ]
+    },
+    {
+        "roomCode": 127.1,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63853842020035,
+            45.45895104050222
+        ]
+    },
+    {
+        "roomCode": 121.1,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.6385840177536,
+            45.458960447277796
+        ]
+    },
+    {
+        "roomCode": 101.4,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.63814145326614,
+            45.45916551459574
+        ]
+    },
+    {
+        "roomCode": 101.3,
+        "floorCode": "VL-1",
+        "centerCoordinates": [
+            -73.6381709575653,
+            45.4591372943669
+        ]
+    }
+]}
