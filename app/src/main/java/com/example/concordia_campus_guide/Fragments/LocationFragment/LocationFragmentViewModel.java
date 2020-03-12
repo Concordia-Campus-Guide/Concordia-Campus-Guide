@@ -5,8 +5,12 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import androidx.lifecycle.ViewModel;
 
+import com.example.concordia_campus_guide.Database.AppDatabase;
+import com.example.concordia_campus_guide.Database.Daos.RoomDao;
+import com.example.concordia_campus_guide.Database.Daos.RoomDao_Impl;
 import com.example.concordia_campus_guide.Global.ApplicationState;
 import com.example.concordia_campus_guide.Models.Building;
+import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
@@ -16,10 +20,13 @@ import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.JsonObject;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 import com.google.maps.android.geojson.GeoJsonPointStyle;
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -62,6 +69,7 @@ public class LocationFragmentViewModel extends ViewModel {
      */
     private GeoJsonLayer initLayer(GoogleMap map, Context applicationContext){
         GeoJsonLayer layer = null;
+
         try {
             JSONObject geoJsonLayer = ApplicationState.getInstance(applicationContext).getBuildings().getGeoJson();
             layer = new GeoJsonLayer(map, geoJsonLayer);
@@ -201,32 +209,46 @@ public class LocationFragmentViewModel extends ViewModel {
     public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, Context context, GoogleMap mMap) {
         String fileName = buildingCode.toLowerCase()+"_"+floor.toLowerCase();
         groundOverlay.setImage(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+fileName+".png"));
+
         if (floorLayer != null) {
             floorLayer.removeLayerFromMap();
         }
-        floorLayer = initMarkersLayer(mMap, getJsonObject("buildings_floors_json/" + fileName  + ".json", context));
-        // getPointStyle(floorLayer);
+        floorLayer = initMarkersLayer(mMap, getGeoJson(context, floor));
+        getPointStyle(floorLayer);
         floorLayer.addLayerToMap();
     }
 
-    public JSONObject getJsonObject(String fileName, Context context) {
-        JSONObject jObect = null;
-        try {
-            InputStream is = context.getAssets().open(fileName);
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            String json = new String(buffer, "UTF-8");
-            jObect = new JSONObject(json);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        } catch (JSONException e) {
+    public JSONObject getGeoJson(Context context, String floor){
+        JSONObject toReturn = new JSONObject();
+        try{
+            toReturn.put("type", "FeatureCollection");
+            toReturn.put("features", getInnerGeoJson(context, floor));
+        }
+        catch (Exception e){
             e.printStackTrace();
         }
-        return jObect;
+
+        return toReturn;
     }
+
+    public JSONArray getInnerGeoJson(Context context, String floor){
+        AppDatabase appDB = AppDatabase.getInstance(context);
+        List<RoomModel> roomModelList = appDB.roomDao().getAllRoomsByFloorCode(floor);
+        JSONArray features = new JSONArray();
+
+        try{
+            for(RoomModel roomModel: roomModelList){
+                JSONObject roomGeoJSON = roomModel.getGeoJson();
+                if(roomGeoJSON!=null) features.put(roomGeoJSON);
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return features;
+    }
+
     public Building getBuildingFromeCode(String buildingCode) {
         return buildings.get(buildingCode);
     }

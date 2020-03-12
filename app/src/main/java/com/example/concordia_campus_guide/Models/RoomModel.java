@@ -1,11 +1,20 @@
 package com.example.concordia_campus_guide.Models;
 
+import android.text.TextUtils;
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static androidx.room.ForeignKey.CASCADE;
 
@@ -56,7 +65,30 @@ public class RoomModel extends Place {
         super();
     }
 
+    public JSONObject getGeoJson(){
+        JSONObject toReturn = new JSONObject();
+        JSONObject properties = new JSONObject();
+        JSONObject geometry = new JSONObject();
 
+        try{
+            toReturn.put("type", "Feature");
+
+            properties.put("floorCode", floorCode);
+            if(roomCode!=null) properties.put("roomCode", roomCode);
+            toReturn.put("properties", properties);
+
+            geometry.put("type", "Point");
+            Double[] geoJsonCoordinates = centerCoordinates;
+            geometry.put("coordinates", new JSONArray(geoJsonCoordinates));
+
+            toReturn.put("geometry", geometry);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return toReturn;
+    }
 
     public void setRoomId(Integer roomId) {
         this.roomId = roomId;
