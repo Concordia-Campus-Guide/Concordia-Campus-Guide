@@ -7,10 +7,12 @@ import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,13 +37,16 @@ import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 
@@ -61,6 +66,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private Boolean myLocationPermissionsGranted = false;
     private HashMap<String, GroundOverlay> buildingsGroundOverlays;
     private FloorPickerAdapter currentFloorPickerAdapter;
+    private List<LatLng> temporaryList;
 
     private Button selectedFloor;
 
@@ -79,14 +85,11 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         initComponent(rootView);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
-
         initMap();
         setupClickListeners();
         getLocationPermission();
-
         return rootView;
     }
-
 
     /**
      * @param rootView is the object that contains the parts displayed on the fragment
@@ -99,6 +102,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         mFloorPickerGv.setVisibility(View.GONE);
         buildingsGroundOverlays = new HashMap<>();
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
+        temporaryList = new ArrayList<>();
     }
 
     private void setupFloorPickerAdapter(Building building) {
@@ -134,6 +138,13 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                 initFloorPlans();
                 uiSettingsForMap(mMap);
                 setFirstLocationToDisplay();
+                mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                    @Override
+                    public void onMapClick(LatLng latLng) {
+                        android.util.Log.i("onMapClick", Double.toString(latLng.latitude) + " - "+ Double.toString(latLng.longitude));
+                        temporaryList.add(latLng);
+                    }
+                });
             }
         });
     }
@@ -308,7 +319,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                Log.i(TAG,marker.getTag().toString());
+                Log.i(TAG,marker.getPosition().toString());
                 return false;
             }
         });
