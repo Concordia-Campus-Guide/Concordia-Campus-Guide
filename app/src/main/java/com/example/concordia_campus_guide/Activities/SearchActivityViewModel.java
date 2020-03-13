@@ -50,11 +50,11 @@ public class SearchActivityViewModel extends AndroidViewModel {
     }
 
     public List<Place> getAllPlaces(){
-        List<Place> toReturn = new ArrayList<Place>();
-        toReturn.addAll(buildings);
-        toReturn.addAll(floors);
-        toReturn.addAll(rooms);
-        return toReturn;
+        List<Place> places = new ArrayList<Place>();
+        places.addAll(buildings);
+        places.addAll(floors);
+        places.addAll(rooms);
+        return places;
     }
 
     public Location getMyCurrentLocation() {

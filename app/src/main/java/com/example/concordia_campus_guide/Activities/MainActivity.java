@@ -67,8 +67,7 @@ public class MainActivity extends AppCompatActivity {
             Intent openSearch = new Intent(MainActivity.this,
                     SearchActivity.class);
 
-            SelectingToFromState.setMyCurrentLocation(locationFragment.getCurrentLocation());
-            openSearch.putExtra("myCurrentLocation", locationFragment.getCurrentLocation());
+            SelectingToFromState.setMyCurrentLocation(getMyCurrentLocation());
 
             startActivity(openSearch);
             return false;

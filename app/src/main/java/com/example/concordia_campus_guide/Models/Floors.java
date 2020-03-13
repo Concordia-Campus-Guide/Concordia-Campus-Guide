@@ -16,10 +16,10 @@ public class Floors {
     }
 
     public List<Place> getPlaces(){
-        List<Place> toReturn = new ArrayList<Place>();
+        List<Place> places = new ArrayList<Place>();
         for(Floor floor: Floors){
-            toReturn.add(floor);
+            places.add(floor);
         }
-        return toReturn;
+        return places;
     }
 }

@@ -19,11 +19,11 @@ public class Buildings {
     }
 
     public List<Place> getPlaces(){
-        List<Place> toReturn = new ArrayList<Place>();
+        List<Place> places = new ArrayList<Place>();
         for(Building building: Buildings){
-            toReturn.add(building);
+            places.add(building);
         }
-        return toReturn;
+        return places;
     }
 
     public Building getBuilding(String buildingCode){

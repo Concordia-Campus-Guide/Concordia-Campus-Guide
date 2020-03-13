@@ -18,10 +18,10 @@ public class Rooms {
     }
 
     public List<Place> getPlaces(){
-        List<Place> toReturn = new ArrayList<Place>();
+        List<Place> places = new ArrayList<Place>();
         for(RoomModel room: Rooms){
-            toReturn.add(room);
+            places.add(room);
         }
-        return toReturn;
+        return places;
     }
 }
