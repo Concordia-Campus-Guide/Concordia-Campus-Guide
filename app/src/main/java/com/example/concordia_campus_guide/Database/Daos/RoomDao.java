@@ -15,7 +15,7 @@ public interface RoomDao {
 
 //    Fix the query here later
     @Query("SELECT *  FROM rooms")
-    List<RoomModel> getAllRoomsForFloorInBuiling();
+    List<RoomModel> getAll();
 
 
     @Insert
@@ -25,5 +25,6 @@ public interface RoomDao {
     @Delete
     void deleteAll(RoomModel... rooms);
 
-
+    @Query("SELECT * FROM rooms WHERE id=:roomId")
+    public RoomModel getRoomById(long roomId);
 }

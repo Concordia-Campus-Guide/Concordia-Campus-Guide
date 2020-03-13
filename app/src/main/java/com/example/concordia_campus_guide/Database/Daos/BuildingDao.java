@@ -20,6 +20,9 @@ public interface BuildingDao {
     @Query("SELECT * FROM buildings WHERE building_code=:buildingCode")
     List<Building> findRepositoriesForUser(String buildingCode);
 
+    @Query("SELECT * FROM buildings WHERE building_code=:buildingCode")
+    Building getBuildingByBuildingCode(String buildingCode);
+
     @Insert
     void insertAll(List<Building> buildings);
 
@@ -29,4 +32,7 @@ public interface BuildingDao {
     @Transaction
     @Query("SELECT * FROM buildings")
     public List<BuildingWithFloors> getBuildingsWithFloors();
+
+    @Query("SELECT * FROM buildings WHERE id=:buildingId")
+    public Building getBuildingById(long buildingId);
 }

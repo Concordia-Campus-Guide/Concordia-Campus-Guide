@@ -1,36 +1,32 @@
 package com.example.concordia_campus_guide.Fragments.InfoCardFragment;
 
-import android.widget.TextView;
-import androidx.lifecycle.ViewModel;
+import android.app.Application;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+
+import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Models.Building;
+import com.example.concordia_campus_guide.Models.Place;
 
-public class InfoCardFragmentViewModel extends ViewModel {
+public class InfoCardFragmentViewModel extends AndroidViewModel {
 
-    private Building building;
-    private TextView infoCardTitle;
-    private TextView buildingAddress;
+    private Place place;
+    private AppDatabase appDb;
+
+    public InfoCardFragmentViewModel(@NonNull Application application) {
+        super(application);
+
+        appDb = AppDatabase.getInstance(application.getApplicationContext());
+    }
 
     public Building getBuilding() {
-        return building;
-    }
-    public void setBuilding(Building building) {
-        this.building = building;
+        return (Building) place;
     }
 
-    public TextView getInfoCardTitle() {
-        return infoCardTitle;
-    }
+    public void setBuilding(String buildingCode){ this.place = (Place) appDb.buildingDao().getBuildingByBuildingCode(buildingCode); }
 
-    public void setInfoCardTitle(TextView infoCardTitle) {
-        this.infoCardTitle = infoCardTitle;
-    }
-
-    public TextView getBuildingAddress() {
-        return buildingAddress;
-    }
-
-    public void setBuildingAddress(TextView buildingAddress) {
-        this.buildingAddress = buildingAddress;
+    public void setPlace(Place place) {
+        this.place = place;
     }
 }
