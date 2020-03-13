@@ -2,13 +2,14 @@
   "walkingPoints" : [
     {
       "id": 1,
-      "coordinate":"1,2",
-      "floorCode" : "",
-      "connectedPointsId": [
-        1,2,3
-      ],
-      "pointType": "Walking"
-    },
-    {},
+      "coordinate":{
+        "latitude": 12.24,
+        "longitude": 123.23
+      },
+      "floorCode" : "H-8",
+      "connectedPointsId": [1,2,3],
+      "pointType": "CLASSROOM"
+    }
   ]
 }
+

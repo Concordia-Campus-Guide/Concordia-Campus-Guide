@@ -6,6 +6,7 @@ import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.Floors;
 import com.example.concordia_campus_guide.Models.Rooms;
+import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.Models.WalkingPoints;
 import com.example.concordia_campus_guide.R;
 import com.google.gson.Gson;
@@ -121,5 +122,7 @@ public class ApplicationState {
     public Rooms getRooms(){
         return this.rooms;
     }
+
+    public WalkingPoints getWalkingPoints() { return this.walkingPoints; }
 
 }

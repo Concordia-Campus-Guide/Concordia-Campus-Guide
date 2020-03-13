@@ -32,7 +32,6 @@ public  class WalkingPoint {
     @PrimaryKey
     private int id;
 
-    @NonNull
     @ColumnInfo(name = "coordinate")
     @TypeConverters(CoordinatesConverter.class)
     private Coordinates coordinate;

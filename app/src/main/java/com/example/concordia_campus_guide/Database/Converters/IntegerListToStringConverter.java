@@ -13,7 +13,7 @@ public class IntegerListToStringConverter {
         if(listOfIds != null ){
             StringBuilder idsInString = new StringBuilder();
             for (int id : listOfIds ){
-                idsInString.append(id);
+                idsInString.append(id +SPLIT_CHAR);
             }
             return  idsInString.toString();
         }

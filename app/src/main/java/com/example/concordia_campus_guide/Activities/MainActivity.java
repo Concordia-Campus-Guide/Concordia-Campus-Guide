@@ -1,5 +1,6 @@
 package com.example.concordia_campus_guide.Activities;
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,6 +23,8 @@ import com.example.concordia_campus_guide.Models.Floors;
 import com.example.concordia_campus_guide.Models.Relations.BuildingWithFloors;
 import com.example.concordia_campus_guide.Models.Relations.FloorWithRooms;
 import com.example.concordia_campus_guide.Models.Rooms;
+import com.example.concordia_campus_guide.Models.WalkingPoint;
+import com.example.concordia_campus_guide.Models.WalkingPoints;
 import com.example.concordia_campus_guide.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
@@ -57,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         List<Building> listBuildings = appDB.buildingDao().getAll();
         List<BuildingWithFloors> buildingWithFloorsList = appDB.buildingDao().getBuildingsWithFloors();
         List<FloorWithRooms> floorWithRooms = appDB.floorDao().getFloorWithRooms();
+        List<WalkingPoint> walkingPoints = appDB.walkingPointDao().getAll();
         //end
     }
 
@@ -142,5 +146,8 @@ public class MainActivity extends AppCompatActivity {
         //load rooms
         Rooms rooms = ApplicationState.getInstance(this).getRooms();
         appDb.roomDao().insertAll(rooms.getRooms());
+
+        WalkingPoints walkingPoints = ApplicationState.getInstance(this).getWalkingPoints();
+        appDb.walkingPointDao().insertAll(walkingPoints.getWalkingPoints());
     }
 }
