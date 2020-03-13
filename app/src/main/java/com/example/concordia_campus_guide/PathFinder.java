@@ -37,6 +37,20 @@ public class PathFinder {
         this.destinationGoal = getWalkingPoint(destination.getCenterCoordinates(), destination.getFloorCode(), walkingPoints);
     }
 
+    //Helper ctor for testing purposes, don't push with this!!!!
+    public PathFinder(Context context, Double[] source, Double[] destination, String floorCode) {
+        appDb = AppDatabase.getInstance(context);
+
+        Comparator<WalkingPointNode> comparator = new WalkingPointComparator();
+        this.walkingPointsToVisit = new PriorityQueue<WalkingPointNode>(comparator);
+
+        List<WalkingPoint> walkingPoints = appDb.walkingPointDao().getAll();
+        populateWalkingPointMap(walkingPoints);
+
+        this.initialCoordinate = getWalkingPoint(source, floorCode, walkingPoints);
+        this.destinationGoal = getWalkingPoint(destination, floorCode, walkingPoints);
+    }
+
     public WalkingPoint getWalkingPoint(Double[] coordinates, String floorcode, List<WalkingPoint> walkingPointList) {
         //TODO: If no walking point corresponds to room, return the access point of the floor on which the room is.
         final WalkingPoint wantedPoint = new WalkingPoint(new Coordinates(coordinates[0], coordinates[1]), floorcode, null, null);
