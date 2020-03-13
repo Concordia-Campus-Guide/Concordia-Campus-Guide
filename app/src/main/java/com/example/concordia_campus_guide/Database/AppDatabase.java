@@ -11,7 +11,6 @@ import com.example.concordia_campus_guide.Database.Converters.StringListConverte
 import com.example.concordia_campus_guide.Database.Daos.BuildingDao;
 import com.example.concordia_campus_guide.Database.Daos.FloorDao;
 import com.example.concordia_campus_guide.Database.Daos.RoomDao;
-import com.example.concordia_campus_guide.Models.AccessibilityType;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Floor;
 import com.example.concordia_campus_guide.Models.RoomModel;
