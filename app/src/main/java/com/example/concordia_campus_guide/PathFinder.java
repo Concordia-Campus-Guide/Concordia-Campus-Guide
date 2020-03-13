@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Models.Coordinates;
-import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.PointType;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
@@ -17,23 +16,23 @@ import java.util.PriorityQueue;
 import java.util.function.Predicate;
 
 public class PathFinder {
+
     HashMap<Integer, WalkingPoint> walkingPointMap;
     PriorityQueue<WalkingPointNode> walkingPointsToVisit;
     HashMap<WalkingPoint, Double> walkingPointsVisited;
     WalkingPoint initialCoordinate;
     WalkingPoint destinationGoal;
     WalkingPointNode goalNode;
-    AppDatabase appDb;
+    Context context;
 
     public PathFinder(Context context, RoomModel source, RoomModel destination) {
-        appDb = AppDatabase.getInstance(context);
 
         Comparator<WalkingPointNode> comparator = new WalkingPointComparator();
-        this.walkingPointsToVisit = new PriorityQueue<WalkingPointNode>(comparator);
+        this.walkingPointsToVisit = new PriorityQueue<>(comparator);
 
-        List<WalkingPoint> walkingPoints = appDb.walkingPointDao().getAll();
+        List<WalkingPoint> walkingPoints = AppDatabase.getInstance(context).walkingPointDao().getAll();
         populateWalkingPointMap(walkingPoints);
-
+        this.context = context;
         this.initialCoordinate = getWalkingPoint(source.getCenterCoordinates(), source.getFloorCode(), walkingPoints);
         this.destinationGoal = getWalkingPoint(destination.getCenterCoordinates(), destination.getFloorCode(), walkingPoints);
     }
@@ -62,7 +61,7 @@ public class PathFinder {
             heuristic =
                     getBirdViewDistanceBetweenWalkingPoints(currentCoordinate, destinationGoal);
         } else {
-            WalkingPoint accessPoint = getNearestAccessPointForFloor(currentCoordinate.getFloorCode(), currentCoordinate);
+            WalkingPoint accessPoint = getNearestAccessPointForFloor(currentCoordinate);
             heuristic = getBirdViewDistanceBetweenWalkingPoints(currentCoordinate, accessPoint) + getBirdViewDistanceBetweenWalkingPoints(accessPoint, destinationGoal);
         }
 
@@ -73,8 +72,8 @@ public class PathFinder {
         return currentCoordinate.getCost() + getHeuristicEstimate(currentCoordinate.getWalkingPoint());
     }
 
-    private WalkingPoint getNearestAccessPointForFloor(String floorCode, WalkingPoint currentPoint) {
-        List<WalkingPoint> accessPtList = appDb.walkingPointDao().getAllAccessPointsOnFloor(floorCode, PointType.ELEVATOR);
+    private WalkingPoint getNearestAccessPointForFloor(WalkingPoint currentPoint) {
+        List<WalkingPoint> accessPtList = AppDatabase.getInstance(context).walkingPointDao().getAllAccessPointsOnFloor(currentPoint.getFloorCode(), PointType.ELEVATOR);
 
         WalkingPoint closestPoint = null;
         if (!accessPtList.isEmpty()) {
