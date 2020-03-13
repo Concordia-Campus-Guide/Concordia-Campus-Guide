@@ -25,6 +25,8 @@ import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.Models.Building;
+import com.example.concordia_campus_guide.Models.WalkingPoint;
+import com.example.concordia_campus_guide.PathFinder;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -154,7 +156,20 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                 });
             }
         });
+
+        Double[] src = {45.49748331	-73.5787892};
+        Double[] trg = {45.49731974	-73.57883681};
+        PathFinder path = new PathFinder(getContext(), src, trg, "H-9");
+        MarkerOptions marker;
+        List<WalkingPoint> list = path.getSolutionPath();
+        for(int i = list.size() - 1 ; i >= 0; i-- ){
+            WalkingPoint point = list.get(i);
+            LatLng latLng = new LatLng(point.getCoordinate().getLatitude(), point.getCoordinate().getLongitude());
+            marker = new MarkerOptions().position(latLng).title(String.valueOf(markerCounter)).visible(true);
+            mMap.addMarker(marker);
+        }
     }
+
 
 
     private void setFirstLocationToDisplay(){
