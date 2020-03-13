@@ -168,6 +168,8 @@
 <!--            android:layout_height="15dp"-->
 <!--            android:background="@color/colorPrimary" />-->
 
+<!--    TODO: Convert to ListView. Should we limit height or limit number of items?  -->
+
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp"
