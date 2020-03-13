@@ -25,8 +25,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/editText"
-                app:layout_constraintTop_toTopOf="@+id/editText"
+                app:layout_constraintEnd_toStartOf="@+id/fromText"
+                app:layout_constraintTop_toTopOf="@+id/fromText"
                 app:srcCompat="@drawable/ic_my_location_24dp" />
 
             <ImageView
@@ -35,12 +35,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/editText4"
-                app:layout_constraintTop_toTopOf="@+id/editText4"
+                app:layout_constraintEnd_toStartOf="@+id/toText"
+                app:layout_constraintTop_toTopOf="@+id/toText"
                 app:srcCompat="@drawable/ic_place_24dp" />
 
             <ImageButton
-                android:id="@+id/imageButton2"
+                android:id="@+id/routesPageBackButton"
                 android:layout_width="30dp"
                 android:layout_height="38dp"
                 android:layout_marginStart="8dp"
@@ -51,8 +51,10 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_arrow_back_24dp" />
 
-            <EditText
-                android:id="@+id/editText4"
+            <TextView
+                android:onClick="onClickTo"
+                android:clickable="true"
+                android:id="@+id/toText"
                 android:layout_width="303dp"
                 android:layout_height="39dp"
                 android:layout_marginTop="60dp"
@@ -64,11 +66,13 @@
                 android:textColor="@android:color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.771"
-                app:layout_constraintStart_toEndOf="@+id/imageButton2"
+                app:layout_constraintStart_toEndOf="@+id/routesPageBackButton"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/editText"
+            <TextView
+                android:onClick="onClickFrom"
+                android:clickable="true"
+                android:id="@+id/fromText"
                 android:layout_width="303dp"
                 android:layout_height="39dp"
                 android:layout_marginTop="8dp"
@@ -80,7 +84,7 @@
                 android:textColor="@android:color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.771"
-                app:layout_constraintStart_toEndOf="@+id/imageButton2"
+                app:layout_constraintStart_toEndOf="@+id/routesPageBackButton"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

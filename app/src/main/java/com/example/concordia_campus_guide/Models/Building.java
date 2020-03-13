@@ -7,6 +7,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.TypeConverters;
 
 import com.example.concordia_campus_guide.Database.Converters.CoordinatesListConverter;
@@ -21,7 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Entity (tableName = "buildings",
-        primaryKeys = {"building_code"}
+        indices = {@Index(value = "building_code", unique = true)}
         )
 public class Building extends Place {
     /**
@@ -230,6 +231,10 @@ public class Building extends Place {
         }
 
         return toReturn;
+    }
+    
+    public String getDisplayName(){
+        return this.Building_Long_Name;
     }
 
     private List<List<Double>> cornerCoordinatesToListDouble(){
