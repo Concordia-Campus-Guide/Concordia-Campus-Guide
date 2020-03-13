@@ -34,6 +34,8 @@ public class RoomModel extends Place {
     @NonNull
     private String floorCode;
 
+
+
     public Integer getRoomId() {
         return roomId;
     }

@@ -2,6 +2,7 @@ package com.example.concordia_campus_guide.Global;
 
 import android.content.Context;
 
+import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.Floors;
 import com.example.concordia_campus_guide.Models.Rooms;
@@ -11,6 +12,8 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.InputStream;
 
+import androidx.room.Room;
+
 public class ApplicationState {
 
     private Context context;
@@ -18,6 +21,7 @@ public class ApplicationState {
     private Buildings buildings;
     private Floors floors;
     private Rooms rooms;
+    private AppDatabase appdb;
 
     private ApplicationState(Context context) {
         this.context = context;
@@ -74,7 +78,6 @@ public class ApplicationState {
     private void importRooms(){
         String json;
         Rooms rooms = new Rooms();
-
         try{
             InputStream is = context.getResources().openRawResource(R.raw.rooms_info);
             int size = is.available();
@@ -86,7 +89,6 @@ public class ApplicationState {
         } catch (IOException e){
             e.printStackTrace();
         }
-
         this.rooms = rooms;
     }
 

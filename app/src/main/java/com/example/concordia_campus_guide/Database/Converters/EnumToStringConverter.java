@@ -15,7 +15,7 @@ public class EnumToStringConverter {
     }
 
     @TypeConverter
-    public static AccessibilityType fromStringToAccessibilityType (String accessibilityType) {
+    public static AccessibilityType fromStringToAccessibilityType(String accessibilityType) {
         if(accessibilityType!= null){
             return AccessibilityType.valueOf(accessibilityType);
         }
