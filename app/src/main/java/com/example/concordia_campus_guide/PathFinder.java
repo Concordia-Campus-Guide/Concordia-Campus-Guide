@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.PriorityQueue;
 import java.util.function.Predicate;
 
@@ -41,6 +42,7 @@ public class PathFinder {
     public PathFinder(Context context, Double[] source, Double[] destination, String floorCode) {
         Comparator<WalkingPointNode> comparator = new WalkingPointComparator();
         this.walkingPointsToVisit = new PriorityQueue<WalkingPointNode>(comparator);
+        this.walkingPointMap = new HashMap<>();
 
         List<WalkingPoint> walkingPoints = AppDatabase.getInstance(context).walkingPointDao().getAll();
         populateWalkingPointMap(walkingPoints);
@@ -51,18 +53,24 @@ public class PathFinder {
 
     public WalkingPoint getWalkingPoint(Double[] coordinates, String floorcode, List<WalkingPoint> walkingPointList) {
         //TODO: If no walking point corresponds to room, return the access point of the floor on which the room is.
-        final WalkingPoint wantedPoint = new WalkingPoint(new Coordinates(coordinates[0], coordinates[1]), floorcode, null, null);
-        return walkingPointList.stream().filter(new Predicate<WalkingPoint>() {
+        final Coordinates coordinates1 = new Coordinates(coordinates[0], coordinates[1]);
+        final WalkingPoint wantedPoint = new WalkingPoint(coordinates1, floorcode, null, null);
+        Optional<WalkingPoint> optionalWalkingPoints = walkingPointList.stream().filter(new Predicate<WalkingPoint>() {
             @Override
             public boolean test(WalkingPoint walkingPoint) {
                 return wantedPoint.equals(walkingPoint);
             }
-        }).findFirst().get();
+        }).findFirst();
+        if(optionalWalkingPoints.isPresent()){
+            return optionalWalkingPoints.get();
+        }else {
+            return null;
+        }
     }
 
     private void populateWalkingPointMap(List<WalkingPoint> walkingPoints) {
         for (WalkingPoint walkingPoint : walkingPoints) {
-            walkingPointMap.put(walkingPoint.getId(), walkingPoint);
+            walkingPointMap.put(new Integer(walkingPoint.getId()), walkingPoint);
         }
     }
 

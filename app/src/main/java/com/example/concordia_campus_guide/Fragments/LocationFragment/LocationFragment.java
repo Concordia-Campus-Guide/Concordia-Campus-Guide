@@ -23,6 +23,8 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
 import com.example.concordia_campus_guide.ClassConstants;
+import com.example.concordia_campus_guide.Database.AppDatabase;
+import com.example.concordia_campus_guide.Global.ApplicationState;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
@@ -71,6 +73,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private FloorPickerAdapter currentFloorPickerAdapter;
     private List<LatLng> temporaryList;
 
+    int markerCounter = 35;
+    HashMap<Integer, String> listOfMarkers;
     private Button selectedFloor;
 
     /**
@@ -84,6 +88,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.location_fragment_fragment, container, false);
+        AppDatabase appDatabase = AppDatabase.getInstance(getContext());
+
         getLocationPermission();
         initComponent(rootView);
         mMapView.onCreate(savedInstanceState);
@@ -106,6 +112,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         buildingsGroundOverlays = new HashMap<>();
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
         temporaryList = new ArrayList<>();
+        listOfMarkers = new HashMap<>();
     }
 
     private void setupFloorPickerAdapter(Building building) {
@@ -126,8 +133,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
      * The purpose of this method is to init the map and fill it up with the required
      * information to display them to the user
      */
-    int markerCounter = 35;
-    HashMap<Integer, String> listOfMarkers = new HashMap<>();
+
     private void initMap() {
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
@@ -150,15 +156,15 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                         mMap.addMarker(marker);
                         String lat_lng = Double.toString(latLng.latitude) + ","+ Double.toString(latLng.longitude);
                         android.util.Log.i("onMapClick", lat_lng);
-                        listOfMarkers.put(new Integer(markerCounter), lat_lng);
+                        listOfMarkers.put(markerCounter, lat_lng);
                         markerCounter++;
                     }
                 });
             }
         });
 
-        Double[] src = {45.49748331	-73.5787892};
-        Double[] trg = {45.49731974	-73.57883681};
+        Double[] src = {45.49748331,	-73.5787892};
+        Double[] trg = {45.49731974,	-73.57883681};
         PathFinder path = new PathFinder(getContext(), src, trg, "H-9");
         MarkerOptions marker;
         List<WalkingPoint> list = path.getSolutionPath();

@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setUpDb();
         setContentView(R.layout.activity_main);
         mViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         fragmentManager = getSupportFragmentManager();
@@ -52,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         View infoCard = findViewById(R.id.info_card);
         swipeableInfoCard = BottomSheetBehavior.from(infoCard);
 
-        setUpDb();
 
         //examples on how to get objects from db
         //begin
