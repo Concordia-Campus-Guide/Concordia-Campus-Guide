@@ -39,12 +39,10 @@ public class PathFinder {
 
     //Helper ctor for testing purposes, don't push with this!!!!
     public PathFinder(Context context, Double[] source, Double[] destination, String floorCode) {
-        appDb = AppDatabase.getInstance(context);
-
         Comparator<WalkingPointNode> comparator = new WalkingPointComparator();
         this.walkingPointsToVisit = new PriorityQueue<WalkingPointNode>(comparator);
 
-        List<WalkingPoint> walkingPoints = appDb.walkingPointDao().getAll();
+        List<WalkingPoint> walkingPoints = AppDatabase.getInstance(context).walkingPointDao().getAll();
         populateWalkingPointMap(walkingPoints);
 
         this.initialCoordinate = getWalkingPoint(source, floorCode, walkingPoints);
