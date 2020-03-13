@@ -6,8 +6,8 @@ import android.graphics.Color;
 import androidx.lifecycle.ViewModel;
 
 import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Database.Daos.RoomDao;
-import com.example.concordia_campus_guide.Database.Daos.RoomDao_Impl;
+//import com.example.concordia_campus_guide.Database.Daos.RoomDao;
+//import com.example.concordia_campus_guide.Database.Daos.RoomDao_Impl;
 import com.example.concordia_campus_guide.Global.ApplicationState;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.RoomModel;

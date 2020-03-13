@@ -1,0 +1,664 @@
+{
+  "shuttle": [
+    {
+      "time": "7:05",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "8:05",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "8:20",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "8:35",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "8:55",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "9:10",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "9:30",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "9:45",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "10:05",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "10:20",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "10:55",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "11:10",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "11:45",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "12:00",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "12:30",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "13:00",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "13:30",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "14:00",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "14:30",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "15:00",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "15:30",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "16:00",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "16:30",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "17:00",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "17:30",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "18:00",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "18:30",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "19:00",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "19:30",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "20:00",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "20:10",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "20:30",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "21:00",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "21:25",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "21:45",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "22:00",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "22:30",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "23:00",
+      "campus": "SGW",
+      "day": "week"
+    },
+    {
+      "time": "7:45",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "8:20",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "8:55",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "9:30",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "9:45",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "10:05",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "10:55",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "11:10",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "11:45",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "12:05",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "12:20",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "12:55",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "12:20",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "12:55",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "13:30",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "13:45",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "14:05",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "14:40",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "14:55",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "15:15",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "15:50",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "16:05",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "16:25",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "17:15",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "17:30",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "18:05",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "18:40",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "19:15",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "19:50",
+      "campus": "SGW",
+      "day": "friday"
+    },
+    {
+      "time": "7:30",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "7:40",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "7:55",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "8:20",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "8:35",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "8:55",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "9:10",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "9:30",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "9:45",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "10:20",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "10:35",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "10:55",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "11:10",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "11:30",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "12:00",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "12:30",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "13:00",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "13:30",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "14:00",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "14:30",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "15:00",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "15:30",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "16:00",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "16:30",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "17:00",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "17:30",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "18:00",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "18:30",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "19:00",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "19:30",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "20:00",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "20:30",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "20:45",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "21:05",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "21:30",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "22:00",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "22:30",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "23:00",
+      "campus": "Loyola",
+      "day": "week"
+    },
+    {
+      "time": "7:40",
+      "campus": "Loyola",
+      "day": "friday"
+    },
+    {
+      "time": "8:15",
+      "campus": "Loyola",
+      "day": "friday"
+    },
+    {
+      "time": "8:55",
+      "campus": "Loyola",
+      "day": "friday"
+    },
+    {
+      "time": "9:10",
+      "campus": "Loyola",
+      "day": "friday"
+    },
+    {
+      "time": "9:30",
+      "campus": "Loyola",
+      "day": "friday"
+    },
+    {
+      "time": "10:20",
+      "campus": "Loyola",
+      "day": "friday"
+    },
+    {
+      "time": "10:35",
+      "campus": "Loyola",
+      "day": "friday"
+    },
+    {
+      "time": "11:10",
+      "campus": "Loyola",
+      "day": "friday"
+    },
+    {
+      "time": "11:30",
+      "campus": "Loyola",
+      "day": "friday"
+    },
+    {
+      "time": "11:45",
+      "campus": "Loyola",
+      "day": "friday"
+    },
+    {
+      "time": "12:20",
+      "campus": "Loyola",
+      "day": "friday"
+    },
+    {
+      "time": "12:40",
+      "campus": "Loyola",
+      "day": "friday"
+    },
+    {
+      "time": "12:55",
+      "campus": "Loyola",
+      "day": "friday"
+    },
+    {
+      "time": "13:30",
+      "campus": "Loyola",
+      "day": "friday"
+    },
+    {
+      "time": "14:05",
+      "campus": "Loyola",
+      "day": "friday"
+    },
+    {
+      "time": "14:20",
+      "campus": "Loyola",
+      "day": "friday"
+    },
+    {
+      "time": "14:40",
+      "campus": "Loyola",
+      "day": "friday"
+    },
+    {
+      "time": "15:15",
+      "campus": "Loyola",
+      "day": "friday"
+    },
+    {
+      "time": "15:30",
+      "campus": "Loyola",
+      "day": "friday"
+    },
+    {
+      "time": "15:50",
+      "campus": "Loyola",
+      "day": "friday"
+    },
+    {
+      "time": "16:25",
+      "campus": "Loyola",
+      "day": "friday"
+    },
+    {
+      "time": "16:40",
+      "campus": "Loyola",
+      "day": "friday"
+    },
+    {
+      "time": "17:00",
+      "campus": "Loyola",
+      "day": "friday"
+    },
+    {
+      "time": "18:05",
+      "campus": "Loyola",
+      "day": "friday"
+    },
+    {
+      "time": "18:40",
+      "campus": "Loyola",
+      "day": "friday"
+    },
+    {
+      "time": "19:15",
+      "campus": "Loyola",
+      "day": "friday"
+    },
+    {
+      "time": "19:50",
+      "campus": "Loyola",
+      "day": "friday"
+    }
+  ]
+}

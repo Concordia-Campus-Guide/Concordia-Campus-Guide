@@ -23,6 +23,7 @@ import com.example.concordia_campus_guide.Models.Relations.BuildingWithFloors;
 import com.example.concordia_campus_guide.Models.Relations.FloorWithRooms;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.Rooms;
+import com.example.concordia_campus_guide.Models.Shuttle;
 import com.example.concordia_campus_guide.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
@@ -59,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
         List<BuildingWithFloors> buildingWithFloorsList = appDB.buildingDao().getBuildingsWithFloors();
         List<FloorWithRooms> floorWithRooms = appDB.floorDao().getFloorWithRooms();
         List<RoomModel> jas = appDB.roomDao().getAllRoomsByFloorCode("H-8");
-        String gs = "Asda" ;
+        List<Shuttle> asd = appDB.shuttleDao().getScheduleByCampus("Loyola");
+        String dfvs = "asd";
     }
 
     @Override
@@ -143,5 +145,9 @@ public class MainActivity extends AppCompatActivity {
         //load rooms
         Rooms rooms = ApplicationState.getInstance(this).getRooms();
         appDb.roomDao().insertAll(rooms.getRooms());
+
+        //get shuttle schedule
+        Shuttle shuttle = ApplicationState.getInstance(this).getShuttle();
+        appDb.shuttleDao().insertAll(shuttle.getShuttle());
     }
 }
