@@ -1,5 +1,6 @@
 package com.example.concordia_campus_guide.Database.Daos;
 
+import com.example.concordia_campus_guide.Models.PointType;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import java.util.List;
 
@@ -15,6 +16,10 @@ public interface WalkingPointDao {
 
     @Query("SELECT * FROM walkingPoints WHERE floor_code =:floorCode")
     List<WalkingPoint> getAllWalkingPointsFromFloor(String floorCode);
+
+    @Query("SELECT * FROM walkingPoints WHERE floor_code =:floorCode AND point_type=:pointType")
+    List<WalkingPoint> getAllAccessPointsOnFloor(String floorCode, PointType pointType);
+
 
     @Insert
     void insertAll(List<WalkingPoint> walkingPoints);
