@@ -1,31 +1,24 @@
 package com.example.concordia_campus_guide.Database.Daos;
 
+import com.example.concordia_campus_guide.Models.WalkingPoint;
+import java.util.List;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Transaction;
-
-import com.example.concordia_campus_guide.Models.Building;
-import com.example.concordia_campus_guide.Models.WalkingPoint;
-
-import java.util.List;
 
 @Dao
-public class WalkingPointDao {
-
+public interface WalkingPointDao {
     @Query("SELECT * FROM walkingPoints")
     List<WalkingPoint> getAll();
 
-    @Query("SELECT * FROM buildings WHERE floorCo")
-    List<WalkingPoint> findRepositoriesForUser(String buildingCode);
+    @Query("SELECT * FROM walkingPoints WHERE floor_code =:floorCode")
+    List<WalkingPoint> getAllWalkingPointsFromFloor(String floorCode);
 
     @Insert
     void insertAll(List<WalkingPoint> walkingPoints);
 
     @Delete
     void deleteAll(WalkingPoint... walkingPoints);
-
-
 }

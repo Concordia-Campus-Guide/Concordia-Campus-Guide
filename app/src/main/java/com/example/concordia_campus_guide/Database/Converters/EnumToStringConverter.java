@@ -15,9 +15,9 @@ public class EnumToStringConverter {
     }
 
     @TypeConverter
-    public static PointType fromStringToAccessibilityType(String accessibilityType) {
-        if(accessibilityType!= null){
-            return PointType.valueOf(accessibilityType);
+    public static PointType fromStringToAccessibilityType(String pointType) {
+        if(pointType!= null){
+            return PointType.valueOf(pointType);
         }
         return null;
     }

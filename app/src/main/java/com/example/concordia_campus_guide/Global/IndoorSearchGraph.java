@@ -2,17 +2,20 @@ package com.example.concordia_campus_guide.Global;
 
 import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.ListOfCoordinates;
+import com.example.concordia_campus_guide.Models.PointType;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
+
 public class IndoorSearchGraph {
     private Map<WalkingPoint, List<WalkingPoint>> adjacencyList;
 
-    public void addVertex(Coordinates coordinates, String floorCode,  ListOfCoordinates connectedPoints) {
-        WalkingPoint newPoint = new WalkingPoint(coordinates, floorCode,connectedPoints);
+    public void addVertex(Coordinates coordinates, String floorCode,  List<Integer> connectedPointsIds,PointType pointType) {
+        WalkingPoint newPoint = new WalkingPoint(coordinates, floorCode,connectedPointsIds,pointType);
         if (!adjacencyList.containsKey(newPoint)) {
             adjacencyList.put(newPoint, new ArrayList<WalkingPoint>());
         }

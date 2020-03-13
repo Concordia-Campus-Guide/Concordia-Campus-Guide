@@ -1,5 +1,6 @@
 package com.example.concordia_campus_guide.Models;
 
+import com.example.concordia_campus_guide.Database.Converters.CoordinatesConverter;
 import com.example.concordia_campus_guide.Database.Converters.EnumToStringConverter;
 import com.example.concordia_campus_guide.Database.Converters.IntegerListToStringConverter;
 
@@ -33,6 +34,7 @@ public  class WalkingPoint {
 
     @NonNull
     @ColumnInfo(name = "coordinate")
+    @TypeConverters(CoordinatesConverter.class)
     private Coordinates coordinate;
 
     @NonNull
@@ -66,6 +68,48 @@ public  class WalkingPoint {
     @Override
     public int hashCode() {
         return Objects.hash(coordinate, floorCode);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @NonNull
+    public Coordinates getCoordinate() {
+        return coordinate;
+    }
+
+    public void setCoordinate(@NonNull Coordinates coordinate) {
+        this.coordinate = coordinate;
+    }
+
+    @NonNull
+    public String getFloorCode() {
+        return floorCode;
+    }
+
+    public void setFloorCode(@NonNull String floorCode) {
+        this.floorCode = floorCode;
+    }
+
+    public List<Integer> getConnectedPointsId() {
+        return connectedPointsId;
+    }
+
+    public void setConnectedPointsId(List<Integer> connectedPointsId) {
+        this.connectedPointsId = connectedPointsId;
+    }
+
+    public PointType getPointType() {
+        return pointType;
+    }
+
+    public void setPointType(PointType pointType) {
+        this.pointType = pointType;
     }
 
 

@@ -6,6 +6,7 @@ import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.Floors;
 import com.example.concordia_campus_guide.Models.Rooms;
+import com.example.concordia_campus_guide.Models.WalkingPoints;
 import com.example.concordia_campus_guide.R;
 import com.google.gson.Gson;
 
@@ -21,13 +22,14 @@ public class ApplicationState {
     private Buildings buildings;
     private Floors floors;
     private Rooms rooms;
-    private AppDatabase appdb;
+    private WalkingPoints walkingPoints;
 
     private ApplicationState(Context context) {
         this.context = context;
         importBuildings();
         importFloors();
         importRooms();
+        importWalkingPoints();
     }
 
     public static ApplicationState getInstance(Context context) {
@@ -52,8 +54,24 @@ public class ApplicationState {
         } catch (IOException e){
             e.printStackTrace();
         }
-
         this.buildings = buildings;
+    }
+
+    private void importWalkingPoints(){
+        String json;
+        WalkingPoints walkingPoints = new WalkingPoints();
+        try{
+            InputStream is = context.getResources().openRawResource(R.raw.walking_points);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+            walkingPoints = new Gson().fromJson(json, WalkingPoints.class);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        this.walkingPoints = walkingPoints;
     }
 
     private void importFloors(){

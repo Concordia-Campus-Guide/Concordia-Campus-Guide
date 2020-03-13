@@ -1,10 +1,13 @@
 {
-  "WalkingPoints" : [
+  "walkingPoints" : [
     {
       "id": 1,
-      "coordinate" : [1, 2],
-      "floor_code" : "",
-      "connectedPointsId": []
+      "coordinate":"1,2",
+      "floorCode" : "",
+      "connectedPointsId": [
+        1,2,3
+      ],
+      "pointType": "Walking"
     },
     {},
   ]
