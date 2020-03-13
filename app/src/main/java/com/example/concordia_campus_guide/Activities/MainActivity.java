@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         List<BuildingWithFloors> buildingWithFloorsList = appDB.buildingDao().getBuildingsWithFloors();
         List<FloorWithRooms> floorWithRooms = appDB.floorDao().getFloorWithRooms();
         List<WalkingPoint> walkingPoints = appDB.walkingPointDao().getAll();
+        String s = "asdas";
         //end
     }
 

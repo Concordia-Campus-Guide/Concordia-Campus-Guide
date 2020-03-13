@@ -6,7 +6,7 @@
         "longitude": -73.57909564,
         "latitude": 45.49703044
       },
-      "floor_code": "H-9",
+      "floorCode": "H-9",
       "pointType": "CLASSROOM",
       "connectedPointsId": [8]
     },
@@ -16,7 +16,7 @@
         "longitude": -73.57902993,
         "latitude": 45.4969959
       },
-      "floor_code": "H-9",
+      "floorCode": "H-9",
       "pointType": "CLASSROOM",
       "connectedPointsId": [8, 11]
     },
@@ -26,7 +26,7 @@
         "longitude": -73.57895516,
         "latitude": 45.49696112
       },
-      "floor_code": "H-9",
+      "floorCode": "H-9",
       "pointType": "CLASSROOM",
       "connectedPointsId": [11]
     },
@@ -36,7 +36,7 @@
         "longitude": -73.57888006,
         "latitude": 45.49692281
       },
-      "floor_code": "H-9",
+      "floorCode": "H-9",
       "pointType": "CLASSROOM",
       "connectedPointsId": [11]
     },
@@ -46,7 +46,7 @@
         "longitude": -73.57881233,
         "latitude": 45.49698438
       },
-      "floor_code": "H-9",
+      "floorCode": "H-9",
       "pointType": "CLASSROOM",
       "connectedPointsId": [11]
     },
@@ -56,7 +56,7 @@
         "longitude": -73.57876372,
         "latitude": 45.4970335
       },
-      "floor_code": "H-9",
+      "floorCode": "H-9",
       "pointType": "CLASSROOM",
       "connectedPointsId": [11, 13]
     },
@@ -66,7 +66,7 @@
         "longitude": -73.57872616,
         "latitude": 45.49707087
       },
-      "floor_code": "H-9",
+      "floorCode": "H-9",
       "pointType": "CLASSROOM",
       "connectedPointsId": [13, 14]
     },
@@ -76,7 +76,7 @@
         "longitude": -73.57900947,
         "latitude": 45.49706006
       },
-      "floor_code": "H-9",
+      "floorCode": "H-9",
       "pointType": "NONE",
       "connectedPointsId": [1, 2, 9, 10, 11]
     },
@@ -86,7 +86,7 @@
         "longitude": -73.57904702,
         "latitude": 45.49712539
       },
-      "floor_code": "H-9",
+      "floorCode": "H-9",
       "pointType": "CLASSROOM",
       "connectedPointsId": [8]
     },
@@ -96,7 +96,7 @@
         "longitude": -73.57897729,
         "latitude": 45.4970892
       },
-      "floor_code": "H-9",
+      "floorCode": "H-9",
       "pointType": "CLASSROOM",
       "connectedPointsId": [8]
     },
@@ -106,7 +106,7 @@
         "longitude": -73.5789052,
         "latitude": 45.4970147
       },
-      "floor_code": "H-9",
+      "floorCode": "H-9",
       "pointType": "NONE",
       "connectedPointsId": [2, 3, 4, 5, 6, 8, 12, 13]
     },
@@ -116,7 +116,7 @@
         "longitude": -73.57893337,
         "latitude": 45.49707157
       },
-      "floor_code": "H-9",
+      "floorCode": "H-9",
       "pointType": "CLASSROOM",
       "connectedPointsId": [11]
     },
@@ -126,7 +126,7 @@
         "longitude": -73.57881267,
         "latitude": 45.49710118
       },
-      "floor_code": "H-9",
+      "floorCode": "H-9",
       "pointType": "NONE",
       "connectedPointsId": [6, 7, 11, 14]
     },
@@ -136,7 +136,7 @@
         "longitude": -73.57875399,
         "latitude": 45.49716416
       },
-      "floor_code": "H-9",
+      "floorCode": "H-9",
       "pointType": "NONE",
       "connectedPointsId": [7, 13, 15]
     },
@@ -146,7 +146,7 @@
         "longitude": -73.57888341,
         "latitude": 45.49722738
       },
-      "floor_code": "H-9",
+      "floorCode": "H-9",
       "pointType": "NONE",
       "connectedPointsId": [14, 16]
     },
@@ -156,7 +156,7 @@
         "longitude": -73.57904099,
         "latitude": 45.49730987
       },
-      "floor_code": "H-9",
+      "floorCode": "H-9",
       "pointType": "NONE",
       "connectedPointsId": [15, 17]
     },
@@ -166,7 +166,7 @@
         "longitude": -73.57917443,
         "latitude": 45.49717921
       },
-      "floor_code": "H-9",
+      "floorCode": "H-9",
       "pointType": "NONE",
       "connectedPointsId": [16, 18]
     },
@@ -176,7 +176,7 @@
         "longitude": -73.5792274,
         "latitude": 45.49720999
       },
-      "floor_code": "H-9",
+      "floorCode": "H-9",
       "pointType": "STAIRS",
       "connectedPointsId": [17]
     }
