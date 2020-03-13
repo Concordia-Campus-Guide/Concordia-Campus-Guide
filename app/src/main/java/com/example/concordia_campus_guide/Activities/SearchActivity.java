@@ -15,8 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.concordia_campus_guide.Adapters.PlaceToSearchResultAdapter;
+import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Floor;
+import com.example.concordia_campus_guide.Models.MyCurrentPlace;
 import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.R;
@@ -40,12 +42,6 @@ public class SearchActivity extends AppCompatActivity {
         searchText = (EditText) findViewById(R.id.searchText);
         mViewModel = ViewModelProviders.of(this).get(SearchActivityViewModel.class);
 
-        //get passed parameters
-        mViewModel.setMyCurrentLocation((Location) getIntent().getParcelableExtra("myCurrentLocation"));
-        mViewModel.setFromId(getIntent().getLongExtra("fromId", 0));
-        mViewModel.setToId(getIntent().getLongExtra("toId", 0));
-        mViewModel.setSelectingToOrFrom(getIntent().getStringExtra("selectingToOrFrom"));
-
         //android adapter for list view
         adapter = new PlaceToSearchResultAdapter(this, R.layout.list_item_layout, mViewModel.getAllPlaces());
         searchResults.setAdapter(adapter);
@@ -67,21 +63,31 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Place place = adapter.getItem(position);
-                openRoutesPage(place.getId(), getPlaceType(place));
+                openRoutesPage(place);
             }
         });
     }
 
-    private void openRoutesPage(long placeId, String classExtendsPlaceType){
+    private void openRoutesPage(Place place){
         Intent openRoutes= new Intent(SearchActivity.this,
                 RoutesActivity.class);
 
-        openRoutes.putExtra("selectingToOrFrom", mViewModel.getSelectingToOrFrom());
-        openRoutes.putExtra()
-        openRoutes.putExtra("classExtendsPlaceType", classExtendsPlaceType);
-        openRoutes.putExtra("placeId", placeId);
-        openRoutes.putExtra("myCurrentLocation", mViewModel.getMyCurrentLocation());
-
+        if(SelectingToFromState.isQuickSelect()){
+            SelectingToFromState.setTo(place);
+            if(SelectingToFromState.getMyCurrentLocation() != null){
+                Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
+                SelectingToFromState.setFrom(new MyCurrentPlace(myCurrentLocation.getLatitude(), myCurrentLocation.getLongitude()));
+            }
+            else{
+                SelectingToFromState.setFrom(new MyCurrentPlace());
+            }
+        }
+        if(SelectingToFromState.isSelectFrom()){
+            SelectingToFromState.setFrom(place);
+        }
+        if(SelectingToFromState.isSelectTo()){
+            SelectingToFromState.setTo(place);
+        }
         startActivity(openRoutes);
     }
 

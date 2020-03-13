@@ -2,6 +2,7 @@ package com.example.concordia_campus_guide.Fragments.InfoCardFragment;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +19,8 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Activities.RoutesActivity;
-import com.example.concordia_campus_guide.Models.Building;
-import com.example.concordia_campus_guide.Models.Floor;
-import com.example.concordia_campus_guide.Models.Place;
-import com.example.concordia_campus_guide.Models.RoomModel;
+import com.example.concordia_campus_guide.Global.SelectingToFromState;
+import com.example.concordia_campus_guide.Models.MyCurrentPlace;
 import com.example.concordia_campus_guide.R;
 
 import java.io.InputStream;
@@ -135,9 +134,16 @@ public class InfoCardFragment extends Fragment {
     public void onClickDirections(View v){
         Intent openRoutes= new Intent(getActivity(), RoutesActivity.class);
 
-        openRoutes.putExtra("classExtendsPlaceType", Building.class.getSimpleName());
-        openRoutes.putExtra("placeId", mViewModel.getBuilding().getId());
-        openRoutes.putExtra("myCurrentLocation", ((MainActivity) getActivity()).getMyCurrentLocation());
+        SelectingToFromState.setQuickSelectToTrue();
+        SelectingToFromState.setMyCurrentLocation(((MainActivity) getActivity()).getMyCurrentLocation());
+        Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
+        if(myCurrentLocation != null){
+            SelectingToFromState.setFrom(new MyCurrentPlace(myCurrentLocation.getLatitude(), myCurrentLocation.getLongitude()));
+        }
+        else{
+            SelectingToFromState.setFrom(new MyCurrentPlace());
+        }
+        SelectingToFromState.setTo(mViewModel.getBuilding());
 
         startActivity(openRoutes);
     }
@@ -165,13 +171,5 @@ public class InfoCardFragment extends Fragment {
             }
         }
 
-    }
-
-    private String getPlaceType(Place place){
-        if(place instanceof RoomModel) return RoomModel.class.getSimpleName();
-        if(place instanceof Floor) return Floor.class.getSimpleName();
-        if(place instanceof Building) return Building.class.getSimpleName();
-
-        return null;
     }
 }

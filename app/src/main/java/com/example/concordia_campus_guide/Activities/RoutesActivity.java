@@ -1,8 +1,8 @@
 package com.example.concordia_campus_guide.Activities;
 
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.R;
 
 public class RoutesActivity extends AppCompatActivity {
@@ -36,10 +37,8 @@ public class RoutesActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //get passed item
-        long placeId = getIntent().getLongExtra("placeId", 0);
-        String classExtendsPlaceType = getIntent().getStringExtra("classExtendsPlaceType");
-        mViewModel.setMyCurrentLocation((Location) getIntent().getParcelableExtra("myCurrentLocation"));
-        mViewModel.setToUsingPlaceId(placeId, classExtendsPlaceType);
+        mViewModel.setFrom(SelectingToFromState.getFrom());
+        mViewModel.setTo(SelectingToFromState.getTo());
 
         this.fromText.setText(mViewModel.getFrom().getDisplayName());
         this.toText.setText(mViewModel.getTo().getDisplayName());
@@ -48,31 +47,46 @@ public class RoutesActivity extends AppCompatActivity {
     }
 
     public void onClickTo(View v){
-        openSearchPage("to");
+        SelectingToFromState.setSelectToToTrue();
+        openSearchPage();
     }
 
     public void onClickFrom(View v){
-        openSearchPage("from");
+        SelectingToFromState.setSelectFromToTrue();
+        openSearchPage();
     }
 
     private void setBackButtonOnClick(){
         ImageButton backButton = (ImageButton)this.findViewById(R.id.routesPageBackButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                finish();
-            }
+            public void onClick(View v) { exitSelectToFrom(); }
         });
     }
 
-    private void openSearchPage(String toOrFrom){
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            exitSelectToFrom();
+
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private void exitSelectToFrom(){
+        Intent exitSelectToFrom= new Intent(RoutesActivity.this,
+                MainActivity.class);
+
+        SelectingToFromState.reset();
+
+        startActivity(exitSelectToFrom);
+    }
+
+    private void openSearchPage(){
         Intent openSearch= new Intent(RoutesActivity.this,
                 SearchActivity.class);
-
-        openSearch.putExtra("fromId", mViewModel.getFrom().getId());
-        openSearch.putExtra("toId", mViewModel.getTo().getId());
-        openSearch.putExtra("selectingToOrFrom", toOrFrom);
-        openSearch.putExtra("myCurrentLocation", mViewModel.getMyCurrentLocation());
 
         startActivity(openSearch);
     }

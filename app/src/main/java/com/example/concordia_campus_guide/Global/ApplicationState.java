@@ -18,6 +18,7 @@ public class ApplicationState {
     private Buildings buildings;
     private Floors floors;
     private Rooms rooms;
+    private boolean dbIsSet = false;
 
     private ApplicationState(Context context) {
         this.context = context;
@@ -102,4 +103,11 @@ public class ApplicationState {
         return this.rooms;
     }
 
+    public boolean isDbIsSet() {
+        return dbIsSet;
+    }
+
+    public void setDbIsSetToTrue() {
+        this.dbIsSet = true;
+    }
 }

@@ -18,6 +18,7 @@ import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragment;
 import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragment;
 import com.example.concordia_campus_guide.Global.ApplicationState;
+import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.Floors;
 import com.example.concordia_campus_guide.Models.Rooms;
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             Intent openSearch = new Intent(MainActivity.this,
                     SearchActivity.class);
 
+            SelectingToFromState.setMyCurrentLocation(locationFragment.getCurrentLocation());
             openSearch.putExtra("myCurrentLocation", locationFragment.getCurrentLocation());
 
             startActivity(openSearch);
@@ -119,21 +121,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpDb(){
-        //delete previous db
-        getApplication().getApplicationContext().deleteDatabase(AppDatabase.DB_NAME);
+        if(!ApplicationState.getInstance(this).isDbIsSet()){
+            //delete previous db
+            getApplication().getApplicationContext().deleteDatabase(AppDatabase.DB_NAME);
 
-        //load buildings
-        Buildings buildings = ApplicationState.getInstance(this).getBuildings();
-        AppDatabase appDb = AppDatabase.getInstance(this);
-        appDb.buildingDao().insertAll(buildings.getBuildings());
+            //load buildings
+            Buildings buildings = ApplicationState.getInstance(this).getBuildings();
+            AppDatabase appDb = AppDatabase.getInstance(this);
+            appDb.buildingDao().insertAll(buildings.getBuildings());
 
-        //load floors
-        Floors floors = ApplicationState.getInstance(this).getFloors();
-        appDb.floorDao().insertAll(floors.getFloors());
+            //load floors
+            Floors floors = ApplicationState.getInstance(this).getFloors();
+            appDb.floorDao().insertAll(floors.getFloors());
 
-        //load rooms
-        Rooms rooms = ApplicationState.getInstance(this).getRooms();
-        appDb.roomDao().insertAll(rooms.getRooms());
+            //load rooms
+            Rooms rooms = ApplicationState.getInstance(this).getRooms();
+            appDb.roomDao().insertAll(rooms.getRooms());
+
+            ApplicationState.getInstance(this).setDbIsSetToTrue();
+        }
     }
 
     public Location getMyCurrentLocation(){
