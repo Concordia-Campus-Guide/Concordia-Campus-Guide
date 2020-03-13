@@ -30,6 +30,8 @@ public class PathFinder {
 
         Comparator<WalkingPointNode> comparator = new WalkingPointComparator();
         this.walkingPointsToVisit = new PriorityQueue<>(comparator);
+        this.walkingPointsVisited = new HashMap<>();
+
 
         List<WalkingPoint> walkingPoints = AppDatabase.getInstance(context).walkingPointDao().getAll();
         populateWalkingPointMap(walkingPoints);
@@ -43,18 +45,20 @@ public class PathFinder {
         Comparator<WalkingPointNode> comparator = new WalkingPointComparator();
         this.walkingPointsToVisit = new PriorityQueue<WalkingPointNode>(comparator);
         this.walkingPointMap = new HashMap<>();
+        this.walkingPointsVisited = new HashMap<>();
 
         List<WalkingPoint> walkingPoints = AppDatabase.getInstance(context).walkingPointDao().getAll();
         populateWalkingPointMap(walkingPoints);
 
         this.initialCoordinate = getWalkingPoint(source, floorCode, walkingPoints);
         this.destinationGoal = getWalkingPoint(destination, floorCode, walkingPoints);
+        searchPathToDestination();
     }
 
-    public WalkingPoint getWalkingPoint(Double[] coordinates, String floorcode, List<WalkingPoint> walkingPointList) {
+    public WalkingPoint getWalkingPoint(Double[] coordinates, String floorCode, List<WalkingPoint> walkingPointList) {
         //TODO: If no walking point corresponds to room, return the access point of the floor on which the room is.
         final Coordinates coordinates1 = new Coordinates(coordinates[0], coordinates[1]);
-        final WalkingPoint wantedPoint = new WalkingPoint(coordinates1, floorcode, null, null);
+        final WalkingPoint wantedPoint = new WalkingPoint(coordinates1, floorCode, null, null);
         Optional<WalkingPoint> optionalWalkingPoints = walkingPointList.stream().filter(new Predicate<WalkingPoint>() {
             @Override
             public boolean test(WalkingPoint walkingPoint) {

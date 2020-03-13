@@ -163,8 +163,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             }
         });
 
-        Double[] src = {45.49748331,	-73.5787892};
-        Double[] trg = {45.49731974,	-73.57883681};
+        Double[] src = {-73.5787892, 45.49748331};
+        Double[] trg = {-73.57883681, 45.49731974};
         PathFinder path = new PathFinder(getContext(), src, trg, "H-9");
         MarkerOptions marker;
         List<WalkingPoint> list = path.getSolutionPath();

@@ -16,7 +16,13 @@ public class Coordinates {
         this.longitude = longitude;
     }
 
-
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Coordinates that = (Coordinates) o;
+        return latitude == that.latitude  &&
+                longitude == that.longitude;
+    }
 
     public List<Double> toListDouble(){
         return new ArrayList<>(Arrays.asList(latitude, longitude));
