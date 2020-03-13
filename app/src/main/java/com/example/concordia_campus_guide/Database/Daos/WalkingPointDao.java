@@ -17,8 +17,8 @@ public interface WalkingPointDao {
     @Query("SELECT * FROM walkingPoints WHERE floor_code =:floorCode")
     List<WalkingPoint> getAllWalkingPointsFromFloor(String floorCode);
 
-    @Query("SELECT * FROM walkingPoints WHERE floor_code =:floorCode AND point_type=:pointType")
-    List<WalkingPoint> getAllAccessPointsOnFloor(String floorCode, PointType pointType);
+//    @Query("SELECT * FROM walkingPoints WHERE floor_code =:floorCode AND point_type=:pointType")
+//    List<WalkingPoint> getAllAccessPointsOnFloor(String floorCode, PointType pointType);
 
 
     @Insert

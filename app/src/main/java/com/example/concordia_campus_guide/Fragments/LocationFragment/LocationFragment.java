@@ -47,6 +47,7 @@ import com.google.maps.android.geojson.GeoJsonLayer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.BiConsumer;
 
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 
@@ -123,6 +124,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
      * The purpose of this method is to init the map and fill it up with the required
      * information to display them to the user
      */
+    int markerCounter = 35;
+    HashMap<Integer, String> listOfMarkers = new HashMap<>();
     private void initMap() {
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
@@ -141,8 +144,12 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                 mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
                     public void onMapClick(LatLng latLng) {
-                        android.util.Log.i("onMapClick", Double.toString(latLng.latitude) + " - "+ Double.toString(latLng.longitude));
-                        temporaryList.add(latLng);
+                        MarkerOptions marker = new MarkerOptions().position(latLng).title(String.valueOf(markerCounter)).visible(true).zIndex(-4.0f);
+                        mMap.addMarker(marker);
+                        String lat_lng = Double.toString(latLng.latitude) + ","+ Double.toString(latLng.longitude);
+                        android.util.Log.i("onMapClick", lat_lng);
+                        listOfMarkers.put(new Integer(markerCounter), lat_lng);
+                        markerCounter++;
                     }
                 });
             }
@@ -218,6 +225,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         loyolaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                printHashMap();
                 zoomInLocation(mViewModel.getLoyolaZoomLocation());
             }
         });
@@ -230,7 +238,18 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         sgwBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                printHashMap();
                 zoomInLocation(mViewModel.getSGWZoomLocation());
+            }
+        });
+    }
+
+    private void printHashMap(){
+        System.out.println("MARKER LIST: ");
+        listOfMarkers.forEach(new BiConsumer<Integer, String>() {
+            @Override
+            public void accept(Integer key, String value) {
+                System.out.println(key + "," + value);
             }
         });
     }
@@ -299,11 +318,11 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                 Building building = mViewModel.getBuildingFromeCode(marker.getTag().toString());
-                //TODO: Make function that pops up the info card for the building (via the building-code)
-                String buildingCode = (marker.getTag()).toString();
-                ((MainActivity)getActivity()).showInfoCard(buildingCode);
-                onBuildingClick(building);
+//                 Building building = mViewModel.getBuildingFromeCode(marker.getTag().toString());
+//                //TODO: Make function that pops up the info card for the building (via the building-code)
+//                String buildingCode = (marker.getTag()).toString();
+//                ((MainActivity)getActivity()).showInfoCard(buildingCode);
+//                onBuildingClick(building);
                 return false;
             }
         });
