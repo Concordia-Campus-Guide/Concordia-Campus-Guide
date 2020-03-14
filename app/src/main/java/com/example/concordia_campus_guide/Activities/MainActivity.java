@@ -22,6 +22,8 @@ import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.Floors;
 import com.example.concordia_campus_guide.Models.Rooms;
+import com.example.concordia_campus_guide.Models.Shuttle;
+import com.example.concordia_campus_guide.Models.Shuttles;
 import com.example.concordia_campus_guide.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
@@ -53,6 +55,10 @@ public class MainActivity extends AppCompatActivity {
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
 
         setUpDb();
+
+        AppDatabase appDB = AppDatabase.getInstance(this);
+        List<Shuttle> jas = appDB.shuttleDao().getAll();
+        String gs = "Asda" ;
     }
 
     @Override
@@ -138,6 +144,10 @@ public class MainActivity extends AppCompatActivity {
             //load rooms
             Rooms rooms = ApplicationState.getInstance(this).getRooms();
             appDb.roomDao().insertAll(rooms.getRooms());
+
+            //Get shuttle schedule
+            Shuttles shuttles = ApplicationState.getInstance(this).getShuttle();
+            appDb.shuttleDao().insertAll(shuttles.getShuttles());
 
             ApplicationState.getInstance(this).setDbIsSetToTrue();
         }

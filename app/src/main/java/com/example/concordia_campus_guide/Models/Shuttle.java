@@ -24,14 +24,13 @@ public class Shuttle {
     @ColumnInfo(name = "time")
     private String time;
 
-    @Ignore
-    private List<Shuttle> shuttle;
-
     public Shuttle() {
     }
 
-    public List<Shuttle> getShuttle() {
-        return shuttle;
+    public Shuttle(String campus, List<String> day, String time) {
+        this.campus = campus;
+        this.day = day;
+        this.time = time;
     }
 
     public int getShuttleId() {
