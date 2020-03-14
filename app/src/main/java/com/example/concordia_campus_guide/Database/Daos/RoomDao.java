@@ -26,5 +26,6 @@ public interface RoomDao {
     @Delete
     void deleteAll(RoomModel... rooms);
 
-
+    @Query("SELECT * FROM rooms WHERE id=:roomId")
+    public RoomModel getRoomById(long roomId);
 }

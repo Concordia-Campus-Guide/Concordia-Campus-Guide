@@ -1,20 +1,12 @@
 package com.example.concordia_campus_guide.Models;
 
-import android.text.TextUtils;
-
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
-import androidx.room.Index;
-import androidx.room.PrimaryKey;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import static androidx.room.ForeignKey.CASCADE;
 
@@ -29,10 +21,6 @@ import static androidx.room.ForeignKey.CASCADE;
                 })
 public class RoomModel extends Place {
 
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "room_id")
-    private Integer roomId;
-
     @ColumnInfo(name = "room_code")
     @NonNull
     private String roomCode;
@@ -40,10 +28,6 @@ public class RoomModel extends Place {
     @ColumnInfo(name = "floor_code")
     @NonNull
     private String floorCode;
-
-    public Integer getRoomId() {
-        return roomId;
-    }
 
     @NonNull
     public String getFloorCode() {
@@ -88,11 +72,11 @@ public class RoomModel extends Place {
         return toReturn;
     }
 
-    public void setRoomId(Integer roomId) {
-        this.roomId = roomId;
-    }
-
     public void setFloorCode(@NonNull String floorCode) {
         this.floorCode = floorCode;
+    }
+
+    public String getDisplayName(){
+        return roomCode;
     }
 }

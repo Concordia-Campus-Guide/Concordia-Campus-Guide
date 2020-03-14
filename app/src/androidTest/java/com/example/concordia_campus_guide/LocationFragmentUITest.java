@@ -79,7 +79,7 @@ public class LocationFragmentUITest {
                 allOf(withId(R.id.SGWBtn), withText("SGW"),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(R.id.fragment),
+                                        withId(R.id.locationFragment),
                                         1),
                                 0),
                         isDisplayed()));
@@ -89,7 +89,7 @@ public class LocationFragmentUITest {
                 allOf(withId(R.id.SGWBtn),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(R.id.fragment),
+                                        withId(R.id.locationFragment),
                                         1),
                                 0),
                         isDisplayed()));
@@ -99,7 +99,7 @@ public class LocationFragmentUITest {
                 allOf(withId(R.id.loyolaBtn),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(R.id.fragment),
+                                        withId(R.id.locationFragment),
                                         1),
                                 1),
                         isDisplayed()));

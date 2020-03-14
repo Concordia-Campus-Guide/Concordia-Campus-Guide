@@ -5,7 +5,6 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
-import androidx.room.PrimaryKey;
 
 import static androidx.room.ForeignKey.CASCADE;
 
@@ -29,7 +28,6 @@ public class Floor extends Place {
     //the floor indicator/number
     //the floor code is the BUILDING_CODE-FLOOR-INDICATOR ie: H-9
     @NonNull
-    @PrimaryKey
     @ColumnInfo(name = "floor_code")
     private String floorCode;
 
@@ -67,6 +65,10 @@ public class Floor extends Place {
 
     public void setAltitude(float altitude) {
         this.altitude = altitude;
+    }
+
+    public String getDisplayName(){
+        return floorCode;
     }
 }
 

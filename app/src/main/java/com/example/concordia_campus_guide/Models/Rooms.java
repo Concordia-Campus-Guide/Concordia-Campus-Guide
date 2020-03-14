@@ -1,5 +1,6 @@
 package com.example.concordia_campus_guide.Models;
 
+import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -59,5 +60,13 @@ public class Rooms {
         }
 
         return features;
+    }
+
+    public List<Place> getPlaces(){
+        List<Place> places = new ArrayList<Place>();
+        for(RoomModel room: Rooms){
+            places.add(room);
+        }
+        return places;
     }
 }
