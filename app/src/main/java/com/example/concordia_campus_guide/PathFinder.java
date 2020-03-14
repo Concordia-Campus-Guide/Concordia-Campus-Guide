@@ -87,7 +87,7 @@ public class PathFinder {
 
             WalkingPointNode currentLocation = walkingPointsToVisit.poll();
 
-            if (walkingPointsVisited.containsKey(currentLocation)) continue;
+            if (walkingPointsVisited.containsKey(currentLocation.getWalkingPoint().getId())) continue;
             else walkingPointsVisited.put(currentLocation.getWalkingPoint().getId(), currentLocation.getCost());
 
             if (isGoal(currentLocation.getWalkingPoint())) {
