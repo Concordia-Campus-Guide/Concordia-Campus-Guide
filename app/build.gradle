@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'jacoco-android'
 
 def properties = new Properties()
+
 properties.load(project.rootProject.file("local.properties").newDataInputStream())
 android {
     compileSdkVersion 28
@@ -14,6 +15,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [google_api_key: properties.getProperty('default.account.google_maps_key')]
+        buildConfigField "String", "API_KEY", "\"" + properties.getProperty('default.account.google_maps_key') + "\""
     }
     buildTypes {
         debug {
@@ -78,6 +80,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.1'
     implementation group: 'javax.persistence', name: 'persistence-api', version: '1.0'
 
-
+    // Google Directions
+    implementation 'com.google.maps:google-maps-services:0.11.0'
+    //implementation 'com.google.android.androidgms:play-services-maps:11.0.2'
+    implementation 'org.slf4j:slf4j-simple:1.7.25'
 
 }

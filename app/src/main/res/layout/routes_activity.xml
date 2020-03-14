@@ -87,6 +87,18 @@
                 app:layout_constraintStart_toEndOf="@+id/routesPageBackButton"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <Button
+                android:id="@+id/btnGetDirection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Get Directions"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/toText"
+                app:layout_constraintHorizontal_bias="0.995"
+                app:layout_constraintStart_toEndOf="@+id/routesPageBackButton"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.878" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
