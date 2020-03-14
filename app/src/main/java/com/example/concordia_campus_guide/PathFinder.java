@@ -18,34 +18,33 @@ import java.util.function.Predicate;
 
 public class PathFinder {
 
-    HashMap <Integer, WalkingPoint> walkingPointMap;
-    PriorityQueue <WalkingPointNode> walkingPointsToVisit;
+    HashMap<Integer, WalkingPointNode> walkingPointNodeMap;
+    PriorityQueue<WalkingPointNode> walkingPointsToVisit;
 
-    HashMap<Integer, Double> walkingPointsVisited;
+    HashMap<WalkingPointNode, Double> walkingPointsVisited;
 
     WalkingPoint initialCoordinate;
     WalkingPoint destinationGoal;
     WalkingPointNode goalNode;
     Context context;
 
-//    public PathFinder(Context context, RoomModel source, RoomModel destination) {
-//
-//        Comparator<WalkingPointNode> comparator = new WalkingPointComparator();
-//        this.walkingPointsToVisit = new PriorityQueue<>(comparator);
-//        this.walkingPointsVisited = new HashMap<>();
-//
-//
-//        List<WalkingPoint> walkingPoints = AppDatabase.getInstance(context).walkingPointDao().getAll();
-//        populateWalkingPointMap(walkingPoints);
-//        this.context = context;
-//        this.initialCoordinate = getWalkingPoint(source.getCenterCoordinates(), source.getFloorCode(), walkingPoints);
-//        this.destinationGoal = getWalkingPoint(destination.getCenterCoordinates(), destination.getFloorCode(), walkingPoints);
-//    }
-
-    public PathFinder(Context context, Double[] source, Double[] destination, String floorCode) {
+    public PathFinder(Context context, RoomModel source, RoomModel destination) {
 
         Comparator<WalkingPointNode> comparator = new WalkingPointComparator();
         this.walkingPointsToVisit = new PriorityQueue<>(comparator);
+        this.walkingPointsVisited = new HashMap<>();
+
+
+        List<WalkingPoint> walkingPoints = AppDatabase.getInstance(context).walkingPointDao().getAll();
+        populateWalkingPointMap(walkingPoints);
+        this.context = context;
+        this.initialCoordinate = getWalkingPoint(source.getCenterCoordinates(), source.getFloorCode(), walkingPoints);
+        this.destinationGoal = getWalkingPoint(destination.getCenterCoordinates(), destination.getFloorCode(), walkingPoints);
+    }
+
+    public PathFinder(Context context, Double[] source, Double[] destination, String floorCode) {
+
+        this.walkingPointsToVisit = new PriorityQueue<>(new WalkingPointComparator());
         this.walkingPointsVisited = new HashMap<>();
 
         List<WalkingPoint> walkingPoints = AppDatabase.getInstance(context).walkingPointDao().getAll();
@@ -53,13 +52,14 @@ public class PathFinder {
 
         this.initialCoordinate = getWalkingPoint(source, floorCode, walkingPoints);
         this.destinationGoal = getWalkingPoint(destination, floorCode, walkingPoints);
+
         searchPathToDestination();
     }
 
     private void populateWalkingPointMap(List<WalkingPoint> walkingPoints) {
-        this.walkingPointMap = new HashMap<>();
+        this.walkingPointNodeMap = new HashMap<>();
         for (WalkingPoint walkingPoint : walkingPoints) {
-            walkingPointMap.put(new Integer(walkingPoint.getId()), walkingPoint);
+            walkingPointNodeMap.put(new Integer(walkingPoint.getId()), new WalkingPointNode(walkingPoint, null, 0, 0));
         }
     }
 
@@ -81,14 +81,17 @@ public class PathFinder {
     }
 
     public List<WalkingPoint> searchPathToDestination() {
-        walkingPointsToVisit.add(new WalkingPointNode(initialCoordinate, null, getHeuristicEstimate(initialCoordinate), 0));
+
+        WalkingPointNode initial = walkingPointNodeMap.get(initialCoordinate.getId());
+        initial.setHeuristic(getHeuristicEstimate(initial.getWalkingPoint()));
+        walkingPointsToVisit.add(initial);
 
         while (!walkingPointsToVisit.isEmpty()) {
 
             WalkingPointNode currentLocation = walkingPointsToVisit.poll();
 
-            if (walkingPointsVisited.containsKey(currentLocation.getWalkingPoint().getId())) continue;
-            else walkingPointsVisited.put(currentLocation.getWalkingPoint().getId(), currentLocation.getCost());
+            if (walkingPointsVisited.containsKey(currentLocation)) continue;
+            else walkingPointsVisited.put(currentLocation, currentLocation.getCost());
 
             if (isGoal(currentLocation.getWalkingPoint())) {
                 goalNode = currentLocation;
@@ -118,7 +121,17 @@ public class PathFinder {
 
     private void addNearestWalkingPoints(WalkingPointNode currentLocation) {
         for (int id : currentLocation.getWalkingPoint().getConnectedPointsId()) {
-            walkingPointsToVisit.add(new WalkingPointNode(walkingPointMap.get(id), currentLocation, getHeuristicEstimate(walkingPointMap.get(id)), currentLocation.getCost()+getBirdViewDistanceBetweenWalkingPoints(currentLocation.getWalkingPoint(), walkingPointMap.get(id))));
+
+            WalkingPointNode curr = walkingPointNodeMap.get(id);
+
+            double c = currentLocation.getCost()+getBirdViewDistanceBetweenWalkingPoints(currentLocation.getWalkingPoint(), walkingPointNodeMap.get(id).getWalkingPoint());
+
+            if(c < curr.getCost() && curr.getCost() > 0 || curr.getCost() == 0){
+                curr.setParent(currentLocation);
+                curr.setHeuristic(getHeuristicEstimate(curr.getWalkingPoint()));
+                curr.setCost(c);
+                walkingPointsToVisit.add(curr);
+            }
         }
     }
 
