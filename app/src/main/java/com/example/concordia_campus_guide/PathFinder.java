@@ -135,7 +135,7 @@ public class PathFinder {
     public double getHeuristicEstimate(WalkingPoint currentCoordinate) {
         double heuristic;
         //check type of working point
-        if (currentCoordinate.getFloorCode() == destinationGoal.getFloorCode()) {
+        if (currentCoordinate.getFloorCode().equalsIgnoreCase(destinationGoal.getFloorCode())) {
             heuristic =
                     getBirdViewDistanceBetweenWalkingPoints(currentCoordinate, destinationGoal);
         } else {
