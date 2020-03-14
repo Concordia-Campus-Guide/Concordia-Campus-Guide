@@ -58,8 +58,6 @@ public class MainActivity extends AppCompatActivity {
         List<Building> listBuildings = appDB.buildingDao().getAll();
         List<BuildingWithFloors> buildingWithFloorsList = appDB.buildingDao().getBuildingsWithFloors();
         List<FloorWithRooms> floorWithRooms = appDB.floorDao().getFloorWithRooms();
-        List<RoomModel> jas = appDB.roomDao().getAllRoomsByFloorCode("H-8");
-        String gs = "Asda" ;
     }
 
     @Override

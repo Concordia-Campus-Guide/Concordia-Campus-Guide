@@ -195,7 +195,7 @@ public class LocationFragmentViewModel extends ViewModel {
 
     private void getPointStyle(GeoJsonLayer layer) {
         GeoJsonPointStyle geoJsonPointStyle = new GeoJsonPointStyle();
-        geoJsonPointStyle.setVisible(false);
+        geoJsonPointStyle.setVisible(true);
 
         for (GeoJsonFeature feature : layer.getFeatures()) {
             feature.setPointStyle(geoJsonPointStyle);
@@ -213,41 +213,12 @@ public class LocationFragmentViewModel extends ViewModel {
         if (floorLayer != null) {
             floorLayer.removeLayerFromMap();
         }
-        floorLayer = initMarkersLayer(mMap, getGeoJson(context, buildingCode+"-"+floor));
+        JSONObject geoJson = ApplicationState.getInstance(context).getRooms().getGeoJson(buildingCode+"-"+floor);
+        floorLayer = initMarkersLayer(mMap, geoJson);
         getPointStyle(floorLayer);
         floorLayer.addLayerToMap();
     }
 
-    public JSONObject getGeoJson(Context context, String floor){
-        JSONObject toReturn = new JSONObject();
-        try{
-            toReturn.put("type", "FeatureCollection");
-            toReturn.put("features", getInnerGeoJson(context, floor));
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-
-        return toReturn;
-    }
-
-    public JSONArray getInnerGeoJson(Context context, String floor){
-        AppDatabase appDB = AppDatabase.getInstance(context);
-        List<RoomModel> roomModelList = appDB.roomDao().getAllRoomsByFloorCode(floor);
-        JSONArray features = new JSONArray();
-
-        try{
-            for(RoomModel roomModel: roomModelList){
-                JSONObject roomGeoJSON = roomModel.getGeoJson();
-                if(roomGeoJSON!=null) features.put(roomGeoJSON);
-            }
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-
-        return features;
-    }
 
     public Building getBuildingFromeCode(String buildingCode) {
         return buildings.get(buildingCode);
