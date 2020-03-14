@@ -130,7 +130,7 @@ public class PathFinder {
             }
 
             walkingPointsVisited.put(currentLocation.getWalkingPoint(), currentLocation.getCost());
-            addNearestWalkingPoints(currentLocation.getWalkingPoint());
+            addNearestWalkingPoints(currentLocation);
         }
         System.out.print("bordel no goal found :(");
         goalNode = null;
@@ -139,17 +139,17 @@ public class PathFinder {
 
     public List<WalkingPoint> getSolutionPath() {
         List<WalkingPoint> solutionPath = new ArrayList<>();
-        WalkingPoint node = goalNode.walkingPoint;
+        WalkingPointNode node = goalNode;
         do {
-            solutionPath.add(node);
-            node = goalNode.parent;
+            solutionPath.add(node.getWalkingPoint());
+            node = node.parent;
         } while (node != null);
         return solutionPath;
     }
 
-    private void addNearestWalkingPoints(WalkingPoint currentLocation) {
-        for (int id : currentLocation.getConnectedPointsId()) {
-            walkingPointsToVisit.add(new WalkingPointNode(walkingPointMap.get(id), currentLocation, getHeuristicEstimate(walkingPointMap.get(id)), getBirdViewDistanceBetweenWalkingPoints(currentLocation, walkingPointMap.get(id))));
+    private void addNearestWalkingPoints(WalkingPointNode currentLocation) {
+        for (int id : currentLocation.getWalkingPoint().getConnectedPointsId()) {
+            walkingPointsToVisit.add(new WalkingPointNode(walkingPointMap.get(id), currentLocation, getHeuristicEstimate(walkingPointMap.get(id)), getBirdViewDistanceBetweenWalkingPoints(currentLocation.getWalkingPoint(), walkingPointMap.get(id))));
         }
     }
 

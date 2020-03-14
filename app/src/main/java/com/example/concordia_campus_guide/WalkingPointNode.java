@@ -4,11 +4,11 @@ import com.example.concordia_campus_guide.Models.WalkingPoint;
 
 public class WalkingPointNode {
     WalkingPoint walkingPoint;
-    WalkingPoint parent;
+    WalkingPointNode parent;
     double heuristic;
     double cost;
 
-    public WalkingPointNode(WalkingPoint walkingPoint, WalkingPoint parent, double heuristic, double cost) {
+    public WalkingPointNode(WalkingPoint walkingPoint, WalkingPointNode parent, double heuristic, double cost) {
         this.walkingPoint = walkingPoint;
         this.parent = parent;
         this.heuristic = heuristic;
@@ -23,11 +23,11 @@ public class WalkingPointNode {
         this.walkingPoint = walkingPoint;
     }
 
-    public WalkingPoint getParent() {
+    public WalkingPointNode getParent() {
         return parent;
     }
 
-    public void setParent(WalkingPoint parent) {
+    public void setParent(WalkingPointNode parent) {
         this.parent = parent;
     }
 
