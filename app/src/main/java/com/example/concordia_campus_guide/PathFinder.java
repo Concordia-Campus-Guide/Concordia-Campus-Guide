@@ -34,7 +34,6 @@ public class PathFinder {
         this.walkingPointsToVisit = new PriorityQueue<>(comparator);
         this.walkingPointsVisited = new HashMap<>();
 
-
         List<WalkingPoint> walkingPoints = AppDatabase.getInstance(context).walkingPointDao().getAll();
         populateWalkingPointMap(walkingPoints);
         this.context = context;

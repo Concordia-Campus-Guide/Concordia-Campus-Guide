@@ -105,6 +105,7 @@
       "connectedPointsId": [
         5,
         6,
+        7,
         34,
         17
       ]
@@ -403,7 +404,8 @@
       "floorCode": "H-9",
       "pointType": "NONE",
       "connectedPointsId": [
-        31
+        31,
+        29
       ]
     },
     {
@@ -424,6 +426,19 @@
       "coordinate": {
         "latitude": 45.49725065,
         "longitude": -73.57890118
+      },
+      "floorCode": "H-9",
+      "pointType": "NONE",
+      "connectedPointsId": [
+        1,
+        8
+      ]
+    },
+    {
+      "id": 35,
+      "coordinate": {
+        "latitude": 45.497250232,
+        "longitude": -73.57890143
       },
       "floorCode": "H-9",
       "pointType": "NONE",
