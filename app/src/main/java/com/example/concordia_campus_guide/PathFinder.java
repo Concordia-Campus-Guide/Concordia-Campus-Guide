@@ -18,8 +18,8 @@ import java.util.function.Predicate;
 
 public class PathFinder {
 
-    HashMap<Integer, WalkingPoint> walkingPointMap;
-    PriorityQueue<WalkingPointNode> walkingPointsToVisit;
+    HashMap <Integer, WalkingPoint> walkingPointMap;
+    PriorityQueue <WalkingPointNode> walkingPointsToVisit;
 
     HashMap<Integer, Double> walkingPointsVisited;
 
@@ -28,19 +28,19 @@ public class PathFinder {
     WalkingPointNode goalNode;
     Context context;
 
-    public PathFinder(Context context, RoomModel source, RoomModel destination) {
-
-        Comparator<WalkingPointNode> comparator = new WalkingPointComparator();
-        this.walkingPointsToVisit = new PriorityQueue<>(comparator);
-        this.walkingPointsVisited = new HashMap<>();
-
-
-        List<WalkingPoint> walkingPoints = AppDatabase.getInstance(context).walkingPointDao().getAll();
-        populateWalkingPointMap(walkingPoints);
-        this.context = context;
-        this.initialCoordinate = getWalkingPoint(source.getCenterCoordinates(), source.getFloorCode(), walkingPoints);
-        this.destinationGoal = getWalkingPoint(destination.getCenterCoordinates(), destination.getFloorCode(), walkingPoints);
-    }
+//    public PathFinder(Context context, RoomModel source, RoomModel destination) {
+//
+//        Comparator<WalkingPointNode> comparator = new WalkingPointComparator();
+//        this.walkingPointsToVisit = new PriorityQueue<>(comparator);
+//        this.walkingPointsVisited = new HashMap<>();
+//
+//
+//        List<WalkingPoint> walkingPoints = AppDatabase.getInstance(context).walkingPointDao().getAll();
+//        populateWalkingPointMap(walkingPoints);
+//        this.context = context;
+//        this.initialCoordinate = getWalkingPoint(source.getCenterCoordinates(), source.getFloorCode(), walkingPoints);
+//        this.destinationGoal = getWalkingPoint(destination.getCenterCoordinates(), destination.getFloorCode(), walkingPoints);
+//    }
 
     public PathFinder(Context context, Double[] source, Double[] destination, String floorCode) {
 
