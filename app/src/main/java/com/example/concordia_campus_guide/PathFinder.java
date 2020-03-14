@@ -16,15 +16,24 @@ import java.util.Optional;
 import java.util.PriorityQueue;
 import java.util.function.Predicate;
 
+/**
+ * Usage Example:
+ * Double[] src = {-73.57883681, 45.49731974};
+ * Double[] trg = {-73.57873723, 45.49748425};
+ * RoomModel room1 = new RoomModel(src,"H927" ,"H-9");
+ * RoomModel room2 = new RoomModel(trg,"H842", "H-8");
+ * PathFinder finder = new PathFinder(getContext(),  room1, room2);
+ * List<WalkingPoint> solution = finder.getPathToDestination();
+ */
 public class PathFinder {
 
-    HashMap<Integer, WalkingPointNode> walkingPointNodesMap;
-    PriorityQueue<WalkingPointNode> walkingPointsToVisit;
-    HashMap<WalkingPointNode, Double> walkingPointsVisited;
+    private HashMap<Integer, WalkingPointNode> walkingPointNodesMap;
+    private PriorityQueue<WalkingPointNode> walkingPointsToVisit;
+    private HashMap<WalkingPointNode, Double> walkingPointsVisited;
 
-    WalkingPoint initialPoint;
-    WalkingPoint destinationPoint;
-    Context context;
+    private WalkingPoint initialPoint;
+    private WalkingPoint destinationPoint;
+    private Context context;
 
     public PathFinder(Context context, RoomModel source, RoomModel destination) {
         this.walkingPointsToVisit = new PriorityQueue<>(new WalkingPointComparator());
@@ -33,13 +42,11 @@ public class PathFinder {
         List<WalkingPoint> walkingPoints = AppDatabase.getInstance(context).walkingPointDao().getAll();
         walkingPointNodesMap = populateWalkingPointMap(walkingPoints);
 
-        this.initialPoint = getWalkingPoint(source.getCenterCoordinates(), source.getFloorCode(), walkingPoints);
-        this.destinationPoint = getWalkingPoint(destination.getCenterCoordinates(), destination.getFloorCode(), walkingPoints);
-
-        searchPathToDestination();
+        this.initialPoint = getWalkingPointCorrespondingToRoom(source, walkingPoints);
+        this.destinationPoint = getWalkingPointCorrespondingToRoom(destination, walkingPoints);
     }
 
-    private HashMap<Integer, WalkingPointNode> populateWalkingPointMap(List<WalkingPoint> walkingPoints) {
+    protected HashMap<Integer, WalkingPointNode> populateWalkingPointMap(List<WalkingPoint> walkingPoints) {
         this.walkingPointNodesMap = new HashMap<>();
         for (WalkingPoint walkingPoint : walkingPoints) {
             walkingPointNodesMap.put(new Integer(walkingPoint.getId()), new WalkingPointNode(walkingPoint, null, 0, 0));
@@ -47,24 +54,22 @@ public class PathFinder {
         return walkingPointNodesMap;
     }
 
-    public WalkingPoint getWalkingPoint(Double[] coordinates, String floorCode, List<WalkingPoint> walkingPointList) {
+    protected WalkingPoint getWalkingPointCorrespondingToRoom(RoomModel room, List<WalkingPoint> walkingPointList) {
         //TODO: If no walking point corresponds to room, return the access point of the floor on which the room is.
-        final Coordinates coordinates1 = new Coordinates(coordinates[0], coordinates[1]);
-        final WalkingPoint wantedPoint = new WalkingPoint(coordinates1, floorCode, null, null);
+        final Coordinates coordinates1 = new Coordinates(room.getCenterCoordinates()[0], room.getCenterCoordinates()[1]);
+        final WalkingPoint wantedPoint = new WalkingPoint(coordinates1, room.getFloorCode(), null, null);
+
         Optional<WalkingPoint> optionalWalkingPoints = walkingPointList.stream().filter(new Predicate<WalkingPoint>() {
             @Override
             public boolean test(WalkingPoint walkingPoint) {
                 return wantedPoint.equals(walkingPoint);
             }
         }).findFirst();
-        if(optionalWalkingPoints.isPresent()){
-            return optionalWalkingPoints.get();
-        }else {
-            return null;
-        }
+
+        return optionalWalkingPoints.isPresent() ? optionalWalkingPoints.get() : null;
     }
 
-    public List<WalkingPoint> searchPathToDestination() {
+    public List<WalkingPoint> getPathToDestination() {
 
         addInitialPointToMap();
 
@@ -80,6 +85,7 @@ public class PathFinder {
             if (isGoal(currentLocation.getWalkingPoint())) {
                 return getSolutionPath(currentLocation);
             }
+
             addNearestWalkingPoints(currentLocation);
         }
         return null;
@@ -87,17 +93,16 @@ public class PathFinder {
 
     private void addInitialPointToMap() {
         WalkingPointNode initial = walkingPointNodesMap.get(initialPoint.getId());
-        initial.setHeuristic(getHeuristicEstimate(initial.getWalkingPoint()));
+        initial.setHeuristic(computeHeuristicEstimate(initialPoint));
         walkingPointsToVisit.add(initial);
     }
 
-    private boolean isGoal(WalkingPoint currentLocation) {
+    protected boolean isGoal(WalkingPoint currentLocation) {
         return destinationPoint.equals(currentLocation);
     }
 
-    public List<WalkingPoint> getSolutionPath(WalkingPointNode goalNode) {
+    protected List<WalkingPoint> getSolutionPath(WalkingPointNode goalNode) {
         List<WalkingPoint> solutionPath = new ArrayList<>();
-
         do {
             solutionPath.add(goalNode.getWalkingPoint());
             goalNode = goalNode.parent;
@@ -106,60 +111,58 @@ public class PathFinder {
         return solutionPath;
     }
 
+    protected void addNearestWalkingPoints(WalkingPointNode currentNode) {
+        for (int id : currentNode.getWalkingPoint().getConnectedPointsId()) {
 
-    private void addNearestWalkingPoints(WalkingPointNode currentLocation) {
-        for (int id : currentLocation.getWalkingPoint().getConnectedPointsId()) {
+            WalkingPointNode adjacentNode = walkingPointNodesMap.get(id);
+            double currentCost = currentNode.getCost() + getEuclideanDistance(currentNode.getWalkingPoint(), walkingPointNodesMap.get(id).getWalkingPoint());
+            double previousCost = adjacentNode.getCost();
 
-            WalkingPointNode child = walkingPointNodesMap.get(id);
-            double c = currentLocation.getCost()+ getEuclideanDistance(currentLocation.getWalkingPoint(), walkingPointNodesMap.get(id).getWalkingPoint());
-
-
-            if (walkingPointsVisited.containsKey(child)) {
-                if(child.getCost() > c){
-                    child.setParent(currentLocation);
-                    child.setCost(c);
+            if (walkingPointsVisited.containsKey(adjacentNode)) {
+                if (currentCost < previousCost) {
+                    updateWalkingNode(adjacentNode, currentNode, currentCost);
                 }
                 continue;
-            }
-
-            else if(c < child.getCost() && child.getCost() > 0 || child.getCost() == 0){
-                child.setParent(currentLocation);
-                child.setHeuristic(getHeuristicEstimate(child.getWalkingPoint()));
-                child.setCost(c);
-                walkingPointsToVisit.add(child);
+            } else if (currentCost < previousCost && previousCost > 0 || previousCost == 0) {
+                updateWalkingNode(adjacentNode, currentNode, currentCost);
+                walkingPointsToVisit.add(adjacentNode);
             }
         }
     }
 
-    public double getEuclideanDistance(WalkingPoint firstCoordinate, WalkingPoint secondCoordinate) {
+    protected void updateWalkingNode(WalkingPointNode node, WalkingPointNode parent, double cost) {
+        node.setParent(parent);
+        node.setCost(cost);
+        if (node.heuristic == 0)
+            node.setHeuristic(computeHeuristicEstimate(node.getWalkingPoint()));
+    }
 
+    protected double getEuclideanDistance(WalkingPoint firstCoordinate, WalkingPoint secondCoordinate) {
         double resultLatDiff = Math.abs(firstCoordinate.getCoordinate().toListDouble().get(0) - secondCoordinate.getCoordinate().toListDouble().get(0));
         double resultLongDiff = Math.abs(firstCoordinate.getCoordinate().toListDouble().get(1) - secondCoordinate.getCoordinate().toListDouble().get(1));
 
         return Math.sqrt(Math.pow(resultLatDiff, 2) + Math.pow(resultLongDiff, 2));
     }
 
-    public double getF(WalkingPointNode currentCoordinate) {
-        return currentCoordinate.getCost() + getHeuristicEstimate(currentCoordinate.getWalkingPoint());
+    protected double computeEstimatedCostFromInitialToDestination(WalkingPointNode currentCoordinate) {
+        return currentCoordinate.getCost() + computeHeuristicEstimate(currentCoordinate.getWalkingPoint());
     }
 
-    public double getHeuristicEstimate(WalkingPoint currentCoordinate) {
-        double heuristic;
-        //check type of working point
-        if (currentCoordinate.getFloorCode().equalsIgnoreCase(destinationPoint.getFloorCode())) {
-            heuristic =
-                    getEuclideanDistance(currentCoordinate, destinationPoint);
-        } else {
+    protected double computeHeuristicEstimate(WalkingPoint currentCoordinate) {
+        if (!currentCoordinate.getFloorCode().equalsIgnoreCase(destinationPoint.getFloorCode())) {
             WalkingPoint accessPoint = getNearestAccessPointForFloor(currentCoordinate);
-            heuristic = getEuclideanDistance(currentCoordinate, accessPoint) + getEuclideanDistance(accessPoint, destinationPoint);
+            return getEuclideanDistance(currentCoordinate, accessPoint) + getEuclideanDistance(accessPoint, destinationPoint);
         }
 
-        return heuristic;
+        return getEuclideanDistance(currentCoordinate, destinationPoint);
     }
 
-    private WalkingPoint getNearestAccessPointForFloor(WalkingPoint currentPoint) {
+    protected WalkingPoint getNearestAccessPointForFloor(WalkingPoint currentPoint) {
         List<WalkingPoint> accessPtList = AppDatabase.getInstance(context).walkingPointDao().getAllAccessPointsOnFloor(currentPoint.getFloorCode(), PointType.ELEVATOR);
+        return getClosestPointToCurrentPointFromList(currentPoint, accessPtList);
+    }
 
+    protected WalkingPoint getClosestPointToCurrentPointFromList(WalkingPoint currentPoint, List<WalkingPoint> accessPtList) {
         WalkingPoint closestPoint = null;
         if (!accessPtList.isEmpty()) {
             closestPoint = accessPtList.get(0);
@@ -172,19 +175,38 @@ public class PathFinder {
         return closestPoint;
     }
 
+    public HashMap<Integer, WalkingPointNode> getWalkingPointNodesMap() {
+        return walkingPointNodesMap;
+    }
+
+    public PriorityQueue<WalkingPointNode> getWalkingPointsToVisit() {
+        return walkingPointsToVisit;
+    }
+
+    public HashMap<WalkingPointNode, Double> getWalkingPointsVisited() {
+        return walkingPointsVisited;
+    }
+
+    public WalkingPoint getInitialPoint() {
+        return initialPoint;
+    }
+
+    public WalkingPoint getDestinationPoint() {
+        return destinationPoint;
+    }
+
     public class WalkingPointComparator implements Comparator<WalkingPointNode> {
         @Override
         public int compare(WalkingPointNode o1, WalkingPointNode o2) {
-            if (getF(o1) < getF(o2)) {
+            if (computeEstimatedCostFromInitialToDestination(o1) < computeEstimatedCostFromInitialToDestination(o2)) {
                 return -1;
             }
-            if (getF(o1) > getF(o2)) {
+            if (computeEstimatedCostFromInitialToDestination(o1) > computeEstimatedCostFromInitialToDestination(o2)) {
                 return 1;
             }
             return 0;
         }
     }
-
 }
 
 

@@ -164,21 +164,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                 });
             }
         });
-
-       Double[] src = {-73.57883681, 45.49731974};
-       Double[] trg = {-73.57873723, 45.49748425};
-//42
-        RoomModel room1 = new RoomModel(src,"H927" ,"H-9");
-        RoomModel room2 = new RoomModel(trg,"H842", "H-8");
-        PathFinder path = new PathFinder(getContext(),  room1, room2);
-        MarkerOptions marker;
-//        List<WalkingPoint> list = path.getSolutionPath();
-//        for(int i = list.size() - 1 ; i >= 0; i-- ){
-//            WalkingPoint point = list.get(i);
-//            LatLng latLng = new LatLng(point.getCoordinate().getLatitude(), point.getCoordinate().getLongitude());
-//            marker = new MarkerOptions().position(latLng).title(String.valueOf(markerCounter)).visible(true);
-//            mMap.addMarker(marker);
-//        }
     }
 
 
