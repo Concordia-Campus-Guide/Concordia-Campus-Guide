@@ -87,6 +87,13 @@
                 app:layout_constraintStart_toEndOf="@+id/routesPageBackButton"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <include
+                layout="@layout/routes_filter"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="119dp" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
