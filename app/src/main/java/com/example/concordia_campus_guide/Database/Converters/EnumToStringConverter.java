@@ -6,16 +6,15 @@ import androidx.room.TypeConverter;
 
 public class EnumToStringConverter {
 
-
     @TypeConverter
-    public static String fromAccessibilityTypeToString(PointType pointType) {
+    public String fromPointTypeToString(PointType pointType) {
         if (pointType == null)
             return null;
         return pointType.toString();
     }
 
     @TypeConverter
-    public static PointType fromStringToAccessibilityType(String pointType) {
+    public PointType fromStringToPointType(String pointType) {
         if(pointType!= null){
             return PointType.valueOf(pointType);
         }

@@ -48,7 +48,6 @@ public  class WalkingPoint {
     @TypeConverters(EnumToStringConverter.class)
     private PointType pointType;
 
-
     public WalkingPoint(@NonNull Coordinates coordinate, @NonNull String floorCode, List<Integer> connectedPointsId, PointType pointType) {
         this.coordinate = coordinate;
         this.floorCode = floorCode;
@@ -56,14 +55,6 @@ public  class WalkingPoint {
         this.pointType = pointType;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        WalkingPoint that = (WalkingPoint) o;
-        return coordinate.equals(that.coordinate) &&
-                floorCode.equals(that.floorCode);
-    }
     @Override
     public int hashCode() {
         return Objects.hash(coordinate, floorCode);
@@ -87,9 +78,7 @@ public  class WalkingPoint {
     }
 
     @NonNull
-    public String getFloorCode() {
-        return floorCode;
-    }
+    public String getFloorCode() { return floorCode; }
 
     public void setFloorCode(@NonNull String floorCode) {
         this.floorCode = floorCode;
@@ -99,9 +88,7 @@ public  class WalkingPoint {
         return connectedPointsId;
     }
 
-    public void setConnectedPointsId(List<Integer> connectedPointsId) {
-        this.connectedPointsId = connectedPointsId;
-    }
+    public void setConnectedPointsId(List<Integer> connectedPointsId) { this.connectedPointsId = connectedPointsId; }
 
     public PointType getPointType() {
         return pointType;
@@ -111,41 +98,12 @@ public  class WalkingPoint {
         this.pointType = pointType;
     }
 
-
-//    public JSONObject getGeoJson(){
-//        JSONObject toReturn = new JSONObject();
-//        JSONObject properties = new JSONObject();
-//        JSONObject geometry = new JSONObject();
-//
-//        try{
-//            if(coordinate!=null) properties.put("StartingPoint", coordinate);
-//            if(floorCode!=null) properties.put("floorCode", floorCode);
-//
-//            geometry.put("type", "Polygon");
-//            List<List<List<Double>>> geoJsonCoordinates = new ArrayList<>(Arrays.asList(cornerCoordinatesToListDouble()));
-//
-//            geometry.put("coordinates", new JSONArray(geoJsonCoordinates));
-//
-//            toReturn.put("type", "Feature");
-//            toReturn.put("properties", properties);
-//            toReturn.put("geometry", geometry);
-//        }
-//        catch (Exception e){
-//            e.printStackTrace();
-//        }
-//
-//        return toReturn;
-//    }
-
-//    private List<List<Double>> cornerCoordinatesToListDouble(){
-//        List<List<Double>> toReturn = new ArrayList<>();
-//
-//        List<Coordinates> listOfCoordinatesObject = connectedPoints.getListOfCoordinates();
-//
-//        for(Coordinates coordinates: listOfCoordinatesObject){
-//            toReturn.add(coordinates.toListDouble());
-//        }
-//
-//        return toReturn;
-//    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WalkingPoint that = (WalkingPoint) o;
+        return coordinate.equals(that.coordinate) &&
+                floorCode.equals(that.floorCode);
+    }
 }
