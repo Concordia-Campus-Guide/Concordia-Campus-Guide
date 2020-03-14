@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide;
+package com.example.concordia_campus_guide.Helper;
 
 import android.content.Context;
 
@@ -206,6 +206,52 @@ public class PathFinder {
                 return 1;
             }
             return 0;
+        }
+    }
+
+    public class WalkingPointNode {
+        WalkingPoint walkingPoint;
+        WalkingPointNode parent;
+        double heuristic;
+        double cost;
+
+        public WalkingPointNode(WalkingPoint walkingPoint, WalkingPointNode parent, double heuristic, double cost) {
+            this.walkingPoint = walkingPoint;
+            this.parent = parent;
+            this.heuristic = heuristic;
+            this.cost = cost;
+        }
+
+        public WalkingPoint getWalkingPoint() {
+            return walkingPoint;
+        }
+
+        public void setWalkingPoint(WalkingPoint walkingPoint) {
+            this.walkingPoint = walkingPoint;
+        }
+
+        public WalkingPointNode getParent() {
+            return parent;
+        }
+
+        public void setParent(WalkingPointNode parent) {
+            this.parent = parent;
+        }
+
+        public double getHeuristic() {
+            return heuristic;
+        }
+
+        public void setHeuristic(double heuristic) {
+            this.heuristic = heuristic;
+        }
+
+        public double getCost() {
+            return cost;
+        }
+
+        public void setCost(double cost) {
+            this.cost = cost;
         }
     }
 }
