@@ -25,6 +25,8 @@ import com.example.concordia_campus_guide.Models.Rooms;
 import com.example.concordia_campus_guide.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     FragmentTransaction fragmentTransaction;

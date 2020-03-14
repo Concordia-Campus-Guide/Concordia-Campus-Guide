@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.Floors;
 import com.example.concordia_campus_guide.Models.Rooms;
+import com.example.concordia_campus_guide.Models.Shuttle;
 import com.example.concordia_campus_guide.R;
 import com.google.gson.Gson;
 
@@ -19,12 +20,14 @@ public class ApplicationState {
     private Floors floors;
     private Rooms rooms;
     private boolean dbIsSet = false;
+    private Shuttle shuttleSchedule;
 
     private ApplicationState(Context context) {
         this.context = context;
         importBuildings();
         importFloors();
         importRooms();
+        importShuttle();
     }
 
     public static ApplicationState getInstance(Context context) {
@@ -91,6 +94,25 @@ public class ApplicationState {
         this.rooms = rooms;
     }
 
+    private void importShuttle() {
+        String json;
+        Shuttle shuttle = new Shuttle();
+
+        try {
+            InputStream is = context.getResources().openRawResource(R.raw.shuttle_info);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+            shuttle = new Gson().fromJson(json, Shuttle.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        this.shuttleSchedule = shuttle;
+    }
+
     public Buildings getBuildings(){
         return this.buildings;
     }
@@ -110,4 +132,8 @@ public class ApplicationState {
     public void setDbIsSetToTrue() {
         this.dbIsSet = true;
     }
+    public Shuttle getShuttle() {
+        return this.shuttleSchedule;
+    }
+
 }
