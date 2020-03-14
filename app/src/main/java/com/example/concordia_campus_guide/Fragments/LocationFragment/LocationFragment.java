@@ -7,12 +7,11 @@ import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,7 +23,6 @@ import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Global.ApplicationState;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
@@ -163,8 +161,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             }
         });
 
-        Double[] src = {-73.5787892, 45.49748331};
-        Double[] trg = {-73.57885357, 45.49753054};
+        Double[] src = {-73.57895248, 45.4969677};
+        Double[] trg = {-73.57883681, 45.49731974};
 
         PathFinder path = new PathFinder(getContext(), src, trg, "H-9");
         MarkerOptions marker;

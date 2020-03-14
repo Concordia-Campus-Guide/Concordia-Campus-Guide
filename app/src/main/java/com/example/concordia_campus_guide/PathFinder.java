@@ -20,7 +20,9 @@ public class PathFinder {
 
     HashMap<Integer, WalkingPoint> walkingPointMap;
     PriorityQueue<WalkingPointNode> walkingPointsToVisit;
-    HashMap<WalkingPoint, Double> walkingPointsVisited;
+
+    HashMap<Integer, Double> walkingPointsVisited;
+
     WalkingPoint initialCoordinate;
     WalkingPoint destinationGoal;
     WalkingPointNode goalNode;
@@ -40,11 +42,10 @@ public class PathFinder {
         this.destinationGoal = getWalkingPoint(destination.getCenterCoordinates(), destination.getFloorCode(), walkingPoints);
     }
 
-    //Helper ctor for testing purposes, don't push with this!!!!
     public PathFinder(Context context, Double[] source, Double[] destination, String floorCode) {
+
         Comparator<WalkingPointNode> comparator = new WalkingPointComparator();
-        this.walkingPointsToVisit = new PriorityQueue<WalkingPointNode>(comparator);
-        this.walkingPointMap = new HashMap<>();
+        this.walkingPointsToVisit = new PriorityQueue<>(comparator);
         this.walkingPointsVisited = new HashMap<>();
 
         List<WalkingPoint> walkingPoints = AppDatabase.getInstance(context).walkingPointDao().getAll();
@@ -53,6 +54,13 @@ public class PathFinder {
         this.initialCoordinate = getWalkingPoint(source, floorCode, walkingPoints);
         this.destinationGoal = getWalkingPoint(destination, floorCode, walkingPoints);
         searchPathToDestination();
+    }
+
+    private void populateWalkingPointMap(List<WalkingPoint> walkingPoints) {
+        this.walkingPointMap = new HashMap<>();
+        for (WalkingPoint walkingPoint : walkingPoints) {
+            walkingPointMap.put(new Integer(walkingPoint.getId()), walkingPoint);
+        }
     }
 
     public WalkingPoint getWalkingPoint(Double[] coordinates, String floorCode, List<WalkingPoint> walkingPointList) {
@@ -72,10 +80,56 @@ public class PathFinder {
         }
     }
 
-    private void populateWalkingPointMap(List<WalkingPoint> walkingPoints) {
-        for (WalkingPoint walkingPoint : walkingPoints) {
-            walkingPointMap.put(new Integer(walkingPoint.getId()), walkingPoint);
+    public List<WalkingPoint> searchPathToDestination() {
+        walkingPointsToVisit.add(new WalkingPointNode(initialCoordinate, null, getHeuristicEstimate(initialCoordinate), 0));
+
+        while (!walkingPointsToVisit.isEmpty()) {
+
+            WalkingPointNode currentLocation = walkingPointsToVisit.poll();
+
+            if (walkingPointsVisited.containsKey(currentLocation)) continue;
+            else walkingPointsVisited.put(currentLocation.getWalkingPoint().getId(), currentLocation.getCost());
+
+            if (isGoal(currentLocation.getWalkingPoint())) {
+                goalNode = currentLocation;
+                return getSolutionPath();
+            }
+            addNearestWalkingPoints(currentLocation);
         }
+        System.out.print("bordel no goal found :(");
+        goalNode = null;
+        return null;
+    }
+
+    private boolean isGoal(WalkingPoint currentLocation) {
+        return destinationGoal.equals(currentLocation);
+    }
+
+    public List<WalkingPoint> getSolutionPath() {
+        List<WalkingPoint> solutionPath = new ArrayList<>();
+        WalkingPointNode node = goalNode;
+        do {
+            solutionPath.add(node.getWalkingPoint());
+            node = node.parent;
+        } while (node != null);
+        return solutionPath;
+    }
+
+
+    private void addNearestWalkingPoints(WalkingPointNode currentLocation) {
+        for (int id : currentLocation.getWalkingPoint().getConnectedPointsId()) {
+            walkingPointsToVisit.add(new WalkingPointNode(walkingPointMap.get(id), currentLocation, getHeuristicEstimate(walkingPointMap.get(id)), currentLocation.getCost()+getBirdViewDistanceBetweenWalkingPoints(currentLocation.getWalkingPoint(), walkingPointMap.get(id))));
+        }
+    }
+
+    public double getBirdViewDistanceBetweenWalkingPoints(WalkingPoint firstCoordinate, WalkingPoint secondCoordinate) {
+        return Math.sqrt(
+                Math.pow(Math.abs(firstCoordinate.getCoordinate().toListDouble().get(0) - secondCoordinate.getCoordinate().toListDouble().get(0)), 2)
+                        + Math.pow(Math.abs(firstCoordinate.getCoordinate().toListDouble().get(1) - secondCoordinate.getCoordinate().toListDouble().get(1)), 2));
+    }
+
+    public double getF(WalkingPointNode currentCoordinate) {
+        return currentCoordinate.getCost() + getHeuristicEstimate(currentCoordinate.getWalkingPoint());
     }
 
     public double getHeuristicEstimate(WalkingPoint currentCoordinate) {
@@ -92,10 +146,6 @@ public class PathFinder {
         return heuristic;
     }
 
-    public double getF(WalkingPointNode currentCoordinate) {
-        return currentCoordinate.getCost() + getHeuristicEstimate(currentCoordinate.getWalkingPoint());
-    }
-
     private WalkingPoint getNearestAccessPointForFloor(WalkingPoint currentPoint) {
         List<WalkingPoint> accessPtList = AppDatabase.getInstance(context).walkingPointDao().getAllAccessPointsOnFloor(currentPoint.getFloorCode(), PointType.ELEVATOR);
 
@@ -109,52 +159,6 @@ public class PathFinder {
             }
         }
         return closestPoint;
-    }
-
-    public double getBirdViewDistanceBetweenWalkingPoints(WalkingPoint firstCoordinate, WalkingPoint secondCoordinate) {
-        return Math.sqrt(
-                Math.pow(Math.abs(firstCoordinate.getCoordinate().toListDouble().get(0) - secondCoordinate.getCoordinate().toListDouble().get(0)), 2)
-                        + Math.pow(Math.abs(firstCoordinate.getCoordinate().toListDouble().get(1) - secondCoordinate.getCoordinate().toListDouble().get(1)), 2));
-    }
-
-    public List<WalkingPoint> searchPathToDestination() {
-        walkingPointsToVisit.add(new WalkingPointNode(initialCoordinate, null, getHeuristicEstimate(initialCoordinate), 0));
-
-        while (!walkingPointsToVisit.isEmpty()) {
-
-            WalkingPointNode currentLocation = walkingPointsToVisit.poll();
-
-            if (isGoal(currentLocation.getWalkingPoint())) {
-                goalNode = currentLocation;
-                return getSolutionPath();
-            }
-
-            walkingPointsVisited.put(currentLocation.getWalkingPoint(), currentLocation.getCost());
-            addNearestWalkingPoints(currentLocation);
-        }
-        System.out.print("bordel no goal found :(");
-        goalNode = null;
-        return null;
-    }
-
-    public List<WalkingPoint> getSolutionPath() {
-        List<WalkingPoint> solutionPath = new ArrayList<>();
-        WalkingPointNode node = goalNode;
-        do {
-            solutionPath.add(node.getWalkingPoint());
-            node = node.parent;
-        } while (node != null);
-        return solutionPath;
-    }
-
-    private void addNearestWalkingPoints(WalkingPointNode currentLocation) {
-        for (int id : currentLocation.getWalkingPoint().getConnectedPointsId()) {
-            walkingPointsToVisit.add(new WalkingPointNode(walkingPointMap.get(id), currentLocation, getHeuristicEstimate(walkingPointMap.get(id)), getBirdViewDistanceBetweenWalkingPoints(currentLocation.getWalkingPoint(), walkingPointMap.get(id))));
-        }
-    }
-
-    private boolean isGoal(WalkingPoint currentLocation) {
-        return destinationGoal.equals(currentLocation);
     }
 
     public class WalkingPointComparator implements Comparator<WalkingPointNode> {
