@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Models.Coordinates;
+import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.PointType;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
@@ -29,19 +30,19 @@ public class PathFinder {
     Context context;
 
     public PathFinder(Context context, RoomModel source, RoomModel destination) {
-
-        Comparator<WalkingPointNode> comparator = new WalkingPointComparator();
-        this.walkingPointsToVisit = new PriorityQueue<>(comparator);
+        this.walkingPointsToVisit = new PriorityQueue<>(new WalkingPointComparator());
         this.walkingPointsVisited = new HashMap<>();
 
         List<WalkingPoint> walkingPoints = AppDatabase.getInstance(context).walkingPointDao().getAll();
         populateWalkingPointMap(walkingPoints);
-        this.context = context;
+
         this.initialCoordinate = getWalkingPoint(source.getCenterCoordinates(), source.getFloorCode(), walkingPoints);
         this.destinationGoal = getWalkingPoint(destination.getCenterCoordinates(), destination.getFloorCode(), walkingPoints);
+
+        searchPathToDestination();
     }
 
-    public PathFinder(Context context, Double[] source, Double[] destination, String floorCode) {
+    public PathFinder(Context context, Place source, Place destination, String floorCode) {
 
         this.walkingPointsToVisit = new PriorityQueue<>(new WalkingPointComparator());
         this.walkingPointsVisited = new HashMap<>();
@@ -49,8 +50,8 @@ public class PathFinder {
         List<WalkingPoint> walkingPoints = AppDatabase.getInstance(context).walkingPointDao().getAll();
         populateWalkingPointMap(walkingPoints);
 
-        this.initialCoordinate = getWalkingPoint(source, floorCode, walkingPoints);
-        this.destinationGoal = getWalkingPoint(destination, floorCode, walkingPoints);
+        this.initialCoordinate = getWalkingPoint(source.getCenterCoordinates(), floorCode, walkingPoints);
+        this.destinationGoal = getWalkingPoint(destination.getCenterCoordinates(), floorCode, walkingPoints);
 
         searchPathToDestination();
     }

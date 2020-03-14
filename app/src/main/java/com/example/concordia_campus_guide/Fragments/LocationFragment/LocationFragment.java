@@ -1,6 +1,7 @@
 package com.example.concordia_campus_guide.Fragments.LocationFragment;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.location.Location;
@@ -18,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.room.Room;
 
 import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
@@ -25,6 +27,8 @@ import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.Models.Building;
+import com.example.concordia_campus_guide.Models.Place;
+import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.PathFinder;
 import com.example.concordia_campus_guide.R;
@@ -161,10 +165,12 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             }
         });
 
-        Double[] src = {-73.57895248, 45.4969677};
-        Double[] trg = {-73.57883681, 45.49731974};
-
-        PathFinder path = new PathFinder(getContext(), src, trg, "H-9");
+       Double[] src = {-73.57883681, 45.49731974};
+       Double[] trg = {-73.57873723, 45.49748425};
+//42
+        RoomModel room1 = new RoomModel(src,"H927" ,"H-9");
+        RoomModel room2 = new RoomModel(trg,"H842", "H-8");
+        PathFinder path = new PathFinder(getContext(),  room1, room2);
         MarkerOptions marker;
 //        List<WalkingPoint> list = path.getSolutionPath();
 //        for(int i = list.size() - 1 ; i >= 0; i-- ){
