@@ -1,4 +1,5 @@
 package com.example.concordia_campus_guide.Models;
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;

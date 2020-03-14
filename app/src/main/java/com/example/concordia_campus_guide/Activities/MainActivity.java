@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         setUpDb();
 
         AppDatabase appDB = AppDatabase.getInstance(this);
-        List<Shuttle> jas = appDB.shuttleDao().getAll();
+        List<Shuttle> jas = appDB.shuttleDao().getScheduleByCampusAndDay("SGW", "Friday");
         String gs = "Asda" ;
     }
 
