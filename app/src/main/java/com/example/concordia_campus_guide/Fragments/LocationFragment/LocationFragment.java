@@ -166,13 +166,13 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
         PathFinder path = new PathFinder(getContext(), src, trg, "H-9");
         MarkerOptions marker;
-        List<WalkingPoint> list = path.getSolutionPath();
-        for(int i = list.size() - 1 ; i >= 0; i-- ){
-            WalkingPoint point = list.get(i);
-            LatLng latLng = new LatLng(point.getCoordinate().getLatitude(), point.getCoordinate().getLongitude());
-            marker = new MarkerOptions().position(latLng).title(String.valueOf(markerCounter)).visible(true);
-            mMap.addMarker(marker);
-        }
+        //List<WalkingPoint> list = path.getSolutionPath();
+//        for(int i = list.size() - 1 ; i >= 0; i-- ){
+//            WalkingPoint point = list.get(i);
+//            LatLng latLng = new LatLng(point.getCoordinate().getLatitude(), point.getCoordinate().getLongitude());
+//            marker = new MarkerOptions().position(latLng).title(String.valueOf(markerCounter)).visible(true);
+//            mMap.addMarker(marker);
+//        }
     }
 
 
