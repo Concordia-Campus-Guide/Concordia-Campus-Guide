@@ -121,15 +121,23 @@ public class PathFinder {
     private void addNearestWalkingPoints(WalkingPointNode currentLocation) {
         for (int id : currentLocation.getWalkingPoint().getConnectedPointsId()) {
 
-            WalkingPointNode curr = walkingPointNodeMap.get(id);
-
+            WalkingPointNode child = walkingPointNodeMap.get(id);
             double c = currentLocation.getCost()+getBirdViewDistanceBetweenWalkingPoints(currentLocation.getWalkingPoint(), walkingPointNodeMap.get(id).getWalkingPoint());
 
-            if(c < curr.getCost() && curr.getCost() > 0 || curr.getCost() == 0){
-                curr.setParent(currentLocation);
-                curr.setHeuristic(getHeuristicEstimate(curr.getWalkingPoint()));
-                curr.setCost(c);
-                walkingPointsToVisit.add(curr);
+
+            if (walkingPointsVisited.containsKey(child)) {
+                if(child.getCost() > c){
+                    child.setParent(currentLocation);
+                    child.setCost(c);
+                }
+                continue;
+            }
+
+            else if(c < child.getCost() && child.getCost() > 0 || child.getCost() == 0){
+                child.setParent(currentLocation);
+                child.setHeuristic(getHeuristicEstimate(child.getWalkingPoint()));
+                child.setCost(c);
+                walkingPointsToVisit.add(child);
             }
         }
     }
