@@ -14,11 +14,14 @@ import java.util.List;
 public interface RoomDao {
 
     @Query("SELECT *  FROM rooms")
-    List<RoomModel> getAllRoomsForFloorInBuiling();
+    List<RoomModel> getAll();
 
     @Insert
     void insertAll(List<RoomModel> rooms);
 
     @Delete
     void deleteAll(RoomModel... rooms);
+
+    @Query("SELECT * FROM rooms WHERE id=:roomId")
+    public RoomModel getRoomById(long roomId);
 }

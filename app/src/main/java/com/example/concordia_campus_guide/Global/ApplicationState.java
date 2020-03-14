@@ -2,9 +2,9 @@ package com.example.concordia_campus_guide.Global;
 
 import android.content.Context;
 
-import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.Floors;
+import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Models.Rooms;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.Models.WalkingPoints;
@@ -24,6 +24,7 @@ public class ApplicationState {
     private Floors floors;
     private Rooms rooms;
     private WalkingPoints walkingPoints;
+    private boolean dbIsSet = false;
 
     private ApplicationState(Context context) {
         this.context = context;
@@ -55,6 +56,7 @@ public class ApplicationState {
         } catch (IOException e){
             e.printStackTrace();
         }
+
         this.buildings = buildings;
     }
 
@@ -97,6 +99,7 @@ public class ApplicationState {
     private void importRooms(){
         String json;
         Rooms rooms = new Rooms();
+
         try{
             InputStream is = context.getResources().openRawResource(R.raw.rooms_info);
             int size = is.available();
@@ -108,6 +111,7 @@ public class ApplicationState {
         } catch (IOException e){
             e.printStackTrace();
         }
+
         this.rooms = rooms;
     }
 
@@ -123,6 +127,13 @@ public class ApplicationState {
         return this.rooms;
     }
 
+    public boolean isDbIsSet() {
+        return dbIsSet;
+    }
+
+    public void setDbIsSetToTrue() {
+        this.dbIsSet = true;
+    }
     public WalkingPoints getWalkingPoints() { return this.walkingPoints; }
 
 }

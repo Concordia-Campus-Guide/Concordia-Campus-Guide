@@ -2,6 +2,7 @@ package com.example.concordia_campus_guide.Activities;
 
 import android.app.Application;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,25 +17,23 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragment;
+import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragment;
 import com.example.concordia_campus_guide.Global.ApplicationState;
-import com.example.concordia_campus_guide.Models.Building;
+import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.Floors;
-import com.example.concordia_campus_guide.Models.Relations.BuildingWithFloors;
-import com.example.concordia_campus_guide.Models.Relations.FloorWithRooms;
 import com.example.concordia_campus_guide.Models.Rooms;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.Models.WalkingPoints;
 import com.example.concordia_campus_guide.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity {
 
     FragmentTransaction fragmentTransaction;
     FragmentManager fragmentManager;
     InfoCardFragment infoCardFragment;
+    LocationFragment locationFragment;
     MainActivityViewModel mViewModel;
     private BottomSheetBehavior swipeableInfoCard;
 
@@ -53,15 +52,7 @@ public class MainActivity extends AppCompatActivity {
         View infoCard = findViewById(R.id.info_card);
         swipeableInfoCard = BottomSheetBehavior.from(infoCard);
 
-
-        //examples on how to get objects from db
-        //begin
-        AppDatabase appDB = AppDatabase.getInstance(this);
-        List<Building> listBuildings = appDB.buildingDao().getAll();
-        List<BuildingWithFloors> buildingWithFloorsList = appDB.buildingDao().getBuildingsWithFloors();
-        List<FloorWithRooms> floorWithRooms = appDB.floorDao().getFloorWithRooms();
-        List<WalkingPoint> walkingPoints = appDB.walkingPointDao().getAll();
-        //end
+        locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
     }
 
     @Override
@@ -75,9 +66,10 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if(id == R.id.search){
-            //TODO onClick of search_activity button
             Intent openSearch = new Intent(MainActivity.this,
                     SearchActivity.class);
+
+            SelectingToFromState.setMyCurrentLocation(getMyCurrentLocation());
 
             startActivity(openSearch);
             return false;
@@ -98,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
 
         infoCardFragment = new InfoCardFragment();
         infoCardFragment.setBuildingCode(buildingCode);
-
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.info_card_frame, infoCardFragment);
         fragmentTransaction.commit();
@@ -131,23 +122,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpDb(){
-        //delete previous db
-        getApplication().getApplicationContext().deleteDatabase(AppDatabase.DB_NAME);
+        if(!ApplicationState.getInstance(this).isDbIsSet()){
+            //delete previous db
+            getApplication().getApplicationContext().deleteDatabase(AppDatabase.DB_NAME);
 
-        //load buildings
-        Buildings buildings = ApplicationState.getInstance(this).getBuildings();
-        AppDatabase appDb = AppDatabase.getInstance(this);
-        appDb.buildingDao().insertAll(buildings.getBuildings());
+            //load buildings
+            Buildings buildings = ApplicationState.getInstance(this).getBuildings();
+            AppDatabase appDb = AppDatabase.getInstance(this);
+            appDb.buildingDao().insertAll(buildings.getBuildings());
 
-        //load floors
-        Floors floors = ApplicationState.getInstance(this).getFloors();
-        appDb.floorDao().insertAll(floors.getFloors());
+            //load floors
+            Floors floors = ApplicationState.getInstance(this).getFloors();
+            appDb.floorDao().insertAll(floors.getFloors());
 
-        //load rooms
-        Rooms rooms = ApplicationState.getInstance(this).getRooms();
-        appDb.roomDao().insertAll(rooms.getRooms());
+            //load rooms
+            Rooms rooms = ApplicationState.getInstance(this).getRooms();
+            appDb.roomDao().insertAll(rooms.getRooms());
 
-        WalkingPoints walkingPoints = ApplicationState.getInstance(this).getWalkingPoints();
-        appDb.walkingPointDao().insertAll(walkingPoints.getWalkingPoints());
+            WalkingPoints walkingPoints = ApplicationState.getInstance(this).getWalkingPoints();
+            appDb.walkingPointDao().insertAll(walkingPoints.getWalkingPoints());
+            ApplicationState.getInstance(this).setDbIsSetToTrue();
+        }
+    }
+
+    public Location getMyCurrentLocation(){
+        return this.locationFragment.getCurrentLocation();
     }
 }

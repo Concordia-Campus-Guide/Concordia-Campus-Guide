@@ -1,11 +1,11 @@
 package com.example.concordia_campus_guide.Fragments.LocationFragment;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,16 +13,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
 
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+
 import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
 import com.example.concordia_campus_guide.ClassConstants;
-import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.R;
@@ -37,16 +36,12 @@ import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.function.BiConsumer;
 
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 
@@ -54,6 +49,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     MapView mMapView;
 
+    private Location currentLocation;
     private GoogleMap mMap;
     private LocationFragmentViewModel mViewModel;
     private GeoJsonLayer mLayer;
@@ -66,10 +62,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private Boolean myLocationPermissionsGranted = false;
     private HashMap<String, GroundOverlay> buildingsGroundOverlays;
     private FloorPickerAdapter currentFloorPickerAdapter;
-    private List<LatLng> temporaryList;
 
-    int markerCounter = 35;
-    HashMap<Integer, String> listOfMarkers;
     private Button selectedFloor;
 
     /**
@@ -83,17 +76,19 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.location_fragment_fragment, container, false);
-        AppDatabase appDatabase = AppDatabase.getInstance(getContext());
-
         getLocationPermission();
         initComponent(rootView);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
+
         initMap();
         setupClickListeners();
         getLocationPermission();
+        updateLocationEvery5Seconds();
+
         return rootView;
     }
+
 
     /**
      * @param rootView is the object that contains the parts displayed on the fragment
@@ -106,8 +101,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         mFloorPickerGv.setVisibility(View.GONE);
         buildingsGroundOverlays = new HashMap<>();
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
-        temporaryList = new ArrayList<>();
-        listOfMarkers = new HashMap<>();
     }
 
     private void setupFloorPickerAdapter(Building building) {
@@ -128,7 +121,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
      * The purpose of this method is to init the map and fill it up with the required
      * information to display them to the user
      */
-
     private void initMap() {
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
@@ -144,21 +136,9 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                 initFloorPlans();
                 uiSettingsForMap(mMap);
                 setFirstLocationToDisplay();
-                mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-                    @Override
-                    public void onMapClick(LatLng latLng) {
-                        MarkerOptions marker = new MarkerOptions().position(latLng).title(String.valueOf(markerCounter)).visible(true).zIndex(-4.0f);
-                        mMap.addMarker(marker);
-                        String lat_lng = Double.toString(latLng.latitude) + ","+ Double.toString(latLng.longitude);
-                        android.util.Log.i("onMapClick", lat_lng);
-                        listOfMarkers.put(markerCounter, lat_lng);
-                        markerCounter++;
-                    }
-                });
             }
         });
     }
-
 
 
     private void setFirstLocationToDisplay(){
@@ -229,7 +209,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         loyolaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                printHashMap();
                 zoomInLocation(mViewModel.getLoyolaZoomLocation());
             }
         });
@@ -242,18 +221,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         sgwBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                printHashMap();
                 zoomInLocation(mViewModel.getSGWZoomLocation());
-            }
-        });
-    }
-
-    private void printHashMap(){
-        System.out.println("MARKER LIST: ");
-        listOfMarkers.forEach(new BiConsumer<Integer, String>() {
-            @Override
-            public void accept(Integer key, String value) {
-                System.out.println(key + "," + value);
             }
         });
     }
@@ -322,11 +290,11 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-//                 Building building = mViewModel.getBuildingFromeCode(marker.getTag().toString());
-//                //TODO: Make function that pops up the info card for the building (via the building-code)
-//                String buildingCode = (marker.getTag()).toString();
-//                ((MainActivity)getActivity()).showInfoCard(buildingCode);
-//                onBuildingClick(building);
+                 Building building = mViewModel.getBuildingFromeCode(marker.getTag().toString());
+                //TODO: Make function that pops up the info card for the building (via the building-code)
+                String buildingCode = (marker.getTag()).toString();
+                ((MainActivity)getActivity()).showInfoCard(buildingCode);
+                onBuildingClick(building);
                 return false;
             }
         });
@@ -342,7 +310,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                Log.i(TAG,marker.getPosition().toString());
+                Log.i(TAG,marker.getTag().toString());
                 return false;
             }
         });
@@ -438,5 +406,33 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     public void onLowMemory() {
         super.onLowMemory();
         mMapView.onLowMemory();
+    }
+
+    private void updateLocationEvery5Seconds(){
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable(){
+            @Override
+            public void run(){
+                fusedLocationProviderClient.getLastLocation().addOnSuccessListener(getActivity(), new updateLocationListener());
+                handler.postDelayed(this, 5000);
+            }
+        }, 5000);
+    }
+
+    public void setCurrentLocation(Location location){
+        this.currentLocation = location;
+    }
+
+    public Location getCurrentLocation(){
+        return currentLocation;
+    }
+
+    private class updateLocationListener implements OnSuccessListener {
+        @Override
+        public void onSuccess(Object location) {
+            if(location != null && location instanceof Location) {
+                LocationFragment.this.setCurrentLocation((android.location.Location) location);
+            }
+        }
     }
 }

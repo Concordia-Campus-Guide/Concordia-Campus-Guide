@@ -19,14 +19,13 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:theme="@style/toolbarTheme">
-        </androidx.appcompat.widget.Toolbar>
+            android:theme="@style/toolbarTheme"></androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
 
     <fragment
-        android:id="@+id/fragment"
+        android:id="@+id/locationFragment"
         android:name="com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -35,9 +34,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/info_card_coordinator_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -61,8 +58,16 @@
                 android:layout_height="match_parent" />
 
         </androidx.core.widget.NestedScrollView>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+    <fragment
+        android:id="@+id/fragment2"
+        android:name="com.example.concordia_campus_guide.Fragments.CalendarFragment.CalendarFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
