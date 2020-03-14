@@ -19,18 +19,12 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.room.Room;
-
 import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.Models.Building;
-import com.example.concordia_campus_guide.Models.Place;
-import com.example.concordia_campus_guide.Models.RoomModel;
-import com.example.concordia_campus_guide.Models.WalkingPoint;
-import com.example.concordia_campus_guide.PathFinder;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -46,7 +40,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 

@@ -42,6 +42,7 @@ public class PathFinder {
         List<WalkingPoint> walkingPoints = AppDatabase.getInstance(context).walkingPointDao().getAll();
         walkingPointNodesMap = populateWalkingPointMap(walkingPoints);
 
+        this.context = context;
         this.initialPoint = getWalkingPointCorrespondingToRoom(source, walkingPoints);
         this.destinationPoint = getWalkingPointCorrespondingToRoom(destination, walkingPoints);
     }
