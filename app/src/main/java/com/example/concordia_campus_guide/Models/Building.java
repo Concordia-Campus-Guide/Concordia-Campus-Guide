@@ -42,7 +42,6 @@ public class Building extends Place {
     @ColumnInfo(name = "bearing")
     private float bearing;
 
-    //Not sure what to do here yet
     @Embedded
     @TypeConverters(CoordinatesListConverter.class)
     private ListOfCoordinates cornerCoordinates = new ListOfCoordinates();

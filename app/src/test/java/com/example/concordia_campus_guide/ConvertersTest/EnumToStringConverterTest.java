@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide;
+package com.example.concordia_campus_guide.ConvertersTest;
 
 import com.example.concordia_campus_guide.Database.Converters.EnumToStringConverter;
 import com.example.concordia_campus_guide.Models.PointType;

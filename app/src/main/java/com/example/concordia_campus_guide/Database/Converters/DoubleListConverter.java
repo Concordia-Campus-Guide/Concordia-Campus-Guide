@@ -1,11 +1,6 @@
 package com.example.concordia_campus_guide.Database.Converters;
 
-import android.os.Build;
 
-import java.util.Arrays;
-import java.util.List;
-
-import androidx.annotation.RequiresApi;
 import androidx.room.TypeConverter;
 
 public class DoubleListConverter {

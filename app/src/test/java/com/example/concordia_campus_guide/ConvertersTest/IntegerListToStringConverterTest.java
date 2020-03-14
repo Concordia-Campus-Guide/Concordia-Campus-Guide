@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide;
+package com.example.concordia_campus_guide.ConvertersTest;
 
 import com.example.concordia_campus_guide.Database.Converters.CoordinatesListConverter;
 import com.example.concordia_campus_guide.Database.Converters.IntegerListToStringConverter;
