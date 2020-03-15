@@ -21,7 +21,6 @@ public class DirectionsApiDataRetrieval extends AsyncTask<String, Void, String> 
 
     @Override
     protected String doInBackground(String... strings) {
-        // For storing data from web service
         String data = "";
         try {
             // Fetching the data from web service

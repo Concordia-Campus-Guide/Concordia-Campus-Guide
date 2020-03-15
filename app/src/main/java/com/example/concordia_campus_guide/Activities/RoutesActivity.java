@@ -2,6 +2,7 @@ package com.example.concordia_campus_guide.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,7 @@ import com.example.concordia_campus_guide.RoutesHelpers.DirectionsApiDataRetriev
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.model.TransitMode;
 
 public class RoutesActivity extends AppCompatActivity {
 
@@ -62,14 +64,17 @@ public class RoutesActivity extends AppCompatActivity {
             }
         });
 
-        Double[] fromCoordinates = (mViewModel.getFrom().getCenterCoordinates());
-        Double[] toCoordinates = (mViewModel.getTo().getCenterCoordinates());
+//        Double[] fromCoordinates = (mViewModel.getFrom().getCenterCoordinates());
+//        Double[] toCoordinates = (mViewModel.getTo().getCenterCoordinates());
+//
+//        from = new MarkerOptions().position(new LatLng(fromCoordinates[0], fromCoordinates[1]));
+//        to = new MarkerOptions().position(new LatLng(toCoordinates[1], toCoordinates[0]));
+//
+//        Log.d("mylog", "FROM:" + fromCoordinates[0] + ", " + fromCoordinates[1]);
+//        Log.d("mylog", "TO:" + toCoordinates[1] + ", " + toCoordinates[0]);
 
-//        from = new MarkerOptions().position(new LatLng(fromCoordinates[0], fromCoordinates[1])).title("From");
-        to = new MarkerOptions().position(new LatLng(toCoordinates[1], toCoordinates[0]));
-
-        from = new MarkerOptions().position(new LatLng(45.525393, -73.677086));
-//        to = new MarkerOptions().position(new LatLng(45.495624,  -73.577673)).title("To");
+        from = new MarkerOptions().position(new LatLng(45.525407, -73.677126));
+        to = new MarkerOptions().position(new LatLng(45.497361,  -73.579033));
 
         // set back button
         setBackButtonOnClick();
