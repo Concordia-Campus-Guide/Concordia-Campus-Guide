@@ -2,10 +2,11 @@ package com.example.concordia_campus_guide.RoutesHelpers;
 
 import android.os.AsyncTask;
 
+import com.example.concordia_campus_guide.model.DirectionsResult;
+import com.example.concordia_campus_guide.model.DirectionsRoute;
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
-import com.google.maps.model.DirectionsLeg;
-import com.google.maps.model.DirectionsResult;
-import com.google.maps.model.DirectionsRoute;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -44,7 +45,14 @@ public class DirectionsApiDataParser extends AsyncTask<String, Integer, List<Dir
 //                }
 //            }
 
-            DirectionsResult directionsResult = new Gson().fromJson(jsonData[0], DirectionsResult.class);
+            Gson gson = new GsonBuilder()
+                    .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                    .create();
+
+            DirectionsResult directionsResult = gson.fromJson(jsonData[0], DirectionsResult.class);
+
+
+
 
         } catch (Exception e) {
             e.printStackTrace();

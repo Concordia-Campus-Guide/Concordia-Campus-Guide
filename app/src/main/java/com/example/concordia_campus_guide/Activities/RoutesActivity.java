@@ -60,7 +60,7 @@ public class RoutesActivity extends AppCompatActivity {
         getDirection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DirectionsApiDataRetrieval(RoutesActivity.this).execute(buildUrl(from.getPosition(), to.getPosition(), TransportType.DRIVING.toString()));
+                new DirectionsApiDataRetrieval(RoutesActivity.this).execute(buildUrl(from.getPosition(), to.getPosition(), TransportType.TRANSIT.toString()));
             }
         });
 
