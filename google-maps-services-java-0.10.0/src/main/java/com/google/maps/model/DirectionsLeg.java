@@ -13,9 +13,7 @@
  * permissions and limitations under the License.
  */
 
-package com.example.concordia_campus_guide.model;
-
-import com.example.concordia_campus_guide.Models.Time;
+package com.google.maps.model;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
@@ -60,13 +58,13 @@ public class DirectionsLeg implements Serializable {
    * The estimated time of arrival for this leg. This property is only returned for transit
    * directions.
    */
-  public Time arrivalTime;
+  public ZonedDateTime arrivalTime;
 
   /**
    * The estimated time of departure for this leg. The departureTime is only available for transit
    * directions.
    */
-  public Time departureTime;
+  public ZonedDateTime departureTime;
 
   /**
    * The latitude/longitude coordinates of the origin of this leg. Because the Directions API

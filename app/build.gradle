@@ -87,7 +87,7 @@ dependencies {
     implementation group: 'javax.persistence', name: 'persistence-api', version: '1.0'
 
     // Google Directions
-//    implementation 'com.google.maps:google-maps-services:0.11.0'
+//    implementation 'com.google.maps:google-maps-services:0.10.0'
     //implementation 'com.google.android.androidgms:play-services-maps:11.0.2'
     implementation 'org.slf4j:slf4j-simple:1.7.25'
 

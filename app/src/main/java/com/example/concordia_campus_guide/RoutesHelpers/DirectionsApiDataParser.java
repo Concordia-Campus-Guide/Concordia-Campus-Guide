@@ -1,16 +1,13 @@
 package com.example.concordia_campus_guide.RoutesHelpers;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.example.concordia_campus_guide.model.DirectionsResult;
 import com.example.concordia_campus_guide.model.DirectionsRoute;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,26 +21,7 @@ public class DirectionsApiDataParser extends AsyncTask<String, Integer, List<Dir
         allRoutes = new ArrayList<>();
 
         try {
-//            jObject = new JSONObject(jsonData[0]);
-//            routes = parse(jObject);
-//            Log.d("mylog", "Executing routes");
-//            Log.d("mylog", routes.toString());
-
-//            String jData = jsonData[0];
-//            JSONArray jRoutes = new JSONObject(jData).getJSONArray("routes");
-//            for (int i = 0; i < jRoutes.length(); i++) {
-//
-//                String route = jRoutes.get(i).toString();
-//                DirectionsRoute directionsRoute = new Gson().fromJson(route, DirectionsRoute.class);
-//                allRoutes.add(directionsRoute);
-//
-//                JSONArray jLegs = new JSONObject(route).getJSONArray("legs");
-//                for (int j = 0; j < jLegs.length(); j++) {
-//                    String leg = jRoutes.get(i).toString();
-//                    DirectionsLeg directionsLeg = new Gson().fromJson(leg, DirectionsLeg.class);
-//                    directionsRoute.legs[i] = directionsLeg;
-//                }
-//            }
+            Log.d("mylog", "Executing routes");
 
             Gson gson = new GsonBuilder()
                     .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
@@ -51,55 +29,11 @@ public class DirectionsApiDataParser extends AsyncTask<String, Integer, List<Dir
 
             DirectionsResult directionsResult = gson.fromJson(jsonData[0], DirectionsResult.class);
 
-
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
         return allRoutes;
     }
-
-//    private List<DirectionsRoute> parse(JSONObject jObject) {
-//
-//        List<List<HashMap<String, String>>> routes = new ArrayList<>();
-//        JSONArray jRoutes;
-//        JSONArray jLegs;
-//        JSONArray jSteps;
-//        try {
-//            jRoutes = jObject.getJSONArray("routes");
-//            /** Traversing all routes */
-//            for (int i = 0; i < jRoutes.length(); i++) {
-//                jLegs = ((JSONObject) jRoutes.get(i)).getJSONArray("legs");
-//                List path = new ArrayList<>();
-//                /** Traversing all legs */
-//                for (int j = 0; j < jLegs.length(); j++) {
-//                    jSteps = ((JSONObject) jLegs.get(j)).getJSONArray("steps");
-//
-//                    /** Traversing all steps */
-//                    for (int k = 0; k < jSteps.length(); k++) {
-//                        String polyline = "";
-//                        polyline = (String) ((JSONObject) ((JSONObject) jSteps.get(k)).get("polyline")).get("points");
-//                        List<LatLng> list = decodePoly(polyline);
-//
-//                        /** Traversing all points */
-//                        for (int l = 0; l < list.size(); l++) {
-//                            HashMap<String, String> hm = new HashMap<>();
-//                            hm.put("lat", Double.toString((list.get(l)).latitude));
-//                            hm.put("lng", Double.toString((list.get(l)).longitude));
-//                            path.add(hm);
-//                        }
-//                    }
-//                    routes.add(path);
-//                }
-//            }
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        } catch (Exception e) {
-//        }
-//        return routes;
-//    }
 
 
 //    // Executes in UI thread, after the parsing process
