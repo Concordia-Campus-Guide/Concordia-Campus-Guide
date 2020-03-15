@@ -14,4 +14,12 @@ public class Floors {
     public List<Floor> getFloors(){
         return Floors;
     }
+
+    public List<Place> getPlaces(){
+        List<Place> places = new ArrayList<Place>();
+        for(Floor floor: Floors){
+            places.add(floor);
+        }
+        return places;
+    }
 }

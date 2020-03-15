@@ -26,4 +26,7 @@ public interface FloorDao {
     @Transaction
     @Query("SELECT * FROM floors")
     public List<FloorWithRooms> getFloorWithRooms();
+
+    @Query("SELECT * FROM floors WHERE id=:floorId")
+    public Floor getFloorById(long floorId);
 }

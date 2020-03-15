@@ -1,20 +1,21 @@
 package com.example.concordia_campus_guide.Models;
 
-import com.example.concordia_campus_guide.Database.Converters.DoubleListConverter;
-import com.example.concordia_campus_guide.Database.Converters.StringListConverter;
-import com.google.android.gms.maps.model.LatLng;
-
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
 
-@Entity(tableName = "places")
-public class Place {
+import com.example.concordia_campus_guide.Database.Converters.DoubleListConverter;
+import com.google.android.gms.maps.model.LatLng;
 
-    @Ignore
+@Entity(tableName = "places",
+        indices = {@Index("id")}
+        )
+public abstract class Place {
+
+    @ColumnInfo(name = "id")
+    @PrimaryKey(autoGenerate = true)
     private long id;
 
     @TypeConverters(DoubleListConverter.class)
@@ -25,9 +26,7 @@ public class Place {
         this.centerCoordinates = centerCoordinates;
     }
 
-    public Place() {
-
-    }
+    public Place() {}
 
     public Double[] getCenterCoordinates() {
         return centerCoordinates;
@@ -48,4 +47,6 @@ public class Place {
     public void setId(long id) {
         this.id = id;
     }
+    
+    public abstract String getDisplayName();
 }
