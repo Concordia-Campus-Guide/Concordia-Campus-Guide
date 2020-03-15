@@ -1,0 +1,220 @@
+{
+  "walkingPoints": [
+    {
+      "id": 1,
+      "coordinate": {
+        "latitude": 45.49729154,
+        "longitude": -73.57876237
+      },
+      "floorCode": "H-9",
+      "pointType": "ELEVATOR",
+      "connectedPointsId": [
+        4,
+        34,
+        35
+      ]
+    },
+    {
+      "id": 4,
+      "coordinate": {
+        "latitude": 45.49739588,
+        "longitude": -73.5787094
+      },
+      "floorCode": "H-9",
+      "pointType": "NONE",
+      "connectedPointsId": [
+        1,
+        5
+      ]
+    },
+    {
+      "id": 5,
+      "coordinate": {
+        "latitude": 45.49733972,
+        "longitude": -73.57858803
+      },
+      "floorCode": "H-9",
+      "pointType": "NONE",
+      "connectedPointsId": [
+        4,
+        6,
+        8
+      ]
+    },
+    {
+      "id": 6,
+      "coordinate": {
+        "latitude": 45.49724054,
+        "longitude": -73.57858669
+      },
+      "floorCode": "H-9",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [
+        5,
+        8
+      ]
+    },
+    {
+      "id": 8,
+      "coordinate": {
+        "latitude": 45.49716322,
+        "longitude": -73.5787617
+      },
+      "floorCode": "H-9",
+      "pointType": "NONE",
+      "connectedPointsId": [
+        5,
+        6,
+        34,
+        17
+      ]
+    },
+    {
+      "id": 17,
+      "coordinate": {
+        "latitude": 45.49711387,
+        "longitude": -73.57880227
+      },
+      "floorCode": "H-9",
+      "pointType": "NONE",
+      "connectedPointsId": [
+        8
+      ]
+    },
+    {
+      "id": 34,
+      "coordinate": {
+        "latitude": 45.49725065,
+        "longitude": -73.57890118
+      },
+      "floorCode": "H-9",
+      "pointType": "NONE",
+      "connectedPointsId": [
+        1,
+        8
+      ]
+    },
+    {
+      "id": 35,
+      "coordinate": {
+        "latitude": 45.49729154,
+        "longitude": -73.57876237
+      },
+      "floorCode": "H-8",
+      "pointType": "ELEVATOR",
+      "connectedPointsId": [
+        1,
+        36
+      ]
+    },
+    {
+      "id": 36,
+      "coordinate": {
+        "latitude": 45.49731222,
+        "longitude": -73.5787902
+      },
+      "floorCode": "H-8",
+      "pointType": "NONE",
+      "connectedPointsId": [
+        35,
+        38
+      ]
+    },
+    {
+      "id": 38,
+      "coordinate": {
+        "latitude": 45.497398,
+        "longitude": -73.57871544
+      },
+      "floorCode": "H-8",
+      "pointType": "NONE",
+      "connectedPointsId": [
+        36,
+        40,
+        41,
+        42,
+        45,
+        47,
+        50
+      ]
+    },
+    {
+      "id": 40,
+      "coordinate": {
+        "latitude": 45.49742244,
+        "longitude": -73.57861251
+      },
+      "floorCode": "H-8",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [
+        50,
+        38
+      ]
+    },
+    {
+      "id": 41,
+      "coordinate": {
+        "latitude": 45.49745393,
+        "longitude": -73.57867721
+      },
+      "floorCode": "H-8",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [
+        38
+      ]
+    },
+    {
+      "id": 42,
+      "coordinate": {
+        "latitude": 45.49748425,
+        "longitude": -73.57873723
+      },
+      "floorCode": "H-8",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [
+        38,
+        45
+      ]
+    },
+    {
+      "id": 45,
+      "coordinate": {
+        "latitude": 45.49749224,
+        "longitude": -73.57890788
+      },
+      "floorCode": "H-8",
+      "pointType": "NONE",
+      "connectedPointsId": [
+        38,
+        42,
+        47
+      ]
+    },
+    {
+      "id": 47,
+      "coordinate": {
+        "latitude": 45.4974255,
+        "longitude": -73.57888643
+      },
+      "floorCode": "H-8",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [
+        38,
+        45
+      ]
+    },
+    {
+      "id": 50,
+      "coordinate": {
+        "latitude": 45.4973369,
+        "longitude": -73.57858904
+      },
+      "floorCode": "H-8",
+      "pointType": "NONE",
+      "connectedPointsId": [
+        38,
+        40
+      ]
+    }
+  ]
+}
