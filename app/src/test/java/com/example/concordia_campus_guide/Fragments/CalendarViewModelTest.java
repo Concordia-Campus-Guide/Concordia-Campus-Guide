@@ -34,8 +34,34 @@ public class CalendarViewModelTest {
     }
 
     @Test
-    public void getCalendarEvents() {
-        ArrayList<CalendarEvent> list = new ArrayList<>(mViewModel.getCalendarEvents(cursor));
-        assertFalse(list.isEmpty());
+    public void getCalendarEventNoMatch() {
+        CalendarEvent calendarEvent = mViewModel.getCalendarEvent(cursor);
+        assertNull(calendarEvent);
     }
+
+    @Test
+    public void getCalendarEventMatchLecture(){
+        String containsLecture = "Lecture: SOEN 390";
+        when(cursor.getString(anyInt())).thenReturn(containsLecture);
+        CalendarEvent calendarEvent = mViewModel.getCalendarEvent(cursor);
+        assertNotNull(calendarEvent);
+    }
+
+    @Test
+    public void getCalendarEventMatchTutorial(){
+        String containsTutorial = "Tutorial: SOEN 390";
+        when(cursor.getString(anyInt())).thenReturn(containsTutorial);
+        CalendarEvent calendarEvent = mViewModel.getCalendarEvent(cursor);
+        assertNotNull(calendarEvent);
+    }
+
+    @Test
+    public void getCalendarEventMatchLab(){
+        String containsLab = "Lab: COMP 445";
+        when(cursor.getString(anyInt())).thenReturn(containsLab);
+        CalendarEvent calendarEvent = mViewModel.getCalendarEvent(cursor);
+        assertNotNull(calendarEvent);
+    }
+
+
 }

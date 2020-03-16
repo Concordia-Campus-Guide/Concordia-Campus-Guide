@@ -11,10 +11,6 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.concordia_campus_guide.Models.CalendarEvent;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 public class CalendarViewModel extends ViewModel {
 
     // The indices for the projection array above.
@@ -31,8 +27,7 @@ public class CalendarViewModel extends ViewModel {
     public Cursor getCalendarCursor(Context context) {
         Uri.Builder eventsUriBuilder = CalendarContract.Instances.CONTENT_URI
                 .buildUpon();
-        long startTime = new Date().getTime();
-        // TODO: for #17 set the proper time we want, currently set to get classes in the next +8 hours.
+        long startTime = System.currentTimeMillis();
         long endTime = startTime + 28800000;
         ContentUris.appendId(eventsUriBuilder, startTime);
         ContentUris.appendId(eventsUriBuilder, endTime);
@@ -42,24 +37,23 @@ public class CalendarViewModel extends ViewModel {
                 INSTANCE_PROJECTION,
                 null,
                 null,
-                // TODO: for #17 convert DTSTART from full UTC date to only the time in order to get correct starting time of class.
-                CalendarContract.Instances.DTSTART + " ASC"
+                Instances.BEGIN + " ASC"
         );
 
         return cursor;
     }
 
-    public List<CalendarEvent> getCalendarEvents(Cursor cursor) {
-        ArrayList<CalendarEvent> list = new ArrayList<>();
+    public CalendarEvent getCalendarEvent(Cursor cursor) {
 
         while (cursor.moveToNext()) {
            String eventTitle = cursor.getString(PROJECTION_TITLE_INDEX);
            String eventLocation = cursor.getString(PROJECTION_LOCATION_INDEX);
            String eventStart = cursor.getString(PROJECTION_START_INDEX);
 
-           list.add(new CalendarEvent(eventTitle, eventLocation, eventStart));
+           if(eventTitle.contains("Lecture: ")||eventTitle.contains("Tutorial: ") || eventTitle.contains("Lab: ")){
+               return new CalendarEvent(eventTitle, eventLocation, eventStart);
+           }
         }
-
-        return list;
+        return null;
     }
 }
