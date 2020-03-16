@@ -33,7 +33,6 @@ public class PathFinder {
 
     private final WalkingPoint initialPoint;
     private final WalkingPoint destinationPoint;
-    private final Context context;
     private final IndoorPathHeuristic indoorPathHeuristic;
 
     public PathFinder(final Context context, final RoomModel source, final RoomModel destination) {
@@ -44,7 +43,6 @@ public class PathFinder {
         final List<WalkingPoint> walkingPoints = AppDatabase.getInstance(context).walkingPointDao().getAll();
         walkingPointNodesMap = populateWalkingPointMap(walkingPoints);
 
-        this.context = context;
         this.initialPoint = getWalkingPointCorrespondingToRoom(source, walkingPoints);
         this.destinationPoint = getWalkingPointCorrespondingToRoom(destination, walkingPoints);
     }
