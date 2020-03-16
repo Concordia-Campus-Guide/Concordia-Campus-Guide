@@ -16,6 +16,12 @@ public class IndoorPathHeuristic {
         this.context = context;
     }
 
+    /**
+     * The heuristic is based on the distance between the goal and destination coordinate, the further a point from a destination, the bigger the heuristic it will have.
+     * @param currentCoordinate
+     * @param destinationPoint
+     * @return
+     */
     protected double computeHeuristic(final WalkingPoint currentCoordinate, final WalkingPoint destinationPoint) {
         if (!currentCoordinate.getFloorCode().equalsIgnoreCase(destinationPoint.getFloorCode())) {
             final WalkingPoint accessPoint = getNearestAccessPointForFloor(currentCoordinate);
@@ -26,12 +32,24 @@ public class IndoorPathHeuristic {
         return getEuclideanDistance(currentCoordinate, destinationPoint);
     }
 
+    /**
+     * This methods return the nearest access point in a given floor (elevator)
+     * @param currentPoint
+     * @return
+     */
     protected WalkingPoint getNearestAccessPointForFloor(final WalkingPoint currentPoint) {
         final List<WalkingPoint> accessPtList = AppDatabase.getInstance(context).walkingPointDao()
                 .getAllAccessPointsOnFloor(currentPoint.getFloorCode(), PointType.ELEVATOR);
         return getClosestPointToCurrentPointFromList(currentPoint, accessPtList);
     }
 
+    /**
+     * This method returns the closest access point based on a source location. This is where the logic is.
+     * This method returns the closest access point based on a source location. This is where the logic is.
+     * @param currentPoint
+     * @param accessPtList
+     * @return
+     */
     protected WalkingPoint getClosestPointToCurrentPointFromList(final WalkingPoint currentPoint,
                                                                  final List<WalkingPoint> accessPtList) {
         WalkingPoint closestPoint = null;
@@ -46,6 +64,12 @@ public class IndoorPathHeuristic {
         return closestPoint;
     }
 
+    /**
+     * This method returns the euclidean distance between two points based on the pythagorean theorem.
+     * @param firstCoordinate
+     * @param secondCoordinate
+     * @return
+     */
     protected double getEuclideanDistance(final WalkingPoint firstCoordinate, final WalkingPoint secondCoordinate) {
         final double resultLatDiff = Math.abs(firstCoordinate.getCoordinate().toListDouble().get(0)
                 - secondCoordinate.getCoordinate().toListDouble().get(0));
