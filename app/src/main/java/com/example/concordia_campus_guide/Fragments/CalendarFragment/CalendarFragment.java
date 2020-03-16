@@ -16,20 +16,27 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.concordia_campus_guide.Models.CalendarEvent;
 import com.example.concordia_campus_guide.R;
 
-import java.util.ArrayList;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class CalendarFragment extends Fragment {
 
     private CalendarViewModel mViewModel;
+    private TextView nextClass;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.calendar_fragment, container, false);
+        View view = inflater.inflate(R.layout.calendar_fragment, container, false);
+
+        nextClass = view.findViewById(R.id.next_class_directions);
+
+        return view ;
     }
 
     @Override
@@ -42,10 +49,15 @@ public class CalendarFragment extends Fragment {
                     new String[]{Manifest.permission.READ_CALENDAR}, 101);
         } else {
             Cursor cursor = mViewModel.getCalendarCursor(getContext());
-            ArrayList<CalendarEvent> events = new ArrayList<>(mViewModel.getCalendarEvents(cursor));
-            //TODO: for #17, change logic to create UI elements from list of events.
-            for (CalendarEvent event : events) {
-                System.out.println(event.toString());
+            CalendarEvent event = mViewModel.getCalendarEvent(cursor);
+
+            if(event != null){
+                Date eventDate = new Date((Long.parseLong(event.getStartTime())));
+                String timeUntil = getTimeUntilString(eventDate.getTime(), System.currentTimeMillis());
+
+                nextClass.setText(event.getTitle() + " in " + timeUntil + " @ " + event.getLocation());
+            }else{
+                nextClass.setText("No classes today");
             }
         }
     }
@@ -53,5 +65,15 @@ public class CalendarFragment extends Fragment {
     private boolean hasReadPermission(){
         return ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_CALENDAR)
                 == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private String getTimeUntilString(long eventTime, long currentTime){
+        long differenceInMillis = eventTime - currentTime;
+
+        String timeUntil = String.format("%02d hours and %02d minutes",
+                TimeUnit.MILLISECONDS.toHours(differenceInMillis),
+                TimeUnit.MILLISECONDS.toMinutes(differenceInMillis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(differenceInMillis)));
+
+        return timeUntil;
     }
 }
