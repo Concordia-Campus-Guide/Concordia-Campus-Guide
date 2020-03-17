@@ -151,6 +151,8 @@ public class MainActivity extends AppCompatActivity {
             Shuttles shuttles = ApplicationState.getInstance(this).getShuttles();
             appDb.shuttleDao().insertAll(shuttles.getShuttles());
 
+            List<Shuttle> sh = appDb.shuttleDao().getScheduleByCampus("SGW");
+
             WalkingPoints walkingPoints = ApplicationState.getInstance(this).getWalkingPoints();
             appDb.walkingPointDao().insertAll(walkingPoints.getWalkingPoints());
             ApplicationState.getInstance(this).setDbIsSetToTrue();

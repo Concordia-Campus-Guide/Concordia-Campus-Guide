@@ -117,6 +117,7 @@
                     android:background="@drawable/round_button"
                     android:gravity="center_vertical|center_horizontal"
                     android:padding="10dp"
+                    android:onClick="getShuttle"
                     app:srcCompat="@drawable/ic_shuttle" />
 
                 <ImageButton

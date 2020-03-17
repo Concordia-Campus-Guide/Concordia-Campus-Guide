@@ -65,4 +65,8 @@ public class Shuttle {
     public void setDay(List<String> day) {
         this.day = day;
     }
+
+    public String toString() {
+        return "Campus: " + this.campus + ", Day: " + this.day + ", time: " + this.time + "\n";
+    }
 }
