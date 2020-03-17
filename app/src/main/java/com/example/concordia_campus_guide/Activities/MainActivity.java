@@ -139,8 +139,11 @@ public class MainActivity extends AppCompatActivity {
             Rooms rooms = ApplicationState.getInstance(this).getRooms();
             appDb.roomDao().insertAll(rooms.getRooms());
 
+
+            // load walking points
             WalkingPoints walkingPoints = ApplicationState.getInstance(this).getWalkingPoints();
             appDb.walkingPointDao().insertAll(walkingPoints.getWalkingPoints());
+
             ApplicationState.getInstance(this).setDbIsSetToTrue();
         }
     }

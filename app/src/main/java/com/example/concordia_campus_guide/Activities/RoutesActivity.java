@@ -20,6 +20,7 @@ public class RoutesActivity extends AppCompatActivity {
 
     TextView fromText;
     TextView toText;
+    TextView content;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class RoutesActivity extends AppCompatActivity {
         //get view
         fromText = (TextView) findViewById(R.id.fromText);
         toText = (TextView) findViewById(R.id.toText);
+        content = (TextView) findViewById(R.id.content);
 
         //setup toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -89,5 +91,10 @@ public class RoutesActivity extends AppCompatActivity {
                 SearchActivity.class);
 
         startActivity(openSearch);
+    }
+
+    public void getShuttleData(View view) {
+        this.content.setText("hello");
+        String sh = mViewModel.getShuttles().toString();
     }
 }

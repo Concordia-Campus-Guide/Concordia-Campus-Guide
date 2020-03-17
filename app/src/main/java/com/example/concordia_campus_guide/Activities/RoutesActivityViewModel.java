@@ -9,11 +9,12 @@ import androidx.lifecycle.AndroidViewModel;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Models.Place;
 
-public class RoutesActivityViewModel extends AndroidViewModel {
+public class RoutesActivityViewModel<Shuttles> extends AndroidViewModel {
 
     private AppDatabase appDB;
     private Place from;
     private Place to;
+    private Shuttles shuttles;
 
     private Location myCurrentLocation;
 
@@ -38,5 +39,7 @@ public class RoutesActivityViewModel extends AndroidViewModel {
     public void setFrom(Place from) {
         this.from = from;
     }
+
+    public Shuttles getShuttles() { return shuttles; }
 
 }
