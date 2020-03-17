@@ -59,9 +59,11 @@ public class RoutesActivityViewModel extends AndroidViewModel {
         if (getFrom() != null && getTo() != null) {
             if (from.getClass() == Building.class) {
                 campusFrom = ((Building) from).getCampus();
+            } else if (to.getClass() == Building.class) {
                 campusTo = ((Building) to).getCampus();
             } else if (from.getClass() == Floor.class) {
                 campusFrom = ((Floor) from).getCampus();
+            } else if(to.getClass() == Floor.class) {
                 campusTo = ((Floor) to).getCampus();
             }
             if (campusFrom.compareTo(campusTo) == 0) {
@@ -74,5 +76,17 @@ public class RoutesActivityViewModel extends AndroidViewModel {
         SimpleDateFormat time = new SimpleDateFormat("HH:mm");
         shuttles = appDB.shuttleDao().getScheduleByCampusAndDayAndTime(campusFrom, day, time.format(cal.getTime()));
         return shuttles;
+    }
+
+    public String getShuttleDisplayText(List<Shuttle> shuttles) {
+        String content = "";
+        String campusTo = shuttles.get(0).getCampus().compareTo("SGW") == 0 ? "LOY" : "SGW";
+        if (shuttles == null || shuttles.size() == 0) {
+            return "No available routes using the shuttle service";
+        }
+        for (Shuttle shuttle : shuttles) {
+            content += shuttle.getCampus() + "  >   " + campusTo + ", leaves at: " + shuttle.getTime() + "\n";
+        }
+        return content;
     }
 }

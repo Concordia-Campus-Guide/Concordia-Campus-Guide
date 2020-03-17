@@ -96,17 +96,8 @@ public class RoutesActivity extends AppCompatActivity {
     }
 
     public void getShuttle(View view) {
-//        String sh = mViewModel.getShuttles().toString();
-//        content.setText(sh);
         List<Shuttle> shuttles = mViewModel.getShuttles();
-        if (shuttles == null || shuttles.size() == 0) {
-            content.setText("No available routes using the shuttle service");
-        } else {
-            String display = "";
-            for (Shuttle shuttle : shuttles) {
-                display += "Campus: " + shuttle.getCampus() + ", time: " + shuttle.getTime() + "\n";
-            }
-            content.setText(display);
-        }
+        String content = mViewModel.getShuttleDisplayText(shuttles);
+        this.content.setText(content);
     }
 }
