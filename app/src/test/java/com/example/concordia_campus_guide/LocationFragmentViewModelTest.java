@@ -4,6 +4,7 @@ import android.graphics.Color;
 
 import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel;
 import com.example.concordia_campus_guide.Models.Building;
+import com.example.concordia_campus_guide.Models.Shuttle;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 
