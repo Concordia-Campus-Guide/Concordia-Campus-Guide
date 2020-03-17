@@ -10,7 +10,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
-
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.Models.Shuttle;
 import com.example.concordia_campus_guide.R;
@@ -97,7 +96,17 @@ public class RoutesActivity extends AppCompatActivity {
     }
 
     public void getShuttle(View view) {
-        String sh = mViewModel.getShuttles().toString();
-        content.setText(sh);
+//        String sh = mViewModel.getShuttles().toString();
+//        content.setText(sh);
+        List<Shuttle> shuttles = mViewModel.getShuttles();
+        if (shuttles == null || shuttles.size() == 0) {
+            content.setText("No available routes using the shuttle service");
+        } else {
+            String display = "";
+            for (Shuttle shuttle : shuttles) {
+                display += "Campus: " + shuttle.getCampus() + ", time: " + shuttle.getTime() + "\n";
+            }
+            content.setText(display);
+        }
     }
 }

@@ -34,6 +34,9 @@ public class Floor extends Place {
     @ColumnInfo(name = "altitude")
     private float altitude;
 
+    @ColumnInfo(name = "campus")
+    private String campus;
+
     public Floor() {
         super();
     }
@@ -70,5 +73,9 @@ public class Floor extends Place {
     public String getDisplayName(){
         return floorCode;
     }
+
+    public String getCampus() { return campus; }
+
+    public void setCampus(String campus) { this.campus = campus; }
 }
 
