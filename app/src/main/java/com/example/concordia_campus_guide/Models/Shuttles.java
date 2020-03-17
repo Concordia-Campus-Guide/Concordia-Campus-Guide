@@ -10,4 +10,7 @@ public class Shuttles {
     public List<Shuttle> getShuttles() {
         return shuttles;
     }
+    public void setShuttles(List<Shuttle> shuttles) {
+        this.shuttles = shuttles;
+    }
 }

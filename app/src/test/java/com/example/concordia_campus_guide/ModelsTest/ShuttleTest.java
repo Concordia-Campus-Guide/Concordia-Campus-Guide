@@ -1,6 +1,7 @@
 package com.example.concordia_campus_guide.ModelsTest;
 
 import com.example.concordia_campus_guide.Models.Shuttle;
+import com.example.concordia_campus_guide.Models.Shuttles;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,15 +15,17 @@ import static junit.framework.TestCase.assertEquals;
 
 public class ShuttleTest {
     Shuttle shuttle;
+    Shuttles shuttles;
 
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
         shuttle = new Shuttle();
+        shuttles = new Shuttles();
     }
 
     @Test
-    public void testGetShuttleCampus() {
+    public void testShuttleCampus() {
         String expected = "SGW";
         shuttle.setCampus(expected);
         String actual = shuttle.getCampus();
@@ -30,7 +33,7 @@ public class ShuttleTest {
     }
 
     @Test
-    public void testGetShuttleDay() {
+    public void testShuttleDay() {
         List<String> expected = Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday");
         shuttle.setDay(expected);
         List<String> actual = shuttle.getDay();
@@ -38,10 +41,19 @@ public class ShuttleTest {
     }
 
     @Test
-    public void testGetShuttleTime() {
+    public void testShuttleTime() {
         String expected = "7:05";
         shuttle.setTime(expected);
         String actual = shuttle.getTime();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testShuttles() {
+        ArrayList<Shuttle> expected = new ArrayList<Shuttle>();
+        expected.add(shuttle);
+        shuttles.setShuttles(expected);
+        List<Shuttle> actual = shuttles.getShuttles();
         assertEquals(expected, actual);
     }
 }
