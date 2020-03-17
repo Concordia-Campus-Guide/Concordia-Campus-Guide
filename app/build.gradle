@@ -14,7 +14,7 @@ android {
     buildToolsVersion "28.0.3"
     defaultConfig {
         applicationId "com.example.concordia_campus_guide"
-        minSdkVersion 21
+        minSdkVersion 24
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -48,7 +48,7 @@ jacoco {
 
 jacocoAndroidUnitTestReport {
     csv.enabled false
-    html.enabled false
+    html.enabled true
     xml.enabled true
 }
 dependencies {

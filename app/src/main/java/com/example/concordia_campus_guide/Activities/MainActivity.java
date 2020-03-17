@@ -1,5 +1,6 @@
 package com.example.concordia_campus_guide.Activities;
 
+import android.app.Application;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ import com.example.concordia_campus_guide.Models.Floors;
 import com.example.concordia_campus_guide.Models.Rooms;
 import com.example.concordia_campus_guide.Models.Shuttle;
 import com.example.concordia_campus_guide.Models.Shuttles;
+import com.example.concordia_campus_guide.Models.WalkingPoint;
+import com.example.concordia_campus_guide.Models.WalkingPoints;
 import com.example.concordia_campus_guide.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setUpDb();
         setContentView(R.layout.activity_main);
         mViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         fragmentManager = getSupportFragmentManager();
@@ -53,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
         swipeableInfoCard = BottomSheetBehavior.from(infoCard);
 
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
-
-        setUpDb();
 
         AppDatabase appDB = AppDatabase.getInstance(this);
         List<Shuttle> jas = appDB.shuttleDao().getScheduleByCampusAndDay("SGW", "Friday");
@@ -146,9 +148,11 @@ public class MainActivity extends AppCompatActivity {
             appDb.roomDao().insertAll(rooms.getRooms());
 
             //Get shuttle schedule
-            Shuttles shuttles = ApplicationState.getInstance(this).getShuttle();
+            Shuttles shuttles = ApplicationState.getInstance(this).getShuttles();
             appDb.shuttleDao().insertAll(shuttles.getShuttles());
 
+            WalkingPoints walkingPoints = ApplicationState.getInstance(this).getWalkingPoints();
+            appDb.walkingPointDao().insertAll(walkingPoints.getWalkingPoints());
             ApplicationState.getInstance(this).setDbIsSetToTrue();
         }
     }

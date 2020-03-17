@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.Floors;
 import com.example.concordia_campus_guide.Models.Rooms;
+import com.example.concordia_campus_guide.Models.WalkingPoints;
 import com.example.concordia_campus_guide.Models.Shuttles;
 import com.example.concordia_campus_guide.R;
 import com.google.gson.Gson;
@@ -19,6 +20,7 @@ public class ApplicationState {
     private Buildings buildings;
     private Floors floors;
     private Rooms rooms;
+    private WalkingPoints walkingPoints;
     private boolean dbIsSet = false;
     private Shuttles shuttles;
 
@@ -28,6 +30,7 @@ public class ApplicationState {
         importFloors();
         importRooms();
         importShuttle();
+        importWalkingPoints();
     }
 
     public static ApplicationState getInstance(Context context) {
@@ -37,104 +40,72 @@ public class ApplicationState {
         return instance;
     }
 
-    private void importBuildings(){
-        String json;
-        Buildings buildings = new Buildings();
-
+    private String importMethod(int jsonFileId){
+        String json =null;
         try{
-            InputStream is = context.getResources().openRawResource(R.raw.buildings_info);
+            InputStream is = context.getResources().openRawResource(jsonFileId);
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
             is.close();
             json = new String(buffer, "UTF-8");
-            buildings = new Gson().fromJson(json, Buildings.class);
         } catch (IOException e){
             e.printStackTrace();
         }
+        return json;
+    }
 
-        this.buildings = buildings;
+    private void importBuildings(){
+        String json = importMethod(R.raw.buildings_info);
+        if(json != null){
+            Buildings buildings = new Gson().fromJson(json, Buildings.class);
+            this.buildings = buildings;
+        }
+    }
+
+    private void importWalkingPoints(){
+        String json = importMethod(R.raw.walking_points);
+        if(json != null){
+            WalkingPoints walkingPoints = new Gson().fromJson(json, WalkingPoints.class);
+            this.walkingPoints = walkingPoints;
+        }
     }
 
     private void importFloors(){
-        String json;
-        Floors floors = new Floors();
-
-        try{
-            InputStream is = context.getResources().openRawResource(R.raw.floors_info);
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-            floors = new Gson().fromJson(json, Floors.class);
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-
-        this.floors = floors;
+       String json = importMethod(R.raw.floors_info);
+       if(json != null) {
+           Floors floors = new Gson().fromJson(json, Floors.class);
+           this.floors = floors;
+       }
     }
 
     private void importRooms(){
-        String json;
-        Rooms rooms = new Rooms();
-
-        try{
-            InputStream is = context.getResources().openRawResource(R.raw.rooms_info);
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
+        String json = importMethod(R.raw.rooms_info);
+        if(json != null){
             rooms = new Gson().fromJson(json, Rooms.class);
-        } catch (IOException e){
-            e.printStackTrace();
+            this.rooms = rooms;
         }
-
-        this.rooms = rooms;
     }
+
+    public Buildings getBuildings(){ return this.buildings; }
+
+    public Floors getFloors(){ return this.floors; }
+
+    public Rooms getRooms(){ return this.rooms; }
+
+    public boolean isDbIsSet() { return dbIsSet; }
+
+    public void setDbIsSetToTrue() { this.dbIsSet = true; }
+
+    public WalkingPoints getWalkingPoints() { return this.walkingPoints; }
+
+    public Shuttles getShuttles() { return this.shuttles; }
 
     private void importShuttle() {
-        String json;
-        Shuttles shuttles = new Shuttles();
-        try {
-            InputStream is = context.getResources().openRawResource(R.raw.shuttle_info);
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
+        String json = importMethod(R.raw.shuttle_info);
+        if(json != null){
             shuttles = new Gson().fromJson(json, Shuttles.class);
-        } catch (IOException e) {
-            e.printStackTrace();
+            this.shuttles = shuttles;
         }
-
-        this.shuttles = shuttles;
     }
-
-    public Buildings getBuildings(){
-        return this.buildings;
-    }
-
-    public Floors getFloors(){
-        return this.floors;
-    }
-
-    public Rooms getRooms(){
-        return this.rooms;
-    }
-
-    public Shuttles getShuttle() {
-        return this.shuttles;
-    }
-
-    public boolean isDbIsSet() {
-        return dbIsSet;
-    }
-
-    public void setDbIsSetToTrue() {
-        this.dbIsSet = true;
-    }
-
 }
-

@@ -23,6 +23,12 @@ public class RoomModel extends Place {
     @NonNull
     private String roomCode;
 
+    public RoomModel(Double[] centerCoordinates, @NonNull String roomCode, @NonNull String floorCode) {
+        super(centerCoordinates);
+        this.roomCode = roomCode;
+        this.floorCode = floorCode;
+    }
+
     @ColumnInfo(name = "floor_code")
     @NonNull
     private String floorCode;
