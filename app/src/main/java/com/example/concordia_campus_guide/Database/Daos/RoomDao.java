@@ -22,7 +22,6 @@ public interface RoomDao {
     @Insert
     void insertAll(List<RoomModel> rooms);
 
-
     @Delete
     void deleteAll(RoomModel... rooms);
 
