@@ -6,9 +6,14 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 
 import androidx.lifecycle.ViewModel;
+import androidx.room.Room;
 
 import com.example.concordia_campus_guide.Global.ApplicationState;
+import com.example.concordia_campus_guide.Helper.PathFinder;
 import com.example.concordia_campus_guide.Models.Building;
+import com.example.concordia_campus_guide.Models.Place;
+import com.example.concordia_campus_guide.Models.RoomModel;
+import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
@@ -18,6 +23,7 @@ import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 import com.google.maps.android.geojson.GeoJsonPointStyle;
@@ -28,6 +34,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +44,8 @@ import static java.lang.Double.parseDouble;
 public class LocationFragmentViewModel extends ViewModel {
     private GeoJsonLayer floorLayer;
     private HashMap<String, Building> buildings = new HashMap<>();
+    private HashMap<String, List<WalkingPoint>> walkingPointsMap = new HashMap<>();
+    private PolylineOptions displayedPolylineOption;
     /**
      * @return return the map style
      */
@@ -211,6 +220,11 @@ public class LocationFragmentViewModel extends ViewModel {
         floorLayer = initMarkersLayer(mMap, getJsonObject("buildings_floors_json/" + fileName  + ".json", context));
         getPointStyle(floorLayer);
         floorLayer.addLayerToMap();
+        if (displayedPolylineOption != null) {
+            // displayedPolylineOption.visible(false);
+        }
+        displayedPolylineOption = drawPath(buildingCode + "-" + floor);
+        mMap.addPolyline(displayedPolylineOption);
     }
 
     public JSONObject getJsonObject(String fileName, Context context) {
@@ -250,5 +264,29 @@ public class LocationFragmentViewModel extends ViewModel {
         return buildings.get("H").getCenterCoordinatesLatLng();
     }
 
+    public void parseWalkingPointList(Context context, RoomModel from, RoomModel to) {
+        PathFinder pf = new PathFinder(context ,from, to);
+        List<WalkingPoint> walkingPoints = pf.getPathToDestination();
+        List<WalkingPoint> floorWalkingPointList;
+        for(WalkingPoint wp: walkingPoints) {
+            floorWalkingPointList = walkingPointsMap.getOrDefault(wp.getFloorCode(), new ArrayList<WalkingPoint>());
+            floorWalkingPointList.add(wp);
+            walkingPointsMap.put(wp.getFloorCode(), floorWalkingPointList);
+        }
+    }
+
+    public PolylineOptions drawPath(String floorCode) {
+        List<WalkingPoint> floorWalkingPoints = walkingPointsMap.get(floorCode);
+        PolylineOptions option = new PolylineOptions();
+        if(floorWalkingPoints == null) {
+            return option;
+        }
+        for(int i=0; i < floorWalkingPoints.size() - 1; i++) {
+            LatLng point1 = floorWalkingPoints.get(i).getCoordinate().getLatLng();
+            LatLng point2 = floorWalkingPoints.get(i + 1).getCoordinate().getLatLng();
+            option.add(point1, point2);
+        }
+        return option.width(5).color(Color.RED).visible(true);
+    }
 
 }

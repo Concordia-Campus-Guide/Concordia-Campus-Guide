@@ -24,6 +24,7 @@ import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.Models.Building;
+import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -41,6 +42,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 import static androidx.core.content.ContextCompat.checkSelfPermission;
@@ -280,6 +282,9 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         } else {
             mFloorPickerGv.setVisibility(View.GONE);
         }
+        RoomModel src = new RoomModel(new Double[]{-73.57876237, 45.49729154}, "927", "H-9");
+        RoomModel destination = new RoomModel(new Double[]{-73.57883681, 45.49731974}, "918", "H-9");
+        mViewModel.parseWalkingPointList(getContext(),src, destination);
     }
 
     /**

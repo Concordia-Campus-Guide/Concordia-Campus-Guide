@@ -1,5 +1,7 @@
 package com.example.concordia_campus_guide.Models;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -41,4 +43,6 @@ public class Coordinates {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+
+    public LatLng getLatLng() { return new LatLng(this.longitude, this.latitude); }
 }
