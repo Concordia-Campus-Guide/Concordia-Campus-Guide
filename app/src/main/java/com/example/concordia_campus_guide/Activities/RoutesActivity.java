@@ -2,7 +2,6 @@ package com.example.concordia_campus_guide.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -15,12 +14,11 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.concordia_campus_guide.BuildConfig;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
-import com.example.concordia_campus_guide.RoutesHelpers.TransportType;
-import com.example.concordia_campus_guide.RoutesHelpers.DirectionsApiDataRetrieval;
+import com.example.concordia_campus_guide.Helper.RoutesHelpers.TransportType;
+import com.example.concordia_campus_guide.Helper.RoutesHelpers.DirectionsApiDataRetrieval;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.maps.model.TransitMode;
 
 public class RoutesActivity extends AppCompatActivity {
 
@@ -60,7 +58,7 @@ public class RoutesActivity extends AppCompatActivity {
         getDirection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DirectionsApiDataRetrieval(RoutesActivity.this).execute(buildUrl(from.getPosition(), to.getPosition(), TransportType.TRANSIT.toString()));
+                new DirectionsApiDataRetrieval().execute(buildUrl(from.getPosition(), to.getPosition(), TransportType.TRANSIT.toString()));
             }
         });
 

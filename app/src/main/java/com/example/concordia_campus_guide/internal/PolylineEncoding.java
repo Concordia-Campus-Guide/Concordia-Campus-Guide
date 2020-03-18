@@ -15,7 +15,7 @@
 
 package com.example.concordia_campus_guide.internal;
 
-import com.example.concordia_campus_guide.model.LatLng;
+import com.example.concordia_campus_guide.GoogleMapsServicesModels.LatLng;
 
 import java.util.ArrayList;
 import java.util.Arrays;
