@@ -41,10 +41,9 @@ public class PathFinder {
         this.walkingPointsVisited = new HashMap<>();
         this.indoorPathHeuristic = new IndoorPathHeuristic(context);
 
+        this.context = context;
         final List<WalkingPoint> walkingPoints = AppDatabase.getInstance(context).walkingPointDao().getAll();
         walkingPointNodesMap = populateWalkingPointMap(walkingPoints);
-
-        this.context = context;
         this.initialPoint = getWalkingPointCorrespondingToRoom(source, walkingPoints);
         this.destinationPoint = getWalkingPointCorrespondingToRoom(destination, walkingPoints);
     }
@@ -100,7 +99,7 @@ public class PathFinder {
         walkingPointsToVisit.add(initial);
     }
 
-    protected boolean isGoal(final WalkingPoint currentLocation) {
+    public boolean isGoal(final WalkingPoint currentLocation) {
         return destinationPoint.equals(currentLocation);
     }
 
