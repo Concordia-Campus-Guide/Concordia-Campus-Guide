@@ -191,7 +191,7 @@ public class LocationFragmentViewModel extends ViewModel {
 
     private void getPointStyle(GeoJsonLayer layer) {
         GeoJsonPointStyle geoJsonPointStyle = new GeoJsonPointStyle();
-        geoJsonPointStyle.setVisible(false);
+        geoJsonPointStyle.setVisible(true);
 
         for (GeoJsonFeature feature : layer.getFeatures()) {
             feature.setPointStyle(geoJsonPointStyle);
@@ -208,29 +208,13 @@ public class LocationFragmentViewModel extends ViewModel {
         if (floorLayer != null) {
             floorLayer.removeLayerFromMap();
         }
-        floorLayer = initMarkersLayer(mMap, getJsonObject("buildings_floors_json/" + fileName  + ".json", context));
+        JSONObject geoJson = ApplicationState.getInstance(context).getRooms().getGeoJson(buildingCode+"-"+floor);
+        floorLayer = initMarkersLayer(mMap, geoJson);
         getPointStyle(floorLayer);
         floorLayer.addLayerToMap();
     }
 
-    public JSONObject getJsonObject(String fileName, Context context) {
-        JSONObject jObect = null;
-        try {
-            InputStream is = context.getAssets().open(fileName);
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            String json = new String(buffer, "UTF-8");
-            jObect = new JSONObject(json);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return jObect;
-    }
+
     public Building getBuildingFromeCode(String buildingCode) {
         return buildings.get(buildingCode);
     }

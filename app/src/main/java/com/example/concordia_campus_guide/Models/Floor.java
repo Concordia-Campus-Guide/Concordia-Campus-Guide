@@ -40,10 +40,11 @@ public class Floor extends Place {
     public Floor() {
         super();
     }
-    public Floor(Double[] coordinates, String floorCode, float altitude) {
+    public Floor(Double[] coordinates, String floorCode, float altitude, String campus) {
         super(coordinates);
         this.floorCode = floorCode;
         this.altitude = altitude;
+        this.campus = campus;
     }
 
     public String getBuildingCode() {
