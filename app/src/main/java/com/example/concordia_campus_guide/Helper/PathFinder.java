@@ -57,7 +57,7 @@ public class PathFinder {
         return walkingPointNodesMap;
     }
 
-    protected WalkingPoint getWalkingPointCorrespondingToRoom(final RoomModel room,
+    public WalkingPoint getWalkingPointCorrespondingToRoom(final RoomModel room,
             final List<WalkingPoint> walkingPointList) {
         final Coordinates coordinates1 = new Coordinates(room.getCenterCoordinates()[0],
                 room.getCenterCoordinates()[1]);
