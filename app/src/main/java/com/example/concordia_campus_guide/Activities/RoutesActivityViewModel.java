@@ -71,19 +71,19 @@ public class RoutesActivityViewModel extends AndroidViewModel {
             }
         }
 
-        Calendar cal = Calendar.getInstance();
-        String day = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(cal.getTime());
+        Calendar calendar = Calendar.getInstance();
+        String day = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(calendar.getTime());
         SimpleDateFormat time = new SimpleDateFormat("HH:mm");
-        shuttles = appDB.shuttleDao().getScheduleByCampusAndDayAndTime(campusFrom, day, time.format(cal.getTime()));
+        shuttles = appDB.shuttleDao().getScheduleByCampusAndDayAndTime(campusFrom, day, time.format(calendar.getTime()));
         return shuttles;
     }
 
     public String getShuttleDisplayText(List<Shuttle> shuttles) {
         String content = "";
-        String campusTo = shuttles.get(0).getCampus().compareTo("SGW") == 0 ? "LOY" : "SGW";
         if (shuttles == null || shuttles.size() == 0) {
             return "No available routes using the shuttle service";
         }
+        String campusTo = shuttles.get(0).getCampus().compareTo("SGW") == 0 ? "LOY" : "SGW";
         for (Shuttle shuttle : shuttles) {
             content += shuttle.getCampus() + "  >   " + campusTo + ", leaves at: " + shuttle.getTime() + "\n";
         }

@@ -147,14 +147,14 @@ public class MainActivity extends AppCompatActivity {
             Rooms rooms = ApplicationState.getInstance(this).getRooms();
             appDb.roomDao().insertAll(rooms.getRooms());
 
-            //Get shuttle schedule
+            // Load shuttle schedule
             Shuttles shuttles = ApplicationState.getInstance(this).getShuttles();
             appDb.shuttleDao().insertAll(shuttles.getShuttles());
 
-            List<Shuttle> sh = appDb.shuttleDao().getScheduleByCampus("SGW");
-
+            // Load walking points
             WalkingPoints walkingPoints = ApplicationState.getInstance(this).getWalkingPoints();
             appDb.walkingPointDao().insertAll(walkingPoints.getWalkingPoints());
+
             ApplicationState.getInstance(this).setDbIsSetToTrue();
         }
     }
