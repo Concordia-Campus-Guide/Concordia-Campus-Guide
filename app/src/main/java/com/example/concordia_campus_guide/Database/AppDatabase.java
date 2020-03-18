@@ -8,6 +8,7 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
 import com.example.concordia_campus_guide.Database.Converters.StringListConverter;
+import com.example.concordia_campus_guide.Database.Converters.StringLongConverter;
 import com.example.concordia_campus_guide.Database.Daos.BuildingDao;
 import com.example.concordia_campus_guide.Database.Daos.FloorDao;
 import com.example.concordia_campus_guide.Database.Daos.RoomDao;
@@ -19,8 +20,8 @@ import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.Shuttle;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 
-@Database(entities = {Building.class, Floor.class, RoomModel.class, WalkingPoint.class,  Shuttle.class},exportSchema = false, version = 1)
-@TypeConverters({StringListConverter.class})
+@Database(entities = {Building.class, Floor.class, RoomModel.class, WalkingPoint.class,  Shuttle.class},exportSchema = false, version = 2)
+@TypeConverters({StringListConverter.class, StringLongConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
     public static final String DB_NAME = "ConUMaps.db";
     private static AppDatabase instance;
