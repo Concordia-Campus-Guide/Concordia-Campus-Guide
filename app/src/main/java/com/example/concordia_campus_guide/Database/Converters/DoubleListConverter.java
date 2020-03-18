@@ -1,11 +1,6 @@
 package com.example.concordia_campus_guide.Database.Converters;
 
-import android.os.Build;
 
-import java.util.Arrays;
-import java.util.List;
-
-import androidx.annotation.RequiresApi;
 import androidx.room.TypeConverter;
 
 public class DoubleListConverter {
@@ -15,7 +10,7 @@ public class DoubleListConverter {
     @TypeConverter
     public String convertToDatabaseColumn(Double[] array) {
         if(array != null ){
-            return array[0] + SPLIT_CHAR +array[1];
+            return array[0] + SPLIT_CHAR + array[1];
         }
         return null;
     }

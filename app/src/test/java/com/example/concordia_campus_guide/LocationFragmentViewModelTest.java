@@ -75,7 +75,7 @@ public class LocationFragmentViewModelTest  {
         assertEquals(new LatLng( 45.45909, -73.63844), viewModel.getLoyolaZoomLocation());
     }
     @Test
-    public void getBuildingFromeCodeTest(){
+    public void getBuildingFromCodeTest(){
         assertEquals(buildings.get("EV"), viewModel.getBuildingFromeCode("EV"));
     }
 

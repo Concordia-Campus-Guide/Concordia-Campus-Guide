@@ -1,5 +1,6 @@
 package com.example.concordia_campus_guide.Activities;
 
+import android.app.Application;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -23,6 +24,8 @@ import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.Floors;
 import com.example.concordia_campus_guide.Models.Rooms;
+import com.example.concordia_campus_guide.Models.WalkingPoint;
+import com.example.concordia_campus_guide.Models.WalkingPoints;
 import com.example.concordia_campus_guide.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setUpDb();
         setContentView(R.layout.activity_main);
         mViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         fragmentManager = getSupportFragmentManager();
@@ -50,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
         swipeableInfoCard = BottomSheetBehavior.from(infoCard);
 
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
-
-        setUpDb();
     }
 
     @Override
@@ -138,6 +140,8 @@ public class MainActivity extends AppCompatActivity {
             Rooms rooms = ApplicationState.getInstance(this).getRooms();
             appDb.roomDao().insertAll(rooms.getRooms());
 
+            WalkingPoints walkingPoints = ApplicationState.getInstance(this).getWalkingPoints();
+            appDb.walkingPointDao().insertAll(walkingPoints.getWalkingPoints());
             ApplicationState.getInstance(this).setDbIsSetToTrue();
         }
     }
