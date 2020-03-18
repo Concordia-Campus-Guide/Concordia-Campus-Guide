@@ -57,10 +57,6 @@ public class MainActivity extends AppCompatActivity {
         swipeableInfoCard = BottomSheetBehavior.from(infoCard);
 
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
-
-        AppDatabase appDB = AppDatabase.getInstance(this);
-        List<Shuttle> jas = appDB.shuttleDao().getScheduleByCampusAndDay("SGW", "Friday");
-        String gs = "Asda" ;
     }
 
     @Override
