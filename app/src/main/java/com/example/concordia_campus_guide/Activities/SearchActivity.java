@@ -16,11 +16,9 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.concordia_campus_guide.Adapters.PlaceToSearchResultAdapter;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
-import com.example.concordia_campus_guide.Models.Building;
-import com.example.concordia_campus_guide.Models.Floor;
+import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.Models.MyCurrentPlace;
 import com.example.concordia_campus_guide.Models.Place;
-import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.R;
 
 public class SearchActivity extends AppCompatActivity {
@@ -37,15 +35,28 @@ public class SearchActivity extends AppCompatActivity {
 
         //setting up activity
         setContentView(R.layout.search_activity);
-        setBackButtonOnClick();
+        mViewModel = ViewModelProviders.of(this, new ViewModelFactory(this.getApplication())).get(SearchActivityViewModel.class);
+
+        setUiElements();
+        setEvents();
+    }
+
+    private void setUiElements(){
         searchResults = (ListView) findViewById(R.id.searchResults);
         searchText = (EditText) findViewById(R.id.searchText);
-        mViewModel = ViewModelProviders.of(this).get(SearchActivityViewModel.class);
 
         //android adapter for list view
         adapter = new PlaceToSearchResultAdapter(this, R.layout.list_item_layout, mViewModel.getAllPlaces());
         searchResults.setAdapter(adapter);
+    }
 
+    private void setEvents(){
+        setBackButtonOnClick();
+        setTextListener();
+        setOnClickListeners();
+    }
+
+    private void setTextListener(){
         //search results filtering according to search text
         searchText.addTextChangedListener(new TextWatcher(){
             @Override
@@ -58,7 +69,9 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable){ }
         });
+    }
 
+    private void setOnClickListeners(){
         searchResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -99,13 +112,5 @@ public class SearchActivity extends AppCompatActivity {
                 finish();
             }
         });
-    }
-
-    private String getPlaceType(Place place){
-        if(place instanceof RoomModel) return RoomModel.class.getSimpleName();
-        if(place instanceof Floor) return Floor.class.getSimpleName();
-        if(place instanceof Building) return Building.class.getSimpleName();
-
-        return null;
     }
 }

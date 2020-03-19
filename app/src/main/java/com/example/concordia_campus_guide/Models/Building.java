@@ -73,6 +73,9 @@ public class Building extends Place {
     private GroundOverlayOptions groundOverlayOption;
 
     public Building(){}
+    public Building(String buildingCode){
+        this.BuildingCode = buildingCode;
+    }
     public Building(Coordinates centerCoordinates, List<String> availableFloors, float width, float height, float bearing,
                     String campus, String buildingCode, String Building_Long_Name, String address,
                     List<String> departments, List<String> services, ListOfCoordinates cornerCoordinates) {
