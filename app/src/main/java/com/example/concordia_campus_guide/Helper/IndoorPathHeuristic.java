@@ -17,7 +17,7 @@ public class IndoorPathHeuristic {
     }
 
     /**
-     * The heuristic is based on the distance between the goal and destination coordinate, the further a point from a destination, the bigger the heuristic it will have.
+     * The heuristic is based on the distance between the goal and destination coordinates, the further a point from a destination, the bigger the heuristic it will have.
      * @param currentCoordinate
      * @param destinationPoint
      * @return
@@ -33,7 +33,7 @@ public class IndoorPathHeuristic {
     }
 
     /**
-     * This methods return the nearest access point in a given floor (elevator)
+     * This method returns the nearest access point in a given floor (elevator).
      * @param currentPoint
      * @return
      */
@@ -44,7 +44,6 @@ public class IndoorPathHeuristic {
     }
 
     /**
-     * This method returns the closest access point based on a source location. This is where the logic is.
      * This method returns the closest access point based on a source location. This is where the logic is.
      * @param currentPoint
      * @param accessPtList

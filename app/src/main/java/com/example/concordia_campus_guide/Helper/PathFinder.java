@@ -48,7 +48,7 @@ public class PathFinder {
     }
 
     /**
-     *  This methods' purpose is to populate our map (graph) with all the walking points in the map.
+     *  This method's purpose is to populate our map (graph) with all the walking points in the map.
      * @param walkingPoints
      * @return
      */
@@ -61,7 +61,7 @@ public class PathFinder {
     }
 
     /**
-     * This methods' purpose is to get a corresponding walking point given a room object.
+     * This method's purpose is to get a corresponding walking point given a room object.
      * @param room
      * @param walkingPointList
      * @return
@@ -84,7 +84,7 @@ public class PathFinder {
     }
 
     /**
-     * This methods' purpose is to find a solution path from a point A to a point B. It will use a priorityQueue to get the best next point to visit at each moment. If the point was already visited, it will skip it.
+     * This method's purpose is to find a solution path from a point A to a point B. It will use a priorityQueue to get the best next point to visit at each moment. If the point was already visited, it will skip it.
      * @return
      */
     public List<WalkingPoint> getPathToDestination() {
@@ -108,7 +108,7 @@ public class PathFinder {
     }
 
     /**
-     * This helper methods simply add the first source point into the priorityQueue.
+     * This helper method simply adds the initial point into the priorityQueue.
      */
     private void addInitialPointToMap() {
         final WalkingPointNode initial = walkingPointNodesMap.get(initialPoint.getId());
@@ -136,8 +136,8 @@ public class PathFinder {
     }
 
     /**
-     * This methods' purpose is to add the reachable points from a walkingPoint. If one of these points is already in the open list with a higher cost,
-     * we will update it. Same if it was in the closed list, we will update the cost only, in this class.
+     * This method's purpose is to add the reachable points from a walkingPoint. If one of these points is already in the open list (nodes to visit list) with a higher cost,
+     * we will update it. Same if it was in the closed list(visited nodes list), we will update the cost only, in this class.
      * @param currentNode
      */
     protected void addNearestWalkingPoints(final WalkingPointNode currentNode) {
@@ -209,7 +209,7 @@ public class PathFinder {
     }
 
     /**
-     * This is a wrapper class for the WalkingPoint object that reprent a specific node in our graph, with a parent, cost and heuristic.
+     * This is a wrapper class for the WalkingPoint object that represents a specific node in our graph, with a parent, cost and heuristic.
      */
     public class WalkingPointNode {
         WalkingPoint walkingPoint;
@@ -258,5 +258,4 @@ public class PathFinder {
         }
     }
 }
-
 
