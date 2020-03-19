@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.ModelsTest;
+package com.example.concordia_campus_guide.ModelTests;
 
 import com.example.concordia_campus_guide.Models.Shuttle;
 import com.example.concordia_campus_guide.Models.Shuttles;
@@ -42,9 +42,9 @@ public class ShuttleTest {
 
     @Test
     public void testShuttleTime() {
-        String expected = "7:05";
+        Double expected = 7.05;
         shuttle.setTime(expected);
-        String actual = shuttle.getTime();
+        Double actual = shuttle.getTime();
         assertEquals(expected, actual);
     }
 

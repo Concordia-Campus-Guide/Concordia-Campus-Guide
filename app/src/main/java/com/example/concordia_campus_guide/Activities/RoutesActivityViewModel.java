@@ -66,8 +66,8 @@ public class RoutesActivityViewModel extends AndroidViewModel {
 
         Calendar calendar = Calendar.getInstance();
         String day = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(calendar.getTime());
-        SimpleDateFormat time = new SimpleDateFormat("HH:mm");
-        shuttles = appDB.shuttleDao().getScheduleByCampusAndDayAndTime(campusFrom, day, time.format(calendar.getTime()));
+        SimpleDateFormat time = new SimpleDateFormat("HH.mm");
+        shuttles = appDB.shuttleDao().getScheduleByCampusAndDayAndTime(campusFrom, day, Double.parseDouble(time.format(calendar.getTime())));
         return shuttles;
     }
 
@@ -78,7 +78,7 @@ public class RoutesActivityViewModel extends AndroidViewModel {
         }
         String campusTo = shuttles.get(0).getCampus().compareTo("SGW") == 0 ? "LOY" : "SGW";
         for (Shuttle shuttle : shuttles) {
-            content += shuttle.getCampus() + "  >   " + campusTo + ", leaves at: " + shuttle.getTime() + "\n";
+            content += shuttle.getCampus() + "  >   " + campusTo + ", \t leaves at: " + shuttle.getTime().toString().replace(".", ":") + "\n";
         }
         return content;
     }

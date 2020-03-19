@@ -1,662 +1,662 @@
 {
   "shuttles": [
     {
-      "time": "7:05",
+      "time": 7.05,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "8:05",
+      "time": 8.05,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "8:20",
+      "time": 8.20,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "8:35",
+      "time": 8.35,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "8:55",
+      "time": 8.55,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "9:10",
+      "time": 9.10,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "9:30",
+      "time": 9.30,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "9:45",
+      "time": 9.45,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "10:05",
+      "time": 10.05,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "10:20",
+      "time": 10.20,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "10:55",
+      "time": 10.55,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "11:10",
+      "time": 11.10,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "11:45",
+      "time": 11.45,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "12:00",
+      "time": 12.00,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "12:30",
+      "time": 12.30,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "13:00",
+      "time": 13.00,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "13:30",
+      "time": 13.30,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "14:00",
+      "time": 14.00,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "14:30",
+      "time": 14.30,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "15:00",
+      "time": 15.00,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "15:30",
+      "time": 15.30,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "16:00",
+      "time": 16.00,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "16:30",
+      "time": 16.30,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "17:00",
+      "time": 17.00,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "17:30",
+      "time": 17.30,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "18:00",
+      "time": 18.00,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "18:30",
+      "time": 18.30,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "19:00",
+      "time": 19.00,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "19:30",
+      "time": 19.30,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "20:00",
+      "time": 20.00,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "20:10",
+      "time": 20.10,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "20:30",
+      "time": 20.30,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "21:00",
+      "time": 21.00,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "21:25",
+      "time": 21.25,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "21:45",
+      "time": 21.45,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "22:00",
+      "time": 22.00,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "22:30",
+      "time": 22.30,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "23:00",
+      "time": 23.00,
       "campus": "SGW",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "7:45",
-      "campus": "SGW",
-      "day": ["Friday"]
-    },
-    {
-      "time": "8:20",
+      "time": 7.45,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "8:55",
+      "time": 8.20,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "9:30",
+      "time": 8.55,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "9:45",
+      "time": 9.30,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "10:05",
+      "time": 9.45,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "10:55",
+      "time": 10.05,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "11:10",
+      "time": 10.55,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "11:45",
+      "time": 11.10,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "12:05",
+      "time": 11.45,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "12:20",
+      "time": 12.05,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "12:55",
+      "time": 12.20,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "12:20",
+      "time": 12.55,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "12:55",
+      "time": 12.20,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "13:30",
+      "time": 12.55,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "13:45",
+      "time": 13.30,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "14:05",
+      "time": 13.45,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "14:40",
+      "time": 14.05,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "14:55",
+      "time": 14.40,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "15:15",
+      "time": 14.55,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "15:50",
+      "time": 15.15,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "16:05",
+      "time": 15.50,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "16:25",
+      "time": 16.05,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "17:15",
+      "time": 16.25,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "17:30",
+      "time": 17.15,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "18:05",
+      "time": 17.30,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "18:40",
+      "time": 18.05,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "19:15",
+      "time": 18.40,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "19:50",
+      "time": 19.15,
       "campus": "SGW",
       "day": ["Friday"]
     },
     {
-      "time": "7:30",
+      "time": 19.50,
+      "campus": "SGW",
+      "day": ["Friday"]
+    },
+    {
+      "time": 7.30,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "7:40",
+      "time": 7.40,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "7:55",
+      "time": 7.55,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "8:20",
+      "time": 8.20,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "8:35",
+      "time": 8.35,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "8:55",
+      "time": 8.55,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "9:10",
+      "time": 9.10,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "9:30",
+      "time": 9.30,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "9:45",
+      "time": 9.45,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "10:20",
+      "time": 10.20,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "10:35",
+      "time": 10.35,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "10:55",
+      "time": 10.55,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "11:10",
+      "time": 11.10,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "11:30",
+      "time": 11.30,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "12:00",
+      "time": 12.00,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "12:30",
+      "time": 12.30,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "13:00",
+      "time": 13.00,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "13:30",
+      "time": 13.30,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "14:00",
+      "time": 14.00,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "14:30",
+      "time": 14.30,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "15:00",
+      "time": 15.00,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "15:30",
+      "time": 15.30,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "16:00",
+      "time": 16.00,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "16:30",
+      "time": 16.30,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "17:00",
+      "time": 17.00,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "17:30",
+      "time": 17.30,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "18:00",
+      "time": 18.00,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "18:30",
+      "time": 18.30,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "19:00",
+      "time": 19.00,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "19:30",
+      "time": 19.30,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "20:00",
+      "time": 20.00,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "20:30",
+      "time": 20.30,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "20:45",
+      "time": 20.45,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "21:05",
+      "time": 21.05,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "21:30",
+      "time": 21.30,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "22:00",
+      "time": 22.00,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "22:30",
+      "time": 22.30,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "23:00",
+      "time": 23.00,
       "campus": "LOY",
       "day": ["Monday", "Tuesday", "Wednesday", "Thursday"]
     },
     {
-      "time": "7:40",
+      "time": 7.40,
       "campus": "LOY",
       "day": ["Friday"]
     },
     {
-      "time": "8:15",
+      "time": 8.15,
       "campus": "LOY",
       "day": ["Friday"]
     },
     {
-      "time": "8:55",
+      "time": 8.55,
       "campus": "LOY",
       "day": ["Friday"]
     },
     {
-      "time": "9:10",
+      "time": 9.10,
       "campus": "LOY",
       "day": ["Friday"]
     },
     {
-      "time": "9:30",
+      "time": 9.30,
       "campus": "LOY",
       "day": ["Friday"]
     },
     {
-      "time": "10:20",
+      "time": 10.20,
       "campus": "LOY",
       "day": ["Friday"]
     },
     {
-      "time": "10:35",
+      "time": 10.35,
       "campus": "LOY",
       "day": ["Friday"]
     },
     {
-      "time": "11:10",
+      "time": 11.10,
       "campus": "LOY",
       "day": ["Friday"]
     },
     {
-      "time": "11:30",
+      "time": 11.30,
       "campus": "LOY",
       "day": ["Friday"]
     },
     {
-      "time": "11:45",
+      "time": 11.45,
       "campus": "LOY",
       "day": ["Friday"]
     },
     {
-      "time": "12:20",
+      "time": 12.20,
       "campus": "LOY",
       "day": ["Friday"]
     },
     {
-      "time": "12:40",
+      "time": 12.40,
       "campus": "LOY",
       "day": ["Friday"]
     },
     {
-      "time": "12:55",
+      "time": 12.55,
       "campus": "LOY",
       "day": ["Friday"]
     },
     {
-      "time": "13:30",
+      "time": 13.30,
       "campus": "LOY",
       "day": ["Friday"]
     },
     {
-      "time": "14:05",
+      "time": 14.05,
       "campus": "LOY",
       "day": ["Friday"]
     },
     {
-      "time": "14:20",
+      "time": 14.20,
       "campus": "LOY",
       "day": ["Friday"]
     },
     {
-      "time": "14:40",
+      "time": 14.40,
       "campus": "LOY",
       "day": ["Friday"]
     },
     {
-      "time": "15:15",
+      "time": 15.15,
       "campus": "LOY",
       "day": ["Friday"]
     },
     {
-      "time": "15:30",
+      "time": 15.30,
       "campus": "LOY",
       "day": ["Friday"]
     },
     {
-      "time": "15:50",
+      "time": 15.50,
       "campus": "LOY",
       "day": ["Friday"]
     },
     {
-      "time": "16:25",
+      "time": 16.25,
       "campus": "LOY",
       "day": ["Friday"]
     },
     {
-      "time": "16:40",
+      "time": 16.40,
       "campus": "LOY",
       "day": ["Friday"]
     },
     {
-      "time": "17:00",
+      "time": 17.00,
       "campus": "LOY",
       "day": ["Friday"]
     },
     {
-      "time": "18:05",
+      "time": 18.05,
       "campus": "LOY",
       "day": ["Friday"]
     },
     {
-      "time": "18:40",
+      "time": 18.40,
       "campus": "LOY",
       "day": ["Friday"]
     },
     {
-      "time": "19:15",
+      "time": 19.15,
       "campus": "LOY",
       "day": ["Friday"]
     },
     {
-      "time": "19:50",
+      "time": 19.50,
       "campus": "LOY",
       "day": ["Friday"]
     }

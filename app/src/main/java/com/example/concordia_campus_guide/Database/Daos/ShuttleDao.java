@@ -23,5 +23,5 @@ public interface ShuttleDao {
     List<Shuttle> getScheduleByCampusAndDay(String campus, String day);
 
     @Query("SELECT *  FROM shuttle WHERE campus=:campus AND day LIKE '%' || :day || '%' AND time >= :time")
-    List<Shuttle> getScheduleByCampusAndDayAndTime(String campus, String day, String time);
+    List<Shuttle> getScheduleByCampusAndDayAndTime(String campus, String day, Double time);
 }

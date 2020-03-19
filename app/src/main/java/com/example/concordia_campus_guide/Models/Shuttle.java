@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 import com.example.concordia_campus_guide.Database.Converters.StringListConverter;
-import com.example.concordia_campus_guide.Database.Converters.StringLongConverter;
+
 import java.util.List;
 
 @Entity(tableName = "shuttle")
@@ -21,13 +21,12 @@ public class Shuttle {
     private List<String> day;
 
     @ColumnInfo(name = "time")
-    @TypeConverters(StringLongConverter.class)
-    private String time;
+    private Double time;
 
     public Shuttle() {
     }
 
-    public Shuttle(String campus, List<String> day, String time) {
+    public Shuttle(String campus, List<String> day, Double time) {
         this.campus = campus;
         this.day = day;
         this.time = time;
@@ -41,11 +40,11 @@ public class Shuttle {
         this.shuttleId = shuttleId;
     }
 
-    public String getTime() {
+    public Double getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Double time) {
         this.time = time;
     }
 
