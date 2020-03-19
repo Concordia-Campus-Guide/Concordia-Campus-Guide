@@ -75,7 +75,6 @@ public class PathFinderTest {
         pathFinder = new PathFinder(mockApplicationContext, roomSource, roomDestination);
     }
 
-    @Ignore
     @Test
     public void getWalkingPointCorrespondingToRoomTest(){
         List<WalkingPoint> walkingPoints = new ArrayList<>();
@@ -83,7 +82,6 @@ public class PathFinderTest {
         walkingPoints.add(walkingPointTest);
         assertEquals(pathFinder.getWalkingPointCorrespondingToRoom(roomSource, walkingPoints), walkingPointTest);
     }
-    @Ignore
     @Test
     public void isGoalTest(){
         assertTrue(pathFinder.isGoal(new WalkingPoint(new Coordinates(-73.57902321964502, 45.49699848270905), "H-8", null, PointType.CLASSROOM)));
