@@ -27,7 +27,7 @@ public abstract class Place {
         this.centerCoordinates = centerCoordinates;
     }
 
-    public Place(Double[] centerCoordinates, String campus) {
+    public Place(Coordinates centerCoordinates, String campus) {
         this.centerCoordinates = centerCoordinates;
         this.Campus = campus;
     }
