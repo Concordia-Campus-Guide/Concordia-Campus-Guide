@@ -29,7 +29,6 @@ import com.google.maps.android.geojson.GeoJsonLayer;
 import com.google.maps.android.geojson.GeoJsonPointStyle;
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -159,7 +158,7 @@ public class LocationFragmentViewModel extends ViewModel {
                         .anchor(0.5f,0.5f)
                         .alpha(0.90f)
                         //This line should be included whenever we test the UI for the marker:
-                        //.title(buildingLabel)
+//                        .title(buildingLabel)
         );
         marker.setTag(buildingLabel);
     }
@@ -200,7 +199,7 @@ public class LocationFragmentViewModel extends ViewModel {
 
     private void getPointStyle(GeoJsonLayer layer) {
         GeoJsonPointStyle geoJsonPointStyle = new GeoJsonPointStyle();
-        geoJsonPointStyle.setVisible(false);
+        geoJsonPointStyle.setVisible(true);
 
         for (GeoJsonFeature feature : layer.getFeatures()) {
             feature.setPointStyle(geoJsonPointStyle);
@@ -214,10 +213,12 @@ public class LocationFragmentViewModel extends ViewModel {
     public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, Context context, GoogleMap mMap) {
         String fileName = buildingCode.toLowerCase()+"_"+floor.toLowerCase();
         groundOverlay.setImage(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+fileName+".png"));
+
         if (floorLayer != null) {
             floorLayer.removeLayerFromMap();
         }
-        floorLayer = initMarkersLayer(mMap, getJsonObject("buildings_floors_json/" + fileName  + ".json", context));
+        JSONObject geoJson = ApplicationState.getInstance(context).getRooms().getGeoJson(buildingCode+"-"+floor);
+        floorLayer = initMarkersLayer(mMap, geoJson);
         getPointStyle(floorLayer);
         floorLayer.addLayerToMap();
         if (displayedPolylineOption != null) {
@@ -227,24 +228,7 @@ public class LocationFragmentViewModel extends ViewModel {
         mMap.addPolyline(displayedPolylineOption);
     }
 
-    public JSONObject getJsonObject(String fileName, Context context) {
-        JSONObject jObect = null;
-        try {
-            InputStream is = context.getAssets().open(fileName);
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            String json = new String(buffer, "UTF-8");
-            jObect = new JSONObject(json);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return jObect;
-    }
+
     public Building getBuildingFromeCode(String buildingCode) {
         return buildings.get(buildingCode);
     }
