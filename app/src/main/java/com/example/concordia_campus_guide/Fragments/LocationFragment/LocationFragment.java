@@ -272,7 +272,9 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                     onBuildingClick(building);
                 }
                 String buildingCode = geoJsonFeature.getProperty("code");
-                ((MainActivity)getActivity()).showInfoCard(buildingCode);
+                if(getActivity().getClass() == MainActivity.class) {
+                    ((MainActivity) getActivity()).showInfoCard(buildingCode);
+                }
             }
         });
     }
@@ -286,10 +288,10 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     }
 
     public void drawPaths(Place from, Place to) {
-        RoomModel src = new RoomModel(new Double[]{-73.57876237, 45.49729154}, "927", "H-9");
-        RoomModel destination = new RoomModel(new Double[]{-73.57883681, 45.49731974}, "918", "H-9");
+       // RoomModel src = new RoomModel(from.getCenterCoordinates(), "927", "H-9");
+       // RoomModel destination = new RoomModel(to.getCenterCoordinates(), "918", "H-9");
 
-        mViewModel.parseWalkingPointList(getContext(), src, destination);
+        mViewModel.parseWalkingPointList(getContext(), (RoomModel) from, (RoomModel) to);
     }
 
     /**
@@ -303,7 +305,9 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                  Building building = mViewModel.getBuildingFromeCode(marker.getTag().toString());
                 //TODO: Make function that pops up the info card for the building (via the building-code)
                 String buildingCode = (marker.getTag()).toString();
-                ((MainActivity)getActivity()).showInfoCard(buildingCode);
+                if(getActivity().getClass() == MainActivity.class) {
+                    ((MainActivity) getActivity()).showInfoCard(buildingCode);
+                }
                 onBuildingClick(building);
                 return false;
             }

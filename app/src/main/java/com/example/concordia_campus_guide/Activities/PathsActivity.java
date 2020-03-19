@@ -18,19 +18,9 @@ public class PathsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.paths_activity);
-//        if (savedInstanceState == null) {
-//            getSupportFragmentManager().beginTransaction()
-//                    .replace(R.id.container, PathsFragment.newInstance())
-//                    .commitNow();
-//        }
-        mViewModel = ViewModelProviders.of(this).get(PathsViewModel.class);
 
-        locationFragment = new LocationFragment();
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(R.id.frame_location_paths_fragment, locationFragment);
-        transaction.commit();
-        // locationFragment = (LocationFragment)getSupportFragmentManager().findFragmentById(R.id.pathsLocationFragment);
+        mViewModel = ViewModelProviders.of(this).get(PathsViewModel.class);
+        locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.pathLocationFragment);
 
         Place from = mViewModel.getFrom();
         Place to = mViewModel.getTo();
