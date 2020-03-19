@@ -35,16 +35,17 @@ public class PathFinder {
     private final WalkingPoint initialPoint;
     private final WalkingPoint destinationPoint;
     private final IndoorPathHeuristic indoorPathHeuristic;
+    private final AppDatabase appDatabase;
 
-    public PathFinder(final Context context, final Place source, final Place destination) {
+    public PathFinder(final AppDatabase appDatabase, final Place source, final Place destination) {
         this.walkingPointsToVisit = new PriorityQueue<>(new WalkingPointComparator());
         this.walkingPointsVisited = new HashMap<>();
-        this.indoorPathHeuristic = new IndoorPathHeuristic(context);
+        this.indoorPathHeuristic = new IndoorPathHeuristic(appDatabase);
+        this.appDatabase = appDatabase;
 
-        final List<WalkingPoint> walkingPoints = AppDatabase.getInstance(context).walkingPointDao().getAll();
+        final List<WalkingPoint> walkingPoints = appDatabase.walkingPointDao().getAll();
         walkingPointNodesMap = populateWalkingPointMap(walkingPoints);
 
-        this.context = context;
         this.initialPoint = getWalkingPointCorrespondingToPlace(source);
         this.destinationPoint = getWalkingPointCorrespondingToPlace(destination);
     }
@@ -67,13 +68,13 @@ public class PathFinder {
         List<WalkingPoint> pointList = null;
         if (place instanceof Building) {
             placeCode = ((Building) place).getBuildingCode();
-            pointList = AppDatabase.getInstance(context).walkingPointDao().getAllWalkingPointsFromPlaceCode(placeCode);
+            pointList = appDatabase.walkingPointDao().getAllWalkingPointsFromPlaceCode(placeCode);
         } else if (place instanceof RoomModel) {
             placeCode = ((RoomModel) place).getRoomCode();
-            pointList = AppDatabase.getInstance(context).walkingPointDao().getAllWalkingPointsFromPlaceCode(placeCode);
+            pointList = appDatabase.walkingPointDao().getAllWalkingPointsFromPlaceCode(placeCode);
         } else if (place instanceof Floor) {
             String floorCode = ((Floor) place).getFloorCode();
-            pointList = AppDatabase.getInstance(context).walkingPointDao().getAllAccessPointsOnFloor(floorCode, PointType.ELEVATOR);
+            pointList = appDatabase.walkingPointDao().getAllAccessPointsOnFloor(floorCode, PointType.ELEVATOR);
         }
 
         if(pointList != null && !pointList.isEmpty())
