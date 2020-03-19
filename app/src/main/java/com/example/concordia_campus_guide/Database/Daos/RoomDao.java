@@ -13,14 +13,14 @@ import java.util.List;
 @Dao
 public interface RoomDao {
 
-//    Fix the query here later
-    @Query("SELECT *  FROM rooms")
-    List<RoomModel> getAll();
+    @Query("SELECT *  FROM rooms WHERE floor_code=:floorCode")
+    List<RoomModel> getAllRoomsByFloorCode(String floorCode);
 
+    @Query("SELECT * FROM rooms")
+    List<RoomModel> getAllRooms();
 
     @Insert
     void insertAll(List<RoomModel> rooms);
-
 
     @Delete
     void deleteAll(RoomModel... rooms);

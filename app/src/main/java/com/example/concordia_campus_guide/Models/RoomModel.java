@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
-import androidx.room.Index;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import static androidx.room.ForeignKey.CASCADE;
 
@@ -16,14 +18,18 @@ import static androidx.room.ForeignKey.CASCADE;
                         childColumns = {"floor_code"},
                         onDelete = CASCADE
                 ),
-                },
-        indices = {@Index(value = {"room_code"},
-        unique = true)})
+                })
 public class RoomModel extends Place {
 
     @ColumnInfo(name = "room_code")
     @NonNull
     private String roomCode;
+
+    public RoomModel(Double[] centerCoordinates, @NonNull String roomCode, @NonNull String floorCode) {
+        super(centerCoordinates);
+        this.roomCode = roomCode;
+        this.floorCode = floorCode;
+    }
 
     @ColumnInfo(name = "floor_code")
     @NonNull
@@ -45,6 +51,31 @@ public class RoomModel extends Place {
 
     public RoomModel(){
         super();
+    }
+
+    public JSONObject getGeoJson(){
+        JSONObject toReturn = new JSONObject();
+        JSONObject properties = new JSONObject();
+        JSONObject geometry = new JSONObject();
+
+        try{
+            toReturn.put("type", "Feature");
+
+            properties.put("floorCode", floorCode);
+            if(roomCode!=null) properties.put("roomCode", roomCode);
+            toReturn.put("properties", properties);
+
+            geometry.put("type", "Point");
+            Double[] geoJsonCoordinates = centerCoordinates;
+            geometry.put("coordinates", new JSONArray(geoJsonCoordinates));
+
+            toReturn.put("geometry", geometry);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return toReturn;
     }
 
     public void setFloorCode(@NonNull String floorCode) {

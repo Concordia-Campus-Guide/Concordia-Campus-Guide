@@ -34,7 +34,7 @@ public class SearchActivityViewModel extends AndroidViewModel {
         appDB = AppDatabase.getInstance(application.getApplicationContext());
         buildings = appDB.buildingDao().getAll();
         floors = appDB.floorDao().getAll();
-        rooms = appDB.roomDao().getAll();
+        rooms = appDB.roomDao().getAllRooms();
     }
 
     public List<Building> getBuildings() {

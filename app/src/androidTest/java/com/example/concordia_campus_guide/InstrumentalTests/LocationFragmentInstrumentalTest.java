@@ -42,14 +42,6 @@ public class LocationFragmentInstrumentalTest {
         assertNotNull(bitmap2);
     }
 
-    @Test
-    public void setBuildingGroundOverlayOptionsTest(){
-        Double[] coordinatecenter = new Double[]{45.495305, -73.578885};
-        Building building = new Building(coordinatecenter, new String[]{"S2","1"}, 65, 65, 127, null, "MB", null, null, null, null, null);
-        viewModel.setBuildingGroundOverlayOptions(building);
-        assertNotNull(building.getGroundOverlayOption());
-    }
-
 }
 
 
