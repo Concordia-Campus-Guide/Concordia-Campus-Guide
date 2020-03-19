@@ -37,8 +37,15 @@ public class Floor extends Place {
     public Floor() {
         super();
     }
+
     public Floor(Double[] coordinates, String floorCode, float altitude) {
         super(coordinates);
+        this.floorCode = floorCode;
+        this.altitude = altitude;
+    }
+
+    public Floor(Double[] coordinates, String floorCode, float altitude, String campus) {
+        super(coordinates, campus);
         this.floorCode = floorCode;
         this.altitude = altitude;
     }

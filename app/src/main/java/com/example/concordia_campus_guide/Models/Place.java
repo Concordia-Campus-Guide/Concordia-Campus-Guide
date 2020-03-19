@@ -22,8 +22,16 @@ public abstract class Place {
     @ColumnInfo(name ="center_coordinates")
     protected Double[] centerCoordinates;
 
+    @ColumnInfo(name ="campus")
+    protected String campus;
+
     public Place(Double[] centerCoordinates) {
         this.centerCoordinates = centerCoordinates;
+    }
+
+    public Place(Double[] centerCoordinates, String campus) {
+        this.centerCoordinates = centerCoordinates;
+        this.campus = campus;
     }
 
     public Place() {}
@@ -49,4 +57,12 @@ public abstract class Place {
     }
     
     public abstract String getDisplayName();
+
+    public String getCampus() {
+        return campus;
+    }
+
+    public void setCampus(String campus) {
+        this.campus = campus;
+    }
 }
