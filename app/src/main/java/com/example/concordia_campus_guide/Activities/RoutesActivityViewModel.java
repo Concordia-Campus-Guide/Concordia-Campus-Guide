@@ -23,6 +23,7 @@ public class RoutesActivityViewModel extends AndroidViewModel {
     private Place from;
     private Place to;
     private List<Shuttle> shuttles;
+    private final String noShuttles = "No available routes using the shuttle service";
 
     private Location myCurrentLocation;
 
@@ -81,7 +82,7 @@ public class RoutesActivityViewModel extends AndroidViewModel {
     public String getShuttleDisplayText(List<Shuttle> shuttles) {
         String content = "";
         if (shuttles == null || shuttles.size() == 0) {
-            return "No available routes using the shuttle service";
+            return this.noShuttles;
         }
         String campusTo = shuttles.get(0).getCampus().compareTo("SGW") == 0 ? "LOY" : "SGW";
         for (Shuttle shuttle : shuttles) {
