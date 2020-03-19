@@ -1,0 +1,110 @@
+package com.example.concordia_campus_guide.Models.Helpers;
+
+import android.Manifest;
+import android.content.ContentUris;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.CalendarContract;
+import android.provider.CalendarContract.Instances;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModel;
+
+import com.example.concordia_campus_guide.Activities.SearchActivity;
+import com.example.concordia_campus_guide.Models.CalendarEvent;
+
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
+public class CalendarViewModel extends ViewModel {
+
+    // The indices for the projection array above.
+    private static final int PROJECTION_TITLE_INDEX = 0;
+    private static final int PROJECTION_LOCATION_INDEX = 1;
+    private static final int PROJECTION_START_INDEX = 2;
+
+    public static final String[] INSTANCE_PROJECTION = new String[] {
+            Instances.TITLE,
+            Instances.EVENT_LOCATION,
+            Instances.DTSTART
+    };
+
+    public CalendarEvent getEvent(Context context, SearchActivity searchActivity) {
+
+        if (!hasReadPermission(context)) {
+            ActivityCompat.requestPermissions(searchActivity,
+                    new String[]{Manifest.permission.READ_CALENDAR}, 101);
+        } else {
+
+            Cursor cursor = getCalendarCursor(context);
+            return getCalendarEvent(cursor);
+        }
+        return null;
+    }
+
+    public String getNextClassString(CalendarEvent event){
+        String nextClassString = "";
+            if(event != null){
+                Date eventDate = new Date((Long.parseLong(event.getStartTime())));
+                String timeUntil = getTimeUntilString(eventDate.getTime(), System.currentTimeMillis());
+
+                nextClassString = event.getTitle() +  " in " + timeUntil;
+
+            }else{
+                nextClassString = "No classes today";
+            }
+        return  nextClassString;
+    }
+
+
+    private Cursor getCalendarCursor(Context context) {
+        Uri.Builder eventsUriBuilder = CalendarContract.Instances.CONTENT_URI
+                .buildUpon();
+        long startTime = new Date().getTime();
+        long endTime = startTime + 28800000;
+        ContentUris.appendId(eventsUriBuilder, startTime);
+        ContentUris.appendId(eventsUriBuilder, endTime);
+        Uri eventsUri = eventsUriBuilder.build();
+        Cursor cursor = context.getContentResolver().query(
+                eventsUri,
+                INSTANCE_PROJECTION,
+                null,
+                null,
+                Instances.BEGIN + " ASC"
+        );
+
+        return cursor;
+    }
+
+    public CalendarEvent getCalendarEvent(Cursor cursor) {
+
+        while (cursor.moveToNext()) {
+           String eventTitle = cursor.getString(PROJECTION_TITLE_INDEX);
+           String eventLocation = cursor.getString(PROJECTION_LOCATION_INDEX);
+           String eventStart = cursor.getString(PROJECTION_START_INDEX);
+
+           if(eventTitle.contains("Lecture: ")||eventTitle.contains("Tutorial: ") || eventTitle.contains("Lab: ")){
+               return new CalendarEvent(eventTitle, eventLocation, eventStart);
+           }
+        }
+        return null;
+    }
+
+    private boolean hasReadPermission(Context context){
+        return ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CALENDAR)
+                == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private String getTimeUntilString(long eventTime, long currentTime){
+        long differenceInMillis = eventTime - currentTime;
+
+        String timeUntil = String.format("%02d hours and %02d minutes",
+                TimeUnit.MILLISECONDS.toHours(differenceInMillis),
+                TimeUnit.MILLISECONDS.toMinutes(differenceInMillis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(differenceInMillis)));
+
+        return timeUntil;
+    }
+}

@@ -2,14 +2,12 @@ package com.example.concordia_campus_guide.Fragments;
 
 import android.database.Cursor;
 
-import com.example.concordia_campus_guide.Fragments.CalendarFragment.CalendarViewModel;
+import com.example.concordia_campus_guide.Models.Helpers.CalendarViewModel;
 import com.example.concordia_campus_guide.Models.CalendarEvent;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;

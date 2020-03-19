@@ -18,7 +18,7 @@
 
         <EditText
             android:id="@+id/searchText"
-            android:layout_width="357dp"
+            android:layout_width="0dp"
             android:layout_height="35dp"
             android:background="@null"
             android:ems="10"
@@ -123,33 +123,24 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_place_24dp" />
 
-        <!--        <TextView-->
-<!--            android:id="@+id/next_class"-->
-<!--            android:layout_width="290dp"-->
-<!--            android:layout_height="66dp"-->
-<!--            android:layout_weight="1"-->
-<!--            android:ems="10"-->
-<!--            android:inputType="textPersonName"-->
-<!--            android:padding="15dp"-->
-<!--            android:text="SOEN 357 in 1 hour"-->
-<!--            android:textSize="20sp"-->
-<!--            app:layout_constraintEnd_toStartOf="@+id/imageView10"-->
-<!--            app:layout_constraintHorizontal_bias="1.0"-->
-<!--            app:layout_constraintStart_toEndOf="@id/imageView5"-->
-
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-        <fragment
+        <TextView
             android:id="@+id/next_class_text"
-            android:name="com.example.concordia_campus_guide.Fragments.CalendarFragment.CalendarFragment"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:padding="10dp"
+            android:text="Lecture: SOEN 357 in 01 hour and 20 minutes"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/next_class_arrow"
             app:layout_constraintStart_toEndOf="@+id/imageView5"
-            app:layout_constraintEnd_toStartOf="@+id/imageView10"
-             />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView10"
+            android:id="@+id/next_class_arrow"
+            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginEnd="24dp"
@@ -164,16 +155,16 @@
 
 
 
-<!--    <ListView-->
-<!--        android:id="@+id/searchResults"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:divider="#FFFFFF"-->
-<!--        android:dividerHeight="1dp"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"-->
-<!--        tools:layout_editor_absoluteX="37dp" >-->
+    <ListView
+        android:id="@+id/searchResults"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#FFFFFF"
+        android:dividerHeight="1dp"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        tools:layout_editor_absoluteX="37dp" >
 
-<!--    </ListView>-->
+    </ListView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
