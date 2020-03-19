@@ -1,10 +1,8 @@
 package com.example.concordia_campus_guide.Activities;
 
-import android.app.Application;
 import android.location.Location;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.ViewModel;
 
 import com.example.concordia_campus_guide.BuildConfig;
 import com.example.concordia_campus_guide.ClassConstants;
@@ -13,7 +11,7 @@ import com.example.concordia_campus_guide.GoogleMapsServicesModels.DirectionsRes
 import com.example.concordia_campus_guide.Models.Place;
 import com.google.android.gms.maps.model.LatLng;
 
-public class RoutesActivityViewModel extends AndroidViewModel {
+public class RoutesActivityViewModel extends ViewModel {
 
     private AppDatabase appDB;
     private Place from;
@@ -22,10 +20,8 @@ public class RoutesActivityViewModel extends AndroidViewModel {
     private Location myCurrentLocation;
     private DirectionsResult directionsResult;
 
-    public RoutesActivityViewModel(@NonNull Application application) {
-        super(application);
-
-        appDB = AppDatabase.getInstance(application.getApplicationContext());
+    public RoutesActivityViewModel(AppDatabase appDb) {
+        this.appDB = appDb;
     }
 
     public void setTo(Place place){

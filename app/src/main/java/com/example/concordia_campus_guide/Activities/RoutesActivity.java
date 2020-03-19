@@ -16,6 +16,7 @@ import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.GoogleMapsServicesModels.DirectionsResult;
 import com.example.concordia_campus_guide.Helper.RoutesHelpers.DirectionsApiDataRetrieval;
+import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -36,7 +37,7 @@ public class RoutesActivity extends AppCompatActivity {
         //set up activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.routes_activity);
-        mViewModel = new ViewModelProvider(this).get(RoutesActivityViewModel.class);
+        mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getApplication())).get(RoutesActivityViewModel.class);
 
         //get view
         fromText = findViewById(R.id.fromText);
