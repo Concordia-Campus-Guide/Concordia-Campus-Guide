@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.concordia_campus_guide.BuildConfig;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
+import com.example.concordia_campus_guide.GoogleMapsServicesModels.DirectionsResult;
 import com.example.concordia_campus_guide.Helper.RoutesHelpers.TransportType;
 import com.example.concordia_campus_guide.Helper.RoutesHelpers.DirectionsApiDataRetrieval;
 import com.example.concordia_campus_guide.R;
@@ -38,11 +39,11 @@ public class RoutesActivity extends AppCompatActivity {
         mViewModel = ViewModelProviders.of(this).get(RoutesActivityViewModel.class);
 
         //get view
-        fromText = (TextView) findViewById(R.id.fromText);
-        toText = (TextView) findViewById(R.id.toText);
+        fromText = findViewById(R.id.fromText);
+        toText = findViewById(R.id.toText);
 
         //setup toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         //get passed item
@@ -58,7 +59,8 @@ public class RoutesActivity extends AppCompatActivity {
         getDirection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DirectionsApiDataRetrieval().execute(buildUrl(from.getPosition(), to.getPosition(), TransportType.TRANSIT.toString()));
+                String url = mViewModel.buildUrl(from.getPosition(), to.getPosition(), TransportType.TRANSIT.toString());
+                new DirectionsApiDataRetrieval(RoutesActivity.this).execute(url);
             }
         });
 
@@ -76,6 +78,11 @@ public class RoutesActivity extends AppCompatActivity {
 
         // set back button
         setBackButtonOnClick();
+    }
+
+    public void directionsApiCallBack(DirectionsResult result)
+    {
+        mViewModel.setDirectionsResult(result);
     }
 
     public void onClickTo(View v){
@@ -122,32 +129,4 @@ public class RoutesActivity extends AppCompatActivity {
 
         startActivity(openSearch);
     }
-
-    /**
-     * Build the URL that will be used to call the Google Maps Directions API by passing the necessary parameters
-     *
-     * @param from: latitude and longitude of the origin
-     * @param to: latitude and longitude of the destination
-     * @param transportType: main transport type to get from origin to destination
-     *
-     */
-    private String buildUrl(LatLng from, LatLng to, String transportType) {
-        // Origin of route
-        String str_origin = "origin=" + from.latitude + "," + from.longitude;
-        // Destination of route
-        String str_dest = "destination=" + to.latitude + "," + to.longitude;
-        // Mode
-        String mode = "mode=" + transportType;
-        // Alternatives
-        String alternatives = "alternatives=true";
-        // Building the parameters to the web service
-        String parameters = str_origin + "&" + str_dest + "&" + mode + "&" + alternatives;
-        // Output format
-        String output = "json";
-        // Building the url to the web service
-        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + BuildConfig.API_KEY;
-
-        return url;
-    }
-
 }

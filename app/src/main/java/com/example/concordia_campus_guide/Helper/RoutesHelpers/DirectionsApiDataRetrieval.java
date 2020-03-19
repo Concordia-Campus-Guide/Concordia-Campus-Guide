@@ -3,6 +3,7 @@ package com.example.concordia_campus_guide.Helper.RoutesHelpers;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.concordia_campus_guide.Activities.RoutesActivity;
 import com.example.concordia_campus_guide.ClassConstants;
 
 import java.io.BufferedReader;
@@ -12,7 +13,19 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+
+/**
+ * This class is an AsyncTask because we want to avoid freezing the main UI thread when retrieving the Google Maps Directions API's response
+ */
 public class DirectionsApiDataRetrieval extends AsyncTask<String, Void, String> {
+
+    RoutesActivity caller;
+    String data;
+
+    public DirectionsApiDataRetrieval(RoutesActivity caller)
+    {
+        this.caller = caller;
+    }
 
     /**
      * Fetching the data from web service in the background
@@ -40,7 +53,8 @@ public class DirectionsApiDataRetrieval extends AsyncTask<String, Void, String> 
     @Override
     protected void onPostExecute(String data) {
         super.onPostExecute(data);
-        new DirectionsApiDataParser().execute(data);
+        this.data = data;
+        new DirectionsApiDataParser().execute(this);
     }
 
     /**
