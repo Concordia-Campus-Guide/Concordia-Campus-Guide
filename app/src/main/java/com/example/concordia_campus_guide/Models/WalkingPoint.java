@@ -47,11 +47,15 @@ public  class WalkingPoint {
     @TypeConverters(EnumToStringConverter.class)
     private PointType pointType;
 
-    public WalkingPoint(@NonNull Coordinates coordinate, @NonNull String floorCode, List<Integer> connectedPointsId, PointType pointType) {
+    @ColumnInfo(name = "place_code")
+    private String placeCode;
+
+    public WalkingPoint(@NonNull Coordinates coordinate, @NonNull String floorCode, List<Integer> connectedPointsId, PointType pointType, String placeCode) {
         this.coordinate = coordinate;
         this.floorCode = floorCode;
         this.connectedPointsId = connectedPointsId;
         this.pointType = pointType;
+        this.placeCode = placeCode;
     }
 
     @Override
@@ -96,6 +100,10 @@ public  class WalkingPoint {
     public void setPointType(PointType pointType) {
         this.pointType = pointType;
     }
+
+    public String getPlaceCode() { return placeCode; }
+
+    public void setPlaceCode(String placeCode) { this.placeCode = placeCode; }
 
     @Override
     public boolean equals(Object o) {

@@ -12,7 +12,7 @@ public class IndoorPathHeuristic {
 
     Context context;
 
-    public IndoorPathHeuristic(Context context){
+    public IndoorPathHeuristic(Context context) {
         this.context = context;
     }
 
@@ -23,23 +23,36 @@ public class IndoorPathHeuristic {
      * @return
      */
     protected double computeHeuristic(final WalkingPoint currentCoordinate, final WalkingPoint destinationPoint) {
+
         if (!currentCoordinate.getFloorCode().equalsIgnoreCase(destinationPoint.getFloorCode())) {
-            final WalkingPoint accessPoint = getNearestAccessPointForFloor(currentCoordinate);
-            return getEuclideanDistance(currentCoordinate, accessPoint)
-                    + getEuclideanDistance(accessPoint, destinationPoint);
+            String currentBuildingCode = currentCoordinate.getFloorCode().split("-")[0];
+            String destinationBuildingCode = destinationPoint.getFloorCode().split("-")[0];
+
+            WalkingPoint accessPoint;
+            if (!currentBuildingCode.equals(destinationBuildingCode)) {
+                accessPoint = getNearestAccessPointForFloor(currentCoordinate, PointType.ENTRANCE);
+                if (accessPoint != null)
+                    return getEuclideanDistance(currentCoordinate, accessPoint)
+                            + getEuclideanDistance(accessPoint, destinationPoint);
+            }
+
+            accessPoint = getNearestAccessPointForFloor(currentCoordinate, PointType.ELEVATOR);
+                return getEuclideanDistance(currentCoordinate, accessPoint)
+                        + getEuclideanDistance(accessPoint, destinationPoint);
         }
 
         return getEuclideanDistance(currentCoordinate, destinationPoint);
     }
 
     /**
-     * This method returns the nearest access point in a given floor (elevator).
+     * This method returns the nearest access point in a given floor (given the access point type).
      * @param currentPoint
+     * @param accessPointType
      * @return
      */
-    protected WalkingPoint getNearestAccessPointForFloor(final WalkingPoint currentPoint) {
+    protected WalkingPoint getNearestAccessPointForFloor(final WalkingPoint currentPoint, PointType accessPointType) {
         final List<WalkingPoint> accessPtList = AppDatabase.getInstance(context).walkingPointDao()
-                .getAllAccessPointsOnFloor(currentPoint.getFloorCode(), PointType.ELEVATOR);
+                .getAllAccessPointsOnFloor(currentPoint.getFloorCode(), accessPointType);
         return getClosestPointToCurrentPointFromList(currentPoint, accessPtList);
     }
 
