@@ -1,6 +1,7 @@
 package com.example.concordia_campus_guide.Models.Helpers;
 
 import android.Manifest;
+import android.app.Application;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -9,9 +10,10 @@ import android.net.Uri;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Instances;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.AndroidViewModel;
 
 import com.example.concordia_campus_guide.Activities.SearchActivity;
 import com.example.concordia_campus_guide.Models.CalendarEvent;
@@ -19,7 +21,13 @@ import com.example.concordia_campus_guide.Models.CalendarEvent;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-public class CalendarViewModel extends ViewModel {
+public class CalendarViewModel extends AndroidViewModel {
+    Context context;
+
+    public CalendarViewModel(@NonNull Application application){
+        super(application);
+        context = application.getApplicationContext();
+    }
 
     // The indices for the projection array above.
     private static final int PROJECTION_TITLE_INDEX = 0;
@@ -32,14 +40,14 @@ public class CalendarViewModel extends ViewModel {
             Instances.DTSTART
     };
 
-    public CalendarEvent getEvent(Context context, SearchActivity searchActivity) {
+    public CalendarEvent getEvent(SearchActivity searchActivity) {
 
-        if (!hasReadPermission(context)) {
+        if (!hasReadPermission()) {
             ActivityCompat.requestPermissions(searchActivity,
                     new String[]{Manifest.permission.READ_CALENDAR}, 101);
         } else {
 
-            Cursor cursor = getCalendarCursor(context);
+            Cursor cursor = getCalendarCursor();
             return getCalendarEvent(cursor);
         }
         return null;
@@ -60,7 +68,7 @@ public class CalendarViewModel extends ViewModel {
     }
 
 
-    private Cursor getCalendarCursor(Context context) {
+    private Cursor getCalendarCursor() {
         Uri.Builder eventsUriBuilder = CalendarContract.Instances.CONTENT_URI
                 .buildUpon();
         long startTime = new Date().getTime();
@@ -93,7 +101,7 @@ public class CalendarViewModel extends ViewModel {
         return null;
     }
 
-    private boolean hasReadPermission(Context context){
+    private boolean hasReadPermission(){
         return ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CALENDAR)
                 == PackageManager.PERMISSION_GRANTED;
     }

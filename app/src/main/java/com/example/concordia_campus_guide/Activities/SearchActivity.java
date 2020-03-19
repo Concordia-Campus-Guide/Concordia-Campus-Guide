@@ -14,7 +14,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.concordia_campus_guide.Adapters.PlaceToSearchResultAdapter;
@@ -81,7 +80,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        final CalendarEvent calendarEvent = calendarViewModel.getEvent(getApplicationContext(), this);
+        final CalendarEvent calendarEvent = calendarViewModel.getEvent(this);
 
         nextClassText.setText(calendarViewModel.getNextClassString(calendarEvent));
 
