@@ -57,19 +57,12 @@ public class RoutesActivityViewModel extends ViewModel {
      *
      */
     public String buildUrl(LatLng from, LatLng to, @ClassConstants.TransportType String transportType) {
-        // Origin of route
         String str_origin = "origin=" + from.latitude + "," + from.longitude;
-        // Destination of route
         String str_dest = "destination=" + to.latitude + "," + to.longitude;
-        // Mode
         String mode = "mode=" + transportType;
-        // Alternatives
         String alternatives = "alternatives=true";
-        // Building the parameters to the web service
         String parameters = str_origin + "&" + str_dest + "&" + mode + "&" + alternatives;
-        // Output format
         String output = "json";
-        // Building the url to the web service
         return "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + BuildConfig.API_KEY;
     }
 

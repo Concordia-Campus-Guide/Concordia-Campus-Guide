@@ -97,7 +97,6 @@ public class RoutesActivity extends AppCompatActivity {
     public void directionsApiCallBack(DirectionsResult result)
     {
         mViewModel.setDirectionsResult(result);
-        System.out.println("lol");
     }
 
     private void setBackButtonOnClick(){
