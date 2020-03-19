@@ -1,6 +1,5 @@
 package com.example.concordia_campus_guide.Activities;
 
-import android.app.Application;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -95,8 +94,7 @@ public class MainActivity extends AppCompatActivity {
             hideInfoCard();
         }
 
-        infoCardFragment = new InfoCardFragment();
-        infoCardFragment.setBuildingCode(buildingCode);
+        infoCardFragment = new InfoCardFragment(buildingCode);
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.info_card_frame, infoCardFragment);
         fragmentTransaction.commit();

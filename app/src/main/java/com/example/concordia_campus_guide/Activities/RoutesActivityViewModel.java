@@ -1,13 +1,12 @@
 package com.example.concordia_campus_guide.Activities;
 
-import android.app.Application;
 import android.location.Location;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.ViewModel;
 
 import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.Shuttle;
 
@@ -16,7 +15,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class RoutesActivityViewModel extends AndroidViewModel {
+public class RoutesActivityViewModel extends ViewModel {
 
     private AppDatabase appDB;
     private Place from;
@@ -26,11 +25,8 @@ public class RoutesActivityViewModel extends AndroidViewModel {
 
     private Location myCurrentLocation;
 
-    public RoutesActivityViewModel(@NonNull Application application) {
-        super(application);
-
-        appDB = AppDatabase.getInstance(application.getApplicationContext());
-        setShuttles();
+    public RoutesActivityViewModel(AppDatabase appDB) {
+        this.appDB = appDB;
     }
 
     public void setTo(Place place){

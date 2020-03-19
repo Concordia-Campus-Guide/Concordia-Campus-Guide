@@ -33,7 +33,6 @@ public class PathFinder {
 
     private final WalkingPoint initialPoint;
     private final WalkingPoint destinationPoint;
-    private final Context context;
     private final IndoorPathHeuristic indoorPathHeuristic;
 
     public PathFinder(final Context context, final RoomModel source, final RoomModel destination) {
@@ -44,11 +43,15 @@ public class PathFinder {
         final List<WalkingPoint> walkingPoints = AppDatabase.getInstance(context).walkingPointDao().getAll();
         walkingPointNodesMap = populateWalkingPointMap(walkingPoints);
 
-        this.context = context;
         this.initialPoint = getWalkingPointCorrespondingToRoom(source, walkingPoints);
         this.destinationPoint = getWalkingPointCorrespondingToRoom(destination, walkingPoints);
     }
 
+    /**
+     *  This method's purpose is to populate our map (graph) with all the walking points in the map.
+     * @param walkingPoints
+     * @return
+     */
     protected HashMap<Integer, WalkingPointNode> populateWalkingPointMap(final List<WalkingPoint> walkingPoints) {
         this.walkingPointNodesMap = new HashMap<>();
         for (final WalkingPoint walkingPoint : walkingPoints) {
@@ -57,6 +60,12 @@ public class PathFinder {
         return walkingPointNodesMap;
     }
 
+    /**
+     * This method's purpose is to get a corresponding walking point given a room object.
+     * @param room
+     * @param walkingPointList
+     * @return
+     */
     protected WalkingPoint getWalkingPointCorrespondingToRoom(final RoomModel room,
             final List<WalkingPoint> walkingPointList) {
         final Coordinates coordinates1 = new Coordinates(room.getCenterCoordinates()[0],
@@ -74,6 +83,10 @@ public class PathFinder {
         return optionalWalkingPoints.isPresent() ? optionalWalkingPoints.get() : null;
     }
 
+    /**
+     * This method's purpose is to find a solution path from a point A to a point B. It will use a priorityQueue to get the best next point to visit at each moment. If the point was already visited, it will skip it.
+     * @return
+     */
     public List<WalkingPoint> getPathToDestination() {
 
         addInitialPointToMap();
@@ -94,6 +107,9 @@ public class PathFinder {
         return null;
     }
 
+    /**
+     * This helper method simply adds the initial point into the priorityQueue.
+     */
     private void addInitialPointToMap() {
         final WalkingPointNode initial = walkingPointNodesMap.get(initialPoint.getId());
         initial.setHeuristic(indoorPathHeuristic.computeHeuristic(initialPoint, destinationPoint));
@@ -104,6 +120,11 @@ public class PathFinder {
         return destinationPoint.equals(currentLocation);
     }
 
+    /**
+     * This method will take care of setting the solution path once a solution has been found.
+     * @param goalNode
+     * @return
+     */
     protected List<WalkingPoint> getSolutionPath(WalkingPointNode goalNode) {
         final List<WalkingPoint> solutionPath = new ArrayList<>();
         do {
@@ -114,6 +135,11 @@ public class PathFinder {
         return solutionPath;
     }
 
+    /**
+     * This method's purpose is to add the reachable points from a walkingPoint. If one of these points is already in the open list (nodes to visit list) with a higher cost,
+     * we will update it. Same if it was in the closed list(visited nodes list), we will update the cost only, in this class.
+     * @param currentNode
+     */
     protected void addNearestWalkingPoints(final WalkingPointNode currentNode) {
         for (final int id : currentNode.getWalkingPoint().getConnectedPointsId()) {
 
@@ -166,6 +192,9 @@ public class PathFinder {
         return destinationPoint;
     }
 
+    /**
+     * This is a comparator object that will compare our Walking point based on a heuristic for a priorityQueue.
+     */
     public class WalkingPointComparator implements Comparator<WalkingPointNode> {
         @Override
         public int compare(final WalkingPointNode o1, final WalkingPointNode o2) {
@@ -179,6 +208,9 @@ public class PathFinder {
         }
     }
 
+    /**
+     * This is a wrapper class for the WalkingPoint object that represents a specific node in our graph, with a parent, cost and heuristic.
+     */
     public class WalkingPointNode {
         WalkingPoint walkingPoint;
         WalkingPointNode parent;
@@ -226,5 +258,4 @@ public class PathFinder {
         }
     }
 }
-
 
