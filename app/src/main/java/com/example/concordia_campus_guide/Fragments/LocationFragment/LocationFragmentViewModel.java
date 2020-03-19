@@ -24,7 +24,6 @@ import com.google.maps.android.geojson.GeoJsonLayer;
 import com.google.maps.android.geojson.GeoJsonPointStyle;
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -89,7 +88,7 @@ public class LocationFragmentViewModel extends ViewModel {
 
     public void setBuildingGroundOverlayOptions(Building building){
         building.setGroundOverlayOption(new GroundOverlayOptions()
-                .position(new LatLng(building.getCenterCoordinates().getLatitude(), building.getCenterCoordinates().getLongitude()), building.getWidth(), building.getHeight())
+                .position(new LatLng(building.getCenterCoordinates().getLongitude(), building.getCenterCoordinates().getLatitude()), building.getWidth(), building.getHeight())
                 .image(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+building.getBuildingCode().toLowerCase()+"_"+building.getAvailableFloors().get(building.getAvailableFloors().size()-1).toLowerCase()+".png"))
                 .bearing(building.getBearing()));
     }

@@ -198,7 +198,7 @@ public class Building extends Place {
 
         try{
             properties.put("code", BuildingCode);
-            if(centerCoordinates!=null) properties.put("center", ""+centerCoordinates.getLatitude()+", "+centerCoordinates.getLongitude());
+            if(centerCoordinates!=null) properties.put("center", ""+centerCoordinates.getLongitude()+", "+centerCoordinates.getLatitude());
             if(height!=0) properties.put("height", height);
             if(width!=0) properties.put("width", width);
             if(bearing!=0) properties.put("bearing", bearing);
