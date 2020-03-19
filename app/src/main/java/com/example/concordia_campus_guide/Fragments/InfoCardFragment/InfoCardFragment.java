@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Activities.RoutesActivity;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
+import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.Models.MyCurrentPlace;
 import com.example.concordia_campus_guide.R;
 
@@ -41,6 +42,10 @@ public class InfoCardFragment extends Fragment {
 
     private Button directionsBt;
     private Button indoorMapBt;
+
+    public InfoCardFragment(String buildingCode){
+        this.buildingCode = buildingCode;
+    }
 
     /**
      * Defines the view and initializes text views of the view
@@ -77,14 +82,10 @@ public class InfoCardFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragmentViewModel.class);
+        mViewModel = ViewModelProviders.of(this, new ViewModelFactory(this.getActivity().getApplication())).get(com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragmentViewModel.class);
         mViewModel.setBuilding(this.buildingCode);
         setInfoCard();
         setOnClickListeners();
-    }
-
-    public void setBuildingCode(String buildingCode){
-        this.buildingCode = buildingCode;
     }
 
     /**

@@ -1,10 +1,8 @@
 package com.example.concordia_campus_guide.Activities;
 
-import android.app.Application;
 import android.location.Location;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.ViewModel;
 
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Models.Building;
@@ -15,7 +13,7 @@ import com.example.concordia_campus_guide.Models.RoomModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchActivityViewModel extends AndroidViewModel {
+public class SearchActivityViewModel extends ViewModel {
 
     List<Building> buildings;
     List<RoomModel> rooms;
@@ -28,10 +26,8 @@ public class SearchActivityViewModel extends AndroidViewModel {
 
     AppDatabase appDB;
 
-    public SearchActivityViewModel(@NonNull Application application) {
-        super(application);
-
-        appDB = AppDatabase.getInstance(application.getApplicationContext());
+    public SearchActivityViewModel(AppDatabase appDb) {
+        this.appDB = appDb;
         buildings = appDB.buildingDao().getAll();
         floors = appDB.floorDao().getAll();
         rooms = appDB.roomDao().getAllRooms();
