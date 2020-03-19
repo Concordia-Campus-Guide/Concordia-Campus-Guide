@@ -81,7 +81,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-3",
       "floorCode":"H-8",
       "centerCoordinates":{
         "longitude":-73.57923444360495,
@@ -241,7 +241,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-2",
       "floorCode":"H-8",
       "centerCoordinates":{
         "longitude":-73.57891358435154,
@@ -249,7 +249,7 @@
       }
     },
     {
-      "roomCode":"mens",
+      "roomCode":"mens-1",
       "floorCode":"H-8",
       "centerCoordinates":{
         "longitude":-73.57885994017124,
@@ -265,7 +265,7 @@
       }
     },
     {
-      "roomCode":"904",
+      "roomCode":"804",
       "floorCode":"H-8",
       "centerCoordinates":{
         "longitude":-73.57871174812317,
@@ -281,7 +281,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-5",
       "floorCode":"H-8",
       "centerCoordinates":{
         "longitude":-73.57874695211649,
@@ -289,7 +289,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-1",
       "floorCode":"H-8",
       "centerCoordinates":{
         "longitude":-73.578928001225,
@@ -409,7 +409,7 @@
       }
     },
     {
-      "roomCode":"womens",
+      "roomCode":"womens-1",
       "floorCode":"H-8",
       "centerCoordinates":{
         "longitude":-73.57868492603302,
@@ -473,7 +473,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-4",
       "floorCode":"H-8",
       "centerCoordinates":{
         "longitude":-73.57900578528643,
@@ -601,7 +601,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-3",
       "floorCode":"H-9",
       "centerCoordinates":{
         "longitude":-73.57923444360495,
@@ -873,7 +873,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-2",
       "floorCode":"H-9",
       "centerCoordinates":{
         "longitude":-73.57891358435154,
@@ -881,7 +881,7 @@
       }
     },
     {
-      "roomCode":"mens",
+      "roomCode":"mens-1",
       "floorCode":"H-9",
       "centerCoordinates":{
         "longitude":-73.57885994017124,
@@ -921,7 +921,7 @@
       }
     },
     {
-      "roomCode":"904",
+      "roomCode":"staff washrooms-1",
       "floorCode":"H-9",
       "centerCoordinates":{
         "longitude":-73.57871174812317,
@@ -929,7 +929,7 @@
       }
     },
     {
-      "roomCode":"992",
+      "roomCode":"staff washrooms-2",
       "floorCode":"H-9",
       "centerCoordinates":{
         "longitude":-73.57879757881165,
@@ -937,7 +937,7 @@
       }
     },
     {
-      "roomCode":"womens",
+      "roomCode":"womens-1",
       "floorCode":"H-9",
       "centerCoordinates":{
         "longitude":-73.57868358492851,
@@ -945,7 +945,7 @@
       }
     },
     {
-      "roomCode":"elevator",
+      "roomCode":"elevator-1",
       "floorCode":"H-9",
       "centerCoordinates":{
         "longitude":-73.5787643864751,
@@ -953,7 +953,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-5",
       "floorCode":"H-9",
       "centerCoordinates":{
         "longitude":-73.57874695211649,
@@ -969,7 +969,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-1",
       "floorCode":"H-9",
       "centerCoordinates":{
         "longitude":-73.578928001225,
@@ -1065,7 +1065,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-4",
       "floorCode":"H-9",
       "centerCoordinates":{
         "longitude":-73.57896924018861,
@@ -1137,7 +1137,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-6",
       "floorCode":"MB-1",
       "centerCoordinates":{
         "longitude":-73.57870370149612,
@@ -1153,7 +1153,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-2",
       "floorCode":"MB-1",
       "centerCoordinates":{
         "longitude":-73.57878953218459,
@@ -1193,7 +1193,7 @@
       }
     },
     {
-      "roomCode":"elevators",
+      "roomCode":"elevators-1",
       "floorCode":"MB-1",
       "centerCoordinates":{
         "longitude":-73.5789906978607,
@@ -1233,7 +1233,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-3",
       "floorCode":"MB-1",
       "centerCoordinates":{
         "longitude":-73.57912480831146,
@@ -1241,7 +1241,7 @@
       }
     },
     {
-      "roomCode":"elevators",
+      "roomCode":"elevators-2",
       "floorCode":"MB-1",
       "centerCoordinates":{
         "longitude":-73.579041659832,
@@ -1249,7 +1249,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-1",
       "floorCode":"MB-1",
       "centerCoordinates":{
         "longitude":-73.57885926961899,
@@ -1289,7 +1289,7 @@
       }
     },
     {
-      "roomCode":"mens",
+      "roomCode":"mens-1",
       "floorCode":"MB-1",
       "centerCoordinates":{
         "longitude":-73.57921868562698,
@@ -1297,7 +1297,7 @@
       }
     },
     {
-      "roomCode":"womens",
+      "roomCode":"womens-1",
       "floorCode":"MB-1",
       "centerCoordinates":{
         "longitude":-73.57916235923767,
@@ -1329,7 +1329,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-4",
       "floorCode":"MB-1",
       "centerCoordinates":{
         "longitude":-73.57929110527039,
@@ -1345,7 +1345,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-5",
       "floorCode":"MB-1",
       "centerCoordinates":{
         "longitude":-73.57895314693451,
@@ -1353,7 +1353,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-1",
       "floorCode":"MB-S2",
       "centerCoordinates":{
         "longitude":-73.57871979475021,
@@ -1361,7 +1361,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-2",
       "floorCode":"MB-S2",
       "centerCoordinates":{
         "longitude":-73.57869297266006,
@@ -1409,7 +1409,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-6",
       "floorCode":"MB-S2",
       "centerCoordinates":{
         "longitude":-73.57890486717224,
@@ -1433,7 +1433,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-5",
       "floorCode":"MB-S2",
       "centerCoordinates":{
         "longitude":-73.57893705368042,
@@ -1513,7 +1513,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-4",
       "floorCode":"MB-S2",
       "centerCoordinates":{
         "longitude":-73.57927232980727,
@@ -1561,7 +1561,7 @@
       }
     },
     {
-      "roomCode":"mens",
+      "roomCode":"mens-1",
       "floorCode":"MB-S2",
       "centerCoordinates":{
         "longitude":-73.57912480831146,
@@ -1569,7 +1569,7 @@
       }
     },
     {
-      "roomCode":"womens",
+      "roomCode":"womens-1",
       "floorCode":"MB-S2",
       "centerCoordinates":{
         "longitude":-73.57910335063934,
@@ -1585,7 +1585,7 @@
       }
     },
     {
-      "roomCode":"elevators",
+      "roomCode":"elevators-2",
       "floorCode":"MB-S2",
       "centerCoordinates":{
         "longitude":-73.57903093099593,
@@ -1593,7 +1593,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-3",
       "floorCode":"MB-S2",
       "centerCoordinates":{
         "longitude":-73.57911944389343,
@@ -1601,7 +1601,7 @@
       }
     },
     {
-      "roomCode":"elevators",
+      "roomCode":"elevators-1",
       "floorCode":"MB-S2",
       "centerCoordinates":{
         "longitude":-73.57897996902466,
@@ -1641,7 +1641,7 @@
       }
     },
     {
-      "roomCode":"mens",
+      "roomCode":"mens-1",
       "floorCode":"VL-1",
       "centerCoordinates":{
         "longitude":-73.63866180181503,
@@ -1649,7 +1649,7 @@
       }
     },
     {
-      "roomCode":"womens",
+      "roomCode":"womens-2",
       "floorCode":"VL-1",
       "centerCoordinates":{
         "longitude":-73.63864302635193,
@@ -1665,7 +1665,7 @@
       }
     },
     {
-      "roomCode":"staff washrooms",
+      "roomCode":"staff washrooms-1",
       "floorCode":"VL-1",
       "centerCoordinates":{
         "longitude":-73.63799929618835,
@@ -1705,7 +1705,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-2",
       "floorCode":"VL-1",
       "centerCoordinates":{
         "longitude":-73.63868594169617,
@@ -1713,7 +1713,7 @@
       }
     },
     {
-      "roomCode":"mens",
+      "roomCode":"mens-1",
       "floorCode":"VL-1",
       "centerCoordinates":{
         "longitude":-73.63871812820435,
@@ -1721,7 +1721,7 @@
       }
     },
     {
-      "roomCode":"womens",
+      "roomCode":"womens-1",
       "floorCode":"VL-1",
       "centerCoordinates":{
         "longitude":-73.63873690366745,
@@ -1745,7 +1745,7 @@
       }
     },
     {
-      "roomCode":"elevators",
+      "roomCode":"elevators-1",
       "floorCode":"VL-1",
       "centerCoordinates":{
         "longitude":-73.63819777965546,
@@ -1753,7 +1753,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-3",
       "floorCode":"VL-1",
       "centerCoordinates":{
         "longitude":-73.63821655511856,
@@ -1865,7 +1865,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-1",
       "floorCode":"VL-1",
       "centerCoordinates":{
         "longitude":-73.63854110240936,
@@ -1961,7 +1961,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-3",
       "floorCode":"VL-2",
       "centerCoordinates":{
         "longitude":-73.63792687654495,
@@ -1977,7 +1977,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-2",
       "floorCode":"VL-2",
       "centerCoordinates":{
         "longitude":-73.63858938217163,
@@ -1985,7 +1985,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-1",
       "floorCode":"VL-2",
       "centerCoordinates":{
         "longitude":-73.63857597112656,
@@ -2049,7 +2049,7 @@
       }
     },
     {
-      "roomCode":"mens",
+      "roomCode":"mens-1",
       "floorCode":"VL-2",
       "centerCoordinates":{
         "longitude":-73.63866180181503,
@@ -2057,7 +2057,7 @@
       }
     },
     {
-      "roomCode":"womens",
+      "roomCode":"womens-1",
       "floorCode":"VL-2",
       "centerCoordinates":{
         "longitude":-73.63864302635193,
@@ -2065,7 +2065,7 @@
       }
     },
     {
-      "roomCode":"stairs",
+      "roomCode":"stairs-4",
       "floorCode":"VL-2",
       "centerCoordinates":{
         "longitude":-73.63821119070052,
@@ -2081,7 +2081,7 @@
       }
     },
     {
-      "roomCode":"elevators",
+      "roomCode":"elevators-1",
       "floorCode":"VL-2",
       "centerCoordinates":{
         "longitude":-73.63818168640137,

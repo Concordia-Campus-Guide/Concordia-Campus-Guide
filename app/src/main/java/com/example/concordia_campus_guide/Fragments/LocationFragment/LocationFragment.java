@@ -247,6 +247,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             public void onCameraMove() {
                 if(map.getCameraPosition().zoom > 20){
                     mLayer.removeLayerFromMap();
+                    setupClassMarkerClickListener(map);
                 }
                 else{
                     mLayer.addLayerToMap();
