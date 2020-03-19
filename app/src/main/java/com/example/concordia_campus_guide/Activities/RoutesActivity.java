@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
+
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.Models.Shuttle;
 import com.example.concordia_campus_guide.R;
@@ -91,7 +92,6 @@ public class RoutesActivity extends AppCompatActivity {
     private void openSearchPage(){
         Intent openSearch= new Intent(RoutesActivity.this,
                 SearchActivity.class);
-
         startActivity(openSearch);
     }
 

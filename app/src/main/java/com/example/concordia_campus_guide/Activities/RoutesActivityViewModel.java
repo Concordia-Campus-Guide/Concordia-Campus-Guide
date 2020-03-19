@@ -8,7 +8,6 @@ import androidx.lifecycle.AndroidViewModel;
 
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Models.Building;
-import com.example.concordia_campus_guide.Models.Floor;
 import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.Shuttle;
 
@@ -57,16 +56,9 @@ public class RoutesActivityViewModel extends AndroidViewModel {
     public List<Shuttle> getShuttles() {
         String campusFrom = "";
         String campusTo = "";
-        if (getFrom() != null && getTo() != null) {
-            if (from.getClass() == Building.class) {
-                campusFrom = ((Building) from).getCampus();
-            } else if (to.getClass() == Building.class) {
-                campusTo = ((Building) to).getCampus();
-            } else if (from.getClass() == Floor.class) {
-                campusFrom = ((Floor) from).getCampus();
-            } else if(to.getClass() == Floor.class) {
-                campusTo = ((Floor) to).getCampus();
-            }
+        if (getFrom() != null && getTo() != null && from.getCampus() != null && to.getCampus() != null) {
+                campusFrom = from.getCampus();
+                campusTo =  to.getCampus();
             if (campusFrom.compareTo(campusTo) == 0) {
                 return null;
             }

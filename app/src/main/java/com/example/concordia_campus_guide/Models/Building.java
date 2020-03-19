@@ -72,7 +72,7 @@ public class Building extends Place {
     public Building(Double[] centerCoordinates, List<String> availableFloors, float width, float height, float bearing,
                     String campus, String buildingCode, String Building_Long_Name, String address,
                     List<String> departments, List<String> services, ListOfCoordinates cornerCoordinates) {
-        super(centerCoordinates);
+        super(centerCoordinates, campus);
         this.availableFloors = availableFloors;
         this.width = width;
         this.height = height;

@@ -29,6 +29,11 @@ public abstract class Place {
         this.centerCoordinates = centerCoordinates;
     }
 
+    public Place(Double[] centerCoordinates, String campus) {
+        this.centerCoordinates = centerCoordinates;
+        this.campus = campus;
+    }
+
     public Place() {}
 
     public Double[] getCenterCoordinates() {
