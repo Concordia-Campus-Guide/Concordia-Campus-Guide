@@ -26,6 +26,7 @@ import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListene
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.RoomModel;
+import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -44,6 +45,7 @@ import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 
 import java.util.HashMap;
+import java.util.List;
 
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 
@@ -138,18 +140,18 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                 setupPolygons(mMap);
                 initFloorPlans();
                 uiSettingsForMap(mMap);
-                setFirstLocationToDisplay();
+                setLocationToDisplay(mViewModel.getInitialZoomLocation());
             }
         });
     }
 
 
-    private void setFirstLocationToDisplay(){
-        setFirstLocationToDisplayOnSuccess();
-        setFirstLocationToDisplayOnFailure();
+    public void setLocationToDisplay(final LatLng zoomLocation){
+        setLocationToDisplayOnSuccess(zoomLocation);
+        setLocationToDisplayOnFailure(zoomLocation);
     }
 
-    private void setFirstLocationToDisplayOnSuccess(){
+    private void setLocationToDisplayOnSuccess(final LatLng zoomLocation){
         fusedLocationProviderClient.getLastLocation()
                 .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
                     @Override
@@ -158,16 +160,16 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                             zoomInLocation(new LatLng(location.getLatitude(),location.getLongitude()));
                         }
                         else {
-                            zoomInLocation(mViewModel.getInitialZoomLocation());
+                            zoomInLocation(zoomLocation);
                         }
                     }
                 });
     }
-    private void setFirstLocationToDisplayOnFailure(){
+    private void setLocationToDisplayOnFailure(final LatLng zoomLocation){
         fusedLocationProviderClient.getLastLocation().addOnFailureListener(getActivity(), new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                zoomInLocation(mViewModel.getInitialZoomLocation());
+                zoomInLocation(zoomLocation);
             }
         });
     }
@@ -248,8 +250,9 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         map.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
             @Override
             public void onCameraMove() {
-                if(map.getCameraPosition().zoom > 20){
+                if(map.getCameraPosition().zoom > 14){
                     mLayer.removeLayerFromMap();
+                    setupClassMarkerClickListener(map);
                 }
                 else{
                     mLayer.addLayerToMap();
@@ -288,10 +291,11 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     }
 
     public void drawPaths(Place from, Place to) {
-       // RoomModel src = new RoomModel(from.getCenterCoordinates(), "927", "H-9");
-       // RoomModel destination = new RoomModel(to.getCenterCoordinates(), "918", "H-9");
+        RoomModel src = new RoomModel(new Double[]{-73.57901685, 45.49761115}, "927", "H-9");
+        RoomModel destination = new RoomModel(new Double[]{-73.57854277, 45.49739565}, "918", "H-8");
 
-        mViewModel.parseWalkingPointList(getContext(), (RoomModel) from, (RoomModel) to);
+//        mViewModel.parseWalkingPointList(getContext(), (RoomModel) from, (RoomModel) to);
+        mViewModel.parseWalkingPointList(getContext(), src, destination);
     }
 
     /**
@@ -324,7 +328,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                Log.i(TAG,marker.getTag().toString());
+                System.out.println(marker.getPosition());
                 return false;
             }
         });
@@ -448,5 +452,9 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                 LocationFragment.this.setCurrentLocation((android.location.Location) location);
             }
         }
+    }
+
+    public List<WalkingPoint> getWalkingPoints(){
+        return mViewModel.getWalkingPoints();
     }
 }

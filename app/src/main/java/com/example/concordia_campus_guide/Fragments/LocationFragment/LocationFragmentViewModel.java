@@ -18,11 +18,16 @@ import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Dash;
+import com.google.android.gms.maps.model.Dot;
+import com.google.android.gms.maps.model.Gap;
 import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PatternItem;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
@@ -44,7 +49,17 @@ public class LocationFragmentViewModel extends ViewModel {
     private GeoJsonLayer floorLayer;
     private HashMap<String, Building> buildings = new HashMap<>();
     private PolylineOptions displayedPolylineOption;
+    private Polyline currentlyDisplayedLine;
     private HashMap<String, List<WalkingPoint>> walkingPointsMap = new HashMap<>();
+    private List<WalkingPoint> walkingPoints;
+
+    //Polyline styling
+    public static final int PATTERN_DASH_LENGTH_PX = 20;
+    public static final int PATTERN_GAP_LENGTH_PX = 20;
+    public static final PatternItem DASH = new Dash(PATTERN_DASH_LENGTH_PX);
+    public static final PatternItem GAP = new Gap(PATTERN_GAP_LENGTH_PX);
+    public static final List<PatternItem> PATTERN_POLYLINE = Arrays.asList(GAP, DASH);
+
     /**
      * @return return the map style
      */
@@ -200,6 +215,7 @@ public class LocationFragmentViewModel extends ViewModel {
     private void getPointStyle(GeoJsonLayer layer) {
         GeoJsonPointStyle geoJsonPointStyle = new GeoJsonPointStyle();
         geoJsonPointStyle.setVisible(true);
+        geoJsonPointStyle.setAlpha(0.05f);
 
         for (GeoJsonFeature feature : layer.getFeatures()) {
             feature.setPointStyle(geoJsonPointStyle);
@@ -221,11 +237,11 @@ public class LocationFragmentViewModel extends ViewModel {
         floorLayer = initMarkersLayer(mMap, geoJson);
         getPointStyle(floorLayer);
         floorLayer.addLayerToMap();
-        if (displayedPolylineOption != null) {
-            // displayedPolylineOption.visible(false);
+        if (currentlyDisplayedLine != null) {
+             currentlyDisplayedLine.remove();
         }
         displayedPolylineOption = drawPath(buildingCode + "-" + floor);
-        mMap.addPolyline(displayedPolylineOption);
+        currentlyDisplayedLine = mMap.addPolyline(displayedPolylineOption);
     }
 
 
@@ -250,7 +266,8 @@ public class LocationFragmentViewModel extends ViewModel {
 
     public void parseWalkingPointList(Context context, RoomModel from, RoomModel to) {
         PathFinder pf = new PathFinder(context ,from, to);
-        List<WalkingPoint> walkingPoints = pf.getPathToDestination();
+        walkingPoints = pf.getPathToDestination();
+
         List<WalkingPoint> floorWalkingPointList;
         for(WalkingPoint wp: walkingPoints) {
             floorWalkingPointList = walkingPointsMap.getOrDefault(wp.getFloorCode(), new ArrayList<WalkingPoint>());
@@ -270,7 +287,14 @@ public class LocationFragmentViewModel extends ViewModel {
             LatLng point2 = floorWalkingPoints.get(i + 1).getCoordinate().getLatLng();
             option.add(point1, point2);
         }
-        return option.width(5).color(Color.RED).visible(true);
+        return option
+                .width(10)
+                .pattern(PATTERN_POLYLINE)
+                .color(Color.rgb(147,35, 57))
+                .visible(true);
     }
 
+    public List<WalkingPoint> getWalkingPoints() {
+        return walkingPoints;
+    }
 }
