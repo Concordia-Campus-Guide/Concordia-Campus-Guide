@@ -42,6 +42,10 @@ public abstract class Place {
         return new LatLng(centerCoordinates.latitude, centerCoordinates.longitude);
     }
 
+    public Double[] getCenterCoordinatesDoubleArray(){
+        return new Double[]{centerCoordinates.longitude, centerCoordinates.latitude};
+    }
+
     public void setCenterCoordinates(Coordinates centerCoordinates) {
         this.centerCoordinates = centerCoordinates;
     }

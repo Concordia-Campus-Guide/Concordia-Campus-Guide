@@ -1,7 +1,5 @@
 package com.example.concordia_campus_guide.Models;
 
-import android.text.TextUtils;
-
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -68,7 +66,7 @@ public class RoomModel extends Place {
             toReturn.put("properties", properties);
 
             geometry.put("type", "Point");
-            Coordinates geoJsonCoordinates = centerCoordinates;
+            Double[] geoJsonCoordinates = this.getCenterCoordinatesDoubleArray();
             geometry.put("coordinates", new JSONArray(geoJsonCoordinates));
 
             toReturn.put("geometry", geometry);

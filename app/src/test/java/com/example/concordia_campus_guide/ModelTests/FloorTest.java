@@ -13,7 +13,7 @@ public class FloorTest {
     Floor floor;
     @Before
     public void init(){
-        floor = new Floor(new Coordinates(-73.57907921075821, 45.49702057370776), "H-8", 45);
+        floor = new Floor(new Coordinates(-73.57907921075821, 45.49702057370776), "H-8", 45, "SGW");
     }
 
     @Test
