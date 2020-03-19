@@ -1,18 +1,18 @@
 package com.example.concordia_campus_guide.Models;
 
-import com.example.concordia_campus_guide.Database.Converters.CoordinatesConverter;
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
 import com.example.concordia_campus_guide.Database.Converters.EnumToStringConverter;
 import com.example.concordia_campus_guide.Database.Converters.IntegerListToStringConverter;
 
 import java.util.List;
 import java.util.Objects;
-
-import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
 
 import static androidx.room.ForeignKey.CASCADE;
 
@@ -32,8 +32,7 @@ public  class WalkingPoint {
     @PrimaryKey
     private int id;
 
-    @ColumnInfo(name = "coordinate")
-    @TypeConverters(CoordinatesConverter.class)
+    @Embedded
     private Coordinates coordinate;
 
     @NonNull

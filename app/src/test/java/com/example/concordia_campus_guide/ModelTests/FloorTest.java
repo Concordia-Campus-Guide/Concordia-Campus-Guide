@@ -1,5 +1,6 @@
 package com.example.concordia_campus_guide.ModelTests;
 
+import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.Floor;
 
 import org.junit.Before;
@@ -12,7 +13,7 @@ public class FloorTest {
     Floor floor;
     @Before
     public void init(){
-        floor = new Floor(new Double[]{-73.57907921075821, 45.49702057370776}, "H-8", 45, "SGW");
+        floor = new Floor(new Coordinates(-73.57907921075821, 45.49702057370776), "H-8", 45, "SGW");
     }
 
     @Test

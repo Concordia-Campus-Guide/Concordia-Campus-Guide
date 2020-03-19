@@ -8,6 +8,7 @@ import com.example.concordia_campus_guide.Database.Daos.BuildingDao;
 import com.example.concordia_campus_guide.Database.Daos.FloorDao;
 import com.example.concordia_campus_guide.Database.Daos.RoomDao;
 import com.example.concordia_campus_guide.Models.Building;
+import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.Floor;
 import com.example.concordia_campus_guide.Models.RoomModel;
 
@@ -49,10 +50,10 @@ public class SearchActivityViewModelTest {
         when(mockAppDb.floorDao()).thenReturn(mockFloorDao);
         when(mockAppDb.roomDao()).thenReturn(mockRoomDao);
         when(mockRoomDao.getAll()).thenReturn(new ArrayList<RoomModel>(Arrays.asList(
-                new RoomModel(new Double[]{}, "111", "H-9"), new RoomModel(new Double[]{}, "222", "H-8")
+                new RoomModel(new Coordinates(0, 0), "111", "H-9"), new RoomModel(new Coordinates(0,0), "222", "H-8")
         )));
         when(mockFloorDao.getAll()).thenReturn(new ArrayList<Floor>(Arrays.asList(
-                new Floor(new Double[]{}, "H-9", 0), new Floor(new Double[]{}, "H-8", 0)
+                new Floor(new Coordinates(0,0), "H-9", 0), new Floor(new Coordinates(0,0), "H-8", 0)
         )));
         when(mockBuildingDao.getAll()).thenReturn(new ArrayList<Building>(Arrays.asList(
                 new Building("H"), new Building("MB")
