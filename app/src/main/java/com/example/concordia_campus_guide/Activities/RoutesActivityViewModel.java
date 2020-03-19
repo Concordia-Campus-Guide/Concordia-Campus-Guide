@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.concordia_campus_guide.BuildConfig;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.GoogleMapsServicesModels.DirectionsResult;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsResult;
 import com.example.concordia_campus_guide.Models.Place;
 import com.google.android.gms.maps.model.LatLng;
 

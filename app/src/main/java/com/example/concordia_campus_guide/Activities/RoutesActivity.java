@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
-import com.example.concordia_campus_guide.GoogleMapsServicesModels.DirectionsResult;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsResult;
 import com.example.concordia_campus_guide.Helper.RoutesHelpers.DirectionsApiDataRetrieval;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.R;
@@ -55,8 +55,15 @@ public class RoutesActivity extends AppCompatActivity {
         this.fromText.setText(mViewModel.getFrom().getDisplayName());
         this.toText.setText(mViewModel.getTo().getDisplayName());
 
+        // set from and to
+        setFrom();
+        setTo();
+
+        // set back button
+        setBackButtonOnClick();
+
         // get all possible routes
-        getDirection = findViewById(R.id.btnGetDirection);
+        getDirection = findViewById(R.id.btnGetDirection); // dummy button for now to test if we can retrieve all routes correctly starting from the UI
         getDirection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,39 +71,16 @@ public class RoutesActivity extends AppCompatActivity {
                 new DirectionsApiDataRetrieval(RoutesActivity.this).execute(url);
             }
         });
-
-//        Double[] fromCoordinates = (mViewModel.getFrom().getCenterCoordinates());
-//        Double[] toCoordinates = (mViewModel.getTo().getCenterCoordinates());
-//
-//        from = new MarkerOptions().position(new LatLng(fromCoordinates[0], fromCoordinates[1]));
-//        to = new MarkerOptions().position(new LatLng(toCoordinates[1], toCoordinates[0]));
-//
-//        Log.d("mylog", "FROM:" + fromCoordinates[0] + ", " + fromCoordinates[1]);
-//        Log.d("mylog", "TO:" + toCoordinates[1] + ", " + toCoordinates[0]);
-
-        from = new MarkerOptions().position(new LatLng(45.525407, -73.677126));
-        to = new MarkerOptions().position(new LatLng(45.497361,  -73.579033));
-
-        // set back button
-        setBackButtonOnClick();
     }
 
-    public void onClickTo(){
+    public void onClickTo(View v){
         SelectingToFromState.setSelectToToTrue();
         openSearchPage();
     }
 
-    public void onClickFrom(){
+    public void onClickFrom(View v){
         SelectingToFromState.setSelectFromToTrue();
         openSearchPage();
-    }
-
-    private void setBackButtonOnClick(){
-        ImageButton backButton = (ImageButton)this.findViewById(R.id.routesPageBackButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { exitSelectToFrom(); }
-        });
     }
 
     @Override
@@ -113,8 +97,16 @@ public class RoutesActivity extends AppCompatActivity {
     public void directionsApiCallBack(DirectionsResult result)
     {
         mViewModel.setDirectionsResult(result);
+        System.out.println("lol");
     }
 
+    private void setBackButtonOnClick(){
+        ImageButton backButton = (ImageButton)this.findViewById(R.id.routesPageBackButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { exitSelectToFrom(); }
+        });
+    }
 
     private void exitSelectToFrom(){
         Intent exitSelectToFrom= new Intent(RoutesActivity.this,
@@ -130,5 +122,16 @@ public class RoutesActivity extends AppCompatActivity {
                 SearchActivity.class);
 
         startActivity(openSearch);
+    }
+
+    private void setFrom() {
+        Double[] toCoordinates = (mViewModel.getTo().getCenterCoordinates());
+        to = new MarkerOptions().position(new LatLng(toCoordinates[1], toCoordinates[0]));
+
+    }
+
+    private void setTo() {
+        Double[] fromCoordinates = (mViewModel.getFrom().getCenterCoordinates());
+        from = new MarkerOptions().position(new LatLng(fromCoordinates[0], fromCoordinates[1]));
     }
 }
