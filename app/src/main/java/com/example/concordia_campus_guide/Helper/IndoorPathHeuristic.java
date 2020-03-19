@@ -10,36 +10,49 @@ import java.util.List;
 
 public class IndoorPathHeuristic {
 
-    Context context;
+    AppDatabase appDatabase;
 
-    public IndoorPathHeuristic(Context context){
-        this.context = context;
+    public IndoorPathHeuristic(final AppDatabase appDatabase) {
+        this.appDatabase = appDatabase;
     }
 
     /**
      * The heuristic is based on the distance between the goal and destination coordinates, the further a point from a destination, the bigger the heuristic it will have.
-     * @param currentCoordinate
+     * @param currentPoint
      * @param destinationPoint
      * @return
      */
-    protected double computeHeuristic(final WalkingPoint currentCoordinate, final WalkingPoint destinationPoint) {
-        if (!currentCoordinate.getFloorCode().equalsIgnoreCase(destinationPoint.getFloorCode())) {
-            final WalkingPoint accessPoint = getNearestAccessPointForFloor(currentCoordinate);
-            return getEuclideanDistance(currentCoordinate, accessPoint)
-                    + getEuclideanDistance(accessPoint, destinationPoint);
+    protected double computeHeuristic(final WalkingPoint currentPoint, final WalkingPoint destinationPoint) {
+
+        if (!currentPoint.getFloorCode().equalsIgnoreCase(destinationPoint.getFloorCode())) {
+            String currentBuildingCode = currentPoint.getFloorCode().split("-")[0];
+            String destinationBuildingCode = destinationPoint.getFloorCode().split("-")[0];
+
+            WalkingPoint accessPoint;
+            if (!currentBuildingCode.equals(destinationBuildingCode)) {
+                accessPoint = getNearestAccessPointForFloor(currentPoint, PointType.ENTRANCE);
+                if (accessPoint != null)
+                    return getEuclideanDistance(currentPoint, accessPoint)
+                            + getEuclideanDistance(accessPoint, destinationPoint);
+            }
+
+            accessPoint = getNearestAccessPointForFloor(currentPoint, PointType.ELEVATOR);
+                return getEuclideanDistance(currentPoint, accessPoint)
+                        + getEuclideanDistance(accessPoint, destinationPoint);
         }
 
-        return getEuclideanDistance(currentCoordinate, destinationPoint);
+        return getEuclideanDistance(currentPoint, destinationPoint);
     }
 
     /**
-     * This method returns the nearest access point in a given floor (elevator).
+     * This method returns the nearest access point in a given floor (given the access point type).
      * @param currentPoint
+     * @param accessPointType
      * @return
      */
-    protected WalkingPoint getNearestAccessPointForFloor(final WalkingPoint currentPoint) {
-        final List<WalkingPoint> accessPtList = AppDatabase.getInstance(context).walkingPointDao()
-                .getAllAccessPointsOnFloor(currentPoint.getFloorCode(), PointType.ELEVATOR);
+    protected WalkingPoint getNearestAccessPointForFloor(final WalkingPoint currentPoint, PointType accessPointType) {
+        final List<WalkingPoint> accessPtList = appDatabase.walkingPointDao()
+                .getAllAccessPointsOnFloor(currentPoint.getFloorCode(), accessPointType);
         return getClosestPointToCurrentPointFromList(currentPoint, accessPtList);
     }
 

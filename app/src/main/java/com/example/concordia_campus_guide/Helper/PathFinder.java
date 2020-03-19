@@ -3,7 +3,10 @@ package com.example.concordia_campus_guide.Helper;
 import android.content.Context;
 
 import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Models.Coordinates;
+import com.example.concordia_campus_guide.Models.Building;
+import com.example.concordia_campus_guide.Models.Floor;
+import com.example.concordia_campus_guide.Models.Place;
+import com.example.concordia_campus_guide.Models.PointType;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 
@@ -12,18 +15,16 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.PriorityQueue;
-import java.util.function.Predicate;
 
 /**
  * Usage Example:
- * Double[] src = {-73.57883681, 45.49731974};
- * Double[] trg = {-73.57873723, 45.49748425};
- * RoomModel room1 = new RoomModel(src,"H927" ,"H-9");
- * RoomModel room2 = new RoomModel(trg,"H842", "H-8");
- * PathFinder finder = new PathFinder(getContext(),  room1, room2);
- * List<WalkingPoint> solution = finder.getPathToDestination();
+ Double[] src = {-73.5791637, 45.49526596};
+ Double[] trg = {-73.57908558, 45.49735711};
+ RoomModel room1 = new RoomModel(src, "437", "MB-S2");
+ RoomModel room2 = new RoomModel(trg, "838", "H-8");
+ PathFinder finder = new PathFinder(getContext(), room1, room2);
+ List<WalkingPoint> solution = finder.getPathToDestination();
  */
 public class PathFinder {
 
@@ -34,17 +35,19 @@ public class PathFinder {
     private final WalkingPoint initialPoint;
     private final WalkingPoint destinationPoint;
     private final IndoorPathHeuristic indoorPathHeuristic;
+    private final AppDatabase appDatabase;
 
-    public PathFinder(final Context context, final RoomModel source, final RoomModel destination) {
+    public PathFinder(final AppDatabase appDatabase, final Place source, final Place destination) {
         this.walkingPointsToVisit = new PriorityQueue<>(new WalkingPointComparator());
         this.walkingPointsVisited = new HashMap<>();
-        this.indoorPathHeuristic = new IndoorPathHeuristic(context);
+        this.indoorPathHeuristic = new IndoorPathHeuristic(appDatabase);
+        this.appDatabase = appDatabase;
 
-        final List<WalkingPoint> walkingPoints = AppDatabase.getInstance(context).walkingPointDao().getAll();
+        final List<WalkingPoint> walkingPoints = appDatabase.walkingPointDao().getAll();
         walkingPointNodesMap = populateWalkingPointMap(walkingPoints);
 
-        this.initialPoint = getWalkingPointCorrespondingToRoom(source, walkingPoints);
-        this.destinationPoint = getWalkingPointCorrespondingToRoom(destination, walkingPoints);
+        this.initialPoint = getWalkingPointCorrespondingToPlace(source);
+        this.destinationPoint = getWalkingPointCorrespondingToPlace(destination);
     }
 
     /**
@@ -60,26 +63,24 @@ public class PathFinder {
         return walkingPointNodesMap;
     }
 
-    /**
-     * This method's purpose is to get a corresponding walking point given a room object.
-     * @param room
-     * @param walkingPointList
-     * @return
-     */
-    protected WalkingPoint getWalkingPointCorrespondingToRoom(final RoomModel room,
-            final List<WalkingPoint> walkingPointList) {
-        final Coordinates coordinates1 = room.getCenterCoordinates();
-        final WalkingPoint wantedPoint = new WalkingPoint(coordinates1, room.getFloorCode(), null, null);
+    protected WalkingPoint getWalkingPointCorrespondingToPlace(final Place place) {
+        String placeCode;
+        List<WalkingPoint> pointList = null;
+        if (place instanceof Building) {
+            placeCode = ((Building) place).getBuildingCode();
+            pointList = appDatabase.walkingPointDao().getAllWalkingPointsFromPlaceCode(placeCode);
+        } else if (place instanceof RoomModel) {
+            placeCode = ((RoomModel) place).getRoomCode();
+            pointList = appDatabase.walkingPointDao().getAllWalkingPointsFromPlaceCode(placeCode);
+        } else if (place instanceof Floor) {
+            String floorCode = ((Floor) place).getFloorCode();
+            pointList = appDatabase.walkingPointDao().getAllAccessPointsOnFloor(floorCode, PointType.ELEVATOR);
+        }
 
-        final Optional<WalkingPoint> optionalWalkingPoints = walkingPointList.stream()
-                .filter(new Predicate<WalkingPoint>() {
-                    @Override
-                    public boolean test(final WalkingPoint walkingPoint) {
-                        return wantedPoint.equals(walkingPoint);
-                    }
-                }).findFirst();
+        if(pointList != null && !pointList.isEmpty())
+            return pointList.get(0);
 
-        return optionalWalkingPoints.isPresent() ? optionalWalkingPoints.get() : null;
+        return null;
     }
 
     /**
@@ -103,7 +104,7 @@ public class PathFinder {
             }
             addNearestWalkingPoints(currentLocation);
         }
-        return null;
+        return new ArrayList<>();
     }
 
     /**
@@ -166,7 +167,6 @@ public class PathFinder {
     }
 
 
-
     protected double computeEstimatedCostFromInitialToDestination(final WalkingPointNode currentCoordinate) {
         return currentCoordinate.getCost() + indoorPathHeuristic.computeHeuristic(currentCoordinate.getWalkingPoint(), destinationPoint);
     }
@@ -217,7 +217,7 @@ public class PathFinder {
         double cost;
 
         public WalkingPointNode(final WalkingPoint walkingPoint, final WalkingPointNode parent, final double heuristic,
-                final double cost) {
+                                final double cost) {
             this.walkingPoint = walkingPoint;
             this.parent = parent;
             this.heuristic = heuristic;

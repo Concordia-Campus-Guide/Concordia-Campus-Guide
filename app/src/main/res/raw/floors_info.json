@@ -13,7 +13,16 @@
       "altitude": 0
     },
     {
-      "campus": "SGW",
+      "buildingCode": "H",
+      "floorCode": "H-00",
+      "altitude": 0
+    },
+    {
+      "buildingCode": "H",
+      "floorCode": "H-1",
+      "altitude": 0
+    },
+    {
       "buildingCode": "MB",
       "floorCode": "MB-S2",
       "altitude": 0
