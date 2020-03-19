@@ -10,12 +10,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
-import com.example.concordia_campus_guide.BuildConfig;
+import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.GoogleMapsServicesModels.DirectionsResult;
-import com.example.concordia_campus_guide.Helper.RoutesHelpers.TransportType;
 import com.example.concordia_campus_guide.Helper.RoutesHelpers.DirectionsApiDataRetrieval;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.model.LatLng;
@@ -29,14 +28,15 @@ public class RoutesActivity extends AppCompatActivity {
     TextView toText;
     Button getDirection;
 
-    private MarkerOptions from, to;
+    private MarkerOptions from;
+    private MarkerOptions to;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //set up activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.routes_activity);
-        mViewModel = ViewModelProviders.of(this).get(RoutesActivityViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(RoutesActivityViewModel.class);
 
         //get view
         fromText = findViewById(R.id.fromText);
@@ -59,7 +59,7 @@ public class RoutesActivity extends AppCompatActivity {
         getDirection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = mViewModel.buildUrl(from.getPosition(), to.getPosition(), TransportType.TRANSIT.toString());
+                String url = mViewModel.buildUrl(from.getPosition(), to.getPosition(), ClassConstants.TRANSIT);
                 new DirectionsApiDataRetrieval(RoutesActivity.this).execute(url);
             }
         });
@@ -80,17 +80,12 @@ public class RoutesActivity extends AppCompatActivity {
         setBackButtonOnClick();
     }
 
-    public void directionsApiCallBack(DirectionsResult result)
-    {
-        mViewModel.setDirectionsResult(result);
-    }
-
-    public void onClickTo(View v){
+    public void onClickTo(){
         SelectingToFromState.setSelectToToTrue();
         openSearchPage();
     }
 
-    public void onClickFrom(View v){
+    public void onClickFrom(){
         SelectingToFromState.setSelectFromToTrue();
         openSearchPage();
     }
@@ -113,6 +108,12 @@ public class RoutesActivity extends AppCompatActivity {
 
         return super.onKeyDown(keyCode, event);
     }
+
+    public void directionsApiCallBack(DirectionsResult result)
+    {
+        mViewModel.setDirectionsResult(result);
+    }
+
 
     private void exitSelectToFrom(){
         Intent exitSelectToFrom= new Intent(RoutesActivity.this,

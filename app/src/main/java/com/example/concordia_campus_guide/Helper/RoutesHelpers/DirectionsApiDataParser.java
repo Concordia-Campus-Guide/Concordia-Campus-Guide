@@ -15,10 +15,9 @@ import com.google.gson.GsonBuilder;
 public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieval, Integer, DirectionsResult> {
 
     /**
-     * Parsing the JSON stirng data to map it to a DirectionsResult model
+     * Parsing the JSON string data to map it to a DirectionsResult model
      *
-     * @param obj: strings that have been passed when the execute method was called on a DirectionsApiDataParser object. In that case, jsonData[0] is the JSON data retrieved from Google Maps Directions API
-     *
+     * @param obj: DirectionsApiDataRetrieval object
      */
     DirectionsApiDataRetrieval dataRetrieval = null;
 
@@ -28,7 +27,7 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
         DirectionsResult directionsResult = null;
 
         try {
-            Log.d(ClassConstants.MY_LOG, "Executing routes"); // Debug
+            Log.d(ClassConstants.MY_LOG, "Mapping data to models");
 
             Gson gson = new GsonBuilder()
                     .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
@@ -44,7 +43,12 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
     }
 
 
-    // Executes in UI thread, after the parsing process
+    /**
+     * On the main UI thread, after the parsing process is done, set the DirectionsResult variable in the RoutesActivity to the result obtained
+     *
+     * @param result: DirectionsResult object
+     *
+     */
     @Override
     protected void onPostExecute(DirectionsResult result) {
         dataRetrieval.caller.directionsApiCallBack(result);

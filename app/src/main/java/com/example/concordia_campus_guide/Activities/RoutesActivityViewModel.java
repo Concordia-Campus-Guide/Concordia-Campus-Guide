@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.example.concordia_campus_guide.BuildConfig;
+import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.GoogleMapsServicesModels.DirectionsResult;
 import com.example.concordia_campus_guide.Models.Place;
@@ -59,7 +60,7 @@ public class RoutesActivityViewModel extends AndroidViewModel {
      * @param transportType: main transport type to get from origin to destination
      *
      */
-    public String buildUrl(LatLng from, LatLng to, String transportType) {
+    public String buildUrl(LatLng from, LatLng to, @ClassConstants.TransportType String transportType) {
         // Origin of route
         String str_origin = "origin=" + from.latitude + "," + from.longitude;
         // Destination of route
@@ -73,9 +74,7 @@ public class RoutesActivityViewModel extends AndroidViewModel {
         // Output format
         String output = "json";
         // Building the url to the web service
-        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + BuildConfig.API_KEY;
-
-        return url;
+        return "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + BuildConfig.API_KEY;
     }
 
 
