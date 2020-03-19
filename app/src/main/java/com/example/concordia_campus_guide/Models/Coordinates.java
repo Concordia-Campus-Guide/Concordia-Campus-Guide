@@ -26,6 +26,10 @@ public class Coordinates {
         return new ArrayList<>(Arrays.asList(latitude, longitude));
     }
 
+    public List<Double> toListDoubleLongLat(){
+        return new ArrayList<>(Arrays.asList(longitude, latitude));
+    }
+
     public double getLatitude() {
         return latitude;
     }

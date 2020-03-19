@@ -291,7 +291,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                 Building building = mViewModel.getBuildingFromeCode(marker.getTag().toString());
+                Building building = mViewModel.getBuildingFromeCode(marker.getTag().toString());
                 //TODO: Make function that pops up the info card for the building (via the building-code)
                 String buildingCode = (marker.getTag()).toString();
                 ((MainActivity)getActivity()).showInfoCard(buildingCode);
