@@ -232,7 +232,7 @@ public class Building extends Place {
         List<Coordinates> listOfCoordinatesObject = cornerCoordinates.getListOfCoordinates();
 
         for(Coordinates coordinates: listOfCoordinatesObject){
-            toReturn.add(coordinates.toListDouble());
+            toReturn.add(coordinates.toListDoubleLongLat());
         }
 
         return toReturn;
