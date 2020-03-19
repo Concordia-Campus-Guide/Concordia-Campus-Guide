@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
+import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.R;
 
 public class RoutesActivity extends AppCompatActivity {
@@ -26,7 +27,7 @@ public class RoutesActivity extends AppCompatActivity {
         //set up activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.routes_activity);
-        mViewModel = ViewModelProviders.of(this).get(RoutesActivityViewModel.class);
+        mViewModel = ViewModelProviders.of(this, new ViewModelFactory(this.getApplication())).get(RoutesActivityViewModel.class);
 
         //get view
         fromText = (TextView) findViewById(R.id.fromText);

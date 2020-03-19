@@ -1,23 +1,18 @@
 package com.example.concordia_campus_guide.Fragments.InfoCardFragment;
 
-import android.app.Application;
-
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.ViewModel;
 
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Place;
 
-public class InfoCardFragmentViewModel extends AndroidViewModel {
+public class InfoCardFragmentViewModel extends ViewModel {
 
     private Place place;
     private AppDatabase appDb;
 
-    public InfoCardFragmentViewModel(@NonNull Application application) {
-        super(application);
-
-        appDb = AppDatabase.getInstance(application.getApplicationContext());
+    public InfoCardFragmentViewModel(AppDatabase appDb) {
+        this.appDb = appDb;
     }
 
     public Building getBuilding() {
