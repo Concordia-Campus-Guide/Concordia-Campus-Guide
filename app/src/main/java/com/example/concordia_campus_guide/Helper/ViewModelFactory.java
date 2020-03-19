@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.concordia_campus_guide.Activities.RoutesActivityViewModel;
 import com.example.concordia_campus_guide.Activities.SearchActivityViewModel;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragmentViewModel;
@@ -29,6 +30,9 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         }
         else if(modelClass == SearchActivityViewModel.class){
             return (T) new SearchActivityViewModel(appDb);
+        }
+        else if(modelClass == RoutesActivityViewModel.class){
+            return (T) new RoutesActivityViewModel(appDb);
         }
 
         return null;
