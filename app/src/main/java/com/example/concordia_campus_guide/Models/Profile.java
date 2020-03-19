@@ -18,10 +18,36 @@ public class Profile {
 
     Queue<Place> history;
 
-    public void toggleHandicap(){}
+    public boolean toggleHandicap(){
 
-    public void toggleStaff(){}
+        handicapAccess = handicapAccess? false: true;
+        return handicapAccess;
+    }
 
+    public boolean toggleStaff(){
+        staffAccess = staffAccess? false: true;
+        return staffAccess;
+    }
+
+    public boolean isHandicapAccess() {
+        return handicapAccess;
+    }
+
+    public void setHandicapAccess(boolean handicapAccess) {
+        this.handicapAccess = handicapAccess;
+    }
+
+    public boolean isStaffAccess() {
+        return staffAccess;
+    }
+
+    public void setStaffAccess(boolean staffAccess) {
+        this.staffAccess = staffAccess;
+    }
+
+    public Language getLanguage() {
+        return language;
+    }
     public void setLanguage(Language language){
         this.language = language;
     }
