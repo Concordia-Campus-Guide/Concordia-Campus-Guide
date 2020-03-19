@@ -44,8 +44,8 @@ import static java.lang.Double.parseDouble;
 public class LocationFragmentViewModel extends ViewModel {
     private GeoJsonLayer floorLayer;
     private HashMap<String, Building> buildings = new HashMap<>();
-    private HashMap<String, List<WalkingPoint>> walkingPointsMap = new HashMap<>();
     private PolylineOptions displayedPolylineOption;
+    private HashMap<String, List<WalkingPoint>> walkingPointsMap = new HashMap<>();
     /**
      * @return return the map style
      */
