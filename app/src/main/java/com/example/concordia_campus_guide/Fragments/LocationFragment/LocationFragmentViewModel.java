@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.concordia_campus_guide.Global.ApplicationState;
 import com.example.concordia_campus_guide.Models.Building;
+import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
@@ -87,13 +88,13 @@ public class LocationFragmentViewModel extends ViewModel {
 
     public void setBuildingGroundOverlayOptions(Building building){
         building.setGroundOverlayOption(new GroundOverlayOptions()
-                .position(new LatLng(building.getCenterCoordinates()[0], building.getCenterCoordinates()[1]), building.getWidth(), building.getHeight())
+                .position(new LatLng(building.getCenterCoordinates().getLatitude(), building.getCenterCoordinates().getLongitude()), building.getWidth(), building.getHeight())
                 .image(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+building.getBuildingCode().toLowerCase()+"_"+building.getAvailableFloors().get(building.getAvailableFloors().size()-1).toLowerCase()+".png"))
                 .bearing(building.getBearing()));
     }
 
     public Building getBuildingFromGeoJsonFeature(GeoJsonFeature feature){
-        Double[] centerPos = getCenterPositionBuildingFromGeoJsonFeature(feature);
+        Coordinates centerPos = getCenterPositionBuildingFromGeoJsonFeature(feature);
 
         List<String> floorsAvailable = getFloorsFromBuildingFromGeoJsonFeature(feature);
         float building_width = (feature.getProperty("width") != null)? Float.parseFloat(feature.getProperty("width")): -1;
@@ -103,9 +104,9 @@ public class LocationFragmentViewModel extends ViewModel {
         return new Building(centerPos, floorsAvailable, building_width, building_height, building_bearing, null, building_code, null, null, null, null, null);
     }
 
-    public Double[] getCenterPositionBuildingFromGeoJsonFeature(GeoJsonFeature feature){
+    public Coordinates getCenterPositionBuildingFromGeoJsonFeature(GeoJsonFeature feature){
         String[] coordinatesString = feature.getProperty("center").split(", ");
-        Double[] coordinatesDouble = new Double[]{Double.parseDouble(coordinatesString[1]), Double.parseDouble(coordinatesString[0])};
+        Coordinates coordinatesDouble = new Coordinates(Double.parseDouble(coordinatesString[1]), Double.parseDouble(coordinatesString[0]));
         return coordinatesDouble;
     }
     public List<String> getFloorsFromBuildingFromGeoJsonFeature(GeoJsonFeature feature) {

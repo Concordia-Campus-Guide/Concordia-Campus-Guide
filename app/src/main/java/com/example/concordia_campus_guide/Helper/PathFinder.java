@@ -59,8 +59,7 @@ public class PathFinder {
 
     protected WalkingPoint getWalkingPointCorrespondingToRoom(final RoomModel room,
             final List<WalkingPoint> walkingPointList) {
-        final Coordinates coordinates1 = new Coordinates(room.getCenterCoordinates()[0],
-                room.getCenterCoordinates()[1]);
+        final Coordinates coordinates1 = room.getCenterCoordinates();
         final WalkingPoint wantedPoint = new WalkingPoint(coordinates1, room.getFloorCode(), null, null);
 
         final Optional<WalkingPoint> optionalWalkingPoints = walkingPointList.stream()

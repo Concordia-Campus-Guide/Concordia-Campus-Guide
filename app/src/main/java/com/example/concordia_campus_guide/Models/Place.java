@@ -1,12 +1,11 @@
 package com.example.concordia_campus_guide.Models;
 
 import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
 
-import com.example.concordia_campus_guide.Database.Converters.DoubleListConverter;
 import com.google.android.gms.maps.model.LatLng;
 
 @Entity(tableName = "places",
@@ -18,25 +17,24 @@ public abstract class Place {
     @PrimaryKey(autoGenerate = true)
     private long id;
 
-    @TypeConverters(DoubleListConverter.class)
-    @ColumnInfo(name ="center_coordinates")
-    protected Double[] centerCoordinates;
+    @Embedded
+    protected Coordinates centerCoordinates;
 
-    public Place(Double[] centerCoordinates) {
+    public Place(Coordinates centerCoordinates) {
         this.centerCoordinates = centerCoordinates;
     }
 
     public Place() {}
 
-    public Double[] getCenterCoordinates() {
+    public Coordinates getCenterCoordinates() {
         return centerCoordinates;
     }
 
     public LatLng getCenterCoordinatesLatLng() {
-        return new LatLng(centerCoordinates[0], centerCoordinates[1]);
+        return new LatLng(centerCoordinates.latitude, centerCoordinates.longitude);
     }
 
-    public void setCenterCoordinates(Double[] centerCoordinates) {
+    public void setCenterCoordinates(Coordinates centerCoordinates) {
         this.centerCoordinates = centerCoordinates;
     }
 

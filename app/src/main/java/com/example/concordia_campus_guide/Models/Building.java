@@ -73,7 +73,7 @@ public class Building extends Place {
     private GroundOverlayOptions groundOverlayOption;
 
     public Building(){}
-    public Building(Double[] centerCoordinates, List<String> availableFloors, float width, float height, float bearing,
+    public Building(Coordinates centerCoordinates, List<String> availableFloors, float width, float height, float bearing,
                     String campus, String buildingCode, String Building_Long_Name, String address,
                     List<String> departments, List<String> services, ListOfCoordinates cornerCoordinates) {
         super(centerCoordinates);
@@ -208,7 +208,7 @@ public class Building extends Place {
 
         try{
             properties.put("code", BuildingCode);
-            if(centerCoordinates!=null) properties.put("center", ""+centerCoordinates[0]+", "+centerCoordinates[1]);
+            if(centerCoordinates!=null) properties.put("center", ""+centerCoordinates.getLatitude()+", "+centerCoordinates.getLongitude());
             if(height!=0) properties.put("height", height);
             if(width!=0) properties.put("width", width);
             if(bearing!=0) properties.put("bearing", bearing);

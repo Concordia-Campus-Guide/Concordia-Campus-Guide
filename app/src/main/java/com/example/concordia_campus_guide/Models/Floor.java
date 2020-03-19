@@ -37,7 +37,7 @@ public class Floor extends Place {
     public Floor() {
         super();
     }
-    public Floor(Double[] coordinates, String floorCode, float altitude) {
+    public Floor(Coordinates coordinates, String floorCode, float altitude) {
         super(coordinates);
         this.floorCode = floorCode;
         this.altitude = altitude;

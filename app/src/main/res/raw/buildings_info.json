@@ -1,14 +1,14 @@
 {
-  "Buildings": [
+  "Buildings":[
     {
-      "Campus": "LOY",
-      "BuildingCode": "AD",
-      "Building_Long_Name": "Administration Building",
-      "Address": "7141 Sherbrooke West",
-      "Departments": [
+      "Campus":"LOY",
+      "BuildingCode":"AD",
+      "Building_Long_Name":"Administration Building",
+      "Address":"7141 Sherbrooke West",
+      "Departments":[
         "Faculty of Arts & Science"
       ],
-      "Services": [
+      "Services":[
         "Welcome Crew Office",
         "Centre for Teaching & Learning",
         "Loyola International College",
@@ -20,385 +20,411 @@
         "Counselling and Development",
         "Health Services"
       ],
-      "centerCoordinates": [
-        -73.63982319831847,
-        45.458012236404315
-      ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "centerCoordinates":{
+        "latitude":-73.63982319831847,
+        "longitude":45.458012236404315
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.6401821,
-            "longitude": 45.4578509
+            "latitude":-73.6401821,
+            "longitude":45.4578509
           },
           {
-            "latitude": -73.6398683,
-            "longitude": 45.457723
+            "latitude":-73.6398683,
+            "longitude":45.457723
           },
           {
-            "latitude": -73.6397771,
-            "longitude": 45.4578058
+            "latitude":-73.6397771,
+            "longitude":45.4578058
           },
           {
-            "latitude": -73.6398683,
-            "longitude": 45.4578472
+            "latitude":-73.6398683,
+            "longitude":45.4578472
           },
           {
-            "latitude": -73.6396269,
-            "longitude": 45.4581217
+            "latitude":-73.6396269,
+            "longitude":45.4581217
           },
           {
-            "latitude": -73.6395357,
-            "longitude": 45.4580972
+            "latitude":-73.6395357,
+            "longitude":45.4580972
           },
           {
-            "latitude": -73.6394901,
-            "longitude": 45.4581875
+            "latitude":-73.6394901,
+            "longitude":45.4581875
           },
           {
-            "latitude": -73.6398012,
-            "longitude": 45.4583022
+            "latitude":-73.6398012,
+            "longitude":45.4583022
           },
           {
-            "latitude": -73.639879,
-            "longitude": 45.4582345
+            "latitude":-73.639879,
+            "longitude":45.4582345
           },
           {
-            "latitude": -73.6398039,
-            "longitude": 45.4581969
+            "latitude":-73.6398039,
+            "longitude":45.4581969
           },
           {
-            "latitude": -73.6398951,
-            "longitude": 45.4580784
+            "latitude":-73.6398951,
+            "longitude":45.4580784
           },
           {
-            "latitude": -73.6399353,
-            "longitude": 45.4580916
+            "latitude":-73.6399353,
+            "longitude":45.4580916
           },
           {
-            "latitude": -73.6399809,
-            "longitude": 45.4580239
+            "latitude":-73.6399809,
+            "longitude":45.4580239
           },
           {
-            "latitude": -73.6399621,
-            "longitude": 45.4580089
+            "latitude":-73.6399621,
+            "longitude":45.4580089
           },
           {
-            "latitude": -73.6400533,
-            "longitude": 45.4578904
+            "latitude":-73.6400533,
+            "longitude":45.4578904
           },
           {
-            "latitude": -73.640115,
-            "longitude": 45.4579111
+            "latitude":-73.640115,
+            "longitude":45.4579111
           },
           {
-            "latitude": -73.6401821,
-            "longitude": 45.4578509
+            "latitude":-73.6401821,
+            "longitude":45.4578509
           }
         ]
       }
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "B",
-      "Building_Long_Name": "B Annex",
-      "Address": "2160 Bishop Street",
-      "Departments": [],
-      "Services": [
+      "Campus":"SGW",
+      "BuildingCode":"B",
+      "Building_Long_Name":"B Annex",
+      "Address":"2160 Bishop Street",
+      "Departments":[
+
+      ],
+      "Services":[
         "Engineering and Computer Science Association"
       ]
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "BB",
-      "Building_Long_Name": "BB-BH Annex",
-      "Address": "3502 Bermore Avenue",
-      "Departments": [],
-      "Services": [
+      "Campus":"LOY",
+      "BuildingCode":"BB",
+      "Building_Long_Name":"BB-BH Annex",
+      "Address":"3502 Bermore Avenue",
+      "Departments":[
+
+      ],
+      "Services":[
         "CPE Les P'tits Profs Daycare"
       ],
-      "centerCoordinates": [
-        -73.6393940448761,
-        45.459810813308096
-      ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "centerCoordinates":{
+        "latitude":-73.6393940448761,
+        "longitude":45.459810813308096
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.63950669765472,
-            "longitude": 45.459795762693375
+            "latitude":-73.63950669765472,
+            "longitude":45.459795762693375
           },
           {
-            "latitude": -73.63935649394989,
-            "longitude": 45.45972803487744
+            "latitude":-73.63935649394989,
+            "longitude":45.45972803487744
           },
           {
-            "latitude": -73.6392867565155,
-            "longitude": 45.45983715187417
+            "latitude":-73.6392867565155,
+            "longitude":45.45983715187417
           },
           {
-            "latitude": -73.6394476890564,
-            "longitude": 45.459893591617195
+            "latitude":-73.6394476890564,
+            "longitude":45.459893591617195
           },
           {
-            "latitude": -73.63950669765472,
-            "longitude": 45.459795762693375
+            "latitude":-73.63950669765472,
+            "longitude":45.459795762693375
           }
         ]
       }
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "BH",
-      "Building_Long_Name": "BB-BH Annex",
-      "Address": "3500 Bermore Avenue",
-      "Departments": [],
-      "Services": [
+      "Campus":"LOY",
+      "BuildingCode":"BH",
+      "Building_Long_Name":"BB-BH Annex",
+      "Address":"3500 Bermore Avenue",
+      "Departments":[
+
+      ],
+      "Services":[
         "CPE Les P'tits Profs Daycare"
       ],
-      "centerCoordinates": [
-        -73.6391419172287,
-        45.45972427221864
-      ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "centerCoordinates":{
+        "latitude":-73.6391419172287,
+        "longitude":45.45972427221864
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.63928139209747,
-            "longitude": 45.45972427221864
+            "latitude":-73.63928139209747,
+            "longitude":45.45972427221864
           },
           {
-            "latitude": -73.63912045955658,
-            "longitude": 45.459664069643274
+            "latitude":-73.63912045955658,
+            "longitude":45.459664069643274
           },
           {
-            "latitude": -73.63900244235992,
-            "longitude": 45.4597656614519
+            "latitude":-73.63900244235992,
+            "longitude":45.4597656614519
           },
           {
-            "latitude": -73.63920092582703,
-            "longitude": 45.459825863918795
+            "latitude":-73.63920092582703,
+            "longitude":45.459825863918795
           },
           {
-            "latitude": -73.63928139209747,
-            "longitude": 45.45972427221864
+            "latitude":-73.63928139209747,
+            "longitude":45.45972427221864
           }
         ]
       }
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "CC",
-      "Building_Long_Name": "Central Building",
-      "Address": "7141 Sherbrooke West",
-      "Departments": [],
-      "Services": [
+      "Campus":"LOY",
+      "BuildingCode":"CC",
+      "Building_Long_Name":"Central Building",
+      "Address":"7141 Sherbrooke West",
+      "Departments":[
+
+      ],
+      "Services":[
         "Concordia Student Union",
         "Loyola College for Diversity and Sustainability and Loyola"
       ],
-      "centerCoordinates": [
-        -73.64035427570343,
-        45.45821918855051
-      ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "centerCoordinates":{
+        "latitude":-73.64035427570343,
+        "longitude":45.45821918855051
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.64071905612946,
-            "longitude": 45.458482581092554
+            "latitude":-73.64071905612946,
+            "longitude":45.458482581092554
           },
           {
-            "latitude": -73.64087998867035,
-            "longitude": 45.45832078296248
+            "latitude":-73.64087998867035,
+            "longitude":45.45832078296248
           },
           {
-            "latitude": -73.64002704620361,
-            "longitude": 45.457985896985775
+            "latitude":-73.64002704620361,
+            "longitude":45.457985896985775
           },
           {
-            "latitude": -73.63988757133484,
-            "longitude": 45.458170272657235
+            "latitude":-73.63988757133484,
+            "longitude":45.458170272657235
           },
           {
-            "latitude": -73.64071905612946,
-            "longitude": 45.458482581092554
+            "latitude":-73.64071905612946,
+            "longitude":45.458482581092554
           }
         ]
       }
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "CI",
-      "Building_Long_Name": "CI Annex",
-      "Address": "2149 Mackay Street",
-      "Departments": [
+      "Campus":"SGW",
+      "BuildingCode":"CI",
+      "Building_Long_Name":"CI Annex",
+      "Address":"2149 Mackay Street",
+      "Departments":[
         "School of Community and Public Affairs"
       ],
-      "Services": []
+      "Services":[
+
+      ]
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "CJ",
-      "Building_Long_Name": "Communication Studies and Journalism Building",
-      "Address": "7141 Sherbrooke West",
-      "Departments": [
+      "Campus":"LOY",
+      "BuildingCode":"CJ",
+      "Building_Long_Name":"Communication Studies and Journalism Building",
+      "Address":"7141 Sherbrooke West",
+      "Departments":[
         "Communication Studies",
         "Journalism"
       ],
-      "Services": [
+      "Services":[
         "Campus Retail Stores"
       ],
-      "centerCoordinates": [
-        -73.64042401313782,
-        45.45740642666492
-      ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "centerCoordinates":{
+        "latitude":-73.64042401313782,
+        "longitude":45.45740642666492
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.64084243774414,
-            "longitude": 45.457395138222914
+            "latitude":-73.64084243774414,
+            "longitude":45.457395138222914
           },
           {
-            "latitude": -73.64034354686737,
-            "longitude": 45.457150554757845
+            "latitude":-73.64034354686737,
+            "longitude":45.457150554757845
           },
           {
-            "latitude": -73.64014506340025,
-            "longitude": 45.457395138222914
+            "latitude":-73.64014506340025,
+            "longitude":45.457395138222914
           },
           {
-            "latitude": -73.64008605480193,
-            "longitude": 45.45735751006655
+            "latitude":-73.64008605480193,
+            "longitude":45.45735751006655
           },
           {
-            "latitude": -73.64002168178558,
-            "longitude": 45.45720699719009
+            "latitude":-73.64002168178558,
+            "longitude":45.45720699719009
           },
           {
-            "latitude": -73.63981246948242,
-            "longitude": 45.45721452284347
+            "latitude":-73.63981246948242,
+            "longitude":45.45721452284347
           },
           {
-            "latitude": -73.63973736763,
-            "longitude": 45.45734622161475
+            "latitude":-73.63973736763,
+            "longitude":45.45734622161475
           },
           {
-            "latitude": -73.63967835903168,
-            "longitude": 45.457492971311886
+            "latitude":-73.63967835903168,
+            "longitude":45.457492971311886
           },
           {
-            "latitude": -73.6399358510971,
-            "longitude": 45.45746286884104
+            "latitude":-73.6399358510971,
+            "longitude":45.45746286884104
           },
           {
-            "latitude": -73.64005923271179,
-            "longitude": 45.45747415726948
+            "latitude":-73.64005923271179,
+            "longitude":45.45747415726948
           },
           {
-            "latitude": -73.6399358510971,
-            "longitude": 45.45762466943286
+            "latitude":-73.6399358510971,
+            "longitude":45.45762466943286
           },
           {
-            "latitude": -73.64050447940826,
-            "longitude": 45.45786548805859
+            "latitude":-73.64050447940826,
+            "longitude":45.45786548805859
           },
           {
-            "latitude": -73.64056885242461,
-            "longitude": 45.45774507887428
+            "latitude":-73.64056885242461,
+            "longitude":45.45774507887428
           },
           {
-            "latitude": -73.64070296287537,
-            "longitude": 45.457677348595126
+            "latitude":-73.64070296287537,
+            "longitude":45.457677348595126
           },
           {
-            "latitude": -73.64082098007202,
-            "longitude": 45.45753436218303
+            "latitude":-73.64082098007202,
+            "longitude":45.45753436218303
           },
           {
-            "latitude": -73.64078342914581,
-            "longitude": 45.45746286884104
+            "latitude":-73.64078342914581,
+            "longitude":45.45746286884104
           },
           {
-            "latitude": -73.64084243774414,
-            "longitude": 45.457395138222914
+            "latitude":-73.64084243774414,
+            "longitude":45.457395138222914
           }
         ]
       }
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "CL",
-      "Building_Long_Name": "CL Annex",
-      "Address": "1665 Ste-Catherine West",
-      "Departments": [],
-      "Services": [
+      "Campus":"SGW",
+      "BuildingCode":"CL",
+      "Building_Long_Name":"CL Annex",
+      "Address":"1665 Ste-Catherine West",
+      "Departments":[
+
+      ],
+      "Services":[
         "Concordia Continuing Education"
       ]
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "D",
-      "Building_Long_Name": "D Annex",
-      "Address": "2140 Bishop Street",
-      "Departments": [
+      "Campus":"SGW",
+      "BuildingCode":"D",
+      "Building_Long_Name":"D Annex",
+      "Address":"2140 Bishop Street",
+      "Departments":[
         "Theological Studies"
       ],
-      "Services": []
+      "Services":[
+
+      ]
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "DO",
-      "Building_Long_Name": "Dome",
-      "Address": "7200 Sherbrooke Street West",
-      "Departments": [],
-      "Services": [],
-      "centerCoordinates": [
-        -73.63618612289429,
-        45.457662297410906
+      "Campus":"LOY",
+      "BuildingCode":"DO",
+      "Building_Long_Name":"Dome",
+      "Address":"7200 Sherbrooke Street West",
+      "Departments":[
+
       ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "Services":[
+
+      ],
+      "centerCoordinates":{
+        "latitude":-73.63618612289429,
+        "longitude":45.457662297410906
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.63708734512329,
-            "longitude": 45.45738761259366
+            "latitude":-73.63708734512329,
+            "longitude":45.45738761259366
           },
           {
-            "latitude": -73.63640069961548,
-            "longitude": 45.45699251564698
+            "latitude":-73.63640069961548,
+            "longitude":45.45699251564698
           },
           {
-            "latitude": -73.6352688074112,
-            "longitude": 45.457952032000975
+            "latitude":-73.6352688074112,
+            "longitude":45.457952032000975
           },
           {
-            "latitude": -73.63596618175507,
-            "longitude": 45.45835464772579
+            "latitude":-73.63596618175507,
+            "longitude":45.45835464772579
           },
           {
-            "latitude": -73.63708734512329,
-            "longitude": 45.45738761259366
+            "latitude":-73.63708734512329,
+            "longitude":45.45738761259366
           }
         ]
       }
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "EN",
-      "Building_Long_Name": "EN Annex",
-      "Address": "2070 Mackay Street",
-      "Departments": [],
-      "Services": []
+      "Campus":"SGW",
+      "BuildingCode":"EN",
+      "Building_Long_Name":"EN Annex",
+      "Address":"2070 Mackay Street",
+      "Departments":[
+
+      ],
+      "Services":[
+
+      ]
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "ER",
-      "Building_Long_Name": "ER Building",
-      "Address": "2155 Guy Street",
-      "Departments": [],
-      "Services": []
+      "Campus":"SGW",
+      "BuildingCode":"ER",
+      "Building_Long_Name":"ER Building",
+      "Address":"2155 Guy Street",
+      "Departments":[
+
+      ],
+      "Services":[
+
+      ]
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "EV",
-      "Building_Long_Name": "Engineering, Computer Science and Visual Arts Integrated Complex",
-      "Address": "1515 Ste-Catherine West",
-      "Departments": [
+      "Campus":"SGW",
+      "BuildingCode":"EV",
+      "Building_Long_Name":"Engineering, Computer Science and Visual Arts Integrated Complex",
+      "Address":"1515 Ste-Catherine West",
+      "Departments":[
         "Gina Cody School of Engineering and Computer Science",
         "Electrical and Computer Engineering",
         "Building, Civil and Environmental Engineering",
@@ -414,322 +440,340 @@
         "Centre for Pattern Recognition and Machine Intelligence (CENPARMI)",
         "Center for Composites (CONCOM)"
       ],
-      "Services": [
+      "Services":[
         "LeGym",
         "FOFA Gallery"
       ],
-      "centerCoordinates": [
-        -73.578258,
-        45.495638
-      ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "centerCoordinates":{
+        "latitude":-73.578258,
+        "longitude":45.495638
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.57874661684036,
-            "longitude": 45.495633054158894
+            "latitude":-73.57874661684036,
+            "longitude":45.495633054158894
           },
           {
-            "latitude": -73.57867151498795,
-            "longitude": 45.49559169126274
+            "latitude":-73.57867151498795,
+            "longitude":45.49559169126274
           },
           {
-            "latitude": -73.57869565486908,
-            "longitude": 45.495565369403934
+            "latitude":-73.57869565486908,
+            "longitude":45.495565369403934
           },
           {
-            "latitude": -73.57803583145142,
-            "longitude": 45.49524574585073
+            "latitude":-73.57803583145142,
+            "longitude":45.49524574585073
           },
           {
-            "latitude": -73.5780143737793,
-            "longitude": 45.495255146569384
+            "latitude":-73.5780143737793,
+            "longitude":45.495255146569384
           },
           {
-            "latitude": -73.57787221670151,
-            "longitude": 45.495185581214294
+            "latitude":-73.57787221670151,
+            "longitude":45.495185581214294
           },
           {
-            "latitude": -73.57761472463608,
-            "longitude": 45.495439400337794
+            "latitude":-73.57761472463608,
+            "longitude":45.495439400337794
           },
           {
-            "latitude": -73.57774078845978,
-            "longitude": 45.495493924296525
+            "latitude":-73.57774078845978,
+            "longitude":45.495493924296525
           },
           {
-            "latitude": -73.57772469520569,
-            "longitude": 45.49551084551436
+            "latitude":-73.57772469520569,
+            "longitude":45.49551084551436
           },
           {
-            "latitude": -73.57775688171387,
-            "longitude": 45.49553152699593
+            "latitude":-73.57775688171387,
+            "longitude":45.49553152699593
           },
           {
-            "latitude": -73.5776898264885,
-            "longitude": 45.495584170732904
+            "latitude":-73.5776898264885,
+            "longitude":45.495584170732904
           },
           {
-            "latitude": -73.57753962278365,
-            "longitude": 45.495514605784315
+            "latitude":-73.57753962278365,
+            "longitude":45.495514605784315
           },
           {
-            "latitude": -73.5772231221199,
-            "longitude": 45.4958361079357
+            "latitude":-73.5772231221199,
+            "longitude":45.4958361079357
           },
           {
-            "latitude": -73.57770323753357,
-            "longitude": 45.49607676331564
+            "latitude":-73.57770323753357,
+            "longitude":45.49607676331564
           },
           {
-            "latitude": -73.57800632715225,
-            "longitude": 45.495755262538225
+            "latitude":-73.57800632715225,
+            "longitude":45.495755262538225
           },
           {
-            "latitude": -73.57830941677094,
-            "longitude": 45.495903792365255
+            "latitude":-73.57830941677094,
+            "longitude":45.495903792365255
           },
           {
-            "latitude": -73.57833623886108,
-            "longitude": 45.49588311102042
+            "latitude":-73.57833623886108,
+            "longitude":45.49588311102042
           },
           {
-            "latitude": -73.57844889163971,
-            "longitude": 45.49593387430786
+            "latitude":-73.57844889163971,
+            "longitude":45.49593387430786
           },
           {
-            "latitude": -73.57874661684036,
-            "longitude": 45.495633054158894
+            "latitude":-73.57874661684036,
+            "longitude":45.495633054158894
           }
         ]
       }
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "FA",
-      "Building_Long_Name": "FA Annex",
-      "Address": "2060 Mackay Street",
-      "Departments": [
+      "Campus":"SGW",
+      "BuildingCode":"FA",
+      "Building_Long_Name":"FA Annex",
+      "Address":"2060 Mackay Street",
+      "Departments":[
         "Department of Religions and Cultures"
       ],
-      "Services": []
+      "Services":[
+
+      ]
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "FB",
-      "Building_Long_Name": "Faubourg Building",
-      "Address": "1250 Guy Street",
-      "Departments": [],
-      "Services": [],
-      "centerCoordinates": [
-        -73.577643,
-        45.494686
+      "Campus":"SGW",
+      "BuildingCode":"FB",
+      "Building_Long_Name":"Faubourg Building",
+      "Address":"1250 Guy Street",
+      "Departments":[
+
       ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "Services":[
+
+      ],
+      "centerCoordinates":{
+        "latitude":-73.577643,
+        "longitude":45.494686
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.57801705598831,
-            "longitude": 45.49469674116055
+            "latitude":-73.57801705598831,
+            "longitude":45.49469674116055
           },
           {
-            "latitude": -73.57748597860336,
-            "longitude": 45.494399674747335
+            "latitude":-73.57748597860336,
+            "longitude":45.494399674747335
           },
           {
-            "latitude": -73.57717484235764,
-            "longitude": 45.49465537757668
+            "latitude":-73.57717484235764,
+            "longitude":45.49465537757668
           },
           {
-            "latitude": -73.57743233442307,
-            "longitude": 45.49475690631923
+            "latitude":-73.57743233442307,
+            "longitude":45.49475690631923
           },
           {
-            "latitude": -73.57749670743942,
-            "longitude": 45.49479826982855
+            "latitude":-73.57749670743942,
+            "longitude":45.49479826982855
           },
           {
-            "latitude": -73.5775101184845,
-            "longitude": 45.49479450951078
+            "latitude":-73.5775101184845,
+            "longitude":45.49479450951078
           },
           {
-            "latitude": -73.57758790254593,
-            "longitude": 45.49483587299247
+            "latitude":-73.57758790254593,
+            "longitude":45.49483587299247
           },
           {
-            "latitude": -73.57760399580002,
-            "longitude": 45.49483211267722
+            "latitude":-73.57760399580002,
+            "longitude":45.49483211267722
           },
           {
-            "latitude": -73.57767641544342,
-            "longitude": 45.49487723644378
+            "latitude":-73.57767641544342,
+            "longitude":45.49487723644378
           },
           {
-            "latitude": -73.5776898264885,
-            "longitude": 45.494869715818545
+            "latitude":-73.5776898264885,
+            "longitude":45.494869715818545
           },
           {
-            "latitude": -73.57775956392288,
-            "longitude": 45.494903558624245
+            "latitude":-73.57775956392288,
+            "longitude":45.494903558624245
           },
           {
-            "latitude": -73.57801705598831,
-            "longitude": 45.49469674116055
+            "latitude":-73.57801705598831,
+            "longitude":45.49469674116055
           }
         ]
       }
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "FC",
-      "Building_Long_Name": "F.C. Smith Building",
-      "Address": "7141 Sherbrooke West",
-      "Departments": [],
-      "Services": [
+      "Campus":"LOY",
+      "BuildingCode":"FC",
+      "Building_Long_Name":"F.C. Smith Building",
+      "Address":"7141 Sherbrooke West",
+      "Departments":[
+
+      ],
+      "Services":[
         "F.C. Smith Auditorium",
         "Cazalet Theater",
         "Concordia Multi-Faith and Spirituality Centre"
       ],
-      "centerCoordinates": [
-        -73.63939940929413,
-        45.458508920279094
-      ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "centerCoordinates":{
+        "latitude":-73.63939940929413,
+        "longitude":45.458508920279094
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.63920629024506,
-            "longitude": 45.458347122224595
+            "latitude":-73.63920629024506,
+            "longitude":45.458347122224595
           },
           {
-            "latitude": -73.63907754421233,
-            "longitude": 45.45852397123731
+            "latitude":-73.63907754421233,
+            "longitude":45.45852397123731
           },
           {
-            "latitude": -73.63956034183502,
-            "longitude": 45.45866695513995
+            "latitude":-73.63956034183502,
+            "longitude":45.45866695513995
           },
           {
-            "latitude": -73.63966226577757,
-            "longitude": 45.458648141489256
+            "latitude":-73.63966226577757,
+            "longitude":45.458648141489256
           },
           {
-            "latitude": -73.6396837234497,
-            "longitude": 45.45856912408782
+            "latitude":-73.6396837234497,
+            "longitude":45.45856912408782
           },
           {
-            "latitude": -73.63958179950713,
-            "longitude": 45.45849386931688
+            "latitude":-73.63958179950713,
+            "longitude":45.45849386931688
           },
           {
-            "latitude": -73.63920629024506,
-            "longitude": 45.458347122224595
+            "latitude":-73.63920629024506,
+            "longitude":45.458347122224595
           }
         ]
       }
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "FG",
-      "Building_Long_Name": "Faubourg Ste-Catherine Building",
-      "Address": "1610 Ste-Catherine West",
-      "Departments": [],
-      "Services": [],
-      "centerCoordinates": [
-        -73.578351,
-        45.494176
+      "Campus":"SGW",
+      "BuildingCode":"FG",
+      "Building_Long_Name":"Faubourg Ste-Catherine Building",
+      "Address":"1610 Ste-Catherine West",
+      "Departments":[
+
       ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "Services":[
+
+      ],
+      "centerCoordinates":{
+        "latitude":-73.578351,
+        "longitude":45.494176
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.57904970645905,
-            "longitude": 45.49381305798712
+            "latitude":-73.57904970645905,
+            "longitude":45.49381305798712
           },
           {
-            "latitude": -73.57870370149612,
-            "longitude": 45.493619397907345
+            "latitude":-73.57870370149612,
+            "longitude":45.493619397907345
           },
           {
-            "latitude": -73.57775151729584,
-            "longitude": 45.494441038519035
+            "latitude":-73.57775151729584,
+            "longitude":45.494441038519035
           },
           {
-            "latitude": -73.5776898264885,
-            "longitude": 45.494401554919435
+            "latitude":-73.5776898264885,
+            "longitude":45.494401554919435
           },
           {
-            "latitude": -73.57763886451721,
-            "longitude": 45.49441283595072
+            "latitude":-73.57763886451721,
+            "longitude":45.49441283595072
           },
           {
-            "latitude": -73.57759058475494,
-            "longitude": 45.494461720393474
+            "latitude":-73.57759058475494,
+            "longitude":45.494461720393474
           },
           {
-            "latitude": -73.5780143737793,
-            "longitude": 45.4946892205112
+            "latitude":-73.5780143737793,
+            "longitude":45.4946892205112
           },
           {
-            "latitude": -73.57904970645905,
-            "longitude": 45.49381305798712
+            "latitude":-73.57904970645905,
+            "longitude":45.49381305798712
           }
         ]
       }
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "GA",
-      "Building_Long_Name": "Grey Nuns Annex",
-      "Address": "1211-1215 St-Mathieu Street",
-      "Departments": [],
-      "Services": []
+      "Campus":"SGW",
+      "BuildingCode":"GA",
+      "Building_Long_Name":"Grey Nuns Annex",
+      "Address":"1211-1215 St-Mathieu Street",
+      "Departments":[
+
+      ],
+      "Services":[
+
+      ]
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "GE",
-      "Building_Long_Name": "Centre for Structural and Functional Genomics",
-      "Address": "7141 Sherbrooke West",
-      "Departments": [],
-      "Services": [
+      "Campus":"LOY",
+      "BuildingCode":"GE",
+      "Building_Long_Name":"Centre for Structural and Functional Genomics",
+      "Address":"7141 Sherbrooke West",
+      "Departments":[
+
+      ],
+      "Services":[
         "Centre for Structural and Functional Genomics"
       ],
-      "centerCoordinates": [
-        -73.64052057266235,
-        45.45696617575209
-      ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "centerCoordinates":{
+        "latitude":-73.64052057266235,
+        "longitude":45.45696617575209
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.64063322544098,
-            "longitude": 45.45715808041873
+            "latitude":-73.64063322544098,
+            "longitude":45.45715808041873
           },
           {
-            "latitude": -73.6407995223999,
-            "longitude": 45.45693983584491
+            "latitude":-73.6407995223999,
+            "longitude":45.45693983584491
           },
           {
-            "latitude": -73.64041328430176,
-            "longitude": 45.456785558998675
+            "latitude":-73.64041328430176,
+            "longitude":45.456785558998675
           },
           {
-            "latitude": -73.64023625850677,
-            "longitude": 45.45702261836892
+            "latitude":-73.64023625850677,
+            "longitude":45.45702261836892
           },
           {
-            "latitude": -73.64063322544098,
-            "longitude": 45.45715808041873
+            "latitude":-73.64063322544098,
+            "longitude":45.45715808041873
           }
         ]
       }
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "GM",
-      "Building_Long_Name": "Guy-De Maisonneuve Building",
-      "Address": "1550 De Maisonneuve West",
-      "Departments": [
+      "Campus":"SGW",
+      "BuildingCode":"GM",
+      "Building_Long_Name":"Guy-De Maisonneuve Building",
+      "Address":"1550 De Maisonneuve West",
+      "Departments":[
         "Contemporary Dance",
         "Music",
         "Theatre"
       ],
-      "Services": [
+      "Services":[
         "Access Centre for Students with Disabilities",
         "Environmental health and Safety",
         "Facilities Management",
@@ -749,42 +793,44 @@
         "Ombuds Office",
         "University Communications Services"
       ],
-      "centerCoordinates": [
-        -73.578802,
-        45.495816
-      ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "centerCoordinates":{
+        "latitude":-73.578802,
+        "longitude":45.495816
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.57911676168442,
-            "longitude": 45.49578722468599
+            "latitude":-73.57911676168442,
+            "longitude":45.49578722468599
           },
           {
-            "latitude": -73.57876002788544,
-            "longitude": 45.495629293896855
+            "latitude":-73.57876002788544,
+            "longitude":45.495629293896855
           },
           {
-            "latitude": -73.57841402292252,
-            "longitude": 45.49595455563405
+            "latitude":-73.57841402292252,
+            "longitude":45.49595455563405
           },
           {
-            "latitude": -73.57880026102066,
-            "longitude": 45.496136926999945
+            "latitude":-73.57880026102066,
+            "longitude":45.496136926999945
           },
           {
-            "latitude": -73.57911676168442,
-            "longitude": 45.49578722468599
+            "latitude":-73.57911676168442,
+            "longitude":45.49578722468599
           }
         ]
       }
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "GN",
-      "Building_Long_Name": "Grey Nuns Building",
-      "Address": "1190 Guy Street",
-      "Departments": [],
-      "Services": [
+      "Campus":"SGW",
+      "BuildingCode":"GN",
+      "Building_Long_Name":"Grey Nuns Building",
+      "Address":"1190 Guy Street",
+      "Departments":[
+
+      ],
+      "Services":[
         "Residences",
         "Grey Nuns Library (Reading Room and Group Study Rooms)",
         "Daycare Centre",
@@ -792,24 +838,28 @@
       ]
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "GS",
-      "Building_Long_Name": "Guy-Sherbrooke Building",
-      "Address": "1538 Sherbrooke West",
-      "Departments": [],
-      "Services": []
+      "Campus":"SGW",
+      "BuildingCode":"GS",
+      "Building_Long_Name":"Guy-Sherbrooke Building",
+      "Address":"1538 Sherbrooke West",
+      "Departments":[
+
+      ],
+      "Services":[
+
+      ]
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "H",
-      "Building_Long_Name": "Henry F. Hall Building",
-      "Address": "1455 De Maisonneuve West",
-      "Departments": [
+      "Campus":"SGW",
+      "BuildingCode":"H",
+      "Building_Long_Name":"Henry F. Hall Building",
+      "Address":"1455 De Maisonneuve West",
+      "Departments":[
         "Geography, Planning and Environment",
         "Political Science, Socialogy and Anthropology, Economics",
         "School of Irish Studies"
       ],
-      "Services": [
+      "Services":[
         "Welcome Crew Office",
         "DB Clarke Theatre",
         "Dean of Students",
@@ -823,251 +873,265 @@
         "Career and Planning Services",
         "Sexual Assault Resource Centre (SARC)"
       ],
-      "centerCoordinates": [
-        -73.5789475,
-        45.4972685
-      ],
-      "height": 68,
-      "width": 68,
-      "bearing": 34,
-      "availableFloors": [
+      "centerCoordinates":{
+        "latitude":-73.5789475,
+        "longitude":45.4972685
+      },
+      "height":68,
+      "width":68,
+      "bearing":34,
+      "availableFloors":[
         "8",
         "9"
       ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.57955,
-            "longitude": 45.497178
+            "latitude":-73.57955,
+            "longitude":45.497178
           },
           {
-            "latitude": -73.579035,
-            "longitude": 45.497708
+            "latitude":-73.579035,
+            "longitude":45.497708
           },
           {
-            "latitude": -73.578332,
-            "longitude": 45.497385
+            "latitude":-73.578332,
+            "longitude":45.497385
           },
           {
-            "latitude": -73.578842,
-            "longitude": 45.496832
+            "latitude":-73.578842,
+            "longitude":45.496832
           },
           {
-            "latitude": -73.57955,
-            "longitude": 45.497178
+            "latitude":-73.57955,
+            "longitude":45.497178
           }
         ]
       }
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "HA",
-      "Building_Long_Name": "Hingston Hall, wing HA",
-      "Address": "7141 Sherbrooke West",
-      "Departments": [],
-      "Services": [
+      "Campus":"LOY",
+      "BuildingCode":"HA",
+      "Building_Long_Name":"Hingston Hall, wing HA",
+      "Address":"7141 Sherbrooke West",
+      "Departments":[
+
+      ],
+      "Services":[
         "Student Residence"
       ],
-      "centerCoordinates": [
-        -73.64119112491608,
-        45.459464648153244
-      ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "centerCoordinates":{
+        "latitude":-73.64119112491608,
+        "longitude":45.459464648153244
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.64155054092407,
-            "longitude": 45.45944583476873
+            "latitude":-73.64155054092407,
+            "longitude":45.45944583476873
           },
           {
-            "latitude": -73.64105165004729,
-            "longitude": 45.45925770057825
+            "latitude":-73.64105165004729,
+            "longitude":45.45925770057825
           },
           {
-            "latitude": -73.64083707332611,
-            "longitude": 45.45951732559651
+            "latitude":-73.64083707332611,
+            "longitude":45.45951732559651
           },
           {
-            "latitude": -73.641357421875,
-            "longitude": 45.459716746900206
+            "latitude":-73.641357421875,
+            "longitude":45.459716746900206
           },
           {
-            "latitude": -73.64155054092407,
-            "longitude": 45.45944583476873
+            "latitude":-73.64155054092407,
+            "longitude":45.45944583476873
           }
         ]
       }
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "HB",
-      "Building_Long_Name": "Hingston Hall, wing HB",
-      "Address": "7141 Sherbrooke West",
-      "Departments": [],
-      "Services": [
+      "Campus":"LOY",
+      "BuildingCode":"HB",
+      "Building_Long_Name":"Hingston Hall, wing HB",
+      "Address":"7141 Sherbrooke West",
+      "Departments":[
+
+      ],
+      "Services":[
         "Student Residence",
         "CUFA"
       ],
-      "centerCoordinates": [
-        -73.64189386367798,
-        45.45921254827911
-      ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "centerCoordinates":{
+        "latitude":-73.64189386367798,
+        "longitude":45.45921254827911
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.64228010177611,
-            "longitude": 45.45912224357239
+            "latitude":-73.64228010177611,
+            "longitude":45.45912224357239
           },
           {
-            "latitude": -73.6417543888092,
-            "longitude": 45.45893034559038
+            "latitude":-73.6417543888092,
+            "longitude":45.45893034559038
           },
           {
-            "latitude": -73.64157199859619,
-            "longitude": 45.459201260198675
+            "latitude":-73.64157199859619,
+            "longitude":45.459201260198675
           },
           {
-            "latitude": -73.64163100719452,
-            "longitude": 45.45922383635726
+            "latitude":-73.64163100719452,
+            "longitude":45.45922383635726
           },
           {
-            "latitude": -73.64148080348969,
-            "longitude": 45.45938186921439
+            "latitude":-73.64148080348969,
+            "longitude":45.45938186921439
           },
           {
-            "latitude": -73.64197969436644,
-            "longitude": 45.4595737656597
+            "latitude":-73.64197969436644,
+            "longitude":45.4595737656597
           },
           {
-            "latitude": -73.64228010177611,
-            "longitude": 45.45912224357239
+            "latitude":-73.64228010177611,
+            "longitude":45.45912224357239
           }
         ]
       }
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "HC",
-      "Building_Long_Name": "Hingston Hall, wing HC",
-      "Address": "7141 Sherbrooke West",
-      "Departments": [],
-      "Services": [
+      "Campus":"LOY",
+      "BuildingCode":"HC",
+      "Building_Long_Name":"Hingston Hall, wing HC",
+      "Address":"7141 Sherbrooke West",
+      "Departments":[
+
+      ],
+      "Services":[
         "Student Residence"
       ],
-      "centerCoordinates": [
-        -73.64203870296477,
-        45.459709221580816
-      ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "centerCoordinates":{
+        "latitude":-73.64203870296477,
+        "longitude":45.459709221580816
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.642258644104,
-            "longitude": 45.459633968331474
+            "latitude":-73.642258644104,
+            "longitude":45.459633968331474
           },
           {
-            "latitude": -73.64201188087463,
-            "longitude": 45.45952485094153
+            "latitude":-73.64201188087463,
+            "longitude":45.45952485094153
           },
           {
-            "latitude": -73.64187777042387,
-            "longitude": 45.4597016962604
+            "latitude":-73.64187777042387,
+            "longitude":45.4597016962604
           },
           {
-            "latitude": -73.641899228096,
-            "longitude": 45.459716746900206
+            "latitude":-73.641899228096,
+            "longitude":45.459716746900206
           },
           {
-            "latitude": -73.6418080329895,
-            "longitude": 45.45983715187417
+            "latitude":-73.6418080329895,
+            "longitude":45.45983715187417
           },
           {
-            "latitude": -73.6420065164566,
-            "longitude": 45.45990864220581
+            "latitude":-73.6420065164566,
+            "longitude":45.45990864220581
           },
           {
-            "latitude": -73.64208698272705,
-            "longitude": 45.459776949419336
+            "latitude":-73.64208698272705,
+            "longitude":45.459776949419336
           },
           {
-            "latitude": -73.64212989807129,
-            "longitude": 45.45980705065478
+            "latitude":-73.64212989807129,
+            "longitude":45.45980705065478
           },
           {
-            "latitude": -73.642258644104,
-            "longitude": 45.459633968331474
+            "latitude":-73.642258644104,
+            "longitude":45.459633968331474
           }
         ]
       }
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "HU",
-      "Building_Long_Name": "Applied Science Hub",
-      "Address": "7141, Sherbrooke West",
-      "Departments": [],
-      "Services": []
+      "Campus":"LOY",
+      "BuildingCode":"HU",
+      "Building_Long_Name":"Applied Science Hub",
+      "Address":"7141, Sherbrooke West",
+      "Departments":[
+
+      ],
+      "Services":[
+
+      ]
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "JR",
-      "Building_Long_Name": "Jesuit Residence",
-      "Address": "7141 Sherbrooke West",
-      "Departments": [],
-      "Services": [
+      "Campus":"LOY",
+      "BuildingCode":"JR",
+      "Building_Long_Name":"Jesuit Residence",
+      "Address":"7141 Sherbrooke West",
+      "Departments":[
+
+      ],
+      "Services":[
         "Student Residence"
       ],
-      "centerCoordinates": [
-        -73.64320278167725,
-        45.45841108895281
-      ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "centerCoordinates":{
+        "latitude":-73.64320278167725,
+        "longitude":45.45841108895281
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.64339053630829,
-            "longitude": 45.45839603796446
+            "latitude":-73.64339053630829,
+            "longitude":45.45839603796446
           },
           {
-            "latitude": -73.64315986633301,
-            "longitude": 45.45829820644231
+            "latitude":-73.64315986633301,
+            "longitude":45.45829820644231
           },
           {
-            "latitude": -73.64300966262817,
-            "longitude": 45.45850139479848
+            "latitude":-73.64300966262817,
+            "longitude":45.45850139479848
           },
           {
-            "latitude": -73.64313840866089,
-            "longitude": 45.45854278492943
+            "latitude":-73.64313840866089,
+            "longitude":45.45854278492943
           },
           {
-            "latitude": -73.6431759595871,
-            "longitude": 45.4584976320578
+            "latitude":-73.6431759595871,
+            "longitude":45.4584976320578
           },
           {
-            "latitude": -73.64327251911163,
-            "longitude": 45.45852773397622
+            "latitude":-73.64327251911163,
+            "longitude":45.45852773397622
           },
           {
-            "latitude": -73.64339053630829,
-            "longitude": 45.45839603796446
+            "latitude":-73.64339053630829,
+            "longitude":45.45839603796446
           }
         ]
       }
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "K",
-      "Building_Long_Name": "K Annex",
-      "Address": "2150 Bishop Street",
-      "Departments": [
+      "Campus":"SGW",
+      "BuildingCode":"K",
+      "Building_Long_Name":"K Annex",
+      "Address":"2150 Bishop Street",
+      "Departments":[
         "Theological Studies"
       ],
-      "Services": []
+      "Services":[
+
+      ]
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "LB",
-      "Building_Long_Name": "J.W. McConnell Building",
-      "Address": "1400 De Maisonneuve West",
-      "Departments": [
+      "Campus":"SGW",
+      "BuildingCode":"LB",
+      "Building_Long_Name":"J.W. McConnell Building",
+      "Address":"1400 De Maisonneuve West",
+      "Departments":[
         "English",
         "History",
         "Études françaises",
@@ -1075,7 +1139,7 @@
         "Centre for Interdisciplinary Studies in Society and Culture (CISSC)",
         "Centre for the Study of Learning and Performance"
       ],
-      "Services": [
+      "Services":[
         "R. Howard Webster Library",
         "Welcome Centre",
         "Leonard and Bina Ellen Art Gallery",
@@ -1085,109 +1149,117 @@
         "Instructional & Information Technology Services (IITS)",
         "4TH SPACE"
       ],
-      "centerCoordinates": [
-        -73.577966,
-        45.496835
-      ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "centerCoordinates":{
+        "latitude":-73.577966,
+        "longitude":45.496835
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.57831746339798,
-            "longitude": 45.496986732174285
+            "latitude":-73.57831746339798,
+            "longitude":45.496986732174285
           },
           {
-            "latitude": -73.57826918363571,
-            "longitude": 45.49696417114068
+            "latitude":-73.57826918363571,
+            "longitude":45.49696417114068
           },
           {
-            "latitude": -73.5783389210701,
-            "longitude": 45.49690964860552
+            "latitude":-73.5783389210701,
+            "longitude":45.49690964860552
           },
           {
-            "latitude": -73.57837110757828,
-            "longitude": 45.49693408974849
+            "latitude":-73.57837110757828,
+            "longitude":45.49693408974849
           },
           {
-            "latitude": -73.57857763767242,
-            "longitude": 45.49672727974215
+            "latitude":-73.57857763767242,
+            "longitude":45.49672727974215
           },
           {
-            "latitude": -73.57853472232819,
-            "longitude": 45.496700958414124
+            "latitude":-73.57853472232819,
+            "longitude":45.496700958414124
           },
           {
-            "latitude": -73.57856959104538,
-            "longitude": 45.4966746370738
+            "latitude":-73.57856959104538,
+            "longitude":45.4966746370738
           },
           {
-            "latitude": -73.57769519090652,
-            "longitude": 45.49625913428578
+            "latitude":-73.57769519090652,
+            "longitude":45.49625913428578
           },
           {
-            "latitude": -73.5774564743042,
-            "longitude": 45.49649790775584
+            "latitude":-73.5774564743042,
+            "longitude":45.49649790775584
           },
           {
-            "latitude": -73.57768714427948,
-            "longitude": 45.49661447396399
+            "latitude":-73.57768714427948,
+            "longitude":45.49661447396399
           },
           {
-            "latitude": -73.57763886451721,
-            "longitude": 45.49665395601206
+            "latitude":-73.57763886451721,
+            "longitude":45.49665395601206
           },
           {
-            "latitude": -73.57755839824677,
-            "longitude": 45.49661071376751
+            "latitude":-73.57755839824677,
+            "longitude":45.49661071376751
           },
           {
-            "latitude": -73.57728213071823,
-            "longitude": 45.49689084771905
+            "latitude":-73.57728213071823,
+            "longitude":45.49689084771905
           },
           {
-            "latitude": -73.57804924249649,
-            "longitude": 45.497261224025756
+            "latitude":-73.57804924249649,
+            "longitude":45.497261224025756
           },
           {
-            "latitude": -73.57831746339798,
-            "longitude": 45.496986732174285
+            "latitude":-73.57831746339798,
+            "longitude":45.496986732174285
           }
         ]
       }
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "LD",
-      "Building_Long_Name": "LD Building",
-      "Address": "1424 Bishop Street",
-      "Departments": [],
-      "Services": [
+      "Campus":"SGW",
+      "BuildingCode":"LD",
+      "Building_Long_Name":"LD Building",
+      "Address":"1424 Bishop Street",
+      "Departments":[
+
+      ],
+      "Services":[
         "CSU Daycare & Nursery"
       ]
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "LS",
-      "Building_Long_Name": "Learning Square (LS Building)",
-      "Address": "1535 De Maisonneuve West",
-      "Departments": [],
-      "Services": [
+      "Campus":"SGW",
+      "BuildingCode":"LS",
+      "Building_Long_Name":"Learning Square (LS Building)",
+      "Address":"1535 De Maisonneuve West",
+      "Departments":[
+
+      ],
+      "Services":[
         "IT Services"
       ]
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "M",
-      "Building_Long_Name": "M Annex",
-      "Address": "2135 Mackay Street",
-      "Departments": [],
-      "Services": []
+      "Campus":"SGW",
+      "BuildingCode":"M",
+      "Building_Long_Name":"M Annex",
+      "Address":"2135 Mackay Street",
+      "Departments":[
+
+      ],
+      "Services":[
+
+      ]
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "MB",
-      "Building_Long_Name": "John Molson Building",
-      "Address": "1450 Guy Street",
-      "Departments": [
+      "Campus":"SGW",
+      "BuildingCode":"MB",
+      "Building_Long_Name":"John Molson Building",
+      "Address":"1450 Guy Street",
+      "Departments":[
         "Accountancy",
         "Supply Chain & Business Technology Management",
         "Finance",
@@ -1199,58 +1271,60 @@
         "Theatre",
         "Contemporary Dance"
       ],
-      "Services": [
+      "Services":[
         "Career Management Services",
         "John Molson Executive Centre",
         "Performing Arts Facilities"
       ],
-      "centerCoordinates": [
-        -73.578885,
-        45.495305
-      ],
-      "height": 65,
-      "width": 65,
-      "bearing": 127,
-      "availableFloors": [
+      "centerCoordinates":{
+        "latitude":-73.578885,
+        "longitude":45.495305
+      },
+      "height":65,
+      "width":65,
+      "bearing":127,
+      "availableFloors":[
         "S2",
         "1"
       ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.57948958873749,
-            "longitude": 45.49533787282568
+            "latitude":-73.57948958873749,
+            "longitude":45.49533787282568
           },
           {
-            "latitude": -73.57880294322968,
-            "longitude": 45.494956202948266
+            "latitude":-73.57880294322968,
+            "longitude":45.494956202948266
           },
           {
-            "latitude": -73.5784864425659,
-            "longitude": 45.495215663540556
+            "latitude":-73.5784864425659,
+            "longitude":45.495215663540556
           },
           {
-            "latitude": -73.57919186353682,
-            "longitude": 45.4955446879348
+            "latitude":-73.57919186353682,
+            "longitude":45.4955446879348
           },
           {
-            "latitude": -73.57923746109009,
-            "longitude": 45.49554844820246
+            "latitude":-73.57923746109009,
+            "longitude":45.49554844820246
           },
           {
-            "latitude": -73.57948958873749,
-            "longitude": 45.49533787282568
+            "latitude":-73.57948958873749,
+            "longitude":45.49533787282568
           }
         ]
       }
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "MI",
-      "Building_Long_Name": "MI Annex",
-      "Address": "2130 Bishop Street",
-      "Departments": [],
-      "Services": [
+      "Campus":"SGW",
+      "BuildingCode":"MI",
+      "Building_Long_Name":"MI Annex",
+      "Address":"2130 Bishop Street",
+      "Departments":[
+
+      ],
+      "Services":[
         "Association of Concordia University Management and Administrative Employees (ACUMAE)",
         "Concordia University Support Staff Union (CUSSU)",
         "Concordia University Union of Support Staff - Technical Sector (CUSSU-TS)",
@@ -1260,554 +1334,602 @@
       ]
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "MU",
-      "Building_Long_Name": "MU Annex",
-      "Address": "2170 Bishop Street",
-      "Departments": [],
-      "Services": [
+      "Campus":"SGW",
+      "BuildingCode":"MU",
+      "Building_Long_Name":"MU Annex",
+      "Address":"2170 Bishop Street",
+      "Departments":[
+
+      ],
+      "Services":[
         "Simone de Beauvoir Institute"
       ]
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "P",
-      "Building_Long_Name": "P Annex",
-      "Address": "2020 Mackay Street",
-      "Departments": [],
-      "Services": []
+      "Campus":"SGW",
+      "BuildingCode":"P",
+      "Building_Long_Name":"P Annex",
+      "Address":"2020 Mackay Street",
+      "Departments":[
+
+      ],
+      "Services":[
+
+      ]
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "PB",
-      "Building_Long_Name": "PB Building",
-      "Address": "7200 Sherbrooke West",
-      "Departments": [],
-      "Services": []
+      "Campus":"LOY",
+      "BuildingCode":"PB",
+      "Building_Long_Name":"PB Building",
+      "Address":"7200 Sherbrooke West",
+      "Departments":[
+
+      ],
+      "Services":[
+
+      ]
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "PC",
-      "Building_Long_Name": "PERFORM centre",
-      "Address": "7200 Sherbrooke West",
-      "Departments": [],
-      "Services": [
+      "Campus":"LOY",
+      "BuildingCode":"PC",
+      "Building_Long_Name":"PERFORM centre",
+      "Address":"7200 Sherbrooke West",
+      "Departments":[
+
+      ],
+      "Services":[
         "PERFORM Centre"
       ],
-      "centerCoordinates": [
-        -73.63735020160675,
-        45.45693607300003
-      ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "centerCoordinates":{
+        "latitude":-73.63735020160675,
+        "longitude":45.45693607300003
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.63791882991791,
-            "longitude": 45.45702261836892
+            "latitude":-73.63791882991791,
+            "longitude":45.45702261836892
           },
           {
-            "latitude": -73.63701224327087,
-            "longitude": 45.45664633318971
+            "latitude":-73.63701224327087,
+            "longitude":45.45664633318971
           },
           {
-            "latitude": -73.63677084445953,
-            "longitude": 45.45694359868957
+            "latitude":-73.63677084445953,
+            "longitude":45.45694359868957
           },
           {
-            "latitude": -73.63769888877869,
-            "longitude": 45.45728977932186
+            "latitude":-73.63769888877869,
+            "longitude":45.45728977932186
           },
           {
-            "latitude": -73.63791882991791,
-            "longitude": 45.45702261836892
+            "latitude":-73.63791882991791,
+            "longitude":45.45702261836892
           }
         ]
       }
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "PR",
-      "Building_Long_Name": "PR Annex",
-      "Address": "2100 Mackay Street",
-      "Departments": [],
-      "Services": []
+      "Campus":"SGW",
+      "BuildingCode":"PR",
+      "Building_Long_Name":"PR Annex",
+      "Address":"2100 Mackay Street",
+      "Departments":[
+
+      ],
+      "Services":[
+
+      ]
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "PS",
-      "Building_Long_Name": "Physical Services Building",
-      "Address": "7141 Sherbrooke West",
-      "Departments": [],
-      "Services": [
+      "Campus":"LOY",
+      "BuildingCode":"PS",
+      "Building_Long_Name":"Physical Services Building",
+      "Address":"7141 Sherbrooke West",
+      "Departments":[
+
+      ],
+      "Services":[
         "Environmental Health and Safety",
         "Facilities Management"
       ],
-      "centerCoordinates": [
-        -73.63978028297424,
-        45.45966030698017
-      ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "centerCoordinates":{
+        "latitude":-73.63978028297424,
+        "longitude":45.45966030698017
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.6403489112854,
-            "longitude": 45.45970545892074
+            "latitude":-73.6403489112854,
+            "longitude":45.45970545892074
           },
           {
-            "latitude": -73.6394852399826,
-            "longitude": 45.45937434385029
+            "latitude":-73.6394852399826,
+            "longitude":45.45937434385029
           },
           {
-            "latitude": -73.63930284976959,
-            "longitude": 45.45961891766955
+            "latitude":-73.63930284976959,
+            "longitude":45.45961891766955
           },
           {
-            "latitude": -73.6401504278183,
-            "longitude": 45.45995755659102
+            "latitude":-73.6401504278183,
+            "longitude":45.45995755659102
           },
           {
-            "latitude": -73.6403489112854,
-            "longitude": 45.45970545892074
+            "latitude":-73.6403489112854,
+            "longitude":45.45970545892074
           }
         ]
       }
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "PT",
-      "Building_Long_Name": "Oscar Peterson Concert Hall",
-      "Address": "7141 Sherbrooke West",
-      "Departments": [
+      "Campus":"LOY",
+      "BuildingCode":"PT",
+      "Building_Long_Name":"Oscar Peterson Concert Hall",
+      "Address":"7141 Sherbrooke West",
+      "Departments":[
         "Oscar Peterson Concert Hall"
       ],
-      "Services": [
+      "Services":[
         "Concert Hall"
       ],
-      "centerCoordinates": [
-        -73.63897562026978,
-        45.45928027671424
-      ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "centerCoordinates":{
+        "latitude":-73.63897562026978,
+        "longitude":45.45928027671424
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.6392867565155,
-            "longitude": 45.45929909015399
+            "latitude":-73.6392867565155,
+            "longitude":45.45929909015399
           },
           {
-            "latitude": -73.63897562026978,
-            "longitude": 45.459156107854355
+            "latitude":-73.63897562026978,
+            "longitude":45.459156107854355
           },
           {
-            "latitude": -73.63879859447479,
-            "longitude": 45.45912976897015
+            "latitude":-73.63879859447479,
+            "longitude":45.45912976897015
           },
           {
-            "latitude": -73.6386376619339,
-            "longitude": 45.45931790358749
+            "latitude":-73.6386376619339,
+            "longitude":45.45931790358749
           },
           {
-            "latitude": -73.6391419172287,
-            "longitude": 45.4595098002505
+            "latitude":-73.6391419172287,
+            "longitude":45.4595098002505
           },
           {
-            "latitude": -73.6392867565155,
-            "longitude": 45.45929909015399
+            "latitude":-73.6392867565155,
+            "longitude":45.45929909015399
           }
         ]
       }
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "PY",
-      "Building_Long_Name": "Psychology Building",
-      "Address": "7141 Sherbrooke West",
-      "Departments": [
+      "Campus":"LOY",
+      "BuildingCode":"PY",
+      "Building_Long_Name":"Psychology Building",
+      "Address":"7141 Sherbrooke West",
+      "Departments":[
         "Psychology",
         "Centre for clinical research in health (CCRH)"
       ],
-      "Services": [],
-      "centerCoordinates": [
-        -73.64047229290009,
-        45.45891905745346
+      "Services":[
+
       ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "centerCoordinates":{
+        "latitude":-73.64047229290009,
+        "longitude":45.45891905745346
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.64084780216217,
-            "longitude": 45.45880241323957
+            "latitude":-73.64084780216217,
+            "longitude":45.45880241323957
           },
           {
-            "latitude": -73.64041328430176,
-            "longitude": 45.458648141489256
+            "latitude":-73.64041328430176,
+            "longitude":45.458648141489256
           },
           {
-            "latitude": -73.64010751247406,
-            "longitude": 45.459050752243655
+            "latitude":-73.64010751247406,
+            "longitude":45.459050752243655
           },
           {
-            "latitude": -73.64053666591644,
-            "longitude": 45.459220073664795
+            "latitude":-73.64053666591644,
+            "longitude":45.459220073664795
           },
           {
-            "latitude": -73.64084780216217,
-            "longitude": 45.45880241323957
+            "latitude":-73.64084780216217,
+            "longitude":45.45880241323957
           }
         ]
       }
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "Q",
-      "Building_Long_Name": "Q Annex",
-      "Address": "2010 Mackay Street",
-      "Departments": [],
-      "Services": [
+      "Campus":"SGW",
+      "BuildingCode":"Q",
+      "Building_Long_Name":"Q Annex",
+      "Address":"2010 Mackay Street",
+      "Departments":[
+
+      ],
+      "Services":[
         "Ethnic Students' Association"
       ]
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "QA",
-      "Building_Long_Name": "Quadrangle",
-      "Address": "7141 Sherbrooke West",
-      "Departments": [],
-      "Services": [],
-      "centerCoordinates": [
-        -73.64005386829376,
-        45.45860675143567
+      "Campus":"LOY",
+      "BuildingCode":"QA",
+      "Building_Long_Name":"Quadrangle",
+      "Address":"7141 Sherbrooke West",
+      "Departments":[
+
       ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "Services":[
+
+      ],
+      "centerCoordinates":{
+        "latitude":-73.64005386829376,
+        "longitude":45.45860675143567
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.64060640335083,
-            "longitude": 45.4584976320578
+            "latitude":-73.64060640335083,
+            "longitude":45.4584976320578
           },
           {
-            "latitude": -73.63994121551514,
-            "longitude": 45.45826810440134
+            "latitude":-73.63994121551514,
+            "longitude":45.45826810440134
           },
           {
-            "latitude": -73.63968908786774,
-            "longitude": 45.45890776931427
+            "latitude":-73.63968908786774,
+            "longitude":45.45890776931427
           },
           {
-            "latitude": -73.64001631736755,
-            "longitude": 45.4590168878984
+            "latitude":-73.64001631736755,
+            "longitude":45.4590168878984
           },
           {
-            "latitude": -73.64035964012146,
-            "longitude": 45.45862180236775
+            "latitude":-73.64035964012146,
+            "longitude":45.45862180236775
           },
           {
-            "latitude": -73.64060640335083,
-            "longitude": 45.4584976320578
+            "latitude":-73.64060640335083,
+            "longitude":45.4584976320578
           }
         ]
       }
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "R",
-      "Building_Long_Name": "R Annex",
-      "Address": "2050 Mackay Street",
-      "Departments": [
+      "Campus":"SGW",
+      "BuildingCode":"R",
+      "Building_Long_Name":"R Annex",
+      "Address":"2050 Mackay Street",
+      "Departments":[
         "Religions and Cultures"
       ],
-      "Services": []
+      "Services":[
+
+      ]
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "RA",
-      "Building_Long_Name": "Recreation and Athletics Complex",
-      "Address": "7200 Sherbrooke West",
-      "Departments": [],
-      "Services": [
+      "Campus":"LOY",
+      "BuildingCode":"RA",
+      "Building_Long_Name":"Recreation and Athletics Complex",
+      "Address":"7200 Sherbrooke West",
+      "Departments":[
+
+      ],
+      "Services":[
         "Ed Meagher Arena",
         "Gymnasium"
       ],
-      "centerCoordinates": [
-        -73.63781690597534,
-        45.456740404719916
-      ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "centerCoordinates":{
+        "latitude":-73.63781690597534,
+        "longitude":45.456740404719916
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.63862693309784,
-            "longitude": 45.456842001796275
+            "latitude":-73.63862693309784,
+            "longitude":45.456842001796275
           },
           {
-            "latitude": -73.6373770236969,
-            "longitude": 45.45637916918821
+            "latitude":-73.6373770236969,
+            "longitude":45.45637916918821
           },
           {
-            "latitude": -73.63714635372162,
-            "longitude": 45.456695250405
+            "latitude":-73.63714635372162,
+            "longitude":45.456695250405
           },
           {
-            "latitude": -73.6383533477783,
-            "longitude": 45.457199471535716
+            "latitude":-73.6383533477783,
+            "longitude":45.457199471535716
           },
           {
-            "latitude": -73.63862693309784,
-            "longitude": 45.456842001796275
+            "latitude":-73.63862693309784,
+            "longitude":45.456842001796275
           }
         ]
       }
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "RF",
-      "Building_Long_Name": "Loyola Jesuit Hall and Conference Centre",
-      "Address": "7141 Sherbrooke West",
-      "Departments": [],
-      "Services": [
+      "Campus":"LOY",
+      "BuildingCode":"RF",
+      "Building_Long_Name":"Loyola Jesuit Hall and Conference Centre",
+      "Address":"7141 Sherbrooke West",
+      "Departments":[
+
+      ],
+      "Services":[
         "Loyola Jesuit Hall and Conference Centre",
         "Conference services"
       ],
-      "centerCoordinates": [
-        -73.64104092121124,
-        45.45858417502996
-      ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "centerCoordinates":{
+        "latitude":-73.64104092121124,
+        "longitude":45.45858417502996
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.64131987094879,
-            "longitude": 45.45849010657569
+            "latitude":-73.64131987094879,
+            "longitude":45.45849010657569
           },
           {
-            "latitude": -73.6411589384079,
-            "longitude": 45.45844119091744
+            "latitude":-73.6411589384079,
+            "longitude":45.45844119091744
           },
           {
-            "latitude": -73.64121258258818,
-            "longitude": 45.458358410476016
+            "latitude":-73.64121258258818,
+            "longitude":45.458358410476016
           },
           {
-            "latitude": -73.64107847213745,
-            "longitude": 45.45831702020976
+            "latitude":-73.64107847213745,
+            "longitude":45.45831702020976
           },
           {
-            "latitude": -73.64102482795715,
-            "longitude": 45.4583809869721
+            "latitude":-73.64102482795715,
+            "longitude":45.4583809869721
           },
           {
-            "latitude": -73.64088535308838,
-            "longitude": 45.458328308467216
+            "latitude":-73.64088535308838,
+            "longitude":45.458328308467216
           },
           {
-            "latitude": -73.6407083272934,
-            "longitude": 45.45844871640609
+            "latitude":-73.6407083272934,
+            "longitude":45.45844871640609
           },
           {
-            "latitude": -73.64087462425232,
-            "longitude": 45.458505157538916
+            "latitude":-73.64087462425232,
+            "longitude":45.458505157538916
           },
           {
-            "latitude": -73.64070296287537,
-            "longitude": 45.45874973512836
+            "latitude":-73.64070296287537,
+            "longitude":45.45874973512836
           },
           {
-            "latitude": -73.64105165004729,
-            "longitude": 45.45887766759871
+            "latitude":-73.64105165004729,
+            "longitude":45.45887766759871
           },
           {
-            "latitude": -73.64131987094879,
-            "longitude": 45.45849010657569
+            "latitude":-73.64131987094879,
+            "longitude":45.45849010657569
           }
         ]
       }
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "RR",
-      "Building_Long_Name": "RR Annex",
-      "Address": "2040 Mackay Street",
-      "Departments": [
+      "Campus":"SGW",
+      "BuildingCode":"RR",
+      "Building_Long_Name":"RR Annex",
+      "Address":"2040 Mackay Street",
+      "Departments":[
         "Liberal Arts College"
       ],
-      "Services": []
+      "Services":[
+
+      ]
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "S",
-      "Building_Long_Name": "S Annex",
-      "Address": "2145 Mackay Street",
-      "Departments": [
+      "Campus":"SGW",
+      "BuildingCode":"S",
+      "Building_Long_Name":"S Annex",
+      "Address":"2145 Mackay Street",
+      "Departments":[
         "Department of Philosophy"
       ],
-      "Services": []
+      "Services":[
+
+      ]
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "SB",
-      "Building_Long_Name": "Samuel Bronfman Building",
-      "Address": "1590 Doctor Penfield Avenue",
-      "Departments": [],
-      "Services": [
+      "Campus":"SGW",
+      "BuildingCode":"SB",
+      "Building_Long_Name":"Samuel Bronfman Building",
+      "Address":"1590 Doctor Penfield Avenue",
+      "Departments":[
+
+      ],
+      "Services":[
         "Arts and Science Research Groups"
       ]
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "SC",
-      "Building_Long_Name": "Student Centre",
-      "Address": "7141 Sherbrooke West",
-      "Departments": [],
-      "Services": [
+      "Campus":"LOY",
+      "BuildingCode":"SC",
+      "Building_Long_Name":"Student Centre",
+      "Address":"7141 Sherbrooke West",
+      "Departments":[
+
+      ],
+      "Services":[
         "Campus Centre",
         "Food Services",
         "Cafeteria",
         "Café"
       ],
-      "centerCoordinates": [
-        -73.63921701908112,
-        45.45914105706488
-      ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "centerCoordinates":{
+        "latitude":-73.63921701908112,
+        "longitude":45.45914105706488
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.63939940929413,
-            "longitude": 45.45911471817363
+            "latitude":-73.63939940929413,
+            "longitude":45.45911471817363
           },
           {
-            "latitude": -73.63916873931885,
-            "longitude": 45.45902065060446
+            "latitude":-73.63916873931885,
+            "longitude":45.45902065060446
           },
           {
-            "latitude": -73.63906145095825,
-            "longitude": 45.45914105706488
+            "latitude":-73.63906145095825,
+            "longitude":45.45914105706488
           },
           {
-            "latitude": -73.63901317119598,
-            "longitude": 45.45911095547388
+            "latitude":-73.63901317119598,
+            "longitude":45.45911095547388
           },
           {
-            "latitude": -73.63895952701569,
-            "longitude": 45.45915234515736
+            "latitude":-73.63895952701569,
+            "longitude":45.45915234515736
           },
           {
-            "latitude": -73.63931894302368,
-            "longitude": 45.4593141409013
+            "latitude":-73.63931894302368,
+            "longitude":45.4593141409013
           },
           {
-            "latitude": -73.63938331604004,
-            "longitude": 45.45923888712465
+            "latitude":-73.63938331604004,
+            "longitude":45.45923888712465
           },
           {
-            "latitude": -73.63932430744171,
-            "longitude": 45.459216310972096
+            "latitude":-73.63932430744171,
+            "longitude":45.459216310972096
           },
           {
-            "latitude": -73.63939940929413,
-            "longitude": 45.45911471817363
+            "latitude":-73.63939940929413,
+            "longitude":45.45911471817363
           }
         ]
       }
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "SH",
-      "Building_Long_Name": "Solar House",
-      "Address": "7141 Sherbrooke West",
-      "Departments": [],
-      "Services": [],
-      "centerCoordinates": [
-        -73.64257514476776,
-        45.459287802090905
+      "Campus":"LOY",
+      "BuildingCode":"SH",
+      "Building_Long_Name":"Solar House",
+      "Address":"7141 Sherbrooke West",
+      "Departments":[
+
       ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "Services":[
+
+      ],
+      "centerCoordinates":{
+        "latitude":-73.64257514476776,
+        "longitude":45.459287802090905
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.64265561103821,
-            "longitude": 45.4593367170147
+            "latitude":-73.64265561103821,
+            "longitude":45.4593367170147
           },
           {
-            "latitude": -73.6426717042923,
-            "longitude": 45.4592351244332
+            "latitude":-73.6426717042923,
+            "longitude":45.4592351244332
           },
           {
-            "latitude": -73.6424732208252,
-            "longitude": 45.45923888712465
+            "latitude":-73.6424732208252,
+            "longitude":45.45923888712465
           },
           {
-            "latitude": -73.6424732208252,
-            "longitude": 45.45935176775193
+            "latitude":-73.6424732208252,
+            "longitude":45.45935176775193
           },
           {
-            "latitude": -73.64265561103821,
-            "longitude": 45.4593367170147
+            "latitude":-73.64265561103821,
+            "longitude":45.4593367170147
           }
         ]
       }
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "SI",
-      "Building_Long_Name": "St. Ignatius of Loyola Church",
-      "Address": "4455 Broadway Street",
-      "Departments": [],
-      "Services": [],
-      "centerCoordinates": [
-        -73.64237666130066,
-        45.457839148571495
+      "Campus":"LOY",
+      "BuildingCode":"SI",
+      "Building_Long_Name":"St. Ignatius of Loyola Church",
+      "Address":"4455 Broadway Street",
+      "Departments":[
+
       ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "Services":[
+
+      ],
+      "centerCoordinates":{
+        "latitude":-73.64237666130066,
+        "longitude":45.457839148571495
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.64268779754639,
-            "longitude": 45.45762466943286
+            "latitude":-73.64268779754639,
+            "longitude":45.45762466943286
           },
           {
-            "latitude": -73.64250540733337,
-            "longitude": 45.457564464615714
+            "latitude":-73.64250540733337,
+            "longitude":45.457564464615714
           },
           {
-            "latitude": -73.64204406738281,
-            "longitude": 45.457831623001475
+            "latitude":-73.64204406738281,
+            "longitude":45.457831623001475
           },
           {
-            "latitude": -73.6420226097107,
-            "longitude": 45.45794450644607
+            "latitude":-73.6420226097107,
+            "longitude":45.45794450644607
           },
           {
-            "latitude": -73.64216208457947,
-            "longitude": 45.45804986412375
+            "latitude":-73.64216208457947,
+            "longitude":45.45804986412375
           },
           {
-            "latitude": -73.64229083061218,
-            "longitude": 45.458068677974076
+            "latitude":-73.64229083061218,
+            "longitude":45.458068677974076
           },
           {
-            "latitude": -73.64238202571867,
-            "longitude": 45.45805738966464
+            "latitude":-73.64238202571867,
+            "longitude":45.45805738966464
           },
           {
-            "latitude": -73.64235520362854,
-            "longitude": 45.45809125458613
+            "latitude":-73.64235520362854,
+            "longitude":45.45809125458613
           },
           {
-            "latitude": -73.64254295825957,
-            "longitude": 45.45820037475041
+            "latitude":-73.64254295825957,
+            "longitude":45.45820037475041
           },
           {
-            "latitude": -73.64268243312836,
-            "longitude": 45.45798213421069
+            "latitude":-73.64268243312836,
+            "longitude":45.45798213421069
           },
           {
-            "latitude": -73.64253759384155,
-            "longitude": 45.45790311587595
+            "latitude":-73.64253759384155,
+            "longitude":45.45790311587595
           },
           {
-            "latitude": -73.64268779754639,
-            "longitude": 45.45762466943286
+            "latitude":-73.64268779754639,
+            "longitude":45.45762466943286
           }
         ]
       }
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "SP",
-      "Building_Long_Name": "Richard J. Renaud Science Complex",
-      "Address": "7141 Sherbrooke West",
-      "Departments": [
+      "Campus":"LOY",
+      "BuildingCode":"SP",
+      "Building_Long_Name":"Richard J. Renaud Science Complex",
+      "Address":"7141 Sherbrooke West",
+      "Departments":[
         "Biology",
         "Chemistry and Biochemistry",
         "Health, Kinesiology & Applied Physiology",
@@ -1818,287 +1940,307 @@
         "Center for Studies in Behavioral Neurobiology",
         "Centre for Research in Molecular Modeling"
       ],
-      "Services": [
+      "Services":[
         "Science College",
         "Science Technical Centre",
         "Animal Care Facilities",
         "Security Office",
         "Café"
       ],
-      "centerCoordinates": [
-        -73.64165246486664,
-        45.45756070181251
-      ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "centerCoordinates":{
+        "latitude":-73.64165246486664,
+        "longitude":45.45756070181251
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.64094972610474,
-            "longitude": 45.458347122224595
+            "latitude":-73.64094972610474,
+            "longitude":45.458347122224595
           },
           {
-            "latitude": -73.64105165004729,
-            "longitude": 45.45823047682753
+            "latitude":-73.64105165004729,
+            "longitude":45.45823047682753
           },
           {
-            "latitude": -73.64133596420288,
-            "longitude": 45.45835088497533
+            "latitude":-73.64133596420288,
+            "longitude":45.45835088497533
           },
           {
-            "latitude": -73.64203333854675,
-            "longitude": 45.457451580410336
+            "latitude":-73.64203333854675,
+            "longitude":45.457451580410336
           },
           {
-            "latitude": -73.64081025123595,
-            "longitude": 45.4569962784881
+            "latitude":-73.64081025123595,
+            "longitude":45.4569962784881
           },
           {
-            "latitude": -73.64070296287537,
-            "longitude": 45.45713550343302
+            "latitude":-73.64070296287537,
+            "longitude":45.45713550343302
           },
           {
-            "latitude": -73.64063322544098,
-            "longitude": 45.45711668927136
+            "latitude":-73.64063322544098,
+            "longitude":45.45711668927136
           },
           {
-            "latitude": -73.64063322544098,
-            "longitude": 45.457150554757845
+            "latitude":-73.64063322544098,
+            "longitude":45.457150554757845
           },
           {
-            "latitude": -73.6407458782196,
-            "longitude": 45.45721452284347
+            "latitude":-73.6407458782196,
+            "longitude":45.45721452284347
           },
           {
-            "latitude": -73.64071369171143,
-            "longitude": 45.45724838827118
+            "latitude":-73.64071369171143,
+            "longitude":45.45724838827118
           },
           {
-            "latitude": -73.64141643047333,
-            "longitude": 45.45751554815447
+            "latitude":-73.64141643047333,
+            "longitude":45.45751554815447
           },
           {
-            "latitude": -73.64085853099823,
-            "longitude": 45.458301969196306
+            "latitude":-73.64085853099823,
+            "longitude":45.458301969196306
           },
           {
-            "latitude": -73.64094972610474,
-            "longitude": 45.458347122224595
+            "latitude":-73.64094972610474,
+            "longitude":45.458347122224595
           }
         ]
       }
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "T",
-      "Building_Long_Name": "T Annex",
-      "Address": "2030 Mackay Street",
-      "Departments": [],
-      "Services": [
+      "Campus":"SGW",
+      "BuildingCode":"T",
+      "Building_Long_Name":"T Annex",
+      "Address":"2030 Mackay Street",
+      "Departments":[
+
+      ],
+      "Services":[
         "Graduate Students Asociation"
       ]
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "TA",
-      "Building_Long_Name": "Terrebonne Building",
-      "Address": "7079 Terrebonne Street",
-      "Departments": [],
-      "Services": [],
-      "centerCoordinates": [
-        -73.64104092121124,
-        45.460017758853006
+      "Campus":"LOY",
+      "BuildingCode":"TA",
+      "Building_Long_Name":"Terrebonne Building",
+      "Address":"7079 Terrebonne Street",
+      "Departments":[
+
       ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "Services":[
+
+      ],
+      "centerCoordinates":{
+        "latitude":-73.64104092121124,
+        "longitude":45.460017758853006
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.64105165004729,
-            "longitude": 45.4601118247587
+            "latitude":-73.64105165004729,
+            "longitude":45.4601118247587
           },
           {
-            "latitude": -73.64114820957184,
-            "longitude": 45.45999894565304
+            "latitude":-73.64114820957184,
+            "longitude":45.45999894565304
           },
           {
-            "latitude": -73.64103019237518,
-            "longitude": 45.459953793947506
+            "latitude":-73.64103019237518,
+            "longitude":45.459953793947506
           },
           {
-            "latitude": -73.64092290401459,
-            "longitude": 45.46005914787083
+            "latitude":-73.64092290401459,
+            "longitude":45.46005914787083
           },
           {
-            "latitude": -73.64105165004729,
-            "longitude": 45.4601118247587
+            "latitude":-73.64105165004729,
+            "longitude":45.4601118247587
           }
         ]
       }
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "TB",
-      "Building_Long_Name": "TB Annex",
-      "Address": "7075 Terrebonne Street",
-      "Departments": [],
-      "Services": []
+      "Campus":"LOY",
+      "BuildingCode":"TB",
+      "Building_Long_Name":"TB Annex",
+      "Address":"7075 Terrebonne Street",
+      "Departments":[
+
+      ],
+      "Services":[
+
+      ]
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "TD",
-      "Building_Long_Name": "Toronto-Dominion Building",
-      "Address": "1410 Guy Street",
-      "Departments": [],
-      "Services": [
+      "Campus":"SGW",
+      "BuildingCode":"TD",
+      "Building_Long_Name":"Toronto-Dominion Building",
+      "Address":"1410 Guy Street",
+      "Departments":[
+
+      ],
+      "Services":[
         "Concordia University Student Parents Centre (CUSP)"
       ]
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "V",
-      "Building_Long_Name": "V Annex",
-      "Address": "2110 Mackay Street",
-      "Departments": [],
-      "Services": [
+      "Campus":"SGW",
+      "BuildingCode":"V",
+      "Building_Long_Name":"V Annex",
+      "Address":"2110 Mackay Street",
+      "Departments":[
+
+      ],
+      "Services":[
         "Concordia University Television (CUTV)",
         "Centre for Gender Advocacy"
       ]
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "VA",
-      "Building_Long_Name": "Visual Arts Building",
-      "Address": "1395 Rene Levesque West",
-      "Departments": [
+      "Campus":"SGW",
+      "BuildingCode":"VA",
+      "Building_Long_Name":"Visual Arts Building",
+      "Address":"1395 Rene Levesque West",
+      "Departments":[
         "Studio Arts",
         "Art History",
         "Art Education",
         "Creative Arts Therapies"
       ],
-      "Services": [
+      "Services":[
         "VAV Art Gallery",
         "Art Supply Store"
       ]
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "VE",
-      "Building_Long_Name": "Vanier Extension",
-      "Address": "7141 Sherbrooke West",
-      "Departments": [
+      "Campus":"LOY",
+      "BuildingCode":"VE",
+      "Building_Long_Name":"Vanier Extension",
+      "Address":"7141 Sherbrooke West",
+      "Departments":[
         "Applied Human Sciences"
       ],
-      "Services": [
+      "Services":[
         "Library"
       ],
-      "centerCoordinates": [
-        -73.63862693309784,
-        45.45880993867997
-      ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "centerCoordinates":{
+        "latitude":-73.63862693309784,
+        "longitude":45.45880993867997
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.63883614540099,
-            "longitude": 45.459039464130825
+            "latitude":-73.63883614540099,
+            "longitude":45.459039464130825
           },
           {
-            "latitude": -73.63900780677795,
-            "longitude": 45.458828752276666
+            "latitude":-73.63900780677795,
+            "longitude":45.458828752276666
           },
           {
-            "latitude": -73.63842308521271,
-            "longitude": 45.458618039635105
+            "latitude":-73.63842308521271,
+            "longitude":45.458618039635105
           },
           {
-            "latitude": -73.63828361034393,
-            "longitude": 45.458828752276666
+            "latitude":-73.63828361034393,
+            "longitude":45.458828752276666
           },
           {
-            "latitude": -73.63883614540099,
-            "longitude": 45.459039464130825
+            "latitude":-73.63883614540099,
+            "longitude":45.459039464130825
           }
         ]
       }
     },
     {
-      "Campus": "LOY",
-      "BuildingCode": "VL",
-      "Building_Long_Name": "Vanier Library Building",
-      "Address": "7141 Sherbrooke West",
-      "Departments": [],
-      "Services": [
+      "Campus":"LOY",
+      "BuildingCode":"VL",
+      "Building_Long_Name":"Vanier Library Building",
+      "Address":"7141 Sherbrooke West",
+      "Departments":[
+
+      ],
+      "Services":[
         "Library"
       ],
-      "centerCoordinates": [
-        -73.63844,
-        45.45909
-      ],
-      "height": 45,
-      "width": 80,
-      "bearing": 210,
-      "availableFloors": [
+      "centerCoordinates":{
+        "latitude":-73.63844,
+        "longitude":45.45909
+      },
+      "height":45,
+      "width":80,
+      "bearing":210,
+      "availableFloors":[
         "1",
         "2"
       ],
-      "cornerCoordinates": {
-        "listOfCoordinates": [
+      "cornerCoordinates":{
+        "listOfCoordinates":[
           {
-            "latitude": -73.6386376619339,
-            "longitude": 45.4593141409013
+            "latitude":-73.6386376619339,
+            "longitude":45.4593141409013
           },
           {
-            "latitude": -73.63879323005676,
-            "longitude": 45.45914481976262
+            "latitude":-73.63879323005676,
+            "longitude":45.45914481976262
           },
           {
-            "latitude": -73.63895416259766,
-            "longitude": 45.45914858246013
+            "latitude":-73.63895416259766,
+            "longitude":45.45914858246013
           },
           {
-            "latitude": -73.63902390003204,
-            "longitude": 45.45911471817363
+            "latitude":-73.63902390003204,
+            "longitude":45.45911471817363
           },
           {
-            "latitude": -73.63828361034393,
-            "longitude": 45.45882122683875
+            "latitude":-73.63828361034393,
+            "longitude":45.45882122683875
           },
           {
-            "latitude": -73.63804221153259,
-            "longitude": 45.45888143031404
+            "latitude":-73.63804221153259,
+            "longitude":45.45888143031404
           },
           {
-            "latitude": -73.63785982131958,
-            "longitude": 45.45912224357239
+            "latitude":-73.63785982131958,
+            "longitude":45.45912224357239
           },
           {
-            "latitude": -73.63816559314728,
-            "longitude": 45.45922383635726
+            "latitude":-73.63816559314728,
+            "longitude":45.45922383635726
           },
           {
-            "latitude": -73.63823533058167,
-            "longitude": 45.45914481976262
+            "latitude":-73.63823533058167,
+            "longitude":45.45914481976262
           },
           {
-            "latitude": -73.6386376619339,
-            "longitude": 45.4593141409013
+            "latitude":-73.6386376619339,
+            "longitude":45.4593141409013
           }
         ]
       }
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "X",
-      "Building_Long_Name": "X Annex",
-      "Address": "2080 Mackay Street",
-      "Departments": [],
-      "Services": [
+      "Campus":"SGW",
+      "BuildingCode":"X",
+      "Building_Long_Name":"X Annex",
+      "Address":"2080 Mackay Street",
+      "Departments":[
+
+      ],
+      "Services":[
         "Concordia International"
       ]
     },
     {
-      "Campus": "SGW",
-      "BuildingCode": "Z",
-      "Building_Long_Name": "Z Annex",
-      "Address": "2090 Mackay Street",
-      "Departments": [],
-      "Services": [
+      "Campus":"SGW",
+      "BuildingCode":"Z",
+      "Building_Long_Name":"Z Annex",
+      "Address":"2090 Mackay Street",
+      "Departments":[
+
+      ],
+      "Services":[
         "Multi-Faith and Spirituality Centre",
         "Sustainable Concordia"
       ]
