@@ -247,6 +247,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             public void onCameraMove() {
                 if(map.getCameraPosition().zoom > 20){
                     mLayer.removeLayerFromMap();
+                    setupClassMarkerClickListener(map);
                 }
                 else{
                     mLayer.addLayerToMap();
@@ -310,7 +311,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                Log.i(TAG,marker.getTag().toString());
+                System.out.println(marker.getPosition());
                 return false;
             }
         });
