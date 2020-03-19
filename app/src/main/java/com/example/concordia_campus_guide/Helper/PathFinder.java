@@ -140,29 +140,8 @@ public class PathFinder {
     }
 
 
-
     protected double computeEstimatedCostFromInitialToDestination(final WalkingPointNode currentCoordinate) {
         return currentCoordinate.getCost() + indoorPathHeuristic.computeHeuristic(currentCoordinate.getWalkingPoint(), destinationPoint);
-    }
-
-    public Map<Integer, WalkingPointNode> getWalkingPointNodesMap() {
-        return walkingPointNodesMap;
-    }
-
-    public PriorityQueue<WalkingPointNode> getWalkingPointsToVisit() {
-        return walkingPointsToVisit;
-    }
-
-    public Map<WalkingPointNode, Double> getWalkingPointsVisited() {
-        return walkingPointsVisited;
-    }
-
-    public WalkingPoint getInitialPoint() {
-        return initialPoint;
-    }
-
-    public WalkingPoint getDestinationPoint() {
-        return destinationPoint;
     }
 
     public class WalkingPointComparator implements Comparator<WalkingPointNode> {
