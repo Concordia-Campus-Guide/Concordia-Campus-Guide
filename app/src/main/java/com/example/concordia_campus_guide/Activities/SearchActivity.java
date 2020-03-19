@@ -35,15 +35,28 @@ public class SearchActivity extends AppCompatActivity {
 
         //setting up activity
         setContentView(R.layout.search_activity);
-        setBackButtonOnClick();
+        mViewModel = ViewModelProviders.of(this, new ViewModelFactory(this.getApplication())).get(SearchActivityViewModel.class);
+
+        setUiElements();
+        setEvents();
+    }
+
+    private void setUiElements(){
         searchResults = (ListView) findViewById(R.id.searchResults);
         searchText = (EditText) findViewById(R.id.searchText);
-        mViewModel = ViewModelProviders.of(this, new ViewModelFactory(this.getApplication())).get(SearchActivityViewModel.class);
 
         //android adapter for list view
         adapter = new PlaceToSearchResultAdapter(this, R.layout.list_item_layout, mViewModel.getAllPlaces());
         searchResults.setAdapter(adapter);
+    }
 
+    private void setEvents(){
+        setBackButtonOnClick();
+        setTextListener();
+        setOnClickListeners();
+    }
+
+    private void setTextListener(){
         //search results filtering according to search text
         searchText.addTextChangedListener(new TextWatcher(){
             @Override
@@ -56,7 +69,9 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable){ }
         });
+    }
 
+    private void setOnClickListeners(){
         searchResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

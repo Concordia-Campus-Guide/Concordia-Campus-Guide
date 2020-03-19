@@ -30,7 +30,7 @@ public class SearchActivityViewModel extends ViewModel {
         this.appDB = appDb;
         buildings = appDB.buildingDao().getAll();
         floors = appDB.floorDao().getAll();
-        rooms = appDB.roomDao().getAllRooms();
+        rooms = appDB.roomDao().getAll();
     }
 
     public List<Building> getBuildings() {
