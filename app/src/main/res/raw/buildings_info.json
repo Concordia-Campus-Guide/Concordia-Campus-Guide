@@ -1127,11 +1127,19 @@
       ]
     },
     {
+<<<<<<< HEAD
       "Campus":"SGW",
       "BuildingCode":"LB",
       "Building_Long_Name":"J.W. McConnell Building",
       "Address":"1400 De Maisonneuve West",
       "Departments":[
+=======
+      "campus": "SGW",
+      "BuildingCode": "LB",
+      "Building_Long_Name": "J.W. McConnell Building",
+      "Address": "1400 De Maisonneuve West",
+      "Departments": [
+>>>>>>> 698ba030e51fbdc48b408c15f2e728fd537d8545
         "English",
         "History",
         "Études françaises",
@@ -1145,7 +1153,7 @@
         "Leonard and Bina Ellen Art Gallery",
         "J.A de Sève Cinema",
         "Birks Student Services Centre",
-        "Campus Stores",
+        "campus Stores",
         "Instructional & Information Technology Services (IITS)",
         "4TH SPACE"
       ],

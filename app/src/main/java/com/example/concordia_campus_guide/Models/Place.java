@@ -20,8 +20,16 @@ public abstract class Place {
     @Embedded
     protected Coordinates centerCoordinates;
 
+    @ColumnInfo(name ="campus")
+    protected String Campus;
+
     public Place(Coordinates centerCoordinates) {
         this.centerCoordinates = centerCoordinates;
+    }
+
+    public Place(Double[] centerCoordinates, String campus) {
+        this.centerCoordinates = centerCoordinates;
+        this.Campus = campus;
     }
 
     public Place() {}
@@ -47,4 +55,12 @@ public abstract class Place {
     }
     
     public abstract String getDisplayName();
+
+    public String getCampus() {
+        return Campus;
+    }
+
+    public void setCampus(String campus) {
+        this.Campus = campus;
+    }
 }

@@ -48,4 +48,12 @@ public class FloorTest {
         assertEquals(floor.getDisplayName(), "H-9");
         floor.setFloorCode("H-8");
     }
+
+    @Test
+    public void getAndSetCampus(){
+        assertEquals(floor.getCampus(), "SGW");
+        floor.setCampus("LOY");
+        assertEquals(floor.getCampus(), "LOY");
+        floor.setCampus("SGW");
+    }
 }

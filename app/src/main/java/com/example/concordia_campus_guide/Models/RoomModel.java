@@ -1,5 +1,7 @@
 package com.example.concordia_campus_guide.Models;
 
+import android.text.TextUtils;
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

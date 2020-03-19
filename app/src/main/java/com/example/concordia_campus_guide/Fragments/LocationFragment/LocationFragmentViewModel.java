@@ -24,6 +24,7 @@ import com.google.maps.android.geojson.GeoJsonLayer;
 import com.google.maps.android.geojson.GeoJsonPointStyle;
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -150,7 +151,7 @@ public class LocationFragmentViewModel extends ViewModel {
                         .anchor(0.5f,0.5f)
                         .alpha(0.90f)
                         //This line should be included whenever we test the UI for the marker:
-//                        .title(buildingLabel)
+                        //.title(buildingLabel)
         );
         marker.setTag(buildingLabel);
     }
@@ -205,7 +206,6 @@ public class LocationFragmentViewModel extends ViewModel {
     public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, Context context, GoogleMap mMap) {
         String fileName = buildingCode.toLowerCase()+"_"+floor.toLowerCase();
         groundOverlay.setImage(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+fileName+".png"));
-
         if (floorLayer != null) {
             floorLayer.removeLayerFromMap();
         }
