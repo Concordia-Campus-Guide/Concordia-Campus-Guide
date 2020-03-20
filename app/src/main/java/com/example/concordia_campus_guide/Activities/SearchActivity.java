@@ -12,6 +12,8 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+
+import com.example.concordia_campus_guide.Adapters.PlaceToSearchResultAdapter;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.Models.MyCurrentPlace;
@@ -102,7 +104,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void setBackButtonOnClick(){
-        ImageButton backButton = (ImageButton)this.findViewById(R.id.back);
+        ImageButton backButton = this.findViewById(R.id.back);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
