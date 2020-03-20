@@ -30,7 +30,7 @@ public class RoomModelTest {
         String roomCode = room.getRoomCode();
         room.setRoomCode("822");
         assertEquals(room.getRoomCode(), "822");
-        assertEquals(room.getDisplayName(), "822");
+        assertEquals(room.getDisplayName(), "H-8 822");
         room.setFloorCode(roomCode);
     }
 
