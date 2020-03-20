@@ -169,8 +169,8 @@ public class InfoCardFragment extends Fragment {
                 buildingImage.setImageDrawable(d);
             }
             catch(Exception e2){
-                Log.e("MyLog", "jpg image cannot be shown in the info card: " + e.getMessage());
-                Log.e("MyLog", "PNG image cannot be shown in the info card: " + e2.getMessage());
+                Log.e("InfoCardFragment", "jpg image cannot be shown in the info card: " + e.getMessage());
+                Log.e("InfoCardFragment", "PNG image cannot be shown in the info card: " + e2.getMessage());
             }
         }
 
