@@ -19,8 +19,8 @@ public class RouteTest {
 
     @Before
     public void init() {
-        Direction direction1 = new Direction(new LatLng(-73.57907921075821, 45.49702057370776), new LatLng(-73.57921063899994, 45.49707133596979), TransitType.BIKE, "Pulling up with the may bike");
-        Direction direction2 = new Direction(new LatLng(-73.57921063899994, 45.49707133596979), new LatLng(-73.57907921075821, 45.49702057370776), TransitType.CAR, "This is a description boom boom vroom");
+        Direction direction1 = new Direction(new LatLng(-73.57907921075821, 45.49702057370776), new LatLng(-73.57921063899994, 45.49707133596979), TransitType.BIKE, "Pulling up with the may bike", 15);
+        Direction direction2 = new Direction(new LatLng(-73.57921063899994, 45.49707133596979), new LatLng(-73.57907921075821, 45.49702057370776), TransitType.CAR, "This is a description boom boom vroom", 20);
         directions = new ArrayList<>();
         directions.add(direction1);
         directions.add(direction2);

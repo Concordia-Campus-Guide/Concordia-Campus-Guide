@@ -10,12 +10,17 @@ public class Direction {
     private Date endTime;
     private TransitType type;
     private String description;
+    private double duration;
 
-    public Direction(LatLng start, LatLng end, TransitType type, String description) {
+    public Direction() {
+    }
+
+    public Direction(LatLng start, LatLng end, TransitType type, String description, double duration) {
         this.start = start;
         this.end = end;
         this.type = type;
         this.description = description;
+        this.duration = duration;
     }
 
     public LatLng getStart() {
@@ -48,5 +53,13 @@ public class Direction {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public double getDuration() {
+        return duration;
+    }
+
+    public void setDuration(double duration) {
+        this.duration = duration;
     }
 }

@@ -8,23 +8,33 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.concordia_campus_guide.Adapters.DirectionsRecyclerViewAdapter;
 import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.Helper.PathFinder;
+import com.example.concordia_campus_guide.Models.Direction;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PathInfoCardFragment extends Fragment {
 
     private PathInfoCardViewModel mViewModel;
+
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView.Adapter mAdapter;
 
     public static PathInfoCardFragment newInstance() {
         return new PathInfoCardFragment();
@@ -33,7 +43,29 @@ public class PathInfoCardFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.path_info_card_fragment, container, false);
+        View view = inflater.inflate(R.layout.path_info_card_fragment, container, false);
+        recyclerView = (RecyclerView) view.findViewById(R.id.directions_recycle_view);
+        recyclerView.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+
+        List<Direction> directionList = new ArrayList<>();
+        directionList.add(new Direction());
+        directionList.add(new Direction());
+        directionList.add(new Direction());
+        directionList.add(new Direction());
+        directionList.add(new Direction());
+        // specify an adapter for recycler view
+        mAdapter = new DirectionsRecyclerViewAdapter(getContext(), directionList);
+        recyclerView.setAdapter(mAdapter);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
+                recyclerView.getContext(),
+                DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
+        return view;
     }
 
     @Override
