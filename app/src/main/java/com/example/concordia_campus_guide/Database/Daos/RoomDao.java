@@ -13,7 +13,10 @@ import java.util.List;
 @Dao
 public interface RoomDao {
 
-    @Query("SELECT *  FROM rooms")
+    @Query("SELECT *  FROM rooms WHERE floor_code=:floorCode")
+    List<RoomModel> getAllRoomsByFloorCode(String floorCode);
+
+    @Query("SELECT * FROM rooms")
     List<RoomModel> getAll();
 
     @Insert

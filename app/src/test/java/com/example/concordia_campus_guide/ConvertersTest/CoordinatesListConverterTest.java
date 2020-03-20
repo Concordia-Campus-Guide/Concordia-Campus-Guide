@@ -1,6 +1,5 @@
 package com.example.concordia_campus_guide.ConvertersTest;
 
-import com.example.concordia_campus_guide.Database.Converters.CoordinatesConverter;
 import com.example.concordia_campus_guide.Database.Converters.CoordinatesListConverter;
 import com.example.concordia_campus_guide.Models.Coordinates;
 

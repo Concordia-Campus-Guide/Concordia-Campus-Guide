@@ -1,18 +1,18 @@
 package com.example.concordia_campus_guide.Models;
 
-import com.example.concordia_campus_guide.Database.Converters.CoordinatesConverter;
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
 import com.example.concordia_campus_guide.Database.Converters.EnumToStringConverter;
 import com.example.concordia_campus_guide.Database.Converters.IntegerListToStringConverter;
 
 import java.util.List;
 import java.util.Objects;
-
-import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
 
 import static androidx.room.ForeignKey.CASCADE;
 
@@ -32,8 +32,7 @@ public  class WalkingPoint {
     @PrimaryKey
     private int id;
 
-    @ColumnInfo(name = "coordinate")
-    @TypeConverters(CoordinatesConverter.class)
+    @Embedded
     private Coordinates coordinate;
 
     @NonNull
@@ -48,11 +47,15 @@ public  class WalkingPoint {
     @TypeConverters(EnumToStringConverter.class)
     private PointType pointType;
 
-    public WalkingPoint(@NonNull Coordinates coordinate, @NonNull String floorCode, List<Integer> connectedPointsId, PointType pointType) {
+    @ColumnInfo(name = "place_code")
+    private String placeCode;
+
+    public WalkingPoint(@NonNull Coordinates coordinate, @NonNull String floorCode, List<Integer> connectedPointsId, PointType pointType, String placeCode) {
         this.coordinate = coordinate;
         this.floorCode = floorCode;
         this.connectedPointsId = connectedPointsId;
         this.pointType = pointType;
+        this.placeCode = placeCode;
     }
 
     @Override
@@ -97,6 +100,10 @@ public  class WalkingPoint {
     public void setPointType(PointType pointType) {
         this.pointType = pointType;
     }
+
+    public String getPlaceCode() { return placeCode; }
+
+    public void setPlaceCode(String placeCode) { this.placeCode = placeCode; }
 
     @Override
     public boolean equals(Object o) {

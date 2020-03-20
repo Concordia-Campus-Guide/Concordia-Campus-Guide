@@ -2,6 +2,7 @@ package com.example.concordia_campus_guide.ConvertersTest;
 
 import com.example.concordia_campus_guide.Database.Converters.StringListConverter;
 import com.example.concordia_campus_guide.Models.Building;
+import com.example.concordia_campus_guide.Models.Coordinates;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +21,7 @@ public class StringListConverterTest {
 
     @Before
     public void init() {
-        building  = new Building(new Double[]{45.4972685, -73.5789475}, new ArrayList<String>(Arrays.asList("8","9")), 68, 68, 34, null, "H", null, null, null, null, null);
+        building  = new Building(new Coordinates(45.4972685, -73.5789475), new ArrayList<String>(Arrays.asList("8","9")), 68, 68, 34, null, "H", null, null, null, null, null);
         stringListConverter = new StringListConverter();
     }
 

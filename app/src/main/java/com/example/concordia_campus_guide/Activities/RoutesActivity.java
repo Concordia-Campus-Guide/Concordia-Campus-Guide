@@ -12,7 +12,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
+import com.example.concordia_campus_guide.Models.Shuttle;
+import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.R;
+
+import java.util.List;
 
 public class RoutesActivity extends AppCompatActivity {
 
@@ -20,17 +24,19 @@ public class RoutesActivity extends AppCompatActivity {
 
     TextView fromText;
     TextView toText;
+    TextView content;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //set up activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.routes_activity);
-        mViewModel = ViewModelProviders.of(this).get(RoutesActivityViewModel.class);
-
+        mViewModel = ViewModelProviders.of(this, new ViewModelFactory(this.getApplication())).get(RoutesActivityViewModel.class);
+        mViewModel.setShuttles();
         //get view
         fromText = (TextView) findViewById(R.id.fromText);
         toText = (TextView) findViewById(R.id.toText);
+        content = (TextView) findViewById(R.id.content);
 
         //setup toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -87,7 +93,12 @@ public class RoutesActivity extends AppCompatActivity {
     private void openSearchPage(){
         Intent openSearch= new Intent(RoutesActivity.this,
                 SearchActivity.class);
-
         startActivity(openSearch);
+    }
+
+    public void getShuttle(View view) {
+        List<Shuttle> shuttles = mViewModel.getShuttles();
+        String content = mViewModel.getShuttleDisplayText(shuttles);
+        this.content.setText(content);
     }
 }
