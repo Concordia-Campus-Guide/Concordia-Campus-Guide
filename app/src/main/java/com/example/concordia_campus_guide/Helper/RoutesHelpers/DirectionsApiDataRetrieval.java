@@ -85,6 +85,7 @@ public class DirectionsApiDataRetrieval extends AsyncTask<String, Void, String> 
                 sb.append(line);
             }
             data = sb.toString();
+            Log.d(DirectionsApiDataRetrieval.class.getName(), "Downloaded URL: " + data);
         } catch (Exception e) {
             Log.e(DirectionsApiDataRetrieval.class.getName(), "Exception fetching the data from the Google MAps Directions API: " + e.toString());
         } finally {
