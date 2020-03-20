@@ -11,26 +11,29 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsResult;
 import com.example.concordia_campus_guide.Helper.RoutesHelpers.DirectionsApiDataRetrieval;
+import com.example.concordia_campus_guide.Models.Coordinates;
+import com.example.concordia_campus_guide.Models.Shuttle;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.List;
+
 public class RoutesActivity extends AppCompatActivity {
 
     RoutesActivityViewModel mViewModel;
-
     TextView fromText;
     TextView toText;
-    Button getDirection;
-
     private MarkerOptions from;
     private MarkerOptions to;
+    TextView content;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,13 @@ public class RoutesActivity extends AppCompatActivity {
         //get view
         fromText = findViewById(R.id.fromText);
         toText = findViewById(R.id.toText);
+        mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getApplication())).get(RoutesActivityViewModel.class);
+        mViewModel.setShuttles();
+
+        //get view
+        fromText = (TextView) findViewById(R.id.fromText);
+        toText = (TextView) findViewById(R.id.toText);
+        content = (TextView) findViewById(R.id.content);
 
         //setup toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -62,15 +72,9 @@ public class RoutesActivity extends AppCompatActivity {
         // set back button
         setBackButtonOnClick();
 
-        // get all possible routes
-        getDirection = findViewById(R.id.btnGetDirection); // dummy button for now to test if we can retrieve all routes correctly starting from the UI
-        getDirection.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = mViewModel.buildUrl(from.getPosition(), to.getPosition(), ClassConstants.TRANSIT);
-                new DirectionsApiDataRetrieval(RoutesActivity.this).execute(url);
-            }
-        });
+        // get all possible routes. The following statements should happen on an onClick event.
+        String url = mViewModel.buildUrl(from.getPosition(), to.getPosition(), ClassConstants.TRANSIT);
+        new DirectionsApiDataRetrieval(RoutesActivity.this).execute(url);
     }
 
     public void onClickTo(View v){
@@ -119,18 +123,23 @@ public class RoutesActivity extends AppCompatActivity {
     private void openSearchPage(){
         Intent openSearch= new Intent(RoutesActivity.this,
                 SearchActivity.class);
-
         startActivity(openSearch);
     }
 
     private void setFrom() {
-        Double[] toCoordinates = (mViewModel.getTo().getCenterCoordinates());
-        to = new MarkerOptions().position(new LatLng(toCoordinates[1], toCoordinates[0]));
+        Coordinates toCoordinates = (mViewModel.getTo().getCenterCoordinates());
+        to = new MarkerOptions().position(new LatLng(toCoordinates.getLatitude(), toCoordinates.getLongitude()));
 
     }
 
     private void setTo() {
-        Double[] fromCoordinates = (mViewModel.getFrom().getCenterCoordinates());
-        from = new MarkerOptions().position(new LatLng(fromCoordinates[0], fromCoordinates[1]));
+        Coordinates fromCoordinates = (mViewModel.getFrom().getCenterCoordinates());
+        from = new MarkerOptions().position(new LatLng(fromCoordinates.getLatitude(), fromCoordinates.getLongitude()));
+    }
+
+    public void getShuttle(View view) {
+        List<Shuttle> shuttles = mViewModel.getShuttles();
+        String content = mViewModel.getShuttleDisplayText(shuttles);
+        this.content.setText(content);
     }
 }

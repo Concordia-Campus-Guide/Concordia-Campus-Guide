@@ -4,6 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
+
+import com.example.concordia_campus_guide.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,7 +28,7 @@ public class RoomModel extends Place {
     @NonNull
     private String roomCode;
 
-    public RoomModel(Double[] centerCoordinates, @NonNull String roomCode, @NonNull String floorCode) {
+    public RoomModel(Coordinates centerCoordinates, @NonNull String roomCode, @NonNull String floorCode) {
         super(centerCoordinates);
         this.roomCode = roomCode;
         this.floorCode = floorCode;
@@ -66,7 +69,7 @@ public class RoomModel extends Place {
             toReturn.put("properties", properties);
 
             geometry.put("type", "Point");
-            Double[] geoJsonCoordinates = centerCoordinates;
+            Double[] geoJsonCoordinates = this.getCenterCoordinatesDoubleArray();
             geometry.put("coordinates", new JSONArray(geoJsonCoordinates));
 
             toReturn.put("geometry", geometry);
@@ -83,6 +86,6 @@ public class RoomModel extends Place {
     }
 
     public String getDisplayName(){
-        return roomCode;
+        return floorCode + " " + roomCode;
     }
 }

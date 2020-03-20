@@ -21,8 +21,8 @@ public class WalkingPointsTest {
     @Before
     public void init() {
         walkingPointsList = new ArrayList<>();
-        walkingPointsList.add(new WalkingPoint(new Coordinates(-70.04, 45.45), "H-8",new ArrayList<>(Arrays.asList(new Integer[]{2,3})), PointType.CLASSROOM));
-        walkingPointsList.add(new WalkingPoint(new Coordinates(-73.57907921075821, 45.49702057370776), "H-9",new ArrayList<>(Arrays.asList(new Integer[]{1,3})), PointType.CLASSROOM));
+        walkingPointsList.add(new WalkingPoint(new Coordinates(-70.04, 45.45), "H-8",new ArrayList<>(Arrays.asList(new Integer[]{2,3})), PointType.CLASSROOM, "834"));
+        walkingPointsList.add(new WalkingPoint(new Coordinates(-73.57907921075821, 45.49702057370776), "H-9",new ArrayList<>(Arrays.asList(new Integer[]{1,3})), PointType.CLASSROOM,"937"));
 
         walkingPoints = new WalkingPoints(walkingPointsList);
     }
@@ -35,7 +35,7 @@ public class WalkingPointsTest {
     @Test
     public void setWalkingPointsTest() {
         List<WalkingPoint> walkingPointsListTemp = new ArrayList<>();
-        walkingPointsListTemp.add(new WalkingPoint(new Coordinates(-55, 45), "H-9",new ArrayList<>(Arrays.asList(new Integer[]{2,3,5})), PointType.ELEVATOR));
+        walkingPointsListTemp.add(new WalkingPoint(new Coordinates(-55, 45), "H-9",new ArrayList<>(Arrays.asList(new Integer[]{2,3,5})), PointType.ELEVATOR, "elevators"));
         List<WalkingPoint> temp = walkingPoints.getWalkingPoints();
         walkingPoints.setWalkingPoints(walkingPointsListTemp);
         assertEquals(walkingPoints.getWalkingPoints(), walkingPointsListTemp);

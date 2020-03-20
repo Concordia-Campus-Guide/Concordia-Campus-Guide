@@ -247,6 +247,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             public void onCameraMove() {
                 if(map.getCameraPosition().zoom > 20){
                     mLayer.removeLayerFromMap();
+                    setupClassMarkerClickListener(map);
                 }
                 else{
                     mLayer.addLayerToMap();
@@ -290,7 +291,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                 Building building = mViewModel.getBuildingFromeCode(marker.getTag().toString());
+                Building building = mViewModel.getBuildingFromeCode(marker.getTag().toString());
                 //TODO: Make function that pops up the info card for the building (via the building-code)
                 String buildingCode = (marker.getTag()).toString();
                 ((MainActivity)getActivity()).showInfoCard(buildingCode);
@@ -413,7 +414,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         handler.postDelayed(new Runnable(){
             @Override
             public void run(){
-                fusedLocationProviderClient.getLastLocation().addOnSuccessListener(getActivity(), new updateLocationListener());
+                fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new updateLocationListener());
                 handler.postDelayed(this, 5000);
             }
         }, 5000);

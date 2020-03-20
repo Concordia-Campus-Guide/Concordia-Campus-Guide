@@ -22,7 +22,7 @@ public class WalkingPointTest {
 
     @Before
     public void init() {
-        walkingPoint = new WalkingPoint(new Coordinates(-70.04, 45.45), "H-9",new ArrayList<>(Arrays.asList(new Integer[]{1,2,3})), PointType.CLASSROOM);
+        walkingPoint = new WalkingPoint(new Coordinates(-70.04, 45.45), "H-9",new ArrayList<>(Arrays.asList(new Integer[]{1,2,3})), PointType.CLASSROOM, "937");
     }
 
     @Test
@@ -69,7 +69,7 @@ public class WalkingPointTest {
 
     @Test
     public void equalsTest(){
-        WalkingPoint walkingPointTwo = new WalkingPoint(new Coordinates(-70.04, 45.45), "H-9",new ArrayList<>(Arrays.asList(new Integer[]{})), PointType.ELEVATOR);
+        WalkingPoint walkingPointTwo = new WalkingPoint(new Coordinates(-70.04, 45.45), "H-9",new ArrayList<>(Arrays.asList(new Integer[]{})), PointType.ELEVATOR, "elevators");
         assertTrue(walkingPoint.equals(walkingPointTwo));
         assertTrue(walkingPoint.equals(walkingPoint));
         assertFalse(walkingPoint.equals(null));
