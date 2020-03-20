@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -56,30 +57,30 @@ public class InfoCardFragmentIntegrationTest {
      */
     @Test
     public void correctCollapsedInfoCardPopsUpWhenSpecificMarkerIsClickedTest() throws UiObjectNotFoundException, InterruptedException {
-        UiObject marker = device.findObject(new UiSelector().descriptionContains("EV"));
-        marker.click();
-        Thread.sleep(1500);
-
-        ViewInteraction scrollView = onView(
-                allOf(withId(R.id.info_card),
+        ViewInteraction materialButton = onView(
+                allOf(withId(R.id.SGWBtn), withText("SGW"),
                         childAtPosition(
-                                allOf(withId(R.id.info_card_coordinator_layout),
+                                allOf(withId(R.id.campusSwitchBtnContainer),
                                         childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class),
-                                                1)),
+                                                withId(R.id.topMapContainer),
+                                                0)),
                                 0),
                         isDisplayed()));
-        scrollView.check(matches(isDisplayed()));
+        materialButton.perform(click());
+
+        UiObject marker = device.findObject(new UiSelector().descriptionContains("H"));
+        marker.click();
+        Thread.sleep(5000);
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.info_card_title), withText("Engineering, Computer Science and Visual Arts Integrated Complex"),
+                allOf(withId(R.id.info_card_title), withText("Henry F. Hall Building"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.info_card_frame),
                                         0),
                                 0),
                         isDisplayed()));
-        textView.check(matches(withText("Engineering, Computer Science and Visual Arts Integrated Complex")));
+        textView.check(matches(withText("Henry F. Hall Building")));
     }
 
     /**
