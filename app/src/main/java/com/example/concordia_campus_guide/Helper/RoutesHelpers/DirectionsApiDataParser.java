@@ -27,7 +27,7 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
         DirectionsResult directionsResult = null;
 
         try {
-            Log.d(ClassConstants.MY_LOG, "Mapping data to models");
+            Log.d(DirectionsApiDataParser.class.getName(), "Mapping data to models");
 
             Gson gson = new GsonBuilder()
                     .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
@@ -36,7 +36,7 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
             directionsResult = gson.fromJson(dataRetrieval.data, DirectionsResult.class);
 
         } catch (Exception e) {
-            Log.e(ClassConstants.MY_LOG, "Exception using Gson to map JSON to Models: " + e.toString());
+            Log.e(DirectionsApiDataParser.class.getName(), "Exception using Gson to map JSON to Models: " + e.toString());
         }
 
         return directionsResult;

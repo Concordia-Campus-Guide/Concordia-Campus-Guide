@@ -39,7 +39,7 @@ public class DirectionsApiDataRetrieval extends AsyncTask<String, Void, String> 
         try {
             data = getDataFromGMapsDirectionsApi(strings[0]);
         } catch (Exception e) {
-            Log.e(ClassConstants.MY_LOG, e.toString());
+            Log.e(DirectionsApiDataRetrieval.class.getName(), e.toString());
         }
         return data;
     }
@@ -77,7 +77,7 @@ public class DirectionsApiDataRetrieval extends AsyncTask<String, Void, String> 
         InputStream iStream = urlConnection.getInputStream();
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(iStream))) {
-            Log.d(ClassConstants.MY_LOG, "Fetching routes");
+            Log.d(DirectionsApiDataRetrieval.class.getName(), "Fetching routes");
 
             StringBuilder sb = new StringBuilder();
             String line = "";
@@ -86,7 +86,7 @@ public class DirectionsApiDataRetrieval extends AsyncTask<String, Void, String> 
             }
             data = sb.toString();
         } catch (Exception e) {
-            Log.e(ClassConstants.MY_LOG, "Exception fetching the data from the Google MAps Directions API: " + e.toString());
+            Log.e(DirectionsApiDataRetrieval.class.getName(), "Exception fetching the data from the Google MAps Directions API: " + e.toString());
         } finally {
             iStream.close();
             urlConnection.disconnect();
