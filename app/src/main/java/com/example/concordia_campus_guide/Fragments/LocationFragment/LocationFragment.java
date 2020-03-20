@@ -414,7 +414,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         handler.postDelayed(new Runnable(){
             @Override
             public void run(){
-                fusedLocationProviderClient.getLastLocation().addOnSuccessListener(getActivity(), new updateLocationListener());
+                fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new updateLocationListener());
                 handler.postDelayed(this, 5000);
             }
         }, 5000);

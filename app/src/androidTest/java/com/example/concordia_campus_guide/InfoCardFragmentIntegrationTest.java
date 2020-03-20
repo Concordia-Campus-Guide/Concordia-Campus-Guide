@@ -70,7 +70,7 @@ public class InfoCardFragmentIntegrationTest {
 
         UiObject marker = device.findObject(new UiSelector().descriptionContains("H"));
         marker.click();
-        Thread.sleep(5000);
+        Thread.sleep(3000);
 
         ViewInteraction textView = onView(
                 allOf(withId(R.id.info_card_title), withText("Henry F. Hall Building"),
@@ -88,11 +88,11 @@ public class InfoCardFragmentIntegrationTest {
      * @throws UiObjectNotFoundException
      * @throws InterruptedException
      */
-    @Test
-    public void correctExpandedInfoCardAppearsWhenSwipingUpCardTest() throws UiObjectNotFoundException, InterruptedException {
-        UiObject marker = device.findObject(new UiSelector().descriptionContains("EV"));
-        marker.click();
-        Thread.sleep(1500);
+//    @Test
+//    public void correctExpandedInfoCardAppearsWhenSwipingUpCardTest() throws UiObjectNotFoundException, InterruptedException {
+//        UiObject marker = device.findObject(new UiSelector().descriptionContains("EV"));
+//        marker.click();
+//        Thread.sleep(1500);
 
         // The rest of the test requires the card to be swiped up/expanded which I am unable to simulate so I'll leave it commented for now
 //        // Ui automator section
@@ -132,7 +132,7 @@ public class InfoCardFragmentIntegrationTest {
 //                                1),
 //                        isDisplayed()));
 //        textView4.check(matches(withText("LeGym, FOFA Gallery")));
-    }
+//    }
 
     /**
      * Helper method
