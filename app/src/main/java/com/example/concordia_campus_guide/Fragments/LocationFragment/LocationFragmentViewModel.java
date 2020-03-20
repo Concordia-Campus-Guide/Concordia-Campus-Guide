@@ -293,8 +293,4 @@ public class LocationFragmentViewModel extends ViewModel {
                 .color(Color.rgb(147,35, 57))
                 .visible(true);
     }
-
-    public List<WalkingPoint> getWalkingPoints() {
-        return walkingPoints;
-    }
 }

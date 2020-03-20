@@ -55,7 +55,7 @@ public class PathsActivity extends AppCompatActivity {
 
 
         locationFragment.drawPaths(from, to);
-        locationFragment.setLocationToDisplay(new LatLng(-73.57901685, 45.49761115));
+//        locationFragment.setLocationToDisplay(new LatLng(-73.57901685, 45.49761115));
 
         View pathInfoCard = findViewById(R.id.path_info_card);
         swipeableInfoCard = BottomSheetBehavior.from(pathInfoCard);

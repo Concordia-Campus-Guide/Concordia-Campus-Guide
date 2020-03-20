@@ -250,7 +250,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         map.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
             @Override
             public void onCameraMove() {
-                if(map.getCameraPosition().zoom > 14){
+                if(map.getCameraPosition().zoom > 18){
                     mLayer.removeLayerFromMap();
                     setupClassMarkerClickListener(map);
                 }
@@ -452,9 +452,5 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                 LocationFragment.this.setCurrentLocation((android.location.Location) location);
             }
         }
-    }
-
-    public List<WalkingPoint> getWalkingPoints(){
-        return mViewModel.getWalkingPoints();
     }
 }
