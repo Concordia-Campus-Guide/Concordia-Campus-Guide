@@ -14,6 +14,9 @@ public class Direction {
     private double duration;
 
 
+    public Direction() {
+    }
+
     public Direction(LatLng start, LatLng end, TransitType type, String description, double duration) {
         this.start = start;
         this.end = end;

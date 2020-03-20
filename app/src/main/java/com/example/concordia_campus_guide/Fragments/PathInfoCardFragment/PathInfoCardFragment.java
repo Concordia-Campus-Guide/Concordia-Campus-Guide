@@ -2,7 +2,6 @@ package com.example.concordia_campus_guide.Fragments.PathInfoCardFragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.format.DateUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.concordia_campus_guide.Adapters.DirectionsRecyclerViewAdapter;
 import com.example.concordia_campus_guide.Helper.PathFinder;
 import com.example.concordia_campus_guide.Models.Direction;
 import com.example.concordia_campus_guide.Models.PointType;
@@ -23,9 +26,7 @@ import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.TransitType;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
-import com.google.api.client.util.DateTime;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -39,6 +40,10 @@ public class PathInfoCardFragment extends Fragment {
 
     private PathInfoCardViewModel mViewModel;
 
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView.Adapter mAdapter;
+
     public static PathInfoCardFragment newInstance() {
         return new PathInfoCardFragment();
     }
@@ -46,7 +51,14 @@ public class PathInfoCardFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.path_info_card_fragment, container, false);
+        View view = inflater.inflate(R.layout.path_info_card_fragment, container, false);
+        recyclerView = (RecyclerView) view.findViewById(R.id.directions_recycle_view);
+        recyclerView.setHasFixedSize(false);
+
+        layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+
+        return view;
     }
 
     @Override
@@ -59,6 +71,9 @@ public class PathInfoCardFragment extends Fragment {
     }
 
     private List<WalkingPoint> getWalkingPoints() {
+//        RoomModel from = (RoomModel) SelectingToFromState.getFrom();
+//        RoomModel to = (RoomModel) SelectingToFromState.getTo();
+//        PathFinder pf = new PathFinder(getContext(), from, to);
         RoomModel src = new RoomModel(new Double[]{-73.57901685, 45.49761115}, "927", "H-9");
         RoomModel destination = new RoomModel(new Double[]{-73.57854277, 45.49739565}, "918", "H-8");
         PathFinder pf = new PathFinder(getContext(), src, destination);
@@ -135,6 +150,15 @@ public class PathInfoCardFragment extends Fragment {
             directionList.add(direction);
             totalDistance += distance;
         }
+
+        // specify an adapter for recycler view
+        mAdapter = new DirectionsRecyclerViewAdapter(getContext(), directionList);
+        recyclerView.setAdapter(mAdapter);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
+                recyclerView.getContext(),
+                DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(dividerItemDecoration);
     }
 
     public double getDistanceFromLatLonInKm(double lat1, double lon1, double lat2, double lon2) {
