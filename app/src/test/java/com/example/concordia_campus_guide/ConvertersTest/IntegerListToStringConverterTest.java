@@ -34,7 +34,8 @@ public class IntegerListToStringConverterTest{
     @Test
     public void convertListOfIntegerToStringTest(){
         String stringOfIds = integerListToStringConverter.convertToDatabaseColumn(listOfIntegers);
-        assertEquals("convertListOfIntegerToStringTest:", "1,2,3,",stringOfIds);
+        assertEquals("convertListOfIntegerToStringTest: ", "1,2,3,",stringOfIds);
+        assertEquals("convertListOfIntegerToStringTest: ", null,integerListToStringConverter.convertToDatabaseColumn(null));
     }
 
     @Test
@@ -44,5 +45,7 @@ public class IntegerListToStringConverterTest{
         for (int i =0; i <listOfIntegerTemp.size(); i++){
             assertTrue("convertStringToListOfInteger: ",listOfIntegers.get(i).equals(listOfIntegerTemp.get(i)));
         }
+        assertEquals("convertStringToListOfInteger: ", null,integerListToStringConverter.convertToEntityAttribute(null));
+
     }
 }

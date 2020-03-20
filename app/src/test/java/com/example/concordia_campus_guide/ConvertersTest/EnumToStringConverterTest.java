@@ -20,12 +20,15 @@ public class EnumToStringConverterTest {
     public void fromPointTypeToStringTest(){
         String str = enumToStringConverter.fromPointTypeToString(PointType.ELEVATOR);
         assertEquals("fromPointTypeToStringTest: ", "ELEVATOR",str );
+        assertEquals("fromPointTypeToStringTest: ", null, enumToStringConverter.fromPointTypeToString(null) );
     }
 
     @Test
     public void fromStringToPointTypeTest(){
         PointType pointType = enumToStringConverter.fromStringToPointType("ELEVATOR");
-        assertEquals("fromPointTypeToStringTest: ", PointType.ELEVATOR, pointType);
+        assertEquals("fromStringToPointTypeTest: ", PointType.ELEVATOR, pointType);
+        assertEquals("fromStringToPointTypeTest: ", null, enumToStringConverter.fromPointTypeToString(null) );
+
     }
 
 }

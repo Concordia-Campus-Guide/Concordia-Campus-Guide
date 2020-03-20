@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
 public class CoordinatesListConverterTest {
@@ -42,6 +43,7 @@ public class CoordinatesListConverterTest {
     public void convertListOfCoordinatesToStringTest(){
         String jsonObject = coordinatesListConverter.convertToDatabaseColumn(coordinatesList);
         assertEquals("convertListOfCoordinatesToStringTest:", json,jsonObject);
+        assertEquals(null,coordinatesListConverter.convertToDatabaseColumn(null));
     }
 
     @Test
@@ -51,5 +53,7 @@ public class CoordinatesListConverterTest {
         for (int i =0; i <listOfCoordinatesTemp.size(); i++){
             assertTrue("convertStringToListOfCoordinatesTest: ",listOfCoordinatesTemp.get(i).equals(coordinatesList.get(i)));
         }
+        assertEquals(null,coordinatesListConverter.convertToDatabaseColumn(null));
+
     }
 }

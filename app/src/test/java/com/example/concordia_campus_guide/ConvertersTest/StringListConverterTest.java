@@ -36,6 +36,7 @@ public class StringListConverterTest {
         building.setDepartments(departments);
         String strResult = stringListConverter.convertToDatabaseColumn(building.getDepartments());
         assertEquals("convertListToStringTest: ", "Computer Science & Software Engineering,Art,Business",strResult);
+        assertEquals("convertListToStringTest: ", null,stringListConverter.convertToDatabaseColumn(null));
     }
 
     @Test
@@ -51,5 +52,7 @@ public class StringListConverterTest {
         for(int i =0; i <listOfServices.size(); i++){
             assertEquals("convertStringToList: ",building.getServices().get(i), listOfServices.get(i) );
         }
+        assertEquals("convertListToStringTest: ", null,stringListConverter.convertToEntityAttribute(null));
+
     }
 }
