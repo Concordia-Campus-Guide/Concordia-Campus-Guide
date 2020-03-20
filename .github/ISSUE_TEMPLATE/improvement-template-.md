@@ -1,6 +1,6 @@
 ---
 name: 'Improvement Template '
-about:
+about: Serves as possible improvement template
 title: ''
 labels: Improvement
 assignees: ''
