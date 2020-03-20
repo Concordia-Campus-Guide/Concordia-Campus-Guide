@@ -49,10 +49,6 @@ public class Building extends Place {
     @TypeConverters(CoordinatesListConverter.class)
     private ListOfCoordinates cornerCoordinates = new ListOfCoordinates();
 
-    //Descriptive Attributes
-    @ColumnInfo(name = "campus")
-    private String Campus;
-
     @ColumnInfo(name = "building_code")
     @NonNull
     private String BuildingCode;
@@ -78,14 +74,13 @@ public class Building extends Place {
     public Building(String buildingCode){
         this.BuildingCode = buildingCode;
     }
-    public Building(Double[] centerCoordinates, List<String> availableFloors, float width, float height, float bearing,
+    public Building(Coordinates centerCoordinates, List<String> availableFloors, float width, float height, float bearing,
                     String campus, String buildingCode, String Building_Long_Name, String address,
                     List<String> departments, List<String> services, ListOfCoordinates cornerCoordinates) {
-        super(centerCoordinates);
+        super(centerCoordinates, campus);
         this.availableFloors = availableFloors;
         this.width = width;
         this.height = height;
-        this.Campus = campus;
         this.BuildingCode = buildingCode;
         this.Building_Long_Name = Building_Long_Name;
         this.Address = address;
@@ -134,14 +129,6 @@ public class Building extends Place {
 
     public void setBearing(float bearing) {
         this.bearing = bearing;
-    }
-
-    public String getCampus() {
-        return Campus;
-    }
-
-    public void setCampus(String campus) {
-        this.Campus = campus;
     }
 
     public String getBuildingCode() {
@@ -213,7 +200,7 @@ public class Building extends Place {
 
         try{
             properties.put("code", BuildingCode);
-            if(centerCoordinates!=null) properties.put("center", ""+centerCoordinates[0]+", "+centerCoordinates[1]);
+            if(centerCoordinates!=null) properties.put("center", ""+centerCoordinates.getLongitude()+", "+centerCoordinates.getLatitude());
             if(height!=0) properties.put("height", height);
             if(width!=0) properties.put("width", width);
             if(bearing!=0) properties.put("bearing", bearing);
@@ -247,7 +234,7 @@ public class Building extends Place {
         List<Coordinates> listOfCoordinatesObject = cornerCoordinates.getListOfCoordinates();
 
         for(Coordinates coordinates: listOfCoordinatesObject){
-            toReturn.add(coordinates.toListDouble());
+            toReturn.add(coordinates.toListDoubleLongLat());
         }
 
         return toReturn;

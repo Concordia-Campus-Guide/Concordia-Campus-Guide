@@ -28,7 +28,7 @@ public class RoomModel extends Place {
     @NonNull
     private String roomCode;
 
-    public RoomModel(Double[] centerCoordinates, @NonNull String roomCode, @NonNull String floorCode) {
+    public RoomModel(Coordinates centerCoordinates, @NonNull String roomCode, @NonNull String floorCode) {
         super(centerCoordinates);
         this.roomCode = roomCode;
         this.floorCode = floorCode;
@@ -69,7 +69,7 @@ public class RoomModel extends Place {
             toReturn.put("properties", properties);
 
             geometry.put("type", "Point");
-            Double[] geoJsonCoordinates = centerCoordinates;
+            Double[] geoJsonCoordinates = this.getCenterCoordinatesDoubleArray();
             geometry.put("coordinates", new JSONArray(geoJsonCoordinates));
 
             toReturn.put("geometry", geometry);
