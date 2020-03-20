@@ -2,6 +2,7 @@ package com.example.concordia_campus_guide.Models;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
@@ -49,4 +50,5 @@ public abstract class Place {
     }
     
     public abstract String getDisplayName();
+
 }

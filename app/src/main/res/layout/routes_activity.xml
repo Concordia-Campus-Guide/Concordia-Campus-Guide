@@ -37,7 +37,7 @@
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toStartOf="@+id/toText"
                 app:layout_constraintTop_toTopOf="@+id/toText"
-                app:srcCompat="@drawable/ic_place_24dp" />
+                app:srcCompat="@drawable/ic_place_white" />
 
             <ImageButton
                 android:id="@+id/routesPageBackButton"

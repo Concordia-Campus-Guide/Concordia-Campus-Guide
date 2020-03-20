@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Activities.RoutesActivity;
+import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.Models.MyCurrentPlace;
@@ -167,8 +169,8 @@ public class InfoCardFragment extends Fragment {
                 buildingImage.setImageDrawable(d);
             }
             catch(Exception e2){
-                System.out.println(e.getMessage());
-                System.out.println(e2.getMessage());
+                Log.e("MyLog", "jpg image cannot be shown in the info card: " + e.getMessage());
+                Log.e("MyLog", "PNG image cannot be shown in the info card: " + e2.getMessage());
             }
         }
 

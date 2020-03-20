@@ -10,10 +10,8 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
-
+import androidx.lifecycle.ViewModelProvider;
 import com.example.concordia_campus_guide.Adapters.PlaceToSearchResultAdapter;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
@@ -35,17 +33,17 @@ public class SearchActivity extends AppCompatActivity {
 
         //setting up activity
         setContentView(R.layout.search_activity);
-        mViewModel = ViewModelProviders.of(this, new ViewModelFactory(this.getApplication())).get(SearchActivityViewModel.class);
+        mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getApplication())).get(SearchActivityViewModel.class);
 
         setUiElements();
         setEvents();
     }
 
     private void setUiElements(){
-        searchResults = (ListView) findViewById(R.id.searchResults);
-        searchText = (EditText) findViewById(R.id.searchText);
+        searchResults = findViewById(R.id.searchResults);
+        searchText = findViewById(R.id.searchText);
 
-        //android adapter for list view
+        // Android adapter for list view
         adapter = new PlaceToSearchResultAdapter(this, R.layout.list_item_layout, mViewModel.getAllPlaces());
         searchResults.setAdapter(adapter);
     }
