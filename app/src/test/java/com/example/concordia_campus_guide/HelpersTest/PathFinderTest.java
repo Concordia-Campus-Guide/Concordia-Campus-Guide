@@ -1,10 +1,17 @@
 package com.example.concordia_campus_guide.HelpersTest;
 
+import android.content.SharedPreferences;
+import android.graphics.Color;
+
+import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Database.Daos.WalkingPointDao;
 import com.example.concordia_campus_guide.Helper.IndoorPathHeuristic;
+import com.example.concordia_campus_guide.Helper.PathFinder;
+import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.PointType;
+import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 
 import org.junit.Before;
@@ -19,90 +26,71 @@ import java.util.Arrays;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertTrue;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
-//public class PathFinderTest {
-//
-//
-//    @Mock
-//    AppDatabase mockAppDb;
-//
-//
-//    @Mock
-//    WalkingPointDao mockWalkingPointDao;
-//
-//    @Mock
-//    private Resources mockContextResources;
-//
-//    @Mock
-//    private Context mockApplicationContext;
-//
-//    @Mock
-//    private SharedPreferences mockSharedPreferences;
-//
-//    @Mock
-//    WalkingPointDao mockRoomDao;
-//
-//    private PathFinder pathFinder;
-//    private RoomModel roomSource;
-//    private RoomModel roomDestination;
-//    private Context context;
-//    //    @Before
-////    public void setupTests() {
-////        // Mockito has a very convenient way to inject mocks by using the @Mock annotation. To
-////        // inject the mocks in the test the initMocks method needs to be called.
-////        MockitoAnnotations.initMocks(this);
-////        // During unit testing sometimes test fails because of your methods
-////        // are using the app Context to retrieve resources, but during unit test the Context is null
-////        // so we can mock it.
-////
-////        when(mockApplicationContext.getResources()).thenReturn(mockContextResources);
-////        when(mockApplicationContext.getSharedPreferences(anyString(), anyInt())).thenReturn(mockSharedPreferences);
-////        when(mockApplicationContext.getApplicationContext()).thenReturn(mockApplicationContext);
-////
-////        when(mockContextResources.getString(anyInt())).thenReturn("mocked string");
-////        when(mockContextResources.getStringArray(anyInt())).thenReturn(new String[]{"mocked string 1", "mocked string 2"});
-////        when(mockContextResources.getColor(anyInt())).thenReturn(Color.BLACK);
-////        when(mockContextResources.getBoolean(anyInt())).thenReturn(false);
-////        when(mockContextResources.getDimension(anyInt())).thenReturn(100f);
-////        when(mockContextResources.getIntArray(anyInt())).thenReturn(new int[]{1,2,3});
-////
-////        roomSource = new RoomModel(new Double[]{-73.57907921075821, 45.49702057370776}, "823", "H-8");
-////        roomDestination  = new RoomModel(new Double[]{-73.57902321964502, 45.49699848270905}, "821", "H-8");
-////        setUpDb();
-////        pathFinder = new PathFinder(mockApplicationContext, roomSource, roomDestination);
-////    }
-//    @Before
-//    public void setUp() {
-//        when(mockApplicationContext.getResources()).thenReturn(mockContextResources);
-//        when(mockApplicationContext.getSharedPreferences(anyString(), anyInt())).thenReturn(mockSharedPreferences);
-//        when(mockApplicationContext.getApplicationContext()).thenReturn(mockApplicationContext);
-//
-//        when(mockContextResources.getString(anyInt())).thenReturn("mocked string");
-//        when(mockContextResources.getStringArray(anyInt())).thenReturn(new String[]{"mocked string 1", "mocked string 2"});
-//        when(mockContextResources.getColor(anyInt())).thenReturn(Color.BLACK);
-//        when(mockContextResources.getBoolean(anyInt())).thenReturn(false);
-//        when(mockContextResources.getDimension(anyInt())).thenReturn(100f);
-//        when(mockContextResources.getIntArray(anyInt())).thenReturn(new int[]{1,2,3});
-//        MockitoAnnotations.initMocks(this);
-//        context = mock(MainActivity.class);
-//        pathFinder = new PathFinder(context, roomSource, roomDestination);
-//        roomSource = new RoomModel(new Double[]{-73.57907921075821, 45.49702057370776}, "823", "H-8");
-//        roomDestination  = new RoomModel(new Double[]{-73.57902321964502, 45.49699848270905}, "821", "H-8");
-//    }
-//
-//    @Test
-//    public void getWalkingPointCorrespondingToRoomTest(){
-//        List<WalkingPoint> walkingPoints = new ArrayList<>();
-//        WalkingPoint walkingPointTest = new WalkingPoint(new Coordinates(-73.57907921075821, 45.49702057370776), "H-8", null, PointType.CLASSROOM);
-//        walkingPoints.add(walkingPointTest);
-//        assertEquals(pathFinder.getWalkingPointCorrespondingToRoom(roomSource, walkingPoints), walkingPointTest);
-//    }
-//
-////    @Test
-////    public void isGoalTest(){
-////        assertTrue(pathFinder.isGoal(new WalkingPoint(new Coordinates(-73.57902321964502, 45.49699848270905), "H-8", null, PointType.CLASSROOM)));
-////    }
-//
-//
-//}
+public class PathFinderTest {
+    private WalkingPoint walkingPoint1;
+    private WalkingPoint walkingPoint2;
+    private WalkingPoint walkingPoint3;
+    private WalkingPoint walkingPoint4;
+    private List<WalkingPoint> walkingPointList;
+    private PathFinder pathFinder;
+    private RoomModel room1;
+    private RoomModel room2;
+
+    @Mock
+    AppDatabase mockAppDb;
+
+    @Mock
+    WalkingPointDao mockWalkingPointDao;
+
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+        walkingPoint1 = new WalkingPoint(1,new Coordinates(-70.04, 45.45), "H-9",new ArrayList<>(Arrays.asList(new Integer[]{2,3,4})), PointType.CLASSROOM, "937");
+        walkingPoint2 = new WalkingPoint(2,new Coordinates(-73.57876237,45.49729154), "H-9", new ArrayList<>(Arrays.asList(new Integer[]{1,3})),PointType.NONE,"NONE");
+        walkingPoint3 = new WalkingPoint(3,new Coordinates(-73.57883681,45.49731974), "H-9", new ArrayList<>(Arrays.asList(new Integer[]{2,4})),PointType.NONE,"NONE");
+        walkingPoint4 = new WalkingPoint(4,new Coordinates(-73.57866548, 45.49746803), "H-9", new ArrayList<>(Arrays.asList(new Integer[]{1,3})),PointType.CLASSROOM,"921");
+
+        room1 = new RoomModel(new Coordinates(-73.57876237, 45.49729154), "823", "H-8");
+        room2 = new RoomModel(new Coordinates(-73.57883681, 445.49731974), "813", "H-8");
+        when(mockAppDb.walkingPointDao()).thenReturn(mockWalkingPointDao);
+        walkingPointList = new ArrayList<>();
+        walkingPointList.add(walkingPoint1);
+        walkingPointList.add(walkingPoint2);
+        walkingPointList.add(walkingPoint3);
+        walkingPointList.add(walkingPoint4);
+        when(mockWalkingPointDao.getAll()).thenReturn(walkingPointList);
+        when(mockAppDb.walkingPointDao().getAllWalkingPointsFromPlaceCode(room1.getRoomCode())).thenReturn(walkingPointList);
+        when(mockAppDb.walkingPointDao().getAllWalkingPointsFromPlaceCode(room2.getRoomCode())).thenReturn(walkingPointList);
+
+        pathFinder = new PathFinder(mockAppDb,room1,room2);
+    }
+
+
+
+    @Test
+    public void isGoalTest(){
+        assertFalse(pathFinder.isGoal(walkingPoint2));
+    }
+
+    @Test
+    public void getWalkingPointCorrespondingToPlaceTest(){
+        Building buidling = new Building( new Coordinates(45.4972685, -73.5789475), new ArrayList<String>(Arrays.asList("8","9")), 68, 68, 34, null, "H", null, null, null, null, null);
+        when(mockAppDb.walkingPointDao().getAllWalkingPointsFromPlaceCode(buidling.getBuildingCode())).thenReturn(walkingPointList);
+        assertEquals(pathFinder.getWalkingPointCorrespondingToPlace(buidling),walkingPoint1);
+    }
+
+    @Test
+    public void getPathToDestinationTest(){
+        assertEquals(walkingPointList.get(0),pathFinder.getPathToDestination().get(0));
+    }
+
+    @Test
+    public void addNearestWalkingPointsTest(){
+
+    }
+}

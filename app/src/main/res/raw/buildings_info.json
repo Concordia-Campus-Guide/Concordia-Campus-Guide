@@ -873,10 +873,10 @@
         "Career and Planning Services",
         "Sexual Assault Resource Centre (SARC)"
       ],
-      "centerCoordinates": [
-        -73.5789475,
-        45.4972685
-      ],
+      "centerCoordinates": {
+        "longitude": -73.5789475,
+        "latitude": 45.4972685
+      },
       "height": 68,
       "width": 68,
       "bearing": 34,

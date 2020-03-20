@@ -55,7 +55,7 @@ public class PathFinder {
      * @param walkingPoints
      * @return
      */
-    protected HashMap<Integer, WalkingPointNode> populateWalkingPointMap(final List<WalkingPoint> walkingPoints) {
+    public HashMap<Integer, WalkingPointNode> populateWalkingPointMap(final List<WalkingPoint> walkingPoints) {
         this.walkingPointNodesMap = new HashMap<>();
         for (final WalkingPoint walkingPoint : walkingPoints) {
             walkingPointNodesMap.put(walkingPoint.getId(), new WalkingPointNode(walkingPoint, null, 0, 0));
@@ -63,7 +63,7 @@ public class PathFinder {
         return walkingPointNodesMap;
     }
 
-    protected WalkingPoint getWalkingPointCorrespondingToPlace(final Place place) {
+    public WalkingPoint getWalkingPointCorrespondingToPlace(final Place place) {
         String placeCode;
         List<WalkingPoint> pointList = null;
         if (place instanceof Building) {
@@ -100,6 +100,7 @@ public class PathFinder {
                 walkingPointsVisited.put(currentLocation, currentLocation.getCost());
 
             if (isGoal(currentLocation.getWalkingPoint())) {
+                List<WalkingPoint> walk = getSolutionPath(currentLocation);
                 return getSolutionPath(currentLocation);
             }
             addNearestWalkingPoints(currentLocation);
@@ -171,25 +172,6 @@ public class PathFinder {
         return currentCoordinate.getCost() + indoorPathHeuristic.computeHeuristic(currentCoordinate.getWalkingPoint(), destinationPoint);
     }
 
-    public Map<Integer, WalkingPointNode> getWalkingPointNodesMap() {
-        return walkingPointNodesMap;
-    }
-
-    public PriorityQueue<WalkingPointNode> getWalkingPointsToVisit() {
-        return walkingPointsToVisit;
-    }
-
-    public Map<WalkingPointNode, Double> getWalkingPointsVisited() {
-        return walkingPointsVisited;
-    }
-
-    public WalkingPoint getInitialPoint() {
-        return initialPoint;
-    }
-
-    public WalkingPoint getDestinationPoint() {
-        return destinationPoint;
-    }
 
     /**
      * This is a comparator object that will compare our Walking point based on a heuristic for a priorityQueue.

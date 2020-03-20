@@ -5,6 +5,7 @@ import com.example.concordia_campus_guide.Database.Daos.WalkingPointDao;
 import com.example.concordia_campus_guide.Helper.IndoorPathHeuristic;
 import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.PointType;
+import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 
 import org.junit.Before;
@@ -30,6 +31,7 @@ public class IndoorPathHeuristicTest {
     private WalkingPoint walkingPoint4;
     private List<WalkingPoint> walkingPointList;
 
+
     @Mock
     AppDatabase mockAppDb;
 
@@ -43,6 +45,7 @@ public class IndoorPathHeuristicTest {
         walkingPoint2 = new WalkingPoint(2,new Coordinates(-73.57876237,45.49729154), "H-9", new ArrayList<>(Arrays.asList(new Integer[]{1,3})),PointType.NONE,"NONE");
         walkingPoint3 = new WalkingPoint(3,new Coordinates(-73.57883681,45.49731974), "H-9", new ArrayList<>(Arrays.asList(new Integer[]{2,4})),PointType.NONE,"NONE");
         walkingPoint4 = new WalkingPoint(4,new Coordinates(-73.57866548, 45.49746803), "H-9", new ArrayList<>(Arrays.asList(new Integer[]{1,3})),PointType.CLASSROOM,"921");
+
         when(mockAppDb.walkingPointDao()).thenReturn(mockWalkingPointDao);
 
         walkingPointList = new ArrayList<>();
@@ -51,11 +54,8 @@ public class IndoorPathHeuristicTest {
         walkingPointList.add(walkingPoint3);
         walkingPointList.add(walkingPoint4);
 
-
-
         when(mockWalkingPointDao.getAll()).thenReturn(walkingPointList);
         indoorPathHeuristic = new IndoorPathHeuristic(mockAppDb);
-
     }
 
     @Test
