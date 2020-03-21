@@ -81,10 +81,12 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         final CalendarEvent calendarEvent = calendarViewModel.getEvent(this);
-
-        nextClassText.setText(calendarViewModel.getNextClassString(calendarEvent));
+        final String eventLocation = calendarViewModel.getNextClassString((calendarEvent));
+        nextClassText.setText(eventLocation);
 
         if(nextClassText.getText() != "No classes today"){
+            Place place = mViewModel.getRoomFromDB(eventLocation);
+
             nextClassArrow.setVisibility(View.VISIBLE);
             nextClassRow.setOnClickListener(new View.OnClickListener() {
                 @Override
