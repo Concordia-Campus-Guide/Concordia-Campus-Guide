@@ -29,6 +29,11 @@ import java.util.PriorityQueue;
 public class PathFinder {
 
     private HashMap<Integer, WalkingPointNode> walkingPointNodesMap;
+
+    public PriorityQueue<WalkingPointNode> getWalkingPointsToVisit() {
+        return walkingPointsToVisit;
+    }
+
     private final PriorityQueue<WalkingPointNode> walkingPointsToVisit;
     private final HashMap<WalkingPointNode, Double> walkingPointsVisited;
 
@@ -141,7 +146,7 @@ public class PathFinder {
      * we will update it. Same if it was in the closed list(visited nodes list), we will update the cost only, in this class.
      * @param currentNode
      */
-    protected void addNearestWalkingPoints(final WalkingPointNode currentNode) {
+    public void addNearestWalkingPoints(final WalkingPointNode currentNode) {
         for (final int id : currentNode.getWalkingPoint().getConnectedPointsId()) {
 
             final WalkingPointNode adjacentNode = walkingPointNodesMap.get(id);

@@ -29,6 +29,10 @@ public class IndoorPathHeuristicTest {
     private WalkingPoint walkingPoint2;
     private WalkingPoint walkingPoint3;
     private WalkingPoint walkingPoint4;
+    private WalkingPoint walkingPoint5;
+    private WalkingPoint walkingPoint6;
+    private WalkingPoint walkingPoint7;
+    private WalkingPoint walkingPoint8;
     private List<WalkingPoint> walkingPointList;
 
 
@@ -44,8 +48,11 @@ public class IndoorPathHeuristicTest {
         walkingPoint1 = new WalkingPoint(1,new Coordinates(-70.04, 45.45), "H-9",new ArrayList<>(Arrays.asList(new Integer[]{2,3,4})), PointType.CLASSROOM, "937");
         walkingPoint2 = new WalkingPoint(2,new Coordinates(-73.57876237,45.49729154), "H-9", new ArrayList<>(Arrays.asList(new Integer[]{1,3})),PointType.NONE,"NONE");
         walkingPoint3 = new WalkingPoint(3,new Coordinates(-73.57883681,45.49731974), "H-9", new ArrayList<>(Arrays.asList(new Integer[]{2,4})),PointType.NONE,"NONE");
-        walkingPoint4 = new WalkingPoint(4,new Coordinates(-73.57866548, 45.49746803), "H-9", new ArrayList<>(Arrays.asList(new Integer[]{1,3})),PointType.CLASSROOM,"921");
-
+        walkingPoint4 = new WalkingPoint(4,new Coordinates(-73.57866548, 45.49746803), "H-9", new ArrayList<>(Arrays.asList(new Integer[]{1,3,5,6})),PointType.CLASSROOM,"921");
+        walkingPoint5 = new WalkingPoint(5,new Coordinates(-73.5787094, 45.49739588), "H-9", new ArrayList<>(Arrays.asList(new Integer[]{4,8})),PointType.ENTRANCE,"entrance");
+        walkingPoint6 = new WalkingPoint(6,new Coordinates(-73.57858803, 45.49733972), "H-8", new ArrayList<>(Arrays.asList(new Integer[]{4,7})),PointType.ELEVATOR,"elevator");
+        walkingPoint7 = new WalkingPoint(7,new Coordinates(-73.57858669, 45.49724054), "H-8", new ArrayList<>(Arrays.asList(new Integer[]{6})),PointType.CLASSROOM,"832");
+        walkingPoint8 = new WalkingPoint(8,new Coordinates(-73.5787094, 45.49739588), "MB-2", new ArrayList<>(Arrays.asList(new Integer[]{5})),PointType.CLASSROOM,"S-23");
         when(mockAppDb.walkingPointDao()).thenReturn(mockWalkingPointDao);
 
         walkingPointList = new ArrayList<>();
@@ -53,7 +60,11 @@ public class IndoorPathHeuristicTest {
         walkingPointList.add(walkingPoint2);
         walkingPointList.add(walkingPoint3);
         walkingPointList.add(walkingPoint4);
+        walkingPointList.add(walkingPoint5);
+        walkingPointList.add(walkingPoint6);
+        walkingPointList.add(walkingPoint7);
 
+        when(mockWalkingPointDao.getAllAccessPointsOnFloor(walkingPoint1.getFloorCode(),PointType.ELEVATOR)).thenReturn(walkingPointList);
         when(mockWalkingPointDao.getAll()).thenReturn(walkingPointList);
         indoorPathHeuristic = new IndoorPathHeuristic(mockAppDb);
     }
@@ -88,5 +99,7 @@ public class IndoorPathHeuristicTest {
     public void computeHeuristicTest(){
         double expectedHeuristicValue = 3.5390783547533378;
         assertEquals(expectedHeuristicValue,indoorPathHeuristic.computeHeuristic(walkingPoint1,walkingPoint2));
+        assertEquals(3.5389020092769683,indoorPathHeuristic.computeHeuristic(walkingPoint1,walkingPoint7));
+        assertEquals(3.5390267853025987,indoorPathHeuristic.computeHeuristic(walkingPoint1,walkingPoint8));
     }
 }

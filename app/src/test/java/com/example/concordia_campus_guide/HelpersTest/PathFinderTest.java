@@ -9,6 +9,7 @@ import com.example.concordia_campus_guide.Models.PointType;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 
+import org.jetbrains.annotations.TestOnly;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -84,10 +85,6 @@ public class PathFinderTest {
         assertEquals(walkingPointList.get(0),pathFinder.getPathToDestination().get(0));
     }
 
-    @Test
-    public void addNearestWalkingPointsTest(){
-
-    }
 
     //WalkingNode Inner Class Tests:
     @Test
@@ -118,5 +115,12 @@ public class PathFinderTest {
         assertEquals(-1, walkingPointComparator.compare(walkingPointNode1,walkingPointNode2));
         assertEquals(1,walkingPointComparator.compare(walkingPointNode2,walkingPointNode1));
         assertEquals(0,walkingPointComparator.compare(walkingPointNode1,walkingPointNode1));
+    }
+
+
+    @Test
+    public void addNearestWalkingPointsTest(){
+        pathFinder.addNearestWalkingPoints(walkingPointNode1);
+        assertEquals(3.538983836246734,pathFinder.getWalkingPointsToVisit().peek().getHeuristic());
     }
 }
