@@ -9,7 +9,6 @@ import com.example.concordia_campus_guide.Models.PointType;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 
-import org.jetbrains.annotations.TestOnly;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

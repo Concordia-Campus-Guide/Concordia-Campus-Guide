@@ -25,10 +25,6 @@ import org.junit.runner.RunWith;
 public class LocationFragmentInstrumentalTest {
     private LocationFragmentViewModel viewModel;
     private Context appContext;
-    private PathFinder pathFinder;
-    private RoomModel roomSource;
-    private RoomModel roomDestination;
-    private Database db;
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(MainActivity.class);
