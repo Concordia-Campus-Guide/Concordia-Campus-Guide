@@ -90,13 +90,18 @@ public class SearchActivityViewModel extends AndroidViewModel {
     }
 
     public Place getRoomFromDB(String location){
+        String[] splitLocation;
+        String roomId;
+        long roomIdLong = 0;
+        String floorCode="";
+
         if(location.contains("-")){
             // this manipulation only works for floors 1-9
-            String[] splitLocation = location.split("-");
-            String roomId=splitLocation[1];
-            String floorCode = splitLocation[0] + "-" + roomId.charAt(0);
+            splitLocation = location.split("-");
+            roomId=splitLocation[1];
+            roomIdLong = Long.parseLong(roomId);
+            floorCode = splitLocation[0] + "-" + roomId.charAt(0);
         }
-        // TODO: retrieve Place from database based on roomId and floorCode
-        return null;
+        return appDB.roomDao().getRoomByIdAndFloorCode(roomIdLong, floorCode);
     }
 }
