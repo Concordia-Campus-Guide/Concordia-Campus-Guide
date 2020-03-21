@@ -29,7 +29,7 @@ import com.example.concordia_campus_guide.R;
 
 public class SearchActivity extends AppCompatActivity {
 
-//    ListView searchResults;
+    ListView searchResults;
     EditText searchText;
     View nextClassRow;
     TextView nextClassText;
@@ -46,7 +46,7 @@ public class SearchActivity extends AppCompatActivity {
         //setting up activity
         setContentView(R.layout.search_activity);
         setBackButtonOnClick();
-//        searchResults = (ListView) findViewById(R.id.searchResults);
+        searchResults = (ListView) findViewById(R.id.searchResults);
         searchText = (EditText) findViewById(R.id.searchText);
         mViewModel = ViewModelProviders.of(this).get(SearchActivityViewModel.class);
         nextClassText = (TextView) findViewById(R.id.next_class_text);
@@ -57,7 +57,7 @@ public class SearchActivity extends AppCompatActivity {
 
         //android adapter for list view
         adapter = new PlaceToSearchResultAdapter(this, R.layout.list_item_layout, mViewModel.getAllPlaces());
-//        searchResults.setAdapter(adapter);
+        searchResults.setAdapter(adapter);
 
         //search results filtering according to search text
         searchText.addTextChangedListener(new TextWatcher(){
@@ -72,13 +72,13 @@ public class SearchActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable){ }
         });
 
-//        searchResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Place place = adapter.getItem(position);
-//                openRoutesPage(place);
-//            }
-//        });
+        searchResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Place place = adapter.getItem(position);
+                openRoutesPage(place);
+            }
+        });
 
         final CalendarEvent calendarEvent = calendarViewModel.getEvent(this);
         final String eventLocation = calendarViewModel.getNextClassString((calendarEvent));
