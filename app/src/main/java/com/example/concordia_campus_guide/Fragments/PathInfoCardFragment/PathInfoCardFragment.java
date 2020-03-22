@@ -30,13 +30,14 @@ import com.example.concordia_campus_guide.R;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class PathInfoCardFragment extends Fragment {
     private List<WalkingPoint> walkingPointList;
     private List<Direction> directionList;
-    private double totalDistance = 0;
+    private double totalDuration = 0;
 
     private PathInfoCardViewModel mViewModel;
 
@@ -128,29 +129,39 @@ public class PathInfoCardFragment extends Fragment {
         layout.addView(divider);
     }
 
+    public void setStartAndEndTime() {
+        TextView totalDurationTextView = (TextView) getView().findViewById(R.id.total_time);
+        totalDurationTextView.setText(Double.toString(totalDuration) + "min");
+        Date date = new Date();   // given date
+        Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
+        calendar.setTime(date);   // assigns calendar to given date
+        TextView startTimeTextView = (TextView) getView().findViewById(R.id.start_time);
+        startTimeTextView.setText(calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE));
+        TextView endTimeTextView = (TextView) getView().findViewById(R.id.arrival_time);
+        Calendar arrivalCalendar = GregorianCalendar.getInstance();
+        arrivalCalendar.setTime(new Date());
+        arrivalCalendar.add(Calendar.MINUTE, (int) totalDuration);
+        endTimeTextView.setText(arrivalCalendar.get(Calendar.HOUR_OF_DAY) + ":" + arrivalCalendar.get(Calendar.MINUTE));
+    }
+
     public void calculateDistance() {
         directionList = new ArrayList<Direction>();
-        Date startTime = Calendar.getInstance().getTime();
-        Date endTime = new Date();
+        double totalDistance = 0;
 
-        for (int i=0; i<walkingPointList.size() - 1; i++) {
+        for (int i = 0; i < walkingPointList.size() - 1; i++) {
             WalkingPoint startWalkingPoint = walkingPointList.get(i);
             WalkingPoint endWalkingPoint = walkingPointList.get(i + 1);
             double distance = getDistanceFromLatLonInKm(startWalkingPoint.getCoordinate().getLatitude(), startWalkingPoint.getCoordinate().getLongitude(), endWalkingPoint.getCoordinate().getLatitude(), startWalkingPoint.getCoordinate().getLongitude());
-            if (i !=0 ) {
-                startTime = directionList.get(directionList.size() - 1).getEndTime();
-            }
             // on average a person walks 5km / hr
-            long timeTakenInSeconds = (long) (distance * 60 * 60 / 5);
-            endTime.setTime(startTime.getTime() + TimeUnit.SECONDS.toMillis(timeTakenInSeconds));
+            long timeTakenInMinutes = (long) (distance * 60 / 5);
 
             Direction direction = new Direction(startWalkingPoint.getCoordinate().getLatLng(), endWalkingPoint.getCoordinate().getLatLng(), TransitType.WALK, "", distance);
-            direction.setStartTime(startTime);
-            direction.setEndTime(endTime);
+            direction.setDuration(timeTakenInMinutes);
             directionList.add(direction);
             totalDistance += distance;
         }
 
+        totalDuration = (long) (totalDistance *60 / 5);
         // specify an adapter for recycler view
         mAdapter = new DirectionsRecyclerViewAdapter(getContext(), directionList);
         recyclerView.setAdapter(mAdapter);
@@ -159,24 +170,25 @@ public class PathInfoCardFragment extends Fragment {
                 recyclerView.getContext(),
                 DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
+
+        this.setStartAndEndTime();
     }
 
     public double getDistanceFromLatLonInKm(double lat1, double lon1, double lat2, double lon2) {
         double R = 6371; // Radius of the earth in km
-        double dLat = deg2rad(lat2-lat1);  // deg2rad below
-        double dLon = deg2rad(lon2-lon1);
+        double dLat = deg2rad(lat2 - lat1);  // deg2rad below
+        double dLon = deg2rad(lon2 - lon1);
         double a =
-                Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
                         Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-                                Math.sin(dLon/2) * Math.sin(dLon/2)
-                ;
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+                                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         double d = R * c; // Distance in km
         return d;
     }
 
     public double deg2rad(double deg) {
-        return deg * (Math.PI/180);
+        return deg * (Math.PI / 180);
     }
 
 }
