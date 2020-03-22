@@ -12,6 +12,7 @@ import androidx.room.TypeConverters;
 
 import com.example.concordia_campus_guide.Database.Converters.CoordinatesListConverter;
 import com.example.concordia_campus_guide.Database.Converters.StringListConverter;
+import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 
 import org.json.JSONArray;
@@ -25,6 +26,7 @@ import java.util.List;
         indices = {@Index(value = "building_code", unique = true)}
         )
 public class Building extends Place {
+
     /**
      * These following attributes NEED to match the fields in the JSON file. Do not change them.
      */

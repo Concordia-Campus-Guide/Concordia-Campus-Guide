@@ -51,15 +51,12 @@ public class CalendarViewModel extends ViewModel {
 
     public List<CalendarEvent> getCalendarEvents(Cursor cursor) {
         ArrayList<CalendarEvent> list = new ArrayList<>();
-
         while (cursor.moveToNext()) {
            String eventTitle = cursor.getString(PROJECTION_TITLE_INDEX);
            String eventLocation = cursor.getString(PROJECTION_LOCATION_INDEX);
            String eventStart = cursor.getString(PROJECTION_START_INDEX);
-
            list.add(new CalendarEvent(eventTitle, eventLocation, eventStart));
         }
-
         return list;
     }
 }
