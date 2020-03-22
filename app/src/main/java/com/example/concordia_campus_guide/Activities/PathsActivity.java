@@ -11,14 +11,19 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragment;
 import com.example.concordia_campus_guide.Fragments.PathInfoCardFragment.PathInfoCardFragment;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsResult;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsResult;
 import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PathsActivity extends AppCompatActivity {
@@ -32,6 +37,7 @@ public class PathsActivity extends AppCompatActivity {
     FragmentTransaction fragmentTransaction;
     FragmentManager fragmentManager;
     private BottomSheetBehavior swipeableInfoCard;
+    private DirectionsResult directionsResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +66,11 @@ public class PathsActivity extends AppCompatActivity {
         View pathInfoCard = findViewById(R.id.path_info_card);
         swipeableInfoCard = BottomSheetBehavior.from(pathInfoCard);
         showInfoCard();
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            directionsResult = (DirectionsResult) extras.getSerializable("directionsResult");
+        }
     }
 
     private void returnToSelectRoute(){
@@ -86,5 +97,14 @@ public class PathsActivity extends AppCompatActivity {
         fragmentTransaction.add(R.id.path_info_card_frame, pathInfoCardFragment);
         fragmentTransaction.commit();
         swipeableInfoCard.setState(BottomSheetBehavior.STATE_COLLAPSED);
+    }
+
+    public ArrayList<DirectionWrapper> parseDirectionResults(){
+        ArrayList<DirectionWrapper> directionWrapperArrayList = new ArrayList<>();
+        DirectionsStep[] steps = directionsResult.routes[0].legs[0].steps;
+        for(DirectionsStep step: steps){
+            directionWrapperArrayList.add(new DirectionWrapper(step));
+        }
+        return directionWrapperArrayList;
     }
 }

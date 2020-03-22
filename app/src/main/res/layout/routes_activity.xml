@@ -142,9 +142,9 @@
 
                 <ImageButton
                     android:id="@+id/filterButtonCar"
-                    android:onClick="openPathsPage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="openPathsPage"
                     android:layout_weight="1"
                     android:background="@drawable/round_button"
                     android:gravity="center_vertical|center_horizontal"
