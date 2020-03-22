@@ -32,8 +32,6 @@ public class RoutesActivity extends AppCompatActivity {
     RoutesActivityViewModel mViewModel;
     TextView fromText;
     TextView toText;
-    private MarkerOptions from;
-    private MarkerOptions to;
     TextView content;
 
     @Override
@@ -61,15 +59,11 @@ public class RoutesActivity extends AppCompatActivity {
         this.fromText.setText(mViewModel.getFrom().getDisplayName());
         this.toText.setText(mViewModel.getTo().getDisplayName());
 
-        // set from and to marker options
-        setFrom();
-        setTo();
-
         // set back button
         setBackButtonOnClick();
 
         // get all possible routes. The following statements should happen on an onClick event.
-        String url = UrlBuilder.build(from.getPosition(), to.getPosition(), ClassConstants.TRANSIT);
+        String url = UrlBuilder.build(new LatLng(mViewModel.getFrom().getCenterCoordinates().getLatitude(), mViewModel.getFrom().getCenterCoordinates().getLongitude()), new LatLng(mViewModel.getTo().getCenterCoordinates().getLatitude(), mViewModel.getTo().getCenterCoordinates().getLongitude()), ClassConstants.TRANSIT);
         new DirectionsApiDataRetrieval(RoutesActivity.this).execute(url);
     }
 
@@ -117,20 +111,8 @@ public class RoutesActivity extends AppCompatActivity {
     }
 
     private void openSearchPage(){
-        Intent openSearch= new Intent(RoutesActivity.this,
-                SearchActivity.class);
+        Intent openSearch= new Intent(RoutesActivity.this, SearchActivity.class);
         startActivity(openSearch);
-    }
-
-    private void setFrom() {
-        Coordinates fromCoordinates = (mViewModel.getFrom().getCenterCoordinates());
-        from = new MarkerOptions().position(new LatLng(fromCoordinates.getLatitude(), fromCoordinates.getLongitude()));
-    }
-
-    private void setTo() {
-        Coordinates toCoordinates = (mViewModel.getTo().getCenterCoordinates());
-        to = new MarkerOptions().position(new LatLng(toCoordinates.getLatitude(), toCoordinates.getLongitude()));
-
     }
 
     public void getShuttle(View view) {
