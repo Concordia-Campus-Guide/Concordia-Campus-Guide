@@ -741,7 +741,8 @@
       "floorCode": "H-00",
       "pointType": "NONE",
       "connectedPointsId": [
-        87
+        87,
+        144
       ],
       "placeCode": ""
     },
