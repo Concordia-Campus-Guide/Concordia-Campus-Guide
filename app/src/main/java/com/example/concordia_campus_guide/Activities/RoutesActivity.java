@@ -17,6 +17,7 @@ import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsResult;
 import com.example.concordia_campus_guide.Helper.RoutesHelpers.DirectionsApiDataRetrieval;
+import com.example.concordia_campus_guide.Helper.RoutesHelpers.UrlBuilder;
 import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.Shuttle;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
@@ -37,27 +38,22 @@ public class RoutesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //set up activity
+        // set up activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.routes_activity);
         mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getApplication())).get(RoutesActivityViewModel.class);
-
-        //get view
-        fromText = findViewById(R.id.fromText);
-        toText = findViewById(R.id.toText);
-        mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getApplication())).get(RoutesActivityViewModel.class);
         mViewModel.setShuttles();
 
-        //get view
-        fromText = (TextView) findViewById(R.id.fromText);
-        toText = (TextView) findViewById(R.id.toText);
-        content = (TextView) findViewById(R.id.content);
+        // get view
+        fromText = findViewById(R.id.fromText);
+        toText = findViewById(R.id.toText);
+        content = findViewById(R.id.content);
 
-        //setup toolbar
+        // setup toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //get passed item
+        // get passed item
         mViewModel.setFrom(SelectingToFromState.getFrom());
         mViewModel.setTo(SelectingToFromState.getTo());
 
@@ -65,7 +61,7 @@ public class RoutesActivity extends AppCompatActivity {
         this.fromText.setText(mViewModel.getFrom().getDisplayName());
         this.toText.setText(mViewModel.getTo().getDisplayName());
 
-        // set from and to
+        // set from and to marker options
         setFrom();
         setTo();
 
@@ -73,7 +69,7 @@ public class RoutesActivity extends AppCompatActivity {
         setBackButtonOnClick();
 
         // get all possible routes. The following statements should happen on an onClick event.
-        String url = mViewModel.buildUrl(from.getPosition(), to.getPosition(), ClassConstants.TRANSIT);
+        String url = UrlBuilder.build(from.getPosition(), to.getPosition(), ClassConstants.TRANSIT);
         new DirectionsApiDataRetrieval(RoutesActivity.this).execute(url);
     }
 
