@@ -77,8 +77,8 @@ public class PathInfoCardFragment extends Fragment {
 //        RoomModel from = (RoomModel) SelectingToFromState.getFrom();
 //        RoomModel to = (RoomModel) SelectingToFromState.getTo();
 //        PathFinder pf = new PathFinder(getContext(), from, to);
-        RoomModel src = new RoomModel(new Coordinates(45.49761115, -73.57901685), "927", "H-9");
-        RoomModel destination = new RoomModel(new Coordinates(45.49739565, -73.57854277), "918", "H-8");
+        RoomModel src = new RoomModel(new Coordinates(45.49761115, -73.57901685), "963", "H-9");
+        RoomModel destination = new RoomModel(new Coordinates(45.49739565, -73.57854277), "863", "H-8");
         PathFinder pf = new PathFinder(AppDatabase.getInstance(getContext()), src, destination);
         return pf.getPathToDestination();
 
