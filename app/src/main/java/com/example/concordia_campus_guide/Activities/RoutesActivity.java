@@ -101,4 +101,11 @@ public class RoutesActivity extends AppCompatActivity {
         String content = mViewModel.getShuttleDisplayText(shuttles);
         this.content.setText(content);
     }
+
+    public void openPathsPage(View view) {
+        Intent openPaths = new Intent(RoutesActivity.this,
+                PathsActivity.class);
+
+        startActivity(openPaths);
+    }
 }
