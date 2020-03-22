@@ -123,14 +123,14 @@ public class RoutesActivity extends AppCompatActivity {
     }
 
     private void setFrom() {
-        Coordinates toCoordinates = (mViewModel.getTo().getCenterCoordinates());
-        to = new MarkerOptions().position(new LatLng(toCoordinates.getLatitude(), toCoordinates.getLongitude()));
-
+        Coordinates fromCoordinates = (mViewModel.getFrom().getCenterCoordinates());
+        from = new MarkerOptions().position(new LatLng(fromCoordinates.getLatitude(), fromCoordinates.getLongitude()));
     }
 
     private void setTo() {
-        Coordinates fromCoordinates = (mViewModel.getFrom().getCenterCoordinates());
-        from = new MarkerOptions().position(new LatLng(fromCoordinates.getLatitude(), fromCoordinates.getLongitude()));
+        Coordinates toCoordinates = (mViewModel.getTo().getCenterCoordinates());
+        to = new MarkerOptions().position(new LatLng(toCoordinates.getLatitude(), toCoordinates.getLongitude()));
+
     }
 
     public void getShuttle(View view) {
