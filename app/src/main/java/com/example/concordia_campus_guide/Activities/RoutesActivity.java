@@ -147,6 +147,8 @@ public class RoutesActivity extends AppCompatActivity {
         Intent openPaths = new Intent(RoutesActivity.this,
                 PathsActivity.class);
 
+        DirectionsResult directionsResult = mViewModel.getDirectionsResult();
+        openPaths.putExtra("directionsResult", directionsResult);
         startActivity(openPaths);
     }
 }

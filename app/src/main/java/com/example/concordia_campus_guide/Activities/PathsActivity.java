@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragment;
 import com.example.concordia_campus_guide.Fragments.PathInfoCardFragment.PathInfoCardFragment;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsResult;
 import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
@@ -32,6 +33,7 @@ public class PathsActivity extends AppCompatActivity {
     FragmentTransaction fragmentTransaction;
     FragmentManager fragmentManager;
     private BottomSheetBehavior swipeableInfoCard;
+    private DirectionsResult directionsResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,11 @@ public class PathsActivity extends AppCompatActivity {
         View pathInfoCard = findViewById(R.id.path_info_card);
         swipeableInfoCard = BottomSheetBehavior.from(pathInfoCard);
         showInfoCard();
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            directionsResult = (DirectionsResult) extras.getSerializable("directionsResult");
+        }
     }
 
     private void returnToSelectRoute(){
