@@ -5881,7 +5881,7 @@
       },
       "floorCode": "VL-1",
       "pointType": "ELEVATOR",
-      "connectedPointsId": [670],
+      "connectedPointsId": [670,710],
       "placeCode": "elevators-1"
     },
     {
@@ -6277,7 +6277,7 @@
       },
       "floorCode": "VL-2",
       "pointType": "ELEVATOR",
-      "connectedPointsId": [702],
+      "connectedPointsId": [702,674],
       "placeCode": "elevators-1"
     },
     {
