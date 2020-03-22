@@ -265,7 +265,7 @@
       }
     },
     {
-      "roomCode":"804",
+      "roomCode":"staff washrooms-1",
       "floorCode":"H-8",
       "centerCoordinates":{
         "longitude":-73.57871174812317,
@@ -305,7 +305,7 @@
       }
     },
     {
-      "roomCode":"elevators-2",
+      "roomCode":"staff elevators-1",
       "floorCode":"H-8",
       "centerCoordinates":{
         "longitude":-73.57901249080896,
@@ -1041,7 +1041,7 @@
       }
     },
     {
-      "roomCode":"elevators-2",
+      "roomCode":"staff elevators-1",
       "floorCode":"H-9",
       "centerCoordinates":{
         "longitude":-73.57901249080896,
