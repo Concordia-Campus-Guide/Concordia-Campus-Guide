@@ -193,6 +193,4 @@ public class PathInfoCardFragment extends Fragment {
         return deg * (Math.PI / 180);
     }
 
-
-
 }
