@@ -5057,6 +5057,1436 @@
         31
       ],
       "placeCode": ""
+    },
+    {
+      "id": 600,
+      "coordinate": {
+        "longitude": -73.6388338,
+        "latitude": 45.45918362
+      },
+      "floorCode": "VL-1",
+      "pointType": "ENTRANCE",
+      "connectedPointsId": [601,659],
+      "placeCode": ""
+    },
+    {
+      "id": 601,
+      "coordinate": {
+        "longitude": -73.63879021,
+        "latitude": 45.45923936
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [600,602],
+      "placeCode": ""
+    },
+    {
+      "id": 602,
+      "coordinate": {
+        "longitude": -73.63869835,
+        "latitude": 45.45920714
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [601,603],
+      "placeCode": ""
+    },
+    {
+      "id": 603,
+      "coordinate": {
+        "longitude": -73.63866482,
+        "latitude": 45.45919726
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [602,604,611],
+      "placeCode": ""
+    },
+    {
+      "id": 604,
+      "coordinate": {
+        "longitude": -73.63865174,
+        "latitude": 45.45921325
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [603,605,606],
+      "placeCode": ""
+    },
+    {
+      "id": 605,
+      "coordinate": {
+        "longitude": -73.63868594,
+        "latitude": 45.45922572
+      },
+      "floorCode": "VL-1",
+      "pointType": "STAIRS",
+      "connectedPointsId": [604],
+      "placeCode": "stairs-2"
+    },
+    {
+      "id": 606,
+      "coordinate": {
+        "longitude": -73.63863565,
+        "latitude": 45.45923136
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [604,607,608,609],
+      "placeCode": ""
+    },
+    {
+      "id": 607,
+      "coordinate": {
+        "longitude": -73.63867521,
+        "latitude": 45.45924829
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [606],
+      "placeCode": "197.1"
+    },
+    {
+      "id": 608,
+      "coordinate": {
+        "longitude": -73.63860816,
+        "latitude": 45.45922572
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [606],
+      "placeCode": "103.1"
+    },
+    {
+      "id": 609,
+      "coordinate": {
+        "longitude": -73.6386095,
+        "latitude": 45.45925982
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [606,610],
+      "placeCode": ""
+    },
+    {
+      "id": 610,
+      "coordinate": {
+        "longitude": -73.63864571,
+        "latitude": 45.45929156
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [609],
+      "placeCode": "140"
+    },
+    {
+      "id": 611,
+      "coordinate": {
+        "longitude": -73.63863599,
+        "latitude": 45.45918339
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [603,612],
+      "placeCode": ""
+    },
+    {
+      "id": 612,
+      "coordinate": {
+        "longitude": -73.6386038,
+        "latitude": 45.45917398
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [611,613,689],
+      "placeCode": ""
+    },
+    {
+      "id": 613,
+      "coordinate": {
+        "longitude": -73.63862727,
+        "latitude": 45.45913588
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [614,612,615,664,689],
+      "placeCode": ""
+    },
+    {
+      "id": 614,
+      "coordinate": {
+        "longitude": -73.6386779,
+        "latitude": 45.45915423
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [613],
+      "placeCode": "106.1"
+    },
+    {
+      "id": 615,
+      "coordinate": {
+        "longitude": -73.63864336,
+        "latitude": 45.45912107
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [613,616,617],
+      "placeCode": ""
+    },
+    {
+      "id": 616,
+      "coordinate": {
+        "longitude": -73.63870203,
+        "latitude": 45.45913729
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [615],
+      "placeCode": "106.2"
+    },
+    {
+      "id": 617,
+      "coordinate": {
+        "longitude": -73.6386551,
+        "latitude": 45.45910484
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [618,699],
+      "placeCode": ""
+    },
+    {
+      "id": 618,
+      "coordinate": {
+        "longitude": -73.63861889,
+        "latitude": 45.45909332
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [617,619,620],
+      "placeCode": ""
+    },
+    {
+      "id": 619,
+      "coordinate": {
+        "longitude": -73.6387369,
+        "latitude": 45.4590658
+      },
+      "floorCode": "VL-1",
+      "pointType": "WASHROOM",
+      "connectedPointsId": [618],
+      "placeCode": "womens-2"
+    },
+    {
+      "id": 620,
+      "coordinate": {
+        "longitude": -73.63856692,
+        "latitude": 45.45907991
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [618,621,650,664],
+      "placeCode": ""
+    },
+    {
+      "id": 621,
+      "coordinate": {
+        "longitude": -73.63858938,
+        "latitude": 45.4590444
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [620,622,623,625],
+      "placeCode": ""
+    },
+    {
+      "id": 622,
+      "coordinate": {
+        "longitude": -73.63871813,
+        "latitude": 45.45909779
+      },
+      "floorCode": "VL-1",
+      "pointType": "WASHROOM",
+      "connectedPointsId": [621],
+      "placeCode": "mens-1"
+    },
+    {
+      "id": 623,
+      "coordinate": {
+        "longitude": -73.63861017,
+        "latitude": 45.45902371
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [621,651,624,627],
+      "placeCode": ""
+    },
+    {
+      "id": 624,
+      "coordinate": {
+        "longitude": -73.63862794,
+        "latitude": 45.45900348
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [623,626,628],
+      "placeCode": ""
+    },
+    {
+      "id": 625,
+      "coordinate": {
+        "longitude": -73.63864303,
+        "latitude": 45.45901877
+      },
+      "floorCode": "VL-1",
+      "pointType": "STAIRS",
+      "connectedPointsId": [621],
+      "placeCode": "stairs-1"
+    },
+    {
+      "id": 626,
+      "coordinate": {
+        "longitude": -73.63858402,
+        "latitude": 45.45896045
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [624],
+      "placeCode": "121.1"
+    },
+    {
+      "id": 627,
+      "coordinate": {
+        "longitude": -73.63868058,
+        "latitude": 45.45899055
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [623],
+      "placeCode": "121"
+    },
+    {
+      "id": 628,
+      "coordinate": {
+        "longitude": -73.63857731,
+        "latitude": 45.45898561
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [624,629,630],
+      "placeCode": ""
+    },
+    {
+      "id": 629,
+      "coordinate": {
+        "longitude": -73.63858402,
+        "latitude": 45.45896045
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [628],
+      "placeCode": "121.1"
+    },
+    {
+      "id": 630,
+      "coordinate": {
+        "longitude": -73.63855183,
+        "latitude": 45.45897103
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [628,633,635],
+      "placeCode": ""
+    },
+    {
+      "id": 631,
+      "coordinate": {
+        "longitude": -73.63860548,
+        "latitude": 45.4589454
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [656],
+      "placeCode": "121.2"
+    },
+    {
+      "id": 632,
+      "coordinate": {
+        "longitude": -73.63856524,
+        "latitude": 45.45893035
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [657],
+      "placeCode": "127.2"
+    },
+    {
+      "id": 633,
+      "coordinate": {
+        "longitude": -73.63849819,
+        "latitude": 45.45890965
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [630],
+      "placeCode": "127.3"
+    },
+    {
+      "id": 634,
+      "coordinate": {
+        "longitude": -73.63846064,
+        "latitude": 45.45889836
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [635],
+      "placeCode": "127.4"
+    },
+    {
+      "id": 635,
+      "coordinate": {
+        "longitude": -73.63851763,
+        "latitude": 45.45894963
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [630,634,636],
+      "placeCode": ""
+    },
+    {
+      "id": 636,
+      "coordinate": {
+        "longitude": -73.63849014,
+        "latitude": 45.45893905
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [635,637,638],
+      "placeCode": ""
+    },
+    {
+      "id": 637,
+      "coordinate": {
+        "longitude": -73.63840431,
+        "latitude": 45.45888331
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [636],
+      "placeCode": "127.5"
+    },
+    {
+      "id": 638,
+      "coordinate": {
+        "longitude": -73.6384489,
+        "latitude": 45.45892988
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [636,639,640],
+      "placeCode": ""
+    },
+    {
+      "id": 639,
+      "coordinate": {
+        "longitude": -73.63833189,
+        "latitude": 45.45889836
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [638],
+      "placeCode": "130"
+    },
+    {
+      "id": 640,
+      "coordinate": {
+        "longitude": -73.63837246,
+        "latitude": 45.4588986
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [638,641],
+      "placeCode": ""
+    },
+    {
+      "id": 641,
+      "coordinate": {
+        "longitude": -73.63831814,
+        "latitude": 45.45888049
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [640,642],
+      "placeCode": ""
+    },
+    {
+      "id": 642,
+      "coordinate": {
+        "longitude": -73.63828562,
+        "latitude": 45.45886873
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [641,643],
+      "placeCode": ""
+    },
+    {
+      "id": 643,
+      "coordinate": {
+        "longitude": -73.638235,
+        "latitude": 45.45893129
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [642,644,645],
+      "placeCode": ""
+    },
+    {
+      "id": 644,
+      "coordinate": {
+        "longitude": -73.63827825,
+        "latitude": 45.45895857
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [643],
+      "placeCode": ""
+    },
+    {
+      "id": 645,
+      "coordinate": {
+        "longitude": -73.6382702,
+        "latitude": 45.45895269
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [643,646,647],
+      "placeCode": ""
+    },
+    {
+      "id": 646,
+      "coordinate": {
+        "longitude": -73.63836408,
+        "latitude": 45.45893223
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [645],
+      "placeCode": "128"
+    },
+    {
+      "id": 647,
+      "coordinate": {
+        "longitude": -73.63837279,
+        "latitude": 45.45899361
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [645,648],
+      "placeCode": ""
+    },
+    {
+      "id": 648,
+      "coordinate": {
+        "longitude": -73.63844723,
+        "latitude": 45.45901877
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [647,649,650],
+      "placeCode": ""
+    },
+    {
+      "id": 649,
+      "coordinate": {
+        "longitude": -73.63846332,
+        "latitude": 45.45896797
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [648],
+      "placeCode": "126"
+    },
+    {
+      "id": 650,
+      "coordinate": {
+        "longitude": -73.63852266,
+        "latitude": 45.4590524
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [620,648],
+      "placeCode": ""
+    },
+    {
+      "id": 651,
+      "coordinate": {
+        "longitude": -73.63867622,
+        "latitude": 45.45902018
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [623,652],
+      "placeCode": ""
+    },
+    {
+      "id": 652,
+      "coordinate": {
+        "longitude": -73.6387416,
+        "latitude": 45.45905028
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [651,653,654],
+      "placeCode": ""
+    },
+    {
+      "id": 653,
+      "coordinate": {
+        "longitude": -73.63877177,
+        "latitude": 45.45901877
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [652],
+      "placeCode": ""
+    },
+    {
+      "id": 654,
+      "coordinate": {
+        "longitude": -73.63879859,
+        "latitude": 45.45906463
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [652,655],
+      "placeCode": ""
+    },
+    {
+      "id": 655,
+      "coordinate": {
+        "longitude": -73.63882676,
+        "latitude": 45.45903053
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [656,654],
+      "placeCode": ""
+    },
+    {
+      "id": 656,
+      "coordinate": {
+        "longitude": -73.63860145,
+        "latitude": 45.45893622
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [631,655,657],
+      "placeCode": ""
+    },
+    {
+      "id": 657,
+      "coordinate": {
+        "longitude": -73.63856021,
+        "latitude": 45.45891953
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [632,656,658],
+      "placeCode": ""
+    },
+    {
+      "id": 658,
+      "coordinate": {
+        "longitude": -73.63832083,
+        "latitude": 45.45882664
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [657],
+      "placeCode": ""
+    },
+    {
+      "id": 659,
+      "coordinate": {
+        "longitude": -73.63872115,
+        "latitude": 45.45916293
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [600],
+      "placeCode": ""
+    },
+    {
+      "id": 660,
+      "coordinate": {
+        "longitude": -73.63875367,
+        "latitude": 45.45911966
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [659,661,662],
+      "placeCode": ""
+    },
+    {
+      "id": 661,
+      "coordinate": {
+        "longitude": -73.63877378,
+        "latitude": 45.45909638
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [660,663],
+      "placeCode": ""
+    },
+    {
+      "id": 662,
+      "coordinate": {
+        "longitude": -73.63870338,
+        "latitude": 45.45909896
+      },
+      "floorCode": "VL-1",
+      "pointType": "WASHROOM",
+      "connectedPointsId": [660],
+      "placeCode": "mens-2"
+    },
+    {
+      "id": 663,
+      "coordinate": {
+        "longitude": -73.63872383,
+        "latitude": 45.45908179
+      },
+      "floorCode": "VL-1",
+      "pointType": "WASHROOM",
+      "connectedPointsId": [661],
+      "placeCode": "womens-1"
+    },
+    {
+      "id": 664,
+      "coordinate": {
+        "longitude": -73.63849584,
+        "latitude": 45.4590959
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [665,620,613,689],
+      "placeCode": ""
+    },
+    {
+      "id": 665,
+      "coordinate": {
+        "longitude": -73.63834128,
+        "latitude": 45.45904182
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [666,664,667,694],
+      "placeCode": ""
+    },
+    {
+      "id": 666,
+      "coordinate": {
+        "longitude": -73.63823298,
+        "latitude": 45.45899525
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [668,665,669,670],
+      "placeCode": ""
+    },
+    {
+      "id": 667,
+      "coordinate": {
+        "longitude": -73.63835871,
+        "latitude": 45.45900184
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [665],
+      "placeCode": "122"
+    },
+    {
+      "id": 668,
+      "coordinate": {
+        "longitude": -73.63826752,
+        "latitude": 45.45897926
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [666],
+      "placeCode": "122.1"
+    },
+    {
+      "id": 669,
+      "coordinate": {
+        "longitude": -73.63821656,
+        "latitude": 45.4589548
+      },
+      "floorCode": "VL-1",
+      "pointType": "STAIRS",
+      "connectedPointsId": [666],
+      "placeCode": "stairs-3"
+    },
+    {
+      "id": 670,
+      "coordinate": {
+        "longitude": -73.63821253,
+        "latitude": 45.45900936
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [666,674,675],
+      "placeCode": ""
+    },
+    {
+      "id": 671,
+      "coordinate": {
+        "longitude": -73.63818403,
+        "latitude": 45.4590484
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [670,672,694],
+      "placeCode": ""
+    },
+    {
+      "id": 672,
+      "coordinate": {
+        "longitude": -73.63814078,
+        "latitude": 45.45903758
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [671,676,673],
+      "placeCode": ""
+    },
+    {
+      "id": 673,
+      "coordinate": {
+        "longitude": -73.63809016,
+        "latitude": 45.45901712
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [672,679,678,677],
+      "placeCode": ""
+    },
+    {
+      "id": 674,
+      "coordinate": {
+        "longitude": -73.63819778,
+        "latitude": 45.45899431
+      },
+      "floorCode": "VL-1",
+      "pointType": "ELEVATOR",
+      "connectedPointsId": [670],
+      "placeCode": "elevators-1"
+    },
+    {
+      "id": 675,
+      "coordinate": {
+        "longitude": -73.63818437,
+        "latitude": 45.45900372
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [670],
+      "placeCode": "194.3"
+    },
+    {
+      "id": 676,
+      "coordinate": {
+        "longitude": -73.63815218,
+        "latitude": 45.45898302
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [672,680],
+      "placeCode": "102.3"
+    },
+    {
+      "id": 677,
+      "coordinate": {
+        "longitude": -73.6381039,
+        "latitude": 45.45899243
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [673],
+      "placeCode": "102.2"
+    },
+    {
+      "id": 678,
+      "coordinate": {
+        "longitude": -73.63801539,
+        "latitude": 45.45898302
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [673],
+      "placeCode": "102"
+    },
+    {
+      "id": 679,
+      "coordinate": {
+        "longitude": -73.63807306,
+        "latitude": 45.45904605
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [673,681,682,683],
+      "placeCode": ""
+    },
+    {
+      "id": 680,
+      "coordinate": {
+        "longitude": -73.6381039,
+        "latitude": 45.45896797
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [676],
+      "placeCode": "102.4"
+    },
+    {
+      "id": 681,
+      "coordinate": {
+        "longitude": -73.63807172,
+        "latitude": 45.45907427
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [679,684,685,686,694],
+      "placeCode": ""
+    },
+    {
+      "id": 682,
+      "coordinate": {
+        "longitude": -73.6379993,
+        "latitude": 45.45899996
+      },
+      "floorCode": "VL-1",
+      "pointType": "STAFF_WASHROOM",
+      "connectedPointsId": [679],
+      "placeCode": "staff washrooms-1"
+    },
+    {
+      "id": 683,
+      "coordinate": {
+        "longitude": -73.6379832,
+        "latitude": 45.45901501
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [679],
+      "placeCode": "101.7"
+    },
+    {
+      "id": 684,
+      "coordinate": {
+        "longitude": -73.63796979,
+        "latitude": 45.45902818
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [681],
+      "placeCode": "101.6"
+    },
+    {
+      "id": 685,
+      "coordinate": {
+        "longitude": -73.6379537,
+        "latitude": 45.45904135
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [681],
+      "placeCode": "101.5"
+    },
+    {
+      "id": 686,
+      "coordinate": {
+        "longitude": -73.63805227,
+        "latitude": 45.45910907
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [681,687,688],
+      "placeCode": ""
+    },
+    {
+      "id": 687,
+      "coordinate": {
+        "longitude": -73.63817096,
+        "latitude": 45.45913729
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [686],
+      "placeCode": "101.3"
+    },
+    {
+      "id": 688,
+      "coordinate": {
+        "longitude": -73.63814145,
+        "latitude": 45.45916551
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [686],
+      "placeCode": "101.4"
+    },
+    {
+      "id": 689,
+      "coordinate": {
+        "longitude": -73.63851495,
+        "latitude": 45.45912201
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [612,689,664,613,690],
+      "placeCode": ""
+    },
+    {
+      "id": 690,
+      "coordinate": {
+        "longitude": -73.63845762,
+        "latitude": 45.45915352
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [689,691,694,692],
+      "placeCode": ""
+    },
+    {
+      "id": 691,
+      "coordinate": {
+        "longitude": -73.63855384,
+        "latitude": 45.45919397
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [690,695],
+      "placeCode": ""
+    },
+    {
+      "id": 692,
+      "coordinate": {
+        "longitude": -73.63843247,
+        "latitude": 45.45917445
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [690,692,696],
+      "placeCode": ""
+    },
+    {
+      "id": 693,
+      "coordinate": {
+        "longitude": -73.63841269,
+        "latitude": 45.45920197
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [692,697,681,694],
+      "placeCode": ""
+    },
+    {
+      "id": 694,
+      "coordinate": {
+        "longitude": -73.63826517,
+        "latitude": 45.45908556
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [690,665,671,693,681],
+      "placeCode": ""
+    },
+    {
+      "id": 695,
+      "coordinate": {
+        "longitude": -73.63853037,
+        "latitude": 45.45922196
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [691],
+      "placeCode": "104"
+    },
+    {
+      "id": 696,
+      "coordinate": {
+        "longitude": -73.63847405,
+        "latitude": 45.4591975
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [692],
+      "placeCode": "101.1"
+    },
+    {
+      "id": 697,
+      "coordinate": {
+        "longitude": -73.63844454,
+        "latitude": 45.45922196
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [693,698],
+      "placeCode": "101.2"
+    },
+    {
+      "id": 698,
+      "coordinate": {
+        "longitude": -73.63849819,
+        "latitude": 45.45924641
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [697],
+      "placeCode": "104.1"
+    },
+    {
+      "id": 699,
+      "coordinate": {
+        "longitude": -73.63871813,
+        "latitude": 45.45912224
+      },
+      "floorCode": "VL-1",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [617],
+      "placeCode": "120"
+    },
+    {
+      "id": 700,
+      "coordinate": {
+        "longitude": -73.63800466,
+        "latitude": 45.45910743
+      },
+      "floorCode": "VL-2",
+      "pointType": "NONE",
+      "connectedPointsId": [701,708],
+      "placeCode": ""
+    },
+    {
+      "id": 701,
+      "coordinate": {
+        "longitude": -73.63802914,
+        "latitude": 45.4590698
+      },
+      "floorCode": "VL-2",
+      "pointType": "NONE",
+      "connectedPointsId": [700,709],
+      "placeCode": ""
+    },
+    {
+      "id": 702,
+      "coordinate": {
+        "longitude": -73.63822863,
+        "latitude": 45.45901054
+      },
+      "floorCode": "VL-2",
+      "pointType": "NONE",
+      "connectedPointsId": [712,703,705,704,710,711],
+      "placeCode": ""
+    },
+    {
+      "id": 703,
+      "coordinate": {
+        "longitude": -73.63816191,
+        "latitude": 45.45908979
+      },
+      "floorCode": "VL-2",
+      "pointType": "NONE",
+      "connectedPointsId": [701,702,704,705],
+      "placeCode": ""
+    },
+    {
+      "id": 704,
+      "coordinate": {
+        "longitude": -73.63845661,
+        "latitude": 45.45920032
+      },
+      "floorCode": "VL-2",
+      "pointType": "NONE",
+      "connectedPointsId": [705, 703, 702, 717, 718],
+      "placeCode": ""
+    },
+    {
+      "id": 705,
+      "coordinate": {
+        "longitude": -73.63852367,
+        "latitude": 45.45910813
+      },
+      "floorCode": "VL-2",
+      "pointType": "NONE",
+      "connectedPointsId": [702, 703, 704, 706, 713, 714, 715, 716],
+      "placeCode": ""
+    },
+    {
+      "id": 706,
+      "coordinate": {
+        "longitude": -73.63858804,
+        "latitude": 45.45906369
+      },
+      "floorCode": "VL-2",
+      "pointType": "NONE",
+      "connectedPointsId": [707, 705, 714, 719],
+      "placeCode": ""
+    },
+    {
+      "id": 707,
+      "coordinate": {
+        "longitude": -73.63860045,
+        "latitude": 45.4590477
+      },
+      "floorCode": "VL-2",
+      "pointType": "NONE",
+      "connectedPointsId": [706, 715, 729],
+      "placeCode": ""
+    },
+    {
+      "id": 708,
+      "coordinate": {
+        "longitude": -73.63792688,
+        "latitude": 45.45907709
+      },
+      "floorCode": "VL-2",
+      "pointType": "STAIRS",
+      "connectedPointsId": [700],
+      "placeCode": "stairs-3"
+    },
+    {
+      "id": 709,
+      "coordinate": {
+        "longitude": -73.6379537,
+        "latitude": 45.45904135
+      },
+      "floorCode": "VL-2",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [701],
+      "placeCode": "202.1"
+    },
+    {
+      "id": 710,
+      "coordinate": {
+        "longitude": -73.63818169,
+        "latitude": 45.45898679
+      },
+      "floorCode": "VL-2",
+      "pointType": "ELEVATOR",
+      "connectedPointsId": [702],
+      "placeCode": "elevators-1"
+    },
+    {
+      "id": 711,
+      "coordinate": {
+        "longitude": -73.63821119,
+        "latitude": 45.45895292
+      },
+      "floorCode": "VL-2",
+      "pointType": "STAIRS",
+      "connectedPointsId": [702],
+      "placeCode": "stairs-3"
+    },
+    {
+      "id": 712,
+      "coordinate": {
+        "longitude": -73.63826215,
+        "latitude": 45.45896985
+      },
+      "floorCode": "VL-2",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [702],
+      "placeCode": "202.3"
+    },
+    {
+      "id": 713,
+      "coordinate": {
+        "longitude": -73.63860548,
+        "latitude": 45.45910343
+      },
+      "floorCode": "VL-2",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [705],
+      "placeCode": "203.2"
+    },
+    {
+      "id": 714,
+      "coordinate": {
+        "longitude": -73.63859206,
+        "latitude": 45.45911848
+      },
+      "floorCode": "VL-2",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [705],
+      "placeCode": "203.1"
+    },
+    {
+      "id": 715,
+      "coordinate": {
+        "longitude": -73.63858134,
+        "latitude": 45.45913353
+      },
+      "floorCode": "VL-2",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [705],
+      "placeCode": "201.1"
+    },
+    {
+      "id": 716,
+      "coordinate": {
+        "longitude": -73.6386162,
+        "latitude": 45.45918245
+      },
+      "floorCode": "VL-2",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [705, 722],
+      "placeCode": "201"
+    },
+    {
+      "id": 717,
+      "coordinate": {
+        "longitude": -73.63853306,
+        "latitude": 45.45926146
+      },
+      "floorCode": "VL-2",
+      "pointType": "NONE",
+      "connectedPointsId": [704, 718, 723],
+      "placeCode": ""
+    },
+    {
+      "id": 718,
+      "coordinate": {
+        "longitude": -73.638581,
+        "latitude": 45.45925088
+      },
+      "floorCode": "VL-2",
+      "pointType": "NONE",
+      "connectedPointsId": [704, 717, 724],
+      "placeCode": ""
+    },
+    {
+      "id": 719,
+      "coordinate": {
+        "longitude": -73.63865409,
+        "latitude": 45.45910084
+      },
+      "floorCode": "VL-2",
+      "pointType": "NONE",
+      "connectedPointsId": [706, 725, 720],
+      "placeCode": ""
+    },
+    {
+      "id": 720,
+      "coordinate": {
+        "longitude": -73.63870237,
+        "latitude": 45.45912013
+      },
+      "floorCode": "VL-2",
+      "pointType": "NONE",
+      "connectedPointsId": [719, 726, 721],
+      "placeCode": ""
+    },
+    {
+      "id": 721,
+      "coordinate": {
+        "longitude": -73.63875534,
+        "latitude": 45.45914835
+      },
+      "floorCode": "VL-2",
+      "pointType": "NONE",
+      "connectedPointsId": [722, 720, 727],
+      "placeCode": ""
+    },
+    {
+      "id": 722,
+      "coordinate": {
+        "longitude": -73.63869399,
+        "latitude": 45.45921678
+      },
+      "floorCode": "VL-2",
+      "pointType": "NONE",
+      "connectedPointsId": [721, 716, 728],
+      "placeCode": ""
+    },
+    {
+      "id": 723,
+      "coordinate": {
+        "longitude": -73.63858938,
+        "latitude": 45.45927651
+      },
+      "floorCode": "VL-2",
+      "pointType": "STAIRS",
+      "connectedPointsId": [717],
+      "placeCode": "stairs-2"
+    },
+    {
+      "id": 724,
+      "coordinate": {
+        "longitude": -73.63864571,
+        "latitude": 45.45929156
+      },
+      "floorCode": "VL-2",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [718],
+      "placeCode": "240"
+    },
+    {
+      "id": 725,
+      "coordinate": {
+        "longitude": -73.63863498,
+        "latitude": 45.45912601
+      },
+      "floorCode": "VL-2",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [719],
+      "placeCode": "203.3"
+    },
+    {
+      "id": 726,
+      "coordinate": {
+        "longitude": -73.63868326,
+        "latitude": 45.45914294
+      },
+      "floorCode": "VL-2",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [720],
+      "placeCode": "204"
+    },
+    {
+      "id": 727,
+      "coordinate": {
+        "longitude": -73.63875568,
+        "latitude": 45.45910155
+      },
+      "floorCode": "VL-2",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [721],
+      "placeCode": "205"
+    },
+    {
+      "id": 728,
+      "coordinate": {
+        "longitude": -73.63867521,
+        "latitude": 45.45924829
+      },
+      "floorCode": "VL-2",
+      "pointType": "CLASSROOM",
+      "connectedPointsId": [722],
+      "placeCode": "297.1"
+    },
+    {
+      "id": 729,
+      "coordinate": {
+        "longitude": -73.63857597,
+        "latitude": 45.45900936
+      },
+      "floorCode": "VL-2",
+      "pointType": "STAIRS",
+      "connectedPointsId": [707],
+      "placeCode": "stairs-1"
     }
   ]
 }
