@@ -311,7 +311,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                Log.i(TAG,marker.getTag().toString());
+                System.out.println(marker.getPosition());
+                // Log.i(TAG,marker.getTag().toString());
                 return false;
             }
         });
