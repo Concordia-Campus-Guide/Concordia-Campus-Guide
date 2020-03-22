@@ -19,7 +19,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.concordia_campus_guide.Adapters.DirectionsRecyclerViewAdapter;
+import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Helper.PathFinder;
+import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.Direction;
 import com.example.concordia_campus_guide.Models.PointType;
 import com.example.concordia_campus_guide.Models.RoomModel;
@@ -75,9 +77,9 @@ public class PathInfoCardFragment extends Fragment {
 //        RoomModel from = (RoomModel) SelectingToFromState.getFrom();
 //        RoomModel to = (RoomModel) SelectingToFromState.getTo();
 //        PathFinder pf = new PathFinder(getContext(), from, to);
-        RoomModel src = new RoomModel(new Double[]{-73.57901685, 45.49761115}, "927", "H-9");
-        RoomModel destination = new RoomModel(new Double[]{-73.57854277, 45.49739565}, "918", "H-8");
-        PathFinder pf = new PathFinder(getContext(), src, destination);
+        RoomModel src = new RoomModel(new Coordinates(45.49761115, -73.57901685), "927", "H-9");
+        RoomModel destination = new RoomModel(new Coordinates(45.49739565, -73.57854277), "918", "H-8");
+        PathFinder pf = new PathFinder(AppDatabase.getInstance(getContext()), src, destination);
         return pf.getPathToDestination();
 
     }

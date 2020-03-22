@@ -22,8 +22,10 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
 import com.example.concordia_campus_guide.ClassConstants;
+import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.Models.Building;
+import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
@@ -291,11 +293,11 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     }
 
     public void drawPaths(Place from, Place to) {
-        RoomModel src = new RoomModel(new Double[]{-73.57901685, 45.49761115}, "927", "H-9");
-        RoomModel destination = new RoomModel(new Double[]{-73.57854277, 45.49739565}, "918", "H-8");
+        RoomModel src = new RoomModel(new Coordinates(45.49761115,-73.57901685), "927", "H-9");
+        RoomModel destination = new RoomModel(new Coordinates(45.49739565,-73.57854277), "918", "H-8");
 
 //        mViewModel.parseWalkingPointList(getContext(), (RoomModel) from, (RoomModel) to);
-        mViewModel.parseWalkingPointList(getContext(), src, destination);
+        mViewModel.parseWalkingPointList(AppDatabase.getInstance(getContext()), src, destination);
     }
 
     /**

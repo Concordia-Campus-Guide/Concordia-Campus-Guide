@@ -8,6 +8,7 @@ import android.graphics.Color;
 import androidx.lifecycle.ViewModel;
 import androidx.room.Room;
 
+import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Global.ApplicationState;
 import com.example.concordia_campus_guide.Helper.PathFinder;
 import com.example.concordia_campus_guide.Models.Building;
@@ -263,9 +264,9 @@ public class LocationFragmentViewModel extends ViewModel {
     public LatLng getSGWZoomLocation(){
         return buildings.get("H").getCenterCoordinatesLatLng();
     }
-
-    public void parseWalkingPointList(Context context, RoomModel from, RoomModel to) {
-        PathFinder pf = new PathFinder(context ,from, to);
+    
+    public void parseWalkingPointList(AppDatabase appDatabase, RoomModel from, RoomModel to) {
+        PathFinder pf = new PathFinder(appDatabase ,from, to);
         walkingPoints = pf.getPathToDestination();
 
         List<WalkingPoint> floorWalkingPointList;

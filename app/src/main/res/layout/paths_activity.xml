@@ -50,7 +50,7 @@
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toStartOf="@+id/path_toText"
                 app:layout_constraintTop_toTopOf="@+id/path_toText"
-                app:srcCompat="@drawable/ic_place_24dp" />
+                app:srcCompat="@drawable/ic_place_white" />
 
             <TextView
                 android:id="@+id/path_fromText"
