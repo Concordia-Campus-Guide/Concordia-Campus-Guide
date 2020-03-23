@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.POIFragment.POIFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/info_card_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/ic_line_grey"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:text="TextView"
+            android:textAllCaps="false"
+            android:textColor="@color/colorAppTheme"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30sp"
+            android:layout_marginEnd="30sp"
+            android:layout_marginBottom="35sp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/directions"
+                style="@style/InfoCardButton"
+                android:layout_marginEnd="15sp"
+                android:drawableLeft="@drawable/ic_directions_black_24dp"
+                android:text="Directions"
+                app:iconPadding="5dp" />
+
+            <Button
+                android:id="@+id/indoor_map"
+                style="@style/InfoCardButton"
+                android:layout_marginStart="15sp"
+                android:backgroundTint="@color/colorPrimary"
+                android:drawableLeft="@drawable/ic_layers_black_24dp"
+                android:text="Indoor Map"
+                app:iconPadding="5dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_weight="0"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/building_image"
+                android:layout_width="170dp"
+                android:layout_height="168dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                tools:srcCompat="@tools:sample/avatars[2]" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <ImageView
+                    android:id="@+id/red_pin"
+                    android:layout_width="11dp"
+                    android:layout_height="19dp"
+                    android:layout_marginEnd="8dp"
+                    app:srcCompat="@drawable/red_pin" />
+
+                <TextView
+                    android:id="@+id/building_address"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="5"
+                    android:text="TextView"
+                    android:textColor="@color/colorPrimary" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/departments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/departments_title"
+                    style="@style/InfoCardDescriptionTitle"
+                    android:text="Departments" />
+
+                <TextView
+                    android:id="@+id/departments_list"
+                    style="@style/InfoCardDescription" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/services"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/services_title"
+                    style="@style/InfoCardDescriptionTitle"
+                    android:layout_marginTop="10dp"
+                    android:text="Services" />
+
+                <TextView
+                    android:id="@+id/services_list"
+                    style="@style/InfoCardDescription"
+                    android:layout_marginBottom="20dp"
+                    android:text="TextView" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="15dp"
+                android:background="@color/divider"
+                android:backgroundTint="@color/divider"
+                tools:visibility="visible" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
