@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimaryLight">#4DF06675</color>
     <color name="colorPrimary">#C85563</color>
     <color name="colorPrimaryDark">#DADCE0</color>
     <color name="colorAppTheme">#932339</color>
@@ -8,6 +9,7 @@
     <color name="floorPickerTextColor">#FFFFFF</color>
     <color name="loginPageBackgroundColor">#FFFFFF</color>
     <color name="productGridBackgroundColor">#FFFFFF</color>
+    <color name="whiteBackgroundColor">#FFFFFF</color>
     <color name="textColor">#FFFFFF</color>
     <color name="divider">#DEBCC0</color>
     <color name="backgroundGrey">#E5E5E5</color>
