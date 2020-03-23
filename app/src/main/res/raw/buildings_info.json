@@ -107,7 +107,11 @@
       ],
       "Services":[
         "Engineering and Computer Science Association"
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.579588,
+        "latitude":45.497856
+      }
     },
     {
       "Campus":"LOY",
@@ -240,7 +244,11 @@
       ],
       "Services":[
 
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.579925,
+        "latitude":45.497467
+      }
     },
     {
       "Campus":"LOY",
@@ -341,7 +349,11 @@
       ],
       "Services":[
         "Concordia Continuing Education"
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.579007,
+        "latitude":45.494259
+      }
     },
     {
       "Campus":"SGW",
@@ -353,7 +365,11 @@
       ],
       "Services":[
 
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.579409,
+        "latitude":45.497827
+      }
     },
     {
       "Campus":"LOY",
@@ -405,7 +421,11 @@
       ],
       "Services":[
 
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.579555,
+        "latitude":45.496944
+      }
     },
     {
       "Campus":"SGW",
@@ -417,7 +437,11 @@
       ],
       "Services":[
 
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.57999,
+        "latitude":45.496428
+      }
     },
     {
       "Campus":"SGW",
@@ -539,7 +563,11 @@
       ],
       "Services":[
 
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.579468,
+        "latitude":45.496874
+      }
     },
     {
       "Campus":"SGW",
@@ -721,7 +749,11 @@
       ],
       "Services":[
 
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.57787,
+        "latitude":45.494123
+      }
     },
     {
       "Campus":"LOY",
@@ -835,7 +867,11 @@
         "Grey Nuns Library (Reading Room and Group Study Rooms)",
         "Daycare Centre",
         "Summer Accommodation"
-      ]
+      ],
+      "centerCoordinates": {
+        "longitude":-73.577003,
+        "latitude":45.493622
+      }
     },
     {
       "Campus":"SGW",
@@ -847,7 +883,11 @@
       ],
       "Services":[
 
-      ]
+      ],
+      "centerCoordinates": {
+        "longitude":-73.581409,
+        "latitude":45.496673
+      }
     },
     {
       "Campus":"SGW",
@@ -1126,7 +1166,11 @@
       ],
       "Services":[
 
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.579531,
+        "latitude":45.497777
+      }
     },
     {
       "Campus":"SGW",
@@ -1230,7 +1274,11 @@
       ],
       "Services":[
         "CSU Daycare & Nursery"
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.577312,
+        "latitude":45.496697
+      }
     },
     {
       "Campus":"SGW",
@@ -1242,7 +1290,11 @@
       ],
       "Services":[
         "IT Services"
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.57949,
+        "latitude":45.496192
+      },
     },
     {
       "Campus":"SGW",
@@ -1254,7 +1306,11 @@
       ],
       "Services":[
 
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.579777,
+        "latitude":45.497368
+      }
     },
     {
       "Campus":"SGW",
@@ -1333,7 +1389,11 @@
         "Concordia University Library Employees' Union (CULEU)",
         "Concordia University Professional Employee Union (CUPEU)",
         "Concordia University  Continuing Education Part-time Faculty Union (CUCEPTFU)"
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.579261,
+        "latitude":45.497807
+      }
     },
     {
       "Campus":"SGW",
@@ -1345,7 +1405,11 @@
       ],
       "Services":[
         "Simone de Beauvoir Institute"
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.579506,
+        "latitude":45.497963
+      }
     },
     {
       "Campus":"SGW",
@@ -1357,7 +1421,11 @@
       ],
       "Services":[
 
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.579113,
+        "latitude":45.496745
+      }
     },
     {
       "Campus":"LOY",
@@ -1369,7 +1437,11 @@
       ],
       "Services":[
 
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.638106,
+        "latitude":45.456534
+      }
     },
     {
       "Campus":"LOY",
@@ -1421,7 +1493,11 @@
       ],
       "Services":[
 
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.57979,
+        "latitude":45.497066
+      }
     },
     {
       "Campus":"LOY",
@@ -1559,7 +1635,11 @@
       ],
       "Services":[
         "Ethnic Students' Association"
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.579094,
+        "latitude":45.496648
+      }
     },
     {
       "Campus":"LOY",
@@ -1615,7 +1695,11 @@
       ],
       "Services":[
 
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.579389,
+        "latitude":45.496826
+      }
     },
     {
       "Campus":"LOY",
@@ -1733,7 +1817,11 @@
       ],
       "Services":[
 
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.579259,
+        "latitude":45.496796
+      }
     },
     {
       "Campus":"SGW",
@@ -1745,7 +1833,11 @@
       ],
       "Services":[
 
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.579851,
+        "latitude":45.497423
+      }
     },
     {
       "Campus":"SGW",
@@ -1757,7 +1849,11 @@
       ],
       "Services":[
         "Arts and Science Research Groups"
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.58609,
+        "latitude":45.4966
+      }
     },
     {
       "Campus":"LOY",
@@ -2020,7 +2116,11 @@
       ],
       "Services":[
         "Graduate Students Asociation"
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.57927,
+        "latitude":45.49671
+      }
     },
     {
       "Campus":"LOY",
@@ -2072,7 +2172,11 @@
       ],
       "Services":[
 
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.640842,
+        "latitude":45.460051
+      }
     },
     {
       "Campus":"SGW",
@@ -2084,7 +2188,11 @@
       ],
       "Services":[
         "Concordia University Student Parents Centre (CUSP)"
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.578375,
+        "latitude":45.495103
+      }
     },
     {
       "Campus":"SGW",
@@ -2097,7 +2205,11 @@
       "Services":[
         "Concordia University Television (CUTV)",
         "Centre for Gender Advocacy"
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.579907,
+        "latitude":45.497101
+      }
     },
     {
       "Campus":"SGW",
@@ -2113,7 +2225,11 @@
       "Services":[
         "VAV Art Gallery",
         "Art Supply Store"
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.573795,
+        "latitude":45.495543
+      }
     },
     {
       "Campus":"LOY",
@@ -2232,7 +2348,11 @@
       ],
       "Services":[
         "Concordia International"
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.579593,
+        "latitude":45.49694
+      }
     },
     {
       "Campus":"SGW",
@@ -2245,7 +2365,11 @@
       "Services":[
         "Multi-Faith and Spirituality Centre",
         "Sustainable Concordia"
-      ]
+      ],
+      "centerCoordinates":{
+        "longitude":-73.579705,
+        "latitude":45.496981
+      }
     }
   ]
 }
