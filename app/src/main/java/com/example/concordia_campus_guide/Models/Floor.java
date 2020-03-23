@@ -4,7 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.Index;
+
+import com.example.concordia_campus_guide.R;
 
 import static androidx.room.ForeignKey.CASCADE;
 
@@ -37,8 +40,14 @@ public class Floor extends Place {
     public Floor() {
         super();
     }
-    public Floor(Double[] coordinates, String floorCode, float altitude) {
+    public Floor(Coordinates coordinates, String floorCode, float altitude) {
         super(coordinates);
+        this.floorCode = floorCode;
+        this.altitude = altitude;
+    }
+
+    public Floor(Coordinates coordinates, String floorCode, float altitude, String campus) {
+        super(coordinates, campus);
         this.floorCode = floorCode;
         this.altitude = altitude;
     }

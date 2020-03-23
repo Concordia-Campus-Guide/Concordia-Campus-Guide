@@ -37,7 +37,7 @@
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toStartOf="@+id/toText"
                 app:layout_constraintTop_toTopOf="@+id/toText"
-                app:srcCompat="@drawable/ic_place_24dp" />
+                app:srcCompat="@drawable/ic_place_white" />
 
             <ImageButton
                 android:id="@+id/routesPageBackButton"
@@ -52,15 +52,15 @@
                 app:srcCompat="@drawable/ic_arrow_back_24dp" />
 
             <TextView
-                android:onClick="onClickTo"
-                android:clickable="true"
                 android:id="@+id/toText"
                 android:layout_width="303dp"
                 android:layout_height="39dp"
                 android:layout_marginTop="60dp"
                 android:background="#29FFFFFF"
+                android:clickable="true"
                 android:ems="10"
                 android:inputType="textPersonName"
+                android:onClick="onClickTo"
                 android:padding="8dp"
                 android:text="Name"
                 android:textColor="@android:color/white"
@@ -70,15 +70,15 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:onClick="onClickFrom"
-                android:clickable="true"
                 android:id="@+id/fromText"
                 android:layout_width="303dp"
                 android:layout_height="39dp"
                 android:layout_marginTop="8dp"
                 android:background="#29FFFFFF"
+                android:clickable="true"
                 android:ems="10"
                 android:inputType="textPersonName"
+                android:onClick="onClickFrom"
                 android:padding="8dp"
                 android:text="Name"
                 android:textColor="@android:color/white"
@@ -86,6 +86,71 @@
                 app:layout_constraintHorizontal_bias="0.771"
                 app:layout_constraintStart_toEndOf="@+id/routesPageBackButton"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:layout_width="409dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginBottom="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                    android:id="@+id/filterButtonTransit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:padding="10dp"
+                    app:srcCompat="@drawable/ic_directions_bus_black_24dp" />
+
+                <ImageButton
+                    android:id="@+id/filterButtonShuttle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:padding="10dp"
+                    android:onClick="getShuttle"
+                    app:srcCompat="@drawable/ic_shuttle" />
+
+                <ImageButton
+                    android:id="@+id/filterButtonWalk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:padding="10dp"
+                    app:srcCompat="@drawable/ic_directions_walk_black_24dp" />
+
+                <ImageButton
+                    android:id="@+id/filterButtonAccessibility"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:padding="10dp"
+                    app:srcCompat="@drawable/ic_accessible_white_24dp" />
+
+                <ImageButton
+                    android:id="@+id/filterButtonCar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:padding="10dp"
+                    app:srcCompat="@drawable/ic_directions_car_black_24dp" />
+            </LinearLayout>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

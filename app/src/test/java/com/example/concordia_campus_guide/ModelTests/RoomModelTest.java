@@ -1,5 +1,6 @@
 package com.example.concordia_campus_guide.ModelTests;
 
+import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -14,7 +15,7 @@ public class RoomModelTest {
 
     @Before
     public void init() {
-        room = new RoomModel(new Double[]{-73.57907921075821, 45.49702057370776}, "823", "H-8");
+        room = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8");
     }
 
     @Test
@@ -29,14 +30,14 @@ public class RoomModelTest {
         String roomCode = room.getRoomCode();
         room.setRoomCode("822");
         assertEquals(room.getRoomCode(), "822");
-        assertEquals(room.getDisplayName(), "822");
+        assertEquals(room.getDisplayName(), "H-8 822");
         room.setFloorCode(roomCode);
     }
 
     @Test
     public void getAndSetCenterCoordinatesTest() {
-        Double[] centerCoordinates = room.getCenterCoordinates();
-        Double[] centerCoordinatesNew = new Double[]{-73.57921063899994, 45.49707133596979};
+        Coordinates centerCoordinates = room.getCenterCoordinates();
+        Coordinates centerCoordinatesNew = new Coordinates(-73.57921063899994, 45.49707133596979);
         room.setCenterCoordinates(centerCoordinatesNew);
         assertEquals(room.getCenterCoordinates(), centerCoordinatesNew);
         room.setCenterCoordinates(centerCoordinates);
@@ -52,7 +53,7 @@ public class RoomModelTest {
 
     @Test
     public void getCenterCoordinatesLatLngTest() {
-        Double[] coordinates = room.getCenterCoordinates();
-        assertEquals(room.getCenterCoordinatesLatLng(), new LatLng(coordinates[0], coordinates[1]));
+        Coordinates coordinates = room.getCenterCoordinates();
+        assertEquals(room.getCenterCoordinatesLatLng(), new LatLng(coordinates.getLatitude(), coordinates.getLongitude()));
     }
 }

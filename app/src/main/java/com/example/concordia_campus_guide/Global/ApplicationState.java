@@ -6,6 +6,7 @@ import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.Floors;
 import com.example.concordia_campus_guide.Models.Rooms;
 import com.example.concordia_campus_guide.Models.WalkingPoints;
+import com.example.concordia_campus_guide.Models.Shuttles;
 import com.example.concordia_campus_guide.R;
 import com.google.gson.Gson;
 
@@ -21,12 +22,14 @@ public class ApplicationState {
     private Rooms rooms;
     private WalkingPoints walkingPoints;
     private boolean dbIsSet = false;
+    private Shuttles shuttles;
 
     private ApplicationState(Context context) {
         this.context = context;
         importBuildings();
         importFloors();
         importRooms();
+        importShuttle();
         importWalkingPoints();
     }
 
@@ -82,7 +85,6 @@ public class ApplicationState {
             rooms = new Gson().fromJson(json, Rooms.class);
             this.rooms = rooms;
         }
-
     }
 
     public Buildings getBuildings(){ return this.buildings; }
@@ -96,4 +98,14 @@ public class ApplicationState {
     public void setDbIsSetToTrue() { this.dbIsSet = true; }
 
     public WalkingPoints getWalkingPoints() { return this.walkingPoints; }
+
+    public Shuttles getShuttles() { return this.shuttles; }
+
+    private void importShuttle() {
+        String json = importMethod(R.raw.shuttle_info);
+        if(json != null){
+            shuttles = new Gson().fromJson(json, Shuttles.class);
+            this.shuttles = shuttles;
+        }
+    }
 }

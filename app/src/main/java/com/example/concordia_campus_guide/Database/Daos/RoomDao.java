@@ -17,7 +17,7 @@ public interface RoomDao {
     List<RoomModel> getAllRoomsByFloorCode(String floorCode);
 
     @Query("SELECT * FROM rooms")
-    List<RoomModel> getAllRooms();
+    List<RoomModel> getAll();
 
     @Insert
     void insertAll(List<RoomModel> rooms);
