@@ -68,7 +68,7 @@ public class CalendarViewModel extends AndroidViewModel {
     }
 
 
-    private Cursor getCalendarCursor() {
+    public Cursor getCalendarCursor() {
         Uri.Builder eventsUriBuilder = CalendarContract.Instances.CONTENT_URI
                 .buildUpon();
         long startTime = new Date().getTime();
