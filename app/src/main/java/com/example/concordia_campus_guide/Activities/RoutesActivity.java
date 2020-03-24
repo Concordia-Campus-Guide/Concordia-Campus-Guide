@@ -79,7 +79,7 @@ public class RoutesActivity extends AppCompatActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)  {
-        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
             exitSelectToFrom();
 
             return true;
@@ -94,7 +94,7 @@ public class RoutesActivity extends AppCompatActivity {
     }
 
     private void setBackButtonOnClick(){
-        ImageButton backButton = (ImageButton)this.findViewById(R.id.routesPageBackButton);
+        ImageButton backButton = this.findViewById(R.id.routesPageBackButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { exitSelectToFrom(); }
