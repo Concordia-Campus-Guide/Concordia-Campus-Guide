@@ -9,7 +9,9 @@ public class Route {
     private String departureTime;
     private String arrivalTime;
 
-    public Route() {}
+    public Route() {
+        this.directions = new ArrayList<>();
+    }
 
     public Route(String departureTime, String arrivalTime) {
         this.directions = new ArrayList<>();
