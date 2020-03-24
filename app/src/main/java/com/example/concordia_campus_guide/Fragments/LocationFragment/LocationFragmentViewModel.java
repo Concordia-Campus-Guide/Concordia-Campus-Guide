@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 
 import androidx.lifecycle.ViewModel;
-import androidx.room.Room;
 
 import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.Database.AppDatabase;
@@ -14,15 +13,14 @@ import com.example.concordia_campus_guide.Global.ApplicationState;
 import com.example.concordia_campus_guide.Helper.PathFinder;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Coordinates;
-import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.RoomModel;
+import com.example.concordia_campus_guide.Models.TransitType;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Dash;
-import com.google.android.gms.maps.model.Dot;
 import com.google.android.gms.maps.model.Gap;
 import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
@@ -61,7 +59,7 @@ public class LocationFragmentViewModel extends ViewModel {
     public static final int PATTERN_GAP_LENGTH_PX = 20;
     public static final PatternItem DASH = new Dash(PATTERN_DASH_LENGTH_PX);
     public static final PatternItem GAP = new Gap(PATTERN_GAP_LENGTH_PX);
-    public static final List<PatternItem> PATTERN_POLYLINE = Arrays.asList(GAP, DASH);
+    public static final List<PatternItem> WALK_PATTERN = Arrays.asList(GAP, DASH);
 
     /**
      * @return return the map style
@@ -291,16 +289,14 @@ public class LocationFragmentViewModel extends ViewModel {
         }
         return option
                 .width(10)
-                .pattern(PATTERN_POLYLINE)
+                .pattern(WALK_PATTERN)
                 .color(Color.rgb(147,35, 57))
                 .visible(true);
     }
 
     public void drawOutdoorPath(List<DirectionWrapper> outdoorDirections, GoogleMap map) {
         for(DirectionWrapper directionWrapper: outdoorDirections) {
-            PolylineOptions polylineOptions = new PolylineOptions()
-                    .width(20)
-                    .color(Color.rgb(147,35, 57));
+            PolylineOptions polylineOptions = stylePolyLine(directionWrapper.getDirection().getType());
             List<com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.LatLng> polyline = directionWrapper.getPolyline().decodePath();
 
             for(int i=0; i<polyline.size(); i++){
@@ -308,5 +304,18 @@ public class LocationFragmentViewModel extends ViewModel {
             }
             map.addPolyline(polylineOptions);
         }
+    }
+
+    private PolylineOptions stylePolyLine(TransitType type) {
+        PolylineOptions polylineOptions = new PolylineOptions().width(20);
+        if(type.equals(TransitType.WALK)) {
+            polylineOptions.pattern(WALK_PATTERN);
+        }
+        if(type.equals(TransitType.BUS) || type.equals(TransitType.METRO) || type.equals(TransitType.CAR)){
+            polylineOptions.color(Color.rgb(35,147, 57));
+        }else{
+            polylineOptions.color(Color.rgb(147,35, 57));
+        }
+        return polylineOptions;
     }
 }
