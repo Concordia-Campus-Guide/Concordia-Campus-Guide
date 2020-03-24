@@ -6,9 +6,13 @@ import java.util.List;
 public class Route {
 
     private List<Direction> directions;
+    private String departureTime;
+    private String arrivalTime;
 
-    public Route() {
+    public Route(String departureTime, String arrivalTime) {
         this.directions = new ArrayList<>();
+        this.departureTime = departureTime;
+        this.arrivalTime = arrivalTime;
     }
 
     public Route(List<Direction> directions) {

@@ -1,15 +1,13 @@
 package com.example.concordia_campus_guide.Activities;
 
-import android.location.Location;
 import androidx.lifecycle.ViewModel;
-import com.example.concordia_campus_guide.BuildConfig;
-import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsResult;
 import com.example.concordia_campus_guide.Models.Place;
-import com.google.android.gms.maps.model.LatLng;
+import com.example.concordia_campus_guide.Models.Route;
 import com.example.concordia_campus_guide.Models.Shuttle;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -22,6 +20,8 @@ public class RoutesActivityViewModel extends ViewModel {
     private List<Shuttle> shuttles;
     private final String noShuttles = "No available routes using the shuttle service";
     private DirectionsResult directionsResult;
+
+    private List<Route> routeOptions;
 
     public RoutesActivityViewModel(AppDatabase appDB) {
         this.appDB = appDB;
@@ -84,4 +84,9 @@ public class RoutesActivityViewModel extends ViewModel {
         }
         return content;
     }
+
+    public List<Route> getRouteOptions() {  return routeOptions; }
+
+    public void setRouteOptions(List<Route> routeOptions) { this.routeOptions = routeOptions; }
+
 }

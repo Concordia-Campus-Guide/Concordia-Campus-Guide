@@ -11,33 +11,12 @@ public class DirectionWrapper {
     Direction direction;
     EncodedPolyline polyline;
 
-    public DirectionWrapper(DirectionsStep directionStep){
+    public DirectionWrapper(DirectionsStep step){
         // create a new direction
-        direction = new Direction();
-        direction.setStart(new LatLng(directionStep.startLocation.lat, directionStep.startLocation.lng));
-        direction.setEnd(new LatLng(directionStep.endLocation.lat, directionStep.endLocation.lng));
-        direction.setType(getTransitType(directionStep.travelMode));
-        direction.setDescription(directionStep.htmlInstructions);
-        direction.setDuration(directionStep.duration.value);
+        direction = new Direction(step);
 
         // map polyline
-        polyline = directionStep.polyline;
-    }
-
-    private TransitType getTransitType(TravelMode travelMode){
-        switch (travelMode){
-            case DRIVING:
-                return TransitType.CAR;
-            case WALKING:
-                return TransitType.WALK;
-            case BICYCLING:
-                return TransitType.BIKE;
-            case TRANSIT:
-                // TODO: we have both metro and bus (but Google only provides TRANSIT)
-                return TransitType.BUS;
-        }
-        // TODO: what should be returned if there is no match?
-        return null;
+        polyline = step.polyline;
     }
 
     public Direction getDirection() {

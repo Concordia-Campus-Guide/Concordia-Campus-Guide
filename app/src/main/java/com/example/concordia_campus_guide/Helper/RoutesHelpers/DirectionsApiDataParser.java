@@ -5,9 +5,16 @@ import android.util.Log;
 
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsResult;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsRoute;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
+import com.example.concordia_campus_guide.Models.Direction;
+import com.example.concordia_campus_guide.Models.Route;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class is an AsyncTask because we want to avoid freezing the main UI thread when parsing the Google Maps Directions API's response
@@ -51,6 +58,21 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
      */
     @Override
     protected void onPostExecute(DirectionsResult result) {
-        dataRetrieval.caller.directionsApiCallBack(result);
+        dataRetrieval.caller.directionsApiCallBack(result, extractRelevantInfoFromDirectionsResultObj(result));
+    }
+
+
+    public List<Route> extractRelevantInfoFromDirectionsResultObj(DirectionsResult result) {
+        List<Route> routeOptions = new ArrayList<>();
+        for(DirectionsRoute directionsRoute: result.routes) {
+            Route route = new Route(directionsRoute.legs[0].departureTime.text, directionsRoute.legs[0].arrivalTime.text);
+            routeOptions.add(route);
+            DirectionsStep[] steps = directionsRoute.legs[0].steps;
+            for(DirectionsStep step: steps) {
+                route.getDirections().add(new Direction(step));
+            }
+        }
+
+        return routeOptions;
     }
 }
