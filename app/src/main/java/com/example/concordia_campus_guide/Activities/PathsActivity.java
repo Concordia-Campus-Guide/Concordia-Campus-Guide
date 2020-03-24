@@ -46,6 +46,11 @@ public class PathsActivity extends AppCompatActivity {
         mViewModel = ViewModelProviders.of(this).get(PathsViewModel.class);
         fragmentManager = getSupportFragmentManager();
 
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            directionsResult = (DirectionsResult) extras.getSerializable("directionsResult");
+        }
+
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.pathLocationFragment);
 
         Place from = mViewModel.getFrom();
@@ -64,10 +69,6 @@ public class PathsActivity extends AppCompatActivity {
         swipeableInfoCard = BottomSheetBehavior.from(pathInfoCard);
         showInfoCard();
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            directionsResult = (DirectionsResult) extras.getSerializable("directionsResult");
-        }
     }
 
     private void returnToSelectRoute(){

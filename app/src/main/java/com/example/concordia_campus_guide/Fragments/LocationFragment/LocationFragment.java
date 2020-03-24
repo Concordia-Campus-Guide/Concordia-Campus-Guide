@@ -301,8 +301,13 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         mViewModel.parseWalkingPointList(AppDatabase.getInstance(getContext()), src, destination);
     }
 
-    public void drawOutdoorPaths(List<DirectionWrapper> outdoorDirections){
-        mViewModel.drawOutdoorPath(outdoorDirections, mMap);
+    public void drawOutdoorPaths(final List<DirectionWrapper> outdoorDirections){
+        mMapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                mViewModel.drawOutdoorPath(outdoorDirections, googleMap);
+            }
+        });
     }
 
     /**

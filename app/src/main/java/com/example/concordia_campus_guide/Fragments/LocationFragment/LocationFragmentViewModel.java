@@ -298,8 +298,11 @@ public class LocationFragmentViewModel extends ViewModel {
 
     public void drawOutdoorPath(List<DirectionWrapper> outdoorDirections, GoogleMap map) {
         for(DirectionWrapper directionWrapper: outdoorDirections) {
-            PolylineOptions polylineOptions = new PolylineOptions();
+            PolylineOptions polylineOptions = new PolylineOptions()
+                    .width(20)
+                    .color(Color.rgb(147,35, 57));
             List<com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.LatLng> polyline = directionWrapper.getPolyline().decodePath();
+
             for(int i=0; i<polyline.size(); i++){
                 polylineOptions.add(new LatLng(polyline.get(i).lat, polyline.get(i).lng));
             }
