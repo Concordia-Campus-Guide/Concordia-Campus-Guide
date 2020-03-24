@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         View infoCard = findViewById(R.id.info_card);
         swipeableInfoCard = BottomSheetBehavior.from(infoCard);
 
-        locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
+        //locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
     }
 
     @Override
@@ -67,22 +67,22 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        int id = item.getItemId();
-
-        if(id == R.id.search){
-            Intent openSearch = new Intent(MainActivity.this,
-                    SearchActivity.class);
-
-            SelectingToFromState.setMyCurrentLocation(getMyCurrentLocation());
-
-            startActivity(openSearch);
-            return false;
-        }
-
-        return true;
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item){
+//        int id = item.getItemId();
+//
+//        if(id == R.id.search){
+//            Intent openSearch = new Intent(MainActivity.this,
+//                    SearchActivity.class);
+//
+//            SelectingToFromState.setMyCurrentLocation(getMyCurrentLocation());
+//
+//            startActivity(openSearch);
+//            return false;
+//        }
+//
+//        return true;
+//    }
 
     /**
      * Show the info card fragment in the view
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public Location getMyCurrentLocation(){
-        return this.locationFragment.getCurrentLocation();
-    }
+//    public Location getMyCurrentLocation(){
+//        return this.locationFragment.getCurrentLocation();
+//    }
 }
