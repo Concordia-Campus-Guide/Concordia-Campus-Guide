@@ -5,6 +5,8 @@ import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServ
 public class Subway extends TransitType {
     public String color;
 
+    public Subway() {}
+
     public Subway(DirectionsStep step) {
         color = step.transitDetails.line.color;
     }

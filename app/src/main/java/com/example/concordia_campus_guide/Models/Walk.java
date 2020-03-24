@@ -5,8 +5,7 @@ import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServ
 public class Walk extends TransitType {
     private String duration;
 
-    public Walk() {
-    }
+    public Walk() {}
 
     public Walk(DirectionsStep step) {
         duration = step.duration.text;

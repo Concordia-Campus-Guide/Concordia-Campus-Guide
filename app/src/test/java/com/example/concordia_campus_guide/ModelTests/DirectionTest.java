@@ -1,7 +1,9 @@
 package com.example.concordia_campus_guide.ModelTests;
 
+import com.example.concordia_campus_guide.Models.Bus;
 import com.example.concordia_campus_guide.Models.Direction;
 import com.example.concordia_campus_guide.Models.TransitType;
+import com.example.concordia_campus_guide.Models.Walk;
 import com.google.android.gms.maps.model.LatLng;
 
 import org.junit.Before;
@@ -14,7 +16,7 @@ public class DirectionTest {
 
     @Before
     public void init() {
-        direction = new Direction(new LatLng(-73.57907921075821, 45.49702057370776), new LatLng(-73.57921063899994, 45.49707133596979), TransitType.BIKE, "This is a description", 20);
+        direction = new Direction(new LatLng(-73.57907921075821, 45.49702057370776), new LatLng(-73.57921063899994, 45.49707133596979), new Walk(), "This is a description", 20);
     }
 
     @Test
@@ -38,7 +40,7 @@ public class DirectionTest {
     @Test
     public void getAndSetTransitTypeTest() {
         TransitType transitTypeOg = direction.getTransitType();
-        TransitType transitTypeNew = TransitType.BUS;
+        TransitType transitTypeNew = new Bus();
         direction.setTransitType(transitTypeNew);
         assertEquals(direction.getTransitType(), transitTypeNew);
         direction.setTransitType(transitTypeOg);

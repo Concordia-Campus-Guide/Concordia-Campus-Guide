@@ -1,8 +1,10 @@
 package com.example.concordia_campus_guide.ModelTests;
 
+import com.example.concordia_campus_guide.Models.Car;
 import com.example.concordia_campus_guide.Models.Direction;
 import com.example.concordia_campus_guide.Models.Route;
 import com.example.concordia_campus_guide.Models.TransitType;
+import com.example.concordia_campus_guide.Models.Walk;
 import com.google.android.gms.maps.model.LatLng;
 
 import org.junit.Before;
@@ -19,8 +21,8 @@ public class RouteTest {
 
     @Before
     public void init() {
-        Direction direction1 = new Direction(new LatLng(-73.57907921075821, 45.49702057370776), new LatLng(-73.57921063899994, 45.49707133596979), TransitType.BIKE, "Pulling up with the may bike", 15);
-        Direction direction2 = new Direction(new LatLng(-73.57921063899994, 45.49707133596979), new LatLng(-73.57907921075821, 45.49702057370776), TransitType.CAR, "This is a description boom boom vroom", 20);
+        Direction direction1 = new Direction(new LatLng(-73.57907921075821, 45.49702057370776), new LatLng(-73.57921063899994, 45.49707133596979), new Walk(), "Walking my way downtown", 15);
+        Direction direction2 = new Direction(new LatLng(-73.57921063899994, 45.49707133596979), new LatLng(-73.57907921075821, 45.49702057370776), new Car(), "This is a description boom boom vroom", 20);
         directions = new ArrayList<>();
         directions.add(direction1);
         directions.add(direction2);

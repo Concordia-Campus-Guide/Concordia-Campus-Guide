@@ -5,6 +5,8 @@ import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServ
 public class Bus extends TransitType {
     private String busNumber;
 
+    public Bus() {}
+
     public Bus(DirectionsStep step) {
         busNumber = step.transitDetails.line.shortName;
     }

@@ -9,6 +9,8 @@ public class Route {
     private String departureTime;
     private String arrivalTime;
 
+    public Route() {}
+
     public Route(String departureTime, String arrivalTime) {
         this.directions = new ArrayList<>();
         this.departureTime = departureTime;

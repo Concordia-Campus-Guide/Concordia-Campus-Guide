@@ -5,6 +5,8 @@ import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServ
 public class Car extends TransitType {
     private long duration; // in seconds
 
+    public Car() {}
+
     public Car(DirectionsStep step) {
         duration = step.duration.value;
     }
