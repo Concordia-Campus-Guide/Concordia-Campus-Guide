@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/direction_item"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+
+    <ImageButton
+        android:id="@+id/direction_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:backgroundTint="#00FFFFFF"
+        android:tint="@color/colorAppTheme"
+        app:srcCompat="@drawable/ic_arrow_upward_black_24dp" />
+
+    <TextView
+        android:id="@+id/direction_instruction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/direction_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="0"
+        android:gravity="center_vertical"
+        android:text="TextView" />
+</LinearLayout>

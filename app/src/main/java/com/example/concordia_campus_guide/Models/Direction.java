@@ -1,6 +1,7 @@
 package com.example.concordia_campus_guide.Models;
 
 import com.google.android.gms.maps.model.LatLng;
+
 import java.util.Date;
 
 public class Direction {
@@ -10,12 +11,18 @@ public class Direction {
     private Date endTime;
     private TransitType type;
     private String description;
+    private double duration;
 
-    public Direction(LatLng start, LatLng end, TransitType type, String description) {
+
+    public Direction() {
+    }
+
+    public Direction(LatLng start, LatLng end, TransitType type, String description, double duration) {
         this.start = start;
         this.end = end;
         this.type = type;
         this.description = description;
+        this.duration = duration;
     }
 
     public LatLng getStart() {
@@ -49,4 +56,33 @@ public class Direction {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public double getDuration() {
+        return duration;
+    }
+
+    public void setDuration(double duration) {
+        this.duration = duration;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
 }
+
+
+
+
+
