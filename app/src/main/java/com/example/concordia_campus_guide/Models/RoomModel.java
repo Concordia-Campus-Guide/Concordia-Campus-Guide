@@ -5,6 +5,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
+import androidx.room.Index;
 
 import com.example.concordia_campus_guide.R;
 
@@ -14,6 +15,8 @@ import org.json.JSONObject;
 import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "rooms",
+        indices = {@Index(value = {"floor_code", "room_code"},
+                unique = true)},
         foreignKeys = {
                 @ForeignKey(
                         entity = Floor.class,
@@ -21,7 +24,7 @@ import static androidx.room.ForeignKey.CASCADE;
                         childColumns = {"floor_code"},
                         onDelete = CASCADE
                 ),
-                })
+        })
 public class RoomModel extends Place {
 
     @ColumnInfo(name = "room_code")
@@ -52,20 +55,20 @@ public class RoomModel extends Place {
         this.roomCode = number;
     }
 
-    public RoomModel(){
+    public RoomModel() {
         super();
     }
 
-    public JSONObject getGeoJson(){
+    public JSONObject getGeoJson() {
         JSONObject toReturn = new JSONObject();
         JSONObject properties = new JSONObject();
         JSONObject geometry = new JSONObject();
 
-        try{
+        try {
             toReturn.put("type", "Feature");
 
             properties.put("floorCode", floorCode);
-            if(roomCode!=null) properties.put("roomCode", roomCode);
+            if (roomCode != null) properties.put("roomCode", roomCode);
             toReturn.put("properties", properties);
 
             geometry.put("type", "Point");
@@ -73,8 +76,7 @@ public class RoomModel extends Place {
             geometry.put("coordinates", new JSONArray(geoJsonCoordinates));
 
             toReturn.put("geometry", geometry);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -85,7 +87,7 @@ public class RoomModel extends Place {
         this.floorCode = floorCode;
     }
 
-    public String getDisplayName(){
+    public String getDisplayName() {
         return floorCode + " " + roomCode;
     }
 }

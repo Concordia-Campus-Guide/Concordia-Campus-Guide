@@ -12,16 +12,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
-
+import androidx.lifecycle.ViewModelProvider;
 import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Activities.RoutesActivity;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
+import com.example.concordia_campus_guide.Helper.RoutesHelpers.DirectionsApiDataRetrieval;
+import com.example.concordia_campus_guide.Helper.RoutesHelpers.UrlBuilder;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.Models.MyCurrentPlace;
 import com.example.concordia_campus_guide.R;
@@ -84,7 +84,7 @@ public class InfoCardFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this, new ViewModelFactory(this.getActivity().getApplication())).get(com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragmentViewModel.class);
+        mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getActivity().getApplication())).get(com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragmentViewModel.class);
         mViewModel.setBuilding(this.buildingCode);
         setInfoCard();
         setOnClickListeners();
@@ -135,7 +135,7 @@ public class InfoCardFragment extends Fragment {
     }
 
     public void onClickDirections(View v){
-        Intent openRoutes= new Intent(getActivity(), RoutesActivity.class);
+        Intent openRoutes = new Intent(getActivity(), RoutesActivity.class);
 
         SelectingToFromState.setQuickSelectToTrue();
         SelectingToFromState.setMyCurrentLocation(((MainActivity) getActivity()).getMyCurrentLocation());
