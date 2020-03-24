@@ -34,7 +34,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class PathInfoCardFragment extends Fragment {
     private List<WalkingPoint> walkingPointList;
@@ -69,8 +68,8 @@ public class PathInfoCardFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(PathInfoCardViewModel.class);
         walkingPointList = getWalkingPoints();
-        populateDirections();
-        calculateDistance();
+        setIconsInfoCardTop();
+        populateDirectionsList();
     }
 
     private List<WalkingPoint> getWalkingPoints() {
@@ -84,7 +83,7 @@ public class PathInfoCardFragment extends Fragment {
 
     }
 
-    public void populateDirections() {
+    public void setIconsInfoCardTop() {
         LinearLayout layout = (LinearLayout) getView().findViewById(R.id.paths_image_buttons);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1);
 
@@ -146,7 +145,7 @@ public class PathInfoCardFragment extends Fragment {
         endTimeTextView.setText(arrivalCalendar.get(Calendar.HOUR_OF_DAY) + ":" + arrivalCalendar.get(Calendar.MINUTE));
     }
 
-    public void calculateDistance() {
+    public void populateDirectionsList() {
         directionList = new ArrayList<Direction>();
         double totalDistance = 0;
         double distanceBetweenTwoPoints = 0;
