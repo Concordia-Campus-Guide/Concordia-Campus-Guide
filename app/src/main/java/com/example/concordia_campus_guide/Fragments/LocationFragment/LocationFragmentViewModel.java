@@ -5,16 +5,23 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 
+import androidx.lifecycle.ViewModel;
+
+import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Global.ApplicationState;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.PoiType;
+import com.example.concordia_campus_guide.Models.RoomModel;
+import com.example.concordia_campus_guide.Models.TransitType;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Dash;
+import com.google.android.gms.maps.model.Gap;
 import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
@@ -45,12 +52,25 @@ import static java.lang.Double.parseDouble;
 public class LocationFragmentViewModel extends ViewModel {
 
     private GeoJsonLayer floorLayer;
-    private Map<String, Building> buildings = new HashMap<>();
     private AppDatabase appDatabase;
     private MutableLiveData<List<WalkingPoint>> poiList = new MutableLiveData<>();
 
     public static final Logger LOGGER = Logger.getLogger("LocationFragmentViewModel");
     public static final String FLOORS_AVAILABLE = "floorsAvailable";
+
+
+    private HashMap<String, Building> buildings = new HashMap<>();
+    private PolylineOptions displayedPolylineOption;
+    private Polyline currentlyDisplayedLine;
+    private HashMap<String, List<WalkingPoint>> walkingPointsMap = new HashMap<>();
+    private List<WalkingPoint> walkingPoints;
+
+    //Polyline styling
+    public static final int PATTERN_DASH_LENGTH_PX = 20;
+    public static final int PATTERN_GAP_LENGTH_PX = 20;
+    public static final PatternItem DASH = new Dash(PATTERN_DASH_LENGTH_PX);
+    public static final PatternItem GAP = new Gap(PATTERN_GAP_LENGTH_PX);
+    public static final List<PatternItem> WALK_PATTERN = Arrays.asList(GAP, DASH);
 
     public LocationFragmentViewModel(AppDatabase appDb) {
         this.appDatabase = appDb;
@@ -280,4 +300,46 @@ public class LocationFragmentViewModel extends ViewModel {
         return poiList;
     }
 
+    public PolylineOptions drawPath(String floorCode) {
+        List<WalkingPoint> floorWalkingPoints = walkingPointsMap.get(floorCode);
+        PolylineOptions option = new PolylineOptions();
+        if(floorWalkingPoints == null) {
+            return option;
+        }
+        for(int i=0; i < floorWalkingPoints.size() - 1; i++) {
+            LatLng point1 = floorWalkingPoints.get(i).getCoordinate().getLatLng();
+            LatLng point2 = floorWalkingPoints.get(i + 1).getCoordinate().getLatLng();
+            option.add(point1, point2);
+        }
+        return option
+                .width(10)
+                .pattern(WALK_PATTERN)
+                .color(Color.rgb(147,35, 57))
+                .visible(true);
+    }
+
+    public void drawOutdoorPath(List<DirectionWrapper> outdoorDirections, GoogleMap map) {
+        for(DirectionWrapper directionWrapper: outdoorDirections) {
+            PolylineOptions polylineOptions = stylePolyLine(directionWrapper.getDirection().getType());
+            List<com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.LatLng> polyline = directionWrapper.getPolyline().decodePath();
+
+            for(int i=0; i<polyline.size(); i++){
+                polylineOptions.add(new LatLng(polyline.get(i).lat, polyline.get(i).lng));
+            }
+            map.addPolyline(polylineOptions);
+        }
+    }
+
+    private PolylineOptions stylePolyLine(TransitType type) {
+        PolylineOptions polylineOptions = new PolylineOptions().width(20);
+        if(type.equals(TransitType.WALK)) {
+            polylineOptions.pattern(WALK_PATTERN);
+        }
+        if(type.equals(TransitType.BUS) || type.equals(TransitType.METRO) || type.equals(TransitType.CAR)){
+            polylineOptions.color(Color.rgb(35,147, 57));
+        }else{
+            polylineOptions.color(Color.rgb(147,35, 57));
+        }
+        return polylineOptions;
+    }
 }
