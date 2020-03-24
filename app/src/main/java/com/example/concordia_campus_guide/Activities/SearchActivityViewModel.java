@@ -84,4 +84,20 @@ public class SearchActivityViewModel extends ViewModel {
     public void setSelectingToOrFrom(String selectingToOrFrom) {
         this.selectingToOrFrom = selectingToOrFrom;
     }
+
+    public Place getRoomFromDB(String location){
+        String[] splitLocation;
+        String roomId;
+        long roomIdLong = 0;
+        String floorCode="";
+
+        if(location.contains("-")){
+            // this manipulation only works for floors 1-9
+            splitLocation = location.split("-");
+            roomId=splitLocation[1];
+            roomIdLong = Long.parseLong(roomId);
+            floorCode = splitLocation[0] + "-" + roomId.charAt(0);
+        }
+        return appDB.roomDao().getRoomByIdAndFloorCode(roomIdLong, floorCode);
+    }
 }
