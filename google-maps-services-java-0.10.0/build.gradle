@@ -1,0 +1,164 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.3'
+  }
+}
+
+
+plugins {
+    id 'com.github.ben-manes.versions' version '0.22.0'
+    id 'com.github.sherter.google-java-format' version '0.8'
+}
+
+apply plugin: 'java'
+apply plugin: 'java-library'
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+apply plugin: 'jacoco'
+apply plugin: 'com.github.kt3k.coveralls'
+apply plugin: 'com.github.sherter.google-java-format'
+
+archivesBaseName = 'google-maps-services'
+group = 'com.google.maps'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from 'build/docs/javadoc'
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+artifacts {
+    archives jar
+    archives javadocJar
+    archives sourcesJar
+}
+
+dependencies {
+    compileOnly 'com.google.appengine:appengine-api-1.0-sdk:1.9.76'
+    api 'com.squareup.okhttp3:okhttp:3.14.2'
+    api 'com.google.code.gson:gson:2.8.5'
+    implementation 'org.slf4j:slf4j-api:1.7.26'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:3.0.0'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:3.14.2'
+    testImplementation 'org.apache.httpcomponents:httpclient:4.5.9'
+    testImplementation 'org.slf4j:slf4j-simple:1.7.26'
+    testImplementation 'org.apache.commons:commons-lang3:3.9'
+    testImplementation 'org.json:json:20180813'
+}
+
+task updateVersion(type: Copy) {
+    from('src') into "build/filtered/src"
+    filter(ReplaceTokens, tokens: [VERSION: project.version])
+}
+compileJava.source = "build/filtered/src/main/java"
+compileJava.dependsOn updateVersion
+
+compileJava {
+    options.compilerArgs << "-Xlint:deprecation"
+}
+
+compileTestJava {
+    options.compilerArgs << "-Xlint:deprecation"
+}
+
+// Propagate API Key system properties to test tasks
+tasks.withType(Test) {
+    systemProperty 'api.key', System.getProperty('api.key')
+    systemProperty 'client.id', System.getProperty('client.id')
+    systemProperty 'client.secret', System.getProperty('client.secret')
+}
+
+javadoc {
+    exclude '**/internal/**'
+    def currentJavaVersion = org.gradle.api.JavaVersion.current()
+}
+
+jacoco {
+    toolVersion = "0.8.2" // non-default version 0.8.2 required for OpenJDK 11 compatibility
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true // coveralls plugin depends on xml format report
+        html.enabled = true
+    }
+}
+
+publishing {
+    publications {
+        jar(MavenPublication) {
+            pom {
+                name = 'Java Client for Google Maps Platform Web Services'
+                description = 'Use the Google Maps Platform Web Services in Java! ' +
+                        'https://developers.google.com/maps/documentation/webservices/'
+                url = 'https://github.com/googlemaps/google-maps-services-java'
+
+                scm {
+                    url = 'scm:git@github.com:googlemaps/google-maps-services-java.git'
+                    connection = 'scm:git@github.com:googlemaps/google-maps-services-java.git'
+                    developerConnection = 'scm:git@github.com:googlemaps/google-maps-services-java.git'
+                }
+
+                licenses {
+                    license {
+                        name = 'The Apache Software License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        distribution = 'repo'
+                    }
+                }
+
+                organization {
+                    name = 'Google Inc'
+                    url = 'http://developers.google.com/maps'
+                }
+
+                developers {
+                    developer {
+                        id = 'markmcd'
+                        name = 'Mark McDonald'
+                    }
+                    developer {
+                        id = 'domesticmouse'
+                        name = 'Brett Morgan'
+                    }
+                    developer {
+                        id = 'broady'
+                        name = 'Chris Broadfoot'
+                    }
+                }
+            }
+            groupId group
+            artifactId 'google-maps-services'
+            version version
+            artifact("$buildDir/libs/google-maps-services-" + project.version + ".jar")
+        }
+    }
+    repositories {
+        maven {
+            url "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+            credentials {
+                username "sonatypeUsername"
+                password "sonatypePassword"
+            }
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.jar
+}

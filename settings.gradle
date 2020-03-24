@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':google-maps-services-java-master', ':google-maps-services-java-0.10.0'
 rootProject.name='Concordia-Campus-Guide'

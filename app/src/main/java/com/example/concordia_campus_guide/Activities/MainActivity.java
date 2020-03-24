@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.concordia_campus_guide.BuildConfig;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragment;
 import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragment;
