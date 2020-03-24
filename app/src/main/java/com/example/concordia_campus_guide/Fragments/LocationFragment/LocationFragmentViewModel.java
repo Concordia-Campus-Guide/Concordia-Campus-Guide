@@ -263,6 +263,11 @@ public class LocationFragmentViewModel extends ViewModel {
         floorLayer = initMarkersLayer(mMap, geoJson);
         getPointStyle(floorLayer);
         floorLayer.addLayerToMap();
+        if (currentlyDisplayedLine != null) {
+             currentlyDisplayedLine.remove();
+        }
+        displayedPolylineOption = getFloorPolylines(buildingCode + "-" + floor);
+        currentlyDisplayedLine = mMap.addPolyline(displayedPolylineOption);
     }
 
     public Building getBuildingFromeCode(String buildingCode) {
@@ -300,7 +305,8 @@ public class LocationFragmentViewModel extends ViewModel {
         return poiList;
     }
 
-    public PolylineOptions drawPath(String floorCode) {
+    public PolylineOptions getFloorPolylines(String floorCode) {
+        // previously drawindoorpaths
         List<WalkingPoint> floorWalkingPoints = walkingPointsMap.get(floorCode);
         PolylineOptions option = new PolylineOptions();
         if(floorWalkingPoints == null) {
