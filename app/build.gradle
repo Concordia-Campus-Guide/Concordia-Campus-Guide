@@ -36,6 +36,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
     testOptions {
         unitTests.returnDefaultValues = true
         unitTests.all {
@@ -58,9 +62,9 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'crea
         html.enabled = true
     }
 
-    def fileFilter = ['**/R.class', '**/Activities/**', '**/Adapters/**', '**/Global/**', '**/Interfaces/**', '**/Daos/**', '**/ClassConstants.*',
-                      '**/TransitType.*', '**/R$*.class',
-                      '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*', '**/InfoCardFragment.*']
+    def fileFilter = ['**/R.class', '**/*Activity.*', '**/Adapters/**', '**/Global/**', '**/Interfaces/**', '**/ClassConstants.*',
+                      '**/TransitType.*', '**/Language.*', '**/R$*.class', '**/PointType.*','**/Daos/**',
+                      '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*', '**/InfoCardFragment.*', '**/GoogleMapsServicesTools/**','**/AppDatabase_Impl*']
     def debugTree = fileTree(dir: "$project.buildDir/intermediates/javac/debug", excludes: fileFilter)
     def mainSrc = "$project.projectDir/src/main/java"
 
@@ -108,5 +112,5 @@ dependencies {
     implementation 'com.google.api-client:google-api-client:1.23.0'
     implementation 'com.google.oauth-client:google-oauth-client-jetty:1.23.0'
     implementation 'com.google.apis:google-api-services-calendar:v3-rev305-1.23.0'
-    compile project(path: ':google-maps-services-java-0.10.0')
+    implementation project(path: ':google-maps-services-java-0.10.0')
 }
