@@ -28,7 +28,9 @@ import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.TransitType;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
+import com.google.maps.model.DirectionsResult;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -50,6 +52,9 @@ public class PathInfoCardFragment extends Fragment {
         return new PathInfoCardFragment();
     }
 
+    public static PathInfoCardFragment newInstance(String directions) {
+        return new PathInfoCardFragment();
+    }
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -60,6 +65,7 @@ public class PathInfoCardFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
+        Serializable directionsResults = getArguments().getSerializable("directionsResult");
         return view;
     }
 
@@ -225,6 +231,8 @@ public class PathInfoCardFragment extends Fragment {
     public double deg2rad(double deg) {
         return deg * (Math.PI / 180);
     }
+
+//    public void
 
 
 }

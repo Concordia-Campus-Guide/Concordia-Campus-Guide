@@ -60,9 +60,8 @@ public class PathsActivity extends AppCompatActivity {
         toTextView.setText(to.getDisplayName());
         setBackButtonOnClickListener();
 
-
-        locationFragment.setIndoorPaths(from, to);
-//        locationFragment.drawOutdoorPaths(parseDirectionResults());
+//        locationFragment.setIndoorPaths(from, to);
+        locationFragment.drawOutdoorPaths(parseDirectionResults());
 //        locationFragment.setLocationToDisplay(new LatLng(-73.57901685, 45.49761115));
 
         View pathInfoCard = findViewById(R.id.path_info_card);
@@ -91,6 +90,9 @@ public class PathsActivity extends AppCompatActivity {
 
     public void showInfoCard() {
         pathInfoCardFragment = new PathInfoCardFragment();
+        Bundle infoCardBundle = new Bundle();
+        infoCardBundle.putSerializable("directionsResult", directionsResult);
+        pathInfoCardFragment.setArguments(infoCardBundle);
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.path_info_card_frame, pathInfoCardFragment);
         fragmentTransaction.commit();
