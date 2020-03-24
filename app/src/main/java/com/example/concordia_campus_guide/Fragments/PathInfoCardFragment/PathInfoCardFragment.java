@@ -97,13 +97,13 @@ public class PathInfoCardFragment extends Fragment {
                     }
                     break;
                 case STAIRS:
-                    if (i != 0 && walkingPointList.get(i - 1).getPointType() != PointType.ELEVATOR) {
+                    if (i != 0 && walkingPointList.get(i - 1).getPointType() != PointType.STAIRS) {
                         createImageButton(layout, layoutParams, R.drawable.ic_stairs_white);
                         setDividerTextView(layout, layoutParams);
                     }
                     break;
                 case STAFF_ELEVATOR:
-                    if (i != 0 && walkingPointList.get(i - 1).getPointType() != PointType.ELEVATOR) {
+                    if (i != 0 && walkingPointList.get(i - 1).getPointType() != PointType.STAFF_ELEVATOR) {
                         createImageButton(layout, layoutParams, R.drawable.ic_staff_elevator_white);
                         setDividerTextView(layout, layoutParams);
                     }
@@ -133,7 +133,7 @@ public class PathInfoCardFragment extends Fragment {
 
     public void setStartAndEndTime() {
         TextView totalDurationTextView = (TextView) getView().findViewById(R.id.total_time);
-        totalDurationTextView.setText(Double.toString(totalDuration) + "min");
+        totalDurationTextView.setText(totalDuration + "min");
         Date date = new Date();   // given date
         Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
         calendar.setTime(date);   // assigns calendar to given date
@@ -149,21 +149,55 @@ public class PathInfoCardFragment extends Fragment {
     public void calculateDistance() {
         directionList = new ArrayList<Direction>();
         double totalDistance = 0;
+        double distanceBetweenTwoPoints = 0;
 
         for (int i = 0; i < walkingPointList.size() - 1; i++) {
             WalkingPoint startWalkingPoint = walkingPointList.get(i);
             WalkingPoint endWalkingPoint = walkingPointList.get(i + 1);
-            double distance = getDistanceFromLatLonInKm(startWalkingPoint.getCoordinate().getLatitude(), startWalkingPoint.getCoordinate().getLongitude(), endWalkingPoint.getCoordinate().getLatitude(), startWalkingPoint.getCoordinate().getLongitude());
+            distanceBetweenTwoPoints = getDistanceFromLatLonInKm(startWalkingPoint.getCoordinate().getLatitude(), startWalkingPoint.getCoordinate().getLongitude(), endWalkingPoint.getCoordinate().getLatitude(), startWalkingPoint.getCoordinate().getLongitude());
+            totalDistance += distanceBetweenTwoPoints;
             // on average a person walks 5km / hr
-            long timeTakenInMinutes = (long) (distance * 60 / 5);
-
-            Direction direction = new Direction(startWalkingPoint.getCoordinate().getLatLng(), endWalkingPoint.getCoordinate().getLatLng(), TransitType.WALK, "", distance);
-            direction.setDuration(timeTakenInMinutes);
-            directionList.add(direction);
-            totalDistance += distance;
+            long timeTakenInMinutes = (long) (distanceBetweenTwoPoints * 60 / 5);
+            String description = "";
+            if (i == 0 && startWalkingPoint.getPointType() == PointType.CLASSROOM) {
+                description = "Leave classroom";
+            }
+            switch (endWalkingPoint.getPointType()) {
+                case ELEVATOR:
+                    if (i != 0 && startWalkingPoint.getPointType() != endWalkingPoint.getPointType().ELEVATOR) {
+                        description = "Walk towards elevator";
+                        distanceBetweenTwoPoints = 0;
+                    }
+                    break;
+                case ENTRANCE:
+                    description = "Enter building";
+                    distanceBetweenTwoPoints = 0;
+                    break;
+                case STAFF_ELEVATOR:
+                    if (i != 0 && startWalkingPoint.getPointType() != endWalkingPoint.getPointType().STAFF_ELEVATOR) {
+                        description = "Walk towards staff elevator";
+                        distanceBetweenTwoPoints = 0;
+                    }
+                    break;
+                case STAIRS:
+                    if (i != 0 && startWalkingPoint.getPointType() != endWalkingPoint.getPointType().STAIRS) {
+                        description = "Walk towards stairs";
+                        distanceBetweenTwoPoints = 0;
+                    }
+                    break;
+                case CLASSROOM:
+                    description = "Walk towards classroom";
+                    distanceBetweenTwoPoints = 0;
+                    break;
+            }
+            if (description.length() != 0) {
+                Direction direction = new Direction(startWalkingPoint.getCoordinate().getLatLng(), endWalkingPoint.getCoordinate().getLatLng(), TransitType.WALK, description, distanceBetweenTwoPoints);
+                direction.setDuration(timeTakenInMinutes);
+                directionList.add(direction);
+            }
         }
 
-        totalDuration = (long) (totalDistance *60 / 5);
+        totalDuration = (totalDistance * 60.0 / 5.0);
         // specify an adapter for recycler view
         mAdapter = new DirectionsRecyclerViewAdapter(getContext(), directionList);
         recyclerView.setAdapter(mAdapter);
@@ -192,7 +226,6 @@ public class PathInfoCardFragment extends Fragment {
     public double deg2rad(double deg) {
         return deg * (Math.PI / 180);
     }
-
 
 
 }

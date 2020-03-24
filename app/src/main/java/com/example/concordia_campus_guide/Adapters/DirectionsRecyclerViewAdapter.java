@@ -37,10 +37,8 @@ public class DirectionsRecyclerViewAdapter extends RecyclerView.Adapter<Directio
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-//        String description = mData.get(position).getDescription();
+        String description = mData.get(position).getDescription();
         String duration = String.valueOf(mData.get(position).getDuration())+"min";
-        String description = "Walk walk walk";
-//        String duration = String.valueOf(2)+"min";
         holder.directionInstruction.setText(description);
         holder.duration.setText(duration);
     }

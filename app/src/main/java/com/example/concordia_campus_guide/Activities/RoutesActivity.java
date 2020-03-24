@@ -63,8 +63,8 @@ public class RoutesActivity extends AppCompatActivity {
         setBackButtonOnClick();
 
         // get all possible routes. The following statements should happen on an onClick event.
-        String url = UrlBuilder.build(new LatLng(mViewModel.getFrom().getCenterCoordinates().getLatitude(), mViewModel.getFrom().getCenterCoordinates().getLongitude()), new LatLng(mViewModel.getTo().getCenterCoordinates().getLatitude(), mViewModel.getTo().getCenterCoordinates().getLongitude()), ClassConstants.TRANSIT);
-        new DirectionsApiDataRetrieval(RoutesActivity.this).execute(url);
+//        String url = UrlBuilder.build(new LatLng(mViewModel.getFrom().getCenterCoordinates().getLatitude(), mViewModel.getFrom().getCenterCoordinates().getLongitude()), new LatLng(mViewModel.getTo().getCenterCoordinates().getLatitude(), mViewModel.getTo().getCenterCoordinates().getLongitude()), ClassConstants.TRANSIT);
+//        new DirectionsApiDataRetrieval(RoutesActivity.this).execute(url);
     }
 
     public void onClickTo(View v){
