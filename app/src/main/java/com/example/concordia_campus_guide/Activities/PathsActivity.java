@@ -16,15 +16,11 @@ import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFra
 import com.example.concordia_campus_guide.Fragments.PathInfoCardFragment.PathInfoCardFragment;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsResult;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsResult;
 import com.example.concordia_campus_guide.Models.Place;
-import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class PathsActivity extends AppCompatActivity {
 
@@ -60,7 +56,8 @@ public class PathsActivity extends AppCompatActivity {
         setBackButtonOnClickListener();
 
 
-        locationFragment.drawPaths(from, to);
+        locationFragment.setIndoorPaths(from, to);
+        locationFragment.drawOutdoorPaths(parseDirectionResults());
 //        locationFragment.setLocationToDisplay(new LatLng(-73.57901685, 45.49761115));
 
         View pathInfoCard = findViewById(R.id.path_info_card);

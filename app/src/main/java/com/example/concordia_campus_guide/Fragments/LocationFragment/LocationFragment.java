@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.concordia_campus_guide.Activities.MainActivity;
+import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
@@ -292,12 +293,16 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         }
     }
 
-    public void drawPaths(Place from, Place to) {
+    public void setIndoorPaths(Place from, Place to) {
         RoomModel src = new RoomModel(new Coordinates(45.49761115,-73.57901685), "963", "H-9");
         RoomModel destination = new RoomModel(new Coordinates(45.49739565,-73.57854277), "863", "H-8");
 
 //        mViewModel.parseWalkingPointList(getContext(), (RoomModel) from, (RoomModel) to);
         mViewModel.parseWalkingPointList(AppDatabase.getInstance(getContext()), src, destination);
+    }
+
+    public void drawOutdoorPaths(List<DirectionWrapper> outdoorDirections){
+        mViewModel.drawOutdoorPath(outdoorDirections, mMap);
     }
 
     /**

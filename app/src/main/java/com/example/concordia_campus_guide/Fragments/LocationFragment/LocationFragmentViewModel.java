@@ -8,6 +8,7 @@ import android.graphics.Color;
 import androidx.lifecycle.ViewModel;
 import androidx.room.Room;
 
+import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Global.ApplicationState;
 import com.example.concordia_campus_guide.Helper.PathFinder;
@@ -293,5 +294,16 @@ public class LocationFragmentViewModel extends ViewModel {
                 .pattern(PATTERN_POLYLINE)
                 .color(Color.rgb(147,35, 57))
                 .visible(true);
+    }
+
+    public void drawOutdoorPath(List<DirectionWrapper> outdoorDirections, GoogleMap map) {
+        for(DirectionWrapper directionWrapper: outdoorDirections) {
+            PolylineOptions polylineOptions = new PolylineOptions();
+            List<com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.LatLng> polyline = directionWrapper.getPolyline().decodePath();
+            for(int i=0; i<polyline.size(); i++){
+                polylineOptions.add(new LatLng(polyline.get(i).lat, polyline.get(i).lng));
+            }
+            map.addPolyline(polylineOptions);
+        }
     }
 }

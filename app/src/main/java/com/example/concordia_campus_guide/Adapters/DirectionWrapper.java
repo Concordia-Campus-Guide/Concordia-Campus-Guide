@@ -1,15 +1,15 @@
 package com.example.concordia_campus_guide.Adapters;
 
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.EncodedPolyline;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TravelMode;
 import com.example.concordia_campus_guide.Models.Direction;
 import com.example.concordia_campus_guide.Models.TransitType;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Polyline;
 
 public class DirectionWrapper {
     Direction direction;
-    Polyline polyline;
+    EncodedPolyline polyline;
 
     public DirectionWrapper(DirectionsStep directionStep){
         // create a new direction
@@ -21,6 +21,7 @@ public class DirectionWrapper {
         direction.setDuration(directionStep.duration.value);
 
         // map polyline
+        polyline = directionStep.polyline;
     }
 
     private TransitType getTransitType(TravelMode travelMode){
@@ -37,5 +38,21 @@ public class DirectionWrapper {
         }
         // TODO: what should be returned if there is no match?
         return null;
+    }
+
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
+
+    public EncodedPolyline getPolyline() {
+        return polyline;
+    }
+
+    public void setPolyline(EncodedPolyline polyline) {
+        this.polyline = polyline;
     }
 }
