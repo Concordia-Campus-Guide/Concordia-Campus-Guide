@@ -5,6 +5,8 @@ import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.Rooms;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,10 +20,10 @@ public class RoomsTest {
     private Rooms rooms;
 
     @Before
-    public void init(){
+    public void init() {
         roomList = new ArrayList<>();
-        RoomModel room1  = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8");
-        RoomModel room2  = new RoomModel(new Coordinates(-73.57902321964502, 45.49699848270905), "821", "H-8");
+        RoomModel room1 = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8");
+        RoomModel room2 = new RoomModel(new Coordinates(-73.57902321964502, 45.49699848270905), "921", "H-9");
 
         roomList.add(room1);
         roomList.add(room2);
@@ -29,16 +31,48 @@ public class RoomsTest {
     }
 
     @Test
-    public void getRoomsTest(){
-        assertEquals(rooms.getRooms(), roomList);
+    public void getRoomsTest() {
+        assertEquals(roomList, rooms.getRooms());
     }
+
     @Test
-    public void getPlacesTest(){
+    public void getPlacesTest() {
         List<Place> places = new ArrayList<Place>();
-             for(RoomModel room: roomList){
-                  places.add(room);
-              }
-        assertEquals(rooms.getPlaces(), places);
+        for (RoomModel room : roomList) {
+            places.add(room);
+        }
+        assertEquals(places, rooms.getPlaces());
+    }
+
+    @Test
+    public void getRoomsByFloorTest() {
+        List<RoomModel> roomListTest = new ArrayList<RoomModel>();
+        roomListTest.add(roomList.get(0));
+        assertEquals(roomListTest, rooms.getRoomsByFloor("H-8"));
+    }
+
+    @Test
+    public void getGeoJsonTest() {
+        JSONObject toReturn = new JSONObject();
+        try {
+            toReturn.put("type", "FeatureCollection");
+            toReturn.put("features", getInnerGeoJsonTest());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals(toReturn.toString(), rooms.getGeoJson("H-8").toString());
+    }
+
+    public JSONArray getInnerGeoJsonTest() {
+        JSONArray features = new JSONArray();
+        RoomModel roomTest = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8");
+        try {
+            JSONObject roomGeoJSON = roomTest.getGeoJson();
+            if (roomGeoJSON != null) features.put(roomGeoJSON);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return features;
     }
 
 }

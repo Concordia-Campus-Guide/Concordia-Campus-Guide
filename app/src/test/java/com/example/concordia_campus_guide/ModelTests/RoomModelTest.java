@@ -4,6 +4,8 @@ import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.google.android.gms.maps.model.LatLng;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,6 +27,7 @@ public class RoomModelTest {
         assertEquals(room.getFloorCode(), "H-8");
         room.setFloorCode(floorCode);
     }
+
     @Test
     public void getAndSetRoomCodeTest() {
         String roomCode = room.getRoomCode();
@@ -55,5 +58,34 @@ public class RoomModelTest {
     public void getCenterCoordinatesLatLngTest() {
         Coordinates coordinates = room.getCenterCoordinates();
         assertEquals(room.getCenterCoordinatesLatLng(), new LatLng(coordinates.getLatitude(), coordinates.getLongitude()));
+    }
+
+    @Test
+    public void getDisplayNameTest() {
+        String expected = "H-8 823";
+        assertEquals(expected, room.getDisplayName());
+    }
+
+    @Test
+    public void getGeoJsonTest() {
+        JSONObject toReturn = new JSONObject();
+        JSONObject properties = new JSONObject();
+        JSONObject geometry = new JSONObject();
+
+        try {
+            toReturn.put("type", "Feature");
+
+            properties.put("floorCode", "H-8");
+            properties.put("roomCode", "823");
+            toReturn.put("properties", properties);
+
+            geometry.put("type", "Point");
+            Double[] geoJsonCoordinates = { 45.49702057370776, -73.57907921075821 };
+            geometry.put("coordinates", new JSONArray(geoJsonCoordinates));
+            toReturn.put("geometry", geometry);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals(toReturn.toString(), room.getGeoJson().toString());
     }
 }
