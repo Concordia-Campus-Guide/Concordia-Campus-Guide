@@ -24,7 +24,6 @@ public class DirectionTest {
         direction.setStart(startNew);
         assertEquals(direction.getStart(), startNew);
         direction.setStart(startTemp);
-
     }
     @Test
     public void getAndSetEndTest() {
