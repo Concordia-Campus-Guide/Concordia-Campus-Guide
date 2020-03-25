@@ -22,7 +22,7 @@ public class IndoorPathHeuristic {
      * @param destinationPoint
      * @return
      */
-    protected double computeHeuristic(final WalkingPoint currentPoint, final WalkingPoint destinationPoint) {
+    public double computeHeuristic(final WalkingPoint currentPoint, final WalkingPoint destinationPoint) {
 
         if (!currentPoint.getFloorCode().equalsIgnoreCase(destinationPoint.getFloorCode())) {
             String currentBuildingCode = currentPoint.getFloorCode().split("-")[0];
@@ -50,9 +50,10 @@ public class IndoorPathHeuristic {
      * @param accessPointType
      * @return
      */
-    protected WalkingPoint getNearestAccessPointForFloor(final WalkingPoint currentPoint, PointType accessPointType) {
+    public WalkingPoint getNearestAccessPointForFloor(final WalkingPoint currentPoint, PointType accessPointType) {
         final List<WalkingPoint> accessPtList = appDatabase.walkingPointDao()
                 .getAllAccessPointsOnFloor(currentPoint.getFloorCode(), accessPointType);
+        WalkingPoint walkingPoint = getClosestPointToCurrentPointFromList(currentPoint, accessPtList);
         return getClosestPointToCurrentPointFromList(currentPoint, accessPtList);
     }
 
@@ -62,7 +63,7 @@ public class IndoorPathHeuristic {
      * @param accessPtList
      * @return
      */
-    protected WalkingPoint getClosestPointToCurrentPointFromList(final WalkingPoint currentPoint,
+    public WalkingPoint getClosestPointToCurrentPointFromList(final WalkingPoint currentPoint,
                                                                  final List<WalkingPoint> accessPtList) {
         WalkingPoint closestPoint = null;
         if (!accessPtList.isEmpty()) {
@@ -73,6 +74,7 @@ public class IndoorPathHeuristic {
                 closestPoint = closestPointDistance > otherPointDistance ? accessPtList.get(i) : closestPoint;
             }
         }
+        WalkingPoint s = closestPoint;
         return closestPoint;
     }
 
@@ -82,7 +84,7 @@ public class IndoorPathHeuristic {
      * @param secondCoordinate
      * @return
      */
-    protected double getEuclideanDistance(final WalkingPoint firstCoordinate, final WalkingPoint secondCoordinate) {
+    public double getEuclideanDistance(final WalkingPoint firstCoordinate, final WalkingPoint secondCoordinate) {
         final double resultLatDiff = Math.abs(firstCoordinate.getCoordinate().toListDouble().get(0)
                 - secondCoordinate.getCoordinate().toListDouble().get(0));
         final double resultLongDiff = Math.abs(firstCoordinate.getCoordinate().toListDouble().get(1)

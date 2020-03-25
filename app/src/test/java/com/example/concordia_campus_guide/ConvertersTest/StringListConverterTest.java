@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertNull;
 
 public class StringListConverterTest {
 
@@ -25,8 +26,6 @@ public class StringListConverterTest {
         stringListConverter = new StringListConverter();
     }
 
-
-
     @Test
     public void convertListToStringTest(){
         List <String> departments = new ArrayList<>();
@@ -39,7 +38,12 @@ public class StringListConverterTest {
     }
 
     @Test
-    public void convertStringToList(){
+    public void convertListToStringNullTest() {
+        assertNull("convertListToStringTest: ", stringListConverter.convertToDatabaseColumn(null));
+    }
+
+    @Test
+    public void convertStringToListTest(){
         String str  = "Welcome Crew Office,Centre for Teaching & Learning,Loyola International College";
         List <String> services = new ArrayList<>();
         services.add("Welcome Crew Office");
@@ -51,5 +55,10 @@ public class StringListConverterTest {
         for(int i =0; i <listOfServices.size(); i++){
             assertEquals("convertStringToList: ",building.getServices().get(i), listOfServices.get(i) );
         }
+    }
+
+    @Test
+    public void convertStringToListNullTest() {
+        assertNull("convertListToStringTest: ",stringListConverter.convertToEntityAttribute(null));
     }
 }

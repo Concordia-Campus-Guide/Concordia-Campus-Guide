@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertNull;
 
 public class EnumToStringConverterTest {
     private EnumToStringConverter enumToStringConverter;
@@ -23,9 +24,17 @@ public class EnumToStringConverterTest {
     }
 
     @Test
-    public void fromStringToPointTypeTest(){
-        PointType pointType = enumToStringConverter.fromStringToPointType("ELEVATOR");
-        assertEquals("fromPointTypeToStringTest: ", PointType.ELEVATOR, pointType);
+    public void fromPointTypeToStringNullTest(){
+        assertNull("fromPointTypeToStringTest: ", enumToStringConverter.fromPointTypeToString(null) );
     }
 
+    @Test
+    public void fromStringToPointTypeTest(){
+        PointType pointType = enumToStringConverter.fromStringToPointType("ELEVATOR");
+        assertEquals("fromStringToPointTypeTest: ", PointType.ELEVATOR, pointType);
+    }
+    @Test
+    public void fromStringToPointTypeNullTest(){
+        assertNull("fromStringToPointTypeTest: ",  enumToStringConverter.fromPointTypeToString(null) );
+    }
 }
