@@ -43,6 +43,7 @@ public class POIFragment extends Fragment {
 
     private void setupViewPager() {
         List<String> services = new ArrayList<>();
+        //TESTING PURPOSE, WILL BE REMOVED IN NEXT PR
         services.add("elevators");
         services.add("lounges");
         services.add("bathrooms");
@@ -56,7 +57,6 @@ public class POIFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(POIFragmentViewModel.class);
-        // TODO: Use the ViewModel
     }
 
 }

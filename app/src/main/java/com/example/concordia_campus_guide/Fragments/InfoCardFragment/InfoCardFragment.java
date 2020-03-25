@@ -138,7 +138,7 @@ public class InfoCardFragment extends Fragment {
         Intent openRoutes= new Intent(getActivity(), RoutesActivity.class);
 
         SelectingToFromState.setQuickSelectToTrue();
-        //SelectingToFromState.setMyCurrentLocation(((MainActivity) getActivity()).getMyCurrentLocation());
+        SelectingToFromState.setMyCurrentLocation(((MainActivity) getActivity()).getMyCurrentLocation());
         Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
         if(myCurrentLocation != null){
             SelectingToFromState.setFrom(new MyCurrentPlace(myCurrentLocation.getLatitude(), myCurrentLocation.getLongitude()));

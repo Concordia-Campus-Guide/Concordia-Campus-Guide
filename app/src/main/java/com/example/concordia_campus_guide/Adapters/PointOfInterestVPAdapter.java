@@ -34,8 +34,8 @@ public class PointOfInterestVPAdapter extends RecyclerView.Adapter<PointOfIntere
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Adapter adapter = new PointOfInterestGvAdapter(context, services.subList(position*4, Math.min((position*4)+4, services.size())));
-        holder.poiGV.setAdapter((ListAdapter) adapter);
+        Adapter poiGvAdapter = new PointOfInterestGvAdapter(context, services.subList(position*4, Math.min((position*4)+4, services.size())));
+        holder.poiGV.setAdapter((ListAdapter) poiGvAdapter);
 
     }
 
