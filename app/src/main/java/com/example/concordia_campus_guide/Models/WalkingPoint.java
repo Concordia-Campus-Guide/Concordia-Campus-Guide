@@ -5,6 +5,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
@@ -50,7 +51,18 @@ public  class WalkingPoint {
     @ColumnInfo(name = "place_code")
     private String placeCode;
 
+
     public WalkingPoint(@NonNull Coordinates coordinate, @NonNull String floorCode, List<Integer> connectedPointsId, PointType pointType, String placeCode) {
+        this.coordinate = coordinate;
+        this.floorCode = floorCode;
+        this.connectedPointsId = connectedPointsId;
+        this.pointType = pointType;
+        this.placeCode = placeCode;
+    }
+
+    @Ignore
+    public WalkingPoint(@NonNull int id,@NonNull Coordinates coordinate, @NonNull String floorCode, List<Integer> connectedPointsId, PointType pointType, String placeCode) {
+        this.id = id;
         this.coordinate = coordinate;
         this.floorCode = floorCode;
         this.connectedPointsId = connectedPointsId;
