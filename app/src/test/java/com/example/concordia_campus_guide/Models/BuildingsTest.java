@@ -13,7 +13,8 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class BuildingsTest {
-    Buildings buildings;
+    Buildings defaultBuildings;
+    Buildings buildingsWithList;
     List<Building> listOfBuildings = new ArrayList<>();
     private Coordinates centerCoordinates = new Coordinates(45.4972685,-73.5789475);
     private List<String> availableFloors=new ArrayList<String>(Arrays.asList("00", "1", "8", "9"));
@@ -70,21 +71,29 @@ public class BuildingsTest {
 
     @Before
     public void init() {
-        buildings = new Buildings();
+        defaultBuildings = new Buildings();
         listOfBuildings.add(building1);
         listOfBuildings.add(building2);
-        buildings.setBuildings(listOfBuildings);
+        defaultBuildings.setBuildings(listOfBuildings);
+        buildingsWithList = new Buildings(listOfBuildings);
+    }
+
+    @Test
+    public void buildingsConstructorWithList(){
+        assertNotNull(buildingsWithList);
+        assertEquals(listOfBuildings, buildingsWithList.getBuildings());
+        assertEquals(building1, buildingsWithList.getBuilding(building1.getBuildingCode()));
     }
 
     @Test
     public void getBuildings() {
-        assertEquals(listOfBuildings, buildings.getBuildings());
+        assertEquals(listOfBuildings, defaultBuildings.getBuildings());
     }
 
     @Test
     public void getPlaces() {
         List<Place> places = new ArrayList<Place>();
-        places = buildings.getPlaces();
+        places = defaultBuildings.getPlaces();
         assertEquals(2, places.size());
         assertEquals(building1, places.get(0));
         assertEquals(building2, places.get(1));
@@ -94,39 +103,38 @@ public class BuildingsTest {
 
     @Test
     public void getBuilding() {
-        assertEquals(building1, buildings.getBuilding("H"));
+        assertEquals(building1, defaultBuildings.getBuilding("H"));
     }
 
     @Test
     public void getBuildingNull(){
-        assertNull(buildings.getBuilding("Z"));
+        assertNull(defaultBuildings.getBuilding("Z"));
     }
 
     @Test
     public void setBuildings() {
         List<Building> updateBuildings = new ArrayList<Building>();
         updateBuildings.add(building1);
-        assertEquals(2, buildings.getBuildings().size());
-        buildings.setBuildings(updateBuildings);
-        assertEquals(1, buildings.getBuildings().size());
-        assertEquals(building1, buildings.getBuildings().get(0));
+        assertEquals(2, defaultBuildings.getBuildings().size());
+        defaultBuildings.setBuildings(updateBuildings);
+        assertEquals(1, defaultBuildings.getBuildings().size());
+        assertEquals(building1, defaultBuildings.getBuildings().get(0));
     }
 
     @Test
     public void getGeoJson() throws JSONException {
-        assertNotNull(buildings.getGeoJson());
-        JSONObject toReturn = buildings.getGeoJson();
-
+        assertNotNull(defaultBuildings.getGeoJson());
+        JSONObject toReturn = defaultBuildings.getGeoJson();
         assertEquals("FeatureCollection", toReturn.get("type"));
 //        assertEquals(buildings.getInnerGeoJson().getClass(), toReturn.get("features"));
 //        assertEquals(buildings.getInnerGeoJson(), toReturn.get("features"));
 
-        JSONArray innerGeoJson = buildings.getInnerGeoJson();
+        JSONArray innerGeoJson = defaultBuildings.getInnerGeoJson();
         assertNotNull(innerGeoJson.get(0));
     }
 
     @Test
     public void getInnerGeoJson() {
-        assertNotNull(buildings.getInnerGeoJson());
+        assertNotNull(defaultBuildings.getInnerGeoJson());
     }
 }
