@@ -96,10 +96,20 @@ public class IndoorPathHeuristicTest {
 
 
     @Test
-    public void computeHeuristicTest(){
+    public void computeHeuristicSameFloorTest(){
         double expectedHeuristicValue = 3.5390783547533378;
         assertEquals(expectedHeuristicValue,indoorPathHeuristic.computeHeuristic(walkingPoint1,walkingPoint2));
-        assertEquals(3.5389020092769683,indoorPathHeuristic.computeHeuristic(walkingPoint1,walkingPoint7));
-        assertEquals(3.5390267853025987,indoorPathHeuristic.computeHeuristic(walkingPoint1,walkingPoint8));
+    }
+
+    @Test
+    public void computeHeuristicDifferentFloorTest(){
+        double expectedHeuristicValue = 3.5389020092769683;
+        assertEquals(expectedHeuristicValue,indoorPathHeuristic.computeHeuristic(walkingPoint1,walkingPoint7));
+    }
+
+    @Test
+    public void computeHeuristicDifferentBuildingsTest(){
+        double expectedHeuristicValue = 3.5390267853025987;
+        assertEquals(expectedHeuristicValue,indoorPathHeuristic.computeHeuristic(walkingPoint1,walkingPoint8));
     }
 }

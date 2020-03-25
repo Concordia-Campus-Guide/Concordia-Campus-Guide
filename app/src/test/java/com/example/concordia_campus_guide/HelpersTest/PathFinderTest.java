@@ -22,6 +22,7 @@ import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertTrue;
 import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class PathFinderTest {
@@ -65,18 +66,21 @@ public class PathFinderTest {
         walkingPointNode1 = pathFinder.new WalkingPointNode(walkingPoint1, null, 22.3, 123.312);
     }
 
-
-
     @Test
-    public void isGoalTest(){
+    public void isGoalFalseTest(){
         assertFalse(pathFinder.isGoal(walkingPoint2));
     }
 
     @Test
+    public void isGoalTrueTest(){
+        assertTrue(pathFinder.isGoal(walkingPoint1));
+    }
+
+    @Test
     public void getWalkingPointCorrespondingToPlaceTest(){
-        Building buidling = new Building( new Coordinates(45.4972685, -73.5789475), new ArrayList<String>(Arrays.asList("8","9")), 68, 68, 34, null, "H", null, null, null, null, null);
-        when(mockAppDb.walkingPointDao().getAllWalkingPointsFromPlaceCode(buidling.getBuildingCode())).thenReturn(walkingPointList);
-        assertEquals(pathFinder.getWalkingPointCorrespondingToPlace(buidling),walkingPoint1);
+        Building building = new Building( new Coordinates(45.4972685, -73.5789475), new ArrayList<String>(Arrays.asList("8","9")), 68, 68, 34, null, "H", null, null, null, null, null);
+        when(mockAppDb.walkingPointDao().getAllWalkingPointsFromPlaceCode(building.getBuildingCode())).thenReturn(walkingPointList);
+        assertEquals(pathFinder.getWalkingPointCorrespondingToPlace(building),walkingPoint1);
     }
 
     @Test
