@@ -9,6 +9,7 @@ import com.example.concordia_campus_guide.Activities.RoutesActivityViewModel;
 import com.example.concordia_campus_guide.Activities.SearchActivityViewModel;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragmentViewModel;
+import com.example.concordia_campus_guide.Fragments.POIFragment.POIFragmentViewModel;
 
 public class ViewModelFactory implements ViewModelProvider.Factory {
 
@@ -33,6 +34,8 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         }
         else if(modelClass == RoutesActivityViewModel.class){
             return (T) new RoutesActivityViewModel(appDb);
+        }else if(modelClass == POIFragmentViewModel.class){
+            return (T) new POIFragmentViewModel(appDb);
         }
 
         return null;
