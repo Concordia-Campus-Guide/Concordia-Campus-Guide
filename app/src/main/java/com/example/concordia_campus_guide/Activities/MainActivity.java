@@ -63,16 +63,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if(id == R.id.search){
+        if (id == R.id.search) {
             Intent openSearch = new Intent(MainActivity.this,
                     SearchActivity.class);
 
@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public Location getMyCurrentLocation(){
+    public Location getMyCurrentLocation() {
         return this.locationFragment.getCurrentLocation();
     }
 }
