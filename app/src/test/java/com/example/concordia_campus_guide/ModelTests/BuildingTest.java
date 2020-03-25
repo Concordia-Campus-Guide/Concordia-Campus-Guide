@@ -1,7 +1,10 @@
-package com.example.concordia_campus_guide.Models;
+package com.example.concordia_campus_guide.ModelTests;
 
 import android.text.TextUtils;
 
+import com.example.concordia_campus_guide.Models.Building;
+import com.example.concordia_campus_guide.Models.Coordinates;
+import com.example.concordia_campus_guide.Models.ListOfCoordinates;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 

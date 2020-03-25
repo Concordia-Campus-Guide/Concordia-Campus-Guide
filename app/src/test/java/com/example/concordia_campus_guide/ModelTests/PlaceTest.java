@@ -1,5 +1,7 @@
-package com.example.concordia_campus_guide.Models;
+package com.example.concordia_campus_guide.ModelTests;
 
+import com.example.concordia_campus_guide.Models.Coordinates;
+import com.example.concordia_campus_guide.Models.Place;
 import com.google.android.gms.maps.model.LatLng;
 
 import org.junit.Before;
@@ -42,22 +44,22 @@ public class PlaceTest {
     @Test
     public void getCenterCoordinates() {
         assertEquals(centerCoordinates, placeWithCenterCoordinates.getCenterCoordinates());
-        assertEquals(centerCoordinates.latitude, placeWithCenterCoordinates.getCenterCoordinates().getLatitude(), 0.001);
-        assertEquals(centerCoordinates.longitude, placeWithCenterCoordinates.getCenterCoordinates().getLongitude(), 0.001);
+        assertEquals(centerCoordinates.getLatitude(), placeWithCenterCoordinates.getCenterCoordinates().getLatitude(), 0.001);
+        assertEquals(centerCoordinates.getLongitude(), placeWithCenterCoordinates.getCenterCoordinates().getLongitude(), 0.001);
     }
 
     @Test
     public void getCenterCoordinatesLatLng() {
         assertEquals(LatLng.class, placeWithCenterCoordinates.getCenterCoordinatesLatLng().getClass());
-        assertEquals(centerCoordinates.latitude, placeWithCenterCoordinates.getCenterCoordinatesLatLng().latitude, 0.001);
-        assertEquals(centerCoordinates.longitude, placeWithCenterCoordinates.getCenterCoordinatesLatLng().longitude, 0.001);
+        assertEquals(centerCoordinates.getLatitude(), placeWithCenterCoordinates.getCenterCoordinatesLatLng().latitude, 0.001);
+        assertEquals(centerCoordinates.getLongitude(), placeWithCenterCoordinates.getCenterCoordinatesLatLng().longitude, 0.001);
     }
 
     @Test
     public void getCenterCoordinatesDoubleArray() {
         assertEquals(Double[].class, placeWithCenterCoordinates.getCenterCoordinatesDoubleArray().getClass());
-        assertEquals(centerCoordinates.latitude, placeWithCenterCoordinates.getCenterCoordinatesDoubleArray()[1], 0.001);
-        assertEquals(centerCoordinates.longitude, placeWithCenterCoordinates.getCenterCoordinatesDoubleArray()[0], 0.001);
+        assertEquals(centerCoordinates.getLatitude(), placeWithCenterCoordinates.getCenterCoordinatesDoubleArray()[1], 0.001);
+        assertEquals(centerCoordinates.getLongitude(), placeWithCenterCoordinates.getCenterCoordinatesDoubleArray()[0], 0.001);
 
     }
 
@@ -65,13 +67,13 @@ public class PlaceTest {
     public void setCenterCoordinates() {
         Coordinates updateCenterCoordinates = new Coordinates(45.493622,-73.577003 );
         assertEquals(centerCoordinates, placeWithCenterCoordinates.getCenterCoordinates());
-        assertEquals(centerCoordinates.latitude, placeWithCenterCoordinates.getCenterCoordinates().getLatitude(), 0.001);
-        assertEquals(centerCoordinates.longitude, placeWithCenterCoordinates.getCenterCoordinates().getLongitude(), 0.001);
+        assertEquals(centerCoordinates.getLatitude(), placeWithCenterCoordinates.getCenterCoordinates().getLatitude(), 0.001);
+        assertEquals(centerCoordinates.getLongitude(), placeWithCenterCoordinates.getCenterCoordinates().getLongitude(), 0.001);
 
         placeWithCenterCoordinates.setCenterCoordinates(updateCenterCoordinates);
         assertEquals(updateCenterCoordinates, placeWithCenterCoordinates.getCenterCoordinates());
-        assertEquals(updateCenterCoordinates.latitude, placeWithCenterCoordinates.getCenterCoordinates().latitude,0.001);
-        assertEquals(updateCenterCoordinates.longitude, placeWithCenterCoordinates.getCenterCoordinates().longitude, 0.001);
+        assertEquals(updateCenterCoordinates.getLatitude(), placeWithCenterCoordinates.getCenterCoordinates().getLatitude(),0.001);
+        assertEquals(updateCenterCoordinates.getLongitude(), placeWithCenterCoordinates.getCenterCoordinates().getLongitude(), 0.001);
     }
 
     @Test
