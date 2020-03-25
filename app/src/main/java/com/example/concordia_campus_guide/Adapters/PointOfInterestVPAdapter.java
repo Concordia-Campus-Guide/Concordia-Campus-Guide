@@ -36,7 +36,7 @@ public class PoiAdapter extends RecyclerView.Adapter<PoiAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Adapter adapter = new PoiGvAdapter(context, services.subList(position, position+4));
+        Adapter adapter = new PoiGvAdapter(context, services.subList(position*4, Math.min((position*4)+4, services.size())));
         holder.poiGV.setAdapter((ListAdapter) adapter);
 
     }
