@@ -114,14 +114,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void resetBottomCard(){
-        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-            if (fragment instanceof LocationFragment) {
-                continue;
-            }
-            else {
+        for (Fragment fragment : getSupportFragmentManager().getFragments())
+            if (fragment instanceof POIFragment || fragment instanceof InfoCardFragment)
                 getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-            }
-        }
     }
 
     /**

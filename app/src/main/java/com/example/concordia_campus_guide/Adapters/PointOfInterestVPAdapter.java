@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ListAdapter;
 
-import com.example.concordia_campus_guide.Helper.POIGridView;
+import com.example.concordia_campus_guide.CustomViews.POIGridView;
 import com.example.concordia_campus_guide.Interfaces.OnPOIClickListener;
 import com.example.concordia_campus_guide.R;
 
