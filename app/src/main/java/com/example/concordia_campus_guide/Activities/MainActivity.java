@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void showInfoCard(String buildingCode){
         if(infoCardFragment!=null){
-            hideInfoCard();
+            resetBottomCard();
         }
 
         infoCardFragment = new InfoCardFragment(buildingCode);
@@ -113,14 +113,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /**
-     * Hides the info card fragment from the view.
-     */
-    public void hideInfoCard(){
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.remove(infoCardFragment);
-        fragmentTransaction.add(R.id.bottom_card_frame, poiFragment);
-        fragmentTransaction.commit();
+    public void resetBottomCard(){
+        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+            if (fragment instanceof LocationFragment) {
+                continue;
+            }
+            else {
+                getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+            }
+        }
     }
 
     /**
@@ -130,7 +131,8 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed(){
         Fragment fragment = fragmentManager.findFragmentById(R.id.bottom_card_frame);
         if(fragment!=null){
-            hideInfoCard();
+            resetBottomCard();
+            showPOICard();
         }
         else{
             super.onBackPressed();
