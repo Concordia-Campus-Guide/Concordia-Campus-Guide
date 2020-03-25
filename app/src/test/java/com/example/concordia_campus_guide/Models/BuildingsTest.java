@@ -122,19 +122,29 @@ public class BuildingsTest {
     }
 
     @Test
-    public void getGeoJson() throws JSONException {
-        assertNotNull(defaultBuildings.getGeoJson());
-        JSONObject toReturn = defaultBuildings.getGeoJson();
-        assertEquals("FeatureCollection", toReturn.get("type"));
-//        assertEquals(buildings.getInnerGeoJson().getClass(), toReturn.get("features"));
-//        assertEquals(buildings.getInnerGeoJson(), toReturn.get("features"));
+    public void getGeoJson() {
+        JSONObject toReturn = new JSONObject();
+        listOfBuildings = new ArrayList<>();
+        listOfBuildings.add(building1);
+        defaultBuildings.setBuildings(listOfBuildings);
 
-        JSONArray innerGeoJson = defaultBuildings.getInnerGeoJson();
-        assertNotNull(innerGeoJson.get(0));
+        try {
+            toReturn.put("type", "FeatureCollection");
+            toReturn.put("features", getInnerGeoJson());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals(toReturn.toString(), defaultBuildings.getGeoJson().toString());
     }
 
-    @Test
-    public void getInnerGeoJson() {
-        assertNotNull(defaultBuildings.getInnerGeoJson());
+    public JSONArray getInnerGeoJson() {
+        JSONArray features = new JSONArray();
+        try {
+            JSONObject building1GeoJson = building1.getGeoJson();
+            if (building1GeoJson != null) features.put(building1GeoJson);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return features;
     }
 }
