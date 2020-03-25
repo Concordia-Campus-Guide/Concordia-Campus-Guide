@@ -31,9 +31,10 @@ public class CalendarEvent {
         return startTime;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
+    //TODO: to be deleted because app should not be able to change startTime
+//    public void setStartTime(String startTime) {
+//        this.startTime = startTime;
+//    }
 
     @Override
     public String toString() {
