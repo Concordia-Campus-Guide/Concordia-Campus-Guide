@@ -6,24 +6,32 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/serviceIv"
-            app:srcCompat="@drawable/ic_building"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            android:minWidth="75dp"
-            android:minHeight="75dp" />
+            android:adjustViewBounds="true"
+            android:maxWidth="50dp"
+            android:maxHeight="50dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_building" />
 
         <TextView
             android:id="@+id/serviceTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:text="TextView" />
     </LinearLayout>

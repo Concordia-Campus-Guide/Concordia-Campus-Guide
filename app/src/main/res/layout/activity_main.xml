@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/locationFragment"
-        android:name="com.example.concordia_campus_guide.Fragments.POIFragment.POIFragment"
+        android:name="com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

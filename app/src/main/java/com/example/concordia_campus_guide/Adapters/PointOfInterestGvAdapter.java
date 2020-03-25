@@ -19,15 +19,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-class PoiGvAdapter extends BaseAdapter {
+class PointOfInterestGvAdapter extends BaseAdapter {
     private Context context;
     List<String> services;
-    LayoutInflater layoutInflater;
 
-    public PoiGvAdapter(Context context, List<String> services){
+    public PointOfInterestGvAdapter(Context context, List<String> services){
         this.context = context;
         this.services = services;
-        layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override

@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.concordia_campus_guide.Adapters.PoiAdapter;
+import com.example.concordia_campus_guide.Adapters.PointOfInterestVPAdapter;
 import com.example.concordia_campus_guide.R;
 
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class POIFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.p_o_i_fragment, container, false);
+        View rootView = inflater.inflate(R.layout.point_of_interest_fragment, container, false);
 
         initComponents(rootView);
 
@@ -43,19 +43,12 @@ public class POIFragment extends Fragment {
 
     private void setupViewPager() {
         List<String> services = new ArrayList<>();
-        services.add("class");
-        services.add("libraries");
+        services.add("elevators");
         services.add("lounges");
-        services.add("bathroom");
-        services.add("coffee shop");
-        services.add("class");
-        services.add("carotte");
-        services.add("concombre");
-        services.add("tomate");
-        services.add("coffee shop");
-        services.add("tomate");
-        services.add("coffee shop");
-        PoiAdapter poiViewPagerAdapter = new PoiAdapter(getContext(), services);
+        services.add("bathrooms");
+        services.add("water_fountains");
+        services.add("escalators");
+        PointOfInterestVPAdapter poiViewPagerAdapter = new PointOfInterestVPAdapter(getContext(), services);
         poiVP.setAdapter(poiViewPagerAdapter);
     }
 
