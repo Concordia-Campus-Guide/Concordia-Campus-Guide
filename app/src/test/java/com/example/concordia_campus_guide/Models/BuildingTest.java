@@ -113,8 +113,6 @@ public class BuildingTest {
         assertEquals(10, buildingWithArgs.getHeight(), 0.001);
     }
 
-//  TODO: GroundOverlayOptions
-
     @Test
     public void getGroundOverlayOption() {
     }
@@ -221,12 +219,9 @@ public class BuildingTest {
         assertEquals("", buildingWithArgs.getServicesString());
     }
 
-    // TODO: check why this is failing
     @Test
     public void getServicesString() {
-//        assertEquals(null, buildingWithArgs.getServices());
         assertFalse(buildingWithArgs.getServices().isEmpty());
-//        assertEquals("Welcome Crew Office, DB Clarke Theatre, Dean of Students, Aboriginal Student Resource Centre, Concordia Student Union, IT Service Desk, Security Office, Student Success Centre, Mail Services, Archives, Career and Planning Services, Sexual Assault Resource Centre (SARC)", buildingWithArgs.getServicesString());
     }
 
     @Test
@@ -239,7 +234,6 @@ public class BuildingTest {
     @Test
     public void getDepartmentsString() {
         assertFalse(buildingWithArgs.getDepartments().isEmpty());
-//        assertEquals("Geography, Planning and Environment, Political Science, Socialogy and Anthropology, Economics, School of Irish Studies", buildingWithArgs.getDepartmentsString());
     }
 
     @Test
@@ -258,10 +252,8 @@ public class BuildingTest {
         JSONObject geometry = toReturn.getJSONObject("geometry");
         assertEquals("Polygon", geometry.get("type"));
 
-        // TODO: fix assertion
-//        double[][][] arrayOfCoordinates = {{{-73.57955,45.497178},{-73.579035,45.497708},{-73.578332,45.497385},{-73.578842,45.496832},{-73.57955,45.497178}}};
-//        assertEquals(new JSONArray(arrayOfCoordinates), geometry.get("coordinates"));
         assertEquals("Feature", toReturn.get("type"));
+        assertEquals(toReturn.toString(), buildingWithArgs.getGeoJson().toString());
     }
 
     @Test
