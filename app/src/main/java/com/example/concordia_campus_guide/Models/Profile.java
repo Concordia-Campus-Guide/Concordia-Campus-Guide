@@ -33,17 +33,17 @@ public class Profile {
         return handicapAccess;
     }
 
-    public void setHandicapAccess(boolean handicapAccess) {
-        this.handicapAccess = handicapAccess;
-    }
+//    public void setHandicapAccess(boolean handicapAccess) {
+//        this.handicapAccess = handicapAccess;
+//    }
 
     public boolean isStaffAccess() {
         return staffAccess;
     }
 
-    public void setStaffAccess(boolean staffAccess) {
-        this.staffAccess = staffAccess;
-    }
+//    public void setStaffAccess(boolean staffAccess) {
+//        this.staffAccess = staffAccess;
+//    }
 
     public Language getLanguage() {
         return language;
