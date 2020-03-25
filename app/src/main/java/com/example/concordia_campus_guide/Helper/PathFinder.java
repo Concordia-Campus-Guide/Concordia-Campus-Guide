@@ -29,6 +29,11 @@ import java.util.PriorityQueue;
 public class PathFinder {
 
     private HashMap<Integer, WalkingPointNode> walkingPointNodesMap;
+
+    public PriorityQueue<WalkingPointNode> getWalkingPointsToVisit() {
+        return walkingPointsToVisit;
+    }
+
     private final PriorityQueue<WalkingPointNode> walkingPointsToVisit;
     private final HashMap<WalkingPointNode, Double> walkingPointsVisited;
 
@@ -55,7 +60,7 @@ public class PathFinder {
      * @param walkingPoints
      * @return
      */
-    protected HashMap<Integer, WalkingPointNode> populateWalkingPointMap(final List<WalkingPoint> walkingPoints) {
+    public HashMap<Integer, WalkingPointNode> populateWalkingPointMap(final List<WalkingPoint> walkingPoints) {
         this.walkingPointNodesMap = new HashMap<>();
         for (final WalkingPoint walkingPoint : walkingPoints) {
             walkingPointNodesMap.put(walkingPoint.getId(), new WalkingPointNode(walkingPoint, null, 0, 0));
@@ -63,7 +68,7 @@ public class PathFinder {
         return walkingPointNodesMap;
     }
 
-    protected WalkingPoint getWalkingPointCorrespondingToPlace(final Place place) {
+    public WalkingPoint getWalkingPointCorrespondingToPlace(final Place place) {
         String placeCode;
         List<WalkingPoint> pointList = null;
         if (place instanceof Building) {
@@ -100,6 +105,7 @@ public class PathFinder {
                 walkingPointsVisited.put(currentLocation, currentLocation.getCost());
 
             if (isGoal(currentLocation.getWalkingPoint())) {
+                List<WalkingPoint> walk = getSolutionPath(currentLocation);
                 return getSolutionPath(currentLocation);
             }
             addNearestWalkingPoints(currentLocation);
@@ -116,7 +122,7 @@ public class PathFinder {
         walkingPointsToVisit.add(initial);
     }
 
-    protected boolean isGoal(final WalkingPoint currentLocation) {
+    public boolean isGoal(final WalkingPoint currentLocation) {
         return destinationPoint.equals(currentLocation);
     }
 
@@ -140,7 +146,7 @@ public class PathFinder {
      * we will update it. Same if it was in the closed list(visited nodes list), we will update the cost only, in this class.
      * @param currentNode
      */
-    protected void addNearestWalkingPoints(final WalkingPointNode currentNode) {
+    public void addNearestWalkingPoints(final WalkingPointNode currentNode) {
         for (final int id : currentNode.getWalkingPoint().getConnectedPointsId()) {
 
             final WalkingPointNode adjacentNode = walkingPointNodesMap.get(id);
@@ -171,25 +177,6 @@ public class PathFinder {
         return currentCoordinate.getCost() + indoorPathHeuristic.computeHeuristic(currentCoordinate.getWalkingPoint(), destinationPoint);
     }
 
-    public Map<Integer, WalkingPointNode> getWalkingPointNodesMap() {
-        return walkingPointNodesMap;
-    }
-
-    public PriorityQueue<WalkingPointNode> getWalkingPointsToVisit() {
-        return walkingPointsToVisit;
-    }
-
-    public Map<WalkingPointNode, Double> getWalkingPointsVisited() {
-        return walkingPointsVisited;
-    }
-
-    public WalkingPoint getInitialPoint() {
-        return initialPoint;
-    }
-
-    public WalkingPoint getDestinationPoint() {
-        return destinationPoint;
-    }
 
     /**
      * This is a comparator object that will compare our Walking point based on a heuristic for a priorityQueue.
