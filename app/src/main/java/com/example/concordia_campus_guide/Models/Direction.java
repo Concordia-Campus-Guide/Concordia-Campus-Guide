@@ -13,7 +13,6 @@ public class Direction {
     private String description;
     private double duration;
 
-
     public Direction() {
     }
 

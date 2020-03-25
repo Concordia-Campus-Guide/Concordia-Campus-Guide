@@ -319,4 +319,8 @@ public class LocationFragmentViewModel extends ViewModel {
         }
         return polylineOptions;
     }
+
+    public List<WalkingPoint> getWalkingPointsList() {
+        return walkingPoints;
+    }
 }

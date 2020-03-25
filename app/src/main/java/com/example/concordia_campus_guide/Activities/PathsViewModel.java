@@ -18,8 +18,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class PathsViewModel extends ViewModel {
-    Place from;
-    Place to;
 
     public Place getTo() {
         return SelectingToFromState.getTo();
