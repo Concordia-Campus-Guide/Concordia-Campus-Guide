@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 
 import com.example.concordia_campus_guide.Adapters.PointOfInterestVPAdapter;
 import com.example.concordia_campus_guide.R;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,7 @@ import androidx.viewpager2.widget.ViewPager2;
 public class POIFragment extends Fragment {
 
     private ViewPager2 poiVP;
+    private TabLayout tabLayout;
     private POIFragmentViewModel mViewModel;
 
     public static POIFragment newInstance() {
@@ -38,6 +41,7 @@ public class POIFragment extends Fragment {
 
     private void initComponents(View rootView) {
         poiVP = rootView.findViewById(R.id.poiVp);
+        tabLayout = rootView.findViewById(R.id.dotsTab);
         setupViewPager();
     }
 
@@ -49,8 +53,20 @@ public class POIFragment extends Fragment {
         services.add("bathrooms");
         services.add("water_fountains");
         services.add("escalators");
+        services.add("elevators");
+        services.add("lounges");
+        services.add("bathrooms");
+        services.add("water_fountains");
+        services.add("escalators");
         PointOfInterestVPAdapter poiViewPagerAdapter = new PointOfInterestVPAdapter(getContext(), services);
         poiVP.setAdapter(poiViewPagerAdapter);
+        new TabLayoutMediator(tabLayout, poiVP, new TabLayoutMediator.TabConfigurationStrategy() {
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                //empty, if removed would crash the app since the function cannot be null
+            }
+        }
+        ).attach();
     }
 
     @Override

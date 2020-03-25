@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <GridView
+    <com.example.concordia_campus_guide.Helper.POIGridView
         android:id="@+id/poiGv"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:numColumns="2"
         app:layout_constraintEnd_toEndOf="parent"
