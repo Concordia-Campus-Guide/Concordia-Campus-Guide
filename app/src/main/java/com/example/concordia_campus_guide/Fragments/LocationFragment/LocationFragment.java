@@ -63,8 +63,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private HashMap<String, GroundOverlay> buildingsGroundOverlays;
     private FloorPickerAdapter currentFloorPickerAdapter;
 
-    private Button selectedFloor;
-
     /**
      * @return it will return a new object of this fragment
      */
@@ -88,7 +86,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
         return rootView;
     }
-
 
     /**
      * @param rootView is the object that contains the parts displayed on the fragment
