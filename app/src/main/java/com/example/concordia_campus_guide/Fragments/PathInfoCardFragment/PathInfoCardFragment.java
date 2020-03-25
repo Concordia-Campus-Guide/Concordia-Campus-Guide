@@ -18,8 +18,10 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.Adapters.DirectionsRecyclerViewAdapter;
 import com.example.concordia_campus_guide.Database.AppDatabase;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsRoute;
 import com.example.concordia_campus_guide.Helper.PathFinder;
 import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.Direction;
@@ -28,7 +30,6 @@ import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.TransitType;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
-import com.google.maps.model.DirectionsResult;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -47,6 +48,7 @@ public class PathInfoCardFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter mAdapter;
+    List<DirectionWrapper> directionsResults;
 
     public static PathInfoCardFragment newInstance() {
         return new PathInfoCardFragment();
@@ -64,8 +66,10 @@ public class PathInfoCardFragment extends Fragment {
 
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
+        directionList = new ArrayList<Direction>();
 
-        Serializable directionsResults = getArguments().getSerializable("directionsResult");
+        Serializable temporaryDirectionsResults = getArguments().getSerializable("directionsResult");
+        directionsResults = (ArrayList<DirectionWrapper>) temporaryDirectionsResults;
         return view;
     }
 
@@ -75,7 +79,8 @@ public class PathInfoCardFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(PathInfoCardViewModel.class);
         walkingPointList = getWalkingPoints();
         setIconsInfoCardTop();
-        populateDirectionsList();
+//        populateIndoorDirectionsList();
+        populateOutdoorDirectionsList();
     }
 
     private List<WalkingPoint> getWalkingPoints() {
@@ -151,8 +156,8 @@ public class PathInfoCardFragment extends Fragment {
         endTimeTextView.setText(arrivalCalendar.get(Calendar.HOUR_OF_DAY) + ":" + arrivalCalendar.get(Calendar.MINUTE));
     }
 
-    public void populateDirectionsList() {
-        directionList = new ArrayList<Direction>();
+    public void populateIndoorDirectionsList() {
+
         double totalDistance = 0;
         double distanceBetweenTwoPoints = 0;
 
@@ -232,7 +237,20 @@ public class PathInfoCardFragment extends Fragment {
         return deg * (Math.PI / 180);
     }
 
-//    public void
+    public void populateOutdoorDirectionsList(){
+        for(DirectionWrapper direction: directionsResults){
+            directionList.add(direction.getDirection());
+        }
+
+        mAdapter = new DirectionsRecyclerViewAdapter(getContext(), directionList);
+        recyclerView.setAdapter(mAdapter);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
+                recyclerView.getContext(),
+                DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
+    }
 
 
 }

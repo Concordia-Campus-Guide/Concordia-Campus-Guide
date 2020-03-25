@@ -34,6 +34,7 @@ public class PathsActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
     private BottomSheetBehavior swipeableInfoCard;
     private DirectionsResult directionsResult;
+    private ArrayList<DirectionWrapper> directionWrappers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +62,8 @@ public class PathsActivity extends AppCompatActivity {
         setBackButtonOnClickListener();
 
 //        locationFragment.setIndoorPaths(from, to);
-        locationFragment.drawOutdoorPaths(parseDirectionResults());
+        directionWrappers= parseDirectionResults();
+        locationFragment.drawOutdoorPaths(directionWrappers);
 //        locationFragment.setLocationToDisplay(new LatLng(-73.57901685, 45.49761115));
 
         View pathInfoCard = findViewById(R.id.path_info_card);
@@ -91,7 +93,7 @@ public class PathsActivity extends AppCompatActivity {
     public void showInfoCard() {
         pathInfoCardFragment = new PathInfoCardFragment();
         Bundle infoCardBundle = new Bundle();
-        infoCardBundle.putSerializable("directionsResult", directionsResult);
+        infoCardBundle.putSerializable("directionsResult", directionWrappers);
         pathInfoCardFragment.setArguments(infoCardBundle);
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.path_info_card_frame, pathInfoCardFragment);
