@@ -322,6 +322,19 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         }
     }
 
+    public void setIndoorPaths(Place from, Place to) {
+        mViewModel.parseWalkingPointList(AppDatabase.getInstance(getContext()), (RoomModel) from, (RoomModel) to);
+    }
+
+    public void drawOutdoorPaths(final List<DirectionWrapper> outdoorDirections){
+        mMapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                mViewModel.drawOutdoorPath(outdoorDirections, googleMap);
+            }
+        });
+    }
+
     /**
      * The purpose of this method is handle the onclick marker
      * and to open the info card according to the clicked building.
@@ -505,5 +518,9 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                 }
             }
         }
+    }
+
+    public List<WalkingPoint> getWalkingPointList() {
+        return mViewModel.getWalkingPointsList();
     }
 }

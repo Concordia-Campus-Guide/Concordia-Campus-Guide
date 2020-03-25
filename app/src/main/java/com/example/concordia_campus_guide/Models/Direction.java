@@ -11,6 +11,10 @@ public class Direction {
     private Date endTime;
     private TransportType transportType;
     private String description;
+    private double duration;
+
+    public Direction() {
+    }
 
     public Direction(LatLng start, LatLng end, TransportType transportType, String description) {
         this.start = start;
