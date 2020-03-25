@@ -13,10 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.concordia_campus_guide.Models.Direction;
 import com.example.concordia_campus_guide.R;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class DirectionsRecyclerViewAdapter extends RecyclerView.Adapter<DirectionsRecyclerViewAdapter.ViewHolder> {
 
+    private static DecimalFormat df2 = new DecimalFormat("#.##");
     private List<Direction> mData;
     private LayoutInflater mInflater;
     AdapterView.OnItemClickListener mClickListener;
@@ -38,7 +40,7 @@ public class DirectionsRecyclerViewAdapter extends RecyclerView.Adapter<Directio
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         String description = mData.get(position).getDescription();
-        String duration = String.valueOf(mData.get(position).getDuration())+"min";
+        String duration = String.valueOf(df2.format(mData.get(position).getDuration()))+"min";
         holder.directionInstruction.setText(description);
         holder.duration.setText(duration);
     }

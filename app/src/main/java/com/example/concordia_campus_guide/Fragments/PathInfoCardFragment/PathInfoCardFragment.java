@@ -24,6 +24,7 @@ import com.example.concordia_campus_guide.Models.TransitType;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -36,6 +37,8 @@ public class PathInfoCardFragment extends Fragment {
     List<DirectionWrapper> directionsResults;
     double totalDistance;
     double distanceBetweenPoints;
+    private static DecimalFormat df2 = new DecimalFormat("#.##");
+    private double totalDuration;
 
     public static PathInfoCardFragment newInstance() {
         return new PathInfoCardFragment();
@@ -64,6 +67,7 @@ public class PathInfoCardFragment extends Fragment {
         walkingPointList = (ArrayList<WalkingPoint>) getArguments().getSerializable("walkingPoints");
         populateIndoorDirectionsList();
         populateOutdoorDirectionsList();
+        setStartAndEndTime();
     }
 
     public void createImageButton(LinearLayout layout, LinearLayout.LayoutParams layoutParams, int imageId) {
@@ -83,9 +87,9 @@ public class PathInfoCardFragment extends Fragment {
         layout.addView(divider);
     }
 
-    public void setStartAndEndTime(double totalDuration) {
+    public void setStartAndEndTime() {
         TextView totalDurationTextView = (TextView) getView().findViewById(R.id.total_time);
-        totalDurationTextView.setText(totalDuration + "min");
+        totalDurationTextView.setText(df2.format(totalDuration) + "min");
         Date date = new Date();   // given date
         Calendar calendar = Calendar.getInstance(); // creates a new calendar instance
         calendar.setTime(date);   // assigns calendar to given date
@@ -99,7 +103,6 @@ public class PathInfoCardFragment extends Fragment {
     }
 
     public void populateIndoorDirectionsList() {
-        double totalDuration = 0;
         distanceBetweenPoints = 0;
         LinearLayout layout = (LinearLayout) getView().findViewById(R.id.paths_image_buttons);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1);
@@ -110,8 +113,7 @@ public class PathInfoCardFragment extends Fragment {
             setIndoorComponents(startWalkingPoint, endWalkingPoint, layout, layoutParams);
         }
 
-        totalDuration = (totalDistance * 60.0 / 5.0);
-        this.setStartAndEndTime(totalDuration);
+        this.totalDuration = (totalDistance * 60.0 / 5.0);
         createImageButton(layout, layoutParams, R.drawable.ic_directions_walk_black_24dp);
         setRecyclerView();
     }
@@ -203,9 +205,47 @@ public class PathInfoCardFragment extends Fragment {
         for (DirectionWrapper direction : directionsResults) {
             double minute = direction.getDirection().getDuration() / 60;
             direction.getDirection().setDuration(minute);
+            totalDuration += direction.getDirection().getDuration();
             directionList.add(direction.getDirection());
         }
+        setOutdoorTopCard();
         setRecyclerView();
+    }
+
+    public void setOutdoorTopCard() {
+        LinearLayout layout = (LinearLayout) getView().findViewById(R.id.paths_image_buttons);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+        for (int i=0; i<directionList.size(); i++) {
+            Direction direction = directionList.get(i);
+            switch (direction.getType()) {
+                case BUS:
+                    createImageButton(layout, layoutParams, R.drawable.ic_directions_bus_black_24dp);
+                    setDividerTextView(layout, layoutParams);
+                    break;
+                case CAR:
+                    createImageButton(layout, layoutParams, R.drawable.ic_directions_car_black_24dp);
+                    setDividerTextView(layout, layoutParams);
+                    break;
+                case METRO:
+                    createImageButton(layout, layoutParams, R.drawable.ic_directions_subway_black_24dp);
+                    setDividerTextView(layout, layoutParams);
+                    break;
+                case SHUTTLE:
+                    createImageButton(layout, layoutParams, R.drawable.ic_shuttle);
+                    setDividerTextView(layout, layoutParams);
+                    break;
+                case BIKE:
+                    createImageButton(layout, layoutParams, R.drawable.ic_directions_bike_black_24dp);
+                    setDividerTextView(layout, layoutParams);
+                    break;
+                case WALK:
+                    if (i !=0 && direction.getType() != directionList.get(i - 1).getType()) {
+                        createImageButton(layout, layoutParams, R.drawable.ic_directions_walk_black_24dp);
+                        setDividerTextView(layout, layoutParams);
+                    }
+                    break;
+            }
+        }
     }
 
     public void setRecyclerView() {
