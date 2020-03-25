@@ -123,8 +123,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void openRoutesPage(Place place){
-        Intent openRoutes= new Intent(SearchActivity.this,
-                RoutesActivity.class);
+        Intent openRoutes = new Intent(SearchActivity.this, RoutesActivity.class);
 
         if(SelectingToFromState.isQuickSelect()){
             SelectingToFromState.setTo(place);
@@ -142,6 +141,7 @@ public class SearchActivity extends AppCompatActivity {
         if(SelectingToFromState.isSelectTo()){
             SelectingToFromState.setTo(place);
         }
+
         startActivity(openRoutes);
     }
 
