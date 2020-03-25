@@ -91,6 +91,15 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void setOnClickListeners(){
+        searchText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean onFocus) {
+                if(onFocus){
+                    searchResults.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         searchResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -100,22 +109,19 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         final CalendarEvent calendarEvent = calendarViewModel.getEvent(this);
-        final String eventLocation = calendarViewModel.getNextClassString((calendarEvent));
-        nextClassText.setText(eventLocation);
+        final String eventString = calendarViewModel.getNextClassString((calendarEvent));
+        final String eventLocation = calendarEvent.getLocation();
+        nextClassText.setText(eventString);
 
         if(nextClassText.getText() != "No classes today"){
             Place place = mViewModel.getRoomFromDB(eventLocation);
+//            Place place = mViewModel.getRoomFromDB(calendarEvent.getLocation());
 
             nextClassArrow.setVisibility(View.VISIBLE);
             nextClassRow.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    openRoutesPage(new Place() {
-                        @Override
-                        public String getDisplayName() {
-                            return calendarEvent.getLocation();
-                        }
-                    });
+                public void onClick(View view) {
+                    openRoutesPage(place);
                 }
             });
         }
