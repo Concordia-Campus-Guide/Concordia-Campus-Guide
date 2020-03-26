@@ -18,7 +18,6 @@ import androidx.test.uiautomator.UiSelector;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -76,7 +75,7 @@ public class InfoCardFragmentIntegrationTest {
                 allOf(withId(R.id.info_card_title), withText("Henry F. Hall Building"),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(R.id.info_card_frame),
+                                        withId(R.id.bottom_card_frame),
                                         0),
                                 0),
                         isDisplayed()));
