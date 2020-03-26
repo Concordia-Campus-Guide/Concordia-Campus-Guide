@@ -18,10 +18,13 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@id/topMapContainer"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginRight="15dp"
         android:background="@color/backgroundGrey"
-        android:tint="@color/cardview_dark_background"
+        android:elevation="20dp"
+        android:minWidth="40dp"
+        android:minHeight="40dp"
         android:padding="5dp"
+        android:tint="@color/cardview_dark_background"
         app:srcCompat="@drawable/ic_my_location_24dp" />
 
     <LinearLayout
