@@ -22,10 +22,6 @@ public class TestUtils {
     // Buildings
     public Buildings defaultBuildings;
     Buildings buildingsWithList;
-    List<Building> listOfBuildings = new ArrayList<Building>(){{
-        add(building1);
-        add(building2);
-    }};
 
     public Coordinates centerCoordinates = new Coordinates(45.4972685,-73.5789475);
     public List<String> availableFloors=new ArrayList<String>(Arrays.asList("00", "1", "8", "9"));
@@ -73,6 +69,8 @@ public class TestUtils {
             bearing, SGWcampus, buildingCode, Building_Long_Name,  address, departments,
             services,  cornerCoordinates
     );
+
+    List<Building> listOfBuildings = new ArrayList<Building>(Arrays.asList(building1, building2));
 
     public Building defaultBuilding = new Building();
     public Building buildingWithArgs = new Building(centerCoordinates, availableFloors, width, height,
