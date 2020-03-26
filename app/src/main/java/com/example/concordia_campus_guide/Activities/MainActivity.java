@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     POIFragment poiFragment;
     MainActivityViewModel mViewModel;
     private BottomSheetBehavior swipeableInfoCard;
+    private BottomSheetBehavior swipeablePOICard;
     Toolbar myToolbar;
 
     @Override
@@ -57,7 +58,9 @@ public class MainActivity extends AppCompatActivity {
         myToolbar = (Toolbar) findViewById(R.id.toolbar);
         MainActivity.this.setTitle("ConUMaps");
         View infoCard = findViewById(R.id.bottom_card_scroll_view);
+        View poiCard = findViewById(R.id.explore_bottom_card_scroll_view);
         swipeableInfoCard = BottomSheetBehavior.from(infoCard);
+        swipeablePOICard = BottomSheetBehavior.from(poiCard);
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
     }
 
@@ -93,32 +96,26 @@ public class MainActivity extends AppCompatActivity {
         resetBottomCard();
         infoCardFragment = new InfoCardFragment(buildingCode);
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.remove(poiFragment);
         fragmentTransaction.add(R.id.bottom_card_frame, infoCardFragment);
         fragmentTransaction.commit();
-
-        swipeableInfoCard.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        swipeableInfoCard.setPeekHeight((int) dpToPx(145));
-
     }
 
     public void showPOICard(){
         resetBottomCard();
         poiFragment = new POIFragment();
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.bottom_card_frame, poiFragment);
+        fragmentTransaction.add(R.id.explore_bottom_card_frame, poiFragment);
         fragmentTransaction.commit();
-
-        swipeableInfoCard.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        swipeableInfoCard.setPeekHeight((int) dpToPx(70));
-        swipeableInfoCard.setHideable(false);
-
     }
 
     public void resetBottomCard(){
-        for (Fragment fragment : fragmentManager.getFragments())
-            if (fragment instanceof POIFragment || fragment instanceof InfoCardFragment)
+        for (Fragment fragment : fragmentManager.getFragments()){
+            if (fragment instanceof InfoCardFragment) {
                 fragmentManager.beginTransaction().remove(fragment).commit();
+            }
+        }
+        swipeableInfoCard.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
     }
 
     /**
