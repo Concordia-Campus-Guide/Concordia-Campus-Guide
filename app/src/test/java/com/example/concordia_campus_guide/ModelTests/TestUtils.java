@@ -14,24 +14,28 @@ public class TestUtils {
     public TestUtils(){}
 
     // Buildings
-    Buildings defaultBuildings;
+    public Buildings defaultBuildings;
     Buildings buildingsWithList;
-    List<Building> listOfBuildings = new ArrayList<>();
-    private Coordinates centerCoordinates = new Coordinates(45.4972685,-73.5789475);
-    private List<String> availableFloors=new ArrayList<String>(Arrays.asList("00", "1", "8", "9"));
-    private float width = 68;
-    private float height = 68;
-    private float bearing = 34;
-    private String campus = "SGW";
-    private String buildingCode = "H";
-    private String Building_Long_Name = "Henry F. Hall Building";
-    private String address = "1455 De Maisonneuve West";
-    private List<String> departments = new ArrayList<String>(Arrays.asList(
+    List<Building> listOfBuildings = new ArrayList<Building>(){{
+        add(building1);
+        add(building2);
+    }};
+
+    public Coordinates centerCoordinates = new Coordinates(45.4972685,-73.5789475);
+    public List<String> availableFloors=new ArrayList<String>(Arrays.asList("00", "1", "8", "9"));
+    public float width = 68;
+    public float height = 68;
+    public float bearing = 34;
+    public String campus = "SGW";
+    public String buildingCode = "H";
+    public String Building_Long_Name = "Henry F. Hall Building";
+    public String address = "1455 De Maisonneuve West";
+    public List<String> departments = new ArrayList<String>(Arrays.asList(
             "Geography, Planning and Environment",
             "Political Science, Socialogy and Anthropology, Economics",
             "School of Irish Studies"
     ));
-    private List<String> services = new ArrayList<String>(Arrays.asList("Welcome Crew Office",
+    public List<String> services = new ArrayList<String>(Arrays.asList("Welcome Crew Office",
             "DB Clarke Theatre",
             "Dean of Students",
             "Aboriginal Student Resource Centre",
@@ -59,7 +63,7 @@ public class TestUtils {
         add(cornerCoordinate5);
     }};
 
-    private ListOfCoordinates cornerCoordinates = new ListOfCoordinates(listOfCornerCoordinates);
+    public ListOfCoordinates cornerCoordinates = new ListOfCoordinates(listOfCornerCoordinates);
 
     Building building1 = new Building(centerCoordinates, availableFloors, width, height,
             bearing, campus, buildingCode, Building_Long_Name,  address, departments,
@@ -69,6 +73,12 @@ public class TestUtils {
             bearing, campus, buildingCode, Building_Long_Name,  address, departments,
             services,  cornerCoordinates
     );
+
+    public Building defaultBuilding = new Building();
+    public Building buildingWithArgs = new Building(centerCoordinates, availableFloors, width, height,
+                                             bearing, campus, buildingCode, Building_Long_Name,  address, departments,
+                                             services,  cornerCoordinates);
+
 
     // Floors
 
