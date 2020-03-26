@@ -18,22 +18,16 @@ import com.example.concordia_campus_guide.BuildConfig;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragment;
 import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragment;
+import com.example.concordia_campus_guide.Fragments.POIFragment.POIFragment;
 import com.example.concordia_campus_guide.Global.ApplicationState;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.Floors;
-import com.example.concordia_campus_guide.Models.Relations.BuildingWithFloors;
-import com.example.concordia_campus_guide.Models.Relations.FloorWithRooms;
-import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.Rooms;
-import com.example.concordia_campus_guide.Models.Shuttle;
 import com.example.concordia_campus_guide.Models.Shuttles;
-import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.Models.WalkingPoints;
 import com.example.concordia_campus_guide.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
     InfoCardFragment infoCardFragment;
     LocationFragment locationFragment;
+    POIFragment poiFragment;
     MainActivityViewModel mViewModel;
     private BottomSheetBehavior swipeableInfoCard;
 
@@ -56,23 +51,24 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
         MainActivity.this.setTitle("ConUMaps");
 
-        View infoCard = findViewById(R.id.info_card);
+        View infoCard = findViewById(R.id.bottom_card_scroll_view);
         swipeableInfoCard = BottomSheetBehavior.from(infoCard);
+        showPOICard();
 
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if(id == R.id.search){
+        if (id == R.id.search) {
             Intent openSearch = new Intent(MainActivity.this,
                     SearchActivity.class);
 
@@ -92,25 +88,35 @@ public class MainActivity extends AppCompatActivity {
      */
     public void showInfoCard(String buildingCode){
         if(infoCardFragment!=null){
-            hideInfoCard();
+            resetBottomCard();
         }
 
         infoCardFragment = new InfoCardFragment(buildingCode);
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.info_card_frame, infoCardFragment);
+        fragmentTransaction.remove(poiFragment);
+        fragmentTransaction.add(R.id.bottom_card_frame, infoCardFragment);
         fragmentTransaction.commit();
 
         swipeableInfoCard.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
     }
 
-    /**
-     * Hides the info card fragment from the view.
-     */
-    public void hideInfoCard(){
+    public void showPOICard(){
+        poiFragment = new POIFragment();
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.remove(infoCardFragment);
+        fragmentTransaction.add(R.id.bottom_card_frame, poiFragment);
         fragmentTransaction.commit();
+
+        swipeableInfoCard.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        swipeableInfoCard.setPeekHeight(180);
+        swipeableInfoCard.setHideable(false);
+
+    }
+
+    public void resetBottomCard(){
+        for (Fragment fragment : getSupportFragmentManager().getFragments())
+            if (fragment instanceof POIFragment || fragment instanceof InfoCardFragment)
+                getSupportFragmentManager().beginTransaction().remove(fragment).commit();
     }
 
     /**
@@ -118,9 +124,10 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     public void onBackPressed(){
-        Fragment fragment = fragmentManager.findFragmentById(R.id.info_card_frame);
+        Fragment fragment = fragmentManager.findFragmentById(R.id.bottom_card_frame);
         if(fragment!=null){
-            hideInfoCard();
+            resetBottomCard();
+            showPOICard();
         }
         else{
             super.onBackPressed();
@@ -157,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public Location getMyCurrentLocation(){
+    public Location getMyCurrentLocation() {
         return this.locationFragment.getCurrentLocation();
     }
 }
