@@ -380,7 +380,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     public void onFloorPickerOnClick(int position, View view) {
         mViewModel.setFloorPlan(buildingsGroundOverlays.get(currentFloorPickerAdapter.getBuildingCode()), currentFloorPickerAdapter.getBuildingCode(), currentFloorPickerAdapter.getFloorsAvailable().get(position), getContext(), mMap);
     }
-
+//adding a comment:
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if(requestCode == ClassConstants.LOCATION_PERMISSION_REQUEST_CODE)
