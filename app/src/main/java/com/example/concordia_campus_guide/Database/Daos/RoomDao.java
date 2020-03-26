@@ -28,6 +28,10 @@ public interface RoomDao {
     @Query("SELECT * FROM rooms WHERE id=:roomId")
     public RoomModel getRoomById(long roomId);
 
+    @Query("SELECT * FROM rooms WHERE room_code=:roomCode AND floor_code=:floorCode" )
+    public RoomModel getRoomByRoomCodeAndFloorCode(String roomCode, String floorCode);
+
+
     @Query("SELECT * FROM rooms WHERE id=:roomId AND floor_code=:floorCode" )
     public RoomModel getRoomByIdAndFloorCode(long roomId, String floorCode);
 }

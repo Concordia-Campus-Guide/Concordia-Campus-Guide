@@ -1,5 +1,6 @@
 package com.example.concordia_campus_guide.Activities;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
@@ -24,9 +25,11 @@ import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFra
 import com.example.concordia_campus_guide.Global.ApplicationState;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.Helper.Notification;
+import com.example.concordia_campus_guide.Helper.StartActivityHelper;
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.CalendarEvent;
 import com.example.concordia_campus_guide.Models.Floors;
+import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.Relations.BuildingWithFloors;
 import com.example.concordia_campus_guide.Models.Relations.FloorWithRooms;
 import com.example.concordia_campus_guide.Models.RoomModel;
@@ -65,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
         View infoCard = findViewById(R.id.info_card);
         swipeableInfoCard = BottomSheetBehavior.from(infoCard);
-        notification = new Notification(this);
+        notification = new Notification(this,AppDatabase.getInstance(this));
         notification.checkUpCalendarEvery5Minutes();
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
     }
@@ -74,11 +77,11 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setCancelable(true);
         builder.setTitle("Heads up... Your next class is in " +  mViewModel.displayTimeToNextClass(calendarEvent.getStartTime()));
-        builder.setMessage("You have " + calendarEvent.getTitle() + " in " + mViewModel.displayTimeToNextClass(calendarEvent.getStartTime())  + " in " +
+        builder.setMessage("You have " + calendarEvent.getTitle() + " in " + mViewModel.displayTimeToNextClass(calendarEvent.getStartTime())  + " at " +
                 calendarEvent.getLocation() +" ! Please choose to either get directions to your class or to disregard this message");
 
         setupCancelBtn(builder);
-        setupShowMeDirectionsBtn(builder);
+        setupShowMeDirectionsBtn(builder,calendarEvent.getLocation());
 
         builder.show();
     }
@@ -92,11 +95,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void setupShowMeDirectionsBtn(AlertDialog.Builder builder){
+    private void setupShowMeDirectionsBtn(AlertDialog.Builder builder, String location){
+        final String locationTemp = location;
+        final Activity mainActivity = this;
         builder.setPositiveButton("Show me Directions", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Log.i("Main Act", "asdasdansdjkaskom das");
+                RoomModel room = notification.getRoom(locationTemp);
+                StartActivityHelper.openRoutesPage(room,mainActivity);
             }
         });
     }

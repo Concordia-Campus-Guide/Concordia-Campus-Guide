@@ -1,5 +1,6 @@
 package com.example.concordia_campus_guide.Activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -120,7 +121,7 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
-    private void openRoutesPage(Place place){
+    public void openRoutesPage(Place place){
         Intent openRoutes = new Intent(SearchActivity.this, RoutesActivity.class);
 
         if(SelectingToFromState.isQuickSelect()){
@@ -142,6 +143,7 @@ public class SearchActivity extends AppCompatActivity {
 
         startActivity(openRoutes);
     }
+
 
     private void setBackButtonOnClick(){
         ImageButton backButton = this.findViewById(R.id.back);
