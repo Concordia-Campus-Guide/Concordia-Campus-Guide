@@ -2,17 +2,14 @@ package com.example.concordia_campus_guide.Helper.RoutesHelpers;
 
 import android.os.AsyncTask;
 import android.util.Log;
-
 import com.example.concordia_campus_guide.Activities.RoutesActivity;
 import com.example.concordia_campus_guide.ClassConstants;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
 
 /**
  * This class is an AsyncTask because we want to avoid freezing the main UI thread when retrieving the Google Maps Directions API's response
@@ -21,11 +18,9 @@ public class DirectionsApiDataRetrieval extends AsyncTask<String, Void, String> 
 
     RoutesActivity caller;
     String data;
+    String transportType;
 
-    public DirectionsApiDataRetrieval(RoutesActivity caller)
-    {
-        this.caller = caller;
-    }
+    public DirectionsApiDataRetrieval(RoutesActivity caller) { this.caller = caller; }
 
     /**
      * Fetching the data from web service in the background
@@ -38,6 +33,7 @@ public class DirectionsApiDataRetrieval extends AsyncTask<String, Void, String> 
         String data = "";
         try {
             data = getDataFromGMapsDirectionsApi(strings[0]);
+            this.transportType = strings[1];
         } catch (Exception e) {
             Log.e(DirectionsApiDataRetrieval.class.getName(), e.toString());
         }
@@ -78,7 +74,6 @@ public class DirectionsApiDataRetrieval extends AsyncTask<String, Void, String> 
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(iStream))) {
             Log.d(DirectionsApiDataRetrieval.class.getName(), "Fetching routes");
-
             StringBuilder sb = new StringBuilder();
             String line = "";
             while ((line = br.readLine()) != null) {
@@ -92,6 +87,7 @@ public class DirectionsApiDataRetrieval extends AsyncTask<String, Void, String> 
             iStream.close();
             urlConnection.disconnect();
         }
+
         return data;
     }
 }

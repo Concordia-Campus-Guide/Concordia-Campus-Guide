@@ -5,19 +5,4 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_weight="12"
-    android:orientation="horizontal">
-
-    <TextView
-        android:id="@+id/textRoute"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="3dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="8dp"
-        android:layout_weight="12"
-        android:orientation="vertical"
-        android:text="TextView"
-        android:textStyle="bold" />
-
-</LinearLayout>
+    android:orientation="horizontal"/>

@@ -1,5 +1,4 @@
 package com.example.concordia_campus_guide.Adapters;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
+import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Models.Routes.Bus;
 import com.example.concordia_campus_guide.Models.Routes.Car;
 import com.example.concordia_campus_guide.Models.Direction;
@@ -17,9 +16,7 @@ import com.example.concordia_campus_guide.Models.Routes.Subway;
 import com.example.concordia_campus_guide.Models.Routes.TransportType;
 import com.example.concordia_campus_guide.Models.Routes.Walk;
 import com.example.concordia_campus_guide.R;
-
 import java.util.List;
-
 import androidx.annotation.NonNull;
 
 public class RoutesAdapter extends ArrayAdapter<Route> {
@@ -44,59 +41,70 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
         if (convertView == null) {
             convertView = LayoutInflater.from(this.getContext())
                     .inflate(R.layout.list_routes, parent, false);
-
             viewHolder = new ViewHolder();
-            viewHolder.textView = convertView.findViewById(R.id.textRoute);
-
             convertView.setTag(viewHolder);
+        }
 
-        } else {
+        else {
             viewHolder = (RoutesAdapter.ViewHolder) convertView.getTag();
         }
 
         Route route = getItem(position);
         if (route!= null) {
-            LinearLayout routeOverviewLayout = convertView.findViewById(R.id.routeOverviewLayout);
+            LinearLayout routeOverviewLayout;
 
-            for(TransportType step: route.getSteps()) {
-                if(step instanceof Walk) {
-                    ImageView imageView = new ImageView(context);
-                    imageView.setImageResource(((Walk) step).getIcon());
+            if (route.getMainTransportType().equals(ClassConstants.WALKING)) {
+                routeOverviewLayout = convertView.findViewById(R.id.routeOverviewLayout);
 
-                    TextView textView = new TextView(context);
-                    textView.setText(((Walk) step).getDuration());
+                ImageView walkIcon = new ImageView(context);
+                walkIcon.setImageResource(R.drawable.ic_directions_walk_red);
 
-                    routeOverviewLayout.addView(imageView);
-                    routeOverviewLayout.addView(textView);
-                }
-                else if (step instanceof Car) {
-                    TextView textView = new TextView(context);
-                    textView.setText(route.getDuration());
+                TextView summary = new TextView(context);
+                summary.setText(route.getSummary());
 
-                    routeOverviewLayout.addView(textView);
-                }
-                else if (step instanceof Bus) {
+                TextView duration = new TextView(context);
+                duration.setText(route.getDuration());
 
-                }
-                else if (step instanceof Subway) {
+                routeOverviewLayout.addView(walkIcon);
+                routeOverviewLayout.addView(summary);
+                routeOverviewLayout.addView(duration);
 
+            } else if (route.getMainTransportType().equals(ClassConstants.DRIVING)) {
+                routeOverviewLayout = convertView.findViewById(R.id.routeOverviewLayout);
+
+                ImageView carIcon = new ImageView(context);
+                carIcon.setImageResource(R.drawable.ic_directions_car_red);
+
+                TextView summary = new TextView(context);
+                summary.setText(route.getSummary());
+
+                TextView duration = new TextView(context);
+                duration.setText(route.getDuration());
+
+                routeOverviewLayout.addView(carIcon);
+                routeOverviewLayout.addView(summary);
+                routeOverviewLayout.addView(duration);
+            }
+            else { // TRANSIT
+                routeOverviewLayout = convertView.findViewById(R.id.routeOverviewLayout);
+                for(TransportType step: route.getSteps()) {
+                    if (step instanceof Bus) {
+                        ImageView carIcon = new ImageView(context);
+                        carIcon.setImageResource(R.drawable.ic_directions_car_red);
+                    }
+                    else if (step instanceof Subway) {
+                    }
                 }
             }
-
-
         }
         else
             viewHolder.textView.setText("No routes available.");
-
         return convertView;
     }
-
-
     @Override
     public Route getItem(int i){
         return routes.get(i);
     }
-
     @Override
     public int getCount(){
         return routes.size();
