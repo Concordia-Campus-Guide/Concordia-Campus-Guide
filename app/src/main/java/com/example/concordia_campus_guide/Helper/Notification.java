@@ -29,9 +29,9 @@ public class Notification {
                 if(calendarEvent  != null ){
                     mainActivity.popUp(calendarEvent);
                 }
-                handler.postDelayed(this, 30000);
+                handler.postDelayed(this, 300000);
             }
-        }, 30000);
+        }, 300000);
     }
 
     public CalendarEvent getNextClassCalendar(){
