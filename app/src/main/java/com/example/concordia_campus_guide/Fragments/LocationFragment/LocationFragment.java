@@ -104,6 +104,12 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         sgwBtn = rootView.findViewById(R.id.SGWBtn);
         loyolaBtn = rootView.findViewById(R.id.loyolaBtn);
         myLocation = rootView.findViewById(R.id.myLocation);
+        myLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popUpRequestPermission();
+            }
+        });
         mFloorPickerGv = rootView.findViewById(R.id.FloorPickerGv);
         mFloorPickerGv.setVisibility(View.GONE);
         buildingsGroundOverlays = new HashMap<>();
@@ -206,25 +212,31 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private void setupClickListeners() {
         setupLoyolaBtnClickListener();
         setupSGWBtnClickListener();
-        setupMyLocationClickListener();
+        //setupMyLocationClickListener();
     }
 
-    private void setupMyLocationClickListener(){
-        myLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popUpRequestPermission();
-            }
-        });
-    }
+//    private void setupMyLocationClickListener(){
+//        myLocation.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                popUpRequestPermission();
+//            }
+//        });
+//    }
     private void popUpRequestPermission(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setCancelable(true);
-        builder.setTitle("Request Permission ");
-        builder.setMessage("Please Accept if you want to use your current location ");
-        builder.setCancelable(true);
-        setupCancelBtn(builder);
-        setupAcceptPermissionBtn(builder);
+        if(!myLocationPermissionsGranted){
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setCancelable(true);
+            builder.setTitle("Request Permission ");
+            builder.setMessage("Please Accept if you want to use your current location ");
+            builder.setCancelable(true);
+            setupCancelBtn(builder);
+            setupAcceptPermissionBtn(builder);
+            builder.show();
+        }
+        else {
+            setFirstLocationToDisplayOnSuccess();
+        }
     }
 
     private void setupCancelBtn(AlertDialog.Builder builder){
@@ -240,7 +252,10 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                myLocationPermissionsGranted = true;
+                getLocationPermission();
+                mMap.setMyLocationEnabled(true);
+                setFirstLocationToDisplayOnSuccess();
             }
         });
     }
@@ -387,22 +402,22 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
      * The purpose of this application is to ask the user for their permission
      * of using their current location.
      */
-//    private void getLocationPermission(){
-//        String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
-//                Manifest.permission.ACCESS_COARSE_LOCATION};
-//        if (ContextCompat.checkSelfPermission(getContext(),Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED) {
-//            if (requestPermission()) {
-//                myLocationPermissionsGranted = true;
-//            } else {
-//                ActivityCompat.requestPermissions(getActivity(),
-//                        permissions,
-//                        ClassConstants.LOCATION_PERMISSION_REQUEST_CODE);
-//            }
-//        }else {
-//            //Permission has already been granted.
-//            setFirstLocationToDisplayOnSuccess();
-//        }
-//    }
+    private void getLocationPermission(){
+        String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION};
+        if (ContextCompat.checkSelfPermission(getContext(),Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED) {
+            if (requestPermission()) {
+                myLocationPermissionsGranted = true;
+            } else {
+                ActivityCompat.requestPermissions(getActivity(),
+                        permissions,
+                        ClassConstants.LOCATION_PERMISSION_REQUEST_CODE);
+            }
+        }else {
+            //Permission has already been granted.
+            setFirstLocationToDisplayOnSuccess();
+        }
+    }
 
     private void classRoomCoordinateTool(GoogleMap map){
         map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
