@@ -59,11 +59,7 @@ public class CalendarViewModel extends AndroidViewModel {
             if(event != null){
                 Date eventDate = new Date((Long.parseLong(event.getStartTime())));
                 String timeUntil = getTimeUntilString(eventDate.getTime(), System.currentTimeMillis());
-
                 nextClassString = event.getTitle() +  " in " + timeUntil;
-
-            }else{
-                nextClassString = "No classes today";
             }
         return  nextClassString;
     }

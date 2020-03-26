@@ -11,6 +11,8 @@ import com.example.concordia_campus_guide.Interfaces.OnPOIClickListener;
 import com.example.concordia_campus_guide.Models.PoiType;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ import androidx.viewpager2.widget.ViewPager2;
 public class POIFragment extends Fragment {
 
     private ViewPager2 poiVP;
+    private TabLayout tabLayout;
     private POIFragmentViewModel mViewModel;
 
     public static POIFragment newInstance() {
@@ -42,6 +45,7 @@ public class POIFragment extends Fragment {
 
     private void initComponents(View rootView) {
         poiVP = rootView.findViewById(R.id.poiVp);
+        tabLayout = rootView.findViewById(R.id.dotsTab);
         setupViewPager();
     }
 
@@ -53,6 +57,13 @@ public class POIFragment extends Fragment {
         }
         PointOfInterestVPAdapter poiViewPagerAdapter = new PointOfInterestVPAdapter(getContext(), services, getOnClickListener());
         poiVP.setAdapter(poiViewPagerAdapter);
+        new TabLayoutMediator(tabLayout, poiVP, new TabLayoutMediator.TabConfigurationStrategy() {
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                //empty, if removed would crash the app since the function cannot be null
+            }
+        }
+        ).attach();
     }
 
     private OnPOIClickListener getOnClickListener() {
