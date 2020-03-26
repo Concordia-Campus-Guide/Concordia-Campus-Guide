@@ -133,7 +133,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:padding="10dp"
-            android:text="Lecture: SOEN 357 in 01 hour and 20 minutes"
+            android:text="No classes today"
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
