@@ -6,9 +6,7 @@ import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Models.CalendarEvent;
 import com.example.concordia_campus_guide.Models.Helpers.CalendarViewModel;
 
-import org.mortbay.jetty.Main;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 public class Notification {
     MainActivity mainActivity;
@@ -26,12 +24,12 @@ public class Notification {
                 if(calendarEvent  != null &&  Long.parseLong(calendarEvent.getStartTime()) <= 3600000){
                     mainActivity.popUp(calendarEvent);
                 }
-                handler.postDelayed(this, 300000);
+                handler.postDelayed(this, 30000);
             }
-        }, 300000);
+        }, 30000);
     }
 
-    private CalendarEvent getNextClassCalendar(){
+    public CalendarEvent getNextClassCalendar(){
         CalendarViewModel calendarViewModel = new CalendarViewModel(mainActivity.getApplication());
         return  calendarViewModel.getEvent(mainActivity);
     }

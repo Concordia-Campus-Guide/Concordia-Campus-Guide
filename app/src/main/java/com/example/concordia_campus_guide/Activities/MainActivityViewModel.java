@@ -7,19 +7,14 @@ import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.ViewModel;
 
-public class MainActivityViewModel extends AndroidViewModel {
-
-    public MainActivityViewModel(@NonNull Application application) {
-        super(application);
-    }
+public class MainActivityViewModel extends ViewModel {
 
     public String displayTimeToNextClass(String date){
         Date eventDate = new Date((Long.parseLong(date)));
         long differenceInMillis = eventDate.getTime() - System.currentTimeMillis();
-        String timeUntil = String.format("%02d hours and %02d minutes",
-                TimeUnit.MILLISECONDS.toHours(differenceInMillis),
-                TimeUnit.MILLISECONDS.toMinutes(differenceInMillis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(differenceInMillis)));
+        String timeUntil = timeUntilMethod(differenceInMillis);
         return cleanTimeDisplay(timeUntil);
     }
 
@@ -32,4 +27,10 @@ public class MainActivityViewModel extends AndroidViewModel {
         }
     }
 
+    public String timeUntilMethod(long differenceInMillis){
+        String timeUntil = String.format("%02d hours and %02d minutes",
+                TimeUnit.MILLISECONDS.toHours(differenceInMillis),
+                TimeUnit.MILLISECONDS.toMinutes(differenceInMillis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(differenceInMillis)));
+        return timeUntil;
+    }
 }

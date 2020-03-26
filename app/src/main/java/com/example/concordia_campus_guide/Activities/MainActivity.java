@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setUpDb();
         setContentView(R.layout.activity_main);
-        mViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
+        mViewModel = new MainActivityViewModel();
         fragmentManager = getSupportFragmentManager();
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
