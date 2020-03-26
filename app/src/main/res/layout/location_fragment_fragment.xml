@@ -20,6 +20,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="30dp"
         android:background="@color/backgroundGrey"
+        android:onClick="koko"
         android:tint="@color/cardview_dark_background"
         android:padding="5dp"
         app:srcCompat="@drawable/ic_my_location_24dp" />

@@ -1,6 +1,9 @@
 package com.example.concordia_campus_guide.Fragments.LocationFragment;
 
 import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.location.Location;
@@ -14,10 +17,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -26,6 +31,7 @@ import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.Models.Building;
+import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -53,8 +59,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     private Location currentLocation;
 
-    private LocationManager locationManager;
-    private LocationListener locationListener;
+    private ImageButton myLocation;
 
     private GoogleMap mMap;
     private LocationFragmentViewModel mViewModel;
@@ -80,14 +85,12 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.location_fragment_fragment, container, false);
-        getLocationPermission();
         initComponent(rootView);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
 
         initMap();
         setupClickListeners();
-        getLocationPermission();
         updateLocationEvery5Seconds();
 
         return rootView;
@@ -100,6 +103,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         mMapView = rootView.findViewById(R.id.mapView);
         sgwBtn = rootView.findViewById(R.id.SGWBtn);
         loyolaBtn = rootView.findViewById(R.id.loyolaBtn);
+        myLocation = rootView.findViewById(R.id.myLocation);
         mFloorPickerGv = rootView.findViewById(R.id.FloorPickerGv);
         mFloorPickerGv.setVisibility(View.GONE);
         buildingsGroundOverlays = new HashMap<>();
@@ -202,6 +206,43 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private void setupClickListeners() {
         setupLoyolaBtnClickListener();
         setupSGWBtnClickListener();
+        setupMyLocationClickListener();
+    }
+
+    private void setupMyLocationClickListener(){
+        myLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popUpRequestPermission();
+            }
+        });
+    }
+    private void popUpRequestPermission(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setCancelable(true);
+        builder.setTitle("Request Permission ");
+        builder.setMessage("Please Accept if you want to use your current location ");
+        builder.setCancelable(true);
+        setupCancelBtn(builder);
+        setupAcceptPermissionBtn(builder);
+    }
+
+    private void setupCancelBtn(AlertDialog.Builder builder){
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+    }
+
+    private void setupAcceptPermissionBtn(AlertDialog.Builder builder){
+        builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
     }
 
 
@@ -331,7 +372,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             mMap.setMyLocationEnabled(true);
         }
         mMap.setIndoorEnabled(false);
-        mMap.getUiSettings().setMyLocationButtonEnabled(true);
+        //mMap.getUiSettings().setMyLocationButtonEnabled(true);
         mMap.getUiSettings().setTiltGesturesEnabled(true);
         mMap.getUiSettings().setMapToolbarEnabled(false);
         mMap.getUiSettings().setZoomControlsEnabled(false);
@@ -346,17 +387,22 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
      * The purpose of this application is to ask the user for their permission
      * of using their current location.
      */
-    private void getLocationPermission(){
-        String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION};
-        if(requestPermission()){
-            myLocationPermissionsGranted = true;
-        }else{
-            ActivityCompat.requestPermissions(getActivity(),
-                    permissions,
-                    ClassConstants.LOCATION_PERMISSION_REQUEST_CODE);
-        }
-    }
+//    private void getLocationPermission(){
+//        String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
+//                Manifest.permission.ACCESS_COARSE_LOCATION};
+//        if (ContextCompat.checkSelfPermission(getContext(),Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED) {
+//            if (requestPermission()) {
+//                myLocationPermissionsGranted = true;
+//            } else {
+//                ActivityCompat.requestPermissions(getActivity(),
+//                        permissions,
+//                        ClassConstants.LOCATION_PERMISSION_REQUEST_CODE);
+//            }
+//        }else {
+//            //Permission has already been granted.
+//            setFirstLocationToDisplayOnSuccess();
+//        }
+//    }
 
     private void classRoomCoordinateTool(GoogleMap map){
         map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -383,9 +429,16 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 //adding a comment:
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(requestCode == ClassConstants.LOCATION_PERMISSION_REQUEST_CODE)
-            myLocationPermissionsGranted = (grantResults.length > 0 &&
-                    grantResults[0] == PackageManager.PERMISSION_GRANTED);
+        if(requestCode == ClassConstants.LOCATION_PERMISSION_REQUEST_CODE){
+            if(grantResults.length > 0  && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                myLocationPermissionsGranted = (grantResults.length > 0 &&
+                        grantResults[0] == PackageManager.PERMISSION_GRANTED);
+            }
+            else {
+                
+            }
+        }
+
     }
 
     @Override
