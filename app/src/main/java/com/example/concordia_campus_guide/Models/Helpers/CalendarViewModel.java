@@ -11,6 +11,7 @@ import android.provider.CalendarContract;
 import android.provider.CalendarContract.Instances;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.AndroidViewModel;
@@ -40,10 +41,10 @@ public class CalendarViewModel extends AndroidViewModel {
             Instances.DTSTART
     };
 
-    public CalendarEvent getEvent(SearchActivity searchActivity) {
+    public CalendarEvent getEvent(AppCompatActivity activity) {
 
         if (!hasReadPermission()) {
-            ActivityCompat.requestPermissions(searchActivity,
+            ActivityCompat.requestPermissions(activity,
                     new String[]{Manifest.permission.READ_CALENDAR}, 101);
         } else {
 
@@ -88,7 +89,6 @@ public class CalendarViewModel extends AndroidViewModel {
     }
 
     public CalendarEvent getCalendarEvent(Cursor cursor) {
-
         while (cursor.moveToNext()) {
            String eventTitle = cursor.getString(PROJECTION_TITLE_INDEX);
            String eventLocation = cursor.getString(PROJECTION_LOCATION_INDEX);

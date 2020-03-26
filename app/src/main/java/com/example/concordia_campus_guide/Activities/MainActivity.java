@@ -1,12 +1,15 @@
 package com.example.concordia_campus_guide.Activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -20,7 +23,9 @@ import com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFra
 import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragment;
 import com.example.concordia_campus_guide.Global.ApplicationState;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
+import com.example.concordia_campus_guide.Helper.Notification;
 import com.example.concordia_campus_guide.Models.Buildings;
+import com.example.concordia_campus_guide.Models.CalendarEvent;
 import com.example.concordia_campus_guide.Models.Floors;
 import com.example.concordia_campus_guide.Models.Relations.BuildingWithFloors;
 import com.example.concordia_campus_guide.Models.Relations.FloorWithRooms;
@@ -33,6 +38,7 @@ import com.example.concordia_campus_guide.Models.WalkingPoints;
 import com.example.concordia_campus_guide.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     LocationFragment locationFragment;
     MainActivityViewModel mViewModel;
     private BottomSheetBehavior swipeableInfoCard;
+    private Notification notification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +65,40 @@ public class MainActivity extends AppCompatActivity {
 
         View infoCard = findViewById(R.id.info_card);
         swipeableInfoCard = BottomSheetBehavior.from(infoCard);
-
+        notification = new Notification(this);
+        notification.checkUpCalendarEvery5Minutes();
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
+    }
+
+    public void popUp(CalendarEvent calendarEvent){
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setCancelable(true);
+        builder.setTitle("Heads up... Your next class is in " +  mViewModel.displayTimeToNextClass(calendarEvent.getStartTime()));
+        builder.setMessage("You have " + calendarEvent.getTitle() + " in " + mViewModel.displayTimeToNextClass(calendarEvent.getStartTime())  + " in " +
+                calendarEvent.getLocation() +" ! Please choose to either get directions to your class or to disregard this message");
+
+        setupCancelBtn(builder);
+        setupShowMeDirectionsBtn(builder);
+
+        builder.show();
+    }
+
+    private void setupCancelBtn(AlertDialog.Builder builder){
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+    }
+
+    private void setupShowMeDirectionsBtn(AlertDialog.Builder builder){
+        builder.setPositiveButton("Show me Directions", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Log.i("Main Act", "asdasdansdjkaskom das");
+            }
+        });
     }
 
     @Override
