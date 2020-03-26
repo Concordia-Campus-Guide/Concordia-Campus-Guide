@@ -1,5 +1,7 @@
 package com.example.concordia_campus_guide.ModelTests;
 
+import androidx.room.Room;
+
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.Coordinates;
@@ -59,13 +61,7 @@ public class TestUtils {
     Coordinates cornerCoordinate4 = new Coordinates(45.496832,-73.578842);
     Coordinates cornerCoordinate5 = new Coordinates(45.497178,-73.57955);
 
-    List<Coordinates> listOfCornerCoordinates = new ArrayList<Coordinates>() {{
-        add(cornerCoordinate1);
-        add(cornerCoordinate2);
-        add(cornerCoordinate3);
-        add(cornerCoordinate4);
-        add(cornerCoordinate5);
-    }};
+    List<Coordinates> listOfCornerCoordinates = new ArrayList<Coordinates>(Arrays.asList(cornerCoordinate1, cornerCoordinate2, cornerCoordinate3, cornerCoordinate4,cornerCoordinate5));
 
     public ListOfCoordinates cornerCoordinates = new ListOfCoordinates(listOfCornerCoordinates);
 
@@ -83,7 +79,6 @@ public class TestUtils {
                                              bearing, SGWcampus, buildingCode, Building_Long_Name,  address, departments,
                                              services,  cornerCoordinates);
 
-
     // Floors
     Coordinates coordinates = new Coordinates(45.4972685, -73.5789475);
     String floorCode = "H-9";
@@ -93,11 +88,7 @@ public class TestUtils {
     Floor floorWithArgs= new Floor(coordinates, floorCode, altitude);;
     Floor floorWithCampus=new Floor(coordinates, floorCode, altitude, SGWcampus);
 
-
-    List<Floor> listOfFloors = new ArrayList<Floor>(){{
-        add(floorWithArgs);
-        add(floorWithCampus);
-    }};
+    List<Floor> listOfFloors = new ArrayList<Floor>(Arrays.asList(floorWithArgs, floorWithCampus));
 
     Floors floors = new Floors();
 
@@ -105,11 +96,7 @@ public class TestUtils {
     RoomModel room1 = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8");
     RoomModel room2 = new RoomModel(new Coordinates(-73.57902321964502, 45.49699848270905), "921", "H-9");
 
-    public List<RoomModel> roomList=new ArrayList<RoomModel>(){{
-        roomList.add(room1);
-        roomList.add(room2);
-    }};;
-
+    ArrayList<RoomModel> roomList = new ArrayList<RoomModel>(Arrays.asList(room1, room2));
     public Rooms rooms = new Rooms(roomList);
 
 
