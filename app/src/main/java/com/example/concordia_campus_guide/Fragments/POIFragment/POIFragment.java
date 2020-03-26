@@ -6,10 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.concordia_campus_guide.Adapters.PointOfInterestVPAdapter;
+import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.Interfaces.OnPOIClickListener;
 import com.example.concordia_campus_guide.Models.PoiType;
-import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -17,7 +17,6 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,7 +28,7 @@ public class POIFragment extends Fragment {
 
     private ViewPager2 poiVP;
     private TabLayout tabLayout;
-    private POIFragmentViewModel mViewModel;
+    private LocationFragmentViewModel mViewModel;
 
     public static POIFragment newInstance() {
         return new POIFragment();
@@ -70,9 +69,7 @@ public class POIFragment extends Fragment {
         return new OnPOIClickListener() {
             @Override
             public void onClick(@PoiType String pointType, View view) {
-                Logger.getLogger("POI").info("POI is clicked: " + pointType);
-                for(WalkingPoint poi: mViewModel.getPOIOfType(pointType))
-                    Logger.getLogger("POI").info("Walking points fetched: " + poi.getId());
+                mViewModel.setListOfPOI(pointType);
             }
         };
     }
@@ -80,7 +77,7 @@ public class POIFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this, new ViewModelFactory(this.getActivity().getApplication())).get(POIFragmentViewModel.class);
+        mViewModel = ViewModelProviders.of(getActivity(), new ViewModelFactory(this.getActivity().getApplication())).get(LocationFragmentViewModel.class);
     }
 
 }
