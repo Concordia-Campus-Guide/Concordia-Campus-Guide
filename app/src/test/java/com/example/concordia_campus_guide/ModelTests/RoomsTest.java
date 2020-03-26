@@ -16,39 +16,32 @@ import java.util.List;
 import static junit.framework.TestCase.assertEquals;
 
 public class RoomsTest {
-    private List<RoomModel> roomList;
-    private Rooms rooms;
+    TestUtils testUtils= new TestUtils();
 
     @Before
     public void init() {
-        roomList = new ArrayList<>();
-        RoomModel room1 = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8");
-        RoomModel room2 = new RoomModel(new Coordinates(-73.57902321964502, 45.49699848270905), "921", "H-9");
-
-        roomList.add(room1);
-        roomList.add(room2);
-        rooms = new Rooms(roomList);
+        testUtils = new TestUtils();
     }
 
     @Test
     public void getRoomsTest() {
-        assertEquals(roomList, rooms.getRooms());
+        assertEquals(testUtils.roomList, testUtils.rooms.getRooms());
     }
 
     @Test
     public void getPlacesTest() {
         List<Place> places = new ArrayList<Place>();
-        for (RoomModel room : roomList) {
+        for (RoomModel room : testUtils.roomList) {
             places.add(room);
         }
-        assertEquals(places, rooms.getPlaces());
+        assertEquals(places, testUtils.rooms.getPlaces());
     }
 
     @Test
     public void getRoomsByFloorTest() {
         List<RoomModel> roomListTest = new ArrayList<RoomModel>();
-        roomListTest.add(roomList.get(0));
-        assertEquals(roomListTest, rooms.getRoomsByFloor("H-8"));
+        roomListTest.add(testUtils.roomList.get(0));
+        assertEquals(roomListTest, testUtils.rooms.getRoomsByFloor("H-8"));
     }
 
     @Test
@@ -60,7 +53,7 @@ public class RoomsTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals(toReturn.toString(), rooms.getGeoJson("H-8").toString());
+        assertEquals(toReturn.toString(), testUtils.rooms.getGeoJson("H-8").toString());
     }
 
     public JSONArray getInnerGeoJsonTest() {

@@ -3,7 +3,11 @@ package com.example.concordia_campus_guide.ModelTests;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.Coordinates;
+import com.example.concordia_campus_guide.Models.Floor;
+import com.example.concordia_campus_guide.Models.Floors;
 import com.example.concordia_campus_guide.Models.ListOfCoordinates;
+import com.example.concordia_campus_guide.Models.RoomModel;
+import com.example.concordia_campus_guide.Models.Rooms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,7 +30,7 @@ public class TestUtils {
     public float width = 68;
     public float height = 68;
     public float bearing = 34;
-    public String campus = "SGW";
+    public String SGWcampus = "SGW";
     public String buildingCode = "H";
     public String Building_Long_Name = "Henry F. Hall Building";
     public String address = "1455 De Maisonneuve West";
@@ -66,21 +70,48 @@ public class TestUtils {
     public ListOfCoordinates cornerCoordinates = new ListOfCoordinates(listOfCornerCoordinates);
 
     Building building1 = new Building(centerCoordinates, availableFloors, width, height,
-            bearing, campus, buildingCode, Building_Long_Name,  address, departments,
+            bearing, SGWcampus, buildingCode, Building_Long_Name,  address, departments,
             services,  cornerCoordinates
     );
     Building building2 = new Building(centerCoordinates, availableFloors, width, height,
-            bearing, campus, buildingCode, Building_Long_Name,  address, departments,
+            bearing, SGWcampus, buildingCode, Building_Long_Name,  address, departments,
             services,  cornerCoordinates
     );
 
     public Building defaultBuilding = new Building();
     public Building buildingWithArgs = new Building(centerCoordinates, availableFloors, width, height,
-                                             bearing, campus, buildingCode, Building_Long_Name,  address, departments,
+                                             bearing, SGWcampus, buildingCode, Building_Long_Name,  address, departments,
                                              services,  cornerCoordinates);
 
 
     // Floors
+    Coordinates coordinates = new Coordinates(45.4972685, -73.5789475);
+    String floorCode = "H-9";
+    float altitude = 0;
+
+    Floor defaultFloor= new Floor();
+    Floor floorWithArgs= new Floor(coordinates, floorCode, altitude);;
+    Floor floorWithCampus=new Floor(coordinates, floorCode, altitude, SGWcampus);
+
+
+    List<Floor> listOfFloors = new ArrayList<Floor>(){{
+        add(floorWithArgs);
+        add(floorWithCampus);
+    }};
+
+    Floors floors = new Floors();
 
     // Rooms
+    RoomModel room1 = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8");
+    RoomModel room2 = new RoomModel(new Coordinates(-73.57902321964502, 45.49699848270905), "921", "H-9");
+
+    public List<RoomModel> roomList=new ArrayList<RoomModel>(){{
+        roomList.add(room1);
+        roomList.add(room2);
+    }};;
+
+    public Rooms rooms = new Rooms(roomList);
+
+
+
 }

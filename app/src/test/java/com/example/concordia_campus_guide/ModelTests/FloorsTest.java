@@ -14,49 +14,30 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class FloorsTest {
-    Floors floors;
-
-    Coordinates coordinates = new Coordinates(45.4972685,-73.5789475);
-    String floorCode = "H-9";
-    float altitude = 0;
-    String campus = "SGW";
-
-    Floor floorWithArgs = new Floor(coordinates, floorCode, altitude);;
-    Floor floorWithCampus = new Floor(coordinates, floorCode, altitude, campus);
-
-
-    List<Floor> listOfFloors = new ArrayList<Floor>(){{
-        add(floorWithArgs);
-        add(floorWithCampus);
-        }
-    };
-
+    TestUtils testUtils;
 
     @Before
     public void init(){
-        floors = new Floors();
-        floorWithArgs = new Floor(coordinates, floorCode, altitude);;
-        floorWithCampus = new Floor(coordinates, floorCode, altitude, campus);
+        testUtils = new TestUtils();
     }
-
 
     @Test
     public void getFloors() {
-        assertTrue(floors.getFloors().isEmpty());
+        assertTrue(testUtils.floors.getFloors().isEmpty());
     }
 
     @Test
     public void setFloors(){
-        assertTrue(floors.getFloors().isEmpty());
-        floors.setFloors(listOfFloors);
-        assertFalse(floors.getFloors().isEmpty());
+        assertTrue(testUtils.floors.getFloors().isEmpty());
+        testUtils.floors.setFloors(testUtils.listOfFloors);
+        assertFalse(testUtils.floors.getFloors().isEmpty());
     }
 
     @Test
     public void getPlaces() {
-        floors.setFloors(listOfFloors);
+        testUtils.floors.setFloors(testUtils.listOfFloors);
         List<Place> places = new ArrayList<Place>();
-        places = floors.getPlaces();
+        places = testUtils.floors.getPlaces();
         assertEquals(2, places.size());
     }
 }
