@@ -89,13 +89,40 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
                 routeOverviewLayout = convertView.findViewById(R.id.routeOverviewLayout);
                 for(TransportType step: route.getSteps()) {
                     if (step instanceof Bus) {
-                        ImageView carIcon = new ImageView(context);
-                        carIcon.setImageResource(R.drawable.ic_directions_car_red);
+                        ImageView busIcon = new ImageView(context);
+                        busIcon.setImageResource(R.drawable.ic_directions_bus_red);
+
+                        TextView busNumber = new TextView(context);
+                        busNumber.setText(((Bus) step).getBusNumber());
+
+                        routeOverviewLayout.addView(busIcon);
+                        routeOverviewLayout.addView(busNumber);
                     }
                     else if (step instanceof Subway) {
+                        ImageView subwayIcon = new ImageView(context);
+                        subwayIcon.setImageResource(pickCorrectSubwayColor(((Subway) step).getColor()));
+
+                        routeOverviewLayout.addView(subwayIcon);
                     }
+
+                    else if (step instanceof Walk) {
+                        ImageView walkIcon = new ImageView(context);
+                        walkIcon.setImageResource(R.drawable.ic_directions_walk_red);
+
+                        TextView duration = new TextView(context);
+                        duration.setText(((Walk) step).getDuration());
+
+                        routeOverviewLayout.addView(walkIcon);
+                        routeOverviewLayout.addView(duration);
+                    }
+
+                    ImageView arrow = new ImageView(context);
+                    arrow.setImageResource(R.drawable.ic_keyboard_arrow_right_grey);
+                    routeOverviewLayout.addView(arrow);
                 }
             }
+
+
         }
         else
             viewHolder.textView.setText("No routes available.");
@@ -108,5 +135,18 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
     @Override
     public int getCount(){
         return routes.size();
+    }
+
+    private int pickCorrectSubwayColor(String color) {
+        if(color.equalsIgnoreCase("#007CC1")) // TODO: find the right shade
+            return R.drawable.ic_subway_blue;
+        else if(color.equalsIgnoreCase("#f27f2f"))
+            return R.drawable.ic_subway_orange;
+        else if(color.equalsIgnoreCase("#00a556"))
+            return R.drawable.ic_subway_green;
+        else if(color.equalsIgnoreCase("#FFD400")) // TODO: find the right shade
+            return R.drawable.ic_subway_yellow;
+
+        return -1;
     }
 }
