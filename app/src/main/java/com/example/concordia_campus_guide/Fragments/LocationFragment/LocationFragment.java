@@ -165,6 +165,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                     @Override
                     public void onSuccess(Location location) {
                         if (location != null) {
+                            mMap.setMyLocationEnabled(true);
                             zoomInLocation(new LatLng(location.getLatitude(),location.getLongitude()));
                         }
                         else {
@@ -225,16 +226,21 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 //    }
     private void popUpRequestPermission(){
         if(!myLocationPermissionsGranted){
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setCancelable(true);
-            builder.setTitle("Request Permission ");
-            builder.setMessage("Please Accept if you want to use your current location ");
-            builder.setCancelable(true);
-            setupCancelBtn(builder);
-            setupAcceptPermissionBtn(builder);
-            builder.show();
+            getLocationPermission();
         }
-        else {
+
+//        if(!myLocationPermissionsGranted){
+//            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//            builder.setCancelable(true);
+//            builder.setTitle("Request Permission ");
+//            builder.setMessage("Please Accept if you want to use your current location ");
+//            builder.setCancelable(true);
+//            setupCancelBtn(builder);
+//            setupAcceptPermissionBtn(builder);
+//            builder.show();
+//        }
+        if(myLocationPermissionsGranted) {
+            mMap.setMyLocationEnabled(true);
             setFirstLocationToDisplayOnSuccess();
         }
     }
@@ -252,9 +258,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                myLocationPermissionsGranted = true;
-                getLocationPermission();
-                mMap.setMyLocationEnabled(true);
+
                 setFirstLocationToDisplayOnSuccess();
             }
         });
@@ -387,7 +391,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             mMap.setMyLocationEnabled(true);
         }
         mMap.setIndoorEnabled(false);
-        //mMap.getUiSettings().setMyLocationButtonEnabled(true);
+        mMap.getUiSettings().setMyLocationButtonEnabled(false);
         mMap.getUiSettings().setTiltGesturesEnabled(true);
         mMap.getUiSettings().setMapToolbarEnabled(false);
         mMap.getUiSettings().setZoomControlsEnabled(false);
@@ -408,6 +412,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         if (ContextCompat.checkSelfPermission(getContext(),Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED) {
             if (requestPermission()) {
                 myLocationPermissionsGranted = true;
+                mMap.setMyLocationEnabled(true);
             } else {
                 ActivityCompat.requestPermissions(getActivity(),
                         permissions,
@@ -416,6 +421,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         }else {
             //Permission has already been granted.
             setFirstLocationToDisplayOnSuccess();
+            mMap.setMyLocationEnabled(true);
         }
     }
 
