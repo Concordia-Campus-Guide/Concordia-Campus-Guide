@@ -6,10 +6,10 @@ public class ListOfCoordinates {
 
     private List<Coordinates> listOfCoordinates;
 
-    // I added constructor to make it easier to test?
-    public ListOfCoordinates(){}
+    public ListOfCoordinates() {
+    }
 
-    public ListOfCoordinates(List<Coordinates> listOfCoordinates){
+    public ListOfCoordinates(List<Coordinates> listOfCoordinates) {
         this.listOfCoordinates = listOfCoordinates;
     }
 
