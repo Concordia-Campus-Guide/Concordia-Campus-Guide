@@ -2,20 +2,29 @@ package com.example.concordia_campus_guide.Models;
 
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TravelMode;
+import com.example.concordia_campus_guide.Models.Routes.Bus;
+import com.example.concordia_campus_guide.Models.Routes.Car;
+import com.example.concordia_campus_guide.Models.Routes.Subway;
+import com.example.concordia_campus_guide.Models.Routes.TransportType;
+import com.example.concordia_campus_guide.Models.Routes.Walk;
 import com.google.android.gms.maps.model.LatLng;
 
 public class Direction {
     private LatLng start;
     private LatLng end;
-    private TransitType transitType;
+    private TransportType transportType;
     private String description;
     private double duration;
+    private double distance;
+    private String durationText;
+    private String distanceText;
 
-    public Direction(LatLng start, LatLng end, TransitType transitType, String description, double duration) {
+    public Direction(LatLng start, LatLng end, TransportType transportType, String description, double distance, double duration) {
         this.start = start;
         this.end = end;
-        this.transitType = transitType;
+        this.transportType = transportType;
         this.description = description;
+        this.distance = distance;
         this.duration = duration;
     }
 
@@ -23,12 +32,14 @@ public class Direction {
     {
         this.start = new LatLng(step.startLocation.lat, step.startLocation.lng);
         this.end = new LatLng(step.endLocation.lat, step.endLocation.lng);
-        this.transitType = getTransitType(step);
+        this.transportType = getTransitType(step);
         this.description = step.htmlInstructions;
         this.duration = step.duration.value;
+        this.distance = step.distance.value;
+        this.durationText = step.duration.text;
     }
 
-    private TransitType getTransitType(DirectionsStep step) {
+    private TransportType getTransitType(DirectionsStep step) {
         TravelMode mode = step.travelMode;
         switch (mode) {
             case DRIVING:
@@ -64,12 +75,12 @@ public class Direction {
         this.end = end;
     }
 
-    public TransitType getTransitType() {
-        return transitType;
+    public TransportType getTransportType() {
+        return transportType;
     }
 
-    public void setTransitType(TransitType transitType) {
-        this.transitType = transitType;
+    public void setTransportType(TransportType transportType) {
+        this.transportType = transportType;
     }
 
     public String getDescription() {

@@ -157,6 +157,14 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_routes" />
+    <ListView
+        android:id="@+id/allRoutes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".Activities.RoutesActivity"
+        tools:showIn="@layout/routes_activity">
+
+    </ListView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

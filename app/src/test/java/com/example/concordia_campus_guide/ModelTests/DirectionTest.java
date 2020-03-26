@@ -1,9 +1,9 @@
 package com.example.concordia_campus_guide.ModelTests;
 
-import com.example.concordia_campus_guide.Models.Bus;
+import com.example.concordia_campus_guide.Models.Routes.Bus;
 import com.example.concordia_campus_guide.Models.Direction;
-import com.example.concordia_campus_guide.Models.TransitType;
-import com.example.concordia_campus_guide.Models.Walk;
+import com.example.concordia_campus_guide.Models.Routes.TransportType;
+import com.example.concordia_campus_guide.Models.Routes.Walk;
 import com.google.android.gms.maps.model.LatLng;
 
 import org.junit.Before;
@@ -39,11 +39,11 @@ public class DirectionTest {
     }
     @Test
     public void getAndSetTransitTypeTest() {
-        TransitType transitTypeOg = direction.getTransitType();
-        TransitType transitTypeNew = new Bus();
-        direction.setTransitType(transitTypeNew);
-        assertEquals(direction.getTransitType(), transitTypeNew);
-        direction.setTransitType(transitTypeOg);
+        TransportType transportTypeOg = direction.getTransportType();
+        TransportType transportTypeNew = new Bus();
+        direction.setTransportType(transportTypeNew);
+        assertEquals(direction.getTransportType(), transportTypeNew);
+        direction.setTransportType(transportTypeOg);
 
     }
     @Test

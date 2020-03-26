@@ -12,17 +12,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.example.concordia_campus_guide.Adapters.PlaceToSearchResultAdapter;
 import com.example.concordia_campus_guide.Models.Helpers.CalendarViewModel;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
-import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.CalendarEvent;
-import com.example.concordia_campus_guide.Models.Floor;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.Models.MyCurrentPlace;
 import com.example.concordia_campus_guide.Models.Place;
@@ -104,23 +99,23 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        final CalendarEvent calendarEvent = calendarViewModel.getEvent(this);
-        final String eventString;
-        final String eventLocation;
-
-        if(calendarEvent != null){
-            eventString = calendarViewModel.getNextClassString((calendarEvent));
-            nextClassText.setText(eventString);
-            eventLocation = calendarEvent.getLocation();
-            Place place = mViewModel.getRoomFromDB(eventLocation);
-            nextClassArrow.setVisibility(View.VISIBLE);
-            nextClassRow.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    openRoutesPage(place);
-                }
-            });
-        }
+//        final CalendarEvent calendarEvent = calendarViewModel.getEvent(this);
+//        final String eventString;
+//        final String eventLocation;
+//
+//        if(calendarEvent != null){
+//            eventString = calendarViewModel.getNextClassString((calendarEvent));
+//            nextClassText.setText(eventString);
+//            eventLocation = calendarEvent.getLocation();
+//            Place place = mViewModel.getRoomFromDB(eventLocation);
+//            nextClassArrow.setVisibility(View.VISIBLE);
+//            nextClassRow.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    openRoutesPage(place);
+//                }
+//            });
+//        }
 
     }
 

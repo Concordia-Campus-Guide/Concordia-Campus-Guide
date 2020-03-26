@@ -1,8 +1,8 @@
-package com.example.concordia_campus_guide.Models;
+package com.example.concordia_campus_guide.Models.Routes;
 
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
 
-public class Car extends TransitType {
+public class Car extends TransportType {
     private long duration; // in seconds
 
     public Car() {}

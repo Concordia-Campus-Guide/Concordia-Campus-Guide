@@ -85,10 +85,7 @@
             app:srcCompat="@drawable/arrow_right"
             tools:layout_editor_absoluteY="16dp" />
 
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     <TextView
         android:id="@+id/textView2"
@@ -155,8 +152,6 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
     <ListView
         android:id="@+id/searchResults"

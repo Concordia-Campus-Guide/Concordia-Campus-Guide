@@ -3,12 +3,16 @@ package com.example.concordia_campus_guide.Helper.RoutesHelpers;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsResult;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsRoute;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
-import com.example.concordia_campus_guide.Models.Direction;
-import com.example.concordia_campus_guide.Models.Route;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TravelMode;
+import com.example.concordia_campus_guide.Models.Routes.Bus;
+import com.example.concordia_campus_guide.Models.Routes.Car;
+import com.example.concordia_campus_guide.Models.Routes.Route;
+import com.example.concordia_campus_guide.Models.Routes.Subway;
+import com.example.concordia_campus_guide.Models.Routes.TransportType;
+import com.example.concordia_campus_guide.Models.Routes.Walk;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -65,14 +69,43 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
     public List<Route> extractRelevantInfoFromDirectionsResultObj(DirectionsResult result) {
         List<Route> routeOptions = new ArrayList<>();
         for(DirectionsRoute directionsRoute: result.routes) {
-            Route route = new Route(directionsRoute.legs[0].departureTime.text, directionsRoute.legs[0].arrivalTime.text);
-            routeOptions.add(route);
-            DirectionsStep[] steps = directionsRoute.legs[0].steps;
-            for(DirectionsStep step: steps) {
-                route.getDirections().add(new Direction(step));
+            Route route;
+            if(directionsRoute.legs[0].steps[0].travelMode.equals(TravelMode.DRIVING) || directionsRoute.legs[0].steps[0].travelMode.equals(TravelMode.WALKING)) {
+                route = new Route(directionsRoute.legs[0].duration.text, directionsRoute.summary);
+                routeOptions.add(route);
+            }
+            else { // TravelMode is TRANSIT
+                route = new Route(directionsRoute.legs[0].departureTime.text, directionsRoute.legs[0].arrivalTime.text, directionsRoute.legs[0].duration.text);
+                routeOptions.add(route);
+
+                DirectionsStep[] steps = directionsRoute.legs[0].steps;
+                for(DirectionsStep step: steps) {
+                    route.getSteps().add(getTransportType(step));
+                }
             }
         }
 
         return routeOptions;
     }
+
+    private TransportType getTransportType(DirectionsStep step) {
+        TravelMode mode = step.travelMode;
+        switch (mode) {
+            case DRIVING:
+                return new Car(step);
+            case WALKING:
+                return new Walk(step);
+            case BICYCLING:
+                return null;
+            case TRANSIT:
+                if(step.transitDetails.line.vehicle.name.equalsIgnoreCase("bus")) {
+                    return new Bus(step);
+                }
+                else if (step.transitDetails.line.vehicle.name.equalsIgnoreCase("subway")) {
+                    return new Subway(step);
+                }
+        }
+        return null;
+    }
+
 }

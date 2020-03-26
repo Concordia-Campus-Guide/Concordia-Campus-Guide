@@ -25,8 +25,7 @@ import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.Direction;
 import com.example.concordia_campus_guide.Models.PointType;
 import com.example.concordia_campus_guide.Models.RoomModel;
-import com.example.concordia_campus_guide.Models.TransitType;
-import com.example.concordia_campus_guide.Models.Walk;
+import com.example.concordia_campus_guide.Models.Routes.Walk;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
 
@@ -35,7 +34,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class PathInfoCardFragment extends Fragment {
     private List<WalkingPoint> walkingPointList;
@@ -158,8 +156,7 @@ public class PathInfoCardFragment extends Fragment {
             // on average a person walks 5km / hr
             long timeTakenInMinutes = (long) (distance * 60 / 5);
 
-            Direction direction = new Direction(startWalkingPoint.getCoordinate().getLatLng(), endWalkingPoint.getCoordinate().getLatLng(), new Walk(), "", distance);
-            direction.setDuration(timeTakenInMinutes);
+            Direction direction = new Direction(startWalkingPoint.getCoordinate().getLatLng(), endWalkingPoint.getCoordinate().getLatLng(), new Walk(), "", distance, timeTakenInMinutes);
             directionList.add(direction);
             totalDistance += distance;
         }

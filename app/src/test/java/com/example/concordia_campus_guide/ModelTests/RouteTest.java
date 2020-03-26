@@ -1,10 +1,9 @@
 package com.example.concordia_campus_guide.ModelTests;
 
-import com.example.concordia_campus_guide.Models.Car;
+import com.example.concordia_campus_guide.Models.Routes.Car;
 import com.example.concordia_campus_guide.Models.Direction;
-import com.example.concordia_campus_guide.Models.Route;
-import com.example.concordia_campus_guide.Models.TransitType;
-import com.example.concordia_campus_guide.Models.Walk;
+import com.example.concordia_campus_guide.Models.Routes.Route;
+import com.example.concordia_campus_guide.Models.Routes.Walk;
 import com.google.android.gms.maps.model.LatLng;
 
 import org.junit.Before;
@@ -31,9 +30,9 @@ public class RouteTest {
 
     @Test
     public void addDirectionsTest() {
-        assertEquals(route.getDirections(), new ArrayList<Direction>());
+        assertEquals(route.getSteps(), new ArrayList<Direction>());
         route.addDirection(directions.get(0));
         route.addDirection(directions.get(1));
-        assertEquals(route.getDirections(),directions);
+        assertEquals(route.getSteps(),directions);
     }
 }
