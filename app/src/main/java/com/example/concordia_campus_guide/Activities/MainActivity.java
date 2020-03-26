@@ -1,8 +1,10 @@
 package com.example.concordia_campus_guide.Activities;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,7 +16,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.concordia_campus_guide.BuildConfig;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragment;
 import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragment;
@@ -38,23 +39,25 @@ public class MainActivity extends AppCompatActivity {
     POIFragment poiFragment;
     MainActivityViewModel mViewModel;
     private BottomSheetBehavior swipeableInfoCard;
+    Toolbar myToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setUpDb();
         setContentView(R.layout.activity_main);
+        initComponents();
+        setSupportActionBar(myToolbar);
+        showPOICard();
+    }
+
+    private void initComponents() {
         mViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         fragmentManager = getSupportFragmentManager();
-
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(myToolbar);
+        myToolbar = (Toolbar) findViewById(R.id.toolbar);
         MainActivity.this.setTitle("ConUMaps");
-
         View infoCard = findViewById(R.id.bottom_card_scroll_view);
         swipeableInfoCard = BottomSheetBehavior.from(infoCard);
-        showPOICard();
-
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
     }
 
@@ -87,10 +90,7 @@ public class MainActivity extends AppCompatActivity {
      * @param buildingCode: the Building code
      */
     public void showInfoCard(String buildingCode){
-        if(infoCardFragment!=null){
-            resetBottomCard();
-        }
-
+        resetBottomCard();
         infoCardFragment = new InfoCardFragment(buildingCode);
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.remove(poiFragment);
@@ -98,25 +98,27 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
 
         swipeableInfoCard.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        swipeableInfoCard.setPeekHeight((int) dpToPx(145));
 
     }
 
     public void showPOICard(){
+        resetBottomCard();
         poiFragment = new POIFragment();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.bottom_card_frame, poiFragment);
         fragmentTransaction.commit();
 
         swipeableInfoCard.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        swipeableInfoCard.setPeekHeight(180);
+        swipeableInfoCard.setPeekHeight((int) dpToPx(70));
         swipeableInfoCard.setHideable(false);
 
     }
 
     public void resetBottomCard(){
-        for (Fragment fragment : getSupportFragmentManager().getFragments())
+        for (Fragment fragment : fragmentManager.getFragments())
             if (fragment instanceof POIFragment || fragment instanceof InfoCardFragment)
-                getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+                fragmentManager.beginTransaction().remove(fragment).commit();
     }
 
     /**
@@ -126,7 +128,6 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed(){
         Fragment fragment = fragmentManager.findFragmentById(R.id.bottom_card_frame);
         if(fragment!=null){
-            resetBottomCard();
             showPOICard();
         }
         else{
@@ -166,5 +167,14 @@ public class MainActivity extends AppCompatActivity {
 
     public Location getMyCurrentLocation() {
         return this.locationFragment.getCurrentLocation();
+    }
+
+    private float dpToPx(float dip){
+        Resources r = getResources();
+        return TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                dip,
+                r.getDisplayMetrics()
+        );
     }
 }
