@@ -328,7 +328,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
         mMap.getUiSettings().setTiltGesturesEnabled(true);
         mMap.getUiSettings().setMapToolbarEnabled(false);
-        mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.getUiSettings().setZoomControlsEnabled(false);
     }
 
     private void zoomInLocation(LatLng center) {
