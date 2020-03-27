@@ -37,6 +37,10 @@ public class PathsActivity extends AppCompatActivity {
     private BottomSheetBehavior swipeableInfoCard;
     private DirectionsResult directionsResult;
     private ArrayList<DirectionWrapper> directionWrappers;
+    Place from;
+    Place to;
+    private boolean fromIsIndoor = false;
+    private boolean toIsIndoor = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,22 +60,22 @@ public class PathsActivity extends AppCompatActivity {
 
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.pathLocationFragment);
 
-        Place from = mViewModel.getFrom();
-        Place to = mViewModel.getTo();
+        from = mViewModel.getFrom();
+        to = mViewModel.getTo();
+        checkFromToType(from, to);
 
         fromTextView.setText(from.getDisplayName());
         toTextView.setText(to.getDisplayName());
         setBackButtonOnClickListener();
 
-        directionWrappers = (ArrayList<DirectionWrapper>) parseDirectionResults();
-        if (!(from instanceof RoomModel && to instanceof RoomModel)) {
+        directionWrappers = !(fromIsIndoor && toIsIndoor) ? (ArrayList<DirectionWrapper>) parseDirectionResults() : new ArrayList<DirectionWrapper>();
+        if (!(fromIsIndoor && toIsIndoor)) {
             locationFragment.drawOutdoorPaths(directionWrappers);
         }
 
-        checkFromToType(from, to);
-
         View pathInfoCard = findViewById(R.id.path_info_card);
         swipeableInfoCard = BottomSheetBehavior.from(pathInfoCard);
+        setIndoorPaths();
         showInfoCard();
     }
 
@@ -93,10 +97,9 @@ public class PathsActivity extends AppCompatActivity {
 
     public void showInfoCard() {
         pathInfoCardFragment = new PathInfoCardFragment();
-        boolean[] fromTo;
         Bundle infoCardBundle = new Bundle();
         infoCardBundle.putSerializable("directionsResult", directionWrappers);
-        infoCardBundle.putSerializable("walkingPoints", (ArrayList<WalkingPoint>) locationFragment.getWalkingPointList());
+        if(fromIsIndoor || toIsIndoor) infoCardBundle.putSerializable("walkingPoints", (ArrayList<WalkingPoint>) locationFragment.getWalkingPointList());
         pathInfoCardFragment.setArguments(infoCardBundle);
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.path_info_card_frame, pathInfoCardFragment);
@@ -112,25 +115,27 @@ public class PathsActivity extends AppCompatActivity {
         }
         return directionWrapperArrayList;
     }
+    //checks if from and to are indoor places and stores in a boolean array {from, to}
+    public void checkFromToType(Place from, Place to) {
+        fromIsIndoor = from instanceof RoomModel;
+        toIsIndoor = to instanceof RoomModel;
+    }
 
-    public boolean[] checkFromToType(Place from, Place to) {
-        boolean[] fromToIsIndoor = {false, false};
-        if (!(from instanceof RoomModel) && !(to instanceof RoomModel)) {
-            return fromToIsIndoor;
-        }
+    public void setIndoorPaths() {
+        if(!fromIsIndoor && !toIsIndoor) return;
         String floorCode;
-        if (!(from instanceof RoomModel)) {
-            floorCode = ((RoomModel) to).getFloorCode();
-            from = new RoomModel(to.getCenterCoordinates(), floorCode.substring(0, floorCode.indexOf('-')), floorCode);
-            fromToIsIndoor[1] = true;
-        }
-        if (!(to instanceof RoomModel)) {
+        Place tempFrom = from;
+        Place tempTo = to;
+
+        if(fromIsIndoor && !toIsIndoor){
             floorCode = ((RoomModel) from).getFloorCode();
-            to = new RoomModel(from.getCenterCoordinates(), floorCode.substring(0, floorCode.indexOf('-')), floorCode);
-            fromToIsIndoor[0] = true;
+            tempTo = new RoomModel(from.getCenterCoordinates(), floorCode.substring(0, floorCode.indexOf('-')), floorCode);
+        }
+        if(toIsIndoor && !fromIsIndoor){
+            floorCode = ((RoomModel) to).getFloorCode();
+            tempFrom = new RoomModel(to.getCenterCoordinates(), floorCode.substring(0, floorCode.indexOf('-')), floorCode);
         }
 
-        locationFragment.setIndoorPaths(from, to);
-        return fromToIsIndoor;
+        locationFragment.setIndoorPaths(tempFrom, tempTo);
     }
 }
