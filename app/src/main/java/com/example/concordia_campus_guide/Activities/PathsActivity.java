@@ -20,8 +20,6 @@ import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
