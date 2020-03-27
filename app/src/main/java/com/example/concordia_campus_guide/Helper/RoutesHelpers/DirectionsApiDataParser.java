@@ -11,6 +11,7 @@ import com.example.concordia_campus_guide.Models.Routes.Bus;
 import com.example.concordia_campus_guide.Models.Routes.Car;
 import com.example.concordia_campus_guide.Models.Routes.Route;
 import com.example.concordia_campus_guide.Models.Routes.Subway;
+import com.example.concordia_campus_guide.Models.Routes.Train;
 import com.example.concordia_campus_guide.Models.Routes.TransportType;
 import com.example.concordia_campus_guide.Models.Routes.Walk;
 import com.google.gson.FieldNamingPolicy;
@@ -98,6 +99,9 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
                 }
                 else if (step.transitDetails.line.vehicle.name.equalsIgnoreCase("subway")) {
                     return new Subway(step);
+                }
+                else if (step.transitDetails.line.vehicle.name.equalsIgnoreCase("train")) {
+                    return new Train(step);
                 }
         }
         return null;
