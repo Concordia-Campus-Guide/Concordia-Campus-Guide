@@ -3,6 +3,7 @@ package com.example.concordia_campus_guide.Helper.RoutesHelpers;
 import android.os.AsyncTask;
 import android.util.Log;
 import com.example.concordia_campus_guide.Activities.RoutesActivity;
+import com.example.concordia_campus_guide.Activities.RoutesActivityViewModel;
 import com.example.concordia_campus_guide.ClassConstants;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,11 +17,11 @@ import java.net.URL;
  */
 public class DirectionsApiDataRetrieval extends AsyncTask<String, Void, String> {
 
-    RoutesActivity caller;
+    RoutesActivityViewModel caller;
     String data;
     String transportType;
 
-    public DirectionsApiDataRetrieval(RoutesActivity caller) { this.caller = caller; }
+    public DirectionsApiDataRetrieval(RoutesActivityViewModel caller) { this.caller = caller; }
 
     /**
      * Fetching the data from web service in the background

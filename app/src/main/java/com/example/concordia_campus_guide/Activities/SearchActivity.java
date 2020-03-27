@@ -39,9 +39,15 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //setting up activity
+        // setting up activity
         setContentView(R.layout.search_activity);
         setBackButtonOnClick();
+        initComponents();
+        setPlaceToSearchResultAdapter();
+        setEvents();
+    }
+
+    private void initComponents() {
         searchResults = findViewById(R.id.searchResults);
         searchText = findViewById(R.id.searchText);
         nextClassText = findViewById(R.id.next_class_text);
@@ -49,12 +55,9 @@ public class SearchActivity extends AppCompatActivity {
         nextClassRow = findViewById(R.id.view_container);
         calendarViewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
         mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getApplication())).get(SearchActivityViewModel.class);
-
-        setSearchResultsAdapter();
-        setEvents();
     }
 
-    private void setSearchResultsAdapter(){
+    private void setPlaceToSearchResultAdapter(){
         // Android adapter for list view
         adapter = new PlaceToSearchResultAdapter(this, R.layout.list_item_layout, mViewModel.getAllPlaces());
         searchResults.setAdapter(adapter);
