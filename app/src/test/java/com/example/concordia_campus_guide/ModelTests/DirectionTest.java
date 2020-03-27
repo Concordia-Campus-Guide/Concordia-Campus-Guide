@@ -26,14 +26,13 @@ public class DirectionTest {
         direction.setStart(startNew);
         assertEquals(direction.getStart(), startNew);
         direction.setStart(startTemp);
-
     }
     @Test
     public void getAndSetEndTest() {
-        LatLng endTemp = direction.getStart();
+        LatLng endTemp = direction.getEnd();
         LatLng endNew = new LatLng(-73.57907921075821, 45.49702057370776);
-        direction.setStart(endNew);
-        assertEquals(direction.getStart(), endNew);
+        direction.setEnd(endNew);
+        assertEquals(direction.getEnd(), endNew);
         direction.setStart(endTemp);
 
     }
@@ -53,6 +52,5 @@ public class DirectionTest {
         direction.setDescription(descriptionNew);
         assertEquals(direction.getDescription(), descriptionNew);
         direction.setDescription(descriptionOg);
-
     }
 }

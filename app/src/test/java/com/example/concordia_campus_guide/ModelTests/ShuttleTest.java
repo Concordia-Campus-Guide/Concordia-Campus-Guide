@@ -56,4 +56,21 @@ public class ShuttleTest {
         List<Shuttle> actual = shuttles.getShuttles();
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void setShuttleIdTest() {
+        int id = 1;
+        shuttle.setShuttleId(id);
+        assertEquals(id, shuttle.getShuttleId());
+    }
+
+    @Test
+    public void toStringTest() {
+        shuttle.setCampus("SGW");
+        shuttle.setDay(Arrays.asList("Monday"));
+        shuttle.setTime(7.05);
+        String expected = "Campus: SGW, Day: [Monday], time: 7.05\n";
+        assertEquals(expected, shuttle.toString());
+    }
+
 }
