@@ -26,12 +26,6 @@ public class Shuttle {
     public Shuttle() {
     }
 
-    public Shuttle(String campus, List<String> day, Double time) {
-        this.campus = campus;
-        this.day = day;
-        this.time = time;
-    }
-
     public int getShuttleId() {
         return shuttleId;
     }

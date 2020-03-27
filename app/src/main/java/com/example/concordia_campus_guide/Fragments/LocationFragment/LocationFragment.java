@@ -12,6 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
@@ -43,12 +51,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 
@@ -57,6 +60,9 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     MapView mMapView;
 
     private Location currentLocation;
+
+    private ImageButton myLocationBtn;
+
     private GoogleMap mMap;
     private LocationFragmentViewModel mViewModel;
     private GeoJsonLayer mLayer;
@@ -81,14 +87,12 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.location_fragment_fragment, container, false);
-        getLocationPermission();
         initComponent(rootView);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
-
+        getLocationPermission();
         initMap();
         setupClickListeners();
-        getLocationPermission();
         updateLocationEvery5Seconds();
 
         return rootView;
@@ -101,10 +105,11 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         mMapView = rootView.findViewById(R.id.mapView);
         sgwBtn = rootView.findViewById(R.id.SGWBtn);
         loyolaBtn = rootView.findViewById(R.id.loyolaBtn);
+        myLocationBtn = rootView.findViewById(R.id.myLocation);
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
         mFloorPickerGv = rootView.findViewById(R.id.FloorPickerGv);
         mFloorPickerGv.setVisibility(View.GONE);
         buildingsGroundOverlays = new HashMap<>();
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
     }
 
     private void setupFloorPickerAdapter(Building building) {
@@ -158,6 +163,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                     @Override
                     public void onSuccess(Location location) {
                         if (location != null) {
+                            mMap.setMyLocationEnabled(true);
                             zoomInLocation(new LatLng(location.getLatitude(), location.getLongitude()));
                         } else {
                             zoomInLocation(mViewModel.getInitialZoomLocation());
@@ -175,13 +181,22 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         });
     }
 
+    private void setCurrentLocationBtn() {
+        myLocationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mFloorPickerGv.setVisibility(View.GONE);
+                popUpRequestPermission();
+            }
+        });
+    }
 
     /**
      * The purpose of this method is to figure the style of the map to display
      */
     private void initFloorPlans() {
         Map<String, Building> temp = mViewModel.getBuildings();
-        for(Map.Entry<String, Building> entry: temp.entrySet()){
+        for (Map.Entry<String, Building> entry : temp.entrySet()) {
             String key = entry.getKey();
             Building value = entry.getValue();
 
@@ -208,8 +223,23 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private void setupClickListeners() {
         setupLoyolaBtnClickListener();
         setupSGWBtnClickListener();
+        setCurrentLocationBtn();
     }
 
+    private void popUpRequestPermission() {
+        if (!myLocationPermissionsGranted) {
+            getLocationPermission();
+            if (myLocationPermissionsGranted) {
+                mMap.setMyLocationEnabled(true);
+                initMap();
+            }
+        }
+
+        if (myLocationPermissionsGranted) {
+            mMap.setMyLocationEnabled(true);
+            initMap();
+        }
+    }
 
     /**
      * The purpose of this method is to handle the "on click" of Loyala button
@@ -332,8 +362,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         mViewModel.getListOfPOI().observe(getViewLifecycleOwner(), new Observer<List<WalkingPoint>>() {
             @Override
             public void onChanged(List<WalkingPoint> walkingPoints) {
-                for(WalkingPoint point: walkingPoints){
-                    LatLng latLng = new LatLng(point.getCoordinate().getLongitude(),point.getCoordinate().getLatitude());
+                for (WalkingPoint point : walkingPoints) {
+                    LatLng latLng = new LatLng(point.getCoordinate().getLongitude(), point.getCoordinate().getLatitude());
                     MarkerOptions markerOptions = new MarkerOptions()
                             .position(latLng)
                             //TODO: Change the icon to be the same as the POI icon
@@ -356,7 +386,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             mMap.setMyLocationEnabled(true);
         }
         mMap.setIndoorEnabled(false);
-        mMap.getUiSettings().setMyLocationButtonEnabled(true);
+        mMap.getUiSettings().setMyLocationButtonEnabled(false);
         mMap.getUiSettings().setTiltGesturesEnabled(true);
         mMap.getUiSettings().setMapToolbarEnabled(false);
         mMap.getUiSettings().setZoomControlsEnabled(false);
@@ -374,13 +404,16 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private void getLocationPermission() {
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
-        if (requestPermission()) {
-            myLocationPermissionsGranted = true;
-        } else {
-            ActivityCompat.requestPermissions(getActivity(),
-                    permissions,
-                    ClassConstants.LOCATION_PERMISSION_REQUEST_CODE);
-        }
+        
+            if (requestPermission()) {
+                initMap();
+            }
+            else {
+                ActivityCompat.requestPermissions(getActivity(),
+                        permissions,
+                        ClassConstants.LOCATION_PERMISSION_REQUEST_CODE);
+            }
+            initMap();
     }
 
     private void classRoomCoordinateTool(GoogleMap map) {
@@ -408,9 +441,16 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == ClassConstants.LOCATION_PERMISSION_REQUEST_CODE)
-            myLocationPermissionsGranted = (grantResults.length > 0 &&
-                    grantResults[0] == PackageManager.PERMISSION_GRANTED);
+        if (requestCode == ClassConstants.LOCATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                myLocationPermissionsGranted = (grantResults.length > 0 &&
+                        grantResults[0] == PackageManager.PERMISSION_GRANTED);
+                setFirstLocationToDisplayOnSuccess();
+            } else {
+                setFirstLocationToDisplayOnSuccess();
+            }
+        }
+
     }
 
     @Override
@@ -459,8 +499,10 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private class updateLocationListener implements OnSuccessListener {
         @Override
         public void onSuccess(Object location) {
-            if(location instanceof Location) {
-                LocationFragment.this.setCurrentLocation((android.location.Location) location);
+            if (location != null && location instanceof Location) {
+                if (location instanceof Location) {
+                    LocationFragment.this.setCurrentLocation((android.location.Location) location);
+                }
             }
         }
     }
