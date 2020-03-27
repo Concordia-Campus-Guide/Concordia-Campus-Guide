@@ -14,10 +14,12 @@ import com.example.concordia_campus_guide.Models.RoomModel;
 public class Notification {
     private MainActivity mainActivity;
     private AppDatabase appDatabase;
+    private CalendarEvent previousCalendarEvent;
 
     public Notification(MainActivity mainActivity, AppDatabase appDatabase){
         this.mainActivity =  mainActivity;
         this.appDatabase  = appDatabase;
+        this.previousCalendarEvent = new CalendarEvent("","","");
     }
 
     public void checkUpCalendarEvery5Minutes() {
@@ -26,14 +28,19 @@ public class Notification {
             @Override
             public void run(){
                 CalendarEvent calendarEvent = getNextClassCalendar();
-                if(calendarEvent  != null){
-                    if(calendarEvent.getLocation().length() > 2 && calendarEvent.getTitle().length() > 7 && calendarEvent.getStartTime().length() >2){
+                if(calendarEvent  != null && validateCalendarEvent(calendarEvent)){
+                    if(!calendarEvent.getTitle().equalsIgnoreCase(previousCalendarEvent.getTitle())){
+                        previousCalendarEvent = calendarEvent;
                         mainActivity.popUp(calendarEvent);
                     }
                 }
-                handler.postDelayed(this, 3000000);
+                handler.postDelayed(this, 3000);
             }
         }, 3000);
+    }
+
+    public boolean validateCalendarEvent(CalendarEvent calendarEvent){
+        return calendarEvent.getLocation().length() > 2 && calendarEvent.getTitle().length() > 7 && calendarEvent.getStartTime().length() >2;
     }
 
     public CalendarEvent getNextClassCalendar(){
@@ -54,7 +61,6 @@ public class Notification {
             floorCode = location.substring(0,location.indexOf('-')+2);
             roomCode  = location.substring(location.indexOf('-')+1);
         }
-        RoomModel place = appDatabase.roomDao().getRoomByRoomCodeAndFloorCode(roomCode,floorCode);
         return appDatabase.roomDao().getRoomByRoomCodeAndFloorCode(roomCode,floorCode);
     }
 }
