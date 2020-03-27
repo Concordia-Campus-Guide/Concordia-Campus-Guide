@@ -187,18 +187,20 @@ public class LocationFragmentViewModel extends ViewModel {
      * @param context the context of the LocationFragment
      * @return it will BitmapDescriptor object to use it as an icon for the marker on the map.
      */
-    public BitmapDescriptor styleMarker(String buildingLabel, Context context) {
+    public BitmapDescriptor styleMarker(String buildingLabel, Context context){
         int height = 150;
         int width = 150;
         InputStream deckFile = null;
+        BitmapDescriptor smallMarkerIcon = null;
         try {
             deckFile = context.getAssets().open("BuildingLabels/" + buildingLabel.toLowerCase()+".png");
+            Bitmap b = BitmapFactory.decodeStream(deckFile);
+            Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+            smallMarkerIcon = BitmapDescriptorFactory.fromBitmap(smallMarker);
+            deckFile.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Bitmap b = BitmapFactory.decodeStream(deckFile);
-        Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
-        BitmapDescriptor smallMarkerIcon = BitmapDescriptorFactory.fromBitmap(smallMarker);
         return  smallMarkerIcon;
     }
 
@@ -232,6 +234,10 @@ public class LocationFragmentViewModel extends ViewModel {
     public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, Context context, GoogleMap mMap) {
         String fileName = buildingCode.toLowerCase()+"_"+floor.toLowerCase();
         groundOverlay.setImage(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+fileName+".png"));
+        setFloorMarkers(buildingCode, floor, context, mMap);
+    }
+
+    public void setFloorMarkers(String buildingCode, String floor, Context context, GoogleMap mMap) {
         if (floorLayer != null) {
             floorLayer.removeLayerFromMap();
         }
@@ -245,7 +251,6 @@ public class LocationFragmentViewModel extends ViewModel {
         displayedPolylineOption = drawPath(buildingCode + "-" + floor);
         currentlyDisplayedLine = mMap.addPolyline(displayedPolylineOption);
     }
-
 
     public Building getBuildingFromeCode(String buildingCode) {
         return buildings.get(buildingCode);

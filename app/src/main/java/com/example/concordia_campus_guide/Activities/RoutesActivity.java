@@ -20,8 +20,10 @@ import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.Routes.Route;
 import com.example.concordia_campus_guide.Models.Shuttle;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
+import com.example.concordia_campus_guide.Models.Shuttle;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.model.LatLng;
+
 import java.util.List;
 
 public class RoutesActivity extends AppCompatActivity {
@@ -61,7 +63,7 @@ public class RoutesActivity extends AppCompatActivity {
 
         // set back button
         setBackButtonOnClick();
-
+        
         // get all possible routes
         getRouteOptions();
     }
