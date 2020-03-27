@@ -99,24 +99,23 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-//        final CalendarEvent calendarEvent = calendarViewModel.getEvent(this);
-//        final String eventString;
-//        final String eventLocation;
-//
-//        if(calendarEvent != null){
-//            eventString = calendarViewModel.getNextClassString((calendarEvent));
-//            nextClassText.setText(eventString);
-//            eventLocation = calendarEvent.getLocation();
-//            Place place = mViewModel.getRoomFromDB(eventLocation);
-//            nextClassArrow.setVisibility(View.VISIBLE);
-//            nextClassRow.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    openRoutesPage(place);
-//                }
-//            });
-//        }
+        final CalendarEvent calendarEvent = calendarViewModel.getEvent(this);
+        final String eventString;
+        final String eventLocation;
 
+        if(calendarEvent != null){
+            eventString = calendarViewModel.getNextClassString((calendarEvent));
+            nextClassText.setText(eventString);
+            eventLocation = calendarEvent.getLocation();
+            Place place = mViewModel.getRoomFromDB(eventLocation);
+            nextClassArrow.setVisibility(View.VISIBLE);
+            nextClassRow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    openRoutesPage(place);
+                }
+            });
+        }
     }
 
     private void openRoutesPage(Place place){

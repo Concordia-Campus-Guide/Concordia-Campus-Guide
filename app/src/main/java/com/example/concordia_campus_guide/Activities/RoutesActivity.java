@@ -131,15 +131,6 @@ public class RoutesActivity extends AppCompatActivity {
         this.content.setText(content);
     }
 
-    public void openPathsPage(View view) {
-        Intent openPaths = new Intent(RoutesActivity.this,
-                PathsActivity.class);
-
-        DirectionsResult directionsResult = mViewModel.getDirectionsResult();
-        openPaths.putExtra("directionsResult", directionsResult);
-        startActivity(openPaths);
-    }
-
     public void getRouteOptions() {
         Coordinates fromCenterCoordinates = mViewModel.getFrom().getCenterCoordinates();
         Coordinates toCenterCoordinates = mViewModel.getTo().getCenterCoordinates();

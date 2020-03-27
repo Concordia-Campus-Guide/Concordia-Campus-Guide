@@ -21,10 +21,8 @@
         "Health Services"
       ],
       "centerCoordinates": {
-//        "longitude":-73.63982319831847,
-//        "latitude":45.458012236404315
-        "longitude":-73.677058,
-        "latitude":45.525494
+        "longitude":-73.63982319831847,
+        "latitude":45.458012236404315
       },
       "cornerCoordinates":{
         "listOfCoordinates":[
