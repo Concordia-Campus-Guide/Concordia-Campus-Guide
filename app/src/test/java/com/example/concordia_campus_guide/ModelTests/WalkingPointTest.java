@@ -76,4 +76,11 @@ public class WalkingPointTest {
         assertFalse(walkingPoint.equals("this is a string"));
     }
 
+    @Test
+    public void getSetPlaceCodeTest() {
+        walkingPoint.setPlaceCode("920");
+        assertEquals("920", walkingPoint.getPlaceCode());
+        walkingPoint.setPlaceCode("937");
+    }
+
 }
