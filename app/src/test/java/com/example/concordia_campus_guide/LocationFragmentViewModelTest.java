@@ -2,14 +2,19 @@ package com.example.concordia_campus_guide;
 
 import android.graphics.Color;
 
+import com.example.concordia_campus_guide.Database.AppDatabase;
+import com.example.concordia_campus_guide.Database.Daos.WalkingPointDao;
 import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Coordinates;
+import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
@@ -17,6 +22,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 import static junit.framework.TestCase.assertEquals;
+import static org.mockito.Mockito.when;
 
 
 /**
@@ -25,12 +31,23 @@ import static junit.framework.TestCase.assertEquals;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class LocationFragmentViewModelTest  {
-    private LocationFragmentViewModel viewModel;
+
+    @Mock
+    AppDatabase mockAppDb;
+    LocationFragmentViewModel viewModel;
+
+    @Mock
+    WalkingPointDao mockWalkingPointDao;
+
     private HashMap<String, Building> buildings;
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
-        viewModel = new LocationFragmentViewModel();
+        when(mockAppDb.walkingPointDao()).thenReturn(mockWalkingPointDao);
+
+        //TODO: Create test data to test the POI generation
+        when(mockWalkingPointDao.getAllWalkingPointsFromPlaceCode(Mockito.anyString())).thenReturn(new ArrayList<WalkingPoint>());
+        viewModel = new LocationFragmentViewModel(mockAppDb);
         buildings = new HashMap<>();
         setupBuildings();
     }

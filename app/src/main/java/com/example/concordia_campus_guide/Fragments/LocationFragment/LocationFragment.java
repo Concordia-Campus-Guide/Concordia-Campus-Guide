@@ -13,17 +13,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
-
 import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
 import com.example.concordia_campus_guide.ClassConstants;
+import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.Models.Building;
+import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -32,16 +28,27 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 
@@ -59,7 +66,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private FusedLocationProviderClient fusedLocationProviderClient;
 
     private static final String TAG = "LocationFragment";
-    private Boolean myLocationPermissionsGranted = false;
+    private boolean myLocationPermissionsGranted = false;
     private HashMap<String, GroundOverlay> buildingsGroundOverlays;
     private FloorPickerAdapter currentFloorPickerAdapter;
 
@@ -111,7 +118,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel.class);
+        mViewModel = ViewModelProviders.of(getActivity(), new ViewModelFactory(this.getActivity().getApplication())).get(LocationFragmentViewModel.class);
+        setupPOIListListener();
     }
 
 
@@ -172,9 +180,12 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
      * The purpose of this method is to figure the style of the map to display
      */
     private void initFloorPlans() {
-        HashMap<String, Building> temp = mViewModel.getBuildings();
-        for (String key : temp.keySet()) {
-            if (temp.get(key).getGroundOverlayOption() != null)
+        Map<String, Building> temp = mViewModel.getBuildings();
+        for(Map.Entry<String, Building> entry: temp.entrySet()){
+            String key = entry.getKey();
+            Building value = entry.getValue();
+
+            if (value.getGroundOverlayOption() != null)
                 buildingsGroundOverlays.put(key, mMap.addGroundOverlay(temp.get(key).getGroundOverlayOption()));
         }
     }
@@ -266,9 +277,9 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                 if (geoJsonFeature != null) {
                     Building building = mViewModel.getBuildingFromGeoJsonFeature(geoJsonFeature);
                     onBuildingClick(building);
+                    String buildingCode = geoJsonFeature.getProperty("code");
+                    ((MainActivity) getActivity()).showInfoCard(buildingCode);
                 }
-                String buildingCode = geoJsonFeature.getProperty("code");
-                ((MainActivity) getActivity()).showInfoCard(buildingCode);
             }
         });
     }
@@ -315,6 +326,23 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             }
         });
         return true;
+    }
+
+    private void setupPOIListListener() {
+        mViewModel.getListOfPOI().observe(getViewLifecycleOwner(), new Observer<List<WalkingPoint>>() {
+            @Override
+            public void onChanged(List<WalkingPoint> walkingPoints) {
+                for(WalkingPoint point: walkingPoints){
+                    LatLng latLng = new LatLng(point.getCoordinate().getLongitude(),point.getCoordinate().getLatitude());
+                    MarkerOptions markerOptions = new MarkerOptions()
+                            .position(latLng)
+                            //TODO: Change the icon to be the same as the POI icon
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                            .visible(false);
+                    mMap.addMarker(markerOptions);
+                }
+            }
+        });
     }
 
 
@@ -431,7 +459,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private class updateLocationListener implements OnSuccessListener {
         @Override
         public void onSuccess(Object location) {
-            if (location != null && location instanceof Location) {
+            if(location instanceof Location) {
                 LocationFragment.this.setCurrentLocation((android.location.Location) location);
             }
         }
