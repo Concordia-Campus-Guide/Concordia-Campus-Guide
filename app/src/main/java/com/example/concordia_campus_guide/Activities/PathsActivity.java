@@ -93,6 +93,7 @@ public class PathsActivity extends AppCompatActivity {
 
     public void showInfoCard() {
         pathInfoCardFragment = new PathInfoCardFragment();
+        boolean[] fromTo;
         Bundle infoCardBundle = new Bundle();
         infoCardBundle.putSerializable("directionsResult", directionWrappers);
         infoCardBundle.putSerializable("walkingPoints", (ArrayList<WalkingPoint>) locationFragment.getWalkingPointList());
@@ -112,20 +113,24 @@ public class PathsActivity extends AppCompatActivity {
         return directionWrapperArrayList;
     }
 
-    public void checkFromToType(Place from, Place to) {
+    public boolean[] checkFromToType(Place from, Place to) {
+        boolean[] fromToIsIndoor = {false, false};
         if (!(from instanceof RoomModel) && !(to instanceof RoomModel)) {
-            return;
+            return fromToIsIndoor;
         }
         String floorCode;
         if (!(from instanceof RoomModel)) {
             floorCode = ((RoomModel) to).getFloorCode();
             from = new RoomModel(to.getCenterCoordinates(), floorCode.substring(0, floorCode.indexOf('-')), floorCode);
+            fromToIsIndoor[1] = true;
         }
         if (!(to instanceof RoomModel)) {
             floorCode = ((RoomModel) from).getFloorCode();
             to = new RoomModel(from.getCenterCoordinates(), floorCode.substring(0, floorCode.indexOf('-')), floorCode);
+            fromToIsIndoor[0] = true;
         }
 
         locationFragment.setIndoorPaths(from, to);
+        return fromToIsIndoor;
     }
 }
