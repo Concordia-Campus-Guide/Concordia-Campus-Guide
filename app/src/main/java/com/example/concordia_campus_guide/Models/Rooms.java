@@ -1,6 +1,7 @@
 package com.example.concordia_campus_guide.Models;
 
 import java.util.ArrayList;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -11,8 +12,6 @@ public class Rooms {
 
     private List<RoomModel> Rooms;
 
-    public Rooms(){}
-
     public Rooms(List<RoomModel> rooms) {
         Rooms = rooms;
     }
@@ -21,50 +20,48 @@ public class Rooms {
         return Rooms;
     }
 
-    public List<RoomModel> getRoomsByFloor(String floor){
+    public List<RoomModel> getRoomsByFloor(String floor) {
         ArrayList<RoomModel> list = new ArrayList<>();
         List<RoomModel> rooms = getRooms();
-        for(RoomModel room: rooms){
-            if(room.getFloorCode().equals(floor)){
+        for (RoomModel room : rooms) {
+            if (room.getFloorCode().equals(floor)) {
                 list.add(room);
             }
         }
         return list;
     }
 
-    public JSONObject getGeoJson(String floor){
+    public JSONObject getGeoJson(String floor) {
         JSONObject toReturn = new JSONObject();
-        try{
+        try {
             toReturn.put("type", "FeatureCollection");
             toReturn.put("features", getInnerGeoJson(floor));
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return toReturn;
     }
 
-    private JSONArray getInnerGeoJson(String floor){
+    private JSONArray getInnerGeoJson(String floor) {
         JSONArray features = new JSONArray();
         List<RoomModel> rooms = getRoomsByFloor(floor);
 
-        try{
-            for(RoomModel roomModel: rooms){
+        try {
+            for (RoomModel roomModel : rooms) {
                 JSONObject roomGeoJSON = roomModel.getGeoJson();
-                if(roomGeoJSON!=null) features.put(roomGeoJSON);
+                if (roomGeoJSON != null) features.put(roomGeoJSON);
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return features;
     }
 
-    public List<Place> getPlaces(){
+    public List<Place> getPlaces() {
         List<Place> places = new ArrayList<Place>();
-        for(RoomModel room: Rooms){
+        for (RoomModel room : Rooms) {
             places.add(room);
         }
         return places;

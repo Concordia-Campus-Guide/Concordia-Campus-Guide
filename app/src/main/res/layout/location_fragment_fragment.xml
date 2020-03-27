@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
@@ -10,6 +11,21 @@
         android:layout_height="match_parent"
         android:visibility="visible"
         tools:visibility="visible" />
+
+    <ImageButton
+        android:id="@+id/myLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/topMapContainer"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/backgroundGrey"
+        android:elevation="20dp"
+        android:minWidth="40dp"
+        android:minHeight="40dp"
+        android:padding="5dp"
+        android:tint="@color/cardview_dark_background"
+        app:srcCompat="@drawable/ic_my_location_24dp" />
 
     <LinearLayout
         android:id="@+id/topMapContainer"
@@ -46,7 +62,9 @@
                 android:layout_marginLeft="5dp"
                 android:text="Loyola">
             </Button>
+
         </LinearLayout>
+
     </LinearLayout>
 
     <GridView
