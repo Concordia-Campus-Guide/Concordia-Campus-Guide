@@ -278,7 +278,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
      */
     private void setupPolygons(GoogleMap map) {
         mLayer = mViewModel.loadPolygons(map, getContext());
-        mLayer.addLayerToMap();
+        // TODO: Remove this line
+       // mLayer.addLayerToMap();
 
         setupPolygonClickListener();
         setupBuildingMarkerClickListener(map);

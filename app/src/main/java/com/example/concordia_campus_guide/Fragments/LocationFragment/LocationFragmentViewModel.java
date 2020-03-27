@@ -239,6 +239,8 @@ public class LocationFragmentViewModel extends ViewModel {
     private void getPointStyle(GeoJsonLayer layer) {
         GeoJsonPointStyle geoJsonPointStyle = new GeoJsonPointStyle();
         geoJsonPointStyle.setVisible(true);
+        geoJsonPointStyle.setAlpha(0.2f);
+        geoJsonPointStyle.setIcon(BitmapDescriptorFactory.fromAsset("class_markers/marker.png"));
 
         for (GeoJsonFeature feature : layer.getFeatures()) {
             feature.setPointStyle(geoJsonPointStyle);
