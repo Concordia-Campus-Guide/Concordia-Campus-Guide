@@ -7,7 +7,9 @@ import com.example.concordia_campus_guide.Models.Direction;
 import com.example.concordia_campus_guide.Models.TransitType;
 import com.google.android.gms.maps.model.LatLng;
 
-public class DirectionWrapper {
+import java.io.Serializable;
+
+public class DirectionWrapper implements Serializable {
     Direction direction;
     EncodedPolyline polyline;
 
