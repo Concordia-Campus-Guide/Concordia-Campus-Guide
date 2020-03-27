@@ -30,9 +30,14 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
     List<Route> routes;
     Context context;
 
-    private static class ViewHolder {
-        private TextView textView;
-    }
+    // UI elements
+    ImageView mainTransportType;
+    FlexboxLayout details;
+    TextView duration;
+    LinearLayout bottom;
+    TextView arrivalAndDepartureTime;
+    LinearLayout routeOverviewLayout;
+    LinearLayout main;
 
     public RoutesAdapter(@NonNull Context context, int textViewResourceId, @NonNull List<Route> routes) {
         super(context, textViewResourceId, routes);
@@ -42,116 +47,20 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final RoutesAdapter.ViewHolder viewHolder;
+        convertView = LayoutInflater.from(this.getContext()).inflate(R.layout.list_routes, parent, false);
 
-        if (convertView == null) {
-            convertView = LayoutInflater.from(this.getContext())
-                    .inflate(R.layout.list_routes, parent, false);
-            viewHolder = new ViewHolder();
-            convertView.setTag(viewHolder);
-        }
-
-        else { viewHolder = (RoutesAdapter.ViewHolder) convertView.getTag(); }
-
-        LinearLayout routeOverviewLayout = convertView.findViewById(R.id.routeOverviewLayout);
-        LinearLayout main = convertView.findViewById(R.id.main);
-        ImageView mainTransportType = convertView.findViewById(R.id.mainTransportType);
-        FlexboxLayout details = convertView.findViewById(R.id.details);
-        TextView duration = convertView.findViewById(R.id.duration);
-
-        LinearLayout bottom = convertView.findViewById(R.id.bottom);
-        TextView arrivalAndDepartureTime = convertView.findViewById(R.id.arrivalAndDepartureTime);
+        routeOverviewLayout = convertView.findViewById(R.id.routeOverviewLayout);
+        main = convertView.findViewById(R.id.main);
+        mainTransportType = convertView.findViewById(R.id.mainTransportType);
+        details = convertView.findViewById(R.id.details);
+        duration = convertView.findViewById(R.id.duration);
+        bottom = convertView.findViewById(R.id.bottom);
+        arrivalAndDepartureTime = convertView.findViewById(R.id.arrivalAndDepartureTime);
 
         Route route = getItem(position);
-        if (route!= null) {
 
-            if (route.getMainTransportType().equals(ClassConstants.WALKING)) {
-                mainTransportType.setImageResource(R.drawable.ic_directions_walk_red);
-
-                TextView summary = new TextView(context);
-                summary.setText(route.getSummary());
-                summary.setGravity(Gravity.CENTER);
-                details.addView(summary);
-
-                duration.setText(route.getDuration());
-                
-            } else if (route.getMainTransportType().equals(ClassConstants.DRIVING)) {
-                mainTransportType.setImageResource(R.drawable.ic_directions_car_red);
-
-                TextView summary = new TextView(context);
-                summary.setText(route.getSummary());
-                summary.setGravity(Gravity.CENTER);
-                details.addView(summary);
-
-                duration.setText(route.getDuration());
-            }
-            else { // TRANSIT
-                mainTransportType.setImageResource(R.drawable.ic_directions_bus_red);
-                duration.setText(route.getDuration());
-
-                for(int i = 0; i < route.getSteps().size(); i++) {
-                    TransportType step = route.getSteps().get(i);
-
-                    if (step instanceof Bus) {
-                        ImageView busIcon = new ImageView(context);
-                        busIcon.setImageResource(R.drawable.ic_directions_bus_red);
-
-                        TextView busNumber = new TextView(context);
-                        busNumber.setText(((Bus) step).getBusNumber());
-                        busNumber.setGravity(Gravity.CENTER);
-
-                        details.addView(busIcon);
-                        details.addView(busNumber);
-                    }
-
-                    else if (step instanceof Subway) {
-                        ImageView subwayIcon = new ImageView(context);
-                        subwayIcon.setImageResource(pickCorrectSubwayColor(((Subway) step).getColor()));
-
-                        details.addView(subwayIcon);
-                    }
-
-                    else if (step instanceof Train) {
-                        ImageView trainIcon = new ImageView(context);
-                        trainIcon.setImageResource(R.drawable.ic_train_red);
-
-                        TextView trainShortName = new TextView(context);
-                        trainShortName.setText(((Train) step).getTrainShortName());
-                        trainShortName.setGravity(Gravity.CENTER);
-
-                        details.addView(trainIcon);
-                        details.addView(trainShortName);
-                    }
-
-                    else if (step instanceof Walk) {
-                        ImageView walkIcon = new ImageView(context);
-                        walkIcon.setImageResource(R.drawable.ic_directions_walk_red);
-
-                        TextView durationWalk = new TextView(context);
-                        durationWalk.setText(((Walk) step).getDuration());
-                        durationWalk.setGravity(Gravity.CENTER);
-
-                        details.addView(walkIcon);
-                        details.addView(durationWalk);
-                    }
-
-                    if(i < route.getSteps().size() - 1) {
-                        ImageView arrow = new ImageView(context);
-                        arrow.setImageResource(R.drawable.ic_keyboard_arrow_right_grey);
-                        details.addView(arrow);
-                    }
-                }
-            }
-
-            if(route.getArrivalTime().isEmpty() || route.getDepartureTime().isEmpty())
-                bottom.setVisibility(LinearLayout.GONE);
-            else
-                arrivalAndDepartureTime.setText(route.getDepartureTime() + " - " + route.getArrivalTime());
-
-
-        }
-        else
-            viewHolder.textView.setText("No routes available.");
+        if (route!= null) { setUIElements(route); }
+        else { displayInfoMsg(); }
 
         return convertView;
     }
@@ -162,6 +71,83 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
     @Override
     public int getCount(){
         return routes.size();
+    }
+
+    // Helper methods for setting UI elements in the Routes Overview section of the Routes Activity page
+    private void setUIElements(Route route) {
+        if (route.getMainTransportType().equals(ClassConstants.WALKING)) { setUIWalk(route); }
+
+        else if (route.getMainTransportType().equals(ClassConstants.DRIVING)) { setUIDriving(route); }
+
+        else { // TRANSIT
+            setUITransit(route);
+
+            // Go through each steps in the route
+            for(int i = 0; i < route.getSteps().size(); i++) {
+                TransportType step = route.getSteps().get(i);
+
+                if (step instanceof Bus) { setUIBus((Bus) step); }
+                else if (step instanceof Subway) { setUISubway((Subway) step); }
+                else if (step instanceof Train) { setUITrain((Train) step); }
+                else if (step instanceof Walk) { setUIWalkInTransit((Walk) step); }
+
+                if(i < route.getSteps().size() - 1) { setUIArrow(); }
+            }
+        }
+
+        setBottomLayout(route);
+    }
+    private void setUIWalk(Route route) {
+        mainTransportType.setImageResource(R.drawable.ic_directions_walk_red);
+
+        TextView summary = new TextView(context);
+        summary.setText(route.getSummary());
+        summary.setGravity(Gravity.CENTER);
+        details.addView(summary);
+
+        duration.setText(route.getDuration());
+    }
+
+    private void setUIWalkInTransit(Walk walk) {
+        ImageView walkIcon = new ImageView(context);
+        walkIcon.setImageResource(R.drawable.ic_directions_walk_red);
+
+        TextView durationWalk = new TextView(context);
+        durationWalk.setText(walk.getDuration());
+        durationWalk.setGravity(Gravity.CENTER);
+
+        details.addView(walkIcon);
+        details.addView(durationWalk);
+    }
+
+    private void setUIDriving(Route route) {
+        mainTransportType.setImageResource(R.drawable.ic_directions_car_red);
+
+        TextView summary = new TextView(context);
+        summary.setText(route.getSummary());
+        summary.setGravity(Gravity.CENTER);
+        details.addView(summary);
+
+        duration.setText(route.getDuration());
+    }
+
+    private void setUIBus(Bus bus) {
+        ImageView busIcon = new ImageView(context);
+        busIcon.setImageResource(R.drawable.ic_directions_bus_red);
+
+        TextView busNumber = new TextView(context);
+        busNumber.setText(bus.getBusNumber());
+        busNumber.setGravity(Gravity.CENTER);
+
+        details.addView(busIcon);
+        details.addView(busNumber);
+    }
+
+    private void setUISubway(Subway subway) {
+        ImageView subwayIcon = new ImageView(context);
+        subwayIcon.setImageResource(pickCorrectSubwayColor(subway.getColor()));
+
+        details.addView(subwayIcon);
     }
 
     private int pickCorrectSubwayColor(String color) {
@@ -175,5 +161,48 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
             return R.drawable.ic_subway_yellow;
 
         return -1;
+    }
+
+    private void setUITrain(Train train) {
+        ImageView trainIcon = new ImageView(context);
+        trainIcon.setImageResource(R.drawable.ic_train_red);
+
+        TextView trainShortName = new TextView(context);
+        trainShortName.setText(train.getTrainShortName());
+        trainShortName.setGravity(Gravity.CENTER);
+
+        details.addView(trainIcon);
+        details.addView(trainShortName);
+    }
+
+    private void setUIArrow() {
+        ImageView arrow = new ImageView(context);
+        arrow.setImageResource(R.drawable.ic_keyboard_arrow_right_grey);
+        details.addView(arrow);
+    }
+
+    private void setUITransit(Route route) {
+        mainTransportType.setImageResource(R.drawable.ic_directions_bus_red);
+        duration.setText(route.getDuration());
+    }
+
+    private void setBottomLayout(Route route) {
+        if(route.getArrivalTime().isEmpty() || route.getDepartureTime().isEmpty())
+            bottom.setVisibility(LinearLayout.GONE);
+        else
+            arrivalAndDepartureTime.setText(route.getDepartureTime() + " - " + route.getArrivalTime());
+    }
+
+    private void displayInfoMsg() {
+        bottom.setVisibility(LinearLayout.GONE);
+        details.setVisibility(LinearLayout.GONE);
+        arrivalAndDepartureTime.setVisibility(LinearLayout.GONE);
+        mainTransportType.setVisibility(LinearLayout.GONE);
+        main.setVisibility(LinearLayout.GONE);
+
+        TextView warningMsg = new TextView(context);
+        warningMsg.setText("No routes available.");
+
+        routeOverviewLayout.addView(warningMsg);
     }
 }
