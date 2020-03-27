@@ -69,12 +69,6 @@ public class PathInfoCardFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         walkingPointList = (ArrayList<WalkingPoint>) getArguments().getSerializable("walkingPoints");
         getIndoorOutdoorInfo();
-//        if (walkingPointList != null) {
-//            populateIndoorDirectionsList();
-//        }
-//        if (directionList != null) {
-//            populateOutdoorDirectionsList();
-//        }
         setStartAndEndTime();
     }
 
@@ -91,9 +85,9 @@ public class PathInfoCardFragment extends Fragment {
                 setDividerTextView(layout, layoutParams);
                 populateIndoorDirectionsList();
             }
-        } else if (walkingPointList != null && directionsResults == null) {
+        } else if (walkingPointList != null) {
             populateIndoorDirectionsList();
-        } else if (walkingPointList == null && directionsResults != null) {
+        } else if (directionsResults != null) {
             populateOutdoorDirectionsList();
         }
 
@@ -148,7 +142,7 @@ public class PathInfoCardFragment extends Fragment {
         setRecyclerView();
     }
 
-    public void setIndoorComponents(WalkingPoint startWalkingPoint, WalkingPoint endWalkingPoint, LinearLayout layout, LinearLayout.LayoutParams layoutParams, boolean last_one) {
+    public void setIndoorComponents(WalkingPoint startWalkingPoint, WalkingPoint endWalkingPoint, LinearLayout layout, LinearLayout.LayoutParams layoutParams, boolean lastOne) {
         distanceBetweenPoints += getDistanceFromLatLonInKm(startWalkingPoint.getCoordinate().getLatitude(), startWalkingPoint.getCoordinate().getLongitude(), endWalkingPoint.getCoordinate().getLatitude(), startWalkingPoint.getCoordinate().getLongitude());
         totalDistance += distanceBetweenPoints;
         // on average a person walks 5km / hr
@@ -169,7 +163,7 @@ public class PathInfoCardFragment extends Fragment {
                     addIndoorDirection(startWalkingPoint.getCoordinate().getLatLng(), endWalkingPoint.getCoordinate().getLatLng(), description, distanceBetweenPoints, timeTakenInMinutes);
                     distanceBetweenPoints = 0;
                     createImageButton(layout, layoutParams, R.drawable.ic_elevator_white);
-                    if (!last_one)
+                    if (!lastOne)
                         setDividerTextView(layout, layoutParams);
                 }
                 break;
@@ -186,7 +180,7 @@ public class PathInfoCardFragment extends Fragment {
                     addIndoorDirection(startWalkingPoint.getCoordinate().getLatLng(), endWalkingPoint.getCoordinate().getLatLng(), description, distanceBetweenPoints, timeTakenInMinutes);
                     distanceBetweenPoints = 0;
                     createImageButton(layout, layoutParams, R.drawable.ic_staff_elevator_white);
-                    if (!last_one)
+                    if (!lastOne)
                         setDividerTextView(layout, layoutParams);
                 }
                 break;
@@ -197,7 +191,7 @@ public class PathInfoCardFragment extends Fragment {
                     addIndoorDirection(startWalkingPoint.getCoordinate().getLatLng(), endWalkingPoint.getCoordinate().getLatLng(), description, distanceBetweenPoints, timeTakenInMinutes);
                     distanceBetweenPoints = 0;
                     createImageButton(layout, layoutParams, R.drawable.ic_stairs_white);
-                    if (!last_one)
+                    if (!lastOne)
                         setDividerTextView(layout, layoutParams);
                 }
                 break;
@@ -243,17 +237,17 @@ public class PathInfoCardFragment extends Fragment {
         LinearLayout layout = (LinearLayout) getView().findViewById(R.id.paths_image_buttons);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1);
         for (int i = 0; i < directionList.size(); i++) {
-            boolean last_one = i == directionList.size() - 1;
+            boolean lastOne = i == directionList.size() - 1;
             Direction direction = directionList.get(i);
             switch (direction.getType()) {
                 case BUS:
                     createImageButton(layout, layoutParams, R.drawable.ic_directions_bus_black_24dp);
-                    if (!last_one)
+                    if (!lastOne)
                         setDividerTextView(layout, layoutParams);
                     break;
                 case CAR:
                     createImageButton(layout, layoutParams, R.drawable.ic_directions_car_black_24dp);
-                    if (!last_one)
+                    if (!lastOne)
                         setDividerTextView(layout, layoutParams);
                     break;
                 case METRO:
@@ -262,18 +256,18 @@ public class PathInfoCardFragment extends Fragment {
                     break;
                 case SHUTTLE:
                     createImageButton(layout, layoutParams, R.drawable.ic_shuttle);
-                    if (!last_one)
+                    if (!lastOne)
                         setDividerTextView(layout, layoutParams);
                     break;
                 case BIKE:
                     createImageButton(layout, layoutParams, R.drawable.ic_directions_bike_black_24dp);
-                    if (!last_one)
+                    if (!lastOne)
                         setDividerTextView(layout, layoutParams);
                     break;
                 case WALK:
                     if (i != 0 && direction.getType() != directionList.get(i - 1).getType()) {
                         createImageButton(layout, layoutParams, R.drawable.ic_directions_walk_black_24dp);
-                        if (!last_one)
+                        if (!lastOne)
                             setDividerTextView(layout, layoutParams);
                     }
                     break;
