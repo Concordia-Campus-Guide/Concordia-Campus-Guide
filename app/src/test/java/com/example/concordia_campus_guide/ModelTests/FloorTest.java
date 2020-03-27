@@ -1,59 +1,66 @@
 package com.example.concordia_campus_guide.ModelTests;
 
-import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.Floor;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class FloorTest {
+    TestUtils testUtils = new TestUtils();
 
-    Floor floor;
     @Before
-    public void init(){
-        floor = new Floor(new Coordinates(-73.57907921075821, 45.49702057370776), "H-8", 45, "SGW");
+    public void init() {
+        testUtils = new TestUtils();
     }
 
     @Test
-    public void getAndSetFloorCodeTest(){
-        assertEquals(floor.getFloorCode(), "H-8");
-        floor.setFloorCode("H-9");
-        assertEquals(floor.getFloorCode(), "H-9");
-        floor.setFloorCode("H-8");
+    public void getBuildingCode() {
+        assertNull(testUtils.defaultFloor.getBuildingCode());
     }
 
     @Test
-    public void getAndSetBuildingCodeTest(){
-        floor.setBuildingCode("H");
-        assertEquals("H", floor.getBuildingCode());
-        floor.setBuildingCode("VL");
-        assertEquals("VL", floor.getBuildingCode());
-        floor.setBuildingCode("H");
+    public void setBuildingCode() {
+        assertNull(testUtils.floorWithArgs.getBuildingCode());
+        testUtils.floorWithArgs.setBuildingCode(testUtils.buildingCode);
+        Assert.assertEquals(testUtils.buildingCode, testUtils.floorWithArgs.getBuildingCode());
     }
 
     @Test
-    public void getAndSetAltitudeCodeTest(){
-        assertEquals(floor.getAltitude(), Float.valueOf(45));
-        floor.setAltitude(23);
-        assertEquals(floor.getAltitude(), Float.valueOf(23));
-        floor.setAltitude(45);
+    public void getFloorCode() {
+        assertNull(testUtils.defaultFloor.getFloorCode());
+        Assert.assertEquals(testUtils.floorCode, testUtils.floorWithArgs.getFloorCode());
+        Assert.assertEquals(testUtils.floorCode, testUtils.floorWithCampus.getFloorCode());
     }
 
     @Test
-    public void getDisplayNameTest(){
-        assertEquals(floor.getDisplayName(), "H-8");
-        floor.setFloorCode("H-9");
-        assertEquals(floor.getDisplayName(), "H-9");
-        floor.setFloorCode("H-8");
+    public void setFloorCode() {
+        Assert.assertEquals(testUtils.floorCode, testUtils.floorWithArgs.getFloorCode());
+        testUtils.floorWithArgs.setFloorCode("H-8");
+        Assert.assertEquals("H-8", testUtils.floorWithArgs.getFloorCode());
     }
 
     @Test
-    public void getAndSetCampus(){
-        assertEquals(floor.getCampus(), "SGW");
-        floor.setCampus("LOY");
-        assertEquals(floor.getCampus(), "LOY");
-        floor.setCampus("SGW");
+    public void getAltitude() {
+        Assert.assertEquals(0, testUtils.defaultFloor.getAltitude(), 0.001);
+        Assert.assertEquals(0, testUtils.floorWithArgs.getAltitude(), 0.001);
+        Assert.assertEquals(0, testUtils.floorWithCampus.getAltitude(), 0.001);
+    }
+
+    @Test
+    public void setAltitude() {
+        Assert.assertEquals(0, testUtils.floorWithArgs.getAltitude(), 0.001);
+        testUtils.floorWithArgs.setAltitude((float) 30.00);
+        Assert.assertEquals(30.00, testUtils.floorWithArgs.getAltitude(), 0.001);
+    }
+
+    @Test
+    public void getDisplayName() {
+        assertNull(testUtils.defaultFloor.getDisplayName());
+        Assert.assertEquals(testUtils.floorCode, testUtils.floorWithArgs.getDisplayName());
+        Assert.assertEquals(testUtils.floorCode, testUtils.floorWithCampus.getDisplayName());
     }
 }

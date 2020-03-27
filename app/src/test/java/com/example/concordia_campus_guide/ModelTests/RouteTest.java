@@ -12,6 +12,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertEquals;
 
 public class RouteTest {
@@ -34,5 +35,13 @@ public class RouteTest {
         route.addDirection(directions.get(0));
         route.addDirection(directions.get(1));
         assertEquals(route.getSteps(),directions);
+    }
+
+    @Test
+    public void getDirections(){
+        assertTrue(route.getDirections().isEmpty());
+        route = new Route(directions);
+        assertEquals(directions, route.getDirections());
+
     }
 }
