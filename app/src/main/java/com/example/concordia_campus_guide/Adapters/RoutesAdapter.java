@@ -208,7 +208,7 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
         main.setVisibility(LinearLayout.GONE);
 
         TextView warningMsg = new TextView(context);
-        warningMsg.setText(R.string.warning_msg_route_overview);
+        warningMsg.setText("No routes available");
 
         routeOverviewLayout.addView(warningMsg);
     }
