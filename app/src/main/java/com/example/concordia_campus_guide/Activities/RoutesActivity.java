@@ -63,7 +63,7 @@ public class RoutesActivity extends AppCompatActivity {
 
         // set back button
         setBackButtonOnClick();
-        
+
         // get all possible routes
         getRouteOptions();
     }
