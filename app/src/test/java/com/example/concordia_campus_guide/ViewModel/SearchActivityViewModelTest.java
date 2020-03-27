@@ -89,7 +89,6 @@ public class SearchActivityViewModelTest {
     public void getSetMyCurrentLocation(){
         Location sampleLocation = new Location("some provider");
         mViewModel.setMyCurrentLocation(sampleLocation);
-
         assertEquals(mViewModel.getMyCurrentLocation(), sampleLocation);
     }
 
@@ -97,7 +96,6 @@ public class SearchActivityViewModelTest {
     public void getSetFromId(){
         Long sampleLong = new Long(234234234234L);
         mViewModel.setFromId(sampleLong);
-
         assertEquals(mViewModel.getFromId(), sampleLong);
     }
 
@@ -105,10 +103,7 @@ public class SearchActivityViewModelTest {
     public void getSetToId(){
         Long sampleLong = new Long(4563456345634L);
         mViewModel.setToId(sampleLong);
-
         assertEquals(mViewModel.getToId(), sampleLong);
     }
-
-
 
 }

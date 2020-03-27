@@ -69,13 +69,6 @@ public class BuildingTest {
         assertEquals(10, testUtils.buildingWithArgs.getHeight(), 0.001);
     }
 
-    @Test
-    public void getGroundOverlayOption() {
-    }
-
-    @Test
-    public void setGroundOverlayOption() {
-    }
 
     @Test
     public void getBearing() {
