@@ -7,7 +7,7 @@
     tools:context=".Fragments.POIFragment.POIFragment">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/poiLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -30,8 +30,14 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/poiVp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
+            android:layout_height="match_parent"></androidx.viewpager2.widget.ViewPager2>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/dotsTab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabBackground="@drawable/tab_selector"
+            app:tabGravity="center"
+            app:tabIndicatorHeight="0dp"/>
     </LinearLayout>
 
 </FrameLayout>

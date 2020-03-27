@@ -12,17 +12,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.example.concordia_campus_guide.Adapters.PlaceToSearchResultAdapter;
 import com.example.concordia_campus_guide.Models.Helpers.CalendarViewModel;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
-import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.CalendarEvent;
-import com.example.concordia_campus_guide.Models.Floor;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.Models.MyCurrentPlace;
 import com.example.concordia_campus_guide.Models.Place;
@@ -44,26 +39,25 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //setting up activity
+        // setting up activity
         setContentView(R.layout.search_activity);
         setBackButtonOnClick();
-        searchResults = (ListView) findViewById(R.id.searchResults);
-        searchText = (EditText) findViewById(R.id.searchText);
-        nextClassText = (TextView) findViewById(R.id.next_class_text);
-        nextClassArrow = (ImageView) findViewById(R.id.next_class_arrow);
-        nextClassRow = (View) findViewById(R.id.view_container);
-        calendarViewModel = ViewModelProviders.of(this).get(CalendarViewModel.class);
-
-        mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getApplication())).get(SearchActivityViewModel.class);
-
-        setUiElements();
+        initComponents();
+        setPlaceToSearchResultAdapter();
         setEvents();
     }
 
-    private void setUiElements(){
+    private void initComponents() {
         searchResults = findViewById(R.id.searchResults);
         searchText = findViewById(R.id.searchText);
+        nextClassText = findViewById(R.id.next_class_text);
+        nextClassArrow = findViewById(R.id.next_class_arrow);
+        nextClassRow = findViewById(R.id.view_container);
+        calendarViewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
+        mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getApplication())).get(SearchActivityViewModel.class);
+    }
 
+    private void setPlaceToSearchResultAdapter(){
         // Android adapter for list view
         adapter = new PlaceToSearchResultAdapter(this, R.layout.list_item_layout, mViewModel.getAllPlaces());
         searchResults.setAdapter(adapter);
@@ -91,6 +85,15 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void setOnClickListeners(){
+        searchText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean onFocus) {
+                if(onFocus){
+                    searchResults.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         searchResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -100,26 +103,22 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         final CalendarEvent calendarEvent = calendarViewModel.getEvent(this);
-        final String eventLocation = calendarViewModel.getNextClassString((calendarEvent));
-        nextClassText.setText(eventLocation);
+        final String eventString;
+        final String eventLocation;
 
-        if(nextClassText.getText() != "No classes today"){
+        if(calendarEvent != null){
+            eventString = calendarViewModel.getNextClassString((calendarEvent));
+            nextClassText.setText(eventString);
+            eventLocation = calendarEvent.getLocation();
             Place place = mViewModel.getRoomFromDB(eventLocation);
-
             nextClassArrow.setVisibility(View.VISIBLE);
             nextClassRow.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    openRoutesPage(new Place() {
-                        @Override
-                        public String getDisplayName() {
-                            return calendarEvent.getLocation();
-                        }
-                    });
+                public void onClick(View view) {
+                    openRoutesPage(place);
                 }
             });
         }
-
     }
 
     private void openRoutesPage(Place place){

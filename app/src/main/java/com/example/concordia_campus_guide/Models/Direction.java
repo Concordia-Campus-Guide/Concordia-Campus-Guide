@@ -1,5 +1,6 @@
 package com.example.concordia_campus_guide.Models;
 
+import com.example.concordia_campus_guide.Models.Routes.TransportType;
 import com.google.android.gms.maps.model.LatLng;
 import java.util.Date;
 
@@ -8,10 +9,10 @@ public class Direction {
     private LatLng end;
     private Date startTime;
     private Date endTime;
-    private TransitType type;
+    private TransportType type;
     private String description;
 
-    public Direction(LatLng start, LatLng end, TransitType type, String description) {
+    public Direction(LatLng start, LatLng end, TransportType type, String description) {
         this.start = start;
         this.end = end;
         this.type = type;
@@ -34,11 +35,11 @@ public class Direction {
         this.end = end;
     }
 
-    public TransitType getType() {
+    public TransportType getType() {
         return type;
     }
 
-    public void setType(TransitType type) {
+    public void setType(TransportType type) {
         this.type = type;
     }
 
