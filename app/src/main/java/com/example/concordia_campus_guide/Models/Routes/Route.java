@@ -28,6 +28,16 @@ public class Route {
         this.mainTransportType = mainTransportType;
     }
 
+    // When TRANSIT is chosen but there's no arrivalTime and departureTime associated to it
+    public Route(String duration, String mainTransportType) {
+        this.steps = new ArrayList<>();
+        this.departureTime = "";
+        this.arrivalTime = "";
+        this.duration = duration;
+        this.summary = "";
+        this.mainTransportType = mainTransportType;
+    }
+
     // When WALKING or DRIVING is chosen
     public Route(String duration, String summary, String mainTransportType) {
         this.steps = null; // for WALKING and DRIVING, no need to have the steps since they won't be displayed in the Routes overview section of Routes Activity page

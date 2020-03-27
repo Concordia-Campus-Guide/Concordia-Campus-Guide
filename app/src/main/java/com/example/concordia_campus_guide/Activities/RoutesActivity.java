@@ -147,7 +147,7 @@ public class RoutesActivity extends AppCompatActivity {
         if(fromCenterCoordinates != null && toCenterCoordinates != null) {
             LatLng from = new LatLng(fromCenterCoordinates.getLatitude(), fromCenterCoordinates.getLongitude());
             LatLng to = new LatLng(toCenterCoordinates.getLatitude(), toCenterCoordinates.getLongitude());
-            String transitType = ClassConstants.WALKING; // TODO: #163: dynamically change the transit type depending on the mode of transportation icon clicked on the RoutesActivity page. By default, it will be TRANSIT.
+            String transitType = ClassConstants.TRANSIT; // TODO: #163: dynamically change the transit type depending on the mode of transportation icon clicked on the RoutesActivity page. By default, it will be TRANSIT.
 
             String url = UrlBuilder.build(from, to, transitType);
             new DirectionsApiDataRetrieval(RoutesActivity.this).execute(url, transitType);

@@ -74,9 +74,7 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
                 details.addView(summary);
 
                 duration.setText(route.getDuration());
-
-                bottom.setVisibility(LinearLayout.GONE);
-
+                
             } else if (route.getMainTransportType().equals(ClassConstants.DRIVING)) {
                 mainTransportType.setImageResource(R.drawable.ic_directions_car_red);
 
@@ -86,8 +84,6 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
                 details.addView(summary);
 
                 duration.setText(route.getDuration());
-
-                bottom.setVisibility(LinearLayout.GONE);
             }
             else { // TRANSIT
                 mainTransportType.setImageResource(R.drawable.ic_directions_bus_red);
@@ -147,7 +143,12 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
                 }
             }
 
-            arrivalAndDepartureTime.setText(route.getDepartureTime() + " - " + route.getArrivalTime());
+            if(route.getArrivalTime().isEmpty() || route.getDepartureTime().isEmpty())
+                bottom.setVisibility(LinearLayout.GONE);
+            else
+                arrivalAndDepartureTime.setText(route.getDepartureTime() + " - " + route.getArrivalTime());
+
+
         }
         else
             viewHolder.textView.setText("No routes available.");

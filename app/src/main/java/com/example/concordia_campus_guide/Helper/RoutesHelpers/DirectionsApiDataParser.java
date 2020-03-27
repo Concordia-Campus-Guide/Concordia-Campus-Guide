@@ -62,7 +62,7 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
     public List<Route> extractRelevantInfoFromDirectionsResultObj(DirectionsResult result) {
         List<Route> routeOptions = new ArrayList<>();
         for(DirectionsRoute directionsRoute: result.routes) {
-            Route route;
+            Route route = null;
             if(dataRetrieval.transportType.equals(ClassConstants.DRIVING)) {
                 route = new Route(directionsRoute.legs[0].duration.text, directionsRoute.summary, ClassConstants.DRIVING);
                 routeOptions.add(route);
@@ -72,7 +72,12 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
                 routeOptions.add(route);
             }
             else { // TravelMode is TRANSIT
-                route = new Route(directionsRoute.legs[0].departureTime.text, directionsRoute.legs[0].arrivalTime.text, directionsRoute.legs[0].duration.text, ClassConstants.TRANSIT);
+
+                if(directionsRoute.legs[0].departureTime != null && directionsRoute.legs[0].arrivalTime != null)
+                    route = new Route(directionsRoute.legs[0].departureTime.text, directionsRoute.legs[0].arrivalTime.text, directionsRoute.legs[0].duration.text, ClassConstants.TRANSIT);
+                else
+                    route = new Route(directionsRoute.legs[0].duration.text, ClassConstants.TRANSIT);
+
                 routeOptions.add(route);
                 DirectionsStep[] steps = directionsRoute.legs[0].steps;
                 for(DirectionsStep step: steps) {
