@@ -150,7 +150,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                 setupPolygons(mMap);
                 initFloorPlans();
                 uiSettingsForMap(mMap);
-                setLocationToDisplay(mViewModel.getInitialZoomLocation());
+                setFirstLocationToDisplay();
             }
         });
     }
