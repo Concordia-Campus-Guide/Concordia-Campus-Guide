@@ -45,4 +45,18 @@ public class Coordinates {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+
+    /**
+     * This method returns the euclidean distance between this and another point based on the pythagorean theorem.
+     * @param other
+     * @return
+     */
+    public double getEuclideanDistanceFrom(Coordinates other){
+        final double resultLatDiff = Math.abs(this.toListDouble().get(0)
+                - other.toListDouble().get(0));
+        final double resultLongDiff = Math.abs(this.toListDouble().get(1)
+                - other.toListDouble().get(1));
+
+        return Math.sqrt(Math.pow(resultLatDiff, 2) + Math.pow(resultLongDiff, 2));
+    }
 }

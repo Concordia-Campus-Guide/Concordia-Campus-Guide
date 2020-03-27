@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.location.Location;
 
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Global.ApplicationState;
@@ -27,12 +28,15 @@ import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -47,7 +51,9 @@ public class LocationFragmentViewModel extends ViewModel {
     private GeoJsonLayer floorLayer;
     private Map<String, Building> buildings = new HashMap<>();
     private AppDatabase appDatabase;
-    private MutableLiveData<List<WalkingPoint>> poiList = new MutableLiveData<>();
+    private MutableLiveData<PriorityQueue<WalkingPoint>> poiList = new MutableLiveData<>();
+    private BitmapDescriptor currentPOIIcon;
+    private Location currentLocation;
 
     public static final Logger LOGGER = Logger.getLogger("LocationFragmentViewModel");
     public static final String FLOORS_AVAILABLE = "floorsAvailable";
@@ -186,20 +192,7 @@ public class LocationFragmentViewModel extends ViewModel {
      * @return it will BitmapDescriptor object to use it as an icon for the marker on the map.
      */
     public BitmapDescriptor styleMarker(String buildingLabel, Context context){
-        int height = 150;
-        int width = 150;
-        InputStream deckFile = null;
-        BitmapDescriptor smallMarkerIcon = null;
-        try {
-            deckFile = context.getAssets().open("BuildingLabels/" + buildingLabel.toLowerCase()+".png");
-            Bitmap b = BitmapFactory.decodeStream(deckFile);
-            Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
-            smallMarkerIcon = BitmapDescriptorFactory.fromBitmap(smallMarker);
-            deckFile.close();
-        } catch (IOException e) {
-            LOGGER.log(Level.WARNING, e.getMessage(), e);
-        }
-        return  smallMarkerIcon;
+        return getCustomSizedIcon("BuildingLabels/" + buildingLabel.toLowerCase()+".png", context, 150, 150);
     }
 
     /**
@@ -270,14 +263,55 @@ public class LocationFragmentViewModel extends ViewModel {
     }
 
 
-    public void setListOfPOI(@PoiType String poiType) {
-        //TODO: Filter poi_list to only contain the 10 closest POIs
-        List<WalkingPoint> listOfPOI = appDatabase.walkingPointDao().getAllPointsForPointType(poiType);
-        this.poiList.postValue(listOfPOI);
+    public void setListOfPOI(@PoiType String poiType, Context context) {
+        List<WalkingPoint> allPOI = appDatabase.walkingPointDao().getAllPointsForPointType(poiType);
+        setCurrentPOIIcon(poiType, context);
+        this.poiList.postValue(getPOIinOrder(allPOI));
     }
 
-    public LiveData<List<WalkingPoint>> getListOfPOI() {
+    private PriorityQueue<WalkingPoint> getPOIinOrder(List<WalkingPoint> allPOI) {
+        PriorityQueue<WalkingPoint> orderedList = new PriorityQueue<>((WalkingPoint o1, WalkingPoint o2) -> {
+            Coordinates currentCoordinates = new Coordinates(currentLocation.getLatitude(), currentLocation.getLongitude());
+            double distanceFromO1 = o1.getCoordinate().getEuclideanDistanceFrom(currentCoordinates);
+            double distanceFromO2 = o2.getCoordinate().getEuclideanDistanceFrom(currentCoordinates);
+
+            if (distanceFromO1 < distanceFromO2) return -1;
+            else if (distanceFromO1 > distanceFromO2) return 1;
+            return 0;
+        });
+        orderedList.addAll(allPOI);
+        return orderedList;
+    }
+
+
+    LiveData<PriorityQueue<WalkingPoint>> getListOfPOI() {
         return poiList;
     }
 
+    private void setCurrentPOIIcon(@PoiType String poiType, Context context) {
+        currentPOIIcon = getCustomSizedIcon("point_of_interest_icons/poi_" + poiType.toLowerCase() + ".png", context, 60, 60);
+    }
+
+    BitmapDescriptor getCurrentPOIIcon() {
+        return currentPOIIcon;
+    }
+
+    void setCurrentLocation(Location currentLocation) {
+        this.currentLocation = currentLocation;
+    }
+
+    private BitmapDescriptor getCustomSizedIcon(String filename, Context context, int height, int width){
+        InputStream deckFile = null;
+        BitmapDescriptor smallMarkerIcon = null;
+        try {
+            deckFile = context.getAssets().open(filename);
+            Bitmap b = BitmapFactory.decodeStream(deckFile);
+            Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+            smallMarkerIcon = BitmapDescriptorFactory.fromBitmap(smallMarker);
+            deckFile.close();
+        } catch (IOException e) {
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
+        }
+        return smallMarkerIcon;
+    }
 }
