@@ -25,7 +25,8 @@ import java.util.List;
  */
 public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieval, Integer, DirectionsResult> {
 
-    DirectionsApiDataRetrieval dataRetrieval = null;
+    private DirectionsApiDataRetrieval dataRetrieval = null;
+    private List<Route> routeOptions;
 
     /**
      * Parsing the JSON string data to map it to a DirectionsResult model
@@ -42,6 +43,9 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
                     .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                     .create();
             directionsResult = gson.fromJson(dataRetrieval.data, DirectionsResult.class);
+
+            extractListOfRoutesFromDirectionsAPIResponseObject(directionsResult);
+
         } catch (Exception e) {
             Log.e(DirectionsApiDataParser.class.getName(), "Exception using Gson to map JSON to Models: " + e.toString());
         }
@@ -55,37 +59,44 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
      *
      */
     @Override
-    protected void onPostExecute(DirectionsResult result) {
-        dataRetrieval.caller.directionsApiCallBack(result, extractRelevantInfoFromDirectionsResultObj(result));
-    }
+    protected void onPostExecute(DirectionsResult result) { dataRetrieval.caller.directionsApiCallBack(result, routeOptions); }
 
-    public List<Route> extractRelevantInfoFromDirectionsResultObj(DirectionsResult result) {
-        List<Route> routeOptions = new ArrayList<>();
+    public void extractListOfRoutesFromDirectionsAPIResponseObject(DirectionsResult result) {
+        routeOptions = new ArrayList<>();
         for(DirectionsRoute directionsRoute: result.routes) {
-            Route route = null;
-            if(dataRetrieval.transportType.equals(ClassConstants.DRIVING)) {
-                route = new Route(directionsRoute.legs[0].duration.text, directionsRoute.summary, ClassConstants.DRIVING);
-                routeOptions.add(route);
-            }
-            else if (dataRetrieval.transportType.equals(ClassConstants.WALKING)) {
-                route = new Route(directionsRoute.legs[0].duration.text, directionsRoute.summary, ClassConstants.WALKING);
-                routeOptions.add(route);
-            }
-            else { // TravelMode is TRANSIT
-
-                if(directionsRoute.legs[0].departureTime != null && directionsRoute.legs[0].arrivalTime != null)
-                    route = new Route(directionsRoute.legs[0].departureTime.text, directionsRoute.legs[0].arrivalTime.text, directionsRoute.legs[0].duration.text, ClassConstants.TRANSIT);
-                else
-                    route = new Route(directionsRoute.legs[0].duration.text, ClassConstants.TRANSIT);
-
-                routeOptions.add(route);
-                DirectionsStep[] steps = directionsRoute.legs[0].steps;
-                for(DirectionsStep step: steps) {
-                    route.getSteps().add(getTransportType(step));
-                }
+            switch(dataRetrieval.transportType) {
+                case ClassConstants.DRIVING:
+                    extractDurationAndSummary(directionsRoute, ClassConstants.DRIVING);
+                case ClassConstants.WALKING:
+                    extractDurationAndSummary(directionsRoute, ClassConstants.WALKING);
+                case ClassConstants.TRANSIT:
+                    extractTransitInfo(directionsRoute);
             }
         }
-        return routeOptions;
+    }
+
+    private void extractDurationAndSummary(DirectionsRoute directionsRoute, @ClassConstants.TransportType String transportType) {
+        Route route = new Route(directionsRoute.legs[0].duration.text, directionsRoute.summary, transportType);
+        routeOptions.add(route);
+    }
+
+    private void extractTransitInfo(DirectionsRoute directionsRoute) {
+        Route route;
+
+        if(directionsRoute.legs[0].departureTime != null && directionsRoute.legs[0].arrivalTime != null)
+            route = new Route(directionsRoute.legs[0].departureTime.text, directionsRoute.legs[0].arrivalTime.text, directionsRoute.legs[0].duration.text, ClassConstants.TRANSIT);
+        else
+            route = new Route(directionsRoute.legs[0].duration.text, ClassConstants.TRANSIT);
+
+        routeOptions.add(route);
+
+        extractSteps(directionsRoute.legs[0].steps, route);
+    }
+
+    private void extractSteps(DirectionsStep[] steps, Route route) {
+        for(DirectionsStep step: steps) {
+            route.getSteps().add(getTransportType(step));
+        }
     }
 
     private TransportType getTransportType(DirectionsStep step) {
