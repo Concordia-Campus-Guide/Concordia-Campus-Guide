@@ -10,11 +10,14 @@ import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServ
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.Coordinates;
+import com.example.concordia_campus_guide.Models.Direction;
 import com.example.concordia_campus_guide.Models.Floor;
 import com.example.concordia_campus_guide.Models.Floors;
 import com.example.concordia_campus_guide.Models.ListOfCoordinates;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.Rooms;
+import com.example.concordia_campus_guide.Models.Routes.Walk;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -120,5 +123,11 @@ public class TestUtils {
 
         return directionsStep;
     }
+
+    public Direction direction = new Direction(
+            new LatLng(-73.57907921075821, 45.49702057370776),
+            new LatLng(-73.57921063899994, 45.49707133596979),
+            new Walk(getDirectionStepsObject()), "This is a description");
+
 
 }

@@ -37,7 +37,7 @@ public class ViewModelFactoryInstrumentalTest {
         assertNotNull(viewModelFactory.create(SearchActivityViewModel.class));
         assertNotNull(viewModelFactory.create(InfoCardFragmentViewModel.class));
         assertNotNull(viewModelFactory.create(RoutesActivityViewModel.class));
-        assertNull(viewModelFactory.create(LocationFragmentViewModel.class));
+        assertNotNull(viewModelFactory.create(LocationFragmentViewModel.class));
     }
 
 }
