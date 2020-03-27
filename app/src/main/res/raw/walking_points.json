@@ -1151,7 +1151,7 @@
         88,
         143
       ],
-      "placeCode": ""
+      "placeCode": "MB"
     },
     {
       "id": 88,
@@ -1439,45 +1439,6 @@
       "placeCode": "elevators-2"
     },
     {
-      "id": 108,
-      "coordinate": {
-        "longitude": 45.4952748880733,
-        "latitude": -73.5790456831455
-      },
-      "floorCode": "MB-S2",
-      "pointType": "ELEVATOR",
-      "connectedPointsId": [
-        115
-      ],
-      "placeCode": ""
-    },
-    {
-      "id": 109,
-      "coordinate": {
-        "longitude": 45.4952549115514,
-        "latitude": -73.5790698230266
-      },
-      "floorCode": "MB-S2",
-      "pointType": "ELEVATOR",
-      "connectedPointsId": [
-        115
-      ],
-      "placeCode": ""
-    },
-    {
-      "id": 110,
-      "coordinate": {
-        "longitude": 45.4952295296074,
-        "latitude": -73.5790141671896
-      },
-      "floorCode": "MB-S2",
-      "pointType": "ELEVATOR",
-      "connectedPointsId": [
-        115
-      ],
-      "placeCode": ""
-    },
-    {
       "id": 111,
       "coordinate": {
         "longitude": 45.4951966270703,
@@ -1530,10 +1491,7 @@
       "pointType": "NONE",
       "connectedPointsId": [
         113,
-        110,
         107,
-        108,
-        109,
         117,
         308
       ],
@@ -2056,8 +2014,8 @@
     {
       "id": 157,
       "coordinate": {
-        "longitude": 45.4942104821088,
-        "latitude": -73.5768372192978
+        "longitude": 45.4972934203281,
+        "latitude": -73.5787627100944
       },
       "floorCode": "H-1",
       "pointType": "ELEVATOR",
@@ -2641,7 +2599,7 @@
         281,
         82
       ],
-      "placeCode": ""
+      "placeCode": "staff elevators-1"
     },
     {
       "id": 204,
@@ -4005,7 +3963,7 @@
         341,
         342
       ],
-      "placeCode": ""
+      "placeCode": "MB"
     },
     {
       "id": 341,
@@ -4437,7 +4395,7 @@
       "connectedPointsId": [
         416
       ],
-      "placeCode": "804"
+      "placeCode": "staff washrooms-1"
     },
     {
       "id": 376,
@@ -5086,7 +5044,7 @@
         659,
         801
       ],
-      "placeCode": ""
+      "placeCode": "VL"
     },
     {
       "id": 601,
