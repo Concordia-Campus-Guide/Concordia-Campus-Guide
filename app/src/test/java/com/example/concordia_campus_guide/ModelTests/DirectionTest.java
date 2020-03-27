@@ -16,7 +16,7 @@ public class DirectionTest {
 
     @Before
     public void init() {
-        direction = new Direction(new LatLng(-73.57907921075821, 45.49702057370776), new LatLng(-73.57921063899994, 45.49707133596979), new Walk(), "This is a description", 20);
+        direction = new Direction(new LatLng(-73.57907921075821, 45.49702057370776), new LatLng(-73.57921063899994, 45.49707133596979), new Walk(), "This is a description");
     }
 
     @Test

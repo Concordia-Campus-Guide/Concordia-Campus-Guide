@@ -9,13 +9,13 @@ public class Direction {
     private LatLng end;
     private Date startTime;
     private Date endTime;
-    private TransportType type;
+    private TransportType transportType;
     private String description;
 
-    public Direction(LatLng start, LatLng end, TransportType type, String description) {
+    public Direction(LatLng start, LatLng end, TransportType transportType, String description) {
         this.start = start;
         this.end = end;
-        this.type = type;
+        this.transportType = transportType;
         this.description = description;
     }
 
@@ -35,12 +35,12 @@ public class Direction {
         this.end = end;
     }
 
-    public TransportType getType() {
-        return type;
+    public TransportType getTransportType() {
+        return transportType;
     }
 
-    public void setType(TransportType type) {
-        this.type = type;
+    public void setTransportType(TransportType transportType) {
+        this.transportType = transportType;
     }
 
     public String getDescription() {
