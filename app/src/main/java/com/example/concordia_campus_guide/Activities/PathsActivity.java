@@ -61,8 +61,8 @@ public class PathsActivity extends AppCompatActivity {
         setBackButtonOnClickListener();
 
 
-        locationFragment.setIndoorPaths(from, to);
-        locationFragment.drawOutdoorPaths(parseDirectionResults());
+//        locationFragment.setIndoorPaths(from, to);
+//        locationFragment.drawOutdoorPaths(parseDirectionResults());
 //        locationFragment.setLocationToDisplay(new LatLng(-73.57901685, 45.49761115));
 
         View pathInfoCard = findViewById(R.id.path_info_card);
