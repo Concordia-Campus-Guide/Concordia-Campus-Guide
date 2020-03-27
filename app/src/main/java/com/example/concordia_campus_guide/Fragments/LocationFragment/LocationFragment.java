@@ -332,14 +332,16 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                if (marker.getTag().toString().contains(POI_TAG)) {
-                    //TODO: Use the directions api to get directions to this point of interest
-                    marker.showInfoWindow();
-                } else {
-                    Building building = mViewModel.getBuildingFromeCode(marker.getTag().toString());
-                    String buildingCode = (marker.getTag()).toString();
-                    ((MainActivity) getActivity()).showInfoCard(buildingCode);
-                    onBuildingClick(building);
+                if (marker.getTag() != null) {
+                    if (marker.getTag().toString().contains(POI_TAG)) {
+                        //TODO: Use the directions api to get directions to this point of interest
+                        marker.showInfoWindow();
+                    } else {
+                        Building building = mViewModel.getBuildingFromeCode(marker.getTag().toString());
+                        String buildingCode = (marker.getTag()).toString();
+                        ((MainActivity) getActivity()).showInfoCard(buildingCode);
+                        onBuildingClick(building);
+                    }
                 }
                 return false;
             }

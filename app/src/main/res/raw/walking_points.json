@@ -2390,19 +2390,6 @@
       "placeCode": "961.07"
     },
     {
-      "id": 181,
-      "coordinate": {
-        "longitude": 45.4584776424937,
-        "latitude": -73.638241700828
-      },
-      "floorCode": "VL-1",
-      "pointType": "NONE",
-      "connectedPointsId": [
-        600
-      ],
-      "placeCode": "shuttle"
-    },
-    {
       "id": 182,
       "coordinate": {
         "longitude": 45.4975514601016,
