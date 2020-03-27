@@ -77,7 +77,7 @@ public class RoutesActivity extends AppCompatActivity {
         setBackButtonOnClick();
 
         // get all possible routes
-        mViewModel.getAllRoutes();
+        getAllRoutes();
     }
 
     public void onClickTo(View v){
@@ -92,12 +92,12 @@ public class RoutesActivity extends AppCompatActivity {
 
     public void onClickTransit(View v) {
         mViewModel.setTransportType(ClassConstants.TRANSIT);
-        mViewModel.getAllRoutes();
+        getAllRoutes();
     }
 
     public void onClickCar(View v) {
         mViewModel.setTransportType(ClassConstants.DRIVING);
-        mViewModel.getAllRoutes();
+        getAllRoutes();
     }
 
     public void onClickDisability(View v) {
@@ -110,7 +110,7 @@ public class RoutesActivity extends AppCompatActivity {
 
     public void onClickWalk(View v) {
         mViewModel.setTransportType(ClassConstants.WALKING);
-        mViewModel.getAllRoutes();
+        getAllRoutes();
     }
 
     @Override
@@ -163,5 +163,22 @@ public class RoutesActivity extends AppCompatActivity {
         List<Shuttle> shuttles = mViewModel.getShuttles();
         String content = mViewModel.getShuttleDisplayText(shuttles);
         this.content.setText(content);
+    }
+
+    /**
+     * Calls the google Maps Directions API
+     */
+    public void getAllRoutes() {
+        Coordinates fromCenterCoordinates = mViewModel.getFrom().getCenterCoordinates();
+        Coordinates toCenterCoordinates = mViewModel.getTo().getCenterCoordinates();
+
+        if(fromCenterCoordinates != null && toCenterCoordinates != null) {
+            LatLng from = new LatLng(fromCenterCoordinates.getLatitude(), fromCenterCoordinates.getLongitude());
+            LatLng to = new LatLng(toCenterCoordinates.getLatitude(), toCenterCoordinates.getLongitude());
+            String transportType = mViewModel.getTransportType();
+
+            String url = UrlBuilder.build(from, to, transportType);
+            new DirectionsApiDataRetrieval(RoutesActivity.this).execute(url, transportType);
+        }
     }
 }

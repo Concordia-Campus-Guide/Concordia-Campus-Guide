@@ -27,7 +27,6 @@ public class RoutesActivityViewModel extends ViewModel {
     private List<Shuttle> shuttles;
     private final String noShuttles = "No available routes using the shuttle service";
     private DirectionsResult directionsResult;
-
     private List<Route> routeOptions;
 
     public RoutesActivityViewModel(AppDatabase appDB) {
@@ -96,7 +95,6 @@ public class RoutesActivityViewModel extends ViewModel {
 
     public void setRouteOptions(List<Route> routeOptions) { this.routeOptions = routeOptions; }
 
-
     public String getTransportType() {
         return transportType;
     }
@@ -105,19 +103,5 @@ public class RoutesActivityViewModel extends ViewModel {
         this.transportType = transportType;
     }
 
-    /**
-     * Calls the google Maps Directions API
-     */
-    public void getAllRoutes() {
-        Coordinates fromCenterCoordinates = from.getCenterCoordinates();
-        Coordinates toCenterCoordinates = to.getCenterCoordinates();
 
-        if(fromCenterCoordinates != null && toCenterCoordinates != null) {
-            LatLng from = new LatLng(fromCenterCoordinates.getLatitude(), fromCenterCoordinates.getLongitude());
-            LatLng to = new LatLng(toCenterCoordinates.getLatitude(), toCenterCoordinates.getLongitude());
-
-            String url = UrlBuilder.build(from, to, transportType);
-            new DirectionsApiDataRetrieval(RoutesActivityViewModel.this).execute(url, transportType);
-        }
-    }
 }

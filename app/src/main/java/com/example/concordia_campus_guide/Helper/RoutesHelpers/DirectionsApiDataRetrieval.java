@@ -17,11 +17,11 @@ import java.net.URL;
  */
 public class DirectionsApiDataRetrieval extends AsyncTask<String, Void, String> {
 
-    RoutesActivityViewModel caller;
+    RoutesActivity caller;
     String data;
     String transportType;
 
-    public DirectionsApiDataRetrieval(RoutesActivityViewModel caller) { this.caller = caller; }
+    public DirectionsApiDataRetrieval(RoutesActivity caller) { this.caller = caller; }
 
     /**
      * Fetching the data from web service in the background
