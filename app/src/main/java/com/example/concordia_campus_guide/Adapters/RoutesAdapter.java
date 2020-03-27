@@ -1,4 +1,5 @@
 package com.example.concordia_campus_guide.Adapters;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -151,13 +152,13 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
     }
 
     private int pickCorrectSubwayColor(String color) {
-        if(color.equalsIgnoreCase("#0074b9"))
+        if(color.equalsIgnoreCase(context.getResources().getString(R.string.subwayBlue)))
             return R.drawable.ic_subway_blue;
-        else if(color.equalsIgnoreCase("#f27f2f"))
+        else if(color.equalsIgnoreCase(context.getResources().getString(R.string.subwayOrange)))
             return R.drawable.ic_subway_orange;
-        else if(color.equalsIgnoreCase("#00a556"))
+        else if(color.equalsIgnoreCase(context.getResources().getString(R.string.subwayGreen)))
             return R.drawable.ic_subway_green;
-        else if(color.equalsIgnoreCase("#f2d101"))
+        else if(color.equalsIgnoreCase(context.getResources().getString(R.string.subwayYellow)))
             return R.drawable.ic_subway_yellow;
 
         return -1;
