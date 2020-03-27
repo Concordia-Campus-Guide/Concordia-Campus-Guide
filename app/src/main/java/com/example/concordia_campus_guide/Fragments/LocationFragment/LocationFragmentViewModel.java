@@ -207,6 +207,10 @@ public class LocationFragmentViewModel extends ViewModel {
     public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, Context context, GoogleMap mMap) {
         String fileName = buildingCode.toLowerCase()+"_"+floor.toLowerCase();
         groundOverlay.setImage(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+fileName+".png"));
+        setFloorMarkers(buildingCode, floor, context, mMap);
+    }
+
+    public void setFloorMarkers(String buildingCode, String floor, Context context, GoogleMap mMap) {
         if (floorLayer != null) {
             floorLayer.removeLayerFromMap();
         }
@@ -215,7 +219,6 @@ public class LocationFragmentViewModel extends ViewModel {
         getPointStyle(floorLayer);
         floorLayer.addLayerToMap();
     }
-
 
     public Building getBuildingFromeCode(String buildingCode) {
         return buildings.get(buildingCode);
