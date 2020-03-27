@@ -1,35 +1,33 @@
 package com.example.concordia_campus_guide.ModelTests;
-
-import com.example.concordia_campus_guide.DirectionStepsJson;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsResult;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
-import com.example.concordia_campus_guide.Models.Direction;
 import com.example.concordia_campus_guide.Models.Routes.Walk;
-import com.example.concordia_campus_guide.Models.Shuttle;
-import com.example.concordia_campus_guide.Models.Shuttles;
+
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.MockitoAnnotations;
 
+
 import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertNotNull;
 
 public class WalkTest {
     private Walk walk;
-    private DirectionStepsJson directionStepsJson;
+    private TestUtils testUtils;
 
     @Before
     public void init() {
-        MockitoAnnotations.initMocks(this);
-        walk = new Walk();
-        directionStepsJson = new DirectionStepsJson();
-        DirectionStepsJson.retrieveBody("test_walking_points.json");
-        String s = "Hello;";
+        testUtils = new TestUtils();
     }
 
     @Test
-    public void testShuttleCampus() {
-        assertNotNull(null);
+    public void getDurationTest() {
+        walk = new Walk(testUtils.getDirectionStepsObject());
+        assertEquals(testUtils.getDirectionStepsObject().duration.text,walk.getDuration());
+    }
+
+    @Test
+    public void setDurationTest(){
+        walk = new Walk();
+        walk.setDuration("2 mins");
+        assertEquals(testUtils.getDirectionStepsObject().duration.text,walk.getDuration());
     }
 }

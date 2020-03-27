@@ -6,8 +6,6 @@ public class Train extends TransportType {
 
     private String trainShortName;
 
-    public Train() {}
-
     public Train(DirectionsStep step) {
         trainShortName = step.transitDetails.line.shortName;
     }
@@ -16,7 +14,4 @@ public class Train extends TransportType {
         return trainShortName;
     }
 
-    public void setTrainShortName(String trainShortName) {
-        this.trainShortName = trainShortName;
-    }
 }

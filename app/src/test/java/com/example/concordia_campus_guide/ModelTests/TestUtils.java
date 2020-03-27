@@ -5,6 +5,8 @@ import androidx.room.Room;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.Distance;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.Duration;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TransitDetails;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TransitLine;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.Coordinates;
@@ -100,6 +102,23 @@ public class TestUtils {
     ArrayList<RoomModel> roomList = new ArrayList<RoomModel>(Arrays.asList(room1, room2));
     public Rooms rooms = new Rooms(roomList);
 
+    public DirectionsStep getDirectionStepsObject(){
+        DirectionsStep directionsStep = new DirectionsStep();
 
+        directionsStep.distance = new Distance();
+        directionsStep.distance.value =  5000;
+        directionsStep.distance.text  = "5000 m";
+
+        directionsStep.duration = new Duration();
+        directionsStep.duration.value = 142;
+        directionsStep.duration.text  = "2 mins";
+
+        directionsStep.transitDetails = new TransitDetails();
+        directionsStep.transitDetails.line = new TransitLine();
+        directionsStep.transitDetails.line.shortName = "128";
+        directionsStep.transitDetails.line.color = "orange";
+
+        return directionsStep;
+    }
 
 }
