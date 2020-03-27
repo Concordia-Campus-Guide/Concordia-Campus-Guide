@@ -117,13 +117,20 @@ public class SearchActivity extends AppCompatActivity {
             nextClassText.setText(eventString);
             eventLocation = calendarEvent.getLocation();
             Place place = mViewModel.getRoomFromDB(eventLocation);
-            nextClassArrow.setVisibility(View.VISIBLE);
-            nextClassRow.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    openRoutesPage(place);
+
+            if(!eventString.equals("Event is incorrectly formatted")){
+                if(place == null){
+                    nextClassText.setText("Location not found");
+                }else {
+                    nextClassArrow.setVisibility(View.VISIBLE);
+                    nextClassRow.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            openRoutesPage(place);
+                        }
+                    });
                 }
-            });
+            }
         }
 
     }

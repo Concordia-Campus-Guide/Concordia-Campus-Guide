@@ -20,6 +20,7 @@ import com.example.concordia_campus_guide.Models.CalendarEvent;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
 public class CalendarViewModel extends AndroidViewModel {
     Context context;
@@ -55,14 +56,21 @@ public class CalendarViewModel extends AndroidViewModel {
 
     public String getNextClassString(CalendarEvent event){
         String nextClassString = "";
-            if(event != null){
-                Date eventDate = new Date((Long.parseLong(event.getStartTime())));
-                String timeUntil = getTimeUntilString(eventDate.getTime(), System.currentTimeMillis());
-                nextClassString = event.getTitle() +  " in " + timeUntil;
-            }
+        if(incorrectlyFormatted(event.getLocation())){
+            return "Event is incorrectly formatted";
+        }
+        if(event != null){
+            Date eventDate = new Date((Long.parseLong(event.getStartTime())));
+            String timeUntil = getTimeUntilString(eventDate.getTime(), System.currentTimeMillis());
+            nextClassString = event.getTitle() +  " in " + timeUntil;
+        }
         return  nextClassString;
     }
 
+    private boolean incorrectlyFormatted(String location) {
+        String pattern = "([A-z]+-\\d+, \\d+)";
+        return !location.matches(pattern);
+    }
 
     public Cursor getCalendarCursor() {
         Uri.Builder eventsUriBuilder = CalendarContract.Instances.CONTENT_URI
