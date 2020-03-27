@@ -83,14 +83,16 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
 
     // Helper methods for setting UI elements in the Routes Overview section of the Routes Activity page
     private void setUIElements(Route route) {
-
         switch(route.getMainTransportType()) {
             case ClassConstants.WALKING:
                 setUIWalk(route);
+                break;
             case ClassConstants.DRIVING:
                 setUIDriving(route);
+                break;
             case ClassConstants.TRANSIT:
                 setUITransit(route);
+                break;
         }
 
         setBottomLayout(route);
