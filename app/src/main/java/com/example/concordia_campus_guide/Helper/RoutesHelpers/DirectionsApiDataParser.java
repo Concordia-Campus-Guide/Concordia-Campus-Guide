@@ -44,8 +44,6 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
                     .create();
             directionsResult = gson.fromJson(dataRetrieval.data, DirectionsResult.class);
 
-            extractListOfRoutesFromDirectionsAPIResponseObject(directionsResult);
-
         } catch (Exception e) {
             Log.e(DirectionsApiDataParser.class.getName(), "Exception using Gson to map JSON to Models: " + e.toString());
         }
@@ -59,9 +57,11 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
      *
      */
     @Override
-    protected void onPostExecute(DirectionsResult result) { dataRetrieval.caller.directionsApiCallBack(result, routeOptions); }
+    protected void onPostExecute(DirectionsResult result) {
+        dataRetrieval.caller.directionsApiCallBack(result, extractListOfRoutesFromDirectionsAPIResponseObject(result));
+    }
 
-    public void extractListOfRoutesFromDirectionsAPIResponseObject(DirectionsResult result) {
+    public List<Route> extractListOfRoutesFromDirectionsAPIResponseObject(DirectionsResult result) {
         routeOptions = new ArrayList<>();
         for(DirectionsRoute directionsRoute: result.routes) {
             switch(dataRetrieval.transportType) {
@@ -73,8 +73,11 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
                     extractTransitInfo(directionsRoute);
             }
         }
+
+        return routeOptions;
     }
 
+    // Helper methods
     private void extractDurationAndSummary(DirectionsRoute directionsRoute, @ClassConstants.TransportType String transportType) {
         Route route = new Route(directionsRoute.legs[0].duration.text, directionsRoute.summary, transportType);
         routeOptions.add(route);
@@ -110,16 +113,22 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
             case BICYCLING:
                 return null;
             case TRANSIT:
-                if(step.transitDetails.line.vehicle.name.equalsIgnoreCase("bus")) {
-                    return new Bus(step);
-                }
-                else if (step.transitDetails.line.vehicle.name.equalsIgnoreCase("subway")) {
-                    return new Subway(step);
-                }
-                else if (step.transitDetails.line.vehicle.name.equalsIgnoreCase("train")) {
-                    return new Train(step);
-                }
+                return getTransitType(step);
         }
+
+        return null;
+    }
+
+    private TransportType getTransitType(DirectionsStep step) {
+        switch(step.transitDetails.line.vehicle.name) {
+            case "Bus":
+                return new Bus(step);
+            case "Subway":
+                return new Subway(step);
+            case "Train":
+                return new Train(step);
+        }
+
         return null;
     }
 }
