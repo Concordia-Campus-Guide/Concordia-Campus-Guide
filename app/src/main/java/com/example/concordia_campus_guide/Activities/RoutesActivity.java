@@ -20,7 +20,6 @@ import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.Routes.Route;
 import com.example.concordia_campus_guide.Models.Shuttle;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
-import com.example.concordia_campus_guide.Models.Shuttle;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -35,6 +34,12 @@ public class RoutesActivity extends AppCompatActivity {
     ListView allRoutes;
     RoutesAdapter adapter;
 
+    ImageButton transitButton;
+    ImageButton shuttleButton;
+    ImageButton walkButton;
+    ImageButton carButton;
+    ImageButton disabilityButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // set up activity
@@ -48,6 +53,13 @@ public class RoutesActivity extends AppCompatActivity {
         fromText = findViewById(R.id.fromText);
         toText = findViewById(R.id.toText);
         content = findViewById(R.id.content);
+
+        // set up listeners for buttons
+        transitButton = findViewById(R.id.filterButtonTransit);
+        shuttleButton = findViewById(R.id.filterButtonShuttle);
+        walkButton = findViewById(R.id.filterButtonWalk);
+        carButton = findViewById(R.id.filterButtonCar);
+        disabilityButton = findViewById(R.id.filterButtonDisability);
 
         // setup toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -68,12 +80,6 @@ public class RoutesActivity extends AppCompatActivity {
         getRouteOptions();
     }
 
-    private void setRoutesAdapter(){
-        // Android adapter for list view
-        adapter = new RoutesAdapter(this, R.layout.list_routes, mViewModel.getRouteOptions());
-        allRoutes.setAdapter(adapter);
-    }
-
     public void onClickTo(View v){
         SelectingToFromState.setSelectToToTrue();
         openSearchPage();
@@ -82,6 +88,29 @@ public class RoutesActivity extends AppCompatActivity {
     public void onClickFrom(View v){
         SelectingToFromState.setSelectFromToTrue();
         openSearchPage();
+    }
+
+    public void onClickTransit(View v) {
+        mViewModel.setTransportType(ClassConstants.TRANSIT);
+        getRouteOptions();
+    }
+
+    public void onClickCar(View v) {
+        mViewModel.setTransportType(ClassConstants.DRIVING);
+        getRouteOptions();
+    }
+
+    public void onClickDisability(View v) {
+
+    }
+
+    public void onClickShuttle(View v) {
+        getShuttle(v);
+    }
+
+    public void onClickWalk(View v) {
+        mViewModel.setTransportType(ClassConstants.WALKING);
+        getRouteOptions();
     }
 
     @Override
@@ -103,12 +132,17 @@ public class RoutesActivity extends AppCompatActivity {
         setRoutesAdapter();
     }
 
+
+    private void setRoutesAdapter(){
+        // Android adapter for list view
+        adapter = new RoutesAdapter(this, R.layout.list_routes, mViewModel.getRouteOptions());
+        allRoutes.setAdapter(adapter);
+    }
+
+
     private void setBackButtonOnClick(){
         ImageButton backButton = this.findViewById(R.id.routesPageBackButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { exitSelectToFrom(); }
-        });
+        backButton.setOnClickListener(v -> exitSelectToFrom());
     }
 
     private void exitSelectToFrom(){
@@ -131,6 +165,9 @@ public class RoutesActivity extends AppCompatActivity {
         this.content.setText(content);
     }
 
+    /**
+     * Calls the google Maps Directions API
+     */
     public void getRouteOptions() {
         Coordinates fromCenterCoordinates = mViewModel.getFrom().getCenterCoordinates();
         Coordinates toCenterCoordinates = mViewModel.getTo().getCenterCoordinates();
@@ -138,7 +175,7 @@ public class RoutesActivity extends AppCompatActivity {
         if(fromCenterCoordinates != null && toCenterCoordinates != null) {
             LatLng from = new LatLng(fromCenterCoordinates.getLatitude(), fromCenterCoordinates.getLongitude());
             LatLng to = new LatLng(toCenterCoordinates.getLatitude(), toCenterCoordinates.getLongitude());
-            String transitType = ClassConstants.TRANSIT; // TODO: #163: dynamically change the transit type depending on the mode of transportation icon clicked on the RoutesActivity page. By default, it will be TRANSIT.
+            String transitType = mViewModel.getTransportType();
 
             String url = UrlBuilder.build(from, to, transitType);
             new DirectionsApiDataRetrieval(RoutesActivity.this).execute(url, transitType);

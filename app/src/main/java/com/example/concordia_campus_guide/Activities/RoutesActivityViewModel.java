@@ -1,6 +1,8 @@
 package com.example.concordia_campus_guide.Activities;
 
 import androidx.lifecycle.ViewModel;
+
+import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsResult;
 import com.example.concordia_campus_guide.Models.Place;
@@ -16,6 +18,7 @@ public class RoutesActivityViewModel extends ViewModel {
     private AppDatabase appDB;
     private Place from;
     private Place to;
+    private @ClassConstants.TransportType String transportType = ClassConstants.DRIVING; // default value
     private List<Shuttle> shuttles;
     private final String noShuttles = "No available routes using the shuttle service";
     private DirectionsResult directionsResult;
@@ -88,4 +91,12 @@ public class RoutesActivityViewModel extends ViewModel {
 
     public void setRouteOptions(List<Route> routeOptions) { this.routeOptions = routeOptions; }
 
+
+    public String getTransportType() {
+        return transportType;
+    }
+
+    public void setTransportType(String transportType) {
+        this.transportType = transportType;
+    }
 }
