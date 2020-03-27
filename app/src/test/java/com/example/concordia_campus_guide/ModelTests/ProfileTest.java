@@ -1,5 +1,6 @@
 package com.example.concordia_campus_guide.ModelTests;
 
+import com.example.concordia_campus_guide.Models.Language;
 import com.example.concordia_campus_guide.Models.Profile;
 
 import org.junit.Before;
@@ -32,8 +33,9 @@ public class ProfileTest {
     }
 
     @Test
-    public void getAndSetlanguageTest(){
-        assertEquals(profile.getLanguage(), null);
+    public void getAndSetLanguageTest(){
+        profile.setLanguage(Language.EN);
+        assertEquals(Language.EN, profile.getLanguage());
     }
 
 }

@@ -15,6 +15,10 @@ public class Floors {
         return Floors;
     }
 
+    public void setFloors(List<Floor> Floors){
+        this.Floors = Floors;
+    }
+
     public List<Place> getPlaces(){
         List<Place> places = new ArrayList<Place>();
         for(Floor floor: Floors){
