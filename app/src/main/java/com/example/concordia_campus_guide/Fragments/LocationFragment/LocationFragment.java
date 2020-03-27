@@ -22,6 +22,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.concordia_campus_guide.Activities.MainActivity;
+import com.example.concordia_campus_guide.Activities.PathsActivity;
+import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
@@ -46,6 +48,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
+
+import org.mortbay.jetty.Main;
 
 import java.util.HashMap;
 import java.util.List;
@@ -88,6 +92,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.location_fragment_fragment, container, false);
         initComponent(rootView);
+        mViewModel = ViewModelProviders.of(getActivity(), new ViewModelFactory(this.getActivity().getApplication())).get(LocationFragmentViewModel.class);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
         getLocationPermission();
@@ -308,7 +313,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                     Building building = mViewModel.getBuildingFromGeoJsonFeature(geoJsonFeature);
                     onBuildingClick(building);
                     String buildingCode = geoJsonFeature.getProperty("code");
-                    ((MainActivity) getActivity()).showInfoCard(buildingCode);
+                    if(getActivity() instanceof MainActivity) ((MainActivity) getActivity()).showInfoCard(buildingCode);
                 }
             }
         });
@@ -344,9 +349,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             @Override
             public boolean onMarkerClick(Marker marker) {
                 Building building = mViewModel.getBuildingFromeCode(marker.getTag().toString());
-                //TODO: Make function that pops up the info card for the building (via the building-code)
                 String buildingCode = (marker.getTag()).toString();
-                ((MainActivity) getActivity()).showInfoCard(buildingCode);
+                if(getActivity() instanceof MainActivity) ((MainActivity) getActivity()).showInfoCard(buildingCode);
                 onBuildingClick(building);
                 return false;
             }
