@@ -71,9 +71,9 @@
 //        Thread.sleep(1500);
 //
 //        ViewInteraction scrollView = onView(
-//                allOf(withId(R.id.info_card),
+//                allOf(withId(R.id.bottom_card_scroll_view),
 //                        childAtPosition(
-//                                allOf(withId(R.id.info_card_coordinator_layout),
+//                                allOf(withId(R.id.bottom_card_coordinator_layout),
 //                                        childAtPosition(
 //                                                IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class),
 //                                                1)),

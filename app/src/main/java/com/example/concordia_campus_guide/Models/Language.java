@@ -1,5 +1,5 @@
 package com.example.concordia_campus_guide.Models;
 
-enum Language {
+public enum Language {
     FR, EN
 }

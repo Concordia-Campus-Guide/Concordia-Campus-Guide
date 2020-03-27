@@ -1,6 +1,7 @@
 package com.example.concordia_campus_guide.Database.Daos;
 
 import com.example.concordia_campus_guide.Database.Converters.EnumToStringConverter;
+import com.example.concordia_campus_guide.Models.PoiType;
 import com.example.concordia_campus_guide.Models.PointType;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import java.util.List;
@@ -25,6 +26,9 @@ public interface WalkingPointDao {
     @TypeConverters(EnumToStringConverter.class)
     @Query("SELECT * FROM walkingPoints WHERE floor_code =:floorCode AND point_type=:pointType")
     List<WalkingPoint> getAllAccessPointsOnFloor(String floorCode, PointType pointType);
+
+    @Query("SELECT * FROM walkingPoints WHERE point_type=:pointType")
+    List<WalkingPoint> getAllPointsForPointType(@PoiType String pointType);
 
     @Insert
     void insertAll(List<WalkingPoint> walkingPoints);

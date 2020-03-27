@@ -12,11 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.concordia_campus_guide.Activities.MainActivity;
@@ -24,9 +26,9 @@ import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
+import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.Models.Building;
-import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
@@ -38,10 +40,12 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.maps.android.geojson.GeoJsonFeature;
@@ -49,6 +53,7 @@ import com.google.maps.android.geojson.GeoJsonLayer;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 
@@ -57,6 +62,9 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     MapView mMapView;
 
     private Location currentLocation;
+
+    private ImageButton myLocationBtn;
+
     private GoogleMap mMap;
     private LocationFragmentViewModel mViewModel;
     private GeoJsonLayer mLayer;
@@ -66,7 +74,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private FusedLocationProviderClient fusedLocationProviderClient;
 
     private static final String TAG = "LocationFragment";
-    private Boolean myLocationPermissionsGranted = false;
+    private boolean myLocationPermissionsGranted = false;
     private HashMap<String, GroundOverlay> buildingsGroundOverlays;
     private FloorPickerAdapter currentFloorPickerAdapter;
 
@@ -81,14 +89,12 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.location_fragment_fragment, container, false);
-        getLocationPermission();
         initComponent(rootView);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
-
+        getLocationPermission();
         initMap();
         setupClickListeners();
-        getLocationPermission();
         updateLocationEvery5Seconds();
 
         mViewModel = ViewModelProviders.of(this).get(com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel.class);
@@ -102,10 +108,11 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         mMapView = rootView.findViewById(R.id.mapView);
         sgwBtn = rootView.findViewById(R.id.SGWBtn);
         loyolaBtn = rootView.findViewById(R.id.loyolaBtn);
+        myLocationBtn = rootView.findViewById(R.id.myLocation);
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
         mFloorPickerGv = rootView.findViewById(R.id.FloorPickerGv);
         mFloorPickerGv.setVisibility(View.GONE);
         buildingsGroundOverlays = new HashMap<>();
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
     }
 
     private void setupFloorPickerAdapter(Building building) {
@@ -113,11 +120,14 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
         currentFloorPickerAdapter = new FloorPickerAdapter(getContext(), building.getAvailableFloors(), building.getBuildingCode(), this);
         mFloorPickerGv.setAdapter(currentFloorPickerAdapter);
+        mViewModel.setFloorMarkers(building.getBuildingCode(), building.getAvailableFloors().get(building.getAvailableFloors().size() - 1), getContext(), mMap);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mViewModel = ViewModelProviders.of(getActivity(), new ViewModelFactory(this.getActivity().getApplication())).get(LocationFragmentViewModel.class);
+        setupPOIListListener();
        // mViewModel = ViewModelProviders.of(this).get(com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel.class);
     }
 
@@ -130,7 +140,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
         } catch (Exception e) {
-            Log.e(TAG,e.getMessage());
+            Log.e(TAG, e.getMessage());
         }
         mMapView.getMapAsync(new OnMapReadyCallback() {
             @Override
@@ -146,42 +156,55 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     }
 
 
-    public void setLocationToDisplay(final LatLng zoomLocation){
-        setLocationToDisplayOnSuccess(zoomLocation);
-        setLocationToDisplayOnFailure(zoomLocation);
+    private void setFirstLocationToDisplay() {
+        setFirstLocationToDisplayOnSuccess();
+        setFirstLocationToDisplayOnFailure();
     }
 
-    private void setLocationToDisplayOnSuccess(final LatLng zoomLocation){
+    private void setFirstLocationToDisplayOnSuccess() {
         fusedLocationProviderClient.getLastLocation()
                 .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
                     @Override
                     public void onSuccess(Location location) {
                         if (location != null) {
-                            zoomInLocation(new LatLng(location.getLatitude(),location.getLongitude()));
-                        }
-                        else {
-                            zoomInLocation(zoomLocation);
+                            mMap.setMyLocationEnabled(true);
+                            zoomInLocation(new LatLng(location.getLatitude(), location.getLongitude()));
+                        } else {
+                            zoomInLocation(mViewModel.getInitialZoomLocation());
                         }
                     }
                 });
     }
-    private void setLocationToDisplayOnFailure(final LatLng zoomLocation){
+
+    private void setFirstLocationToDisplayOnFailure() {
         fusedLocationProviderClient.getLastLocation().addOnFailureListener(getActivity(), new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                zoomInLocation(zoomLocation);
+                zoomInLocation(mViewModel.getInitialZoomLocation());
             }
         });
     }
 
+    private void setCurrentLocationBtn() {
+        myLocationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mFloorPickerGv.setVisibility(View.GONE);
+                popUpRequestPermission();
+            }
+        });
+    }
 
     /**
      * The purpose of this method is to figure the style of the map to display
      */
     private void initFloorPlans() {
-        HashMap<String, Building> temp = mViewModel.getBuildings();
-        for(String key: temp.keySet()){
-            if (temp.get(key).getGroundOverlayOption() != null)
+        Map<String, Building> temp = mViewModel.getBuildings();
+        for (Map.Entry<String, Building> entry : temp.entrySet()) {
+            String key = entry.getKey();
+            Building value = entry.getValue();
+
+            if (value.getGroundOverlayOption() != null)
                 buildingsGroundOverlays.put(key, mMap.addGroundOverlay(temp.get(key).getGroundOverlayOption()));
         }
     }
@@ -204,8 +227,23 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private void setupClickListeners() {
         setupLoyolaBtnClickListener();
         setupSGWBtnClickListener();
+        setCurrentLocationBtn();
     }
 
+    private void popUpRequestPermission() {
+        if (!myLocationPermissionsGranted) {
+            getLocationPermission();
+            if (myLocationPermissionsGranted) {
+                mMap.setMyLocationEnabled(true);
+                initMap();
+            }
+        }
+
+        if (myLocationPermissionsGranted) {
+            mMap.setMyLocationEnabled(true);
+            initMap();
+        }
+    }
 
     /**
      * The purpose of this method is to handle the "on click" of Loyala button
@@ -222,7 +260,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     /**
      * The purpose of this method is to handle the "on click" of SGW button
      */
-    private void setupSGWBtnClickListener(){
+    private void setupSGWBtnClickListener() {
         sgwBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -234,6 +272,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     /**
      * The purpose of this method is display the polygon on the map and
      * call the right method for onClick polygon or on click the marker.
+     *
      * @param map is the map to be used in our application
      */
     private void setupPolygons(GoogleMap map) {
@@ -250,11 +289,10 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         map.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
             @Override
             public void onCameraMove() {
-                if(map.getCameraPosition().zoom > 18){
+                if (map.getCameraPosition().zoom > 19) {
                     mLayer.removeLayerFromMap();
                     setupClassMarkerClickListener(map);
-                }
-                else{
+                } else {
                     mLayer.addLayerToMap();
                     setupBuildingMarkerClickListener(map);
                 }
@@ -266,16 +304,14 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
      * The purpose of this method is handle the onclick polygon
      * and to open the info card according to the clicked building.
      */
-    public void setupPolygonClickListener(){
+    public void setupPolygonClickListener() {
         mLayer.setOnFeatureClickListener(new GeoJsonLayer.GeoJsonOnFeatureClickListener() {
             @Override
             public void onFeatureClick(GeoJsonFeature geoJsonFeature) {
-                if(geoJsonFeature != null){
+                if (geoJsonFeature != null) {
                     Building building = mViewModel.getBuildingFromGeoJsonFeature(geoJsonFeature);
                     onBuildingClick(building);
-                }
-                String buildingCode = geoJsonFeature.getProperty("code");
-                if(getActivity().getClass() == MainActivity.class) {
+                    String buildingCode = geoJsonFeature.getProperty("code");
                     ((MainActivity) getActivity()).showInfoCard(buildingCode);
                 }
             }
@@ -283,7 +319,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     }
 
     private void onBuildingClick(Building building) {
-        if(building.getAvailableFloors() != null) {
+        if (building.getAvailableFloors() != null) {
             setupFloorPickerAdapter(building);
         } else {
             mFloorPickerGv.setVisibility(View.GONE);
@@ -314,9 +350,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                 Building building = mViewModel.getBuildingFromeCode(marker.getTag().toString());
                 //TODO: Make function that pops up the info card for the building (via the building-code)
                 String buildingCode = (marker.getTag()).toString();
-                if(getActivity().getClass() == MainActivity.class) {
-                    ((MainActivity) getActivity()).showInfoCard(buildingCode);
-                }
+                ((MainActivity) getActivity()).showInfoCard(buildingCode);
                 onBuildingClick(building);
                 return false;
             }
@@ -327,33 +361,52 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     /**
      * The purpose of this method is to display the tools used with google
      * maps such as Current Location
+     *
      * @param map is the map used in the application
      */
     public boolean setupClassMarkerClickListener(GoogleMap map) {
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                System.out.println(marker.getPosition());
+                Log.i(TAG, marker.getTag().toString());
                 return false;
             }
         });
         return true;
     }
 
+    private void setupPOIListListener() {
+        mViewModel.getListOfPOI().observe(getViewLifecycleOwner(), new Observer<List<WalkingPoint>>() {
+            @Override
+            public void onChanged(List<WalkingPoint> walkingPoints) {
+                for (WalkingPoint point : walkingPoints) {
+                    LatLng latLng = new LatLng(point.getCoordinate().getLongitude(), point.getCoordinate().getLatitude());
+                    MarkerOptions markerOptions = new MarkerOptions()
+                            .position(latLng)
+                            //TODO: Change the icon to be the same as the POI icon
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                            .visible(false);
+                    mMap.addMarker(markerOptions);
+                }
+            }
+        });
+    }
+
 
     /**
      * set up related to UI for the map
+     *
      * @param mMap
      */
-    private void uiSettingsForMap(GoogleMap mMap){
-        if(myLocationPermissionsGranted){
+    private void uiSettingsForMap(GoogleMap mMap) {
+        if (myLocationPermissionsGranted) {
             mMap.setMyLocationEnabled(true);
         }
         mMap.setIndoorEnabled(false);
-        mMap.getUiSettings().setMyLocationButtonEnabled(true);
+        mMap.getUiSettings().setMyLocationButtonEnabled(false);
         mMap.getUiSettings().setTiltGesturesEnabled(true);
         mMap.getUiSettings().setMapToolbarEnabled(false);
-        mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.getUiSettings().setZoomControlsEnabled(false);
     }
 
     private void zoomInLocation(LatLng center) {
@@ -365,23 +418,26 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
      * The purpose of this application is to ask the user for their permission
      * of using their current location.
      */
-    private void getLocationPermission(){
+    private void getLocationPermission() {
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
-        if(requestPermission()){
-            myLocationPermissionsGranted = true;
-        }else{
-            ActivityCompat.requestPermissions(getActivity(),
-                    permissions,
-                    ClassConstants.LOCATION_PERMISSION_REQUEST_CODE);
-        }
+
+            if (requestPermission()) {
+                initMap();
+            }
+            else {
+                ActivityCompat.requestPermissions(getActivity(),
+                        permissions,
+                        ClassConstants.LOCATION_PERMISSION_REQUEST_CODE);
+            }
+            initMap();
     }
 
-    private void classRoomCoordinateTool(GoogleMap map){
+    private void classRoomCoordinateTool(GoogleMap map) {
         map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-                Log.i(TAG,"\"coordinates\" : [" + latLng.longitude + ", " + latLng.latitude + "]");
+                Log.i(TAG, "\"coordinates\" : [" + latLng.longitude + ", " + latLng.latitude + "]");
             }
         });
     }
@@ -391,7 +447,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
      * @return the method returns true if the user accepts to give the application permission
      * for using their current location.
      */
-    private boolean requestPermission(){
+    private boolean requestPermission() {
         return (checkSelfPermission(getContext(), ClassConstants.FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
     }
 
@@ -402,9 +458,16 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(requestCode == ClassConstants.LOCATION_PERMISSION_REQUEST_CODE)
-            myLocationPermissionsGranted = (grantResults.length > 0 &&
-                    grantResults[0] == PackageManager.PERMISSION_GRANTED);
+        if (requestCode == ClassConstants.LOCATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                myLocationPermissionsGranted = (grantResults.length > 0 &&
+                        grantResults[0] == PackageManager.PERMISSION_GRANTED);
+                setFirstLocationToDisplayOnSuccess();
+            } else {
+                setFirstLocationToDisplayOnSuccess();
+            }
+        }
+
     }
 
     @Override
@@ -431,30 +494,32 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         mMapView.onLowMemory();
     }
 
-    private void updateLocationEvery5Seconds(){
+    private void updateLocationEvery5Seconds() {
         final Handler handler = new Handler();
-        handler.postDelayed(new Runnable(){
+        handler.postDelayed(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new updateLocationListener());
                 handler.postDelayed(this, 5000);
             }
         }, 5000);
     }
 
-    public void setCurrentLocation(Location location){
+    public void setCurrentLocation(Location location) {
         this.currentLocation = location;
     }
 
-    public Location getCurrentLocation(){
+    public Location getCurrentLocation() {
         return currentLocation;
     }
 
     private class updateLocationListener implements OnSuccessListener {
         @Override
         public void onSuccess(Object location) {
-            if(location != null && location instanceof Location) {
-                LocationFragment.this.setCurrentLocation((android.location.Location) location);
+            if (location != null && location instanceof Location) {
+                if (location instanceof Location) {
+                    LocationFragment.this.setCurrentLocation((android.location.Location) location);
+                }
             }
         }
     }

@@ -5,9 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
-import android.widget.GridView;
 import android.widget.ListAdapter;
 
+import com.example.concordia_campus_guide.CustomViews.POIGridView;
+import com.example.concordia_campus_guide.Interfaces.OnPOIClickListener;
 import com.example.concordia_campus_guide.R;
 
 import java.util.List;
@@ -19,10 +20,12 @@ public class PointOfInterestVPAdapter extends RecyclerView.Adapter<PointOfIntere
 
     private List<String> services;
     private Context context;
+    private OnPOIClickListener onClickListener;
 
-    public PointOfInterestVPAdapter(Context context, List<String> services) {
+    public PointOfInterestVPAdapter(Context context, List<String> services, OnPOIClickListener onClickListener) {
         this.services = services;
         this.context = context;
+        this.onClickListener = onClickListener;
     }
 
     @NonNull
@@ -34,9 +37,8 @@ public class PointOfInterestVPAdapter extends RecyclerView.Adapter<PointOfIntere
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Adapter poiGvAdapter = new PointOfInterestGvAdapter(context, services.subList(position*4, Math.min((position*4)+4, services.size())));
+        Adapter poiGvAdapter = new PointOfInterestGvAdapter(context, services.subList(position*4, Math.min((position*4)+4, services.size())), onClickListener);
         holder.poiGV.setAdapter((ListAdapter) poiGvAdapter);
-
     }
 
     @Override
@@ -45,7 +47,7 @@ public class PointOfInterestVPAdapter extends RecyclerView.Adapter<PointOfIntere
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        GridView poiGV;
+        POIGridView poiGV;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             poiGV = itemView.findViewById(R.id.poiGv);

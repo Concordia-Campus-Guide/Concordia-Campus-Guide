@@ -12,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.concordia_campus_guide.Interfaces.OnPOIClickListener;
 import com.example.concordia_campus_guide.R;
 
 import java.io.IOException;
@@ -20,11 +21,13 @@ import java.util.List;
 
 class PointOfInterestGvAdapter extends BaseAdapter {
     private Context context;
-    List<String> services;
+    private List<String> services;
+    private OnPOIClickListener onClickListener;
 
-    public PointOfInterestGvAdapter(Context context, List<String> services){
+    public PointOfInterestGvAdapter(Context context, List<String> services, OnPOIClickListener onClickListener){
         this.context = context;
         this.services = services;
+        this.onClickListener = onClickListener;
     }
 
     @Override
@@ -43,14 +46,21 @@ class PointOfInterestGvAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View view = LayoutInflater.from(context).inflate(R.layout.point_of_interest_item, parent, false);
 
         TextView serviceTxt = view.findViewById(R.id.serviceTv);
         ImageView serviceIv = view.findViewById(R.id.serviceIv);
 
-        serviceIv.setImageBitmap(getBitmapFromAssets("point_of_interest_icons/poi_"+services.get(position)+".png"));
+        serviceIv.setImageBitmap(getBitmapFromAssets("point_of_interest_icons/poi_"+services.get(position).toLowerCase()+".png"));
         serviceTxt.setText(services.get(position).replace("_", " "));
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickListener.onClick(services.get(position), view);
+            }
+        });
 
         return view;
     }

@@ -9,15 +9,14 @@ import com.example.concordia_campus_guide.Activities.RoutesActivityViewModel;
 import com.example.concordia_campus_guide.Activities.SearchActivityViewModel;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragmentViewModel;
+import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel;
 
 public class ViewModelFactory implements ViewModelProvider.Factory {
 
-    private Application mApplication;
     private AppDatabase appDb;
 
 
     public ViewModelFactory(Application application) {
-        mApplication = application;
         this.appDb = AppDatabase.getInstance(application.getApplicationContext());
     }
 
@@ -27,14 +26,13 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
     public <T extends ViewModel> T create(Class<T> modelClass) {
         if (modelClass == InfoCardFragmentViewModel.class) {
             return (T) new InfoCardFragmentViewModel(appDb);
-        }
-        else if(modelClass == SearchActivityViewModel.class){
+        } else if (modelClass == SearchActivityViewModel.class) {
             return (T) new SearchActivityViewModel(appDb);
-        }
-        else if(modelClass == RoutesActivityViewModel.class){
+        } else if (modelClass == RoutesActivityViewModel.class) {
             return (T) new RoutesActivityViewModel(appDb);
+        } else if (modelClass == LocationFragmentViewModel.class) {
+            return (T) new LocationFragmentViewModel(appDb);
         }
-
         return null;
     }
 }
