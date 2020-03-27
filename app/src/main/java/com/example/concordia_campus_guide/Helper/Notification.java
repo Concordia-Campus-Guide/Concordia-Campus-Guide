@@ -26,12 +26,14 @@ public class Notification {
             @Override
             public void run(){
                 CalendarEvent calendarEvent = getNextClassCalendar();
-                if(calendarEvent  != null ){
-                    mainActivity.popUp(calendarEvent);
+                if(calendarEvent  != null){
+                    if(calendarEvent.getLocation().length() > 2 && calendarEvent.getTitle().length() > 7 && calendarEvent.getStartTime().length() >2){
+                        mainActivity.popUp(calendarEvent);
+                    }
                 }
-                handler.postDelayed(this, 300000);
+                handler.postDelayed(this, 3000000);
             }
-        }, 300000);
+        }, 3000);
     }
 
     public CalendarEvent getNextClassCalendar(){

@@ -44,13 +44,13 @@ public class NotificationTest {
     @Test
     public void getRoomTest(){
         RoomModel expectedRoom = new RoomModel(new Coordinates(0, 0), "111", "H-9");
-        assertEquals("getRoomTest(): ", expectedRoom.getFloorCode(), notification.getRoom("H-927").getFloorCode());
+        assertEquals(expectedRoom.getFloorCode(), notification.getRoom("H-927").getFloorCode());
     }
 
     @Test
     public void getRoom10thFloorTest(){
         RoomModel expectedRoom = new RoomModel(new Coordinates(0, 0), "1027", "H-10");
-        assertEquals("getRoomTest(): ", expectedRoom.getFloorCode(), notification.getRoom("H-1027").getFloorCode());
+        assertEquals(expectedRoom.getFloorCode(), notification.getRoom("H-1027").getFloorCode());
     }
 
     @Test

@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setCancelable(true);
         builder.setTitle("Heads up... Your next class is in " +  mViewModel.displayTimeToNextClass(calendarEvent.getStartTime()));
         builder.setMessage("You have " + calendarEvent.getTitle() + " in " + mViewModel.displayTimeToNextClass(calendarEvent.getStartTime())  + " at " +
-                calendarEvent.getLocation() +" ! Please choose to either get directions to your class or to disregard this message");
+                calendarEvent.getLocation() +" ! Please choose to either get directions to your class or to ignore this message");
 
         setupCancelBtn(builder);
         setupShowMeDirectionsBtn(builder,calendarEvent.getLocation());
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupCancelBtn(AlertDialog.Builder builder){
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Ignore", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

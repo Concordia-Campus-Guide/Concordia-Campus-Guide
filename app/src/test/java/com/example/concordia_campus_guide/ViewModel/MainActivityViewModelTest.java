@@ -15,7 +15,6 @@ public class MainActivityViewModelTest {
 
     @Before
     public void init(){
-        MockitoAnnotations.initMocks(this);
         mainActivityViewModel = new MainActivityViewModel();
     }
 
@@ -24,7 +23,7 @@ public class MainActivityViewModelTest {
         long date = 15852069;
         String dateString = mainActivityViewModel.timeUntilMethod(date);
         String expectedValue ="04 hours and 24 minutes";
-        assertEquals("cleanTimeDisplayLongerThanOneHoursTest(): ", expectedValue, mainActivityViewModel.cleanTimeDisplay(dateString));
+        assertEquals( expectedValue, mainActivityViewModel.cleanTimeDisplay(dateString));
     }
 
     @Test
@@ -32,13 +31,13 @@ public class MainActivityViewModelTest {
         long date = 158520;
         String dateString = mainActivityViewModel.timeUntilMethod(date);
         String expectedValue =" 02 minutes";
-        assertEquals("cleanTimeDisplayLessThanOneHoursTest(): ", expectedValue, mainActivityViewModel.cleanTimeDisplay(dateString));
+        assertEquals(expectedValue, mainActivityViewModel.cleanTimeDisplay(dateString));
     }
 
     @Test
-    public void timeUtileMethod(){
+    public void timeUtilMethod(){
         long date = 158520;
         String expectedValue ="00 hours and 02 minutes";
-        assertEquals("cleanTimeDisplay(): ", expectedValue, mainActivityViewModel.timeUntilMethod(date));
+        assertEquals(expectedValue, mainActivityViewModel.timeUntilMethod(date));
     }
 }
