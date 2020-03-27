@@ -8,13 +8,18 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.MockitoAnnotations;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(SelectingToFromState.class)
 public class PathsViewModelTest {
     @Mock
     SelectingToFromState selectingToFromState;
@@ -25,24 +30,26 @@ public class PathsViewModelTest {
     PathsViewModel pathsViewModel;
 
     @Before
-    public void setup(){
-//        MockitoAnnotations.initMocks(this);
-//        pathsViewModel = new PathsViewModel();
-//        when(roomModel.getRoomCode()).thenReturn("963");
+    public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
+        pathsViewModel = new PathsViewModel();
+        RoomModel room = new RoomModel();
+        room.setRoomCode("927");
+
+        PowerMockito.mockStatic(SelectingToFromState.class);
+        PowerMockito.when(SelectingToFromState.getTo()).thenReturn(room);
+        PowerMockito.when(SelectingToFromState.getFrom()).thenReturn(room);
     }
 
     @Test
     public void getTo() {
-//        when(selectingToFromState.getTo()).thenReturn(roomModel);
-//        RoomModel testRoom = (RoomModel) pathsViewModel.getTo();
-//
-//        assertEquals(testRoom.getRoomCode(), "963");
+        RoomModel to = (RoomModel) pathsViewModel.getTo();
+        assertEquals("927", to.getRoomCode());
     }
 
     @Test
     public void getFrom() {
-//        when(selectingToFromState.getFrom()).thenReturn(roomModel);
-//        RoomModel testRoom = (RoomModel) pathsViewModel.getFrom();
-//        assertEquals(testRoom.getRoomCode(), "963");
+        RoomModel from = (RoomModel) pathsViewModel.getFrom();
+        assertEquals("927", from.getRoomCode());
     }
 }
