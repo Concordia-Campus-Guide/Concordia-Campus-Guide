@@ -57,8 +57,4 @@ public class Notification {
         RoomModel place = appDatabase.roomDao().getRoomByRoomCodeAndFloorCode(roomCode,floorCode);
         return appDatabase.roomDao().getRoomByRoomCodeAndFloorCode(roomCode,floorCode);
     }
-
-
-
-
 }
