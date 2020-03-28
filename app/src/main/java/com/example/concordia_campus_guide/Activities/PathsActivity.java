@@ -70,7 +70,7 @@ public class PathsActivity extends AppCompatActivity {
         setBackButtonOnClickListener();
 
         directionWrappers = !(fromIsIndoor && toIsIndoor) ? (ArrayList<DirectionWrapper>) parseDirectionResults() : new ArrayList<DirectionWrapper>();
-        if (!(infromIsIndoor && toIsIndoor)) {
+        if (!(fromIsIndoor && toIsIndoor)) {
             locationFragment.drawOutdoorPaths(directionWrappers);
         }
 
