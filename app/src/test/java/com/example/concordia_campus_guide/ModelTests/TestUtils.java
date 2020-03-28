@@ -14,6 +14,7 @@ import com.example.concordia_campus_guide.Models.Floors;
 import com.example.concordia_campus_guide.Models.ListOfCoordinates;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.Rooms;
+import com.example.concordia_campus_guide.Models.Routes.Route;
 import com.example.concordia_campus_guide.Models.Routes.Walk;
 import com.google.android.gms.maps.model.LatLng;
 import com.example.concordia_campus_guide.Models.Shuttle;
@@ -30,7 +31,7 @@ public class TestUtils {
     Buildings buildingsWithList;
 
     public Coordinates centerCoordinates = new Coordinates(45.4972685,-73.5789475);
-    public List<String> availableFloors=new ArrayList<String>(Arrays.asList("00", "1", "8", "9"));
+    public List<String> availableFloors = new ArrayList<String>(Arrays.asList("00", "1", "8", "9"));
     public float width = 68;
     public float height = 68;
     public float bearing = 34;
@@ -128,6 +129,7 @@ public class TestUtils {
             new LatLng(-73.57921063899994, 45.49707133596979),
             new Walk(getDirectionStepsObject()), "This is a description");
 
+    // Shuttle
     public Shuttle getShuttle1(){
         Shuttle shuttle1 = new Shuttle();
         shuttle1.setCampus("SGW");
@@ -146,5 +148,7 @@ public class TestUtils {
         return  shuttle2;
     }
 
+    // Routes
+    public Route route1 = new Route("1 day 20 hours", "I-80 E", "driving");
 
 }

@@ -1,13 +1,16 @@
 package com.example.concordia_campus_guide.ViewModel;
 
 import com.example.concordia_campus_guide.Activities.RoutesActivityViewModel;
+import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Database.Daos.ShuttleDao;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsResult;
 import com.example.concordia_campus_guide.ModelTests.TestUtils;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.RoomModel;
+import com.example.concordia_campus_guide.Models.Routes.Route;
 import com.example.concordia_campus_guide.Models.Shuttle;
 import com.example.concordia_campus_guide.Models.Time;
 
@@ -83,11 +86,33 @@ public class RoutesActivityViewModelTest {
 //        List<Shuttle> expectedListOfShuttles = Arrays.asList(shuttle1);
 //        List<Shuttle> returnedListOfShuttles = mViewModel.getShuttles();
 //        assertEquals(expectedListOfShuttles.get(0).getShuttleId(),returnedListOfShuttles.get(0).getShuttleId());
-//
 //    }
 
     @Test
     public void getShuttleDisplayTextTest(){
         assertEquals("SGW  >   LOY, \t leaves at: 8:2\n",mViewModel.getShuttleDisplayText(Arrays.asList(shuttle1)));
+    }
+
+    @Test
+    public void getSetTransportTypeTest() {
+        mViewModel.setTransportType(ClassConstants.DRIVING);
+        assertEquals(ClassConstants.DRIVING, mViewModel.getTransportType());
+    }
+
+    @Test
+    public void getSetRouteOptions() {
+        List<Route> routes = new ArrayList();
+        routes.add(testUtils.route1);
+
+        mViewModel.setRouteOptions(routes);
+        assertEquals(routes, mViewModel.getRouteOptions());
+    }
+
+    @Test
+    public void getSetDirectionsResult() {
+        DirectionsResult result = new DirectionsResult();
+        mViewModel.setDirectionsResult(result);
+
+        assertEquals(result, mViewModel.getDirectionsResult());
     }
 }
