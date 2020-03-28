@@ -2,9 +2,12 @@ package com.example.concordia_campus_guide.ModelTests;
 
 import androidx.room.Room;
 
+import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.LatLng;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.Coordinates;
+import com.example.concordia_campus_guide.Models.Direction;
 import com.example.concordia_campus_guide.Models.Floor;
 import com.example.concordia_campus_guide.Models.Floors;
 import com.example.concordia_campus_guide.Models.ListOfCoordinates;
@@ -117,6 +120,46 @@ public class TestUtils {
         shuttle2.setTime(9.10);
         return  shuttle2;
     }
+
+    public static DirectionWrapper getDirectionWrapper1(){
+        DirectionWrapper directionWrapper1 = new DirectionWrapper();
+        Direction direction1 = new Direction();
+        direction1.setDuration(60.0);
+        direction1.setDescription("Go Left");
+
+        directionWrapper1.setDirection(direction1);
+        return directionWrapper1;
+    }
+
+    public static DirectionWrapper getDirectionWrapper2(){
+        DirectionWrapper directionWrapper2 = new DirectionWrapper();
+        Direction direction1 = new Direction();
+        direction1.setDuration(120.0);
+        direction1.setDescription("Go Right");
+
+        directionWrapper2.setDirection(direction1);
+        return directionWrapper2;
+    }
+
+    public static List<DirectionWrapper> getListOfDirectionWrappers(){
+        return new ArrayList<>(Arrays.asList(getDirectionWrapper1(), getDirectionWrapper2()));
+    }
+
+    public static com.google.android.gms.maps.model.LatLng getLatLng1(){
+        // room 819
+        return new com.google.android.gms.maps.model.LatLng(45.496951715566176, -73.5789605230093);
+    }
+
+    public static com.google.android.gms.maps.model.LatLng getLatLng2(){
+        // room 821
+        return new com.google.android.gms.maps.model.LatLng(45.49699848270905,-73.57902321964502);
+    }
+
+    public static String getDirectionDescription(){
+        return "Go Left";
+    }
+
+
 
 
 }
