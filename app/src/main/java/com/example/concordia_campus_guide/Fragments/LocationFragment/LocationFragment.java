@@ -1,6 +1,8 @@
 package com.example.concordia_campus_guide.Fragments.LocationFragment;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.location.Location;
@@ -15,11 +17,16 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 
 import com.example.concordia_campus_guide.Activities.MainActivity;
+import com.example.concordia_campus_guide.Activities.RoutesActivity;
 import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
 import com.example.concordia_campus_guide.ClassConstants;
+import com.example.concordia_campus_guide.Database.AppDatabase;
+import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.Models.Building;
+import com.example.concordia_campus_guide.Models.MyCurrentPlace;
+import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -72,6 +79,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     private static final String TAG = "LocationFragment";
     private static final String POI_TAG = "POI";
+
     private boolean myLocationPermissionsGranted = false;
     private HashMap<String, GroundOverlay> buildingsGroundOverlays;
     private FloorPickerAdapter currentFloorPickerAdapter;
@@ -80,6 +88,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     /**
      * @return it will return a new object of this fragment
      */
+
     public static LocationFragment newInstance() {
         return new LocationFragment();
     }
@@ -88,7 +97,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.location_fragment_fragment, container, false);
-        initComponent(rootView);
+        initComponents(rootView);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
         getLocationPermission();
@@ -99,10 +108,16 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         return rootView;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mViewModel = ViewModelProviders.of(getActivity(), new ViewModelFactory(this.getActivity().getApplication())).get(LocationFragmentViewModel.class);
+        setupPOIListListener();
+    }
     /**
      * @param rootView is the object that contains the parts displayed on the fragment
      */
-    private void initComponent(View rootView) {
+    private void initComponents(View rootView) {
         mMapView = rootView.findViewById(R.id.mapView);
         sgwBtn = rootView.findViewById(R.id.SGWBtn);
         loyolaBtn = rootView.findViewById(R.id.loyolaBtn);
@@ -121,14 +136,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         mFloorPickerGv.setAdapter(currentFloorPickerAdapter);
         mViewModel.setFloorMarkers(building.getBuildingCode(), building.getAvailableFloors().get(building.getAvailableFloors().size() - 1), getContext(), mMap);
     }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(getActivity(), new ViewModelFactory(this.getActivity().getApplication())).get(LocationFragmentViewModel.class);
-        setupPOIListListener();
-    }
-
 
     /**
      * The purpose of this method is to init the map and fill it up with the required
@@ -159,6 +166,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         setFirstLocationToDisplayOnFailure();
     }
 
+    @SuppressLint("MissingPermission")
     private void setFirstLocationToDisplayOnSuccess() {
         fusedLocationProviderClient.getLastLocation()
                 .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
@@ -174,6 +182,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                 });
     }
 
+    @SuppressLint("MissingPermission")
     private void setFirstLocationToDisplayOnFailure() {
         fusedLocationProviderClient.getLastLocation().addOnFailureListener(getActivity(), new OnFailureListener() {
             @Override
@@ -197,13 +206,13 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
      * The purpose of this method is to figure the style of the map to display
      */
     private void initFloorPlans() {
-        Map<String, Building> temp = mViewModel.getBuildings();
-        for (Map.Entry<String, Building> entry : temp.entrySet()) {
+        Map<String, Building> buildings = mViewModel.getBuildings();
+        for (Map.Entry<String, Building> entry : buildings.entrySet()) {
             String key = entry.getKey();
             Building value = entry.getValue();
 
             if (value.getGroundOverlayOption() != null)
-                buildingsGroundOverlays.put(key, mMap.addGroundOverlay(temp.get(key).getGroundOverlayOption()));
+                buildingsGroundOverlays.put(key, mMap.addGroundOverlay(buildings.get(key).getGroundOverlayOption()));
         }
     }
 
@@ -217,17 +226,13 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         }
     }
 
-
-    /**
-     * The purpose of this method is to setup the click listener for both
-     * SGW and LOYALA Campuses buttons.
-     */
     private void setupClickListeners() {
         setupLoyolaBtnClickListener();
         setupSGWBtnClickListener();
         setCurrentLocationBtn();
     }
 
+    @SuppressLint("MissingPermission")
     private void popUpRequestPermission() {
         if (!myLocationPermissionsGranted) {
             getLocationPermission();
@@ -333,9 +338,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             @Override
             public boolean onMarkerClick(Marker marker) {
                 if (marker.getTag() != null) {
-                    if (marker.getTag().toString().contains(POI_TAG)) {
-                        //TODO: Use the directions api to get directions to this point of interest
-                        marker.showInfoWindow();
+                    if (marker.getTag() != null && marker.getTag().toString().contains(POI_TAG)) {
+                        sendToSearchView(marker);
                     } else {
                         Building building = mViewModel.getBuildingFromeCode(marker.getTag().toString());
                         String buildingCode = (marker.getTag()).toString();
@@ -366,6 +370,35 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         return true;
     }
 
+    private void sendToSearchView(Marker marker) {
+        Intent openSearch = new Intent(getActivity(),
+                RoutesActivity.class);
+
+        settingInitialAndDestination(marker);
+
+        startActivity(openSearch);
+    }
+
+    private void settingInitialAndDestination(Marker marker) {
+
+        SelectingToFromState.setQuickSelectToTrue();
+        SelectingToFromState.setMyCurrentLocation(getCurrentLocation());
+
+        Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
+
+        SelectingToFromState.setFrom(myCurrentLocation != null? new MyCurrentPlace(myCurrentLocation.getLatitude(), myCurrentLocation.getLongitude()): new MyCurrentPlace());
+
+        Place placeToGo = getPlaceToGo(marker);
+
+        SelectingToFromState.setTo(placeToGo);
+    }
+
+    private Place getPlaceToGo(Marker marker) {
+        String placeCode = marker.getTag().toString().split("_")[1];
+        String floorCode = marker.getTag().toString().split("_")[2];
+        return AppDatabase.getInstance(getContext()).roomDao().getRoomByIdAndFloorCode(placeCode, floorCode);
+    }
+
     private void setupPOIListListener() {
         mViewModel.getListOfPOI().observe(getViewLifecycleOwner(), priorityQueue -> {
             int position = 1;
@@ -385,7 +418,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             LatLng latLng = new LatLng(poi.getCoordinate().getLongitude(), poi.getCoordinate().getLatitude());
             if (position == 1) zoomInLocation(latLng);
 
-            String tag = POI_TAG + "_" + poi.getPointType() + "_" + position;
+            String tag = POI_TAG + "_" + poi.getPlaceCode() + "_" + poi.getFloorCode();
             MarkerOptions markerOptions = new MarkerOptions()
                     .position(latLng)
                     .icon(mViewModel.getCurrentPOIIcon());
@@ -404,6 +437,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
      *
      * @param mMap
      */
+    @SuppressLint("MissingPermission")
     private void uiSettingsForMap(GoogleMap mMap) {
         if (myLocationPermissionsGranted) {
             mMap.setMyLocationEnabled(true);
@@ -503,6 +537,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private void updateLocationEvery5Seconds() {
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
+            @SuppressLint("MissingPermission")
             @Override
             public void run() {
                 fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new updateLocationListener());
