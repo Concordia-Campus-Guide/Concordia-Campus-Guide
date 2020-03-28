@@ -162,7 +162,6 @@
 
             </LinearLayout>
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.appbar.AppBarLayout>

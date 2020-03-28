@@ -210,6 +210,8 @@ public class RoutesActivity extends AppCompatActivity {
      * Calls the google Maps Directions API
      */
     public void getAllRoutes() {
+        setTransitSelect();
+
         Coordinates fromCenterCoordinates = mViewModel.getFrom().getCenterCoordinates();
         Coordinates toCenterCoordinates = mViewModel.getTo().getCenterCoordinates();
 
