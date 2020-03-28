@@ -98,7 +98,10 @@ public class RoutesActivity extends AppCompatActivity {
     public void onClickTransit(View v) {
         mViewModel.setTransportType(ClassConstants.TRANSIT);
         getAllRoutes();
+        setTransitSelect();
+    }
 
+    private void setTransitSelect() {
         transitButton.setSelected(true);
         shuttleButton.setSelected(false);
         walkButton.setSelected(false);
@@ -108,7 +111,10 @@ public class RoutesActivity extends AppCompatActivity {
     public void onClickCar(View v) {
         mViewModel.setTransportType(ClassConstants.DRIVING);
         getAllRoutes();
+        setCarSelect();
+    }
 
+    private void setCarSelect() {
         transitButton.setSelected(false);
         shuttleButton.setSelected(false);
         walkButton.setSelected(false);
@@ -125,7 +131,10 @@ public class RoutesActivity extends AppCompatActivity {
 
     public void onClickShuttle(View v) {
         //getShuttle(v);
+        setShuttleSelect();
+    }
 
+    private void setShuttleSelect() {
         transitButton.setSelected(false);
         shuttleButton.setSelected(true);
         walkButton.setSelected(false);
@@ -135,7 +144,10 @@ public class RoutesActivity extends AppCompatActivity {
     public void onClickWalk(View v) {
         mViewModel.setTransportType(ClassConstants.WALKING);
         getAllRoutes();
+        setWalkSelect();
+    }
 
+    private void setWalkSelect() {
         transitButton.setSelected(false);
         shuttleButton.setSelected(false);
         walkButton.setSelected(true);
