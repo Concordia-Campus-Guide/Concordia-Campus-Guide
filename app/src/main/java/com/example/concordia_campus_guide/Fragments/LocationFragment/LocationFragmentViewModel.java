@@ -270,11 +270,12 @@ public class LocationFragmentViewModel extends ViewModel {
     }
 
     private PriorityQueue<WalkingPoint> getPOIinOrder(List<WalkingPoint> allPOI) {
-        PriorityQueue<WalkingPoint> orderedList = new PriorityQueue<>((WalkingPoint o1, WalkingPoint o2) -> {
+        PriorityQueue<WalkingPoint> orderedList = new PriorityQueue<>((WalkingPoint p1, WalkingPoint p2) -> {
             Coordinates currentCoordinates = new Coordinates(currentLocation.getLatitude(), currentLocation.getLongitude());
-            double distanceFromO1 = o1.getCoordinate().getEuclideanDistanceFrom(currentCoordinates);
-            double distanceFromO2 = o2.getCoordinate().getEuclideanDistanceFrom(currentCoordinates);
+            double distanceFromO1 = p1.getCoordinate().getEuclideanDistanceFrom(currentCoordinates);
+            double distanceFromO2 = p2.getCoordinate().getEuclideanDistanceFrom(currentCoordinates);
 
+            //Compare walking points: If p1 is closer to the current location than p2, it will have a higher position in priority queue
             if (distanceFromO1 < distanceFromO2) return -1;
             else if (distanceFromO1 > distanceFromO2) return 1;
             return 0;

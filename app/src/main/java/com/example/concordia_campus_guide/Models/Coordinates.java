@@ -52,11 +52,8 @@ public class Coordinates {
      * @return
      */
     public double getEuclideanDistanceFrom(Coordinates other){
-        final double resultLatDiff = Math.abs(this.toListDouble().get(0)
-                - other.toListDouble().get(0));
-        final double resultLongDiff = Math.abs(this.toListDouble().get(1)
-                - other.toListDouble().get(1));
-
+        final double resultLatDiff = Math.abs(this.latitude- other.latitude);
+        final double resultLongDiff = Math.abs(this.longitude - other.longitude);
         return Math.sqrt(Math.pow(resultLatDiff, 2) + Math.pow(resultLongDiff, 2));
     }
 }
