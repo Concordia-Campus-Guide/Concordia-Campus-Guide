@@ -13,11 +13,6 @@ public class Route {
     private String summary;
     private @ClassConstants.TransportType String mainTransportType;
 
-    // For test
-    public Route() {
-        this.steps = new ArrayList<>();
-    }
-
     // When TRANSIT is chosen
     public Route(String departureTime, String arrivalTime, String duration, String mainTransportType) {
         this.steps = new ArrayList<>();
@@ -48,10 +43,6 @@ public class Route {
         this.mainTransportType = mainTransportType;
     }
 
-    public void addDirection(TransportType direction){
-        steps.add(direction);
-    }
-
     public List<TransportType> getSteps() {
         return steps;
     }
@@ -60,43 +51,20 @@ public class Route {
         return departureTime;
     }
 
-    public void setDepartureTime(String departureTime) {
-        this.departureTime = departureTime;
-    }
-
     public String getArrivalTime() {
         return arrivalTime;
-    }
-
-    public void setArrivalTime(String arrivalTime) {
-        this.arrivalTime = arrivalTime;
     }
 
     public String getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
-        this.duration = duration;
-    }
-
-    public void setSteps(List<TransportType> steps) {
-        this.steps = steps;
-    }
-
     public String getSummary() {
         return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
     }
 
     public String getMainTransportType() {
         return mainTransportType;
     }
 
-    public void setMainTransportType(String mainTransportType) {
-        this.mainTransportType = mainTransportType;
-    }
 }

@@ -66,7 +66,9 @@ public class TestUtilsRoutes {
 //            new Walk(getDirectionStepsObject()), "This is a description");
 
     // Routes
-    public Route route1 = new Route("1 day 20 hours", "I-80 E", "driving");
+    public Route routeDriving = new Route("1 day 20 hours", "I-80 E", "driving");
+    public Route routeTransit = new Route("4:23pm", "4:33pm", "10 min", "transit");
+    public Route routeTransitWithNoTime = new Route("1 hour 20 min", "transit");
 
     // Shuttle
     public Shuttle getShuttle1(){
