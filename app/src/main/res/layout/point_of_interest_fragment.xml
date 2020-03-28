@@ -30,7 +30,8 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/poiVp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></androidx.viewpager2.widget.ViewPager2>
+            android:layout_height="match_parent"
+            android:background="@color/whiteBackgroundColor"></androidx.viewpager2.widget.ViewPager2>
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/dotsTab"
             android:layout_width="match_parent"
