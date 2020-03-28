@@ -1,4 +1,5 @@
 package com.example.concordia_campus_guide.ModelTests;
+import com.google.android.gms.maps.model.LatLng;
 import com.example.concordia_campus_guide.Models.Coordinates;
 
 import org.junit.Before;
@@ -26,6 +27,12 @@ public class CoordinatesTest {
         double expected = 45.49702057370776;
         coordinates.setLongitude(expected);
         assertEquals(expected, coordinates.getLongitude());
+    }
+
+    @Test
+    public void getLatLngTest() {
+        LatLng latLng = new LatLng(45.49702057370776, -73.57907921075821);
+        assertEquals(latLng, coordinates.getLatLng());
     }
 
 }

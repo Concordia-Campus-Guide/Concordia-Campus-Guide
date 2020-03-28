@@ -83,4 +83,13 @@ public class WalkingPointTest {
         walkingPoint.setPlaceCode("937");
     }
 
+    @Test
+    public void toStringTest() {
+        String expected = "WalkingPoint{id=" + walkingPoint.getId() +
+                ", coordinate=" + walkingPoint.getCoordinate() +
+                ", floorCode='H-9', connectedPointsId=" + walkingPoint.getConnectedPointsId() +
+                ", pointType=" + walkingPoint.getPointType() + '}';
+        assertEquals(expected, walkingPoint.toString());
+    }
+
 }

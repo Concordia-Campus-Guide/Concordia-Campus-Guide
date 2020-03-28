@@ -1,10 +1,9 @@
 package com.example.concordia_campus_guide.ModelTests;
 
 import com.example.concordia_campus_guide.ClassConstants;
-import com.example.concordia_campus_guide.Models.Routes.Bus;
+import com.example.concordia_campus_guide.ModelTests.TestUtils.TestUtils;
+import com.example.concordia_campus_guide.ModelTests.TestUtils.TestUtilsRoutes;
 import com.example.concordia_campus_guide.Models.Direction;
-import com.example.concordia_campus_guide.Models.Routes.TransportType;
-import com.example.concordia_campus_guide.Models.Routes.Walk;
 import com.google.android.gms.maps.model.LatLng;
 
 import org.junit.Before;
@@ -14,10 +13,11 @@ import static junit.framework.TestCase.assertEquals;
 
 public class DirectionTest {
     private Direction direction;
-
+    private TestUtilsRoutes testUtils;
     @Before
     public void init() {
-        direction = new Direction(new LatLng(-73.57907921075821, 45.49702057370776), new LatLng(-73.57921063899994, 45.49707133596979), ClassConstants.WALKING, "This is a description", 20);
+        testUtils = new TestUtilsRoutes();
+        direction = testUtils.direction;
     }
 
     @Test
@@ -35,7 +35,6 @@ public class DirectionTest {
         direction.setEnd(endNew);
         assertEquals(direction.getEnd(), endNew);
         direction.setStart(endTemp);
-
     }
     @Test
     public void getAndSetTransitTypeTest() {
@@ -44,7 +43,6 @@ public class DirectionTest {
         direction.setTransportType(transportTypeNew);
         assertEquals(direction.getTransportType(), transportTypeNew);
         direction.setTransportType(transportTypeOg);
-
     }
     @Test
     public void getAndSetDescriptionTest() {

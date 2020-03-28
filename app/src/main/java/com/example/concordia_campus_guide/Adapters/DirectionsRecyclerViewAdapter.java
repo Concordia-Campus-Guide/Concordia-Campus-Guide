@@ -1,11 +1,9 @@
 package com.example.concordia_campus_guide.Adapters;
 
 import android.content.Context;
-import android.preference.PreferenceScreen;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,7 +19,6 @@ public class DirectionsRecyclerViewAdapter extends RecyclerView.Adapter<Directio
     private static DecimalFormat df2 = new DecimalFormat("#.##");
     private List<Direction> mData;
     private LayoutInflater mInflater;
-    AdapterView.OnItemClickListener mClickListener;
 
     // data is passed into the constructor
     public DirectionsRecyclerViewAdapter(Context context, List<Direction> data) {

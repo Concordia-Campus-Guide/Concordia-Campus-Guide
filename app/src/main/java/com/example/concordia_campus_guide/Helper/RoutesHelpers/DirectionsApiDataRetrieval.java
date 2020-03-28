@@ -3,8 +3,6 @@ package com.example.concordia_campus_guide.Helper.RoutesHelpers;
 import android.os.AsyncTask;
 import android.util.Log;
 import com.example.concordia_campus_guide.Activities.RoutesActivity;
-import com.example.concordia_campus_guide.Activities.RoutesActivityViewModel;
-import com.example.concordia_campus_guide.ClassConstants;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

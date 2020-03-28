@@ -1,42 +1,45 @@
 package com.example.concordia_campus_guide.Activities;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Parcelable;
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragment;
 import com.example.concordia_campus_guide.Fragments.PathInfoCardFragment.PathInfoCardFragment;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsResult;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsRoute;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
 import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class PathsActivity extends AppCompatActivity {
-    PathsViewModel mViewModel;
-    LocationFragment locationFragment;
-    TextView fromTextView;
-    TextView toTextView;
-    ImageButton backButton;
-    PathInfoCardFragment pathInfoCardFragment;
-    FragmentTransaction fragmentTransaction;
-    FragmentManager fragmentManager;
+    private PathsViewModel mViewModel;
+    private LocationFragment locationFragment;
+    private TextView fromTextView;
+    private TextView toTextView;
+    private ImageButton backButton;
+    private PathInfoCardFragment pathInfoCardFragment;
+    private FragmentTransaction fragmentTransaction;
+    private FragmentManager fragmentManager;
     private BottomSheetBehavior swipeableInfoCard;
-    private DirectionsResult directionsResult;
+    private DirectionsRoute directionsResult;
     private ArrayList<DirectionWrapper> directionWrappers;
-    Place from;
-    Place to;
+    private Place from;
+    private Place to;
     private boolean fromIsIndoor = false;
     private boolean toIsIndoor = false;
 
@@ -53,7 +56,7 @@ public class PathsActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            directionsResult = (DirectionsResult) extras.getSerializable("directionsResult");
+            directionsResult = (DirectionsRoute) extras.getSerializable("directionsResult");
         }
 
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.pathLocationFragment);
@@ -95,10 +98,12 @@ public class PathsActivity extends AppCompatActivity {
 
     public void showInfoCard() {
         pathInfoCardFragment = new PathInfoCardFragment();
+        // creating bundle to be able to pass the directionWrapper and the walkingPoints to the pathsActivity
         Bundle infoCardBundle = new Bundle();
         infoCardBundle.putSerializable("directionsResult", directionWrappers);
         if(fromIsIndoor || toIsIndoor) infoCardBundle.putSerializable("walkingPoints", (ArrayList<WalkingPoint>) locationFragment.getWalkingPointList());
         pathInfoCardFragment.setArguments(infoCardBundle);
+        // creating fragmentTransaction to show the step-by-step card from the bottom of the screen
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.path_info_card_frame, pathInfoCardFragment);
         fragmentTransaction.commit();
@@ -107,7 +112,7 @@ public class PathsActivity extends AppCompatActivity {
 
     public List<DirectionWrapper> parseDirectionResults() {
         ArrayList<DirectionWrapper> directionWrapperArrayList = new ArrayList<>();
-        DirectionsStep[] steps = directionsResult.routes[0].legs[0].steps;
+        DirectionsStep[] steps = directionsResult.legs[0].steps;
         for (DirectionsStep step : steps) {
             directionWrapperArrayList.add(new DirectionWrapper(step));
         }

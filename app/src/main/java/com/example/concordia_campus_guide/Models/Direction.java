@@ -1,6 +1,6 @@
 package com.example.concordia_campus_guide.Models;
 
-import com.example.concordia_campus_guide.Models.Routes.TransportType;
+import com.example.concordia_campus_guide.ClassConstants;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.Serializable;
@@ -42,7 +42,7 @@ public class Direction implements Serializable {
         this.end = end;
     }
 
-    public String getTransportType() {
+    public @ClassConstants.TransportType String getTransportType() {
         return transportType;
     }
 

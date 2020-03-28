@@ -1,6 +1,5 @@
 package com.example.concordia_campus_guide.Adapters;
 
-import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.EncodedPolyline;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TravelMode;
@@ -10,8 +9,8 @@ import com.google.android.gms.maps.model.LatLng;
 import java.io.Serializable;
 
 public class DirectionWrapper implements Serializable {
-    Direction direction;
-    EncodedPolyline polyline;
+    private Direction direction;
+    private EncodedPolyline polyline;
 
     public DirectionWrapper(){}
     public DirectionWrapper(DirectionsStep directionStep){
@@ -28,17 +27,7 @@ public class DirectionWrapper implements Serializable {
     }
 
     private String getTransitType(TravelMode travelMode){
-        switch (travelMode){
-            case DRIVING:
-                return ClassConstants.DRIVING;
-            case WALKING:
-                return ClassConstants.WALKING;
-            case BICYCLING:
-                return ClassConstants.BICYCLING;
-            case TRANSIT:
-                return ClassConstants.TRANSIT;
-        }
-        return null;
+        return travelMode.name().toLowerCase();
     }
 
     public Direction getDirection() {

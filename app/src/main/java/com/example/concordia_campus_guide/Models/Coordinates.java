@@ -25,6 +25,11 @@ public class Coordinates implements Serializable {
                 longitude == that.longitude;
     }
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
     public List<Double> toListDouble(){
         return new ArrayList<>(Arrays.asList(latitude, longitude));
     }
@@ -49,7 +54,19 @@ public class Coordinates implements Serializable {
         this.longitude = longitude;
     }
 
-    public LatLng getLatLng(){
-        // this is not a bug
-        return new LatLng(this.longitude, this.latitude);}
+    /**
+     * This method returns the euclidean distance between this and another point based on the pythagorean theorem.
+     * @param other
+     * @return
+     */
+    public double getEuclideanDistanceFrom(Coordinates other){
+        final double resultLatDiff = Math.abs(this.latitude- other.latitude);
+        final double resultLongDiff = Math.abs(this.longitude - other.longitude);
+        return Math.sqrt(Math.pow(resultLatDiff, 2) + Math.pow(resultLongDiff, 2));
+    }
+
+    public LatLng getLatLng() {
+        // TODO: more investigation why this is inverted.
+        return new LatLng(this.longitude, this.latitude);
+    }
 }

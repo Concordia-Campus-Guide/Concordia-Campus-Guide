@@ -1,7 +1,7 @@
 package com.example.concordia_campus_guide.ModelTests;
 
+import com.example.concordia_campus_guide.ModelTests.TestUtils.TestUtils;
 import com.example.concordia_campus_guide.Models.Coordinates;
-import com.example.concordia_campus_guide.Models.RoomModel;
 import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;

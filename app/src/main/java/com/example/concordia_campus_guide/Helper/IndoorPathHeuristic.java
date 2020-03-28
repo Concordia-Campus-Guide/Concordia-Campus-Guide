@@ -85,11 +85,6 @@ public class IndoorPathHeuristic {
      * @return
      */
     public double getEuclideanDistance(final WalkingPoint firstCoordinate, final WalkingPoint secondCoordinate) {
-        final double resultLatDiff = Math.abs(firstCoordinate.getCoordinate().toListDouble().get(0)
-                - secondCoordinate.getCoordinate().toListDouble().get(0));
-        final double resultLongDiff = Math.abs(firstCoordinate.getCoordinate().toListDouble().get(1)
-                - secondCoordinate.getCoordinate().toListDouble().get(1));
-
-        return Math.sqrt(Math.pow(resultLatDiff, 2) + Math.pow(resultLongDiff, 2));
+        return firstCoordinate.getCoordinate().getEuclideanDistanceFrom(secondCoordinate.getCoordinate());
     }
 }

@@ -69,7 +69,7 @@ public class POIFragment extends Fragment {
         return new OnPOIClickListener() {
             @Override
             public void onClick(@PoiType String pointType, View view) {
-                mViewModel.setListOfPOI(pointType);
+                mViewModel.setListOfPOI(pointType, getContext());
             }
         };
     }
