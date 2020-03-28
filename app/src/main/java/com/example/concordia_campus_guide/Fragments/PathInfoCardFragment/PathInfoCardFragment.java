@@ -84,11 +84,11 @@ public class PathInfoCardFragment extends Fragment {
                 populateOutdoorDirectionsList();
                 setDividerTextView(layout, layoutParams);
                 populateIndoorDirectionsList();
+            } else if (walkingPointList != null) {
+                populateIndoorDirectionsList();
+            } else if (directionsResults != null) {
+                populateOutdoorDirectionsList();
             }
-        } else if (walkingPointList != null) {
-            populateIndoorDirectionsList();
-        } else if (directionsResults != null) {
-            populateOutdoorDirectionsList();
         }
 
     }
