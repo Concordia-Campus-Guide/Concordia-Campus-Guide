@@ -42,12 +42,19 @@ public class RoutesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // set up activity
         super.onCreate(savedInstanceState);
+        initComponent();
+        setViewModelAttributes();
+        setToolbar();
+        setFromAndTo();
+        setBackButtonOnClick();
+        getAllRoutes();
+    }
+
+    private void initComponent() {
         setContentView(R.layout.routes_activity);
         allRoutes = findViewById(R.id.allRoutes);
         mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getApplication())).get(RoutesActivityViewModel.class);
-        mViewModel.setShuttles();
 
         // get view
         fromText = findViewById(R.id.fromText);
@@ -60,24 +67,22 @@ public class RoutesActivity extends AppCompatActivity {
         walkButton = findViewById(R.id.filterButtonWalk);
         carButton = findViewById(R.id.filterButtonCar);
         disabilityButton = findViewById(R.id.filterButtonDisability);
+    }
 
-        // setup toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        // get passed item
-        mViewModel.setFrom(SelectingToFromState.getFrom());
-        mViewModel.setTo(SelectingToFromState.getTo());
-
-        // set from and to in UI
+    private void setFromAndTo() {
         this.fromText.setText(mViewModel.getFrom().getDisplayName());
         this.toText.setText(mViewModel.getTo().getDisplayName());
+    }
 
-        // set back button
-        setBackButtonOnClick();
+    private void setToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+    }
 
-        // get all possible routes
-        getAllRoutes();
+    private void setViewModelAttributes() {
+        mViewModel.setShuttles();
+        mViewModel.setFrom(SelectingToFromState.getFrom());
+        mViewModel.setTo(SelectingToFromState.getTo());
     }
 
     public void onClickTo(View v){
@@ -93,24 +98,60 @@ public class RoutesActivity extends AppCompatActivity {
     public void onClickTransit(View v) {
         mViewModel.setTransportType(ClassConstants.TRANSIT);
         getAllRoutes();
+        setTransitSelect();
+    }
+
+    private void setTransitSelect() {
+        transitButton.setSelected(true);
+        shuttleButton.setSelected(false);
+        walkButton.setSelected(false);
+        carButton.setSelected(false);
     }
 
     public void onClickCar(View v) {
         mViewModel.setTransportType(ClassConstants.DRIVING);
         getAllRoutes();
+        setCarSelect();
     }
 
-    public void onClickDisability(View v) {
+    private void setCarSelect() {
+        transitButton.setSelected(false);
+        shuttleButton.setSelected(false);
+        walkButton.setSelected(false);
+        carButton.setSelected(true);
+    }
 
+    // TODO: #180
+    public void onClickDisability(View v) {
+        if(disabilityButton.isSelected())
+            disabilityButton.setSelected(false);
+        else
+            disabilityButton.setSelected(true);
     }
 
     public void onClickShuttle(View v) {
-        getShuttle(v);
+        //getShuttle(v);
+        setShuttleSelect();
+    }
+
+    private void setShuttleSelect() {
+        transitButton.setSelected(false);
+        shuttleButton.setSelected(true);
+        walkButton.setSelected(false);
+        carButton.setSelected(false);
     }
 
     public void onClickWalk(View v) {
         mViewModel.setTransportType(ClassConstants.WALKING);
         getAllRoutes();
+        setWalkSelect();
+    }
+
+    private void setWalkSelect() {
+        transitButton.setSelected(false);
+        shuttleButton.setSelected(false);
+        walkButton.setSelected(true);
+        carButton.setSelected(false);
     }
 
     @Override
@@ -169,6 +210,8 @@ public class RoutesActivity extends AppCompatActivity {
      * Calls the google Maps Directions API
      */
     public void getAllRoutes() {
+        setTransitSelect();
+
         Coordinates fromCenterCoordinates = mViewModel.getFrom().getCenterCoordinates();
         Coordinates toCenterCoordinates = mViewModel.getTo().getCenterCoordinates();
 

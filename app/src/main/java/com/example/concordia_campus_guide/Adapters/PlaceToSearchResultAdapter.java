@@ -21,6 +21,9 @@ import com.example.concordia_campus_guide.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is an Android Adapter for the UI of the Search Activity page
+ */
 public class PlaceToSearchResultAdapter extends ArrayAdapter<Place> implements Filterable {
 
     Context c;

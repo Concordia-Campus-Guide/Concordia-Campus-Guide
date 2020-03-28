@@ -1,7 +1,5 @@
 package com.example.concordia_campus_guide.ModelTests;
 
-import androidx.room.Room;
-
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.Distance;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.Duration;
@@ -18,7 +16,7 @@ import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.Rooms;
 import com.example.concordia_campus_guide.Models.Routes.Walk;
 import com.google.android.gms.maps.model.LatLng;
-
+import com.example.concordia_campus_guide.Models.Shuttle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,6 +35,7 @@ public class TestUtils {
     public float height = 68;
     public float bearing = 34;
     public String SGWcampus = "SGW";
+    public String LOYCampus = "LOY";
     public String buildingCode = "H";
     public String Building_Long_Name = "Henry F. Hall Building";
     public String address = "1455 De Maisonneuve West";
@@ -69,12 +68,12 @@ public class TestUtils {
 
     public ListOfCoordinates cornerCoordinates = new ListOfCoordinates(listOfCornerCoordinates);
 
-    Building building1 = new Building(centerCoordinates, availableFloors, width, height,
+    public Building building1 = new Building(centerCoordinates, availableFloors, width, height,
             bearing, SGWcampus, buildingCode, Building_Long_Name,  address, departments,
             services,  cornerCoordinates
     );
-    Building building2 = new Building(centerCoordinates, availableFloors, width, height,
-            bearing, SGWcampus, buildingCode, Building_Long_Name,  address, departments,
+    public Building building2 = new Building(centerCoordinates, availableFloors, width, height,
+            bearing, LOYCampus, buildingCode, Building_Long_Name,  address, departments,
             services,  cornerCoordinates
     );
 
@@ -128,6 +127,24 @@ public class TestUtils {
             new LatLng(-73.57907921075821, 45.49702057370776),
             new LatLng(-73.57921063899994, 45.49707133596979),
             new Walk(getDirectionStepsObject()), "This is a description");
+
+    public Shuttle getShuttle1(){
+        Shuttle shuttle1 = new Shuttle();
+        shuttle1.setCampus("SGW");
+        shuttle1.setDay(Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday","Friday"));
+        shuttle1.setShuttleId(1);
+        shuttle1.setTime(8.20);
+        return shuttle1;
+    }
+
+    public Shuttle getShuttle2(){
+        Shuttle shuttle2 = new Shuttle();
+        shuttle2.setCampus("LOY");
+        shuttle2.setDay(Arrays.asList("Monday", "friday"));
+        shuttle2.setShuttleId(2);
+        shuttle2.setTime(9.10);
+        return  shuttle2;
+    }
 
 
 }

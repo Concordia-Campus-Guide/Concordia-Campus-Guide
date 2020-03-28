@@ -89,7 +89,6 @@ public class SearchActivityViewModelTest {
     public void getSetMyCurrentLocation(){
         Location sampleLocation = new Location("some provider");
         mViewModel.setMyCurrentLocation(sampleLocation);
-
         assertEquals(mViewModel.getMyCurrentLocation(), sampleLocation);
     }
 
@@ -97,7 +96,6 @@ public class SearchActivityViewModelTest {
     public void getSetFromId(){
         Long sampleLong = new Long(234234234234L);
         mViewModel.setFromId(sampleLong);
-
         assertEquals(mViewModel.getFromId(), sampleLong);
     }
 
@@ -105,10 +103,19 @@ public class SearchActivityViewModelTest {
     public void getSetToId(){
         Long sampleLong = new Long(4563456345634L);
         mViewModel.setToId(sampleLong);
-
         assertEquals(mViewModel.getToId(), sampleLong);
     }
 
+    @Test
+    public void getAndSetSelectingToOrFromTest(){
+        mViewModel.setSelectingToOrFrom("VL-1, 102.3");
+        assertEquals("VL-1, 102.3",mViewModel.getSelectingToOrFrom());
+    }
 
-
+    @Test
+    public void getRoomFromDbTest(){
+        RoomModel room = new RoomModel(new Coordinates(45.458983023532845,-73.63815218210219),"102.3","VL-1");
+        when(mockRoomDao.getRoomByIdAndFloorCode("102.3","VL-1")).thenReturn(room);
+        assertEquals(room,mViewModel.getRoomFromDB("VL-1, 102.3"));
+    }
 }

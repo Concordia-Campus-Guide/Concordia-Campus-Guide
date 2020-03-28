@@ -37,11 +37,11 @@ public class DirectionTest {
     }
     @Test
     public void getAndSetTransitTypeTest() {
-        TransportType transportTypeOg = direction.getType();
+        TransportType transportTypeOg = direction.getTransportType();
         TransportType transportTypeNew = new Bus(testUtils.getDirectionStepsObject());
-        direction.setType(transportTypeNew);
-        assertEquals(direction.getType(), transportTypeNew);
-        direction.setType(transportTypeOg);
+        direction.setTransportType(transportTypeNew);
+        assertEquals(direction.getTransportType(), transportTypeNew);
+        direction.setTransportType(transportTypeOg);
     }
     @Test
     public void getAndSetDescriptionTest() {

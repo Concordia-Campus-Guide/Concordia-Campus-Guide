@@ -15,4 +15,10 @@
     <color name="divider">#DEBCC0</color>
     <color name="backgroundGrey">#E5E5E5</color>
 
+    <!-- These are strings and not colors because I'm using them for string equality checks-->
+    <string name="subwayBlue">#0074b9</string>
+    <string name="subwayOrange">#f27f2f</string>
+    <string name="subwayYellow">#f2d101</string>
+    <string name="subwayGreen">#00a556</string>
+
 </resources>

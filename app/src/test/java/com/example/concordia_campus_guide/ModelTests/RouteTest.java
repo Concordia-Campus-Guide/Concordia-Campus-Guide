@@ -1,21 +1,21 @@
-//package com.example.concordia_campus_guide.ModelTests;
-//
-//import com.example.concordia_campus_guide.Models.Routes.Car;
-//import com.example.concordia_campus_guide.Models.Direction;
-//import com.example.concordia_campus_guide.Models.Routes.Route;
-//import com.example.concordia_campus_guide.Models.Routes.Walk;
-//import com.google.android.gms.maps.model.LatLng;
-//
-//import org.junit.Before;
-//import org.junit.Test;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//import static junit.framework.Assert.assertTrue;
-//import static junit.framework.TestCase.assertEquals;
-//
-//public class RouteTest {
+package com.example.concordia_campus_guide.ModelTests;
+
+import com.example.concordia_campus_guide.Models.Routes.Car;
+import com.example.concordia_campus_guide.Models.Direction;
+import com.example.concordia_campus_guide.Models.Routes.Route;
+import com.example.concordia_campus_guide.Models.Routes.Walk;
+import com.google.android.gms.maps.model.LatLng;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static junit.framework.Assert.assertTrue;
+import static junit.framework.TestCase.assertEquals;
+
+public class RouteTest {
 //    private Route route;
 //    List<Direction> directions;
 //
@@ -45,3 +45,4 @@
 //
 //    }
 //}
+}

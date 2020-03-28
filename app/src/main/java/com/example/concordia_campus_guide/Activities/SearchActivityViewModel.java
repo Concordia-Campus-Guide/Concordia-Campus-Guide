@@ -88,14 +88,12 @@ public class SearchActivityViewModel extends ViewModel {
     public Place getRoomFromDB(String location){
         String[] splitLocation;
         String roomId = "";
-        long roomIdLong = 0;
         String floorCode="";
 
         if(location.contains(",")){
             splitLocation = location.split(", ");
             floorCode = splitLocation[0];
             roomId=splitLocation[1];
-            roomIdLong = Long.parseLong(roomId);
         }
         return appDB.roomDao().getRoomByIdAndFloorCode(roomId, floorCode);
     }
