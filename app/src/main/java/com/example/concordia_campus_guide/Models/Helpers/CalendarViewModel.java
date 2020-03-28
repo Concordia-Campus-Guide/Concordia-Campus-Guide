@@ -68,7 +68,7 @@ public class CalendarViewModel extends AndroidViewModel {
         return  nextClassString;
     }
 
-    private boolean incorrectlyFormatted(String location) {
+    public boolean incorrectlyFormatted(String location) {
         String pattern = "([A-z]+-\\d+, \\d+)";
         return !location.matches(pattern);
     }
