@@ -25,13 +25,13 @@ import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Activities.PathsActivity;
 import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
-import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
+import com.example.concordia_campus_guide.Models.Place;
+import com.example.concordia_campus_guide.Models.RoomModel;
+import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.Models.Building;
-import com.example.concordia_campus_guide.Models.Place;
-import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -57,6 +57,8 @@ import org.mortbay.jetty.Main;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import androidx.lifecycle.Observer;
 
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 

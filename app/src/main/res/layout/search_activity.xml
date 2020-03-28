@@ -85,10 +85,7 @@
             app:srcCompat="@drawable/arrow_right"
             tools:layout_editor_absoluteY="16dp" />
 
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     <TextView
         android:id="@+id/textView2"
@@ -111,7 +108,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/next_class_row"
             app:layout_constraintEnd_toEndOf="@+id/next_class_row"
             app:layout_constraintStart_toStartOf="@+id/next_class_row"
-            app:layout_constraintTop_toTopOf="@+id/next_class_row"/>
+            app:layout_constraintTop_toTopOf="@+id/next_class_row" />
 
         <ImageView
             android:id="@+id/imageView5"
@@ -122,9 +119,10 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:tint="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="@+id/view_container"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_place_white" />
+            app:srcCompat="@drawable/ic_next_class_book_icon" />
 
         <TextView
             android:id="@+id/next_class_text"
@@ -132,7 +130,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:ems="10"
-            android:padding="10dp"
+            android:padding="15dp"
             android:text="No classes today"
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="20sp"
@@ -155,8 +153,6 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
     <ListView
         android:id="@+id/searchResults"

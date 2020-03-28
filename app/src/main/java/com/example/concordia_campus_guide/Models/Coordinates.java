@@ -48,6 +48,4 @@ public class Coordinates implements Serializable {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
-
-    public LatLng getLatLng() { return new LatLng(this.longitude, this.latitude); }
 }

@@ -1,5 +1,6 @@
 package com.example.concordia_campus_guide.Models;
 
+import com.example.concordia_campus_guide.Models.Routes.TransportType;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.Serializable;
@@ -10,19 +11,18 @@ public class Direction implements Serializable {
     private transient LatLng end;
     private Date startTime;
     private Date endTime;
-    private TransitType type;
+    private TransportType transportType;
     private String description;
     private double duration;
 
     public Direction() {
     }
 
-    public Direction(LatLng start, LatLng end, TransitType type, String description, double duration) {
+    public Direction(LatLng start, LatLng end, TransportType transportType, String description) {
         this.start = start;
         this.end = end;
-        this.type = type;
+        this.transportType = transportType;
         this.description = description;
-        this.duration = duration;
     }
 
     public LatLng getStart() {
@@ -41,12 +41,12 @@ public class Direction implements Serializable {
         this.end = end;
     }
 
-    public TransitType getType() {
-        return type;
+    public TransportType getTransportType() {
+        return transportType;
     }
 
-    public void setType(TransitType type) {
-        this.type = type;
+    public void setTransportType(TransportType transportType) {
+        this.transportType = transportType;
     }
 
     public String getDescription() {
@@ -56,33 +56,4 @@ public class Direction implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public double getDuration() {
-        return duration;
-    }
-
-    public void setDuration(double duration) {
-        this.duration = duration;
-    }
-
-    public Date getStartTime() {
-        return startTime;
-    }
-
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
-
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
 }
-
-
-
-
-

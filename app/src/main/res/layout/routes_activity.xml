@@ -10,7 +10,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
+        android:layout_height="wrap_content"
         android:background="@color/colorAppTheme"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -43,8 +43,8 @@
                 android:id="@+id/routesPageBackButton"
                 android:layout_width="30dp"
                 android:layout_height="38dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
                 android:background="#00FFFFFF"
                 android:tint="@android:color/white"
                 app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +73,7 @@
                 android:id="@+id/fromText"
                 android:layout_width="303dp"
                 android:layout_height="39dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="10dp"
                 android:background="#29FFFFFF"
                 android:clickable="true"
                 android:ems="10"
@@ -88,75 +88,95 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="409dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="1dp"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="1dp"
-                android:layout_marginBottom="1dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/toText">
 
                 <ImageButton
                     android:id="@+id/filterButtonTransit"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="20dp"
                     android:background="@drawable/round_button"
                     android:gravity="center_vertical|center_horizontal"
+                    android:onClick="onClickTransit"
                     android:padding="10dp"
-                    app:srcCompat="@drawable/ic_directions_bus_black_24dp" />
+                    app:srcCompat="@drawable/transit_selection" />
 
                 <ImageButton
                     android:id="@+id/filterButtonShuttle"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:background="@drawable/round_button"
                     android:gravity="center_vertical|center_horizontal"
+                    android:onClick="onClickShuttle"
                     android:padding="10dp"
-                    android:onClick="getShuttle"
-                    app:srcCompat="@drawable/ic_shuttle" />
+                    app:srcCompat="@drawable/shuttle_selection" />
 
                 <ImageButton
                     android:id="@+id/filterButtonWalk"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:background="@drawable/round_button"
                     android:gravity="center_vertical|center_horizontal"
+                    android:onClick="onClickWalk"
                     android:padding="10dp"
-                    app:srcCompat="@drawable/ic_directions_walk_black_24dp" />
-
-                <ImageButton
-                    android:id="@+id/filterButtonAccessibility"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_button"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:padding="10dp"
-                    app:srcCompat="@drawable/ic_accessible_white_24dp" />
+                    app:srcCompat="@drawable/walk_selection" />
 
                 <ImageButton
                     android:id="@+id/filterButtonCar"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="openPathsPage"
-                    android:layout_weight="1"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:background="@drawable/round_button"
                     android:gravity="center_vertical|center_horizontal"
+                    android:onClick="onClickCar"
                     android:padding="10dp"
-                    app:srcCompat="@drawable/ic_directions_car_black_24dp" />
-            </LinearLayout>
+                    app:srcCompat="@drawable/car_selection" />
 
+                <ImageButton
+                    android:id="@+id/filterButtonDisability"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/round_button"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:onClick="onClickDisability"
+                    android:padding="10dp"
+                    app:srcCompat="@drawable/disability_selection" />
+
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_routes" />
+    <ListView
+        android:id="@+id/allRoutes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:addStatesFromChildren="false"
+        android:duplicateParentState="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".Activities.RoutesActivity"
+        tools:showIn="@layout/routes_activity">
+
+    </ListView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
