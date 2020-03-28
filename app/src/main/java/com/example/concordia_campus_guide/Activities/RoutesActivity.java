@@ -98,25 +98,48 @@ public class RoutesActivity extends AppCompatActivity {
     public void onClickTransit(View v) {
         mViewModel.setTransportType(ClassConstants.TRANSIT);
         getAllRoutes();
+
+        transitButton.setSelected(true);
+        shuttleButton.setSelected(false);
+        walkButton.setSelected(false);
+        carButton.setSelected(false);
     }
 
     public void onClickCar(View v) {
         mViewModel.setTransportType(ClassConstants.DRIVING);
         getAllRoutes();
+
+        transitButton.setSelected(false);
+        shuttleButton.setSelected(false);
+        walkButton.setSelected(false);
+        carButton.setSelected(true);
     }
 
     // TODO: #180
     public void onClickDisability(View v) {
-
+        if(transitButton.isSelected())
+            transitButton.setSelected(false);
+        else
+            transitButton.setSelected(true);
     }
 
     public void onClickShuttle(View v) {
         //getShuttle(v);
+
+        transitButton.setSelected(false);
+        shuttleButton.setSelected(true);
+        walkButton.setSelected(false);
+        carButton.setSelected(false);
     }
 
     public void onClickWalk(View v) {
         mViewModel.setTransportType(ClassConstants.WALKING);
         getAllRoutes();
+
+        transitButton.setSelected(false);
+        shuttleButton.setSelected(false);
+        walkButton.setSelected(true);
+        carButton.setSelected(false);
     }
 
     @Override

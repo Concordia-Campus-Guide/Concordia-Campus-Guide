@@ -94,6 +94,7 @@
                 android:layout_marginTop="70dp"
                 android:layout_marginEnd="1dp"
                 android:layout_marginBottom="1dp"
+                android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -101,9 +102,10 @@
 
                 <ImageButton
                     android:id="@+id/filterButtonTransit"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:background="@drawable/round_button"
                     android:gravity="center_vertical|center_horizontal"
                     android:onClick="onClickTransit"
@@ -112,9 +114,10 @@
 
                 <ImageButton
                     android:id="@+id/filterButtonShuttle"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:background="@drawable/round_button"
                     android:gravity="center_vertical|center_horizontal"
                     android:onClick="onClickShuttle"
@@ -123,9 +126,10 @@
 
                 <ImageButton
                     android:id="@+id/filterButtonWalk"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:background="@drawable/round_button"
                     android:gravity="center_vertical|center_horizontal"
                     android:onClick="onClickWalk"
@@ -134,9 +138,10 @@
 
                 <ImageButton
                     android:id="@+id/filterButtonCar"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:background="@drawable/round_button"
                     android:gravity="center_vertical|center_horizontal"
                     android:onClick="onClickCar"
@@ -145,14 +150,15 @@
 
                 <ImageButton
                     android:id="@+id/filterButtonDisability"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="onClickDisability"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:background="@drawable/round_button"
                     android:gravity="center_vertical|center_horizontal"
+                    android:onClick="onClickDisability"
                     android:padding="10dp"
-                    app:srcCompat="@drawable/ic_accessible_white_24dp" />
+                    app:srcCompat="@drawable/disability_selection" />
 
             </LinearLayout>
 
