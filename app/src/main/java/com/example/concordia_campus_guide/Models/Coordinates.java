@@ -2,11 +2,12 @@ package com.example.concordia_campus_guide.Models;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Coordinates {
+public class Coordinates implements Serializable {
 
     double latitude;
     double longitude;
@@ -47,4 +48,8 @@ public class Coordinates {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+
+    public LatLng getLatLng(){
+        // TODO: more investigation why this is inverted.
+        return new LatLng(this.longitude, this.latitude);}
 }

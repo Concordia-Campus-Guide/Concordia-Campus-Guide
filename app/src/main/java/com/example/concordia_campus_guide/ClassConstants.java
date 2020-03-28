@@ -4,8 +4,14 @@ import android.Manifest;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.Arrays;
+import java.util.List;
 
 import androidx.annotation.StringDef;
+
+import com.google.android.gms.maps.model.Dash;
+import com.google.android.gms.maps.model.Gap;
+import com.google.android.gms.maps.model.PatternItem;
 
 public class  ClassConstants {
     public static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
@@ -23,4 +29,8 @@ public class  ClassConstants {
 
     public static final String SGW_SHUTTLE_STOP = "1455 De Maisonneuve Blvd. W., SGW Campus";
     public static final String LOYOLA_SHUTTLE_STOP = "7137 Sherbrooke St. W., Loyola Campus";
+
+    //Polyline styling
+    public static final List<PatternItem> WALK_PATTERN = Arrays.asList(new Gap(20), new Dash(20));
+
 }
