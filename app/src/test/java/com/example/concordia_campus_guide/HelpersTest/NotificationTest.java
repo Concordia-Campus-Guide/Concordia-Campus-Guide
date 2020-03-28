@@ -58,9 +58,5 @@ public class NotificationTest {
         assertNull(notification.getRoom(null));
     }
 
-    @Test
-    public void roomExistsInDbTest(){
-        String location = "H-9, 923";
 
-    }
 }

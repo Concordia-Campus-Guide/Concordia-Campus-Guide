@@ -4,6 +4,7 @@ import android.os.Handler;
 
 import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Database.AppDatabase;
+import com.example.concordia_campus_guide.Global.NotificationStatus;
 import com.example.concordia_campus_guide.Models.CalendarEvent;
 import com.example.concordia_campus_guide.Models.Helpers.CalendarViewModel;
 import com.example.concordia_campus_guide.Models.RoomModel;
@@ -12,12 +13,13 @@ public class Notification {
     private MainActivity mainActivity;
     private AppDatabase appDatabase;
     private CalendarEvent previousCalendarEvent;
-    private CalendarViewModel calendarViewModel;
+    private NotificationStatus notifyUser;
 
     public Notification(MainActivity mainActivity, AppDatabase appDatabase){
         this.mainActivity =  mainActivity;
         this.appDatabase  = appDatabase;
         this.previousCalendarEvent = new CalendarEvent("","","");
+        notifyUser = NotificationStatus.getInstance();
     }
 
     public void checkUpCalendarEvery5Minutes() {
@@ -26,8 +28,9 @@ public class Notification {
             @Override
             public void run(){
                 CalendarEvent calendarEvent = getNextClassCalendar();
-                if(calendarEvent  != null && !validateCalendarEvent(calendarEvent)){
+                if(calendarEvent  != null && !validateCalendarEvent(calendarEvent) && notifyUser.getNotifyUser()){
                     if(!calendarEvent.getTitle().equalsIgnoreCase(previousCalendarEvent.getTitle()) && roomExistsInDb(calendarEvent.getLocation())){
+                        notifyUser.setNotifyUser(false);
                         previousCalendarEvent = calendarEvent;
                         mainActivity.popUp(calendarEvent);
                     }
