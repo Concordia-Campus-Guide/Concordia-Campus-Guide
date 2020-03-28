@@ -1146,12 +1146,12 @@
         "latitude": -73.5786594450473
       },
       "floorCode": "MB-S2",
-      "pointType": "ENTRANCE",
+      "pointType": "NONE",
       "connectedPointsId": [
         88,
         143
       ],
-      "placeCode": "MB"
+      "placeCode": ""
     },
     {
       "id": 88,
@@ -1500,8 +1500,8 @@
     {
       "id": 116,
       "coordinate": {
-        "longitude": 45.4952887541256,
-        "latitude": -73.578928001225
+        "longitude":45.495305,
+        "latitude":-73.578885
       },
       "floorCode": "MB-S2",
       "pointType": "NONE",
@@ -2036,7 +2036,7 @@
       "pointType": "ENTRANCE",
       "connectedPointsId": [
         159,
-        180
+        800
       ],
       "placeCode": "H"
     },
@@ -2320,19 +2320,6 @@
         266
       ],
       "placeCode": "961.06"
-    },
-    {
-      "id": 180,
-      "coordinate": {
-        "longitude": 45.4971190430539,
-        "latitude": -73.5784985125064
-      },
-      "floorCode": "H-1",
-      "pointType": "NONE",
-      "connectedPointsId": [
-        158
-      ],
-      "placeCode": "shuttle"
     },
     {
       "id": 181,
@@ -3635,8 +3622,8 @@
     {
       "id": 314,
       "coordinate": {
-        "longitude": 45.4952553815873,
-        "latitude": -73.5791113972664
+        "longitude":45.495059611298636,
+        "latitude":-73.57882708311081
       },
       "floorCode": "MB-1",
       "pointType": "CLASSROOM",
@@ -6482,6 +6469,32 @@
         625
       ],
       "placeCode": "stairs-1"
+    },
+    {
+      "id": 800,
+      "coordinate": {
+        "longitude": 45.4971190430539,
+        "latitude": -73.5784985125064
+      },
+      "floorCode": "H-1",
+      "pointType": "NONE",
+      "connectedPointsId": [
+        158
+      ],
+      "placeCode": "shuttle"
+    },
+    {
+      "id": 801,
+      "coordinate": {
+        "longitude": 45.4584776424937,
+        "latitude": -73.638241700828
+      },
+      "floorCode": "VL-1",
+      "pointType": "NONE",
+      "connectedPointsId": [
+        600
+      ],
+      "placeCode": "shuttle"
     }
   ]
 }
