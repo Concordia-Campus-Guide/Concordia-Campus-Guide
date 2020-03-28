@@ -46,6 +46,7 @@ public class RoutesActivityViewModelTest {
 
         MockitoAnnotations.initMocks(this);
         testUtils = new TestUtils();
+        testUtilsRoutes = new TestUtilsRoutes();
         mViewModel = new RoutesActivityViewModel(mockAppDb);
         mViewModel.setTo(testUtils.building2);
         mViewModel.setFrom(testUtils.building1);
