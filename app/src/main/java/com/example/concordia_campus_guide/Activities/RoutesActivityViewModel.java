@@ -41,9 +41,7 @@ public class RoutesActivityViewModel extends ViewModel {
         return to;
     }
 
-    public Place getFrom(){
-        return from;
-    }
+    public Place getFrom(){ return from; }
 
     public void setFrom(Place from) {
         this.from = from;

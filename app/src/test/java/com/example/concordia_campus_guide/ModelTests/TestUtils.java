@@ -10,6 +10,7 @@ import com.example.concordia_campus_guide.Models.Floors;
 import com.example.concordia_campus_guide.Models.ListOfCoordinates;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.Rooms;
+import com.example.concordia_campus_guide.Models.Shuttle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,6 +30,7 @@ public class TestUtils {
     public float height = 68;
     public float bearing = 34;
     public String SGWcampus = "SGW";
+    public String LOYCampus = "LOY";
     public String buildingCode = "H";
     public String Building_Long_Name = "Henry F. Hall Building";
     public String address = "1455 De Maisonneuve West";
@@ -61,12 +63,12 @@ public class TestUtils {
 
     public ListOfCoordinates cornerCoordinates = new ListOfCoordinates(listOfCornerCoordinates);
 
-    Building building1 = new Building(centerCoordinates, availableFloors, width, height,
+    public Building building1 = new Building(centerCoordinates, availableFloors, width, height,
             bearing, SGWcampus, buildingCode, Building_Long_Name,  address, departments,
             services,  cornerCoordinates
     );
-    Building building2 = new Building(centerCoordinates, availableFloors, width, height,
-            bearing, SGWcampus, buildingCode, Building_Long_Name,  address, departments,
+    public Building building2 = new Building(centerCoordinates, availableFloors, width, height,
+            bearing, LOYCampus, buildingCode, Building_Long_Name,  address, departments,
             services,  cornerCoordinates
     );
 
@@ -97,6 +99,24 @@ public class TestUtils {
     ArrayList<RoomModel> roomList = new ArrayList<RoomModel>(Arrays.asList(room1, room2));
     public Rooms rooms = new Rooms(roomList);
 
+
+    public Shuttle getShuttle1(){
+        Shuttle shuttle1 = new Shuttle();
+        shuttle1.setCampus("SGW");
+        shuttle1.setDay(Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday","Friday"));
+        shuttle1.setShuttleId(1);
+        shuttle1.setTime(8.20);
+        return shuttle1;
+    }
+
+    public Shuttle getShuttle2(){
+        Shuttle shuttle2 = new Shuttle();
+        shuttle2.setCampus("LOY");
+        shuttle2.setDay(Arrays.asList("Monday", "friday"));
+        shuttle2.setShuttleId(2);
+        shuttle2.setTime(9.10);
+        return  shuttle2;
+    }
 
 
 }
