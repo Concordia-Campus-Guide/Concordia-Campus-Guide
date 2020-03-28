@@ -15,6 +15,7 @@ import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragment;
 import com.example.concordia_campus_guide.Fragments.PathInfoCardFragment.PathInfoCardFragment;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsResult;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsRoute;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
 import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.RoomModel;
@@ -35,7 +36,7 @@ public class PathsActivity extends AppCompatActivity {
     private FragmentTransaction fragmentTransaction;
     private FragmentManager fragmentManager;
     private BottomSheetBehavior swipeableInfoCard;
-    private DirectionsResult directionsResult;
+    private DirectionsRoute directionsResult;
     private ArrayList<DirectionWrapper> directionWrappers;
     private Place from;
     private Place to;
@@ -55,7 +56,7 @@ public class PathsActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            directionsResult = (DirectionsResult) extras.getSerializable("directionsResult");
+            directionsResult = (DirectionsRoute) extras.getSerializable("directionsResult");
         }
 
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.pathLocationFragment);
@@ -69,7 +70,7 @@ public class PathsActivity extends AppCompatActivity {
         setBackButtonOnClickListener();
 
         directionWrappers = !(fromIsIndoor && toIsIndoor) ? (ArrayList<DirectionWrapper>) parseDirectionResults() : new ArrayList<DirectionWrapper>();
-        if (!(fromIsIndoor && toIsIndoor)) {
+        if (!(infromIsIndoor && toIsIndoor)) {
             locationFragment.drawOutdoorPaths(directionWrappers);
         }
 
@@ -111,7 +112,7 @@ public class PathsActivity extends AppCompatActivity {
 
     public List<DirectionWrapper> parseDirectionResults() {
         ArrayList<DirectionWrapper> directionWrapperArrayList = new ArrayList<>();
-        DirectionsStep[] steps = directionsResult.routes[0].legs[0].steps;
+        DirectionsStep[] steps = directionsResult.legs[0].steps;
         for (DirectionsStep step : steps) {
             directionWrapperArrayList.add(new DirectionWrapper(step));
         }

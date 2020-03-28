@@ -15,6 +15,7 @@ import com.example.concordia_campus_guide.Adapters.RoutesAdapter;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsResult;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsRoute;
 import com.example.concordia_campus_guide.Helper.RoutesHelpers.DirectionsApiDataRetrieval;
 import com.example.concordia_campus_guide.Helper.RoutesHelpers.UrlBuilder;
 import com.example.concordia_campus_guide.Models.Coordinates;
@@ -184,7 +185,7 @@ public class RoutesActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent openPaths = new Intent(RoutesActivity.this,
                         PathsActivity.class);
-                DirectionsResult directionsResult = mViewModel.getDirectionsResult();
+                DirectionsRoute directionsResult = mViewModel.getDirectionsResult().routes[i];
                 openPaths.putExtra("directionsResult", directionsResult);
                 startActivity(openPaths);
             }
