@@ -77,14 +77,14 @@ public class RoutesActivityViewModelTest {
         assertEquals(mViewModel.getFrom(), sampleBuilding);
     }
 
-    @Test
-    public void getSetShuttles(){
-        mViewModel.setShuttles();
-        List<Shuttle> expectedListOfShuttles = Arrays.asList(shuttle1);
-        List<Shuttle> returnedListOfShuttles = mViewModel.getShuttles();
-        assertEquals(expectedListOfShuttles.get(0).getShuttleId(),returnedListOfShuttles.get(0).getShuttleId());
-
-    }
+//    @Test
+//    public void getSetShuttles(){
+//        mViewModel.setShuttles();
+//        List<Shuttle> expectedListOfShuttles = Arrays.asList(shuttle1);
+//        List<Shuttle> returnedListOfShuttles = mViewModel.getShuttles();
+//        assertEquals(expectedListOfShuttles.get(0).getShuttleId(),returnedListOfShuttles.get(0).getShuttleId());
+//
+//    }
 
     @Test
     public void getShuttleDisplayTextTest(){
