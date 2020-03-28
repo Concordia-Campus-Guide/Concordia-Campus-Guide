@@ -44,17 +44,23 @@ public class NotificationTest {
     @Test
     public void getRoomTest(){
         RoomModel expectedRoom = new RoomModel(new Coordinates(0, 0), "111", "H-9");
-        assertEquals(expectedRoom.getFloorCode(), notification.getRoom("H-927").getFloorCode());
+        assertEquals(expectedRoom.getFloorCode(), notification.getRoom("H-9, 927").getFloorCode());
     }
 
     @Test
     public void getRoom10thFloorTest(){
         RoomModel expectedRoom = new RoomModel(new Coordinates(0, 0), "1027", "H-10");
-        assertEquals(expectedRoom.getFloorCode(), notification.getRoom("H-1027").getFloorCode());
+        assertEquals(expectedRoom.getFloorCode(), notification.getRoom("H-10, 1027").getFloorCode());
     }
 
     @Test
     public void getRoomNullTest(){
         assertNull(notification.getRoom(null));
+    }
+
+    @Test
+    public void roomExistsInDbTest(){
+        String location = "H-9, 923";
+
     }
 }

@@ -14,12 +14,10 @@ public class Notification {
     private CalendarEvent previousCalendarEvent;
     private CalendarViewModel calendarViewModel;
 
-
     public Notification(MainActivity mainActivity, AppDatabase appDatabase){
         this.mainActivity =  mainActivity;
         this.appDatabase  = appDatabase;
         this.previousCalendarEvent = new CalendarEvent("","","");
-        this.calendarViewModel = new CalendarViewModel(mainActivity.getApplication());
     }
 
     public void checkUpCalendarEvery5Minutes() {
@@ -28,8 +26,8 @@ public class Notification {
             @Override
             public void run(){
                 CalendarEvent calendarEvent = getNextClassCalendar();
-                if(calendarEvent  != null && validateCalendarEvent(calendarEvent)){
-                    if(!calendarEvent.getTitle().equalsIgnoreCase(previousCalendarEvent.getTitle())){
+                if(calendarEvent  != null && !validateCalendarEvent(calendarEvent)){
+                    if(!calendarEvent.getTitle().equalsIgnoreCase(previousCalendarEvent.getTitle()) && roomExistsInDb(calendarEvent.getLocation())){
                         previousCalendarEvent = calendarEvent;
                         mainActivity.popUp(calendarEvent);
                     }
@@ -40,10 +38,12 @@ public class Notification {
     }
 
     public boolean validateCalendarEvent(CalendarEvent calendarEvent){
+        CalendarViewModel calendarViewModel = new CalendarViewModel(mainActivity.getApplication());
         return calendarViewModel.incorrectlyFormatted(calendarEvent.getLocation());
     }
 
     public CalendarEvent getNextClassCalendar(){
+        CalendarViewModel calendarViewModel = new CalendarViewModel(mainActivity.getApplication());
         return  calendarViewModel.getEvent(mainActivity);
     }
 
@@ -55,5 +55,21 @@ public class Notification {
         String roomCode  = location.substring(indexOfSeparation+2);
 
         return appDatabase.roomDao().getRoomByRoomCodeAndFloorCode(roomCode,floorCode);
+    }
+
+    public boolean roomExistsInDb(String location){
+        if(location == null) { return false; }
+
+        int indexOfSeparation = location.indexOf(',');
+        String floorCode = location.substring(0,indexOfSeparation);
+        String roomCode  = location.substring(indexOfSeparation+2);
+
+        RoomModel room = appDatabase.roomDao().getRoomByRoomCodeAndFloorCode(roomCode,floorCode);
+
+        if(room != null){
+            return true;
+        } else{
+          return false;
+        }
     }
 }
