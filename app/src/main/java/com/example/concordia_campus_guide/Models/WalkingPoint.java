@@ -12,6 +12,7 @@ import androidx.room.TypeConverters;
 import com.example.concordia_campus_guide.Database.Converters.EnumToStringConverter;
 import com.example.concordia_campus_guide.Database.Converters.IntegerListToStringConverter;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,7 +27,7 @@ import static androidx.room.ForeignKey.CASCADE;
                         onDelete = CASCADE
                 ),
         })
-public  class WalkingPoint {
+public  class WalkingPoint implements Serializable {
 
     @NonNull
     @ColumnInfo (name = "id")
@@ -124,5 +125,16 @@ public  class WalkingPoint {
         WalkingPoint that = (WalkingPoint) o;
         return coordinate.equals(that.coordinate) &&
                 floorCode.equals(that.floorCode);
+    }
+
+    @Override
+    public String toString() {
+        return "WalkingPoint{" +
+                "id=" + id +
+                ", coordinate=" + coordinate +
+                ", floorCode='" + floorCode + '\'' +
+                ", connectedPointsId=" + connectedPointsId +
+                ", pointType=" + pointType +
+                '}';
     }
 }

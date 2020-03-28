@@ -44,7 +44,7 @@
             android:id="@+id/indoor_map"
             android:layout_marginStart="15sp"
             android:backgroundTint="@color/colorPrimary"
-            android:drawableLeft="@drawable/ic_layers_black_24dp"
+            android:drawableLeft="@drawable/ic_layers_white"
             android:text="Indoor Map"
             app:iconPadding="5dp" />
 
@@ -92,7 +92,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/description"
+        android:id="@+id/upperContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="15dp"

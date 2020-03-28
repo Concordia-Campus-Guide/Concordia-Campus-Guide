@@ -1,21 +1,29 @@
 package com.example.concordia_campus_guide.Models;
 
+import com.example.concordia_campus_guide.ClassConstants;
 import com.google.android.gms.maps.model.LatLng;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class Direction {
-    private LatLng start;
-    private LatLng end;
+public class Direction implements Serializable {
+    private transient LatLng start;
+    private transient LatLng end;
     private Date startTime;
     private Date endTime;
-    private TransitType type;
+    private String transportType;
     private String description;
+    private double duration;
 
-    public Direction(LatLng start, LatLng end, TransitType type, String description) {
+    public Direction() {
+    }
+
+    public Direction(LatLng start, LatLng end, String transportType, String description, double duration) {
         this.start = start;
         this.end = end;
-        this.type = type;
+        this.transportType = transportType;
         this.description = description;
+        this.duration = duration;
     }
 
     public LatLng getStart() {
@@ -34,12 +42,12 @@ public class Direction {
         this.end = end;
     }
 
-    public TransitType getType() {
-        return type;
+    public @ClassConstants.TransportType String getTransportType() {
+        return transportType;
     }
 
-    public void setType(TransitType type) {
-        this.type = type;
+    public void setTransportType(String transportType) {
+        this.transportType = transportType;
     }
 
     public String getDescription() {
@@ -48,5 +56,13 @@ public class Direction {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public double getDuration(){
+        return this.duration;
+    }
+
+    public void setDuration(double duration){
+        this.duration = duration;
     }
 }

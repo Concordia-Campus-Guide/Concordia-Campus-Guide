@@ -1,10 +1,13 @@
 package com.example.concordia_campus_guide.Models;
 
+import com.google.android.gms.maps.model.LatLng;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Coordinates {
+public class Coordinates implements Serializable {
 
     double latitude;
     double longitude;
@@ -60,5 +63,10 @@ public class Coordinates {
         final double resultLatDiff = Math.abs(this.latitude- other.latitude);
         final double resultLongDiff = Math.abs(this.longitude - other.longitude);
         return Math.sqrt(Math.pow(resultLatDiff, 2) + Math.pow(resultLongDiff, 2));
+    }
+
+    public LatLng getLatLng() {
+        // TODO: more investigation why this is inverted.
+        return new LatLng(this.longitude, this.latitude);
     }
 }

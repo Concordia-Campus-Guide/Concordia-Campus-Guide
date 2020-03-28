@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 
 import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Activities.RoutesActivity;
+import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
@@ -27,6 +28,7 @@ import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListene
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.MyCurrentPlace;
 import com.example.concordia_campus_guide.Models.Place;
+import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -92,10 +94,10 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.location_fragment_fragment, container, false);
         initComponents(rootView);
+        mViewModel = ViewModelProviders.of(getActivity(), new ViewModelFactory(this.getActivity().getApplication())).get(LocationFragmentViewModel.class);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
         getLocationPermission();
-        initMap();
         setupClickListeners();
         updateLocationEvery5Seconds();
 
@@ -105,7 +107,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(getActivity(), new ViewModelFactory(this.getActivity().getApplication())).get(LocationFragmentViewModel.class);
         setupPOIListListener();
     }
     /**
@@ -222,6 +223,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             if (myLocationPermissionsGranted) {
                 mMap.setMyLocationEnabled(true);
                 initMap();
+                return;
             }
         }
 
@@ -273,7 +275,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     private void setupZoomListener(final GoogleMap map) {
         map.setOnCameraMoveListener(() -> {
-            if (map.getCameraPosition().zoom > 20) {
+            if (map.getCameraPosition().zoom > 19) {
                 mLayer.removeLayerFromMap();
                 setupClassMarkerClickListener(map);
             } else {
@@ -293,7 +295,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                 Building building = mViewModel.getBuildingFromGeoJsonFeature(geoJsonFeature);
                 onBuildingClick(building);
                 String buildingCode = geoJsonFeature.getProperty("code");
-                ((MainActivity) getActivity()).showInfoCard(buildingCode);
+                if (getActivity() instanceof MainActivity)
+                    ((MainActivity) getActivity()).showInfoCard(buildingCode);
             }
         });
     }
@@ -304,6 +307,14 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         } else {
             mFloorPickerGv.setVisibility(View.GONE);
         }
+    }
+
+    public void setIndoorPaths(Place from, Place to) {
+        mViewModel.parseWalkingPointList(AppDatabase.getInstance(getContext()), (RoomModel) from, (RoomModel) to);
+    }
+
+    public void drawOutdoorPaths(final List<DirectionWrapper> outdoorDirections) {
+        mMapView.getMapAsync(googleMap -> mViewModel.drawOutdoorPath(outdoorDirections, googleMap));
     }
 
     /**
@@ -318,7 +329,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                 } else {
                     Building building = mViewModel.getBuildingFromeCode(marker.getTag().toString());
                     String buildingCode = (marker.getTag()).toString();
-                    ((MainActivity) getActivity()).showInfoCard(buildingCode);
+                    if (getActivity() instanceof MainActivity)
+                        ((MainActivity) getActivity()).showInfoCard(buildingCode);
                     onBuildingClick(building);
                 }
             }
@@ -434,16 +446,16 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private void getLocationPermission() {
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
-        
-            if (requestPermission()) {
-                initMap();
-            }
-            else {
-                ActivityCompat.requestPermissions(getActivity(),
-                        permissions,
-                        ClassConstants.LOCATION_PERMISSION_REQUEST_CODE);
-            }
+
+        if (requestPermission()) {
             initMap();
+            return;
+        } else {
+            ActivityCompat.requestPermissions(getActivity(),
+                    permissions,
+                    ClassConstants.LOCATION_PERMISSION_REQUEST_CODE);
+        }
+        initMap();
     }
 
     private void classRoomCoordinateTool(GoogleMap map) {
@@ -535,5 +547,9 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     public Location getCurrentLocation() {
         return currentLocation;
+    }
+
+    public List<WalkingPoint> getWalkingPointList() {
+        return mViewModel.getWalkingPointsList();
     }
 }

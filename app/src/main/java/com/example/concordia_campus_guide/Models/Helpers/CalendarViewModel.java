@@ -11,6 +11,7 @@ import android.provider.CalendarContract;
 import android.provider.CalendarContract.Instances;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.AndroidViewModel;
@@ -20,6 +21,7 @@ import com.example.concordia_campus_guide.Models.CalendarEvent;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
 public class CalendarViewModel extends AndroidViewModel {
     Context context;
@@ -40,10 +42,10 @@ public class CalendarViewModel extends AndroidViewModel {
             Instances.DTSTART
     };
 
-    public CalendarEvent getEvent(SearchActivity searchActivity) {
+    public CalendarEvent getEvent(AppCompatActivity activity) {
 
         if (!hasReadPermission()) {
-            ActivityCompat.requestPermissions(searchActivity,
+            ActivityCompat.requestPermissions(activity,
                     new String[]{Manifest.permission.READ_CALENDAR}, 101);
         } else {
 
@@ -55,14 +57,21 @@ public class CalendarViewModel extends AndroidViewModel {
 
     public String getNextClassString(CalendarEvent event){
         String nextClassString = "";
-            if(event != null){
-                Date eventDate = new Date((Long.parseLong(event.getStartTime())));
-                String timeUntil = getTimeUntilString(eventDate.getTime(), System.currentTimeMillis());
-                nextClassString = event.getTitle() +  " in " + timeUntil;
-            }
+        if(incorrectlyFormatted(event.getLocation())){
+            return "Event is incorrectly formatted";
+        }
+        if(event != null){
+            Date eventDate = new Date((Long.parseLong(event.getStartTime())));
+            String timeUntil = getTimeUntilString(eventDate.getTime(), System.currentTimeMillis());
+            nextClassString = event.getTitle() +  " in " + timeUntil;
+        }
         return  nextClassString;
     }
 
+    public boolean incorrectlyFormatted(String location) {
+        String pattern = "([A-z]+-\\d+, \\d+)";
+        return !location.matches(pattern);
+    }
 
     public Cursor getCalendarCursor() {
         Uri.Builder eventsUriBuilder = CalendarContract.Instances.CONTENT_URI
@@ -84,7 +93,6 @@ public class CalendarViewModel extends AndroidViewModel {
     }
 
     public CalendarEvent getCalendarEvent(Cursor cursor) {
-
         while (cursor.moveToNext()) {
            String eventTitle = cursor.getString(PROJECTION_TITLE_INDEX);
            String eventLocation = cursor.getString(PROJECTION_LOCATION_INDEX);
