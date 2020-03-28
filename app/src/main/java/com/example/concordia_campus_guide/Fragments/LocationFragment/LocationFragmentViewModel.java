@@ -4,10 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+import android.location.Location;
 
 import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.ClassConstants;
@@ -23,14 +20,11 @@ import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.Dash;
-import com.google.android.gms.maps.model.Gap;
 import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PatternItem;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.geojson.GeoJsonFeature;
@@ -47,8 +41,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import static java.lang.Double.parseDouble;
 
@@ -57,7 +56,9 @@ public class LocationFragmentViewModel extends ViewModel {
     private GeoJsonLayer floorLayer;
     private Map<String, Building> buildings = new HashMap<>();
     private AppDatabase appDatabase;
-    private MutableLiveData<List<WalkingPoint>> poiList = new MutableLiveData<>();
+    private MutableLiveData<PriorityQueue<WalkingPoint>> poiList = new MutableLiveData<>();
+    private BitmapDescriptor currentPOIIcon;
+    private Location currentLocation;
 
     public static final Logger LOGGER = Logger.getLogger("LocationFragmentViewModel");
     public static final String FLOORS_AVAILABLE = "floorsAvailable";
@@ -75,7 +76,7 @@ public class LocationFragmentViewModel extends ViewModel {
     /**
      * @return return the map style
      */
-    public int getMapStyle(){
+    public int getMapStyle() {
         return R.raw.mapstyle_retro;
     }
 
@@ -202,20 +203,7 @@ public class LocationFragmentViewModel extends ViewModel {
      * @return it will BitmapDescriptor object to use it as an icon for the marker on the map.
      */
     public BitmapDescriptor styleMarker(String buildingLabel, Context context){
-        int height = 150;
-        int width = 150;
-        InputStream deckFile = null;
-        BitmapDescriptor smallMarkerIcon = null;
-        try {
-            deckFile = context.getAssets().open("BuildingLabels/" + buildingLabel.toLowerCase()+".png");
-            Bitmap b = BitmapFactory.decodeStream(deckFile);
-            Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
-            smallMarkerIcon = BitmapDescriptorFactory.fromBitmap(smallMarker);
-            deckFile.close();
-        } catch (IOException e) {
-            LOGGER.log(Level.WARNING, e.getMessage(), e);
-        }
-        return  smallMarkerIcon;
+        return getCustomSizedIcon("BuildingLabels/" + buildingLabel.toLowerCase()+".png", context, 150, 150);
     }
 
     /**
@@ -262,7 +250,7 @@ public class LocationFragmentViewModel extends ViewModel {
         getPointStyle(floorLayer);
         floorLayer.addLayerToMap();
         if (currentlyDisplayedLine != null) {
-             currentlyDisplayedLine.remove();
+            currentlyDisplayedLine.remove();
         }
         displayedPolylineOption = getFloorPolylines(buildingCode + "-" + floor);
         currentlyDisplayedLine = mMap.addPolyline(displayedPolylineOption);
@@ -293,35 +281,78 @@ public class LocationFragmentViewModel extends ViewModel {
     }
 
     public void parseWalkingPointList(AppDatabase appDatabase, RoomModel from, RoomModel to) {
-        PathFinder pf = new PathFinder(appDatabase ,from, to);
+        PathFinder pf = new PathFinder(appDatabase, from, to);
         walkingPoints = pf.getPathToDestination();
 
         List<WalkingPoint> floorWalkingPointList;
-        for(WalkingPoint wp: walkingPoints) {
+        for (WalkingPoint wp : walkingPoints) {
             floorWalkingPointList = walkingPointsMap.getOrDefault(wp.getFloorCode(), new ArrayList<WalkingPoint>());
             floorWalkingPointList.add(wp);
             walkingPointsMap.put(wp.getFloorCode(), floorWalkingPointList);
         }
     }
 
-    public void setListOfPOI(@PoiType String poiType) {
-        //TODO: Filter poi_list to only contain the 10 closest POIs
-        List<WalkingPoint> listOfPOI = appDatabase.walkingPointDao().getAllPointsForPointType(poiType);
-        this.poiList.postValue(listOfPOI);
+    public void setListOfPOI(@PoiType String poiType, Context context) {
+        List<WalkingPoint> allPOI = appDatabase.walkingPointDao().getAllPointsForPointType(poiType);
+        setCurrentPOIIcon(poiType, context);
+        this.poiList.postValue(getPOIinOrder(allPOI));
     }
 
-    public LiveData<List<WalkingPoint>> getListOfPOI() {
+    private PriorityQueue<WalkingPoint> getPOIinOrder(List<WalkingPoint> allPOI) {
+        PriorityQueue<WalkingPoint> orderedList = new PriorityQueue<>((WalkingPoint p1, WalkingPoint p2) -> {
+            Coordinates currentCoordinates = new Coordinates(currentLocation.getLatitude(), currentLocation.getLongitude());
+            double distanceFromO1 = p1.getCoordinate().getEuclideanDistanceFrom(currentCoordinates);
+            double distanceFromO2 = p2.getCoordinate().getEuclideanDistanceFrom(currentCoordinates);
+
+            //Compare walking points: If p1 is closer to the current location than p2, it will have a higher position in priority queue
+            if (distanceFromO1 < distanceFromO2) return -1;
+            else if (distanceFromO1 > distanceFromO2) return 1;
+            return 0;
+        });
+        orderedList.addAll(allPOI);
+        return orderedList;
+    }
+
+
+    LiveData<PriorityQueue<WalkingPoint>> getListOfPOI() {
         return poiList;
+    }
+
+    private void setCurrentPOIIcon(@PoiType String poiType, Context context) {
+        currentPOIIcon = getCustomSizedIcon("point_of_interest_icons/poi_" + poiType.toLowerCase() + ".png", context, 60, 60);
+    }
+
+    BitmapDescriptor getCurrentPOIIcon() {
+        return currentPOIIcon;
+    }
+
+    void setCurrentLocation(Location currentLocation) {
+        this.currentLocation = currentLocation;
+    }
+
+    private BitmapDescriptor getCustomSizedIcon(String filename, Context context, int height, int width) {
+        InputStream deckFile = null;
+        BitmapDescriptor smallMarkerIcon = null;
+        try {
+            deckFile = context.getAssets().open(filename);
+            Bitmap b = BitmapFactory.decodeStream(deckFile);
+            Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+            smallMarkerIcon = BitmapDescriptorFactory.fromBitmap(smallMarker);
+            deckFile.close();
+        } catch (IOException e) {
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
+        }
+        return smallMarkerIcon;
     }
 
     public PolylineOptions getFloorPolylines(String floorCode) {
         // previously drawindoorpaths
         List<WalkingPoint> floorWalkingPoints = walkingPointsMap.get(floorCode);
         PolylineOptions option = new PolylineOptions();
-        if(floorWalkingPoints == null) {
+        if (floorWalkingPoints == null) {
             return option;
         }
-        for(int i=0; i < floorWalkingPoints.size() - 1; i++) {
+        for (int i = 0; i < floorWalkingPoints.size() - 1; i++) {
             LatLng point1 = floorWalkingPoints.get(i).getCoordinate().getLatLng();
             LatLng point2 = floorWalkingPoints.get(i + 1).getCoordinate().getLatLng();
             option.add(point1, point2);
@@ -329,16 +360,16 @@ public class LocationFragmentViewModel extends ViewModel {
         return option
                 .width(10)
                 .pattern(ClassConstants.WALK_PATTERN)
-                .color(Color.rgb(147,35, 57))
+                .color(Color.rgb(147, 35, 57))
                 .visible(true);
     }
 
     public void drawOutdoorPath(List<DirectionWrapper> outdoorDirections, GoogleMap map) {
-        for(DirectionWrapper directionWrapper: outdoorDirections) {
+        for (DirectionWrapper directionWrapper : outdoorDirections) {
             PolylineOptions polylineOptions = stylePolyLine(directionWrapper.getDirection().getTransportType());
             List<com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.LatLng> polyline = directionWrapper.getPolyline().decodePath();
 
-            for(int i=0; i<polyline.size(); i++){
+            for (int i = 0; i < polyline.size(); i++) {
                 polylineOptions.add(new LatLng(polyline.get(i).lat, polyline.get(i).lng));
             }
             map.addPolyline(polylineOptions);
@@ -347,13 +378,13 @@ public class LocationFragmentViewModel extends ViewModel {
 
     private PolylineOptions stylePolyLine(String type) {
         PolylineOptions polylineOptions = new PolylineOptions().width(20);
-        if(type.equals(ClassConstants.WALKING)) {
+        if (type.equals(ClassConstants.WALKING)) {
             polylineOptions.pattern(ClassConstants.WALK_PATTERN);
         }
-        if(type.equals(ClassConstants.TRANSIT) || type.equals(ClassConstants.DRIVING)){
-            polylineOptions.color(Color.rgb(35,147, 57));
-        }else{
-            polylineOptions.color(Color.rgb(147,35, 57));
+        if (type.equals(ClassConstants.TRANSIT) || type.equals(ClassConstants.DRIVING)) {
+            polylineOptions.color(Color.rgb(35, 147, 57));
+        } else {
+            polylineOptions.color(Color.rgb(147, 35, 57));
         }
         return polylineOptions;
     }
