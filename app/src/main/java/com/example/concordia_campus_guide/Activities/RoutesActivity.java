@@ -118,9 +118,9 @@ public class RoutesActivity extends AppCompatActivity {
     // TODO: #180
     public void onClickDisability(View v) {
         if(transitButton.isSelected())
-            transitButton.setSelected(false);
+            disabilityButton.setSelected(false);
         else
-            transitButton.setSelected(true);
+            disabilityButton.setSelected(true);
     }
 
     public void onClickShuttle(View v) {
