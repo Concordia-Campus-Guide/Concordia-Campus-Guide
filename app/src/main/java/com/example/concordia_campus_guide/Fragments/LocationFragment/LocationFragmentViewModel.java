@@ -68,13 +68,6 @@ public class LocationFragmentViewModel extends ViewModel {
     private HashMap<String, List<WalkingPoint>> walkingPointsMap = new HashMap<>();
     private List<WalkingPoint> walkingPoints;
 
-    //Polyline styling
-    public static final int PATTERN_DASH_LENGTH_PX = 20;
-    public static final int PATTERN_GAP_LENGTH_PX = 20;
-    public static final PatternItem DASH = new Dash(PATTERN_DASH_LENGTH_PX);
-    public static final PatternItem GAP = new Gap(PATTERN_GAP_LENGTH_PX);
-    public static final List<PatternItem> WALK_PATTERN = Arrays.asList(GAP, DASH);
-
     public LocationFragmentViewModel(AppDatabase appDb) {
         this.appDatabase = appDb;
     }
@@ -335,7 +328,7 @@ public class LocationFragmentViewModel extends ViewModel {
         }
         return option
                 .width(10)
-                .pattern(WALK_PATTERN)
+                .pattern(ClassConstants.WALK_PATTERN)
                 .color(Color.rgb(147,35, 57))
                 .visible(true);
     }
@@ -355,7 +348,7 @@ public class LocationFragmentViewModel extends ViewModel {
     private PolylineOptions stylePolyLine(String type) {
         PolylineOptions polylineOptions = new PolylineOptions().width(20);
         if(type.equals(ClassConstants.WALKING)) {
-            polylineOptions.pattern(WALK_PATTERN);
+            polylineOptions.pattern(ClassConstants.WALK_PATTERN);
         }
         if(type.equals(ClassConstants.TRANSIT) || type.equals(ClassConstants.DRIVING)){
             polylineOptions.color(Color.rgb(35,147, 57));

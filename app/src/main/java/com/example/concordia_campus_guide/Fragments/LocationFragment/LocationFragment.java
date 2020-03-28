@@ -99,7 +99,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
         getLocationPermission();
-        initMap();
         setupClickListeners();
         updateLocationEvery5Seconds();
 
@@ -131,9 +130,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(getActivity(), new ViewModelFactory(this.getActivity().getApplication())).get(LocationFragmentViewModel.class);
         setupPOIListListener();
-       // mViewModel = ViewModelProviders.of(this).get(com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel.class);
     }
 
 
@@ -241,6 +238,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             if (myLocationPermissionsGranted) {
                 mMap.setMyLocationEnabled(true);
                 initMap();
+                return;
             }
         }
 
@@ -282,8 +280,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
      */
     private void setupPolygons(GoogleMap map) {
         mLayer = mViewModel.loadPolygons(map, getContext());
-        // TODO: Remove this line
-       // mLayer.addLayerToMap();
+        mLayer.addLayerToMap();
 
         setupPolygonClickListener();
         setupBuildingMarkerClickListener(map);
@@ -318,7 +315,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                     Building building = mViewModel.getBuildingFromGeoJsonFeature(geoJsonFeature);
                     onBuildingClick(building);
                     String buildingCode = geoJsonFeature.getProperty("code");
-                    if(getActivity() instanceof MainActivity) ((MainActivity) getActivity()).showInfoCard(buildingCode);
+                    if (getActivity() instanceof MainActivity)
+                        ((MainActivity) getActivity()).showInfoCard(buildingCode);
                 }
             }
         });
@@ -336,7 +334,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         mViewModel.parseWalkingPointList(AppDatabase.getInstance(getContext()), (RoomModel) from, (RoomModel) to);
     }
 
-    public void drawOutdoorPaths(final List<DirectionWrapper> outdoorDirections){
+    public void drawOutdoorPaths(final List<DirectionWrapper> outdoorDirections) {
         mMapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
@@ -355,7 +353,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             public boolean onMarkerClick(Marker marker) {
                 Building building = mViewModel.getBuildingFromeCode(marker.getTag().toString());
                 String buildingCode = (marker.getTag()).toString();
-                if(getActivity() instanceof MainActivity) ((MainActivity) getActivity()).showInfoCard(buildingCode);
+                if (getActivity() instanceof MainActivity)
+                    ((MainActivity) getActivity()).showInfoCard(buildingCode);
                 onBuildingClick(building);
                 return false;
             }
@@ -427,15 +426,15 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
 
-            if (requestPermission()) {
-                initMap();
-            }
-            else {
-                ActivityCompat.requestPermissions(getActivity(),
-                        permissions,
-                        ClassConstants.LOCATION_PERMISSION_REQUEST_CODE);
-            }
+        if (requestPermission()) {
             initMap();
+            return;
+        } else {
+            ActivityCompat.requestPermissions(getActivity(),
+                    permissions,
+                    ClassConstants.LOCATION_PERMISSION_REQUEST_CODE);
+        }
+        initMap();
     }
 
     private void classRoomCoordinateTool(GoogleMap map) {
