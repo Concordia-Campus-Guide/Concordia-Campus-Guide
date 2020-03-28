@@ -34,6 +34,7 @@ public class DirectionWrapperTest {
         assertEquals("Go left", directionWrapper.getDirection().getDescription());
         Direction updatedDirection = new Direction();
         updatedDirection.setDescription("Go right");
+        directionWrapper.setDirection(updatedDirection);
         assertEquals("Go right", directionWrapper.getDirection().getDescription());
     }
 
