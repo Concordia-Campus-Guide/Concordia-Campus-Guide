@@ -105,12 +105,13 @@ public class RoutesActivity extends AppCompatActivity {
         getAllRoutes();
     }
 
+    // TODO: #180
     public void onClickDisability(View v) {
 
     }
 
     public void onClickShuttle(View v) {
-        getShuttle(v);
+        //getShuttle(v);
     }
 
     public void onClickWalk(View v) {
