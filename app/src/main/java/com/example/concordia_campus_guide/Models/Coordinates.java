@@ -50,6 +50,6 @@ public class Coordinates implements Serializable {
     }
 
     public LatLng getLatLng(){
-        // this is not a bug
+        // TODO: more investigation why this is inverted.
         return new LatLng(this.longitude, this.latitude);}
 }

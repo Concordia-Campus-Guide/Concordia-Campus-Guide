@@ -1,14 +1,15 @@
 package com.example.concordia_campus_guide.Activities;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Parcelable;
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragment;
@@ -20,6 +21,7 @@ import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+
 import java.util.ArrayList;
 import java.util.List;
 
