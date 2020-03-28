@@ -13,6 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,6 +36,7 @@ import java.util.Date;
 import java.util.List;
 
 public class PathInfoCardFragment extends Fragment {
+    private PathInfoCardViewModel pathInfoCardViewModel;
     private List<WalkingPoint> walkingPointList;
     private List<Direction> directionList;
     private RecyclerView recyclerView;
@@ -60,6 +63,8 @@ public class PathInfoCardFragment extends Fragment {
 
         Serializable temporaryDirectionsResults = getArguments().getSerializable("directionsResult");
         directionsResults = (ArrayList<DirectionWrapper>) temporaryDirectionsResults;
+
+        pathInfoCardViewModel = ViewModelProviders.of(this).get(PathInfoCardViewModel.class);
 
         return view;
     }
@@ -143,7 +148,7 @@ public class PathInfoCardFragment extends Fragment {
     }
 
     public void setIndoorComponents(WalkingPoint startWalkingPoint, WalkingPoint endWalkingPoint, LinearLayout layout, LinearLayout.LayoutParams layoutParams, boolean lastOne) {
-        distanceBetweenPoints += getDistanceFromLatLonInKm(startWalkingPoint.getCoordinate().getLatitude(), startWalkingPoint.getCoordinate().getLongitude(), endWalkingPoint.getCoordinate().getLatitude(), startWalkingPoint.getCoordinate().getLongitude());
+        distanceBetweenPoints += pathInfoCardViewModel.getDistanceFromLatLonInKm(startWalkingPoint.getCoordinate().getLatitude(), startWalkingPoint.getCoordinate().getLongitude(), endWalkingPoint.getCoordinate().getLatitude(), startWalkingPoint.getCoordinate().getLongitude());
         totalDistance += distanceBetweenPoints;
         // on average a person walks 5km / hr
         long timeTakenInMinutes;
@@ -201,34 +206,14 @@ public class PathInfoCardFragment extends Fragment {
     }
 
     public void addIndoorDirection(LatLng startLatLng, LatLng endLatLng, String description, double distance, double minutes) {
-        Direction direction = new Direction(startLatLng, endLatLng, TransitType.WALK, description, distance);
-        direction.setDuration(minutes);
-        directionList.add(direction);
+        directionList.add(pathInfoCardViewModel.createIndoorDirection(startLatLng,endLatLng,description,distance,minutes));
     }
 
-    public double getDistanceFromLatLonInKm(double lat1, double lon1, double lat2, double lon2) {
-        double earthRadius = 6371; // Radius of the earth in km
-        double dLat = deg2rad(lat2 - lat1);  // deg2rad below
-        double dLon = deg2rad(lon2 - lon1);
-        double a =
-                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-                                Math.sin(dLon / 2) * Math.sin(dLon / 2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        return earthRadius * c; // Distance in km
-    }
 
-    public double deg2rad(double deg) {
-        return deg * (Math.PI / 180);
-    }
 
     public void populateOutdoorDirectionsList() {
-        for (DirectionWrapper direction : directionsResults) {
-            double minute = direction.getDirection().getDuration() / 60;
-            direction.getDirection().setDuration(minute);
-            totalDuration += direction.getDirection().getDuration();
-            directionList.add(direction.getDirection());
-        }
+        directionList = pathInfoCardViewModel.createOutdoorDirectionsList(directionsResults);
+        totalDuration += pathInfoCardViewModel.getTotalDuration();
         setOutdoorTopCard();
         setRecyclerView();
     }
