@@ -44,7 +44,8 @@ public class InfoCardFragmentIntegrationTest {
     public GrantPermissionRule mGrantPermissionRule =
             GrantPermissionRule.grant(
                     "android.permission.ACCESS_FINE_LOCATION",
-                    "android.permission.ACCESS_COARSE_LOCATION");
+                    "android.permission.ACCESS_COARSE_LOCATION",
+                    "android.permission.READ_CALENDAR");
 
     @Before
     public void init() { device = UiDevice.getInstance(getInstrumentation()); }

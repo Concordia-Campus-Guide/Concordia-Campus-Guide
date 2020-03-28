@@ -3,6 +3,7 @@ package com.example.concordia_campus_guide.InstrumentalTests;
 import android.content.Context;
 
 import com.example.concordia_campus_guide.Activities.MainActivity;
+import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel;
 import com.example.concordia_campus_guide.Helper.PathFinder;
 import com.example.concordia_campus_guide.Models.RoomModel;
@@ -25,14 +26,16 @@ import org.junit.runner.RunWith;
 public class LocationFragmentInstrumentalTest {
     private LocationFragmentViewModel viewModel;
     private Context appContext;
+    private AppDatabase appDatabase;
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(MainActivity.class);
 
     @Before
     public void init() {
-        viewModel = new LocationFragmentViewModel();
         appContext = mActivityRule.getActivity().getApplicationContext();
+        appDatabase = AppDatabase.getInstance(appContext);
+        viewModel = new LocationFragmentViewModel(appDatabase);
     }
 
     @Test

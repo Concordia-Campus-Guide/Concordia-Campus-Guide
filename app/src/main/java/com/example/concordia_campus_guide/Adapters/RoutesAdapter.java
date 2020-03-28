@@ -26,6 +26,9 @@ import androidx.annotation.NonNull;
 
 import org.w3c.dom.Text;
 
+/**
+ * This class is an Android Adapter for the UI of the Routes Activity page
+ */
 public class RoutesAdapter extends ArrayAdapter<Route> {
 
     List<Route> routes;

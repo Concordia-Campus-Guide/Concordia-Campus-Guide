@@ -98,24 +98,60 @@ public class RoutesActivity extends AppCompatActivity {
     public void onClickTransit(View v) {
         mViewModel.setTransportType(ClassConstants.TRANSIT);
         getAllRoutes();
+        setTransitSelect();
+    }
+
+    private void setTransitSelect() {
+        transitButton.setSelected(true);
+        shuttleButton.setSelected(false);
+        walkButton.setSelected(false);
+        carButton.setSelected(false);
     }
 
     public void onClickCar(View v) {
         mViewModel.setTransportType(ClassConstants.DRIVING);
         getAllRoutes();
+        setCarSelect();
     }
 
-    public void onClickDisability(View v) {
+    private void setCarSelect() {
+        transitButton.setSelected(false);
+        shuttleButton.setSelected(false);
+        walkButton.setSelected(false);
+        carButton.setSelected(true);
+    }
 
+    // TODO: #180
+    public void onClickDisability(View v) {
+        if(disabilityButton.isSelected())
+            disabilityButton.setSelected(false);
+        else
+            disabilityButton.setSelected(true);
     }
 
     public void onClickShuttle(View v) {
-        getShuttle(v);
+        //getShuttle(v);
+        setShuttleSelect();
+    }
+
+    private void setShuttleSelect() {
+        transitButton.setSelected(false);
+        shuttleButton.setSelected(true);
+        walkButton.setSelected(false);
+        carButton.setSelected(false);
     }
 
     public void onClickWalk(View v) {
         mViewModel.setTransportType(ClassConstants.WALKING);
         getAllRoutes();
+        setWalkSelect();
+    }
+
+    private void setWalkSelect() {
+        transitButton.setSelected(false);
+        shuttleButton.setSelected(false);
+        walkButton.setSelected(true);
+        carButton.setSelected(false);
     }
 
     @Override
@@ -174,6 +210,8 @@ public class RoutesActivity extends AppCompatActivity {
      * Calls the google Maps Directions API
      */
     public void getAllRoutes() {
+        setTransitSelect();
+
         Coordinates fromCenterCoordinates = mViewModel.getFrom().getCenterCoordinates();
         Coordinates toCenterCoordinates = mViewModel.getTo().getCenterCoordinates();
 
