@@ -62,7 +62,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     MapView mMapView;
 
     private Location currentLocation;
-
     private ImageButton myLocationBtn;
 
     private GoogleMap mMap;
@@ -277,10 +276,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         map.setOnCameraMoveListener(() -> {
             if (map.getCameraPosition().zoom > 19) {
                 mLayer.removeLayerFromMap();
-                setupClassMarkerClickListener(map);
             } else {
                 mLayer.addLayerToMap();
-                setupBuildingMarkerClickListener(map);
             }
         });
     }
@@ -336,17 +333,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             }
             return false;
         });
-        return true;
-    }
-
-    /**
-     * The purpose of this method is to display the tools used with google
-     * maps such as Current Location
-     *
-     * @param map is the map used in the application
-     */
-    public boolean setupClassMarkerClickListener(GoogleMap map) {
-        map.setOnMarkerClickListener(marker -> false);
         return true;
     }
 
