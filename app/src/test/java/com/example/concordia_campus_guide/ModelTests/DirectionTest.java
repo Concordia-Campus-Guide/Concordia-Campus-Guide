@@ -1,5 +1,6 @@
 package com.example.concordia_campus_guide.ModelTests;
 
+import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Models.Routes.Bus;
 import com.example.concordia_campus_guide.Models.Direction;
 import com.example.concordia_campus_guide.Models.Routes.TransportType;
@@ -37,8 +38,8 @@ public class DirectionTest {
     }
     @Test
     public void getAndSetTransitTypeTest() {
-        TransportType transportTypeOg = direction.getTransportType();
-        TransportType transportTypeNew = new Bus(testUtils.getDirectionStepsObject());
+        String transportTypeOg = direction.getTransportType();
+        String transportTypeNew = ClassConstants.TRANSIT;
         direction.setTransportType(transportTypeNew);
         assertEquals(direction.getTransportType(), transportTypeNew);
         direction.setTransportType(transportTypeOg);
@@ -50,5 +51,13 @@ public class DirectionTest {
         direction.setDescription(descriptionNew);
         assertEquals(direction.getDescription(), descriptionNew);
         direction.setDescription(descriptionOg);
+    }
+
+    @Test
+    public void getAndSetDuration() {
+        double expectedDuration = 10;
+        direction.setDuration(expectedDuration);
+        assertEquals(expectedDuration, direction.getDuration());
+        direction.setDuration(20);
     }
 }
