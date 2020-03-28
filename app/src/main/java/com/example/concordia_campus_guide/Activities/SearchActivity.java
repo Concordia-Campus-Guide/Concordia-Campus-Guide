@@ -13,11 +13,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.example.concordia_campus_guide.Adapters.PlaceToSearchResultAdapter;
 import com.example.concordia_campus_guide.Models.Helpers.CalendarViewModel;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
@@ -43,26 +40,25 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //setting up activity
+        // setting up activity
         setContentView(R.layout.search_activity);
         setBackButtonOnClick();
-        searchResults = (ListView) findViewById(R.id.searchResults);
-        searchText = (EditText) findViewById(R.id.searchText);
-        nextClassText = (TextView) findViewById(R.id.next_class_text);
-        nextClassArrow = (ImageView) findViewById(R.id.next_class_arrow);
-        nextClassRow = (View) findViewById(R.id.view_container);
-        calendarViewModel = ViewModelProviders.of(this).get(CalendarViewModel.class);
-
-        mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getApplication())).get(SearchActivityViewModel.class);
-
-        setUiElements();
+        initComponents();
+        setPlaceToSearchResultAdapter();
         setEvents();
     }
 
-    private void setUiElements(){
+    private void initComponents() {
         searchResults = findViewById(R.id.searchResults);
         searchText = findViewById(R.id.searchText);
+        nextClassText = findViewById(R.id.next_class_text);
+        nextClassArrow = findViewById(R.id.next_class_arrow);
+        nextClassRow = findViewById(R.id.view_container);
+        calendarViewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
+        mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getApplication())).get(SearchActivityViewModel.class);
+    }
 
+    private void setPlaceToSearchResultAdapter(){
         // Android adapter for list view
         adapter = new PlaceToSearchResultAdapter(this, R.layout.list_item_layout, mViewModel.getAllPlaces());
         searchResults.setAdapter(adapter);
@@ -116,15 +112,21 @@ public class SearchActivity extends AppCompatActivity {
             nextClassText.setText(eventString);
             eventLocation = calendarEvent.getLocation();
             Place place = mViewModel.getRoomFromDB(eventLocation);
-            nextClassArrow.setVisibility(View.VISIBLE);
-            nextClassRow.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    openRoutesPage(place);
-                }
-            });
-        }
 
+            if(!eventString.equals("Event is incorrectly formatted")){
+                if(place == null){
+                    nextClassText.setText("Location not found");
+                }else {
+                    nextClassArrow.setVisibility(View.VISIBLE);
+                    nextClassRow.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            openRoutesPage(place);
+                        }
+                    });
+                }
+            }
+        }
     }
 
     public void openRoutesPage(Place place){

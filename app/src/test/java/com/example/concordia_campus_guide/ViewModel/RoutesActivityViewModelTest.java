@@ -42,7 +42,4 @@ public class RoutesActivityViewModelTest {
 
         assertEquals(mViewModel.getFrom(), sampleBuilding);
     }
-
-
-
 }
