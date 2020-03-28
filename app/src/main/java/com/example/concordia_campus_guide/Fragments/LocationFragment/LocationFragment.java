@@ -401,9 +401,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private void setupPOIListListener() {
         mViewModel.getListOfPOI().observe(getViewLifecycleOwner(), priorityQueue -> {
 
-            if (!poiMarkers.isEmpty()) {
-                for (Marker marker : poiMarkers) marker.remove();
-            }
+            for (Marker marker : poiMarkers) marker.remove();
+            poiMarkers.clear();
 
             int position = 1;
             do {
@@ -420,7 +419,9 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         if (poi != null) {
 
             LatLng latLng = new LatLng(poi.getCoordinate().getLongitude(), poi.getCoordinate().getLatitude());
-            if (position == 1) zoomInLocation(latLng);
+
+            if (position == 1)
+                zoomInLocation(latLng);
 
             String tag = POI_TAG + "_" + poi.getPlaceCode() + "_" + poi.getFloorCode();
             MarkerOptions markerOptions = new MarkerOptions()
@@ -429,6 +430,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
             Marker marker = mMap.addMarker(markerOptions);
             marker.setTag(tag);
+
             poiMarkers.add(marker);
 
             Logger.getLogger(POI_TAG).log(Level.INFO, "Adding POI #" + position + " to map: " + poi.getId() + ",\t" + poi.getPlaceCode() + ",\t" + poi.getFloorCode());
