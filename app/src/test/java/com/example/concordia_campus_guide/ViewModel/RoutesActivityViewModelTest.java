@@ -100,7 +100,8 @@ public class RoutesActivityViewModelTest {
     @Test
     public void getSetRouteOptions() {
         List<Route> routes = new ArrayList();
-        routes.add(testUtilsRoutes.routeDriving);
+        Route route = new Route("1 day 20 hours", "I-80 E", "driving");
+        routes.add(route);
 
         mViewModel.setRouteOptions(routes);
         assertEquals(routes, mViewModel.getRouteOptions());
