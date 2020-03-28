@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -178,6 +179,16 @@ public class RoutesActivity extends AppCompatActivity {
         // Android adapter for list view
         adapter = new RoutesAdapter(this, R.layout.list_routes, mViewModel.getRouteOptions());
         allRoutes.setAdapter(adapter);
+        allRoutes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent openPaths = new Intent(RoutesActivity.this,
+                        PathsActivity.class);
+                DirectionsResult directionsResult = mViewModel.getDirectionsResult();
+                openPaths.putExtra("directionsResult", directionsResult);
+                startActivity(openPaths);
+            }
+        });
     }
 
 
