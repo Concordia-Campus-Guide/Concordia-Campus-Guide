@@ -83,7 +83,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private boolean myLocationPermissionsGranted = false;
     private HashMap<String, GroundOverlay> buildingsGroundOverlays;
     private FloorPickerAdapter currentFloorPickerAdapter;
-    private List<Marker> POIMarkers;
+    private List<Marker> poiMarkers;
 
     /**
      * @return it will return a new object of this fragment
@@ -126,7 +126,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         mFloorPickerGv = rootView.findViewById(R.id.FloorPickerGv);
         mFloorPickerGv.setVisibility(View.GONE);
         buildingsGroundOverlays = new HashMap<>();
-        POIMarkers = new ArrayList<>();
+        poiMarkers = new ArrayList<>();
     }
 
     private void setupFloorPickerAdapter(Building building) {
@@ -363,7 +363,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                Log.i(TAG, marker.getTag().toString());
                 return false;
             }
         });
@@ -425,7 +424,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
             Marker marker = mMap.addMarker(markerOptions);
             marker.setTag(tag);
-            POIMarkers.add(marker);
+            poiMarkers.add(marker);
 
             Logger.getLogger(POI_TAG).log(Level.INFO, "Adding POI #" + position + " to map: " + poi.getId() + ",\t" + poi.getPlaceCode() + ",\t" + poi.getFloorCode());
         }
@@ -493,7 +492,17 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     @Override
     public void onFloorPickerOnClick(int position, View view) {
-        mViewModel.setFloorPlan(buildingsGroundOverlays.get(currentFloorPickerAdapter.getBuildingCode()), currentFloorPickerAdapter.getBuildingCode(), currentFloorPickerAdapter.getFloorsAvailable().get(position), getContext(), mMap);
+        String floorSelected = currentFloorPickerAdapter.getFloorsAvailable().get(position);
+        String buildingSelected = currentFloorPickerAdapter.getBuildingCode();
+        mViewModel.setFloorPlan(buildingsGroundOverlays.get(currentFloorPickerAdapter.getBuildingCode()), buildingSelected, floorSelected , getContext(), mMap);
+        setVisiblePOIMarkers(floorSelected, buildingSelected);
+    }
+
+    private void setVisiblePOIMarkers(String floorSelected, String buildingSelected) {
+        for(Marker marker : poiMarkers){
+            String floorCode = marker.getTag().toString().split("_")[2];
+            marker.setVisible(floorCode.equalsIgnoreCase(buildingSelected+"-"+floorSelected));
+        }
     }
 
     @Override
