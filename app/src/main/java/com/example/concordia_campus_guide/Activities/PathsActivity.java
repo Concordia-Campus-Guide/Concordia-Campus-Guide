@@ -24,19 +24,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PathsActivity extends AppCompatActivity {
-    PathsViewModel mViewModel;
-    LocationFragment locationFragment;
-    TextView fromTextView;
-    TextView toTextView;
-    ImageButton backButton;
-    PathInfoCardFragment pathInfoCardFragment;
-    FragmentTransaction fragmentTransaction;
-    FragmentManager fragmentManager;
+    private PathsViewModel mViewModel;
+    private LocationFragment locationFragment;
+    private TextView fromTextView;
+    private TextView toTextView;
+    private ImageButton backButton;
+    private PathInfoCardFragment pathInfoCardFragment;
+    private FragmentTransaction fragmentTransaction;
+    private FragmentManager fragmentManager;
     private BottomSheetBehavior swipeableInfoCard;
     private DirectionsResult directionsResult;
     private ArrayList<DirectionWrapper> directionWrappers;
-    Place from;
-    Place to;
+    private Place from;
+    private Place to;
     private boolean fromIsIndoor = false;
     private boolean toIsIndoor = false;
 
@@ -95,10 +95,12 @@ public class PathsActivity extends AppCompatActivity {
 
     public void showInfoCard() {
         pathInfoCardFragment = new PathInfoCardFragment();
+        // creating bundle to be able to pass the directionWrapper and the walkingPoints to the pathsActivity
         Bundle infoCardBundle = new Bundle();
         infoCardBundle.putSerializable("directionsResult", directionWrappers);
         if(fromIsIndoor || toIsIndoor) infoCardBundle.putSerializable("walkingPoints", (ArrayList<WalkingPoint>) locationFragment.getWalkingPointList());
         pathInfoCardFragment.setArguments(infoCardBundle);
+        // creating fragmentTransaction to show the step-by-step card from the bottom of the screen
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.path_info_card_frame, pathInfoCardFragment);
         fragmentTransaction.commit();
