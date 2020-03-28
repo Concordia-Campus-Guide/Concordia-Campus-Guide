@@ -1,18 +1,12 @@
 package com.example.concordia_campus_guide.Activities;
 
 import androidx.lifecycle.ViewModel;
-
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsResult;
-import com.example.concordia_campus_guide.Helper.RoutesHelpers.DirectionsApiDataRetrieval;
-import com.example.concordia_campus_guide.Helper.RoutesHelpers.UrlBuilder;
-import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.Routes.Route;
 import com.example.concordia_campus_guide.Models.Shuttle;
-import com.google.android.gms.maps.model.LatLng;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -100,6 +94,4 @@ public class RoutesActivityViewModel extends ViewModel {
     public void setTransportType(String transportType) {
         this.transportType = transportType;
     }
-
-
 }

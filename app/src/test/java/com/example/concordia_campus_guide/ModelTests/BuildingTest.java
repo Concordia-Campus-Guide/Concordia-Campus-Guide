@@ -1,18 +1,11 @@
 package com.example.concordia_campus_guide.ModelTests;
 
-import android.text.TextUtils;
-
-import com.example.concordia_campus_guide.Models.Building;
+import com.example.concordia_campus_guide.ModelTests.TestUtils.TestUtils;
 import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.ListOfCoordinates;
-import com.google.android.gms.maps.model.GroundOverlayOptions;
-import com.google.android.gms.maps.model.LatLng;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -20,7 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
 
 public class BuildingTest {
     TestUtils testUtils;

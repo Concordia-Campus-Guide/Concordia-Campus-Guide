@@ -1,17 +1,23 @@
-package com.example.concordia_campus_guide.ModelTests;
+package com.example.concordia_campus_guide.ModelTests.TestUtils;
 
-import androidx.room.Room;
-
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.Distance;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.Duration;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TransitDetails;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TransitLine;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.Coordinates;
+import com.example.concordia_campus_guide.Models.Direction;
 import com.example.concordia_campus_guide.Models.Floor;
 import com.example.concordia_campus_guide.Models.Floors;
 import com.example.concordia_campus_guide.Models.ListOfCoordinates;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.Rooms;
+import com.example.concordia_campus_guide.Models.Routes.Route;
+import com.example.concordia_campus_guide.Models.Routes.Walk;
+import com.google.android.gms.maps.model.LatLng;
 import com.example.concordia_campus_guide.Models.Shuttle;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,10 +28,10 @@ public class TestUtils {
 
     // Buildings
     public Buildings defaultBuildings;
-    Buildings buildingsWithList;
+    public Buildings buildingsWithList;
 
     public Coordinates centerCoordinates = new Coordinates(45.4972685,-73.5789475);
-    public List<String> availableFloors=new ArrayList<String>(Arrays.asList("00", "1", "8", "9"));
+    public List<String> availableFloors = new ArrayList<String>(Arrays.asList("00", "1", "8", "9"));
     public float width = 68;
     public float height = 68;
     public float bearing = 34;
@@ -53,13 +59,13 @@ public class TestUtils {
             "Sexual Assault Resource Centre (SARC)"
     ));
 
-    Coordinates cornerCoordinate1 = new Coordinates(45.497178,-73.57955);
-    Coordinates cornerCoordinate2 = new Coordinates(45.497708,-73.579035);
-    Coordinates cornerCoordinate3 = new Coordinates(45.497385,-73.578332);
-    Coordinates cornerCoordinate4 = new Coordinates(45.496832,-73.578842);
-    Coordinates cornerCoordinate5 = new Coordinates(45.497178,-73.57955);
+    public Coordinates cornerCoordinate1 = new Coordinates(45.497178,-73.57955);
+    public Coordinates cornerCoordinate2 = new Coordinates(45.497708,-73.579035);
+    public Coordinates cornerCoordinate3 = new Coordinates(45.497385,-73.578332);
+    public Coordinates cornerCoordinate4 = new Coordinates(45.496832,-73.578842);
+    public Coordinates cornerCoordinate5 = new Coordinates(45.497178,-73.57955);
 
-    List<Coordinates> listOfCornerCoordinates = new ArrayList<Coordinates>(Arrays.asList(cornerCoordinate1, cornerCoordinate2, cornerCoordinate3, cornerCoordinate4,cornerCoordinate5));
+    public List<Coordinates> listOfCornerCoordinates = new ArrayList<Coordinates>(Arrays.asList(cornerCoordinate1, cornerCoordinate2, cornerCoordinate3, cornerCoordinate4,cornerCoordinate5));
 
     public ListOfCoordinates cornerCoordinates = new ListOfCoordinates(listOfCornerCoordinates);
 
@@ -72,7 +78,7 @@ public class TestUtils {
             services,  cornerCoordinates
     );
 
-    List<Building> listOfBuildings = new ArrayList<Building>(Arrays.asList(building1, building2));
+    public List<Building> listOfBuildings = new ArrayList<Building>(Arrays.asList(building1, building2));
 
     public Building defaultBuilding = new Building();
     public Building buildingWithArgs = new Building(centerCoordinates, availableFloors, width, height,
@@ -80,43 +86,22 @@ public class TestUtils {
                                              services,  cornerCoordinates);
 
     // Floors
-    Coordinates coordinates = new Coordinates(45.4972685, -73.5789475);
-    String floorCode = "H-9";
-    float altitude = 0;
+    public Coordinates coordinates = new Coordinates(45.4972685, -73.5789475);
+    public String floorCode = "H-9";
+    public float altitude = 0;
 
-    Floor defaultFloor= new Floor();
-    Floor floorWithArgs= new Floor(coordinates, floorCode, altitude);;
-    Floor floorWithCampus=new Floor(coordinates, floorCode, altitude, SGWcampus);
+    public Floor defaultFloor= new Floor();
+    public Floor floorWithArgs= new Floor(coordinates, floorCode, altitude);;
+    public Floor floorWithCampus=new Floor(coordinates, floorCode, altitude, SGWcampus);
 
-    List<Floor> listOfFloors = new ArrayList<Floor>(Arrays.asList(floorWithArgs, floorWithCampus));
+    public List<Floor> listOfFloors = new ArrayList<Floor>(Arrays.asList(floorWithArgs, floorWithCampus));
 
-    Floors floors = new Floors();
+    public Floors floors = new Floors();
 
     // Rooms
-    RoomModel room1 = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8");
-    RoomModel room2 = new RoomModel(new Coordinates(-73.57902321964502, 45.49699848270905), "921", "H-9");
+    public RoomModel room1 = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8");
+    public RoomModel room2 = new RoomModel(new Coordinates(-73.57902321964502, 45.49699848270905), "921", "H-9");
 
-    ArrayList<RoomModel> roomList = new ArrayList<RoomModel>(Arrays.asList(room1, room2));
+    public ArrayList<RoomModel> roomList = new ArrayList<RoomModel>(Arrays.asList(room1, room2));
     public Rooms rooms = new Rooms(roomList);
-
-
-    public Shuttle getShuttle1(){
-        Shuttle shuttle1 = new Shuttle();
-        shuttle1.setCampus("SGW");
-        shuttle1.setDay(Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday","Friday"));
-        shuttle1.setShuttleId(1);
-        shuttle1.setTime(8.20);
-        return shuttle1;
-    }
-
-    public Shuttle getShuttle2(){
-        Shuttle shuttle2 = new Shuttle();
-        shuttle2.setCampus("LOY");
-        shuttle2.setDay(Arrays.asList("Monday", "friday"));
-        shuttle2.setShuttleId(2);
-        shuttle2.setTime(9.10);
-        return  shuttle2;
-    }
-
-
 }
