@@ -211,7 +211,7 @@ public class RoutesActivity extends AppCompatActivity {
      */
     public void getAllRoutes() {
         setTransitSelect();
-        
+
         Coordinates fromCenterCoordinates = mViewModel.getFrom().getCenterCoordinates();
         Coordinates toCenterCoordinates = mViewModel.getTo().getCenterCoordinates();
 
