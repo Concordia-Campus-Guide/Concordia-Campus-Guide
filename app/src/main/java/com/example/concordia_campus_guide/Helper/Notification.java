@@ -28,8 +28,8 @@ public class Notification {
             @Override
             public void run(){
                 CalendarEvent calendarEvent = getNextClassCalendar();
-                if(calendarEvent  != null && !validateCalendarEvent(calendarEvent) && notifyUser.getNotifyUser()){
-                    if(!calendarEvent.getTitle().equalsIgnoreCase(previousCalendarEvent.getTitle()) && roomExistsInDb(calendarEvent.getLocation())){
+                if(calendarEvent  != null && notifyUser.getNotifyUser()){
+                    if(!calendarEvent.getTitle().equalsIgnoreCase(previousCalendarEvent.getTitle())){
                         notifyUser.setNotifyUser(false);
                         previousCalendarEvent = calendarEvent;
                         mainActivity.popUp(calendarEvent);

@@ -89,10 +89,17 @@ public class MainActivity extends AppCompatActivity {
         builder.setCancelable(true);
         Date eventDate = new Date((Long.parseLong(calendarEvent.getStartTime())));
         long differenceInMillis = eventDate.getTime() - System.currentTimeMillis();
-        if(differenceInMillis>0 ){
+        if(notification.validateCalendarEvent(calendarEvent) || !notification.roomExistsInDb(calendarEvent.getLocation())) {
+            builder.setTitle("Location Format is Wrong");
+            builder.setMessage("The location of your upcoming event hasn't been inserted correctly"+
+                    "(e.g. 'H-9, 963')");
+        }
+
+        else if(differenceInMillis>0 ){
             builder.setTitle("Heads up... Your next class is in " +  mViewModel.displayTimeToNextClass(calendarEvent.getStartTime()));
             builder.setMessage("You have " + calendarEvent.getTitle() + " in " + mViewModel.displayTimeToNextClass(calendarEvent.getStartTime())  + " at " +
                     calendarEvent.getLocation() +" ! Please choose to either get directions to your class or to ignore this message");
+            setupShowMeDirectionsBtn(builder,calendarEvent.getLocation());
         }
         else {
             String eventPassedBy = mViewModel.displayTimeToNextClass(calendarEvent.getStartTime());
@@ -100,10 +107,10 @@ public class MainActivity extends AppCompatActivity {
             builder.setTitle("Heads up... Your class has already started before " + eventPassedBy);
             builder.setMessage("Your " + calendarEvent.getTitle() + " has started before " + eventPassedBy + " at " +
                     calendarEvent.getLocation() +" ! Please choose to either get directions to your class or to ignore this message");
+            setupShowMeDirectionsBtn(builder,calendarEvent.getLocation());
         }
 
         setupCancelBtn(builder);
-        setupShowMeDirectionsBtn(builder,calendarEvent.getLocation());
 
         builder.show();
     }
