@@ -125,4 +125,15 @@ public  class WalkingPoint {
         return coordinate.equals(that.coordinate) &&
                 floorCode.equals(that.floorCode);
     }
+
+    @Override
+    public String toString() {
+        return "WalkingPoint{" +
+                "id=" + id +
+                ", coordinate=" + coordinate +
+                ", floorCode='" + floorCode + '\'' +
+                ", connectedPointsId=" + connectedPointsId +
+                ", pointType=" + pointType +
+                '}';
+    }
 }

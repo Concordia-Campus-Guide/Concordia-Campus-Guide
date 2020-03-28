@@ -115,4 +115,7 @@ dependencies {
     implementation 'com.google.oauth-client:google-oauth-client-jetty:1.23.0'
     implementation 'com.google.apis:google-api-services-calendar:v3-rev305-1.23.0'
     implementation project(path: ':google-maps-services-java-0.10.0')
+
+    // Flexbox layout
+    implementation 'com.google.android:flexbox:2.0.1'
 }
