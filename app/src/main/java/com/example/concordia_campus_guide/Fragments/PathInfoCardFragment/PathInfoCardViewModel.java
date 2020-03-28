@@ -3,8 +3,8 @@ package com.example.concordia_campus_guide.Fragments.PathInfoCardFragment;
 import androidx.lifecycle.ViewModel;
 
 import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
+import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Models.Direction;
-import com.example.concordia_campus_guide.Models.TransitType;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ public class PathInfoCardViewModel extends ViewModel {
     }
 
     public Direction createIndoorDirection(LatLng startLatLng, LatLng endLatLng, String description, double distance, double minutes){
-        Direction direction = new Direction(startLatLng, endLatLng, TransitType.WALK, description, distance);
+        Direction direction = new Direction(startLatLng, endLatLng, ClassConstants.WALKING, description, distance);
         direction.setDuration(minutes);
         return direction;
     }

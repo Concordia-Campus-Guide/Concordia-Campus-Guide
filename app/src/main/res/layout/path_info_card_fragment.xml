@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="#00FFFFFF"
-                android:src="@drawable/ic_directions_walk_black_24dp"
+                android:src="@drawable/ic_directions_walk_red"
                 android:tint="@color/colorAppTheme" />
 
             <TextView

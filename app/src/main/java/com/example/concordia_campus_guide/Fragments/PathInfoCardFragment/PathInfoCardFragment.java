@@ -21,10 +21,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.Adapters.DirectionsRecyclerViewAdapter;
+import com.example.concordia_campus_guide.ClassConstants;
 import com.google.android.gms.maps.model.LatLng;
 import com.example.concordia_campus_guide.Models.Direction;
 import com.example.concordia_campus_guide.Models.PointType;
-import com.example.concordia_campus_guide.Models.TransitType;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
 
@@ -143,7 +143,7 @@ public class PathInfoCardFragment extends Fragment {
         }
 
         this.totalDuration = (totalDistance * 60.0 / 5.0);
-        createImageButton(layout, layoutParams, R.drawable.ic_directions_walk_black_24dp);
+        createImageButton(layout, layoutParams, R.drawable.ic_directions_walk_white);
         setRecyclerView();
     }
 
@@ -224,34 +224,31 @@ public class PathInfoCardFragment extends Fragment {
         for (int i = 0; i < directionList.size(); i++) {
             boolean lastOne = i == directionList.size() - 1;
             Direction direction = directionList.get(i);
-            switch (direction.getType()) {
-                case BUS:
+            switch (direction.getTransportType().toString()) {
+                case ClassConstants.TRANSIT:
                     createImageButton(layout, layoutParams, R.drawable.ic_directions_bus_black_24dp);
                     if (!lastOne)
                         setDividerTextView(layout, layoutParams);
                     break;
-                case CAR:
-                    createImageButton(layout, layoutParams, R.drawable.ic_directions_car_black_24dp);
+                case ClassConstants.DRIVING:
+                    createImageButton(layout, layoutParams, R.drawable.ic_directions_car_red);
                     if (!lastOne)
                         setDividerTextView(layout, layoutParams);
                     break;
-                case METRO:
-                    createImageButton(layout, layoutParams, R.drawable.ic_directions_subway_black_24dp);
-                    setDividerTextView(layout, layoutParams);
-                    break;
-                case SHUTTLE:
-                    createImageButton(layout, layoutParams, R.drawable.ic_shuttle);
-                    if (!lastOne)
-                        setDividerTextView(layout, layoutParams);
-                    break;
-                case BIKE:
+                    // TODO: Shuttle constant has not been created yet
+//                case SHUTTLE:
+//                    createImageButton(layout, layoutParams, R.drawable.ic_shuttle);
+//                    if (!lastOne)
+//                        setDividerTextView(layout, layoutParams);
+//                    break;
+                case ClassConstants.BICYCLING:
                     createImageButton(layout, layoutParams, R.drawable.ic_directions_bike_black_24dp);
                     if (!lastOne)
                         setDividerTextView(layout, layoutParams);
                     break;
-                case WALK:
-                    if (i != 0 && direction.getType() != directionList.get(i - 1).getType()) {
-                        createImageButton(layout, layoutParams, R.drawable.ic_directions_walk_black_24dp);
+                case ClassConstants.WALKING:
+                    if (i != 0 && direction.getTransportType() != directionList.get(i - 1).getTransportType()) {
+                        createImageButton(layout, layoutParams, R.drawable.ic_directions_walk_red);
                         if (!lastOne)
                             setDividerTextView(layout, layoutParams);
                     }

@@ -1,10 +1,10 @@
 package com.example.concordia_campus_guide.Adapters;
 
+import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.EncodedPolyline;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TravelMode;
 import com.example.concordia_campus_guide.Models.Direction;
-import com.example.concordia_campus_guide.Models.TransitType;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.Serializable;
@@ -18,7 +18,7 @@ public class DirectionWrapper implements Serializable {
         direction = new Direction();
         direction.setStart(new LatLng(directionStep.startLocation.lat, directionStep.startLocation.lng));
         direction.setEnd(new LatLng(directionStep.endLocation.lat, directionStep.endLocation.lng));
-        direction.setType(getTransitType(directionStep.travelMode));
+        direction.setTransportType(getTransitType(directionStep.travelMode));
         direction.setDescription(directionStep.htmlInstructions);
         direction.setDuration(directionStep.duration.value);
 
@@ -26,19 +26,17 @@ public class DirectionWrapper implements Serializable {
         polyline = directionStep.polyline;
     }
 
-    private TransitType getTransitType(TravelMode travelMode){
+    private String getTransitType(TravelMode travelMode){
         switch (travelMode){
             case DRIVING:
-                return TransitType.CAR;
+                return ClassConstants.DRIVING;
             case WALKING:
-                return TransitType.WALK;
+                return ClassConstants.WALKING;
             case BICYCLING:
-                return TransitType.BIKE;
+                return ClassConstants.BICYCLING;
             case TRANSIT:
-                // TODO: we have both metro and bus (but Google only provides TRANSIT)
-                return TransitType.BUS;
+                return ClassConstants.TRANSIT;
         }
-        // TODO: what should be returned if there is no match?
         return null;
     }
 

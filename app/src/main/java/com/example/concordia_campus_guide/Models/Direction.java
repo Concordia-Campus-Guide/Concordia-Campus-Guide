@@ -11,18 +11,19 @@ public class Direction implements Serializable {
     private transient LatLng end;
     private Date startTime;
     private Date endTime;
-    private TransportType transportType;
+    private String transportType;
     private String description;
     private double duration;
 
     public Direction() {
     }
 
-    public Direction(LatLng start, LatLng end, TransportType transportType, String description) {
+    public Direction(LatLng start, LatLng end, String transportType, String description, double duration) {
         this.start = start;
         this.end = end;
         this.transportType = transportType;
         this.description = description;
+        this.duration = duration;
     }
 
     public LatLng getStart() {
@@ -41,11 +42,11 @@ public class Direction implements Serializable {
         this.end = end;
     }
 
-    public TransportType getTransportType() {
+    public String getTransportType() {
         return transportType;
     }
 
-    public void setTransportType(TransportType transportType) {
+    public void setTransportType(String transportType) {
         this.transportType = transportType;
     }
 
@@ -55,5 +56,13 @@ public class Direction implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public double getDuration(){
+        return this.duration;
+    }
+
+    public void setDuration(double duration){
+        this.duration = duration;
     }
 }
