@@ -5,14 +5,11 @@ import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Database.Daos.ShuttleDao;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsResult;
-import com.example.concordia_campus_guide.ModelTests.TestUtils;
+import com.example.concordia_campus_guide.ModelTests.TestUtils.TestUtils;
+import com.example.concordia_campus_guide.ModelTests.TestUtils.TestUtilsRoutes;
 import com.example.concordia_campus_guide.Models.Building;
-import com.example.concordia_campus_guide.Models.Coordinates;
-import com.example.concordia_campus_guide.Models.Place;
-import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.Routes.Route;
 import com.example.concordia_campus_guide.Models.Shuttle;
-import com.example.concordia_campus_guide.Models.Time;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +22,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
@@ -36,6 +32,7 @@ public class RoutesActivityViewModelTest {
     private Shuttle shuttle1;
     private Shuttle shuttle2;
     private TestUtils testUtils;
+    private TestUtilsRoutes testUtilsRoutes;
 
     @Mock
     AppDatabase mockAppDb;
@@ -56,8 +53,8 @@ public class RoutesActivityViewModelTest {
 
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat time = new SimpleDateFormat("HH.mm");
-        shuttle1 = testUtils.getShuttle1();
-        shuttle2 = testUtils.getShuttle2();
+        shuttle1 = testUtilsRoutes.getShuttle1();
+        shuttle2 = testUtilsRoutes.getShuttle2();
 
 
         when(mockAppDb.shuttleDao()).thenReturn(shuttleDao);
@@ -102,7 +99,7 @@ public class RoutesActivityViewModelTest {
     @Test
     public void getSetRouteOptions() {
         List<Route> routes = new ArrayList();
-        routes.add(testUtils.route1);
+        routes.add(testUtilsRoutes.route1);
 
         mViewModel.setRouteOptions(routes);
         assertEquals(routes, mViewModel.getRouteOptions());

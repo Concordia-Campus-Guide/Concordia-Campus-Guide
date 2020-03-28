@@ -1,6 +1,7 @@
 package com.example.concordia_campus_guide.ModelTests;
 
-import com.example.concordia_campus_guide.Models.Routes.Subway;
+import com.example.concordia_campus_guide.ModelTests.TestUtils.TestUtils;
+import com.example.concordia_campus_guide.ModelTests.TestUtils.TestUtilsRoutes;
 import com.example.concordia_campus_guide.Models.Routes.Train;
 
 import org.junit.Before;
@@ -10,16 +11,20 @@ import static junit.framework.TestCase.assertEquals;
 
 public class TrainTest {
     private Train train;
-    private TestUtils testUtils;
+    private TestUtilsRoutes testUtils;
 
     @Before
     public void init() {
-        testUtils = new TestUtils();
+        testUtils = new TestUtilsRoutes();
     }
 
     @Test
     public void getColorTest() {
-        train = new Train(testUtils.getDirectionStepsObject());
-        assertEquals(testUtils.getDirectionStepsObject().transitDetails.line.shortName,train.getTrainShortName());
+        // Act
+        train = new Train(testUtils.directionsStepTrain());
+        String expectedTrainShortName = testUtils.directionsStepTrain().transitDetails.line.shortName;
+
+        // Arrange & Assert
+        assertEquals(expectedTrainShortName, train.getTrainShortName());
     }
 }

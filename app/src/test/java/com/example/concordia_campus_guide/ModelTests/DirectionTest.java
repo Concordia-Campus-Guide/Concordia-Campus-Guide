@@ -1,9 +1,9 @@
 package com.example.concordia_campus_guide.ModelTests;
 
 import com.example.concordia_campus_guide.ClassConstants;
-import com.example.concordia_campus_guide.Models.Routes.Bus;
+import com.example.concordia_campus_guide.ModelTests.TestUtils.TestUtils;
+import com.example.concordia_campus_guide.ModelTests.TestUtils.TestUtilsRoutes;
 import com.example.concordia_campus_guide.Models.Direction;
-import com.example.concordia_campus_guide.Models.Routes.TransportType;
 import com.google.android.gms.maps.model.LatLng;
 
 import org.junit.Before;
@@ -13,10 +13,10 @@ import static junit.framework.TestCase.assertEquals;
 
 public class DirectionTest {
     private Direction direction;
-    private TestUtils testUtils;
+    private TestUtilsRoutes testUtils;
     @Before
     public void init() {
-        testUtils = new TestUtils();
+        testUtils = new TestUtilsRoutes();
         direction = testUtils.direction;
     }
 

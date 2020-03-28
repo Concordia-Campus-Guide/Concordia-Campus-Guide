@@ -5,8 +5,6 @@ import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServ
 public class Subway extends TransportType {
     private String color;
 
-    public Subway() {}
-
     public Subway(DirectionsStep step) {
         color = step.transitDetails.line.color;
     }
@@ -14,9 +12,4 @@ public class Subway extends TransportType {
     public String getColor() {
         return color;
     }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
 }

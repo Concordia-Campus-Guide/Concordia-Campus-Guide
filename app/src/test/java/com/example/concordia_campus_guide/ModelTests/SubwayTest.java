@@ -1,5 +1,7 @@
 package com.example.concordia_campus_guide.ModelTests;
 
+import com.example.concordia_campus_guide.ModelTests.TestUtils.TestUtils;
+import com.example.concordia_campus_guide.ModelTests.TestUtils.TestUtilsRoutes;
 import com.example.concordia_campus_guide.Models.Routes.Subway;
 
 import org.junit.Before;
@@ -9,23 +11,20 @@ import static junit.framework.TestCase.assertEquals;
 
 public class SubwayTest {
     private Subway subway;
-    private TestUtils testUtils;
+    private TestUtilsRoutes testUtils;
 
     @Before
     public void init() {
-        testUtils = new TestUtils();
+        testUtils = new TestUtilsRoutes();
     }
 
     @Test
     public void getColorTest() {
-        subway = new Subway(testUtils.getDirectionStepsObject());
-        assertEquals(testUtils.getDirectionStepsObject().transitDetails.line.color,subway.getColor());
-    }
+        // Arrange
+        subway = new Subway(testUtils.directionsStepSubway());
+        String expectedColor = testUtils.directionsStepSubway().transitDetails.line.color;
 
-    @Test
-    public void setColorTest(){
-        subway = new Subway();
-        subway.setColor("orange");
-        assertEquals(testUtils.getDirectionStepsObject().transitDetails.line.color,subway.getColor());
+        // Act & Assert
+        assertEquals(expectedColor, subway.getColor());
     }
 }

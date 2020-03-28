@@ -1,8 +1,6 @@
 package com.example.concordia_campus_guide.ModelTests;
 
-import com.example.concordia_campus_guide.Models.Coordinates;
-import com.example.concordia_campus_guide.Models.Floor;
-import com.example.concordia_campus_guide.Models.Floors;
+import com.example.concordia_campus_guide.ModelTests.TestUtils.TestUtils;
 import com.example.concordia_campus_guide.Models.Place;
 
 import org.junit.Before;
