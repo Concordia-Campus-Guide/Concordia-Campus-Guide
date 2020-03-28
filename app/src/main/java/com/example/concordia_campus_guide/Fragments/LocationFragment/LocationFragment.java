@@ -400,6 +400,11 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     private void setupPOIListListener() {
         mViewModel.getListOfPOI().observe(getViewLifecycleOwner(), priorityQueue -> {
+
+            if (!POIMarkers.isEmpty()) {
+                for (Marker marker : POIMarkers) marker.remove();
+            }
+
             int position = 1;
             do {
                 WalkingPoint polled = priorityQueue.poll();
