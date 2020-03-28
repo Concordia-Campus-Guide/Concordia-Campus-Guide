@@ -42,6 +42,7 @@ import com.example.concordia_campus_guide.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -86,9 +87,20 @@ public class MainActivity extends AppCompatActivity {
     public void popUp(CalendarEvent calendarEvent){
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setCancelable(true);
-        builder.setTitle("Heads up... Your next class is in " +  mViewModel.displayTimeToNextClass(calendarEvent.getStartTime()));
-        builder.setMessage("You have " + calendarEvent.getTitle() + " in " + mViewModel.displayTimeToNextClass(calendarEvent.getStartTime())  + " at " +
-                calendarEvent.getLocation() +" ! Please choose to either get directions to your class or to ignore this message");
+        Date eventDate = new Date((Long.parseLong(calendarEvent.getStartTime())));
+        long differenceInMillis = eventDate.getTime() - System.currentTimeMillis();
+        if(differenceInMillis>0 ){
+            builder.setTitle("Heads up... Your next class is in " +  mViewModel.displayTimeToNextClass(calendarEvent.getStartTime()));
+            builder.setMessage("You have " + calendarEvent.getTitle() + " in " + mViewModel.displayTimeToNextClass(calendarEvent.getStartTime())  + " at " +
+                    calendarEvent.getLocation() +" ! Please choose to either get directions to your class or to ignore this message");
+        }
+        else {
+            String eventPassedBy = mViewModel.displayTimeToNextClass(calendarEvent.getStartTime());
+            eventPassedBy = eventPassedBy.replace('-',' ');
+            builder.setTitle("Heads up... Your class has already started before " + eventPassedBy);
+            builder.setMessage("Your " + calendarEvent.getTitle() + " has started before " + eventPassedBy + " at " +
+                    calendarEvent.getLocation() +" ! Please choose to either get directions to your class or to ignore this message");
+        }
 
         setupCancelBtn(builder);
         setupShowMeDirectionsBtn(builder,calendarEvent.getLocation());
