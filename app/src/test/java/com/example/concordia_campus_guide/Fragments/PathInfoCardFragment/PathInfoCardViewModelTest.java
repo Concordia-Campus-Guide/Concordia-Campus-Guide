@@ -1,15 +1,16 @@
 package com.example.concordia_campus_guide.Fragments.PathInfoCardFragment;
 
 import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
-import com.example.concordia_campus_guide.ModelTests.TestUtils.TestUtils;
 import com.example.concordia_campus_guide.Models.Direction;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class PathInfoCardViewModelTest {
     private PathInfoCardViewModel pathInfoCardViewModel;
@@ -41,14 +42,52 @@ public class PathInfoCardViewModelTest {
 
     @Test
     public void createOutdoorDirectionsList() {
-        List<Direction> tempOutdoorDirection = pathInfoCardViewModel.createOutdoorDirectionsList(TestUtils.getListOfDirectionWrappers());
+        List<Direction> tempOutdoorDirection = pathInfoCardViewModel.createOutdoorDirectionsList(getListOfDirectionWrappers());
         assertEquals(3, pathInfoCardViewModel.getTotalDuration(), 0.001);
         assertEquals(2, tempOutdoorDirection.size());
     }
 
     @Test
     public void createIndoorDirection() {
-        Direction tempIndoorDirection = pathInfoCardViewModel.createIndoorDirection(TestUtils.getLatLng1(), TestUtils.getLatLng2(),TestUtils.getDirectionDescription(), 10.0, 3.0 );
+        Direction tempIndoorDirection = pathInfoCardViewModel.createIndoorDirection(getLatLng1(), getLatLng2(),getDirectionDescription(), 10.0, 3.0 );
         assertEquals(3.0, tempIndoorDirection.getDuration(),0.01);
+    }
+
+    public static DirectionWrapper getDirectionWrapper1(){
+        DirectionWrapper directionWrapper1 = new DirectionWrapper();
+        Direction direction1 = new Direction();
+        direction1.setDuration(60.0);
+        direction1.setDescription("Go Left");
+
+        directionWrapper1.setDirection(direction1);
+        return directionWrapper1;
+    }
+
+    public static DirectionWrapper getDirectionWrapper2(){
+        DirectionWrapper directionWrapper2 = new DirectionWrapper();
+        Direction direction1 = new Direction();
+        direction1.setDuration(120.0);
+        direction1.setDescription("Go Right");
+
+        directionWrapper2.setDirection(direction1);
+        return directionWrapper2;
+    }
+
+    public static List<DirectionWrapper> getListOfDirectionWrappers(){
+        return new ArrayList<>(Arrays.asList(getDirectionWrapper1(), getDirectionWrapper2()));
+    }
+
+    public static com.google.android.gms.maps.model.LatLng getLatLng1(){
+        // room 819
+        return new com.google.android.gms.maps.model.LatLng(45.496951715566176, -73.5789605230093);
+    }
+
+    public static com.google.android.gms.maps.model.LatLng getLatLng2(){
+        // room 821
+        return new com.google.android.gms.maps.model.LatLng(45.49699848270905,-73.57902321964502);
+    }
+
+    public static String getDirectionDescription(){
+        return "Go Left";
     }
 }
