@@ -22,6 +22,11 @@ public class Coordinates {
                 longitude == that.longitude;
     }
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
     public List<Double> toListDouble(){
         return new ArrayList<>(Arrays.asList(latitude, longitude));
     }

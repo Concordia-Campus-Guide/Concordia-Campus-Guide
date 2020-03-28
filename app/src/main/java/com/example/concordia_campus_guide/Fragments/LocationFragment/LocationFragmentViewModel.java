@@ -28,8 +28,6 @@ import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
