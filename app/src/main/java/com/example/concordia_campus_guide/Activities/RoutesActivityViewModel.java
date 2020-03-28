@@ -23,7 +23,7 @@ public class RoutesActivityViewModel extends ViewModel {
     private AppDatabase appDB;
     private Place from;
     private Place to;
-    private @ClassConstants.TransportType String transportType = ClassConstants.DRIVING; // default value
+    private @ClassConstants.TransportType String transportType = ClassConstants.TRANSIT; // default value
     private List<Shuttle> shuttles;
     private final String noShuttles = "No available routes using the shuttle service";
     private DirectionsResult directionsResult;
