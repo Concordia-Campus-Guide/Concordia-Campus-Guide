@@ -401,8 +401,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private void setupPOIListListener() {
         mViewModel.getListOfPOI().observe(getViewLifecycleOwner(), priorityQueue -> {
 
-            if (!POIMarkers.isEmpty()) {
-                for (Marker marker : POIMarkers) marker.remove();
+            if (!poiMarkers.isEmpty()) {
+                for (Marker marker : poiMarkers) marker.remove();
             }
 
             int position = 1;
