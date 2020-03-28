@@ -1,14 +1,6 @@
 package com.example.concordia_campus_guide.ModelTests.TestUtils;
 
-import androidx.room.Room;
-
 import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.LatLng;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.Distance;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.Duration;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TransitDetails;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TransitLine;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.Coordinates;
@@ -18,10 +10,8 @@ import com.example.concordia_campus_guide.Models.Floors;
 import com.example.concordia_campus_guide.Models.ListOfCoordinates;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.Rooms;
-import com.example.concordia_campus_guide.Models.Routes.Route;
-import com.example.concordia_campus_guide.Models.Routes.Walk;
-import com.google.android.gms.maps.model.LatLng;
 import com.example.concordia_campus_guide.Models.Shuttle;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
