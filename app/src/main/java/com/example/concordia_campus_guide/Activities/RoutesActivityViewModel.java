@@ -7,8 +7,12 @@ import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServ
 import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.Routes.Route;
 import com.example.concordia_campus_guide.Models.Shuttle;
+
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -73,7 +77,7 @@ public class RoutesActivityViewModel extends ViewModel {
 
     public String getShuttleDisplayText(List<Shuttle> shuttles) {
         String content = "";
-        if (shuttles == null || shuttles.size() == 0) {
+        if (shuttles == null || shuttles.isEmpty()) {
             return this.noShuttles;
         }
         String campusTo = shuttles.get(0).getCampus().compareTo("SGW") == 0 ? "LOY" : "SGW";
@@ -81,6 +85,23 @@ public class RoutesActivityViewModel extends ViewModel {
             content += shuttle.getCampus() + "  >   " + campusTo + ", \t leaves at: " + shuttle.getTime().toString().replace(".", ":") + "\n";
         }
         return content;
+    }
+
+    public void adaptShuttleToRoutes(List<Shuttle> shuttles) {
+        for(Shuttle shuttle : shuttles) {
+            String departureTime = shuttle.getTime().toString().replace(".", ":");
+            DateFormat dateFormat = new SimpleDateFormat("hh:mm");
+            String arrivalDateString = "";
+            try {
+                Date arrivalDate = dateFormat.parse(departureTime);
+                arrivalDateString = arrivalDate.toString();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            Route shuttleRoute = new Route(departureTime, arrivalDateString, "20min", "shuttle");
+            routeOptions.add(shuttleRoute);
+        }
     }
 
     public List<Route> getRouteOptions() {  return routeOptions; }

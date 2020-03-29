@@ -129,8 +129,10 @@ public class RoutesActivity extends AppCompatActivity {
     }
 
     public void onClickShuttle(View v) {
-        //getShuttle(v);
+        List<Shuttle> shuttles = mViewModel.getShuttles();
         setShuttleSelect();
+        mViewModel.adaptShuttleToRoutes(shuttles);
+        setRoutesAdapter();
     }
 
     private void setShuttleSelect() {
@@ -207,12 +209,6 @@ public class RoutesActivity extends AppCompatActivity {
     private void openSearchPage(){
         Intent openSearch= new Intent(RoutesActivity.this, SearchActivity.class);
         startActivity(openSearch);
-    }
-
-    public void getShuttle(View view) {
-        List<Shuttle> shuttles = mViewModel.getShuttles();
-        String shuttleDisplayText = mViewModel.getShuttleDisplayText(shuttles);
-        this.content.setText(shuttleDisplayText);
     }
 
     /**
