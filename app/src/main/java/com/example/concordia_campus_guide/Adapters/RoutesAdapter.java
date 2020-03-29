@@ -43,7 +43,7 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
         this.routes = routes;
         this.context = context;
     }
-
+    // TODO: add shuttle
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View viewToDisplay = LayoutInflater.from(this.getContext()).inflate(R.layout.list_routes, parent, false);
