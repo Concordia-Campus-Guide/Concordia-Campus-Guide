@@ -81,11 +81,13 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     private static final String TAG = "LocationFragment";
     private static final String POI_TAG = "POI";
+    private static final String ROOM_TAG = "ROOM";
 
     private boolean myLocationPermissionsGranted = false;
     private HashMap<String, GroundOverlay> buildingsGroundOverlays;
     private FloorPickerAdapter currentFloorPickerAdapter;
     private List<Marker> poiMarkers;
+    private List<Marker> roomMarkers;
 
     /**
      * @return it will return a new object of this fragment
@@ -128,11 +130,11 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         mFloorPickerGv.setVisibility(View.GONE);
         buildingsGroundOverlays = new HashMap<>();
         poiMarkers = new ArrayList<>();
+        roomMarkers = new ArrayList<>();
     }
 
     private void setupFloorPickerAdapter(Building building) {
         mFloorPickerGv.setVisibility(View.VISIBLE);
-
         currentFloorPickerAdapter = new FloorPickerAdapter(getContext(), building.getAvailableFloors(), building.getBuildingCode(), this);
         mFloorPickerGv.setAdapter(currentFloorPickerAdapter);
         mViewModel.setFloorMarkers(building.getBuildingCode(), building.getAvailableFloors().get(building.getAvailableFloors().size() - 1), getContext(), mMap);
@@ -158,6 +160,12 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         });
     }
 
+
+    public void deselectAll(){
+        removeAllRoomsFromMap();
+        removeAllPOIFromMap();
+//        removeFloorPickerFromMap();
+    }
 
     private void setFirstLocationToDisplay() {
         setFirstLocationToDisplayOnSuccess();
@@ -308,6 +316,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private void onBuildingClick(Building building) {
         if (building.getAvailableFloors() != null) {
             setupFloorPickerAdapter(building);
+            setupRoomMarkers();
         } else {
             mFloorPickerGv.setVisibility(View.GONE);
         }
@@ -335,7 +344,11 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             if (marker.getTag() != null) {
                 if (marker.getTag() != null && marker.getTag().toString().contains(POI_TAG)) {
                     sendToSearchView(marker);
-                } else {
+                }
+                else if (marker.getTag() != null && marker.getTag().toString().contains(ROOM_TAG)) {
+                    openRoomCard();
+                }
+                else {
                     Building building = mViewModel.getBuildingFromeCode(marker.getTag().toString());
                     String buildingCode = (marker.getTag()).toString();
                     if (getActivity() instanceof MainActivity)
@@ -346,6 +359,10 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             return false;
         });
         return true;
+    }
+
+    private void openRoomCard(){
+
     }
 
     private void sendToSearchView(Marker marker) {
@@ -377,6 +394,20 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         return AppDatabase.getInstance(getContext()).roomDao().getRoomByIdAndFloorCode(placeCode, floorCode);
     }
 
+    private void setupRoomMarkers(){
+        mViewModel.getListOfRoom().observe(getViewLifecycleOwner(), roomList -> {
+
+            for (Marker marker : roomMarkers) marker.remove();
+            roomMarkers.clear();
+
+            for(RoomModel roomModel: roomList){
+                if(roomModel != null){
+                    addRoomToMap(roomModel);
+                }
+            }
+        });
+    }
+
     private void setupPOIListListener() {
         mViewModel.getListOfPOI().observe(getViewLifecycleOwner(), priorityQueue -> {
 
@@ -392,6 +423,34 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                 position++;
             } while (position <= 10);
         });
+    }
+
+    private void removeAllRoomsFromMap(){
+        for (Marker marker : roomMarkers) marker.remove();
+        roomMarkers.clear();
+    }
+
+    private void removeAllPOIFromMap(){
+        for (Marker marker : poiMarkers) marker.remove();
+        poiMarkers.clear();
+    }
+
+    private void addRoomToMap(RoomModel room){
+        if(room != null){
+            LatLng latLng = new LatLng(room.getCenterCoordinates().getLatitude(), room.getCenterCoordinates().getLongitude());
+
+            String tag = ROOM_TAG + "_" + room.getFloorCode() + "_" + room.getRoomCode();
+            MarkerOptions markerOptions = new MarkerOptions()
+                    .position(latLng)
+                    .icon(mViewModel.getRoomIcon())
+                    .alpha((float) 0.5)
+                    .visible(true);
+
+            Marker marker = mMap.addMarker(markerOptions);
+            marker.setTag(tag);
+
+            roomMarkers.add(marker);
+        }
     }
 
     private void addPOItoMap(WalkingPoint poi, int position) {
@@ -475,6 +534,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         String floorSelected = currentFloorPickerAdapter.getFloorsAvailable().get(position);
         String buildingSelected = currentFloorPickerAdapter.getBuildingCode();
         mViewModel.setFloorPlan(buildingsGroundOverlays.get(currentFloorPickerAdapter.getBuildingCode()), buildingSelected, floorSelected , getContext(), mMap);
+        setupRoomMarkers();
+//        mMap.addMarker(new MarkerOptions().position(new LatLng(-73.5789475, 45.4972685)).title("Hello World"));
         setVisiblePOIMarkers(floorSelected, buildingSelected);
     }
 

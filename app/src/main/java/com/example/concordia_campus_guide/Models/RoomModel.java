@@ -11,6 +11,8 @@ import androidx.room.Index;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "rooms",
@@ -24,7 +26,7 @@ import static androidx.room.ForeignKey.CASCADE;
                         onDelete = CASCADE
                 ),
         })
-public class RoomModel extends Place {
+public class RoomModel extends Place implements Serializable {
 
     @ColumnInfo(name = "room_code")
     @NonNull
