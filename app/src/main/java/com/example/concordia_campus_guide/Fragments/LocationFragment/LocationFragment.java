@@ -173,7 +173,10 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                 .addOnSuccessListener(getActivity(), location -> {
                     if (location != null) {
                         mMap.setMyLocationEnabled(true);
-                        zoomInLocation(new LatLng(location.getLatitude(), location.getLongitude()));
+                        if (getActivity() instanceof MainActivity)
+                            zoomInLocation(new LatLng(location.getLatitude(), location.getLongitude()));
+                        else
+                            zoomInLocation(mViewModel.getInitialZoomLocation());
                     } else {
                         zoomInLocation(mViewModel.getInitialZoomLocation());
                     }
@@ -572,4 +575,11 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     public List<WalkingPoint> getWalkingPointList() {
         return mViewModel.getWalkingPointsList();
     }
+
+    public void setDifferentInitialView(LatLng latLng){
+        mViewModel.setInitialZoomLocation(latLng);
+    }
+
+
+
 }
