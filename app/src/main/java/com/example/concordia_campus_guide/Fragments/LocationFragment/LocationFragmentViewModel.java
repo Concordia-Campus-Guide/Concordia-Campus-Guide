@@ -403,6 +403,10 @@ public class LocationFragmentViewModel extends ViewModel {
         return polylineOptions;
     }
 
+    public RoomModel getRoomByRoomCodeAndFloorCode(String roomCode, String floorCode){
+        return appDatabase.roomDao().getRoomByRoomCodeAndFloorCode(roomCode, floorCode);
+    }
+
     public List<WalkingPoint> getWalkingPointsList() {
         return walkingPoints;
     }

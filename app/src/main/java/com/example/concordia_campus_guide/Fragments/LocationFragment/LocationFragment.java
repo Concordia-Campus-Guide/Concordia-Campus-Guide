@@ -351,7 +351,9 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                     sendToSearchView(marker);
                 }
                 else if (marker.getTag() != null && marker.getTag().toString().contains(ROOM_TAG)) {
-                    openRoomCard();
+                    String roomCode = marker.getTag().toString().split("_")[1];
+                    String floorCode = marker.getTag().toString().split("_")[2];
+                    onRoomClick(roomCode, floorCode);
                 }
                 else {
                     Building building = mViewModel.getBuildingFromCode(marker.getTag().toString());
@@ -366,8 +368,9 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         return true;
     }
 
-    private void openRoomCard(){
-
+    private void onRoomClick(String roomCode, String floorCode){
+        if (getActivity() instanceof MainActivity)
+            ((MainActivity) getActivity()).showRoomCard(mViewModel.getRoomByRoomCodeAndFloorCode(roomCode, floorCode));
     }
 
     private void sendToSearchView(Marker marker) {
@@ -444,7 +447,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         if(room != null){
             LatLng latLng = new LatLng(room.getCenterCoordinates().getLatitude(), room.getCenterCoordinates().getLongitude());
 
-            String tag = ROOM_TAG + "_" + room.getFloorCode() + "_" + room.getRoomCode();
+            String tag = ROOM_TAG + "_" + room.getRoomCode() +"_" + room.getFloorCode();
             MarkerOptions markerOptions = new MarkerOptions()
                     .position(latLng)
                     .icon(roomIcon)

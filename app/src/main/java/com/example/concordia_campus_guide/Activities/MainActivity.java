@@ -28,6 +28,7 @@ import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragment;
 import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragment;
 import com.example.concordia_campus_guide.Fragments.POIFragment.POIFragment;
+import com.example.concordia_campus_guide.Fragments.SmallInfoCardFragment.SmallInfoCardFragment;
 import com.example.concordia_campus_guide.Global.ApplicationState;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.Helper.Notification;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FragmentTransaction fragmentTransaction;
     FragmentManager fragmentManager;
     InfoCardFragment infoCardFragment;
+    SmallInfoCardFragment smallInfoCardFragment;
     LocationFragment locationFragment;
     POIFragment poiFragment;
     MainActivityViewModel mViewModel;
@@ -287,6 +289,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
+    public void showRoomCard(RoomModel room){
+        resetBottomCard();
+        smallInfoCardFragment = new SmallInfoCardFragment(room);
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.bottom_card_frame, smallInfoCardFragment);
+        fragmentTransaction.commit();
+    }
+
     public void showPOICard(){
         resetBottomCard();
         poiFragment = new POIFragment();
@@ -308,7 +318,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void resetBottomCard(){
         for (Fragment fragment : fragmentManager.getFragments()){
-            if (fragment instanceof InfoCardFragment) {
+            if (fragment instanceof InfoCardFragment || fragment instanceof SmallInfoCardFragment) {
                 fragmentManager.beginTransaction().remove(fragment).commit();
             }
         }
