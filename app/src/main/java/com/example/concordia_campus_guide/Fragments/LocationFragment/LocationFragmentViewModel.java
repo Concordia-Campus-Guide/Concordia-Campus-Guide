@@ -33,7 +33,6 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
-import com.google.maps.android.geojson.GeoJsonPointStyle;
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 
 import org.json.JSONObject;
@@ -59,7 +58,6 @@ public class LocationFragmentViewModel extends ViewModel {
     private MutableLiveData<PriorityQueue<WalkingPoint>> poiList = new MutableLiveData<>();
     private MutableLiveData<List<RoomModel>> roomList = new MutableLiveData<>();
     private BitmapDescriptor currentPOIIcon;
-    private BitmapDescriptor roomIcon;
     private Location currentLocation;
 
     public static final Logger LOGGER = Logger.getLogger("LocationFragmentViewModel");
@@ -222,39 +220,21 @@ public class LocationFragmentViewModel extends ViewModel {
         return geoJsonPolygonStyle;
     }
 
-    private void getPointStyle(GeoJsonLayer layer) {
-        GeoJsonPointStyle geoJsonPointStyle = new GeoJsonPointStyle();
-        geoJsonPointStyle.setVisible(true);
-        geoJsonPointStyle.setAlpha(0.2f);
-        geoJsonPointStyle.setIcon(BitmapDescriptorFactory.fromAsset("class_markers/marker.png"));
-
-        for (GeoJsonFeature feature : layer.getFeatures()) {
-            feature.setPointStyle(geoJsonPointStyle);
-        }
-    }
-
     /**
      * @param buildingCode it represents which building we will be covering
      * @return Int of drawable resource's bitmap representation
      */
-    public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, Context context, GoogleMap mMap) {
+    public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, GoogleMap mMap) {
         String fileName = buildingCode.toLowerCase()+"_"+floor.toLowerCase();
         groundOverlay.setImage(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+fileName+".png"));
-        roomIcon = getCustomSizedIcon("class_markers/marker.png", context, 40, 40);
-        setListOfRooms(buildingCode+ "-" + floor);
-
-//        setFloorMarkers(buildingCode, floor, context, mMap);
+        setFloorMarkers(buildingCode, floor, mMap);
     }
 
-    public void setFloorMarkers(String buildingCode, String floor, Context context, GoogleMap mMap) {
+    public void setFloorMarkers(String buildingCode, String floor, GoogleMap mMap) {
         if (floorLayer != null) {
             floorLayer.removeLayerFromMap();
         }
-
-        JSONObject geoJson = ApplicationState.getInstance(context).getRooms().getGeoJson(buildingCode + "-" + floor);
-//        floorLayer = initMarkersLayer(mMap, geoJson);
-//        getPointStyle(floorLayer);
-//        floorLayer.addLayerToMap();
+        setListOfRooms(buildingCode+"-"+floor);
         if (currentlyDisplayedLine != null) {
             currentlyDisplayedLine.remove();
         }
@@ -345,7 +325,7 @@ public class LocationFragmentViewModel extends ViewModel {
         this.currentLocation = currentLocation;
     }
 
-    private BitmapDescriptor getCustomSizedIcon(String filename, Context context, int height, int width) {
+    public BitmapDescriptor getCustomSizedIcon(String filename, Context context, int height, int width) {
         InputStream deckFile = null;
         BitmapDescriptor smallMarkerIcon = null;
         try {
@@ -406,9 +386,5 @@ public class LocationFragmentViewModel extends ViewModel {
 
     public List<WalkingPoint> getWalkingPointsList() {
         return walkingPoints;
-    }
-
-    public BitmapDescriptor getRoomIcon() {
-        return roomIcon;
     }
 }

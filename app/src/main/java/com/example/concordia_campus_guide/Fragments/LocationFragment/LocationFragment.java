@@ -43,6 +43,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
@@ -76,6 +77,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private static final String POI_TAG = "POI";
     private static final String ROOM_TAG = "ROOM";
 
+    private BitmapDescriptor roomIcon;
+
     private boolean myLocationPermissionsGranted = false;
     private HashMap<String, GroundOverlay> buildingsGroundOverlays;
     private FloorPickerAdapter currentFloorPickerAdapter;
@@ -101,6 +104,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         getLocationPermission();
         setupClickListeners();
         updateLocationEvery5Seconds();
+
+        roomIcon = mViewModel.getCustomSizedIcon("class_markers/marker.png", getContext(), 40, 40);
 
         return rootView;
     }
@@ -130,7 +135,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         mFloorPickerGv.setVisibility(View.VISIBLE);
         currentFloorPickerAdapter = new FloorPickerAdapter(getContext(), building.getAvailableFloors(), building.getBuildingCode(), this);
         mFloorPickerGv.setAdapter(currentFloorPickerAdapter);
-        mViewModel.setFloorMarkers(building.getBuildingCode(), building.getAvailableFloors().get(building.getAvailableFloors().size() - 1), getContext(), mMap);
+        mViewModel.setFloorMarkers(building.getBuildingCode(), building.getAvailableFloors().get(building.getAvailableFloors().size() - 1), mMap);
     }
 
     /**
@@ -157,7 +162,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     public void deselectAll(){
         removeAllRoomsFromMap();
         removeAllPOIFromMap();
-//        removeFloorPickerFromMap();
+        mFloorPickerGv.setVisibility(View.GONE);
     }
 
     private void setFirstLocationToDisplay() {
@@ -308,8 +313,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     private void onBuildingClick(Building building) {
         if (building.getAvailableFloors() != null) {
-            setupFloorPickerAdapter(building);
             setupRoomMarkers();
+            setupFloorPickerAdapter(building);
         } else {
             mFloorPickerGv.setVisibility(View.GONE);
         }
@@ -430,7 +435,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             String tag = ROOM_TAG + "_" + room.getFloorCode() + "_" + room.getRoomCode();
             MarkerOptions markerOptions = new MarkerOptions()
                     .position(latLng)
-                    .icon(mViewModel.getRoomIcon())
+                    .icon(roomIcon)
                     .alpha((float) 0.5)
                     .visible(true);
 
@@ -520,9 +525,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     public void onFloorPickerOnClick(int position, View view) {
         String floorSelected = currentFloorPickerAdapter.getFloorsAvailable().get(position);
         String buildingSelected = currentFloorPickerAdapter.getBuildingCode();
-        mViewModel.setFloorPlan(buildingsGroundOverlays.get(currentFloorPickerAdapter.getBuildingCode()), buildingSelected, floorSelected , getContext(), mMap);
+        mViewModel.setFloorPlan(buildingsGroundOverlays.get(currentFloorPickerAdapter.getBuildingCode()), buildingSelected, floorSelected, mMap);
         setupRoomMarkers();
-//        mMap.addMarker(new MarkerOptions().position(new LatLng(-73.5789475, 45.4972685)).title("Hello World"));
         setVisiblePOIMarkers(floorSelected, buildingSelected);
     }
 
