@@ -69,10 +69,6 @@ public class Notification {
 
         RoomModel room = appDatabase.roomDao().getRoomByRoomCodeAndFloorCode(roomCode,floorCode);
 
-        if(room != null){
-            return true;
-        } else{
-          return false;
-        }
+        return room != null;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.concordia_campus_guide.Global;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.Floors;
@@ -50,7 +51,7 @@ public class ApplicationState {
             is.close();
             json = new String(buffer, "UTF-8");
         } catch (IOException e){
-            e.printStackTrace();
+            Log.e("ApplicationState", e.getMessage());
         }
         return json;
     }

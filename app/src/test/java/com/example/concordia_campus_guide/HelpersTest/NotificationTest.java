@@ -14,7 +14,9 @@ import org.mockito.MockitoAnnotations;
 
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 public class NotificationTest {
@@ -58,5 +60,13 @@ public class NotificationTest {
         assertNull(notification.getRoom(null));
     }
 
+    @Test
+    public void roomExistsInDbTest(){
+        assertTrue(notification.roomExistsInDb("H-10, 1027"));
+    }
 
+    @Test
+    public void roomExistsInDbNotExistingTest(){
+        assertFalse(notification.roomExistsInDb("H-12, 132"));
+    }
 }

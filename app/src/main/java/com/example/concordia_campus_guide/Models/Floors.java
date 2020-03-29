@@ -8,7 +8,7 @@ public class Floors {
     private List<Floor> Floors;
 
     public Floors(){
-        Floors = new ArrayList<Floor>();
+        Floors = new ArrayList<>();
     }
 
     public List<Floor> getFloors(){
@@ -20,7 +20,7 @@ public class Floors {
     }
 
     public List<Place> getPlaces(){
-        List<Place> places = new ArrayList<Place>();
+        List<Place> places = new ArrayList<>();
         for(Floor floor: Floors){
             places.add(floor);
         }
