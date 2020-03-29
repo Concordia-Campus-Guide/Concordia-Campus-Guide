@@ -143,6 +143,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         currentFloorPickerAdapter = new FloorPickerAdapter(getContext(), building.getAvailableFloors(), building.getBuildingCode(), this);
         mFloorPickerGv.setAdapter(currentFloorPickerAdapter);
         mViewModel.setFloorPlan(buildingsGroundOverlays.get(currentFloorPickerAdapter.getBuildingCode()), building.getBuildingCode(), building.getAvailableFloors().get(building.getAvailableFloors().size() - 1), mMap);
+        setupRoomMarkers();
     }
 
     /**
@@ -320,7 +321,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     private void onBuildingClick(Building building) {
         if (building.getAvailableFloors() != null) {
-            setupRoomMarkers();
             setupFloorPickerAdapter(building);
         } else {
             mFloorPickerGv.setVisibility(View.GONE);
