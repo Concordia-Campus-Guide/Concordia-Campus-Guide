@@ -7,9 +7,6 @@ import androidx.room.Room;
 
 public class NotificationStatus {
     private static NotificationStatus instance;
-
-
-
     private boolean notifyUser;
 
     private NotificationStatus(){
