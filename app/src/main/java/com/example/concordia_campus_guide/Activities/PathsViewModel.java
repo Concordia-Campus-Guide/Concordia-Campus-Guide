@@ -49,4 +49,17 @@ public class PathsViewModel extends ViewModel {
         }
         return false;
     }
+
+    public boolean areInSameBuilding(Place from, Place to){
+        if(from instanceof RoomModel && to instanceof RoomModel){
+            String floorCode = ((RoomModel) from).getFloorCode();
+            String from_building = floorCode.toUpperCase().substring(0, floorCode.indexOf("-"));
+
+            floorCode = ((RoomModel) to).getFloorCode();
+            String to_building = floorCode.toUpperCase().substring(0, floorCode.indexOf("-"));
+
+            return from_building.equalsIgnoreCase(to_building);
+        }
+        return false;
+    }
 }

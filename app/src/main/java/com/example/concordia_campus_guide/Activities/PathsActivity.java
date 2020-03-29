@@ -69,8 +69,7 @@ public class PathsActivity extends AppCompatActivity {
         fromTextView.setText(from.getDisplayName());
         toTextView.setText(to.getDisplayName());
         setBackButtonOnClickListener();
-
-        directionWrappers = (ArrayList<DirectionWrapper>) parseDirectionResults();
+        directionWrappers = (mViewModel.areInSameBuilding(from, to)) ? new ArrayList<>() : (ArrayList<DirectionWrapper>) parseDirectionResults();
 
         locationFragment.drawOutdoorPaths(directionWrappers);
 
@@ -138,7 +137,7 @@ public class PathsActivity extends AppCompatActivity {
         if (!fromIsIndoor) {
             locationFragment.setIndoorPaths(mViewModel.getEntrance(to), to);
         }
-        else if(mViewModel.arePlacesSeparatedByATunnel(from, to)){
+        else if(mViewModel.arePlacesSeparatedByATunnel(from, to) || mViewModel.areInSameBuilding(from, to)){
             locationFragment.setIndoorPaths(from, to);
         }
         //[from -> from_entrance ] + outdoor directions + [to_entrance -> to]
