@@ -1,6 +1,9 @@
 package com.example.concordia_campus_guide.HelpersTest.RoutesHelperTest;
 
 import com.example.concordia_campus_guide.Activities.RoutesActivity;
+import com.example.concordia_campus_guide.ClassConstants;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsLeg;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsRoute;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.Duration;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TransitDetails;
@@ -16,6 +19,7 @@ import com.example.concordia_campus_guide.Models.Routes.Subway;
 import com.example.concordia_campus_guide.Models.Routes.Train;
 import com.example.concordia_campus_guide.Models.Routes.TransportType;
 import com.example.concordia_campus_guide.Models.Routes.Walk;
+import com.example.concordia_campus_guide.Models.Time;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -109,6 +113,59 @@ public class DirectionsApiDataParserTest {
 
         // Assert
         Assert.assertNull(directionsResultObj);
+    }
+
+    @Test
+    public void extractTransitInfo_DepartureAndArrivalNotNullTest() {
+        // Arrange
+        Object route = null;
+
+        DirectionsRoute directionsRoute = new DirectionsRoute();
+        directionsRoute.legs = new DirectionsLeg[1];
+        directionsRoute.legs[0] = new DirectionsLeg();
+        directionsRoute.legs[0].departureTime = new Time();
+        directionsRoute.legs[0].departureTime.text = "4:23pm";
+        directionsRoute.legs[0].arrivalTime = new Time();
+        directionsRoute.legs[0].arrivalTime.text = "4:33pm";
+        directionsRoute.legs[0].duration = new Duration();
+        directionsRoute.legs[0].duration.text = "10 mins";
+
+        DirectionsStep d1 = new DirectionsStep();
+        d1.travelMode = TravelMode.TRANSIT;
+        d1.transitDetails = new TransitDetails();
+        d1.transitDetails.line = new TransitLine();
+        d1.transitDetails.line.vehicle = new Vehicle();
+        d1.transitDetails.line.vehicle.name = "bus";
+        d1.transitDetails.line.shortName = "128";
+        DirectionsStep[] steps = {d1};
+
+        directionsRoute.legs[0].steps = steps;
+
+        // Act
+        try{
+            Method method = directionsApiDataParser.getClass().getDeclaredMethod("extractTransitInfo", DirectionsRoute.class);
+            method.setAccessible(true);
+            route = method.invoke(directionsApiDataParser, directionsRoute);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        // Assert
+        Assert.assertEquals("4:23pm", ((Route) route).getDepartureTime());
+        Assert.assertEquals("4:33pm", ((Route) route).getArrivalTime());
+        Assert.assertEquals("10 mins", ((Route) route).getDuration());
+        Assert.assertEquals(ClassConstants.TRANSIT, ((Route) route).getMainTransportType());
+        Assert.assertEquals("", ((Route) route).getSummary());
+        Assert.assertEquals(1, ((Route) route).getSteps().size());
+    }
+
+    @Test
+    public void extractTransitInfo_DepartureAndArrivalNullTest() {
+
     }
 
     @Test
