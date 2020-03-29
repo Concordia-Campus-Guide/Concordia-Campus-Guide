@@ -84,7 +84,6 @@ public class RoutesActivity extends AppCompatActivity {
     }
 
     private void setViewModelAttributes() {
-        mViewModel.setShuttles();
         mViewModel.setFrom(SelectingToFromState.getFrom());
         mViewModel.setTo(SelectingToFromState.getTo());
     }
@@ -185,11 +184,14 @@ public class RoutesActivity extends AppCompatActivity {
         allRoutes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent openPaths = new Intent(RoutesActivity.this,
-                        PathsActivity.class);
-                DirectionsRoute directionsResult = mViewModel.getDirectionsResult().routes[i];
-                openPaths.putExtra("directionsResult", directionsResult);
-                startActivity(openPaths);
+                // TODO: Add shuttle route to map #51
+                if (mViewModel.getShuttles().isEmpty()) {
+                    Intent openPaths = new Intent(RoutesActivity.this,
+                            PathsActivity.class);
+                    DirectionsRoute directionsResult = mViewModel.getDirectionsResult().routes[i];
+                    openPaths.putExtra("directionsResult", directionsResult);
+                    startActivity(openPaths);
+                }
             }
         });
     }

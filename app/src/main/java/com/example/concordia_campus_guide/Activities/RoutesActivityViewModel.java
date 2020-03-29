@@ -62,10 +62,6 @@ public class RoutesActivityViewModel extends ViewModel {
         this.directionsResult = directionsResult;
     }
 
-    public void setShuttles() {
-        shuttles = appDB.shuttleDao().getAll();
-    }
-
     public String getFromAndToCampus(Place from, Place to) {
         String campusFrom = "";
         String campusTo = "";
@@ -85,7 +81,11 @@ public class RoutesActivityViewModel extends ViewModel {
         Calendar calendar = Calendar.getInstance();
         String day = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(calendar.getTime());
         SimpleDateFormat time = new SimpleDateFormat("HH.mm");
-        shuttles = getShuttlesByDayAndTime(campuses[0], day, Double.parseDouble(time.format(calendar.getTime())));
+        shuttles = getShuttlesByDayAndTime(campuses[0], "Monday", Double.parseDouble(time.format(calendar.getTime())));
+        return shuttles;
+    }
+
+    public List<Shuttle> getShuttles() {
         return shuttles;
     }
 

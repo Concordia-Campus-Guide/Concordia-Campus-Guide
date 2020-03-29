@@ -25,7 +25,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertNull;
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -61,20 +60,20 @@ public class RoutesActivityViewModelTest {
 
 
         when(mockAppDb.shuttleDao()).thenReturn(shuttleDao);
-        when(mockAppDb.shuttleDao().getAll()).thenReturn(Arrays.asList(shuttle1,shuttle2));
-        when(mockAppDb.shuttleDao().getScheduleByCampusAndDayAndTime("SGW","Friday",Double.parseDouble(time.format(calendar.getTime())))).thenReturn(Arrays.asList(shuttle1));
+        when(mockAppDb.shuttleDao().getAll()).thenReturn(Arrays.asList(shuttle1, shuttle2));
+        when(mockAppDb.shuttleDao().getScheduleByCampusAndDayAndTime("SGW", "Friday", Double.parseDouble(time.format(calendar.getTime())))).thenReturn(Arrays.asList(shuttle1));
     }
 
     //
     @Test
-    public void getSetTo(){
+    public void getSetTo() {
         Building sampleBuilding = new Building("H");
         mViewModel.setTo(sampleBuilding);
         assertEquals(mViewModel.getTo(), sampleBuilding);
     }
 
     @Test
-    public void getSetFrom(){
+    public void getSetFrom() {
         Building sampleBuilding = new Building("H");
         mViewModel.setFrom(sampleBuilding);
         assertEquals(mViewModel.getFrom(), sampleBuilding);
@@ -93,6 +92,7 @@ public class RoutesActivityViewModelTest {
 
     @Test
     public void adaptShuttleToRoutesTest() {
+//        mViewModel.setShuttles();
         List<Shuttle> shuttles = new ArrayList<>();
         shuttles.add(shuttle1);
         mViewModel.adaptShuttleToRoutes(shuttles);
