@@ -83,7 +83,7 @@ public class LocationFragmentInstrumentalTest {
 
     @Test
     public void stylePolyLineTest(){
-        PolylineOptions polylineOptions = viewModel.stylePolyLine("walking");
+        PolylineOptions polylineOptions = viewModel.stylePolyLine("walking", 0);
         assertEquals("[Gap: length=20.0]",polylineOptions.getPattern().get(0).toString());
         assertEquals(-7134407,polylineOptions.getColor());
     }

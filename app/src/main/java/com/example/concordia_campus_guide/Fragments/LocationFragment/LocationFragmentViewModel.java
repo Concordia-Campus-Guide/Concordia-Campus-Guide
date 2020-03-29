@@ -393,7 +393,7 @@ public class LocationFragmentViewModel extends ViewModel {
         }
     }
 
-    private PolylineOptions stylePolyLine(String type, int color) {
+    public PolylineOptions stylePolyLine(String type, int color) {
         PolylineOptions polylineOptions = new PolylineOptions().width(20);
         if (type.equals(ClassConstants.WALKING)) {
             polylineOptions.pattern(ClassConstants.WALK_PATTERN);
