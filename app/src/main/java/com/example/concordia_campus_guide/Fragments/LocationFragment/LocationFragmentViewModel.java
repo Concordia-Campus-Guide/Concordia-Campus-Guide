@@ -242,7 +242,7 @@ public class LocationFragmentViewModel extends ViewModel {
         currentlyDisplayedLine = mMap.addPolyline(displayedPolylineOption);
     }
 
-    public Building getBuildingFromeCode(String buildingCode) {
+    public Building getBuildingFromCode(String buildingCode) {
         return buildings.get(buildingCode);
     }
 

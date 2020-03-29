@@ -342,7 +342,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                     openRoomCard();
                 }
                 else {
-                    Building building = mViewModel.getBuildingFromeCode(marker.getTag().toString());
+                    Building building = mViewModel.getBuildingFromCode(marker.getTag().toString());
                     String buildingCode = (marker.getTag()).toString();
                     if (getActivity() instanceof MainActivity)
                         ((MainActivity) getActivity()).showInfoCard(buildingCode);
