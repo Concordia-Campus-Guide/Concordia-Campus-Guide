@@ -213,7 +213,7 @@ public class RoutesActivity extends AppCompatActivity {
     public void getShuttle(View view) {
         List<Shuttle> shuttles = mViewModel.getAllShuttles();
         String shuttleDisplayText = mViewModel.getShuttleDisplayText(shuttles);
-        // this.content.setText(shuttleDisplayText);
+        
     }
 
     /**
