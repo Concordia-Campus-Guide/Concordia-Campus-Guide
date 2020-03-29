@@ -4,7 +4,9 @@ import androidx.lifecycle.ViewModel;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsResult;
+import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Place;
+import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.Routes.Route;
 import com.example.concordia_campus_guide.Models.Shuttle;
 import java.text.SimpleDateFormat;
@@ -33,6 +35,15 @@ public class RoutesActivityViewModel extends ViewModel {
 
     public Place getTo(){
         return to;
+    }
+
+    public Place getEntrance(Place place) {
+        if (place instanceof RoomModel) {
+            String floorCode = ((RoomModel) place).getFloorCode();
+            String buildingCode = floorCode.substring(0, floorCode.indexOf("-")).toUpperCase();
+            return appDB.roomDao().getRoomByIdAndFloorCode("entrance", buildingCode + "-1");
+        }
+        return place;
     }
 
     public Place getFrom(){ return from; }
