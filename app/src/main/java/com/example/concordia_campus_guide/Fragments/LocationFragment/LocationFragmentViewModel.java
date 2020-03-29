@@ -314,12 +314,12 @@ public class LocationFragmentViewModel extends ViewModel {
                 currentCoordinates = new Coordinates(currentLocation.getLatitude(), currentLocation.getLongitude());
             }
 
-            double distanceFromO1 = p1.getCoordinate().getEuclideanDistanceFrom(currentCoordinates);
-            double distanceFromO2 = p2.getCoordinate().getEuclideanDistanceFrom(currentCoordinates);
+            double distanceFromP1 = p1.getCoordinate().getEuclideanDistanceFrom(currentCoordinates);
+            double distanceFromP2 = p2.getCoordinate().getEuclideanDistanceFrom(currentCoordinates);
 
             //Compare walking points: If p1 is closer to the current location than p2, it will have a higher position in priority queue
-            if (distanceFromO1 < distanceFromO2) return -1;
-            else if (distanceFromO1 > distanceFromO2) return 1;
+            if (distanceFromP1 < distanceFromP2) return -1;
+            else if (distanceFromP1 > distanceFromP2) return 1;
             return 0;
         });
         orderedList.addAll(allPOI);
