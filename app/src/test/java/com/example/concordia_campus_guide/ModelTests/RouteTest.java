@@ -62,6 +62,17 @@ public class RouteTest {
     }
 
     @Test
+    public void getSetSteps() {
+        // Arrange
+        List<TransportType> expectedSteps = new ArrayList<>();
+        Route route = new Route("20 mins", "Autoroute 15-S", "driving");
+        route.setSteps(expectedSteps);
+
+        // Act & Assert
+        assertEquals(expectedSteps, route.getSteps());
+    }
+
+    @Test
     public void getStepsNullTest() {
         // Arrange
         Route route = new Route("20 mins", "Autoroute 15-S", "driving");

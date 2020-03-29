@@ -17,6 +17,8 @@ import com.example.concordia_campus_guide.Models.Routes.Walk;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,15 +99,18 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
         else
             route = new Route(directionsRoute.legs[0].duration.text, ClassConstants.TRANSIT);
 
+        route.setSteps(extractSteps(directionsRoute.legs[0].steps));
         routeOptions.add(route);
 
-        extractSteps(directionsRoute.legs[0].steps, route);
     }
 
-    private void extractSteps(DirectionsStep[] steps, Route route) {
-        for(DirectionsStep step: steps) {
-            route.getSteps().add(getTransportType(step));
+    private List<TransportType> extractSteps(DirectionsStep[] stepsArr) {
+        List<TransportType> steps = new ArrayList<>();
+        for(DirectionsStep step: stepsArr) {
+            steps.add(getTransportType(step));
         }
+
+        return steps;
     }
 
     private TransportType getTransportType(DirectionsStep step) {

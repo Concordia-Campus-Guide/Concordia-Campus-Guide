@@ -32,13 +32,12 @@ public class DirectionsApiDataRetrievalTest {
         // Arrange
         String url = "https://maps.googleapis.com/maps/api/directions/" + "json" + "?" + "origin=45.525407,-73.677126&destination=45.497361,-73.579033&mode=driving&alternatives=true"
                 + "&key=" + BuildConfig.API_KEY;
-        Method method;
         Object returnedObject = null;
 
         // Act
         try {
             // Accessing and testing a private method
-            method = directionsApiDataRetrieval.getClass().getDeclaredMethod("getDataFromGMapsDirectionsApi", String.class);
+            Method method = directionsApiDataRetrieval.getClass().getDeclaredMethod("getDataFromGMapsDirectionsApi", String.class);
             method.setAccessible(true);
             returnedObject = method.invoke(directionsApiDataRetrieval, url);
         } catch (NoSuchMethodException e) {
@@ -57,13 +56,12 @@ public class DirectionsApiDataRetrievalTest {
     public void getDataFromGMapsDirectionsApi_IncorrectUrlFormatTest() {
         // Arrange
         String url = "";
-        Method method;
         Object returnedObject = null;
 
         // Act
         try {
             // Accessing and testing a private method
-            method = directionsApiDataRetrieval.getClass().getDeclaredMethod("getDataFromGMapsDirectionsApi", String.class);
+            Method method = directionsApiDataRetrieval.getClass().getDeclaredMethod("getDataFromGMapsDirectionsApi", String.class);
             method.setAccessible(true);
             returnedObject = method.invoke(directionsApiDataRetrieval, url);
         } catch (NoSuchMethodException e) {

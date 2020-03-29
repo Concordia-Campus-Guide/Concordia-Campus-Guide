@@ -11,20 +11,28 @@ import com.example.concordia_campus_guide.Helper.RoutesHelpers.DirectionsApiData
 import com.example.concordia_campus_guide.Helper.RoutesHelpers.DirectionsApiDataRetrieval;
 import com.example.concordia_campus_guide.Models.Routes.Bus;
 import com.example.concordia_campus_guide.Models.Routes.Car;
+import com.example.concordia_campus_guide.Models.Routes.Route;
 import com.example.concordia_campus_guide.Models.Routes.Subway;
 import com.example.concordia_campus_guide.Models.Routes.Train;
+import com.example.concordia_campus_guide.Models.Routes.TransportType;
 import com.example.concordia_campus_guide.Models.Routes.Walk;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mortbay.util.LazyList;
+import org.powermock.api.mockito.PowerMockito;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
+
+import static org.mockito.Mockito.when;
 
 public class DirectionsApiDataParserTest {
     private DirectionsApiDataParser directionsApiDataParser;
@@ -101,6 +109,39 @@ public class DirectionsApiDataParserTest {
 
         // Assert
         Assert.assertNull(directionsResultObj);
+    }
+
+    @Test
+    public void extractStepsTest() {
+        // Arrange
+        Object listOfTransportType = null;
+
+        DirectionsStep d1 = new DirectionsStep();
+        d1.travelMode = TravelMode.TRANSIT;
+        d1.transitDetails = new TransitDetails();
+        d1.transitDetails.line = new TransitLine();
+        d1.transitDetails.line.vehicle = new Vehicle();
+        d1.transitDetails.line.vehicle.name = "bus";
+        d1.transitDetails.line.shortName = "128";
+
+        DirectionsStep[] steps = {d1};
+
+        // Act
+        try{
+            Method method = directionsApiDataParser.getClass().getDeclaredMethod("extractSteps", DirectionsStep[].class);
+            method.setAccessible(true);
+            listOfTransportType = method.invoke(directionsApiDataParser, steps);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        // Assert
+        Assert.assertEquals(1, ((List<TransportType>) listOfTransportType).size());
+        Assert.assertEquals(d1, ((List<TransportType>) listOfTransportType).get(0));
     }
 
     @Test
