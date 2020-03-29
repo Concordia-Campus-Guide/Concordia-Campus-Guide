@@ -21,8 +21,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -31,7 +29,7 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class AppTitleLoadsTest {
+public class TitleLoadsTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
@@ -44,18 +42,8 @@ public class AppTitleLoadsTest {
                     "android.permission.READ_CALENDAR");
 
     @Test
-    public void appTitleLoadsTest() {
-        android.os.SystemClock.sleep(2000);
-
+    public void TitleLoadsTest() {
         android.os.SystemClock.sleep(1000);
-
-        ViewInteraction materialButton = onView(
-                allOf(withId(android.R.id.button2), withText("Ignore"),
-                        isDisplayed()));
-        materialButton.perform(scrollTo(), click());
-
-        android.os.SystemClock.sleep(1000);
-
 
         ViewInteraction textView = onView(
                 allOf(withText("ConUMaps"),

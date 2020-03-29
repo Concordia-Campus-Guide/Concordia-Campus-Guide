@@ -124,7 +124,7 @@ public class ST9SelectIndoorDestinationAndOriginOnDifferentCampuses {
                 .atPosition(1);
         linearLayout.perform(click());
 
-        android.os.SystemClock.sleep(1000);
+        android.os.SystemClock.sleep(2000);
 
         ViewInteraction textView2 = onView(
                 allOf(withId(R.id.toText), withText("H-8 819"),
@@ -142,7 +142,7 @@ public class ST9SelectIndoorDestinationAndOriginOnDifferentCampuses {
         materialTextView.check(matches(isDisplayed()));
         materialTextView.perform(click());
 
-        android.os.SystemClock.sleep(1000);
+        android.os.SystemClock.sleep(2000);
 
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.searchText),
@@ -164,7 +164,7 @@ public class ST9SelectIndoorDestinationAndOriginOnDifferentCampuses {
                 .atPosition(4);
         linearLayout2.perform(click());
 
-        android.os.SystemClock.sleep(1000);
+        android.os.SystemClock.sleep(2000);
 
         ViewInteraction textView3 = onView(
                 allOf(withId(R.id.fromText), withText("MB-1 294"),

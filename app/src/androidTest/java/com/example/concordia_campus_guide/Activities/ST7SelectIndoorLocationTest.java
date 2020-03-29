@@ -121,7 +121,7 @@ public class ST7SelectIndoorLocationTest {
                 .atPosition(1);
         linearLayout.perform(click());
 
-        android.os.SystemClock.sleep(1000);
+        android.os.SystemClock.sleep(2000);
 
         ViewInteraction textView2 = onView(
                 allOf(withId(R.id.toText), withText("H-8 819"),

@@ -48,12 +48,17 @@ public class CalendarSuggestionTest {
 
     @Test
     public void calendarSuggestionTest() {
-        android.os.SystemClock.sleep(1000);
+        android.os.SystemClock.sleep(5000);
 
         ViewInteraction materialButton = onView(
                 allOf(withId(android.R.id.button2), withText("Ignore"),
                     isDisplayed()));
-        materialButton.perform(scrollTo(), click());
+        try{
+            materialButton.perform(scrollTo(), click());
+        }
+        catch(Exception e){
+            //ignore maybe the popup was cancelled by other test
+        }
 
         ViewInteraction actionMenuItemView = onView(
                 allOf(withId(R.id.search), withContentDescription("Icon"),

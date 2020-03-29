@@ -29,6 +29,7 @@ import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
@@ -64,6 +65,16 @@ public class RoutesActivityOptionsTest {
         //wait for gps
         android.os.SystemClock.sleep(4000);
 
+        ViewInteraction materialButtonX = onView(
+                allOf(withId(android.R.id.button2), withText("Ignore"),
+                        isDisplayed()));
+        try{
+            materialButtonX.perform(scrollTo(), click());
+        }
+        catch(Exception e){
+            //ignore maybe the popup was cancelled by other test
+        }
+
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.SGWBtn), withText("SGW"),
                         childAtPosition(
@@ -97,8 +108,6 @@ public class RoutesActivityOptionsTest {
         materialButton2.perform(click());
 
         android.os.SystemClock.sleep(1000);
-
-        intended(hasComponent(new ComponentName(getInstrumentation().getContext(), RoutesActivity.class)));
 
         ViewInteraction textView = onView(
                 allOf(withId(R.id.toText), withText("Henry F. Hall Building"),
@@ -279,7 +288,28 @@ public class RoutesActivityOptionsTest {
                         isDisplayed()));
 
         textView9.check(matches(isDisplayed()));
+
+        android.os.SystemClock.sleep(1000);
+
+        ViewInteraction appCompatImageButtonX = onView(
+                allOf(withId(R.id.routesPageBackButton),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.app_bar),
+                                        0),
+                                2),
+                        isDisplayed()));
+        appCompatImageButtonX.perform(click());
+
+        android.os.SystemClock.sleep(1000);
+
+        device.pressBack();
+
+        intended(hasComponent(new ComponentName(getInstrumentation().getContext(), MainActivity.class)));
+
     }
+
+
 
     private static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {

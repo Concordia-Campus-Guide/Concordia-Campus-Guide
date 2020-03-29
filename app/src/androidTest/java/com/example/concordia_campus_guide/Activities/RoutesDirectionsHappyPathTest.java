@@ -29,6 +29,7 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
@@ -61,6 +62,19 @@ public class RoutesDirectionsHappyPathTest {
 
     @Test
     public void routesDirectionsHappyPathTest() {
+                //wait for gps
+        android.os.SystemClock.sleep(4000);
+
+        ViewInteraction materialButtonX = onView(
+                allOf(withId(android.R.id.button2), withText("Ignore"),
+                        isDisplayed()));
+        try{
+            materialButtonX.perform(scrollTo(), click());
+        }
+        catch(Exception e){
+            //ignore maybe the popup was cancelled by other test
+        }
+
         ViewInteraction actionMenuItemView = onView(
                 allOf(withId(R.id.search), withContentDescription("Icon"),
                         childAtPosition(
@@ -209,6 +223,14 @@ public class RoutesDirectionsHappyPathTest {
                                 1),
                         isDisplayed()));
         materialButton.perform(click());
+
+        android.os.SystemClock.sleep(1000);
+
+        device.pressBack();
+        android.os.SystemClock.sleep(1000);
+
+        device.pressBack();
+
     }
 
     private static Matcher<View> childAtPosition(
