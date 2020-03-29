@@ -45,7 +45,8 @@ public class PathsViewModel extends ViewModel {
             floorCode = ((RoomModel) to).getFloorCode();
             String to_building = floorCode.toUpperCase().substring(0, floorCode.indexOf("-"));
 
-            return from_building.equalsIgnoreCase("H") && to_building.equalsIgnoreCase("MB");
+            return from_building.equalsIgnoreCase("H") && to_building.equalsIgnoreCase("MB") ||
+                    from_building.equalsIgnoreCase("MB") && to_building.equalsIgnoreCase("H");
         }
         return false;
     }
