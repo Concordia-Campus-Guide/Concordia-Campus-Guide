@@ -1,4 +1,5 @@
 package com.example.concordia_campus_guide.Adapters;
+
 import android.content.Context;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -8,6 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Models.Routes.Bus;
 import com.example.concordia_campus_guide.Models.Routes.Route;
@@ -19,7 +23,6 @@ import com.example.concordia_campus_guide.R;
 import com.google.android.flexbox.FlexboxLayout;
 
 import java.util.List;
-import androidx.annotation.NonNull;
 
 /**
  * This class is an Android Adapter for the UI of the Routes Activity page
@@ -51,7 +54,7 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
 
         Route route = getItem(position);
 
-        if (route!= null)
+        if (route != null)
             setUIElements(route);
         else
             displayInfoMsg();
@@ -70,18 +73,18 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
     }
 
     @Override
-    public Route getItem(int i){
+    public Route getItem(int i) {
         return routes.get(i);
     }
 
     @Override
-    public int getCount(){
+    public int getCount() {
         return routes.size();
     }
 
     // Helper methods for setting UI elements in the Routes Overview section of the Routes Activity page
     private void setUIElements(Route route) {
-        switch(route.getMainTransportType()) {
+        switch (route.getMainTransportType()) {
             case ClassConstants.WALKING:
                 setUIWalk(route);
                 break;
@@ -91,10 +94,14 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
             case ClassConstants.TRANSIT:
                 setUITransit(route);
                 break;
+            case ClassConstants.SHUTTLE:
+                setUIShuttle(route);
+                break;
         }
 
         setBottomLayout(route);
     }
+
     private void setUIWalk(Route route) {
         mainTransportType.setImageResource(R.drawable.ic_directions_walk_red);
 
@@ -122,16 +129,40 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
         duration.setText(route.getDuration());
 
         // Go through each steps in the route
-        for(int i = 0; i < route.getSteps().size(); i++) {
+        for (int i = 0; i < route.getSteps().size(); i++) {
             TransportType step = route.getSteps().get(i);
 
-            if (step instanceof Bus) { setUIBus((Bus) step); }
-            else if (step instanceof Subway) { setUISubway((Subway) step); }
-            else if (step instanceof Train) { setUITrain((Train) step); }
-            else if (step instanceof Walk) { setUIWalkInTransit((Walk) step); }
+            if (step instanceof Bus) {
+                setUIBus((Bus) step);
+            } else if (step instanceof Subway) {
+                setUISubway((Subway) step);
+            } else if (step instanceof Train) {
+                setUITrain((Train) step);
+            } else if (step instanceof Walk) {
+                setUIWalkInTransit((Walk) step);
+            }
 
-            if(i < route.getSteps().size() - 1) { setUIArrow(); }
+            if (i < route.getSteps().size() - 1) {
+                setUIArrow();
+            }
         }
+    }
+
+    private void setUIShuttle(Route route) {
+        mainTransportType.setImageResource(R.drawable.ic_shuttle_red);
+
+        TextView summaryCampusFrom = new TextView(context);
+        String[] campuses = route.getSummary().split(",");
+        summaryCampusFrom.setText(campuses[0]);
+        summaryCampusFrom.setGravity(Gravity.CENTER);
+        details.addView(summaryCampusFrom);
+        setUIArrow();
+        TextView summaryCampusTo = new TextView(context);
+        summaryCampusTo.setText(campuses[1]);
+        summaryCampusTo.setGravity(Gravity.CENTER);
+        details.addView(summaryCampusTo);
+
+        duration.setText(route.getDuration());
     }
 
     private void setUIWalkInTransit(Walk walk) {
@@ -166,13 +197,13 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
     }
 
     private int pickCorrectSubwayColor(String color) {
-        if(color.equalsIgnoreCase(context.getResources().getString(R.string.subwayBlue)))
+        if (color.equalsIgnoreCase(context.getResources().getString(R.string.subwayBlue)))
             return R.drawable.ic_subway_blue;
-        else if(color.equalsIgnoreCase(context.getResources().getString(R.string.subwayOrange)))
+        else if (color.equalsIgnoreCase(context.getResources().getString(R.string.subwayOrange)))
             return R.drawable.ic_subway_orange;
-        else if(color.equalsIgnoreCase(context.getResources().getString(R.string.subwayGreen)))
+        else if (color.equalsIgnoreCase(context.getResources().getString(R.string.subwayGreen)))
             return R.drawable.ic_subway_green;
-        else if(color.equalsIgnoreCase(context.getResources().getString(R.string.subwayYellow)))
+        else if (color.equalsIgnoreCase(context.getResources().getString(R.string.subwayYellow)))
             return R.drawable.ic_subway_yellow;
 
         return -1;
@@ -197,7 +228,7 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
     }
 
     private void setBottomLayout(Route route) {
-        if(route.getArrivalTime().isEmpty() || route.getDepartureTime().isEmpty())
+        if (route.getArrivalTime().isEmpty() || route.getDepartureTime().isEmpty())
             bottom.setVisibility(LinearLayout.GONE);
         else
             arrivalAndDepartureTime.setText(route.getDepartureTime() + " - " + route.getArrivalTime());

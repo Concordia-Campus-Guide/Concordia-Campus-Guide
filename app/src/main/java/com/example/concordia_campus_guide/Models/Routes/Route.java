@@ -43,6 +43,16 @@ public class Route {
         this.mainTransportType = mainTransportType;
     }
 
+    // When Shuttle
+    public Route(String departureTime, String arrivalTime, String duration, String summary, String mainTransportType) {
+        this.steps = null; // for WALKING and DRIVING, no need to have the steps since they won't be displayed in the Routes overview section of Routes Activity page
+        this.departureTime = departureTime;
+        this.arrivalTime = arrivalTime;
+        this.duration = duration;
+        this.summary = summary;
+        this.mainTransportType = mainTransportType;
+    }
+
     public List<TransportType> getSteps() {
         return steps;
     }
