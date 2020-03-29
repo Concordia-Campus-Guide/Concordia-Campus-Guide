@@ -220,13 +220,14 @@ public class LocationFragmentViewModel extends ViewModel {
         return geoJsonPolygonStyle;
     }
 
-    private void getPointStyle(GeoJsonLayer layer) {
-        GeoJsonPointStyle geoJsonPointStyle = new GeoJsonPointStyle();
-        geoJsonPointStyle.setVisible(true);
-        geoJsonPointStyle.setAlpha(0.2f);
-        geoJsonPointStyle.setIcon(BitmapDescriptorFactory.fromAsset("class_markers/marker.png"));
-
+    private void setPointStyle(GeoJsonLayer layer) {
         for (GeoJsonFeature feature : layer.getFeatures()) {
+            GeoJsonPointStyle geoJsonPointStyle = new GeoJsonPointStyle();
+            geoJsonPointStyle.setVisible(true);
+            geoJsonPointStyle.setAlpha(0.2f);
+            geoJsonPointStyle.setIcon(BitmapDescriptorFactory.fromAsset("class_markers/marker.png"));
+            String code = feature.getProperty("roomCode");
+            geoJsonPointStyle.setTitle(code);
             feature.setPointStyle(geoJsonPointStyle);
         }
     }
@@ -247,7 +248,7 @@ public class LocationFragmentViewModel extends ViewModel {
         }
         JSONObject geoJson = ApplicationState.getInstance(context).getRooms().getGeoJson(buildingCode + "-" + floor);
         floorLayer = initMarkersLayer(mMap, geoJson);
-        getPointStyle(floorLayer);
+        setPointStyle(floorLayer);
         floorLayer.addLayerToMap();
         if (currentlyDisplayedLine != null) {
             currentlyDisplayedLine.remove();
