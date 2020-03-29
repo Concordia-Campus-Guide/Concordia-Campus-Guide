@@ -1,0 +1,357 @@
+package com.example.concordia_campus_guide.HelpersTest.RoutesHelperTest;
+
+import com.example.concordia_campus_guide.Activities.RoutesActivity;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.Duration;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TransitDetails;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TransitLine;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TravelMode;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.Vehicle;
+import com.example.concordia_campus_guide.Helper.RoutesHelpers.DirectionsApiDataParser;
+import com.example.concordia_campus_guide.Helper.RoutesHelpers.DirectionsApiDataRetrieval;
+import com.example.concordia_campus_guide.Models.Routes.Bus;
+import com.example.concordia_campus_guide.Models.Routes.Car;
+import com.example.concordia_campus_guide.Models.Routes.Subway;
+import com.example.concordia_campus_guide.Models.Routes.Train;
+import com.example.concordia_campus_guide.Models.Routes.Walk;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mock;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+public class DirectionsApiDataParserTest {
+    private DirectionsApiDataParser directionsApiDataParser;
+    private DirectionsApiDataRetrieval directionsApiDataRetrieval;
+
+    @Mock
+    RoutesActivity routesActivity;
+
+    @Before
+    public void setUp() {
+        directionsApiDataParser = new DirectionsApiDataParser();
+        directionsApiDataRetrieval = new DirectionsApiDataRetrieval(routesActivity);
+    }
+
+    @Test
+    public void getDirectionsResultObj_CorrectDataFormatTest() {
+        // Arrange
+        directionsApiDataParser.setDataRetrieval(directionsApiDataRetrieval);
+
+        Object directionsResultObj = null;
+        try {
+            InputStream is = this.getClass().getClassLoader().getResourceAsStream("data_from_api");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            StringBuilder dataFromApi = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                dataFromApi.append(line);
+            }
+            directionsApiDataParser.getDataRetrieval().setData(dataFromApi.toString());
+            is.close();
+            reader.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        // Act
+        try{
+            // Accessing and testing a private method
+            Method method = directionsApiDataParser.getClass().getDeclaredMethod("getDirectionsResultObj", null);
+            method.setAccessible(true);
+            directionsResultObj = method.invoke(directionsApiDataParser);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        // Assert
+        Assert.assertNotNull(directionsResultObj);
+    }
+
+    @Test
+    public void getDirectionsResultObj_IncorrectDataFormatTest() {
+        // Arrange
+        directionsApiDataParser.setDataRetrieval(directionsApiDataRetrieval);
+        Object directionsResultObj = null;
+        directionsApiDataParser.getDataRetrieval().setData("");
+
+        // Act
+        try{
+            // Accessing and testing a private method
+            Method method = directionsApiDataParser.getClass().getDeclaredMethod("getDirectionsResultObj", null);
+            method.setAccessible(true);
+            directionsResultObj = method.invoke(directionsApiDataParser);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        // Assert
+        Assert.assertNull(directionsResultObj);
+    }
+
+    @Test
+    public void getTransportType_CarTest() {
+        // Arrange
+        Object transportType = null;
+        DirectionsStep step = new DirectionsStep();
+        step.travelMode = TravelMode.DRIVING;
+        step.duration = new Duration();
+        step.duration.value = 142;
+
+        // Act
+        try{
+            Method method = directionsApiDataParser.getClass().getDeclaredMethod("getTransportType", DirectionsStep.class);
+            method.setAccessible(true);
+            transportType = method.invoke(directionsApiDataParser, step);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        // Assert
+        Assert.assertTrue(transportType instanceof Car);
+
+    }
+
+    @Test
+    public void getTransportType_WalkTest() {
+        // Arrange
+        Object transportType = null;
+        DirectionsStep step = new DirectionsStep();
+        step.travelMode = TravelMode.WALKING;
+        step.duration = new Duration();
+        step.duration.text  = "2 mins";
+
+        // Act
+        try{
+            Method method = directionsApiDataParser.getClass().getDeclaredMethod("getTransportType", DirectionsStep.class);
+            method.setAccessible(true);
+            transportType = method.invoke(directionsApiDataParser, step);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        // Assert
+        Assert.assertTrue(transportType instanceof Walk);
+    }
+
+    @Test
+    public void getTransportType_BicycleTest() {
+        // Arrange
+        Object transportType = null;
+        DirectionsStep step = new DirectionsStep();
+        step.travelMode = TravelMode.BICYCLING;
+
+        // Act
+        try{
+            Method method = directionsApiDataParser.getClass().getDeclaredMethod("getTransportType", DirectionsStep.class);
+            method.setAccessible(true);
+            transportType = method.invoke(directionsApiDataParser, step);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        // Assert
+        Assert.assertNull(transportType);
+    }
+
+    @Test
+    public void getTransportType_TransitTest() {
+        // Arrange
+        Object transportType = null;
+        DirectionsStep step = new DirectionsStep();
+        step.travelMode = TravelMode.TRANSIT;
+        step.transitDetails = new TransitDetails();
+        step.transitDetails.line = new TransitLine();
+        step.transitDetails.line.vehicle = new Vehicle();
+        step.transitDetails.line.vehicle.name = "bus";
+        step.transitDetails.line.shortName = "128";
+
+        // Act
+        try{
+            Method method = directionsApiDataParser.getClass().getDeclaredMethod("getTransportType", DirectionsStep.class);
+            method.setAccessible(true);
+            transportType = method.invoke(directionsApiDataParser, step);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        // Assert
+        Assert.assertTrue(transportType instanceof Bus);
+    }
+
+    @Test
+    public void getTransportType_OtherTest() {
+        // Arrange
+        Object transportType = null;
+        DirectionsStep step = new DirectionsStep();
+        step.travelMode = TravelMode.UNKNOWN;
+
+        // Act
+        try{
+            Method method = directionsApiDataParser.getClass().getDeclaredMethod("getTransportType", DirectionsStep.class);
+            method.setAccessible(true);
+            transportType = method.invoke(directionsApiDataParser, step);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        // Assert
+        Assert.assertNull(transportType);
+    }
+
+    @Test
+    public void getTransitType_BusTest() {
+        // Arrange
+        Object transportType = null;
+        DirectionsStep step = new DirectionsStep();
+        step.transitDetails = new TransitDetails();
+        step.transitDetails.line = new TransitLine();
+        step.transitDetails.line.vehicle = new Vehicle();
+        step.transitDetails.line.vehicle.name = "bus";
+        step.transitDetails.line.shortName = "128";
+
+        // Act
+        try{
+            Method method = directionsApiDataParser.getClass().getDeclaredMethod("getTransitType", DirectionsStep.class);
+            method.setAccessible(true);
+            transportType = method.invoke(directionsApiDataParser, step);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        // Assert
+        Assert.assertTrue(transportType instanceof Bus);
+    }
+
+    @Test
+    public void getTransitType_SubwayTest() {
+        // Arrange
+        Object transportType = null;
+        DirectionsStep step = new DirectionsStep();
+        step.transitDetails = new TransitDetails();
+        step.transitDetails.line = new TransitLine();
+        step.transitDetails.line.vehicle = new Vehicle();
+        step.transitDetails.line.vehicle.name = "subway";
+        step.transitDetails.line.color = "orange";
+
+        // Act
+        try{
+            Method method = directionsApiDataParser.getClass().getDeclaredMethod("getTransitType", DirectionsStep.class);
+            method.setAccessible(true);
+            transportType = method.invoke(directionsApiDataParser, step);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        // Assert
+        Assert.assertTrue(transportType instanceof Subway);
+    }
+
+    @Test
+    public void getTransitType_TrainTest() {
+        // Arrange
+        Object transportType = null;
+        DirectionsStep step = new DirectionsStep();
+        step.transitDetails = new TransitDetails();
+        step.transitDetails.line = new TransitLine();
+        step.transitDetails.line.vehicle = new Vehicle();
+        step.transitDetails.line.vehicle.name = "train";
+        step.transitDetails.line.shortName = "DM";
+
+        // Act
+        try{
+            Method method = directionsApiDataParser.getClass().getDeclaredMethod("getTransitType", DirectionsStep.class);
+            method.setAccessible(true);
+            transportType = method.invoke(directionsApiDataParser, step);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        // Assert
+        Assert.assertTrue(transportType instanceof Train);
+    }
+
+    @Test
+    public void getTransitType_OtherTest() {
+        // Arrange
+        Object transportType = null;
+        DirectionsStep step = new DirectionsStep();
+        step.transitDetails = new TransitDetails();
+        step.transitDetails.line = new TransitLine();
+        step.transitDetails.line.vehicle = new Vehicle();
+        step.transitDetails.line.vehicle.name = "other";
+
+        // Act
+        try{
+            Method method = directionsApiDataParser.getClass().getDeclaredMethod("getTransitType", DirectionsStep.class);
+            method.setAccessible(true);
+            transportType = method.invoke(directionsApiDataParser, step);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        // Assert
+        Assert.assertNull(transportType);
+    }
+
+    @Test
+    public void getSetDataRetrievalTest() {
+        // Arrange
+        DirectionsApiDataRetrieval expectedDirectionsApiDataRetrieval = directionsApiDataRetrieval;
+        directionsApiDataParser.setDataRetrieval(directionsApiDataRetrieval);
+
+        // Act & Assert
+        Assert.assertEquals(expectedDirectionsApiDataRetrieval, directionsApiDataParser.getDataRetrieval());
+    }
+
+}

@@ -27,6 +27,11 @@ android {
         manifestPlaceholders = [google_api_key: properties.getProperty('default.account.google_maps_key')]
         buildConfigField "String", "API_KEY", "\"" + properties.getProperty('default.account.google_maps_key') + "\""
     }
+    sourceSets {
+        test {
+            resources.srcDirs = ['src/test/res']
+        }
+    }
     buildTypes {
         debug {
             testCoverageEnabled = true

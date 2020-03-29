@@ -2,6 +2,9 @@ package com.example.concordia_campus_guide.Helper.RoutesHelpers;
 
 import android.os.AsyncTask;
 import android.util.Log;
+
+import androidx.annotation.VisibleForTesting;
+
 import com.example.concordia_campus_guide.Activities.RoutesActivity;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,9 +18,9 @@ import java.net.URL;
  */
 public class DirectionsApiDataRetrieval extends AsyncTask<String, Void, String> {
 
-    RoutesActivity caller;
-    String data;
-    String transportType;
+    private RoutesActivity caller;
+    private String data;
+    private String transportType;
 
     public DirectionsApiDataRetrieval(RoutesActivity caller) { this.caller = caller; }
 
@@ -88,5 +91,21 @@ public class DirectionsApiDataRetrieval extends AsyncTask<String, Void, String> 
         }
 
         return data;
+    }
+
+    public RoutesActivity getCaller() {
+        return caller;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public String getTransportType() {
+        return transportType;
     }
 }

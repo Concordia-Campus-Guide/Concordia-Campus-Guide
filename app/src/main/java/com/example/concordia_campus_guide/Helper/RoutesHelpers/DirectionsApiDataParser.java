@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieval, Integer, DirectionsResult> {
 
-    DirectionsApiDataRetrieval dataRetrieval = null;
+    private DirectionsApiDataRetrieval dataRetrieval = null;
 
     /**
      * Parsing the JSON string data to map it to a DirectionsResult model
@@ -35,16 +35,7 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
     @Override
     protected DirectionsResult doInBackground(DirectionsApiDataRetrieval... obj) {
         this.dataRetrieval = obj[0];
-        DirectionsResult directionsResult = null;
-        try {
-            Log.d(DirectionsApiDataParser.class.getName(), "Mapping data to models");
-            Gson gson = new GsonBuilder()
-                    .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-                    .create();
-            directionsResult = gson.fromJson(dataRetrieval.data, DirectionsResult.class);
-        } catch (Exception e) {
-            Log.e(DirectionsApiDataParser.class.getName(), "Exception using Gson to map JSON to Models: " + e.toString());
-        }
+        DirectionsResult directionsResult = getDirectionsResultObj();
         return directionsResult;
     }
 
@@ -56,13 +47,28 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
      */
     @Override
     protected void onPostExecute(DirectionsResult result) {
-        dataRetrieval.caller.directionsApiCallBack(result, extractRelevantInfoFromDirectionsResultObj(result));
+        dataRetrieval.getCaller().directionsApiCallBack(result, extractRelevantInfoFromDirectionsResultObj(result), dataRetrieval.getData());
     }
 
-    public List<Route> extractRelevantInfoFromDirectionsResultObj(DirectionsResult result) {
+    private DirectionsResult getDirectionsResultObj() {
+        DirectionsResult directionsResult = null;
+        try {
+            Log.d(DirectionsApiDataParser.class.getName(), "Mapping data to models");
+            Gson gson = new GsonBuilder()
+                    .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                    .create();
+            directionsResult = gson.fromJson(dataRetrieval.getData(), DirectionsResult.class);
+        } catch (Exception e) {
+            Log.e(DirectionsApiDataParser.class.getName(), "Exception using Gson to map JSON to Models: " + e.toString());
+        }
+
+        return directionsResult;
+    }
+
+    private List<Route> extractRelevantInfoFromDirectionsResultObj(DirectionsResult result) {
         List<Route> routeOptions = new ArrayList<>();
         for(DirectionsRoute directionsRoute: result.routes) {
-            switch(dataRetrieval.transportType) {
+            switch(dataRetrieval.getTransportType()) {
                 case ClassConstants.DRIVING:
                     extractDurationAndSummary(routeOptions, directionsRoute, ClassConstants.DRIVING);
                     break;
@@ -130,5 +136,13 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
         }
 
        return null;
+    }
+
+    public DirectionsApiDataRetrieval getDataRetrieval() {
+        return dataRetrieval;
+    }
+
+    public void setDataRetrieval(DirectionsApiDataRetrieval dataRetrieval) {
+        this.dataRetrieval = dataRetrieval;
     }
 }
