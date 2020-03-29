@@ -92,8 +92,7 @@ public class RoutesActivityViewModelTest {
 
     @Test
     public void getShuttlesByDayAndTimeTest() {
-        ArrayList<String> expected = new ArrayList<>();
-        assertEquals(expected, mViewModel.getShuttlesByDayAndTime("SGW", "Sunday", 7.05));
+        assertEquals(0, mViewModel.getShuttlesByDayAndTime("SGW", "Sunday", 7.05).size());
     }
 
     @Test
