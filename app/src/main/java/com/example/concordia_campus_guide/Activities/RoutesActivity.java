@@ -8,9 +8,11 @@ import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
+
 import com.example.concordia_campus_guide.Adapters.RoutesAdapter;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
@@ -87,12 +89,12 @@ public class RoutesActivity extends AppCompatActivity {
         mViewModel.setTo(SelectingToFromState.getTo());
     }
 
-    public void onClickTo(View v){
+    public void onClickTo(View v) {
         SelectingToFromState.setSelectToToTrue();
         openSearchPage();
     }
 
-    public void onClickFrom(View v){
+    public void onClickFrom(View v) {
         SelectingToFromState.setSelectFromToTrue();
         openSearchPage();
     }
@@ -129,7 +131,7 @@ public class RoutesActivity extends AppCompatActivity {
     }
 
     public void onClickShuttle(View v) {
-        //getShuttle(v);
+        getShuttle(v);
         setShuttleSelect();
     }
 
@@ -154,7 +156,7 @@ public class RoutesActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             exitSelectToFrom();
 
@@ -164,8 +166,7 @@ public class RoutesActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    public void directionsApiCallBack(DirectionsResult result, List<Route> routeOptions)
-    {
+    public void directionsApiCallBack(DirectionsResult result, List<Route> routeOptions) {
         mViewModel.setDirectionsResult(result);
         mViewModel.setRouteOptions(routeOptions);
 
@@ -173,7 +174,7 @@ public class RoutesActivity extends AppCompatActivity {
     }
 
 
-    private void setRoutesAdapter(){
+    private void setRoutesAdapter() {
         // Android adapter for list view
         adapter = new RoutesAdapter(this, R.layout.list_routes, mViewModel.getRouteOptions());
         allRoutes.setAdapter(adapter);
@@ -190,13 +191,13 @@ public class RoutesActivity extends AppCompatActivity {
     }
 
 
-    private void setBackButtonOnClick(){
+    private void setBackButtonOnClick() {
         ImageButton backButton = this.findViewById(R.id.routesPageBackButton);
         backButton.setOnClickListener(v -> exitSelectToFrom());
     }
 
-    private void exitSelectToFrom(){
-        Intent exitSelectToFrom= new Intent(RoutesActivity.this,
+    private void exitSelectToFrom() {
+        Intent exitSelectToFrom = new Intent(RoutesActivity.this,
                 MainActivity.class);
 
         SelectingToFromState.reset();
@@ -204,15 +205,15 @@ public class RoutesActivity extends AppCompatActivity {
         startActivity(exitSelectToFrom);
     }
 
-    private void openSearchPage(){
-        Intent openSearch= new Intent(RoutesActivity.this, SearchActivity.class);
+    private void openSearchPage() {
+        Intent openSearch = new Intent(RoutesActivity.this, SearchActivity.class);
         startActivity(openSearch);
     }
 
     public void getShuttle(View view) {
-        List<Shuttle> shuttles = mViewModel.getShuttles();
+        List<Shuttle> shuttles = mViewModel.getAllShuttles();
         String shuttleDisplayText = mViewModel.getShuttleDisplayText(shuttles);
-        this.content.setText(shuttleDisplayText);
+        
     }
 
     /**
@@ -224,7 +225,7 @@ public class RoutesActivity extends AppCompatActivity {
         Coordinates fromCenterCoordinates = mViewModel.getFrom().getCenterCoordinates();
         Coordinates toCenterCoordinates = mViewModel.getTo().getCenterCoordinates();
 
-        if(fromCenterCoordinates != null && toCenterCoordinates != null) {
+        if (fromCenterCoordinates != null && toCenterCoordinates != null) {
             LatLng from = new LatLng(fromCenterCoordinates.getLatitude(), fromCenterCoordinates.getLongitude());
             LatLng to = new LatLng(toCenterCoordinates.getLatitude(), toCenterCoordinates.getLongitude());
             String transportType = mViewModel.getTransportType();

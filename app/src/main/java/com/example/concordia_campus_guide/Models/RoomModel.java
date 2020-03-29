@@ -1,5 +1,7 @@
 package com.example.concordia_campus_guide.Models;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -74,7 +76,7 @@ public class RoomModel extends Place {
 
             toReturn.put("geometry", geometry);
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e("RoomModel", e.getMessage());
         }
 
         return toReturn;

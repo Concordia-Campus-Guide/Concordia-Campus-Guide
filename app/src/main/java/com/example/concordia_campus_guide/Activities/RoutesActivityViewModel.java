@@ -7,6 +7,8 @@ import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServ
 import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.Routes.Route;
 import com.example.concordia_campus_guide.Models.Shuttle;
+
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -53,27 +55,36 @@ public class RoutesActivityViewModel extends ViewModel {
         shuttles = appDB.shuttleDao().getAll();
     }
 
-    public List<Shuttle> getShuttles() {
+    public String getFromAndToCampus(Place from, Place to) {
         String campusFrom = "";
         String campusTo = "";
-        if (getFrom() != null && getTo() != null && from.getCampus() != null && to.getCampus() != null) {
-                campusFrom = from.getCampus();
-                campusTo =  to.getCampus();
-            if (campusFrom.compareTo(campusTo) == 0) {
-                return null;
-            }
+        if (from != null && to != null && from.getCampus() != null && to.getCampus() != null) {
+            campusFrom = from.getCampus();
+            campusTo =  to.getCampus();
         }
+        return campusFrom + "," + campusTo;
+    }
 
+    public List<Shuttle> getAllShuttles() {
+        String[] campuses = getFromAndToCampus(getFrom(), getTo()).split(",");
+        // campus[0] is campusFrom and campus[1] is campusTo
+        if (campuses[0].compareTo(campuses[1]) == 0) {
+            return null;
+        }
         Calendar calendar = Calendar.getInstance();
         String day = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(calendar.getTime());
         SimpleDateFormat time = new SimpleDateFormat("HH.mm");
-        shuttles = appDB.shuttleDao().getScheduleByCampusAndDayAndTime(campusFrom, day, Double.parseDouble(time.format(calendar.getTime())));
+        shuttles = getShuttlesByDayAndTime(campuses[0], day, Double.parseDouble(time.format(calendar.getTime())));
         return shuttles;
+    }
+
+    public List<Shuttle> getShuttlesByDayAndTime(String campus, String day, Double time) {
+        return appDB.shuttleDao().getScheduleByCampusAndDayAndTime(campus, day, time);
     }
 
     public String getShuttleDisplayText(List<Shuttle> shuttles) {
         String content = "";
-        if (shuttles == null || shuttles.size() == 0) {
+        if (shuttles == null || shuttles.isEmpty()) {
             return this.noShuttles;
         }
         String campusTo = shuttles.get(0).getCampus().compareTo("SGW") == 0 ? "LOY" : "SGW";

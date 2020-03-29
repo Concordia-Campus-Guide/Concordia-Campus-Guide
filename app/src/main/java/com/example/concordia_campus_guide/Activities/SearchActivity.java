@@ -1,6 +1,5 @@
 package com.example.concordia_campus_guide.Activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;

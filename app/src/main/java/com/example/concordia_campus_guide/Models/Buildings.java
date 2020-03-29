@@ -11,7 +11,7 @@ public class Buildings {
     private List<Building> Buildings;
 
     public Buildings(){
-        Buildings = new ArrayList<Building>();
+        Buildings = new ArrayList<>();
     }
 
     public List<Building> getBuildings(){
@@ -19,7 +19,7 @@ public class Buildings {
     }
 
     public List<Place> getPlaces(){
-        List<Place> places = new ArrayList<Place>();
+        List<Place> places = new ArrayList<>();
         for(Building building: Buildings){
             places.add(building);
         }

@@ -1,7 +1,5 @@
 package com.example.concordia_campus_guide.Helper;
 
-import android.content.Context;
-
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Models.PointType;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
@@ -53,7 +51,6 @@ public class IndoorPathHeuristic {
     public WalkingPoint getNearestAccessPointForFloor(final WalkingPoint currentPoint, PointType accessPointType) {
         final List<WalkingPoint> accessPtList = appDatabase.walkingPointDao()
                 .getAllAccessPointsOnFloor(currentPoint.getFloorCode(), accessPointType);
-        WalkingPoint walkingPoint = getClosestPointToCurrentPointFromList(currentPoint, accessPtList);
         return getClosestPointToCurrentPointFromList(currentPoint, accessPtList);
     }
 
@@ -74,7 +71,6 @@ public class IndoorPathHeuristic {
                 closestPoint = closestPointDistance > otherPointDistance ? accessPtList.get(i) : closestPoint;
             }
         }
-        WalkingPoint s = closestPoint;
         return closestPoint;
     }
 

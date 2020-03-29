@@ -43,7 +43,7 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
         this.routes = routes;
         this.context = context;
     }
-
+    // TODO: add shuttle
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View viewToDisplay = LayoutInflater.from(this.getContext()).inflate(R.layout.list_routes, parent, false);
@@ -198,17 +198,17 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
 
     private void setBottomLayout(Route route) {
         if(route.getArrivalTime().isEmpty() || route.getDepartureTime().isEmpty())
-            bottom.setVisibility(LinearLayout.GONE);
+            bottom.setVisibility(View.GONE);
         else
             arrivalAndDepartureTime.setText(route.getDepartureTime() + " - " + route.getArrivalTime());
     }
 
     private void displayInfoMsg() {
-        bottom.setVisibility(LinearLayout.GONE);
-        details.setVisibility(LinearLayout.GONE);
-        arrivalAndDepartureTime.setVisibility(LinearLayout.GONE);
-        mainTransportType.setVisibility(LinearLayout.GONE);
-        main.setVisibility(LinearLayout.GONE);
+        bottom.setVisibility(View.GONE);
+        details.setVisibility(View.GONE);
+        arrivalAndDepartureTime.setVisibility(View.GONE);
+        mainTransportType.setVisibility(View.GONE);
+        main.setVisibility(View.GONE);
 
         TextView warningMsg = new TextView(context);
         warningMsg.setText(R.string.warning_msg);
