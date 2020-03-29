@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -57,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
         mViewModel = new MainActivityViewModel();
         initComponents();
         setSupportActionBar(myToolbar);
-        showPOICard();
     }
 
     private void initComponents() {
@@ -159,6 +159,16 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.bottom_card_frame, infoCardFragment);
         fragmentTransaction.commit();
+
+        (findViewById(R.id.bottom_card_frame)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(swipeableInfoCard.getState() != BottomSheetBehavior.STATE_EXPANDED)
+                    swipeableInfoCard.setState(BottomSheetBehavior.STATE_EXPANDED);
+                else
+                    swipeableInfoCard.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
+        });
     }
 
     public void showPOICard(){
@@ -167,6 +177,16 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.explore_bottom_card_frame, poiFragment);
         fragmentTransaction.commit();
+
+        (findViewById(R.id.explore_bottom_card_frame)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(swipeablePOICard.getState() != BottomSheetBehavior.STATE_EXPANDED)
+                    swipeablePOICard.setState(BottomSheetBehavior.STATE_EXPANDED);
+                else
+                    swipeablePOICard.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
+        });
     }
 
     public void resetBottomCard(){
