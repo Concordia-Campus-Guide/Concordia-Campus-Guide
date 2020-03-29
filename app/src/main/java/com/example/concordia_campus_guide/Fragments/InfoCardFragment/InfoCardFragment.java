@@ -18,10 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Activities.RoutesActivity;
-import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
-import com.example.concordia_campus_guide.Helper.RoutesHelpers.DirectionsApiDataRetrieval;
-import com.example.concordia_campus_guide.Helper.RoutesHelpers.UrlBuilder;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.Models.MyCurrentPlace;
 import com.example.concordia_campus_guide.R;
@@ -43,7 +40,6 @@ public class InfoCardFragment extends Fragment {
     private LinearLayout departments;
 
     private Button directionsBt;
-    private Button indoorMapBt;
 
     public InfoCardFragment(String buildingCode){
         this.buildingCode = buildingCode;
@@ -70,7 +66,6 @@ public class InfoCardFragment extends Fragment {
         services = view.findViewById(R.id.services);
         departments = view.findViewById(R.id.departments);
         directionsBt = view.findViewById(R.id.directions);
-        indoorMapBt = view.findViewById(R.id.indoor_map);
         return view;
     }
 
@@ -119,7 +114,7 @@ public class InfoCardFragment extends Fragment {
      */
     private void setServicesList() {
         String text = mViewModel.getBuilding().getServicesString();
-        System.out.println("Text is: " + text);
+        Log.i("INFOCARDVM", "Text is: " + text);
         if(text.isEmpty())
             services.setVisibility(View.GONE);
         else

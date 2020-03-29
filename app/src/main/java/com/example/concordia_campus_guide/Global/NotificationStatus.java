@@ -1,10 +1,5 @@
 package com.example.concordia_campus_guide.Global;
 
-import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Helper.Notification;
-
-import androidx.room.Room;
-
 public class NotificationStatus {
     private static NotificationStatus instance;
 

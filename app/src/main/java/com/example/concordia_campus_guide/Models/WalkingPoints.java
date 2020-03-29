@@ -1,23 +1,20 @@
 package com.example.concordia_campus_guide.Models;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class WalkingPoints {
-        private List<WalkingPoint> walkingPoints;
+        private List<WalkingPoint> walkingPointList;
 
-        public WalkingPoints(){ walkingPoints = new ArrayList<WalkingPoint>(); }
+        public WalkingPoints(){ walkingPointList = new ArrayList<>(); }
 
-        public WalkingPoints(List<WalkingPoint> walkingPoints){  this.walkingPoints = walkingPoints; }
+        public WalkingPoints(List<WalkingPoint> walkingPoints){  this.walkingPointList = walkingPoints; }
 
-        public List<WalkingPoint> getWalkingPoints(){
-            return walkingPoints;
+        public List<WalkingPoint> getWalkingPointList(){
+            return walkingPointList;
         }
 
-        public void setWalkingPoints(List<WalkingPoint> walkingPoints){ this.walkingPoints = walkingPoints; }
+        public void setWalkingPointList(List<WalkingPoint> walkingPointList){ this.walkingPointList = walkingPointList; }
 
 }
 

@@ -13,7 +13,6 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 public class CoordinatesListConverter {
-    private static final String SPLIT_CHAR = ",";
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @TypeConverter

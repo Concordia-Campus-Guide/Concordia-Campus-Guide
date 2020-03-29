@@ -33,6 +33,6 @@ public class WalkingPointTestUtil {
         } catch (IOException e){
             e.printStackTrace();
         }
-        return walkingPoints.getWalkingPoints();
+        return walkingPoints.getWalkingPointList();
     }
 }

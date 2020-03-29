@@ -217,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
 
             // Load walking points
             WalkingPoints walkingPoints = ApplicationState.getInstance(this).getWalkingPoints();
-            appDb.walkingPointDao().insertAll(walkingPoints.getWalkingPoints());
+            appDb.walkingPointDao().insertAll(walkingPoints.getWalkingPointList());
 
             ApplicationState.getInstance(this).setDbIsSetToTrue();
         }

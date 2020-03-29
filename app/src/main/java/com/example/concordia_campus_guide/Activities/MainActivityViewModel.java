@@ -1,12 +1,8 @@
 package com.example.concordia_campus_guide.Activities;
 
-import android.app.Application;
-
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.ViewModel;
 
 public class MainActivityViewModel extends ViewModel {
