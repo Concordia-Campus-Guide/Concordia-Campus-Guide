@@ -129,7 +129,7 @@ public class RoutesActivity extends AppCompatActivity {
     }
 
     public void onClickShuttle(View v) {
-        getShuttle(v);
+        //getShuttle(v);
         setShuttleSelect();
     }
 
@@ -164,11 +164,10 @@ public class RoutesActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    public void directionsApiCallBack(DirectionsResult result, List<Route> routeOptions, String data)
+    public void directionsApiCallBack(DirectionsResult result, List<Route> routeOptions)
     {
         mViewModel.setDirectionsResult(result);
         mViewModel.setRouteOptions(routeOptions);
-        System.out.println(data);
 
         setRoutesAdapter();
     }

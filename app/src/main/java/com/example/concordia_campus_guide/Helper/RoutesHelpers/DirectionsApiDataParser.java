@@ -47,7 +47,7 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
      */
     @Override
     protected void onPostExecute(DirectionsResult result) {
-        dataRetrieval.getCaller().directionsApiCallBack(result, extractRelevantInfoFromDirectionsResultObj(result), dataRetrieval.getData());
+        dataRetrieval.getCaller().directionsApiCallBack(result, extractRelevantInfoFromDirectionsResultObj(result));
     }
 
     private DirectionsResult getDirectionsResultObj() {
