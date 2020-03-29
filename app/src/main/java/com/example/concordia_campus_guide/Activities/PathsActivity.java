@@ -136,11 +136,11 @@ public class PathsActivity extends AppCompatActivity {
 
         if(fromIsIndoor && !toIsIndoor){
             floorCode = ((RoomModel) from).getFloorCode();
-            tempTo = new RoomModel(from.getCenterCoordinates(), floorCode.substring(0, floorCode.indexOf('-')), floorCode);
+            tempTo = new RoomModel(from.getCenterCoordinates(), floorCode.substring(0, floorCode.indexOf('-')), floorCode, from.getCampus());
         }
         if(toIsIndoor && !fromIsIndoor){
             floorCode = ((RoomModel) to).getFloorCode();
-            tempFrom = new RoomModel(to.getCenterCoordinates(), floorCode.substring(0, floorCode.indexOf('-')), floorCode);
+            tempFrom = new RoomModel(to.getCenterCoordinates(), floorCode.substring(0, floorCode.indexOf('-')), floorCode, to.getCampus());
         }
 
         locationFragment.setIndoorPaths(tempFrom, tempTo);

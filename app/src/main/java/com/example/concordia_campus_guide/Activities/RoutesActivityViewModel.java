@@ -19,6 +19,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.Level;
+
+import static com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel.LOGGER;
 
 public class RoutesActivityViewModel extends ViewModel {
 
@@ -28,7 +31,6 @@ public class RoutesActivityViewModel extends ViewModel {
     private @ClassConstants.TransportType
     String transportType = ClassConstants.TRANSIT; // default value
     private List<Shuttle> shuttles;
-    private final String noShuttles = "No available routes using the shuttle service";
     private DirectionsResult directionsResult;
     private List<Route> routeOptions;
 
@@ -77,31 +79,18 @@ public class RoutesActivityViewModel extends ViewModel {
     public List<Shuttle> getAllShuttles() {
         String[] campuses = getFromAndToCampus(getFrom(), getTo()).split(",");
         // campus[0] is campusFrom and campus[1] is campusTo
-        if (campuses.length == 0 && campuses[0].compareTo(campuses[1]) == 0) {
-            return null;
+        if (campuses.length == 0 || campuses[0].compareTo(campuses[1]) == 0) {
+            return new ArrayList<>();
         }
         Calendar calendar = Calendar.getInstance();
         String day = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(calendar.getTime());
         SimpleDateFormat time = new SimpleDateFormat("HH.mm");
-        // TODO: replace "Monday" by day
-        shuttles = getShuttlesByDayAndTime(campuses[0], "Monday", Double.parseDouble(time.format(calendar.getTime())));
+        shuttles = getShuttlesByDayAndTime(campuses[0], day, Double.parseDouble(time.format(calendar.getTime())));
         return shuttles;
     }
 
     public List<Shuttle> getShuttlesByDayAndTime(String campus, String day, Double time) {
         return appDB.shuttleDao().getScheduleByCampusAndDayAndTime(campus, day, time);
-    }
-
-    public String getShuttleDisplayText(List<Shuttle> shuttles) {
-        String content = "";
-        if (shuttles == null || shuttles.isEmpty()) {
-            return this.noShuttles;
-        }
-        String campusTo = shuttles.get(0).getCampus().compareTo("SGW") == 0 ? "LOY" : "SGW";
-        for (Shuttle shuttle : shuttles) {
-            content += shuttle.getCampus() + "  >   " + campusTo + ", \t leaves at: " + shuttle.getTime().toString().replace(".", ":") + "\n";
-        }
-        return content;
     }
 
     public List<Route> adaptShuttleToRoutes(List<Shuttle> shuttles) {
@@ -120,7 +109,7 @@ public class RoutesActivityViewModel extends ViewModel {
                 calendar.add(Calendar.MINUTE, 25);
                 arrivalDateString = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
             } catch (ParseException e) {
-                e.printStackTrace();
+                LOGGER.log(Level.WARNING, e.getMessage(), e);
             }
             String campusFrom = shuttle.getCampus();
             String campusTo = campusFrom.compareTo("SGW") == 0 ? "LOY" : "SGW";

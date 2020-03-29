@@ -105,11 +105,6 @@ public class RoutesActivityViewModelTest {
     }
 
     @Test
-    public void getShuttleDisplayTextTest(){
-        assertEquals("SGW  >   LOY, \t leaves at: 8:2\n",mViewModel.getShuttleDisplayText(Arrays.asList(shuttle1)));
-    }
-
-    @Test
     public void getSetTransportTypeTest() {
         mViewModel.setTransportType(ClassConstants.DRIVING);
         assertEquals(ClassConstants.DRIVING, mViewModel.getTransportType());

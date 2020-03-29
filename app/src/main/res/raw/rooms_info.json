@@ -3,6 +3,7 @@
     {
       "roomCode": "VL",
       "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates": {
         "longitude": -73.6388338,
         "latitude": 45.45918362
@@ -11,6 +12,7 @@
     {
       "roomCode": "MB",
       "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates": {
         "longitude": -73.5785880312323,
         "latitude": 45.4952147234681
@@ -19,6 +21,7 @@
     {
       "roomCode": "H",
       "floorCode": "H-1",
+      "Campus": "SGW",     
       "centerCoordinates": {
         "longitude": -73.57868157327175,
         "latitude": 45.49709930219645
@@ -27,6 +30,7 @@
     {
       "roomCode": "elevators-1",
       "floorCode": "H-00",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude": -73.5787627100944,
         "latitude": 45.4972934203281
@@ -35,6 +39,7 @@
     {
       "roomCode": "elevators-1",
       "floorCode": "H-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude": -73.5787627100944,
         "latitude": 45.4972934203281
@@ -43,6 +48,7 @@
     {
       "roomCode": "819",
       "floorCode": "H-8",
+      "Campus": "SGW",   
       "centerCoordinates": {
         "longitude": -73.5789605230093,
         "latitude": 45.496951715566176
@@ -51,6 +57,7 @@
     {
       "roomCode": "821",
       "floorCode": "H-8",
+      "Campus": "SGW",     
       "centerCoordinates": {
         "longitude": -73.57902321964502,
         "latitude": 45.49699848270905
@@ -58,7 +65,8 @@
     },
     {
       "roomCode":"823",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57907921075821,
         "latitude":45.49702057370776
@@ -66,7 +74,8 @@
     },
     {
       "roomCode":"827",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57921063899994,
         "latitude":45.49707133596979
@@ -74,7 +83,8 @@
     },
     {
       "roomCode":"825",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57913553714752,
         "latitude":45.497045014802595
@@ -82,7 +92,8 @@
     },
     {
       "roomCode":"829",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.5792750120163,
         "latitude":45.49710329737056
@@ -90,7 +101,8 @@
     },
     {
       "roomCode":"829.01",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57933938503265,
         "latitude":45.49712773842951
@@ -98,7 +110,8 @@
     },
     {
       "roomCode":"831",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.5794161632657,
         "latitude":45.49717897061476
@@ -106,7 +119,8 @@
     },
     {
       "roomCode":"833",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57936888933182,
         "latitude":45.49723114279224
@@ -114,7 +128,8 @@
     },
     {
       "roomCode":"835",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57933938503265,
         "latitude":45.497268744331606
@@ -122,7 +137,8 @@
     },
     {
       "roomCode":"stairs-3",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57923444360495,
         "latitude":45.49721069694468
@@ -130,7 +146,8 @@
     },
     {
       "roomCode":"843",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57915431261063,
         "latitude":45.49745299151158
@@ -138,7 +155,8 @@
     },
     {
       "roomCode":"845",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57911944389343,
         "latitude":45.497490592902814
@@ -146,7 +164,8 @@
     },
     {
       "roomCode":"847",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57906579971313,
         "latitude":45.497556395277044
@@ -154,7 +173,8 @@
     },
     {
       "roomCode":"849",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57902020215988,
         "latitude":45.49761091718603
@@ -162,7 +182,8 @@
     },
     {
       "roomCode":"851.03",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57892632484436,
         "latitude":45.49759963679541
@@ -170,7 +191,8 @@
     },
     {
       "roomCode":"851.02",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57888340950012,
         "latitude":45.49758083613932
@@ -178,7 +200,8 @@
     },
     {
       "roomCode":"853",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57885658740997,
         "latitude":45.49752443413345
@@ -186,7 +209,8 @@
     },
     {
       "roomCode":"857",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.5787358880043,
         "latitude":45.497479312488096
@@ -194,7 +218,8 @@
     },
     {
       "roomCode":"859",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57867419719696,
         "latitude":45.49745299151158
@@ -202,7 +227,8 @@
     },
     {
       "roomCode":"861",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57859943062067,
         "latitude":45.49742549547835
@@ -210,7 +236,8 @@
     },
     {
       "roomCode":"817",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57885725796223,
         "latitude":45.49693267968286
@@ -218,7 +245,8 @@
     },
     {
       "roomCode":"815",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57880663126707,
         "latitude":45.49698226697044
@@ -226,7 +254,8 @@
     },
     {
       "roomCode":"813",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57876639813185,
         "latitude":45.49702268880291
@@ -234,7 +263,8 @@
     },
     {
       "roomCode":"811",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.578727170825,
         "latitude":45.49706405064796
@@ -242,7 +272,8 @@
     },
     {
       "roomCode":"807",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57863128185272,
         "latitude":45.497157819718254
@@ -250,7 +281,8 @@
     },
     {
       "roomCode":"803",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57855349779129,
         "latitude":45.497233022869814
@@ -258,7 +290,8 @@
     },
     {
       "roomCode":"801",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57850220054388,
         "latitude":45.49729083522429
@@ -266,7 +299,8 @@
     },
     {
       "roomCode":"863.01",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57847839593887,
         "latitude":45.49738154879908
@@ -274,7 +308,8 @@
     },
     {
       "roomCode":"886",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57897393405437,
         "latitude":45.49708473155909
@@ -282,7 +317,8 @@
     },
     {
       "roomCode":"stairs-2",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57891358435154,
         "latitude":45.49710306236033
@@ -290,7 +326,8 @@
     },
     {
       "roomCode":"mens-1",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57885994017124,
         "latitude":45.49713008853076
@@ -298,7 +335,8 @@
     },
     {
       "roomCode":"820",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57904769480228,
         "latitude":45.49712092313529
@@ -306,7 +344,8 @@
     },
     {
       "roomCode":"staff washrooms-1",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57871174812317,
         "latitude":45.49724077818911
@@ -314,7 +353,8 @@
     },
     {
       "roomCode":"elevators-1",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.5787643864751,
         "latitude":45.49729389034705
@@ -322,7 +362,8 @@
     },
     {
       "roomCode":"stairs-5",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57874695211649,
         "latitude":45.49731504119247
@@ -330,7 +371,8 @@
     },
     {
       "roomCode":"stairs-1",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.578928001225,
         "latitude":45.49731363113635
@@ -338,7 +380,8 @@
     },
     {
       "roomCode":"842",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.5789343714714,
         "latitude":45.49737026836251
@@ -346,7 +389,8 @@
     },
     {
       "roomCode":"staff elevators-1",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57901249080896,
         "latitude":45.49740434467443
@@ -354,7 +398,8 @@
     },
     {
       "roomCode":"837",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57929378747939,
         "latitude":45.497321386444554
@@ -362,7 +407,8 @@
     },
     {
       "roomCode":"832.01",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57919454574585,
         "latitude":45.497233022869814
@@ -370,7 +416,8 @@
     },
     {
       "roomCode":"832.02",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57917577028275,
         "latitude":45.497259343949125
@@ -378,7 +425,8 @@
     },
     {
       "roomCode":"832.03",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57917845249176,
         "latitude":45.49730070562033
@@ -386,7 +434,8 @@
     },
     {
       "roomCode":"832.04",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57913821935654,
         "latitude":45.49728942516756
@@ -394,7 +443,8 @@
     },
     {
       "roomCode":"832.05",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57910603284836,
         "latitude":45.49727250448419
@@ -402,7 +452,8 @@
     },
     {
       "roomCode":"805.03",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57858836650847,
         "latitude":45.49717662051555
@@ -410,7 +461,8 @@
     },
     {
       "roomCode":"806.02",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57862055301666,
         "latitude":45.49719166114888
@@ -418,7 +470,8 @@
     },
     {
       "roomCode":"806.01",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57865005731583,
         "latitude":45.49720106154266
@@ -426,7 +479,8 @@
     },
     {
       "roomCode":"867",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57843816280365,
         "latitude":45.49733830711327
@@ -434,7 +488,8 @@
     },
     {
       "roomCode":"863",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57852935791016,
         "latitude":45.497409749880624
@@ -442,7 +497,8 @@
     },
     {
       "roomCode":"841",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57919722795486,
         "latitude":45.497419150238024
@@ -450,7 +506,8 @@
     },
     {
       "roomCode":"womens-1",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57868492603302,
         "latitude":45.49733454696509
@@ -458,7 +515,8 @@
     },
     {
       "roomCode":"855",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57879221439362,
         "latitude":45.4974999932467
@@ -466,7 +524,8 @@
     },
     {
       "roomCode":"851.01",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57893973588943,
         "latitude":45.49754323480837
@@ -474,7 +533,8 @@
     },
     {
       "roomCode":"822",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.5791328549385,
         "latitude":45.497186020911855
@@ -482,7 +542,8 @@
     },
     {
       "roomCode":"838",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57908993959427,
         "latitude":45.4973571078503
@@ -490,7 +551,8 @@
     },
     {
       "roomCode":"852",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57892096042633,
         "latitude":45.497447351300735
@@ -498,7 +560,8 @@
     },
     {
       "roomCode":"854",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57887804508209,
         "latitude":45.49742855059384
@@ -506,7 +569,8 @@
     },
     {
       "roomCode":"881",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57904702425003,
         "latitude":45.497419150238024
@@ -514,7 +578,8 @@
     },
     {
       "roomCode":"stairs-4",
-      "floorCode":"H-8",
+      "floorCode": "H-8",
+      "Campus": "SGW",
       "centerCoordinates":{
         "longitude":-73.57900578528643,
         "latitude":45.49744523622152
@@ -522,7 +587,8 @@
     },
     {
       "roomCode":"919",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.5789605230093,
         "latitude":45.496951715566176
@@ -530,7 +596,8 @@
     },
     {
       "roomCode":"923",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57902321964502,
         "latitude":45.49699848270905
@@ -538,7 +605,8 @@
     },
     {
       "roomCode":"925",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57910066843033,
         "latitude":45.49702574394022
@@ -546,7 +614,8 @@
     },
     {
       "roomCode":"925.02",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57919555157423,
         "latitude":45.497056765325176
@@ -554,7 +623,8 @@
     },
     {
       "roomCode":"925.01",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57915297150612,
         "latitude":45.497080501373325
@@ -562,7 +632,8 @@
     },
     {
       "roomCode":"925.04",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57918851077557,
         "latitude":45.49710024223744
@@ -570,7 +641,8 @@
     },
     {
       "roomCode":"927.02",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57925456017254,
         "latitude":45.49707321605269
@@ -578,7 +650,8 @@
     },
     {
       "roomCode":"927.03",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57928808778524,
         "latitude":45.497094366981
@@ -586,7 +659,8 @@
     },
     {
       "roomCode":"927.01",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57922606170177,
         "latitude":45.497122098186075
@@ -594,7 +668,8 @@
     },
     {
       "roomCode":"927",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57929613441229,
         "latitude":45.49714042897516
@@ -602,7 +677,8 @@
     },
     {
       "roomCode":"929",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57940711081028,
         "latitude":45.49717897061476
@@ -610,7 +686,8 @@
     },
     {
       "roomCode":"931",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57933536171913,
         "latitude":45.497206466768375
@@ -618,7 +695,8 @@
     },
     {
       "roomCode":"933",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57934910804033,
         "latitude":45.49727532459842
@@ -626,7 +704,8 @@
     },
     {
       "roomCode":"932",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.5792850703001,
         "latitude":45.49723255285041
@@ -634,7 +713,8 @@
     },
     {
       "roomCode":"928",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57925992459059,
         "latitude":45.4972553487861
@@ -642,7 +722,8 @@
     },
     {
       "roomCode":"stairs-3",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57923444360495,
         "latitude":45.49721069694468
@@ -650,7 +731,8 @@
     },
     {
       "roomCode":"937",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57910335063934,
         "latitude":45.497312926108286
@@ -658,7 +740,8 @@
     },
     {
       "roomCode":"983",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57919588685036,
         "latitude":45.497438185956895
@@ -666,7 +749,8 @@
     },
     {
       "roomCode":"961.33",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.5791754350066,
         "latitude":45.49750022825529
@@ -674,7 +758,8 @@
     },
     {
       "roomCode":"961.31",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57916336506605,
         "latitude":45.497512918716986
@@ -682,7 +767,8 @@
     },
     {
       "roomCode":"961.29",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.5791352018714,
         "latitude":45.49753641956444
@@ -690,7 +776,8 @@
     },
     {
       "roomCode":"961.27",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57911475002766,
         "latitude":45.49755545524367
@@ -698,7 +785,8 @@
     },
     {
       "roomCode":"961.25",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57908859848976,
         "latitude":45.497585301295715
@@ -706,7 +794,8 @@
     },
     {
       "roomCode":"961.23",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57907116413116,
         "latitude":45.497607392064204
@@ -714,7 +803,8 @@
     },
     {
       "roomCode":"961.21",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57904970645905,
         "latitude":45.49762360762277
@@ -722,7 +812,8 @@
     },
     {
       "roomCode":"961.19",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57902254909277,
         "latitude":45.497645463368265
@@ -730,7 +821,8 @@
     },
     {
       "roomCode":"961.17",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57898298650979,
         "latitude":45.497620317509806
@@ -738,7 +830,8 @@
     },
     {
       "roomCode":"961.15",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57894476503134,
         "latitude":45.49760903712107
@@ -746,7 +839,8 @@
     },
     {
       "roomCode":"961.13",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.5789142549038,
         "latitude":45.49759258655009
@@ -754,7 +848,8 @@
     },
     {
       "roomCode":"961.11",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57888475060463,
         "latitude":45.497574960933015
@@ -762,7 +857,8 @@
     },
     {
       "roomCode":"961.09",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57885390520096,
         "latitude":45.49756015541039
@@ -770,7 +866,8 @@
     },
     {
       "roomCode":"961.07",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57881467789413,
         "latitude":45.49754652492583
@@ -778,7 +875,8 @@
     },
     {
       "roomCode":"961.03",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57876975089312,
         "latitude":45.49752748924357
@@ -786,7 +884,8 @@
     },
     {
       "roomCode":"961.01",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57872113585472,
         "latitude":45.497502578341006
@@ -794,7 +893,8 @@
     },
     {
       "roomCode":"963",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57867050915956,
         "latitude":45.49746920711465
@@ -802,7 +902,8 @@
     },
     {
       "roomCode":"965.02",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57859943062067,
         "latitude":45.49742549547835
@@ -810,7 +911,8 @@
     },
     {
       "roomCode":"917",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57885725796223,
         "latitude":45.49693267968286
@@ -818,7 +920,8 @@
     },
     {
       "roomCode":"915",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57880663126707,
         "latitude":45.49698226697044
@@ -826,7 +929,8 @@
     },
     {
       "roomCode":"913",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57876639813185,
         "latitude":45.49702268880291
@@ -834,7 +938,8 @@
     },
     {
       "roomCode":"911",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.578727170825,
         "latitude":45.49706405064796
@@ -842,7 +947,8 @@
     },
     {
       "roomCode":"909",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57868056744337,
         "latitude":45.497115047880996
@@ -850,7 +956,8 @@
     },
     {
       "roomCode":"907.1",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57861585915089,
         "latitude":45.497154059558035
@@ -858,7 +965,8 @@
     },
     {
       "roomCode":"907.2",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57868660241365,
         "latitude":45.497170980277026
@@ -866,7 +974,8 @@
     },
     {
       "roomCode":"903",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.5785786435008,
         "latitude":45.49723842809245
@@ -874,7 +983,8 @@
     },
     {
       "roomCode":"901.03",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57850220054388,
         "latitude":45.49729083522429
@@ -882,7 +992,8 @@
     },
     {
       "roomCode":"901.01",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57857126742601,
         "latitude":45.49730940096781
@@ -890,7 +1001,8 @@
     },
     {
       "roomCode":"967",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.5784961655736,
         "latitude":45.49738789404366
@@ -898,7 +1010,8 @@
     },
     {
       "roomCode":"986",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57892464846373,
         "latitude":45.49706146553354
@@ -906,7 +1019,8 @@
     },
     {
       "roomCode":"918",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57897393405437,
         "latitude":45.49708473155909
@@ -914,7 +1028,8 @@
     },
     {
       "roomCode":"stairs-2",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57891358435154,
         "latitude":45.49710306236033
@@ -922,7 +1037,8 @@
     },
     {
       "roomCode":"mens-1",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57885994017124,
         "latitude":45.49713008853076
@@ -930,7 +1046,8 @@
     },
     {
       "roomCode":"980",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57883647084236,
         "latitude":45.497169570217295
@@ -938,7 +1055,8 @@
     },
     {
       "roomCode":"920",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57904769480228,
         "latitude":45.49712092313529
@@ -946,7 +1064,8 @@
     },
     {
       "roomCode":"906",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57875231653452,
         "latitude":45.49719659635581
@@ -954,7 +1073,8 @@
     },
     {
       "roomCode":"908",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57878550887108,
         "latitude":45.497208111836976
@@ -962,7 +1082,8 @@
     },
     {
       "roomCode":"staff washrooms-1",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57871174812317,
         "latitude":45.49724077818911
@@ -970,7 +1091,8 @@
     },
     {
       "roomCode":"staff washrooms-2",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57879757881165,
         "latitude":45.49725840391079
@@ -978,7 +1100,8 @@
     },
     {
       "roomCode":"womens-1",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57868358492851,
         "latitude":45.497273209512755
@@ -986,7 +1109,8 @@
     },
     {
       "roomCode":"elevators-1",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.5787643864751,
         "latitude":45.49729389034705
@@ -994,7 +1118,8 @@
     },
     {
       "roomCode":"stairs-5",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57874695211649,
         "latitude":45.49731504119247
@@ -1002,7 +1127,8 @@
     },
     {
       "roomCode":"960",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57887838035822,
         "latitude":45.49729083522429
@@ -1010,7 +1136,8 @@
     },
     {
       "roomCode":"stairs-1",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.578928001225,
         "latitude":45.49731363113635
@@ -1018,7 +1145,8 @@
     },
     {
       "roomCode":"966.01",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57899807393551,
         "latitude":45.49733924715025
@@ -1026,7 +1154,8 @@
     },
     {
       "roomCode":"962",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57883613556625,
         "latitude":45.49731786130461
@@ -1034,7 +1163,8 @@
     },
     {
       "roomCode":"966",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57893336564302,
         "latitude":45.49737825867197
@@ -1042,7 +1172,8 @@
     },
     {
       "roomCode":"964",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57881199568509,
         "latitude":45.497366038198194
@@ -1050,7 +1181,8 @@
     },
     {
       "roomCode":"968",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.5788606107235,
         "latitude":45.497449701388675
@@ -1058,7 +1190,8 @@
     },
     {
       "roomCode":"961.02",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57876002788544,
         "latitude":45.49746450694033
@@ -1066,7 +1199,8 @@
     },
     {
       "roomCode":"961.04",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.5787995904684,
         "latitude":45.49747719741008
@@ -1074,7 +1208,8 @@
     },
     {
       "roomCode":"961.06",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57882373034954,
         "latitude":45.49749200295451
@@ -1082,7 +1217,8 @@
     },
     {
       "roomCode":"staff elevators-1",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57901249080896,
         "latitude":45.49740434467443
@@ -1090,7 +1226,8 @@
     },
     {
       "roomCode":"941",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57899136841297,
         "latitude":45.49741256998801
@@ -1098,7 +1235,8 @@
     },
     {
       "roomCode":"977",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57898935675621,
         "latitude":45.49743889098341
@@ -1106,7 +1244,8 @@
     },
     {
       "roomCode":"stairs-4",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57896924018861,
         "latitude":45.49746944212335
@@ -1114,7 +1253,8 @@
     },
     {
       "roomCode":"945",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57904098927975,
         "latitude":45.497467327044966
@@ -1122,7 +1262,8 @@
     },
     {
       "roomCode":"943",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57910469174385,
         "latitude":45.49746873709722
@@ -1130,7 +1271,8 @@
     },
     {
       "roomCode":"961.30",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.5790815576911,
         "latitude":45.49750845355487
@@ -1138,7 +1280,8 @@
     },
     {
       "roomCode":"961.28",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57905104756357,
         "latitude":45.49752772425203
@@ -1146,7 +1289,8 @@
     },
     {
       "roomCode":"961.08",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57892900705339,
         "latitude":45.49750469341807
@@ -1154,7 +1298,8 @@
     },
     {
       "roomCode":"961.10",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57889480888844,
         "latitude":45.49752231905713
@@ -1162,7 +1307,8 @@
     },
     {
       "roomCode":"961.14",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57896991074085,
         "latitude":45.497540179699115
@@ -1170,7 +1316,8 @@
     },
     {
       "roomCode":"961.26",
-      "floorCode":"H-9",
+      "floorCode": "H-9",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57902657240629,
         "latitude":45.49755851035209
@@ -1178,7 +1325,8 @@
     },
     {
       "roomCode":"stairs-6",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57870370149612,
         "latitude":45.49528334871586
@@ -1186,7 +1334,8 @@
     },
     {
       "roomCode":"294",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57867687940598,
         "latitude":45.49514045769481
@@ -1194,7 +1343,8 @@
     },
     {
       "roomCode":"stairs-2",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57878953218459,
         "latitude":45.49510473488291
@@ -1202,7 +1352,8 @@
     },
     {
       "roomCode":"347",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57879489660263,
         "latitude":45.49504833039692
@@ -1210,7 +1361,8 @@
     },
     {
       "roomCode":"345",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57882708311081,
         "latitude":45.495059611298636
@@ -1218,7 +1370,8 @@
     },
     {
       "roomCode":"210",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57888609170914,
         "latitude":45.49517242019154
@@ -1226,7 +1379,8 @@
     },
     {
       "roomCode":"301",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57916504144669,
         "latitude":45.49524386570682
@@ -1234,7 +1388,8 @@
     },
     {
       "roomCode":"elevators-1",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.5789906978607,
         "latitude":45.49526266714314
@@ -1242,7 +1397,8 @@
     },
     {
       "roomCode":"310",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57897460460663,
         "latitude":45.495241985562835
@@ -1250,7 +1406,8 @@
     },
     {
       "roomCode":"335",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.5790953040123,
         "latitude":45.495185581214294
@@ -1258,7 +1415,8 @@
     },
     {
       "roomCode":"309",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57907384634018,
         "latitude":45.49520626281534
@@ -1266,7 +1424,8 @@
     },
     {
       "roomCode":"315",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57903897762299,
         "latitude":45.49518746136017
@@ -1274,7 +1433,8 @@
     },
     {
       "roomCode":"stairs-3",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57912480831146,
         "latitude":45.495213783395656
@@ -1282,7 +1442,8 @@
     },
     {
       "roomCode":"elevators-2",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.579041659832,
         "latitude":45.49528334871586
@@ -1290,7 +1451,8 @@
     },
     {
       "roomCode":"stairs-1",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57885926961899,
         "latitude":45.49527206785894
@@ -1298,7 +1460,8 @@
     },
     {
       "roomCode":"338",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57901684939861,
         "latitude":45.49516583967896
@@ -1306,7 +1469,8 @@
     },
     {
       "roomCode":"424",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.5790765285492,
         "latitude":45.49529838985487
@@ -1314,7 +1478,8 @@
     },
     {
       "roomCode":"134",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57910871505737,
         "latitude":45.49531531113147
@@ -1322,7 +1487,8 @@
     },
     {
       "roomCode":"437",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57922941446304,
         "latitude":45.49519310179736
@@ -1330,7 +1496,8 @@
     },
     {
       "roomCode":"mens-1",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57921868562698,
         "latitude":45.495277708287695
@@ -1338,7 +1505,8 @@
     },
     {
       "roomCode":"womens-1",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57916235923767,
         "latitude":45.49530967070648
@@ -1346,7 +1514,8 @@
     },
     {
       "roomCode":"130",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57913721352816,
         "latitude":45.495354324055334
@@ -1354,7 +1523,8 @@
     },
     {
       "roomCode":"132",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.5791777819395,
         "latitude":45.49534069303683
@@ -1362,7 +1532,8 @@
     },
     {
       "roomCode":"115",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57932597398758,
         "latitude":45.49532095155587
@@ -1370,7 +1541,8 @@
     },
     {
       "roomCode":"494",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57933133840561,
         "latitude":45.49524950613837
@@ -1378,7 +1550,8 @@
     },
     {
       "roomCode":"stairs-4",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57929110527039,
         "latitude":45.495307790564716
@@ -1386,7 +1559,8 @@
     },
     {
       "roomCode":"434",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57925355434416,
         "latitude":45.49533223240299
@@ -1394,7 +1568,8 @@
     },
     {
       "roomCode":"stairs-5",
-      "floorCode":"MB-1",
+      "floorCode": "MB-1",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57895314693451,
         "latitude":45.495369835210354
@@ -1402,7 +1577,8 @@
     },
     {
       "roomCode":"stairs-1",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57871979475021,
         "latitude":45.49529086928587
@@ -1410,7 +1586,8 @@
     },
     {
       "roomCode":"stairs-2",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57869297266006,
         "latitude":45.495146098136715
@@ -1418,7 +1595,8 @@
     },
     {
       "roomCode":"273",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.5786983370781,
         "latitude":45.49511413562507
@@ -1426,7 +1604,8 @@
     },
     {
       "roomCode":"245",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57860714197157,
         "latitude":45.495185581214294
@@ -1434,7 +1613,8 @@
     },
     {
       "roomCode":"285",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57881367206573,
         "latitude":45.49505209069774
@@ -1442,7 +1622,8 @@
     },
     {
       "roomCode":"330",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57891023159026,
         "latitude":45.4951479782839
@@ -1450,7 +1631,8 @@
     },
     {
       "roomCode":"210",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.5788431763649,
         "latitude":45.495198742234024
@@ -1458,7 +1640,8 @@
     },
     {
       "roomCode":"stairs-6",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57890486717224,
         "latitude":45.495369835210354
@@ -1466,7 +1649,8 @@
     },
     {
       "roomCode":"275",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57872515916824,
         "latitude":45.49509909443683
@@ -1474,7 +1658,8 @@
     },
     {
       "roomCode":"279",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57874929904936,
         "latitude":45.4950840532446
@@ -1482,7 +1667,8 @@
     },
     {
       "roomCode":"stairs-5",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57893705368042,
         "latitude":45.49534351324784
@@ -1490,7 +1676,8 @@
     },
     {
       "roomCode":"345",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57896119356155,
         "latitude":45.49524386570682
@@ -1498,7 +1685,8 @@
     },
     {
       "roomCode":"230",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57902556657791,
         "latitude":45.49520626281534
@@ -1506,7 +1694,8 @@
     },
     {
       "roomCode":"146",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57896387577057,
         "latitude":45.495369835210354
@@ -1514,7 +1703,8 @@
     },
     {
       "roomCode":"115",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.5790953040123,
         "latitude":45.495431879787624
@@ -1522,7 +1712,8 @@
     },
     {
       "roomCode":"105",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57919454574585,
         "latitude":45.4954431606125
@@ -1530,7 +1721,8 @@
     },
     {
       "roomCode":"401",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57923746109009,
         "latitude":45.495362314650876
@@ -1538,7 +1730,8 @@
     },
     {
       "roomCode":"465",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57931256294249,
         "latitude":45.49533035226195
@@ -1546,7 +1739,8 @@
     },
     {
       "roomCode":"455",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57937425374983,
         "latitude":45.495260786999815
@@ -1554,7 +1748,8 @@
     },
     {
       "roomCode":"145",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57902020215988,
         "latitude":45.495379235908274
@@ -1562,7 +1757,8 @@
     },
     {
       "roomCode":"stairs-4",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57927232980727,
         "latitude":45.495307790564716
@@ -1570,7 +1766,8 @@
     },
     {
       "roomCode":"445",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57930451631546,
         "latitude":45.495217543685406
@@ -1578,7 +1775,8 @@
     },
     {
       "roomCode":"435",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57919722795486,
         "latitude":45.4952043826701
@@ -1586,7 +1784,8 @@
     },
     {
       "roomCode":"428",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57922405004501,
         "latitude":45.49526454728644
@@ -1594,7 +1793,8 @@
     },
     {
       "roomCode":"437",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57915699481964,
         "latitude":45.495266427429655
@@ -1602,7 +1802,8 @@
     },
     {
       "roomCode":"438",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57912212610245,
         "latitude":45.49524762599459
@@ -1610,7 +1811,8 @@
     },
     {
       "roomCode":"mens-1",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57912480831146,
         "latitude":45.49530403028097
@@ -1618,7 +1820,8 @@
     },
     {
       "roomCode":"womens-1",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57910335063934,
         "latitude":45.49531719127301
@@ -1626,7 +1829,8 @@
     },
     {
       "roomCode":"440",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57907116413115,
         "latitude":45.49529838985487
@@ -1634,7 +1838,8 @@
     },
     {
       "roomCode":"elevators-2",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57903093099593,
         "latitude":45.49528522885844
@@ -1642,7 +1847,8 @@
     },
     {
       "roomCode":"stairs-3",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57911944389343,
         "latitude":45.49521002310559
@@ -1650,7 +1856,8 @@
     },
     {
       "roomCode":"elevators-1",
-      "floorCode":"MB-S2",
+      "floorCode": "MB-S2",
+      "Campus": "SGW",     
       "centerCoordinates":{
         "longitude":-73.57897996902466,
         "latitude":45.495270187715924
@@ -1658,7 +1865,8 @@
     },
     {
       "roomCode":"101.5",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.6379536986351,
         "latitude":45.45904134548314
@@ -1666,7 +1874,8 @@
     },
     {
       "roomCode":"140",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63864570856094,
         "latitude":45.459291564778844
@@ -1674,7 +1883,8 @@
     },
     {
       "roomCode":"197.1",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.6386752128601,
         "latitude":45.45924829385221
@@ -1682,7 +1892,8 @@
     },
     {
       "roomCode":"103.1",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63860815763474,
         "latitude":45.45922571770342
@@ -1690,7 +1901,8 @@
     },
     {
       "roomCode":"mens-1",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63866180181503,
         "latitude":45.459043226835355
@@ -1698,7 +1910,8 @@
     },
     {
       "roomCode":"womens-2",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63864302635193,
         "latitude":45.45906580305725
@@ -1706,7 +1919,8 @@
     },
     {
       "roomCode":"101.7",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63798320293427,
         "latitude":45.45901500654529
@@ -1714,7 +1928,8 @@
     },
     {
       "roomCode":"staff washrooms-1",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63799929618835,
         "latitude":45.45899995571817
@@ -1722,7 +1937,8 @@
     },
     {
       "roomCode":"101.6",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63796979188918,
         "latitude":45.45902817601576
@@ -1730,7 +1946,8 @@
     },
     {
       "roomCode":"102",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63801538944244,
         "latitude":45.458983023532845
@@ -1738,7 +1955,8 @@
     },
     {
       "roomCode":"102.2",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63810390233994,
         "latitude":45.4589924303031
@@ -1746,7 +1964,8 @@
     },
     {
       "roomCode":"102.4",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63810390233994,
         "latitude":45.45896797269717
@@ -1754,7 +1973,8 @@
     },
     {
       "roomCode":"stairs-2",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63868594169617,
         "latitude":45.45922571770342
@@ -1762,7 +1982,8 @@
     },
     {
       "roomCode":"mens-2",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63871812820435,
         "latitude":45.45909778602276
@@ -1770,7 +1991,8 @@
     },
     {
       "roomCode":"womens-1",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63873690366745,
         "latitude":45.4590714471113
@@ -1778,7 +2000,8 @@
     },
     {
       "roomCode":"102.3",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63815218210219,
         "latitude":45.458983023532845
@@ -1786,7 +2009,8 @@
     },
     {
       "roomCode":"194.3",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63818436861038,
         "latitude":45.459003718425315
@@ -1794,7 +2018,8 @@
     },
     {
       "roomCode":"elevators-1",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63819777965546,
         "latitude":45.458994311656944
@@ -1802,7 +2027,8 @@
     },
     {
       "roomCode":"stairs-3",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63821655511856,
         "latitude":45.458954803212656
@@ -1810,7 +2036,8 @@
     },
     {
       "roomCode":"120",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63871812820435,
         "latitude":45.45912224357239
@@ -1818,7 +2045,8 @@
     },
     {
       "roomCode":"106.2",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63870203495026,
         "latitude":45.4591372943669
@@ -1826,7 +2054,8 @@
     },
     {
       "roomCode":"106.1",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63867789506912,
         "latitude":45.45915422650591
@@ -1834,7 +2063,8 @@
     },
     {
       "roomCode":"104",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.6385303735733,
         "latitude":45.45922195501108
@@ -1842,7 +2072,8 @@
     },
     {
       "roomCode":"104.1",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63849818706512,
         "latitude":45.45924641250684
@@ -1850,7 +2081,8 @@
     },
     {
       "roomCode":"101.2",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63844454288483,
         "latitude":45.45922195501108
@@ -1858,7 +2090,8 @@
     },
     {
       "roomCode":"101.1",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63847404718398,
         "latitude":45.45919749750468
@@ -1866,7 +2099,8 @@
     },
     {
       "roomCode":"124",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.6382782459259,
         "latitude":45.45895856592281
@@ -1874,7 +2108,8 @@
     },
     {
       "roomCode":"122.1",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63826751708984,
         "latitude":45.45897926082429
@@ -1882,7 +2117,8 @@
     },
     {
       "roomCode":"122",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63835871219635,
         "latitude":45.45900183707178
@@ -1890,7 +2126,8 @@
     },
     {
       "roomCode":"128",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63836407661438,
         "latitude":45.45893222694632
@@ -1898,7 +2135,8 @@
     },
     {
       "roomCode":"130",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.6383318901062,
         "latitude":45.458898362529894
@@ -1906,7 +2144,8 @@
     },
     {
       "roomCode":"126",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63846331834793,
         "latitude":45.45896797269717
@@ -1914,7 +2153,8 @@
     },
     {
       "roomCode":"stairs-1",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63854110240936,
         "latitude":45.45901876925146
@@ -1922,7 +2162,8 @@
     },
     {
       "roomCode":"127.5",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.6384043097496,
         "latitude":45.45888331167162
@@ -1930,7 +2171,8 @@
     },
     {
       "roomCode":"121",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63868057727814,
         "latitude":45.45899054894915
@@ -1938,7 +2180,8 @@
     },
     {
       "roomCode":"121.3",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63877177238464,
         "latitude":45.45901876925146
@@ -1946,7 +2189,8 @@
     },
     {
       "roomCode":"127.4",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63846063613892,
         "latitude":45.458898362529894
@@ -1954,7 +2198,8 @@
     },
     {
       "roomCode":"127.3",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63849818706512,
         "latitude":45.45890965067096
@@ -1962,7 +2207,8 @@
     },
     {
       "roomCode":"127.2",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.6385652422905,
         "latitude":45.45893034559038
@@ -1970,7 +2216,8 @@
     },
     {
       "roomCode":"121.2",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63860547542572,
         "latitude":45.458945396436086
@@ -1978,7 +2225,8 @@
     },
     {
       "roomCode":"127.1",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63853842020035,
         "latitude":45.45895104050222
@@ -1986,7 +2234,8 @@
     },
     {
       "roomCode":"121.1",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.6385840177536,
         "latitude":45.458960447277796
@@ -1994,7 +2243,8 @@
     },
     {
       "roomCode":"101.4",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63814145326614,
         "latitude":45.45916551459574
@@ -2002,7 +2252,8 @@
     },
     {
       "roomCode":"101.3",
-      "floorCode":"VL-1",
+      "floorCode": "VL-1",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.6381709575653,
         "latitude":45.4591372943669
@@ -2010,7 +2261,8 @@
     },
     {
       "roomCode":"stairs-3",
-      "floorCode":"VL-2",
+      "floorCode": "VL-2",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63792687654495,
         "latitude":45.45907709116479
@@ -2018,7 +2270,8 @@
     },
     {
       "roomCode":"202.1",
-      "floorCode":"VL-2",
+      "floorCode": "VL-2",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.6379536986351,
         "latitude":45.45904134548314
@@ -2026,7 +2279,8 @@
     },
     {
       "roomCode":"stairs-2",
-      "floorCode":"VL-2",
+      "floorCode": "VL-2",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63858938217163,
         "latitude":45.45927651402553
@@ -2034,7 +2288,8 @@
     },
     {
       "roomCode":"stairs-1",
-      "floorCode":"VL-2",
+      "floorCode": "VL-2",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63857597112656,
         "latitude":45.4590093624856
@@ -2042,7 +2297,8 @@
     },
     {
       "roomCode":"240",
-      "floorCode":"VL-2",
+      "floorCode": "VL-2",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63864570856094,
         "latitude":45.459291564778844
@@ -2050,7 +2306,8 @@
     },
     {
       "roomCode":"297.1",
-      "floorCode":"VL-2",
+      "floorCode": "VL-2",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.6386752128601,
         "latitude":45.45924829385221
@@ -2058,7 +2315,8 @@
     },
     {
       "roomCode":"201",
-      "floorCode":"VL-2",
+      "floorCode": "VL-2",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63861620426178,
         "latitude":45.459182446726274
@@ -2066,7 +2324,8 @@
     },
     {
       "roomCode":"204",
-      "floorCode":"VL-2",
+      "floorCode": "VL-2",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63868325948715,
         "latitude":45.45914293841379
@@ -2074,7 +2333,8 @@
     },
     {
       "roomCode":"203.3",
-      "floorCode":"VL-2",
+      "floorCode": "VL-2",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63863497972487,
         "latitude":45.4591260062714
@@ -2082,7 +2342,8 @@
     },
     {
       "roomCode":"203.2",
-      "floorCode":"VL-2",
+      "floorCode": "VL-2",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63860547542572,
         "latitude":45.4591034300736
@@ -2090,7 +2351,8 @@
     },
     {
       "roomCode":"203.1",
-      "floorCode":"VL-2",
+      "floorCode": "VL-2",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63859206438065,
         "latitude":45.459118480873144
@@ -2098,7 +2360,8 @@
     },
     {
       "roomCode":"mens-1",
-      "floorCode":"VL-2",
+      "floorCode": "VL-2",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63866180181503,
         "latitude":45.459043226835355
@@ -2106,7 +2369,8 @@
     },
     {
       "roomCode":"womens-1",
-      "floorCode":"VL-2",
+      "floorCode": "VL-2",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63864302635193,
         "latitude":45.45906580305725
@@ -2114,7 +2378,8 @@
     },
     {
       "roomCode":"stairs-4",
-      "floorCode":"VL-2",
+      "floorCode": "VL-2",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63821119070052,
         "latitude":45.45895292185747
@@ -2122,7 +2387,8 @@
     },
     {
       "roomCode":"202.30",
-      "floorCode":"VL-2",
+      "floorCode": "VL-2",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63826215267181,
         "latitude":45.458969854051844
@@ -2130,7 +2396,8 @@
     },
     {
       "roomCode":"elevators-1",
-      "floorCode":"VL-2",
+      "floorCode": "VL-2",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63818168640137,
         "latitude":45.45898678624111
@@ -2138,7 +2405,8 @@
     },
     {
       "roomCode":"201.1",
-      "floorCode":"VL-2",
+      "floorCode": "VL-2",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63858133554459,
         "latitude":45.45913353166862
@@ -2146,7 +2414,8 @@
     },
     {
       "roomCode":"205",
-      "floorCode":"VL-2",
+      "floorCode": "VL-2",
+      "Campus": "LOY",     
       "centerCoordinates":{
         "longitude":-73.63875567913054,
         "latitude":45.459101548723396

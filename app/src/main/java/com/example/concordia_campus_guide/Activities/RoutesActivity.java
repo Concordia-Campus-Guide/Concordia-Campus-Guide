@@ -133,7 +133,9 @@ public class RoutesActivity extends AppCompatActivity {
     public void onClickShuttle(View v) {
         List<Shuttle> shuttles = mViewModel.getAllShuttles();
         setShuttleSelect();
-        mViewModel.adaptShuttleToRoutes(shuttles);
+        if (!shuttles.isEmpty()) {
+            mViewModel.adaptShuttleToRoutes(shuttles);
+        }
         setRoutesAdapter();
     }
 
