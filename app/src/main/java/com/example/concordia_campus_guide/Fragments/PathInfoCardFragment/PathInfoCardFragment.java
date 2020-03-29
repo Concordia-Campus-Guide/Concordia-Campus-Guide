@@ -78,8 +78,8 @@ public class PathInfoCardFragment extends Fragment {
 
     public void getIndoorOutdoorInfo() {
         LinearLayout layout = (LinearLayout) getView().findViewById(R.id.paths_image_buttons);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0);
-        if (walkingPointList != null && directionsResults != null) {
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+        if (walkingPointList != null && directionsResults != null && !walkingPointList.isEmpty() && !directionsResults.isEmpty()) {
             if (walkingPointList.get(0).getPointType() == PointType.ENTRANCE) {
                 populateIndoorDirectionsList();
                 setDividerTextView(layout, layoutParams);

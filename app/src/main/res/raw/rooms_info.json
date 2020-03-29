@@ -1,7 +1,7 @@
 {
   "Rooms":[
     {
-      "roomCode": "VL",
+      "roomCode": "entrance",
       "floorCode": "VL-1",
       "centerCoordinates": {
         "longitude": -73.6388338,
@@ -9,7 +9,7 @@
       }
     },
     {
-      "roomCode": "MB",
+      "roomCode": "entrance",
       "floorCode": "MB-1",
       "centerCoordinates": {
         "longitude": -73.5785880312323,
@@ -17,7 +17,7 @@
       }
     },
     {
-      "roomCode": "H",
+      "roomCode": "entrance",
       "floorCode": "H-1",
       "centerCoordinates": {
         "longitude": -73.57868157327175,

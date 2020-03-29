@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.room.Room;
 
 import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragment;
@@ -69,10 +70,9 @@ public class PathsActivity extends AppCompatActivity {
         toTextView.setText(to.getDisplayName());
         setBackButtonOnClickListener();
 
-        directionWrappers = !(fromIsIndoor && toIsIndoor) ? (ArrayList<DirectionWrapper>) parseDirectionResults() : null;
-        if (!(fromIsIndoor && toIsIndoor)) {
-            locationFragment.drawOutdoorPaths(directionWrappers);
-        }
+        directionWrappers = (ArrayList<DirectionWrapper>) parseDirectionResults();
+
+        locationFragment.drawOutdoorPaths(directionWrappers);
 
         View pathInfoCard = findViewById(R.id.path_info_card);
         swipeableInfoCard = BottomSheetBehavior.from(pathInfoCard);
@@ -112,7 +112,7 @@ public class PathsActivity extends AppCompatActivity {
 
     public List<DirectionWrapper> parseDirectionResults() {
         ArrayList<DirectionWrapper> directionWrapperArrayList = new ArrayList<>();
-        DirectionsStep[] steps = directionsResult.legs[0].steps;
+        DirectionsStep[] steps = directionsResult != null && directionsResult.legs[0] != null ? directionsResult.legs[0].steps : null;
         for (DirectionsStep step : steps) {
             DirectionWrapper directionWrapper = new DirectionWrapper();
             directionWrapper.populateAttributesFromStep(step);
@@ -134,19 +134,17 @@ public class PathsActivity extends AppCompatActivity {
     public void setIndoorPaths() {
         if(!fromIsIndoor && !toIsIndoor) return;
 
-        String floorCode;
-        Place tempFrom = from;
-        Place tempTo = to;
-
-        if(fromIsIndoor && !toIsIndoor){
-            floorCode = ((RoomModel) from).getFloorCode();
-            tempTo = new RoomModel(from.getCenterCoordinates(), floorCode.substring(0, floorCode.indexOf('-')), floorCode);
+        //Outdoor -> Indoor
+        if (!fromIsIndoor) {
+            locationFragment.setIndoorPaths(mViewModel.getEntrance(to), to);
         }
-        if(toIsIndoor && !fromIsIndoor){
-            floorCode = ((RoomModel) to).getFloorCode();
-            tempFrom = new RoomModel(to.getCenterCoordinates(), floorCode.substring(0, floorCode.indexOf('-')), floorCode);
+        else if(mViewModel.arePlacesSeparatedByATunnel(from, to)){
+            locationFragment.setIndoorPaths(from, to);
         }
-
-        locationFragment.setIndoorPaths(tempFrom, tempTo);
+        //[from -> from_entrance ] + outdoor directions + [to_entrance -> to]
+        else if (toIsIndoor && fromIsIndoor) {
+            locationFragment.setIndoorPaths(from, mViewModel.getEntrance(from));
+            locationFragment.setIndoorPaths(mViewModel.getEntrance(to), to);
+        }
     }
 }
