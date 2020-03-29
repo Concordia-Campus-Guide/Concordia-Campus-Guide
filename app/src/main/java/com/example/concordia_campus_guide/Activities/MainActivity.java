@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     POIFragment poiFragment;
     MainActivityViewModel mViewModel;
     private BottomSheetBehavior swipeableInfoCard;
+    private BottomSheetBehavior swipeablePOICard;
     private Notification notification;
     Toolbar myToolbar;
 
@@ -66,10 +66,12 @@ public class MainActivity extends AppCompatActivity {
         myToolbar = (Toolbar) findViewById(R.id.toolbar);
         MainActivity.this.setTitle("ConUMaps");
         View infoCard = findViewById(R.id.bottom_card_scroll_view);
+        View poiCard = findViewById(R.id.explore_bottom_card_scroll_view);
         swipeableInfoCard = BottomSheetBehavior.from(infoCard);
         notification = new Notification(this,AppDatabase.getInstance(this));
         notification.checkUpCalendarEvery5Minutes();
         showPOICard();
+        swipeablePOICard = BottomSheetBehavior.from(poiCard);
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
     }
 
@@ -177,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.explore_bottom_card_frame, poiFragment);
         fragmentTransaction.commit();
+
 
         (findViewById(R.id.explore_bottom_card_frame)).setOnClickListener(new View.OnClickListener() {
             @Override

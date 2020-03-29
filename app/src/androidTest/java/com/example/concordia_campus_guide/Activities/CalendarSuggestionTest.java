@@ -25,13 +25,16 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
+import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class AppTitleLoadsTest {
+public class CalendarSuggestionTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
@@ -44,32 +47,48 @@ public class AppTitleLoadsTest {
                     "android.permission.READ_CALENDAR");
 
     @Test
-    public void appTitleLoadsTest() {
-        android.os.SystemClock.sleep(2000);
-
+    public void calendarSuggestionTest() {
         android.os.SystemClock.sleep(1000);
 
         ViewInteraction materialButton = onView(
                 allOf(withId(android.R.id.button2), withText("Ignore"),
-                        isDisplayed()));
+                    isDisplayed()));
         materialButton.perform(scrollTo(), click());
+
+        ViewInteraction actionMenuItemView = onView(
+                allOf(withId(R.id.search), withContentDescription("Icon"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.toolbar),
+                                        1),
+                                0),
+                        isDisplayed()));
+        actionMenuItemView.perform(click());
 
         android.os.SystemClock.sleep(1000);
 
-
         ViewInteraction textView = onView(
-                allOf(withText("ConUMaps"),
+                allOf(withId(R.id.next_class_text),
+                        isDisplayed()));
+        textView.check(matches(isDisplayed()));
+
+        ViewInteraction view = onView(
+                allOf(withId(R.id.view_container),
                         childAtPosition(
-                                allOf(withId(R.id.toolbar),
+                                allOf(withId(R.id.next_class_row),
                                         childAtPosition(
-                                                withId(R.id.appBarLayout),
-                                                0)),
+                                                withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
+                                                3)),
                                 0),
                         isDisplayed()));
-        textView.check(matches(withText("ConUMaps")));
+        view.perform(click());
 
         android.os.SystemClock.sleep(2000);
 
+        ViewInteraction textView2 = onView(
+                allOf(withId(R.id.toText), withText("H-9 937"),
+                        isDisplayed()));
+        textView2.check(matches(withText("H-9 937")));
     }
 
     private static Matcher<View> childAtPosition(

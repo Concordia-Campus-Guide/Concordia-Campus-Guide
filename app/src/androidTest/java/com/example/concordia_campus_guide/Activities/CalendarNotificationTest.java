@@ -31,7 +31,7 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class AppTitleLoadsTest {
+public class CalendarNotificationTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
@@ -44,32 +44,50 @@ public class AppTitleLoadsTest {
                     "android.permission.READ_CALENDAR");
 
     @Test
-    public void appTitleLoadsTest() {
-        android.os.SystemClock.sleep(2000);
+    public void calendarNotificationTest() {
 
-        android.os.SystemClock.sleep(1000);
+        android.os.SystemClock.sleep(5000);
 
-        ViewInteraction materialButton = onView(
-                allOf(withId(android.R.id.button2), withText("Ignore"),
+        ViewInteraction linearLayout = onView(
+                allOf(withId(R.id.buttonPanel),
                         isDisplayed()));
-        materialButton.perform(scrollTo(), click());
-
-        android.os.SystemClock.sleep(1000);
-
+        linearLayout.check(matches(isDisplayed()));
 
         ViewInteraction textView = onView(
-                allOf(withText("ConUMaps"),
-                        childAtPosition(
-                                allOf(withId(R.id.toolbar),
-                                        childAtPosition(
-                                                withId(R.id.appBarLayout),
-                                                0)),
-                                0),
+                allOf(withId(android.R.id.message),
                         isDisplayed()));
-        textView.check(matches(withText("ConUMaps")));
+        textView.check(matches(isDisplayed()));
+
+        ViewInteraction textView2 = onView(
+                allOf(withId(R.id.alertTitle),
+                        isDisplayed()));
+        textView2.check(matches(isDisplayed()));
+
+        ViewInteraction button = onView(
+                allOf(withId(android.R.id.button1),
+                        isDisplayed()));
+        button.check(matches(isDisplayed()));
+
+        ViewInteraction button2 = onView(
+                allOf(withId(android.R.id.button2),
+                        isDisplayed()));
+        button2.check(matches(isDisplayed()));
+
+        ViewInteraction materialButton = onView(
+                allOf(withId(android.R.id.button1), withText("Show me Directions"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.buttonPanel),
+                                        0),
+                                3)));
+        materialButton.perform(scrollTo(), click());
 
         android.os.SystemClock.sleep(2000);
 
+        ViewInteraction textView3 = onView(
+                allOf(withId(R.id.toText), withText("H-9 937"),
+                        isDisplayed()));
+        textView3.check(matches(withText("H-9 937")));
     }
 
     private static Matcher<View> childAtPosition(

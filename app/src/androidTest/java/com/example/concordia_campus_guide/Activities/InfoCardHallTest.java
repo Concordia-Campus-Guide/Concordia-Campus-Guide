@@ -69,6 +69,7 @@ public class InfoCardHallTest {
                                 0),
                         isDisplayed()));
         materialButton.perform(EspressoHelpers.hiddenClick());
+
         android.os.SystemClock.sleep(1000);
 
         UiObject marker = device.findObject(new UiSelector().descriptionContains("H"));

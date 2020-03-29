@@ -123,35 +123,25 @@ public class FloorPickerAndMarkersHallTest {
                         isDisplayed()));
         button4.check(matches(isDisplayed()));
 
-        ViewInteraction view2 = onView(
-                allOf(childAtPosition(
-                        allOf(withContentDescription("Google Map"),
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
-                                        0)),
-                        32),
-                        isDisplayed()));
-        view2.check(matches(isDisplayed()));
+        android.os.SystemClock.sleep(1000);
 
-        ViewInteraction view3 = onView(
-                allOf(childAtPosition(
-                        allOf(withContentDescription("Google Map"),
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
-                                        0)),
-                        67),
-                        isDisplayed()));
-        view3.check(matches(isDisplayed()));
+        UiObject marker2 = device.findObject(new UiSelector().descriptionContains("963"));
+        try {
+            marker2.click();
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+        }
 
-        ViewInteraction view4 = onView(
-                allOf(childAtPosition(
-                        allOf(withContentDescription("Google Map"),
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
-                                        0)),
-                        31),
-                        isDisplayed()));
-        view4.check(matches(isDisplayed()));
+        android.os.SystemClock.sleep(1000);
+
+        marker2 = device.findObject(new UiSelector().descriptionContains("983"));
+        try {
+            marker2.click();
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        android.os.SystemClock.sleep(1000);
 
         DataInteraction button5 = onData(anything())
                 .inAdapterView(allOf(withId(R.id.FloorPickerGv),
@@ -161,6 +151,35 @@ public class FloorPickerAndMarkersHallTest {
                 .atPosition(2);
         button5.perform(click());
 
+        android.os.SystemClock.sleep(1000);
+
+        marker2 = device.findObject(new UiSelector().descriptionContains("853"));
+        try {
+            marker2.click();
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        android.os.SystemClock.sleep(1000);
+
+        marker2 = device.findObject(new UiSelector().descriptionContains("822"));
+        try {
+            marker2.click();
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        android.os.SystemClock.sleep(1000);
+
+        marker2 = device.findObject(new UiSelector().descriptionContains("womens-1"));
+        try {
+            marker2.click();
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        android.os.SystemClock.sleep(1000);
+
         ViewInteraction view5 = onView(
                 allOf(childAtPosition(
                         allOf(withContentDescription("Google Map"),
@@ -169,7 +188,6 @@ public class FloorPickerAndMarkersHallTest {
                                         0)),
                         24),
                         isDisplayed()));
-        view5.check(matches(isDisplayed()));
 
         ViewInteraction view6 = onView(
                 allOf(childAtPosition(
@@ -179,7 +197,6 @@ public class FloorPickerAndMarkersHallTest {
                                         0)),
                         16),
                         isDisplayed()));
-        view6.check(matches(isDisplayed()));
 
         ViewInteraction view7 = onView(
                 allOf(childAtPosition(
@@ -189,7 +206,6 @@ public class FloorPickerAndMarkersHallTest {
                                         0)),
                         36),
                         isDisplayed()));
-        view7.check(matches(isDisplayed()));
 
         DataInteraction button6 = onData(anything())
                 .inAdapterView(allOf(withId(R.id.FloorPickerGv),

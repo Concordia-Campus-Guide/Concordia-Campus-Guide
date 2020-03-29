@@ -21,17 +21,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class AppTitleLoadsTest {
+public class CurrentLocationButtonTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
@@ -44,32 +41,11 @@ public class AppTitleLoadsTest {
                     "android.permission.READ_CALENDAR");
 
     @Test
-    public void appTitleLoadsTest() {
-        android.os.SystemClock.sleep(2000);
-
-        android.os.SystemClock.sleep(1000);
-
-        ViewInteraction materialButton = onView(
-                allOf(withId(android.R.id.button2), withText("Ignore"),
+    public void currentLocationButtonTest() {
+        ViewInteraction imageButton = onView(
+                allOf(withId(R.id.myLocation),
                         isDisplayed()));
-        materialButton.perform(scrollTo(), click());
-
-        android.os.SystemClock.sleep(1000);
-
-
-        ViewInteraction textView = onView(
-                allOf(withText("ConUMaps"),
-                        childAtPosition(
-                                allOf(withId(R.id.toolbar),
-                                        childAtPosition(
-                                                withId(R.id.appBarLayout),
-                                                0)),
-                                0),
-                        isDisplayed()));
-        textView.check(matches(withText("ConUMaps")));
-
-        android.os.SystemClock.sleep(2000);
-
+        imageButton.check(matches(isDisplayed()));
     }
 
     private static Matcher<View> childAtPosition(
