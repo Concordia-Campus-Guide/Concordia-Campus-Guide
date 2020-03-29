@@ -69,7 +69,7 @@ public class PathsActivity extends AppCompatActivity {
         toTextView.setText(to.getDisplayName());
         setBackButtonOnClickListener();
 
-        directionWrappers = !(fromIsIndoor && toIsIndoor) ? (ArrayList<DirectionWrapper>) parseDirectionResults() : new ArrayList<>();
+        directionWrappers = !(fromIsIndoor && toIsIndoor) ? (ArrayList<DirectionWrapper>) parseDirectionResults() : null;
         if (!(fromIsIndoor && toIsIndoor)) {
             locationFragment.drawOutdoorPaths(directionWrappers);
         }
@@ -133,6 +133,7 @@ public class PathsActivity extends AppCompatActivity {
 
     public void setIndoorPaths() {
         if(!fromIsIndoor && !toIsIndoor) return;
+
         String floorCode;
         Place tempFrom = from;
         Place tempTo = to;

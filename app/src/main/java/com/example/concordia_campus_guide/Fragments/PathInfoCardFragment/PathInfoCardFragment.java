@@ -42,7 +42,6 @@ public class PathInfoCardFragment extends Fragment {
     List<DirectionWrapper> directionsResults;
     double totalDistance;
     double distanceBetweenPoints;
-    private static DecimalFormat df2 = new DecimalFormat("#.##");
     private double totalDuration;
 
     public static PathInfoCardFragment newInstance() {
@@ -62,8 +61,10 @@ public class PathInfoCardFragment extends Fragment {
 
         Serializable temporaryDirectionsResults = getArguments().getSerializable("directionsResult");
         directionsResults = (ArrayList<DirectionWrapper>) temporaryDirectionsResults;
+        walkingPointList = (ArrayList<WalkingPoint>) getArguments().getSerializable("walkingPoints");
 
         pathInfoCardViewModel = new ViewModelProvider(this).get(PathInfoCardViewModel.class);
+
 
         return view;
     }
@@ -71,14 +72,13 @@ public class PathInfoCardFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        walkingPointList = (ArrayList<WalkingPoint>) getArguments().getSerializable("walkingPoints");
         getIndoorOutdoorInfo();
         setStartAndEndTime();
     }
 
     public void getIndoorOutdoorInfo() {
         LinearLayout layout = (LinearLayout) getView().findViewById(R.id.paths_image_buttons);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0);
         if (walkingPointList != null && directionsResults != null) {
             if (walkingPointList.get(0).getPointType() == PointType.ENTRANCE) {
                 populateIndoorDirectionsList();
@@ -88,13 +88,12 @@ public class PathInfoCardFragment extends Fragment {
                 populateOutdoorDirectionsList();
                 setDividerTextView(layout, layoutParams);
                 populateIndoorDirectionsList();
-            } else if (walkingPointList != null) {
-                populateIndoorDirectionsList();
-            } else if (directionsResults != null) {
-                populateOutdoorDirectionsList();
             }
+        } else if (walkingPointList != null) {
+                populateIndoorDirectionsList();
+        } else if (directionsResults != null) {
+                populateOutdoorDirectionsList();
         }
-
     }
 
     public void createImageButton(LinearLayout layout, LinearLayout.LayoutParams layoutParams, int imageId) {
@@ -116,17 +115,17 @@ public class PathInfoCardFragment extends Fragment {
 
     public void setStartAndEndTime() {
         TextView totalDurationTextView = (TextView) getView().findViewById(R.id.total_time);
-        totalDurationTextView.setText(df2.format(totalDuration) + "min");
+        totalDurationTextView.setText(Math.ceil(totalDuration) + "min");
         Date date = new Date();   // given date
         Calendar calendar = Calendar.getInstance(); // creates a new calendar instance
         calendar.setTime(date);   // assigns calendar to given date
         TextView startTimeTextView = (TextView) getView().findViewById(R.id.start_time);
-        startTimeTextView.setText(calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE));
+        startTimeTextView.setText(String.format("%02d:%02d", calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE)));
         TextView endTimeTextView = (TextView) getView().findViewById(R.id.arrival_time);
         Calendar arrivalCalendar = Calendar.getInstance();
         arrivalCalendar.setTime(new Date());
         arrivalCalendar.add(Calendar.MINUTE, (int) totalDuration);
-        endTimeTextView.setText(arrivalCalendar.get(Calendar.HOUR_OF_DAY) + ":" + arrivalCalendar.get(Calendar.MINUTE));
+        endTimeTextView.setText(String.format("%02d:%02d", arrivalCalendar.get(Calendar.HOUR_OF_DAY), arrivalCalendar.get(Calendar.MINUTE)));
     }
 
     public void populateIndoorDirectionsList() {
@@ -234,12 +233,6 @@ public class PathInfoCardFragment extends Fragment {
                     if (!lastOne)
                         setDividerTextView(layout, layoutParams);
                     break;
-                    // TODO: Shuttle constant has not been created yet
-//                case SHUTTLE:
-//                    createImageButton(layout, layoutParams, R.drawable.ic_shuttle);
-//                    if (!lastOne)
-//                        setDividerTextView(layout, layoutParams);
-//                    break;
                 case ClassConstants.BICYCLING:
                     createImageButton(layout, layoutParams, R.drawable.ic_directions_bike_black_24dp);
                     if (!lastOne)
@@ -252,6 +245,12 @@ public class PathInfoCardFragment extends Fragment {
                             setDividerTextView(layout, layoutParams);
                     }
                     break;
+//                    TODO: Shuttle constant has not been created yet
+//                case SHUTTLE:
+//                    createImageButton(layout, layoutParams, R.drawable.ic_shuttle);
+//                    if (!lastOne)
+//                        setDividerTextView(layout, layoutParams);
+//                    break;
             }
         }
     }
