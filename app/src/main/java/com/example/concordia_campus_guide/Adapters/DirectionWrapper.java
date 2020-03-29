@@ -12,6 +12,7 @@ public class DirectionWrapper implements Serializable {
     private Direction direction;
     private EncodedPolyline polyline;
 
+    public DirectionWrapper(){}
     public DirectionWrapper(DirectionsStep directionStep){
         // create a new direction
         direction = new Direction();
