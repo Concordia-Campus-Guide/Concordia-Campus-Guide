@@ -92,10 +92,10 @@ public class RoutesActivityViewModelTest {
 
     @Test
     public void adaptShuttleToRoutesTest() {
-//        mViewModel.setShuttles();
         List<Shuttle> shuttles = new ArrayList<>();
         shuttles.add(shuttle1);
         mViewModel.adaptShuttleToRoutes(shuttles);
+        mViewModel.getShuttles();
         assertNotNull(mViewModel.getRouteOptions());
     }
 

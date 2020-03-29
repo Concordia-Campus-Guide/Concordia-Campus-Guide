@@ -72,7 +72,7 @@ public class RoutesActivityViewModel extends ViewModel {
         return campusFrom + "," + campusTo;
     }
 
-    public List<Shuttle> getAllShuttles() {
+    public List<Shuttle> filterShuttles() {
         String[] campuses = getFromAndToCampus(getFrom(), getTo()).split(",");
         // campus[0] is campusFrom and campus[1] is campusTo
         if (campuses.length == 0 || campuses[0].compareTo(campuses[1]) == 0) {
