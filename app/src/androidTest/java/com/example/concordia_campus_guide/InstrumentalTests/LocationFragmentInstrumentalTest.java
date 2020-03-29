@@ -68,15 +68,6 @@ public class LocationFragmentInstrumentalTest {
         assertNotNull(bitmap2);
     }
 
-//    @Test
-//    public void setAndGetPOIIcon(){
-//        viewModel.setListOfPOI("ELEVATOR",appContext);
-//      //  String as = listOfPOIs.getValue().peek().getPointType().toString();
-//        WalkingPoint walkingPoint = viewModel.getListOfPOI().getValue().peek();
-//        PointType pointType = walkingPoint.getPointType();
-//        assertEquals("ELEVATOR", pointType.toString());
-//    }
-
     @Test
     public void getFloorPolylinesTest(){
         RoomModel roomFrom = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8");
