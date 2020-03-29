@@ -94,7 +94,7 @@ public class LocationFragmentViewModelTest  {
     }
     @Test
     public void getBuildingFromCodeTest(){
-        assertEquals(buildings.get("EV"), viewModel.getBuildingFromeCode("EV"));
+        assertEquals(buildings.get("EV"), viewModel.getBuildingFromCode("EV"));
     }
 
 }
