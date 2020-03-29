@@ -2,9 +2,6 @@ package com.example.concordia_campus_guide.Global;
 
 public class NotificationStatus {
     private static NotificationStatus instance;
-
-
-
     private boolean notifyUser;
 
     private NotificationStatus(){
