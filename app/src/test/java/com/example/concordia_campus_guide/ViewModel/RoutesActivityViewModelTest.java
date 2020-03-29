@@ -24,6 +24,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+import static junit.framework.Assert.assertNull;
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -78,13 +79,22 @@ public class RoutesActivityViewModelTest {
         assertEquals(mViewModel.getFrom(), sampleBuilding);
     }
 
-//    @Test
-//    public void getSetShuttles(){
-//        mViewModel.setShuttles();
-//        List<Shuttle> expectedListOfShuttles = Arrays.asList(shuttle1);
-//        List<Shuttle> returnedListOfShuttles = mViewModel.getShuttles();
-//        assertEquals(expectedListOfShuttles.get(0).getShuttleId(),returnedListOfShuttles.get(0).getShuttleId());
-//    }
+    @Test
+    public void getFromAndToCampuses() {
+        Building sampleBuildingFrom = new Building("H");
+        sampleBuildingFrom.setCampus("SGW");
+        mViewModel.setFrom(sampleBuildingFrom);
+        Building sampleBuildingTo = new Building("AD");
+        sampleBuildingTo.setCampus("LOY");
+        mViewModel.setTo(sampleBuildingFrom);
+        assertEquals("SGW,LOY", mViewModel.getFromAndToCampus(sampleBuildingFrom, sampleBuildingTo));
+    }
+
+    @Test
+    public void getShuttlesByDayAndTimeTest() {
+        ArrayList<String> expected = new ArrayList<>();
+        assertEquals(expected, mViewModel.getShuttlesByDayAndTime("SGW", "Sunday", 7.05));
+    }
 
     @Test
     public void getShuttleDisplayTextTest(){
