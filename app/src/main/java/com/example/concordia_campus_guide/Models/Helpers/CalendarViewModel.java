@@ -110,7 +110,7 @@ public class CalendarViewModel extends AndroidViewModel {
                 == PackageManager.PERMISSION_GRANTED;
     }
 
-    private String getTimeUntilString(long eventTime, long currentTime){
+    public String getTimeUntilString(long eventTime, long currentTime){
         long differenceInMillis = eventTime - currentTime;
 
         String timeUntil = String.format("%02d hours and %02d minutes",

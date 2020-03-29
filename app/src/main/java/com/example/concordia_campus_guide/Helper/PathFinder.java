@@ -70,15 +70,19 @@ public class PathFinder {
 
     public WalkingPoint getWalkingPointCorrespondingToPlace(final Place place) {
         String placeCode;
+        String floorCode;
+
         List<WalkingPoint> pointList = null;
         if (place instanceof Building) {
             placeCode = ((Building) place).getBuildingCode();
             pointList = appDatabase.walkingPointDao().getAllWalkingPointsFromPlaceCode(placeCode);
         } else if (place instanceof RoomModel) {
+            //placeCode is not unique for Rooms, therefore we need to fetch the Walking point by searching for both floor code and place code
+            floorCode = ((RoomModel) place).getFloorCode();
             placeCode = ((RoomModel) place).getRoomCode();
-            pointList = appDatabase.walkingPointDao().getAllWalkingPointsFromPlaceCode(placeCode);
+            pointList = appDatabase.walkingPointDao().getAllWalkingPointsFromPlace(floorCode, placeCode);
         } else if (place instanceof Floor) {
-            String floorCode = ((Floor) place).getFloorCode();
+            floorCode = ((Floor) place).getFloorCode();
             pointList = appDatabase.walkingPointDao().getAllAccessPointsOnFloor(floorCode, PointType.ELEVATOR);
         }
 
@@ -151,7 +155,7 @@ public class PathFinder {
 
             final WalkingPointNode adjacentNode = walkingPointNodesMap.get(id);
             final double currentCost = currentNode.getCost() + indoorPathHeuristic.getEuclideanDistance(currentNode.getWalkingPoint(),
-                    walkingPointNodesMap.get(id).getWalkingPoint());
+                    adjacentNode.getWalkingPoint());
             final double previousCost = adjacentNode.getCost();
 
             if (walkingPointsVisited.containsKey(adjacentNode)) {
