@@ -1,5 +1,4 @@
 package com.example.concordia_campus_guide.Adapters;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -11,8 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Models.Routes.Bus;
-import com.example.concordia_campus_guide.Models.Routes.Car;
-import com.example.concordia_campus_guide.Models.Direction;
 import com.example.concordia_campus_guide.Models.Routes.Route;
 import com.example.concordia_campus_guide.Models.Routes.Subway;
 import com.example.concordia_campus_guide.Models.Routes.Train;
@@ -23,8 +20,6 @@ import com.google.android.flexbox.FlexboxLayout;
 
 import java.util.List;
 import androidx.annotation.NonNull;
-
-import org.w3c.dom.Text;
 
 /**
  * This class is an Android Adapter for the UI of the Routes Activity page
@@ -51,8 +46,8 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = LayoutInflater.from(this.getContext()).inflate(R.layout.list_routes, parent, false);
-        initComponent(convertView);
+        View viewToDisplay = LayoutInflater.from(this.getContext()).inflate(R.layout.list_routes, parent, false);
+        initComponent(viewToDisplay);
 
         Route route = getItem(position);
 
@@ -61,7 +56,7 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
         else
             displayInfoMsg();
 
-        return convertView;
+        return viewToDisplay;
     }
 
     private void initComponent(View convertView) {

@@ -52,6 +52,8 @@ import java.time.LocalTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class PlacesApiTest {
@@ -147,6 +149,7 @@ public class PlacesApiTest {
     }
   }
 
+  @Ignore
   @Test
   public void testPlaceDetailsLookupGoogleSydney() throws Exception {
     try (LocalTestServerContext sc = new LocalTestServerContext(placeDetailResponseBody)) {

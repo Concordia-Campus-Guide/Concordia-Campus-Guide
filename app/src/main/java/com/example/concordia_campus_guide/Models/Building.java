@@ -1,6 +1,7 @@
 package com.example.concordia_campus_guide.Models;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
@@ -12,7 +13,6 @@ import androidx.room.TypeConverters;
 
 import com.example.concordia_campus_guide.Database.Converters.CoordinatesListConverter;
 import com.example.concordia_campus_guide.Database.Converters.StringListConverter;
-import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 
 import org.json.JSONArray;
@@ -218,7 +218,7 @@ public class Building extends Place {
             toReturn.put("geometry", geometry);
         }
         catch (Exception e){
-            e.printStackTrace();
+            Log.e("BUILDING", e.getMessage());
         }
 
         return toReturn;
