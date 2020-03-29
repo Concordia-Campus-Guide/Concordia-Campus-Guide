@@ -60,8 +60,8 @@ public class PathFinderTest {
         walkingPointList.add(walkingPoint3);
         walkingPointList.add(walkingPoint4);
         when(mockWalkingPointDao.getAll()).thenReturn(walkingPointList);
-        when(mockAppDb.walkingPointDao().getAllWalkingPointsFromPlaceCode(room1.getRoomCode())).thenReturn(walkingPointList);
-        when(mockAppDb.walkingPointDao().getAllWalkingPointsFromPlaceCode(room2.getRoomCode())).thenReturn(walkingPointList);
+        when(mockAppDb.walkingPointDao().getAllWalkingPointsFromPlace(room1.getFloorCode(), room1.getRoomCode())).thenReturn(walkingPointList);
+        when(mockAppDb.walkingPointDao().getAllWalkingPointsFromPlace(room1.getFloorCode(), room2.getRoomCode())).thenReturn(walkingPointList);
         pathFinder = new PathFinder(mockAppDb,room1,room2);
         walkingPointNode1 = pathFinder.new WalkingPointNode(walkingPoint1, null, 22.3, 123.312);
     }
