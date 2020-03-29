@@ -35,21 +35,21 @@ public class NotificationTest {
         notification = new Notification(mainActivity,mockAppDatabase);
         when(mockAppDatabase.roomDao()).thenReturn(mockRoomDao);
         when(mockRoomDao.getRoomByRoomCodeAndFloorCode("927","H-9")).thenReturn(
-                new RoomModel(new Coordinates(0, 0), "111", "H-9")
+                new RoomModel(new Coordinates(0, 0), "111", "H-9", "SGW")
         );
         when(mockRoomDao.getRoomByRoomCodeAndFloorCode("1027","H-10")).thenReturn(
-                new RoomModel(new Coordinates(0, 0), "1027", "H-10")
+                new RoomModel(new Coordinates(0, 0), "1027", "H-10", "SGW")
         );
     }
     @Test
     public void getRoomTest(){
-        RoomModel expectedRoom = new RoomModel(new Coordinates(0, 0), "111", "H-9");
+        RoomModel expectedRoom = new RoomModel(new Coordinates(0, 0), "111", "H-9", "SGW");
         assertEquals(expectedRoom.getFloorCode(), notification.getRoom("H-9, 927").getFloorCode());
     }
 
     @Test
     public void getRoom10thFloorTest(){
-        RoomModel expectedRoom = new RoomModel(new Coordinates(0, 0), "1027", "H-10");
+        RoomModel expectedRoom = new RoomModel(new Coordinates(0, 0), "1027", "H-10", "SGW");
         assertEquals(expectedRoom.getFloorCode(), notification.getRoom("H-10, 1027").getFloorCode());
     }
 

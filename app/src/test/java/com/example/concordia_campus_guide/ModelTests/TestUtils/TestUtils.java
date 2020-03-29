@@ -93,8 +93,8 @@ public class TestUtils {
     public Floors floors = new Floors();
 
     // Rooms
-    public RoomModel room1 = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8");
-    public RoomModel room2 = new RoomModel(new Coordinates(-73.57902321964502, 45.49699848270905), "921", "H-9");
+    public RoomModel room1 = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8", "SGW");
+    public RoomModel room2 = new RoomModel(new Coordinates(-73.57902321964502, 45.49699848270905), "921", "H-9", "SGW");
 
     public ArrayList<RoomModel> roomList = new ArrayList<RoomModel>(Arrays.asList(room1, room2));
     public Rooms rooms = new Rooms(roomList);
