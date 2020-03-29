@@ -1,7 +1,11 @@
 package com.example.concordia_campus_guide.Adapters;
 
+import android.graphics.Color;
+
+import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.EncodedPolyline;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TransitDetails;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TravelMode;
 import com.example.concordia_campus_guide.Models.Direction;
 import com.google.android.gms.maps.model.LatLng;
@@ -11,19 +15,26 @@ import java.io.Serializable;
 public class DirectionWrapper implements Serializable {
     private Direction direction;
     private EncodedPolyline polyline;
+    private TransitDetails transitDetails;
 
     public DirectionWrapper(){}
-    public DirectionWrapper(DirectionsStep directionStep){
+
+    public void populateAttributesFromStep(DirectionsStep directionStep){
         // create a new direction
-        direction = new Direction();
-        direction.setStart(new LatLng(directionStep.startLocation.lat, directionStep.startLocation.lng));
-        direction.setEnd(new LatLng(directionStep.endLocation.lat, directionStep.endLocation.lng));
-        direction.setTransportType(getTransitType(directionStep.travelMode));
-        direction.setDescription(directionStep.htmlInstructions);
-        direction.setDuration(directionStep.duration.value);
+        this.direction = new Direction();
+        this.direction.setStart(new LatLng(directionStep.startLocation.lat, directionStep.startLocation.lng));
+        this.direction.setEnd(new LatLng(directionStep.endLocation.lat, directionStep.endLocation.lng));
+        this.direction.setTransportType(getTransitType(directionStep.travelMode));
+        this.direction.setDescription(directionStep.htmlInstructions);
+        this.direction.setDuration(directionStep.duration.value);
 
         // map polyline
-        polyline = directionStep.polyline;
+        this.polyline = directionStep.polyline;
+
+        //get color is of type transit
+        if(directionStep.travelMode.toString().equals(ClassConstants.TRANSIT)){
+            this.transitDetails = directionStep.transitDetails;
+        }
     }
 
     private String getTransitType(TravelMode travelMode){
@@ -45,4 +56,9 @@ public class DirectionWrapper implements Serializable {
     public void setPolyline(EncodedPolyline polyline) {
         this.polyline = polyline;
     }
+
+    public TransitDetails getTransitDetails() {
+        return transitDetails;
+    }
+
 }

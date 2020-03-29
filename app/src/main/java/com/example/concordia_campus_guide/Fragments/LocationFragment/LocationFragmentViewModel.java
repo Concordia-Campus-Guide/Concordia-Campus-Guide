@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.location.Location;
+import android.os.Build;
 
 import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.ClassConstants;
@@ -45,6 +46,7 @@ import java.util.PriorityQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -379,7 +381,11 @@ public class LocationFragmentViewModel extends ViewModel {
 
     public void drawOutdoorPath(List<DirectionWrapper> outdoorDirections, GoogleMap map) {
         for (DirectionWrapper directionWrapper : outdoorDirections) {
-            PolylineOptions polylineOptions = stylePolyLine(directionWrapper.getDirection().getTransportType());
+            int color = 0;
+            if(directionWrapper.getTransitDetails() != null){
+                color = Color.parseColor(directionWrapper.getTransitDetails().line.color);
+            }
+            PolylineOptions polylineOptions = stylePolyLine(directionWrapper.getDirection().getTransportType(), color);
             List<com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.LatLng> polyline = directionWrapper.getPolyline().decodePath();
 
             for (int i = 0; i < polyline.size(); i++) {
@@ -389,13 +395,13 @@ public class LocationFragmentViewModel extends ViewModel {
         }
     }
 
-    private PolylineOptions stylePolyLine(String type) {
+    private PolylineOptions stylePolyLine(String type, int color) {
         PolylineOptions polylineOptions = new PolylineOptions().width(20);
         if (type.equals(ClassConstants.WALKING)) {
             polylineOptions.pattern(ClassConstants.WALK_PATTERN);
         }
-        if (type.equals(ClassConstants.TRANSIT) || type.equals(ClassConstants.DRIVING)) {
-            polylineOptions.color(Color.rgb(35, 147, 57));
+        if (color != 0) {
+            polylineOptions.color(color);
         } else {
             polylineOptions.color(Color.rgb(147, 35, 57));
         }

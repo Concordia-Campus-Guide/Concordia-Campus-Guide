@@ -16,6 +16,7 @@ import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFra
 import com.example.concordia_campus_guide.Fragments.PathInfoCardFragment.PathInfoCardFragment;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsRoute;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
+import com.example.concordia_campus_guide.Models.Direction;
 import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
@@ -113,7 +114,9 @@ public class PathsActivity extends AppCompatActivity {
         ArrayList<DirectionWrapper> directionWrapperArrayList = new ArrayList<>();
         DirectionsStep[] steps = directionsResult.legs[0].steps;
         for (DirectionsStep step : steps) {
-            directionWrapperArrayList.add(new DirectionWrapper(step));
+            DirectionWrapper directionWrapper = new DirectionWrapper();
+            directionWrapper.populateAttributesFromStep(step);
+            directionWrapperArrayList.add(directionWrapper);
         }
         return directionWrapperArrayList;
     }
