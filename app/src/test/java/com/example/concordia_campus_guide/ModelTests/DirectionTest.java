@@ -17,7 +17,7 @@ public class DirectionTest {
     @Before
     public void init() {
         testUtils = new TestUtilsRoutes();
-        direction = testUtils.direction;
+        direction = new Direction();
     }
 
     @Test

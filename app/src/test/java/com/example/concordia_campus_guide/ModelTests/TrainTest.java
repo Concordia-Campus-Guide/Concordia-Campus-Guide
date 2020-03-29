@@ -1,5 +1,8 @@
 package com.example.concordia_campus_guide.ModelTests;
 
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TransitDetails;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TransitLine;
 import com.example.concordia_campus_guide.ModelTests.TestUtils.TestUtils;
 import com.example.concordia_campus_guide.ModelTests.TestUtils.TestUtilsRoutes;
 import com.example.concordia_campus_guide.Models.Routes.Train;
@@ -11,20 +14,17 @@ import static junit.framework.TestCase.assertEquals;
 
 public class TrainTest {
     private Train train;
-    private TestUtilsRoutes testUtils;
-
-    @Before
-    public void init() {
-        testUtils = new TestUtilsRoutes();
-    }
-
     @Test
     public void getColorTest() {
         // Act
-        train = new Train(testUtils.directionsStepTrain());
-        String expectedTrainShortName = testUtils.directionsStepTrain().transitDetails.line.shortName;
+        DirectionsStep directionsStep = new DirectionsStep();
+        directionsStep.transitDetails = new TransitDetails();
+        directionsStep.transitDetails.line = new TransitLine();
+        directionsStep.transitDetails.line.shortName = "DM";
+
+        train = new Train(directionsStep);
 
         // Arrange & Assert
-        assertEquals(expectedTrainShortName, train.getTrainShortName());
+        assertEquals("DM", train.getTrainShortName());
     }
 }

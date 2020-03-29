@@ -15,59 +15,6 @@ import java.util.Arrays;
 
 public class TestUtilsRoutes {
 
-    // Directions step
-    public DirectionsStep directionsStepBus(){
-        DirectionsStep directionsStep = new DirectionsStep();
-        directionsStep.transitDetails = new TransitDetails();
-        directionsStep.transitDetails.line = new TransitLine();
-        directionsStep.transitDetails.line.shortName = "128";
-
-        return directionsStep;
-    }
-
-    public DirectionsStep directionsStepCar(){
-        DirectionsStep directionsStep = new DirectionsStep();
-        directionsStep.duration = new Duration();
-        directionsStep.duration.value = 142;
-
-        return directionsStep;
-    }
-
-    public DirectionsStep directionsStepSubway(){
-        DirectionsStep directionsStep = new DirectionsStep();
-        directionsStep.transitDetails = new TransitDetails();
-        directionsStep.transitDetails.line = new TransitLine();
-        directionsStep.transitDetails.line.color = "orange";
-
-        return directionsStep;
-    }
-
-    public DirectionsStep directionsStepTrain(){
-        DirectionsStep directionsStep = new DirectionsStep();
-        directionsStep.transitDetails = new TransitDetails();
-        directionsStep.transitDetails.line = new TransitLine();
-        directionsStep.transitDetails.line.shortName = "DM";
-
-        return directionsStep;
-    }
-
-    public DirectionsStep directionsStepWalk(){
-        DirectionsStep directionsStep = new DirectionsStep();
-        directionsStep.duration = new Duration();
-        directionsStep.duration.text  = "2 mins";
-
-        return directionsStep;
-    }
-
-    // Direction
-    public Direction direction = new Direction();
-//            new LatLng(-73.57907921075821, 45.49702057370776),
-//            new LatLng(-73.57921063899994, 45.49707133596979),
-//            new Walk(getDirectionStepsObject()), "This is a description");
-
-    // Routes
-    public Route route1 = new Route("1 day 20 hours", "I-80 E", "driving");
-
     // Shuttle
     public Shuttle getShuttle1(){
         Shuttle shuttle1 = new Shuttle();
