@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WalkingPoints {
-        private List<WalkingPoint> walkingPointList;
+        private List<WalkingPoint> walkingPoints;
 
-        public WalkingPoints(){ walkingPointList = new ArrayList<>(); }
+        public WalkingPoints(){ walkingPoints = new ArrayList<>(); }
 
-        public WalkingPoints(List<WalkingPoint> walkingPoints){  this.walkingPointList = walkingPoints; }
+        public WalkingPoints(List<WalkingPoint> walkingPoints){  this.walkingPoints = walkingPoints; }
 
-        public List<WalkingPoint> getWalkingPointList(){
-            return walkingPointList;
+        public List<WalkingPoint> getWalkingPoints(){
+            return walkingPoints;
         }
 
-        public void setWalkingPointList(List<WalkingPoint> walkingPointList){ this.walkingPointList = walkingPointList; }
+        public void setWalkingPoints(List<WalkingPoint> walkingPoints){ this.walkingPoints = walkingPoints; }
 
 }
 
