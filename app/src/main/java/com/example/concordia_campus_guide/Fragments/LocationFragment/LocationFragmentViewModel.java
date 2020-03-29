@@ -301,19 +301,31 @@ public class LocationFragmentViewModel extends ViewModel {
 
     private PriorityQueue<WalkingPoint> getPOIinOrder(List<WalkingPoint> allPOI) {
         PriorityQueue<WalkingPoint> orderedList = new PriorityQueue<>((WalkingPoint p1, WalkingPoint p2) -> {
-            Coordinates currentCoordinates = new Coordinates(currentLocation.getLatitude(), currentLocation.getLongitude());
-            double distanceFromO1 = p1.getCoordinate().getEuclideanDistanceFrom(currentCoordinates);
-            double distanceFromO2 = p2.getCoordinate().getEuclideanDistanceFrom(currentCoordinates);
+            Coordinates currentCoordinates;
+
+            if (currentLocation == null) {
+                //This building has inverted lat/lng in order to us th geojsons.
+                Building hallBuilding = appDatabase.buildingDao().getBuildingByBuildingCode("H");
+                Double currentLat = hallBuilding != null? hallBuilding.getCenterCoordinates().getLatitude() : 0;
+                Double currentLng = hallBuilding != null? hallBuilding.getCenterCoordinates().getLongitude(): 0;
+
+                //Current location should be inversed: lat->lng and lng->lat
+                currentCoordinates = new Coordinates(currentLng, currentLat);
+            } else {
+                currentCoordinates = new Coordinates(currentLocation.getLatitude(), currentLocation.getLongitude());
+            }
+
+            double distanceFromP1 = p1.getCoordinate().getEuclideanDistanceFrom(currentCoordinates);
+            double distanceFromP2 = p2.getCoordinate().getEuclideanDistanceFrom(currentCoordinates);
 
             //Compare walking points: If p1 is closer to the current location than p2, it will have a higher position in priority queue
-            if (distanceFromO1 < distanceFromO2) return -1;
-            else if (distanceFromO1 > distanceFromO2) return 1;
+            if (distanceFromP1 < distanceFromP2) return -1;
+            else if (distanceFromP1 > distanceFromP2) return 1;
             return 0;
         });
         orderedList.addAll(allPOI);
         return orderedList;
     }
-
 
     LiveData<PriorityQueue<WalkingPoint>> getListOfPOI() {
         return poiList;
