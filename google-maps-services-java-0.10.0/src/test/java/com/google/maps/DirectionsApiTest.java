@@ -38,6 +38,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -116,6 +118,7 @@ public class DirectionsApiTest {
     }
   }
 
+  @Ignore
   @Test
   public void testResponseTimesArePopulatedCorrectly() throws Exception {
     try (LocalTestServerContext sc =

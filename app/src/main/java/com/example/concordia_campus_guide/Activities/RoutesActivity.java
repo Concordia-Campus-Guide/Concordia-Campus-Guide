@@ -125,10 +125,7 @@ public class RoutesActivity extends AppCompatActivity {
 
     // TODO: #180
     public void onClickDisability(View v) {
-        if(disabilityButton.isSelected())
-            disabilityButton.setSelected(false);
-        else
-            disabilityButton.setSelected(true);
+        disabilityButton.setSelected(!disabilityButton.isSelected());
     }
 
     public void onClickShuttle(View v) {
@@ -214,8 +211,8 @@ public class RoutesActivity extends AppCompatActivity {
 
     public void getShuttle(View view) {
         List<Shuttle> shuttles = mViewModel.getShuttles();
-        String content = mViewModel.getShuttleDisplayText(shuttles);
-        this.content.setText(content);
+        String shuttleDisplayText = mViewModel.getShuttleDisplayText(shuttles);
+        this.content.setText(shuttleDisplayText);
     }
 
     /**

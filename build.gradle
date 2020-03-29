@@ -25,7 +25,8 @@ sonarqube {
         property "sonar.test.inclusions", "**/*Test*/**"
         property "sonar.sourceEncoding", "UTF-8"
         property "sonar.sources", "src/main/java"
-        property 'sonar.coverage.exclusions', ["**/Activities/**", "**/Adapters/**", "**/Database/Daos/**", "**/Global/**", "**/*Fragment.java", "**/ClassConstants.*", '**/TransitType.*']
+        property 'sonar.exclusions', ['**/GoogleMapsServicesTools/**', "**/*GoogleMapsServicesTools*/**", "**/*google-maps-services-java-0.10.0*/**"]
+        property 'sonar.coverage.exclusions', ['**/GoogleMapsServicesTools/**', "**/*GoogleMapsServicesTools*/**", "**/*google-maps-services-java-0.10.0*/**", "**/Activities/**", "**/Adapters/**", "**/Database/Daos/**", "**/Global/**", "**/*Fragment.java", "**/ClassConstants.*", '**/TransitType.*']
     }
 }
 allprojects {

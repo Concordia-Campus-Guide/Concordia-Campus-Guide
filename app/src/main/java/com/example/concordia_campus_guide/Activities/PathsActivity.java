@@ -9,12 +9,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragment;
 import com.example.concordia_campus_guide.Fragments.PathInfoCardFragment.PathInfoCardFragment;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsResult;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsRoute;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
 import com.example.concordia_campus_guide.Models.Place;
@@ -51,7 +50,7 @@ public class PathsActivity extends AppCompatActivity {
         fromTextView = (TextView) findViewById(R.id.path_fromText);
         toTextView = (TextView) findViewById(R.id.path_toText);
 
-        mViewModel = ViewModelProviders.of(this).get(PathsViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(PathsViewModel.class);
         fragmentManager = getSupportFragmentManager();
 
         Bundle extras = getIntent().getExtras();
@@ -69,7 +68,7 @@ public class PathsActivity extends AppCompatActivity {
         toTextView.setText(to.getDisplayName());
         setBackButtonOnClickListener();
 
-        directionWrappers = !(fromIsIndoor && toIsIndoor) ? (ArrayList<DirectionWrapper>) parseDirectionResults() : new ArrayList<DirectionWrapper>();
+        directionWrappers = !(fromIsIndoor && toIsIndoor) ? (ArrayList<DirectionWrapper>) parseDirectionResults() : new ArrayList<>();
         if (!(fromIsIndoor && toIsIndoor)) {
             locationFragment.drawOutdoorPaths(directionWrappers);
         }
@@ -118,7 +117,12 @@ public class PathsActivity extends AppCompatActivity {
         }
         return directionWrapperArrayList;
     }
-    //checks if from and to are indoor places and stores in a boolean array {from, to}
+
+    /**
+     *  checks if from and to are indoor places and stores in a boolean array {from, to}
+     * @param from
+     * @param to
+     */
     public void checkFromToType(Place from, Place to) {
         fromIsIndoor = from instanceof RoomModel;
         toIsIndoor = to instanceof RoomModel;

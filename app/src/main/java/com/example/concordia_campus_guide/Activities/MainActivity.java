@@ -3,11 +3,8 @@ package com.example.concordia_campus_guide.Activities;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,7 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragment;
@@ -31,9 +28,6 @@ import com.example.concordia_campus_guide.Helper.StartActivityHelper;
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.CalendarEvent;
 import com.example.concordia_campus_guide.Models.Floors;
-import com.example.concordia_campus_guide.Models.Place;
-import com.example.concordia_campus_guide.Models.Relations.BuildingWithFloors;
-import com.example.concordia_campus_guide.Models.Relations.FloorWithRooms;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.Rooms;
 import com.example.concordia_campus_guide.Models.Shuttles;
@@ -41,9 +35,7 @@ import com.example.concordia_campus_guide.Models.WalkingPoints;
 import com.example.concordia_campus_guide.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
     MainActivityViewModel mViewModel;
     private BottomSheetBehavior swipeableInfoCard;
     private Notification notification;
-    private BottomSheetBehavior swipeablePOICard;
     Toolbar myToolbar;
 
     @Override
@@ -70,17 +61,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initComponents() {
-        mViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
         fragmentManager = getSupportFragmentManager();
         myToolbar = (Toolbar) findViewById(R.id.toolbar);
         MainActivity.this.setTitle("ConUMaps");
         View infoCard = findViewById(R.id.bottom_card_scroll_view);
-        View poiCard = findViewById(R.id.explore_bottom_card_scroll_view);
         swipeableInfoCard = BottomSheetBehavior.from(infoCard);
         notification = new Notification(this,AppDatabase.getInstance(this));
         notification.checkUpCalendarEvery5Minutes();
         showPOICard();
-        swipeablePOICard = BottomSheetBehavior.from(poiCard);
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
     }
 
@@ -236,14 +225,5 @@ public class MainActivity extends AppCompatActivity {
 
     public Location getMyCurrentLocation() {
         return this.locationFragment.getCurrentLocation();
-    }
-
-    private float dpToPx(float dip){
-        Resources r = getResources();
-        return TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                dip,
-                r.getDisplayMetrics()
-        );
     }
 }

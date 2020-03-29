@@ -14,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -64,7 +63,7 @@ public class PathInfoCardFragment extends Fragment {
         Serializable temporaryDirectionsResults = getArguments().getSerializable("directionsResult");
         directionsResults = (ArrayList<DirectionWrapper>) temporaryDirectionsResults;
 
-        pathInfoCardViewModel = ViewModelProviders.of(this).get(PathInfoCardViewModel.class);
+        pathInfoCardViewModel = new ViewModelProvider(this).get(PathInfoCardViewModel.class);
 
         return view;
     }
@@ -138,8 +137,8 @@ public class PathInfoCardFragment extends Fragment {
         for (int i = 0; i < walkingPointList.size() - 1; i++) {
             WalkingPoint startWalkingPoint = walkingPointList.get(i);
             WalkingPoint endWalkingPoint = walkingPointList.get(i + 1);
-            boolean last_one = i == directionList.size() - 1;
-            setIndoorComponents(startWalkingPoint, endWalkingPoint, layout, layoutParams, last_one);
+            boolean lastOne = i == directionList.size() - 1;
+            setIndoorComponents(startWalkingPoint, endWalkingPoint, layout, layoutParams, lastOne);
         }
 
         this.totalDuration = (totalDistance * 60.0 / 5.0);
@@ -162,7 +161,7 @@ public class PathInfoCardFragment extends Fragment {
         PointType pt = endWalkingPoint.getPointType();
         switch (pt) {
             case ELEVATOR:
-                if (startWalkingPoint.getPointType() != pt.ELEVATOR) {
+                if (startWalkingPoint.getPointType() != PointType.ELEVATOR) {
                     description = "Walk towards elevator";
                     timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
                     addIndoorDirection(startWalkingPoint.getCoordinate().getLatLng(), endWalkingPoint.getCoordinate().getLatLng(), description, distanceBetweenPoints, timeTakenInMinutes);
@@ -179,7 +178,7 @@ public class PathInfoCardFragment extends Fragment {
                 distanceBetweenPoints = 0;
                 break;
             case STAFF_ELEVATOR:
-                if (startWalkingPoint.getPointType() != pt.STAFF_ELEVATOR) {
+                if (startWalkingPoint.getPointType() != PointType.STAFF_ELEVATOR) {
                     description = "Walk towards staff elevator";
                     timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
                     addIndoorDirection(startWalkingPoint.getCoordinate().getLatLng(), endWalkingPoint.getCoordinate().getLatLng(), description, distanceBetweenPoints, timeTakenInMinutes);
@@ -190,7 +189,7 @@ public class PathInfoCardFragment extends Fragment {
                 }
                 break;
             case STAIRS:
-                if (startWalkingPoint.getPointType() != pt.STAIRS) {
+                if (startWalkingPoint.getPointType() != PointType.STAIRS) {
                     description = "Walk towards stairs";
                     timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
                     addIndoorDirection(startWalkingPoint.getCoordinate().getLatLng(), endWalkingPoint.getCoordinate().getLatLng(), description, distanceBetweenPoints, timeTakenInMinutes);
@@ -224,7 +223,7 @@ public class PathInfoCardFragment extends Fragment {
         for (int i = 0; i < directionList.size(); i++) {
             boolean lastOne = i == directionList.size() - 1;
             Direction direction = directionList.get(i);
-            switch (direction.getTransportType().toString()) {
+            switch (direction.getTransportType()) {
                 case ClassConstants.TRANSIT:
                     createImageButton(layout, layoutParams, R.drawable.ic_directions_bus_black_24dp);
                     if (!lastOne)
@@ -247,7 +246,7 @@ public class PathInfoCardFragment extends Fragment {
                         setDividerTextView(layout, layoutParams);
                     break;
                 case ClassConstants.WALKING:
-                    if (i != 0 && direction.getTransportType() != directionList.get(i - 1).getTransportType()) {
+                    if (i != 0 && !(direction.getTransportType().equals(directionList.get(i - 1).getTransportType()))) {
                         createImageButton(layout, layoutParams, R.drawable.ic_directions_walk_red);
                         if (!lastOne)
                             setDividerTextView(layout, layoutParams);
