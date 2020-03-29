@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.location.Location;
-import android.os.Build;
 
 import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.ClassConstants;
@@ -46,7 +45,6 @@ import java.util.PriorityQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import androidx.annotation.RequiresApi;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -329,7 +327,7 @@ public class LocationFragmentViewModel extends ViewModel {
         return orderedList;
     }
 
-    LiveData<PriorityQueue<WalkingPoint>> getListOfPOI() {
+    public LiveData<PriorityQueue<WalkingPoint>> getListOfPOI() {
         return poiList;
     }
 
