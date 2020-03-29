@@ -6,6 +6,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.location.Location;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+
 import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
@@ -45,10 +49,6 @@ import java.util.PriorityQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
-
 import static java.lang.Double.parseDouble;
 
 public class LocationFragmentViewModel extends ViewModel {
@@ -57,7 +57,9 @@ public class LocationFragmentViewModel extends ViewModel {
     private Map<String, Building> buildings = new HashMap<>();
     private AppDatabase appDatabase;
     private MutableLiveData<PriorityQueue<WalkingPoint>> poiList = new MutableLiveData<>();
+    private MutableLiveData<List<RoomModel>> roomList = new MutableLiveData<>();
     private BitmapDescriptor currentPOIIcon;
+    private BitmapDescriptor roomIcon;
     private Location currentLocation;
 
     public static final Logger LOGGER = Logger.getLogger("LocationFragmentViewModel");
@@ -238,17 +240,21 @@ public class LocationFragmentViewModel extends ViewModel {
     public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, Context context, GoogleMap mMap) {
         String fileName = buildingCode.toLowerCase()+"_"+floor.toLowerCase();
         groundOverlay.setImage(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+fileName+".png"));
-        setFloorMarkers(buildingCode, floor, context, mMap);
+        roomIcon = getCustomSizedIcon("class_markers/marker.png", context, 40, 40);
+        setListOfRooms(buildingCode+ "-" + floor);
+
+//        setFloorMarkers(buildingCode, floor, context, mMap);
     }
 
     public void setFloorMarkers(String buildingCode, String floor, Context context, GoogleMap mMap) {
         if (floorLayer != null) {
             floorLayer.removeLayerFromMap();
         }
+
         JSONObject geoJson = ApplicationState.getInstance(context).getRooms().getGeoJson(buildingCode + "-" + floor);
-        floorLayer = initMarkersLayer(mMap, geoJson);
-        getPointStyle(floorLayer);
-        floorLayer.addLayerToMap();
+//        floorLayer = initMarkersLayer(mMap, geoJson);
+//        getPointStyle(floorLayer);
+//        floorLayer.addLayerToMap();
         if (currentlyDisplayedLine != null) {
             currentlyDisplayedLine.remove();
         }
@@ -292,6 +298,11 @@ public class LocationFragmentViewModel extends ViewModel {
         }
     }
 
+    public void setListOfRooms(String floorCode) {
+        List<RoomModel> allRoomsOnFloor = appDatabase.roomDao().getAllRoomsByFloorCode(floorCode);
+        this.roomList.postValue(allRoomsOnFloor);
+    }
+
     public void setListOfPOI(@PoiType String poiType, Context context) {
         List<WalkingPoint> allPOI = appDatabase.walkingPointDao().getAllPointsForPointType(poiType);
         setCurrentPOIIcon(poiType, context);
@@ -313,6 +324,10 @@ public class LocationFragmentViewModel extends ViewModel {
         return orderedList;
     }
 
+
+    LiveData<List<RoomModel>> getListOfRoom() {
+        return roomList;
+    }
 
     LiveData<PriorityQueue<WalkingPoint>> getListOfPOI() {
         return poiList;
@@ -391,5 +406,9 @@ public class LocationFragmentViewModel extends ViewModel {
 
     public List<WalkingPoint> getWalkingPointsList() {
         return walkingPoints;
+    }
+
+    public BitmapDescriptor getRoomIcon() {
+        return roomIcon;
     }
 }
