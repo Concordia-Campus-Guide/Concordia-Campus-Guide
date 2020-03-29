@@ -84,7 +84,7 @@ public class RoutesActivityViewModel extends ViewModel {
 
     public String getShuttleDisplayText(List<Shuttle> shuttles) {
         String content = "";
-        if (shuttles == null || shuttles.size() == 0) {
+        if (shuttles == null || shuttles.isEmpty()) {
             return this.noShuttles;
         }
         String campusTo = shuttles.get(0).getCampus().compareTo("SGW") == 0 ? "LOY" : "SGW";

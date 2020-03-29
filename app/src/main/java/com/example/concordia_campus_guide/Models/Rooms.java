@@ -1,11 +1,12 @@
 package com.example.concordia_campus_guide.Models;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Rooms {
@@ -37,7 +38,7 @@ public class Rooms {
             toReturn.put("type", "FeatureCollection");
             toReturn.put("features", getInnerGeoJson(floor));
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e("Rooms", e.getMessage());
         }
 
         return toReturn;
@@ -53,14 +54,14 @@ public class Rooms {
                 if (roomGeoJSON != null) features.put(roomGeoJSON);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e("Rooms", e.getMessage());
         }
 
         return features;
     }
 
     public List<Place> getPlaces() {
-        List<Place> places = new ArrayList<Place>();
+        List<Place> places = new ArrayList<>();
         for (RoomModel room : Rooms) {
             places.add(room);
         }
