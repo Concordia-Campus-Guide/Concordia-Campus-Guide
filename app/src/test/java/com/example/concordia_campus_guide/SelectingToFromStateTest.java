@@ -22,8 +22,8 @@ public class SelectingToFromStateTest {
         @Before
         public void init(){
             selectingToFromState = new SelectingToFromState();
-            fromRoom = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8");
-            toRoom  = new RoomModel(new Coordinates(-73.57902321964502, 45.49699848270905), "921", "H-9");
+            fromRoom = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8", "SGW");
+            toRoom  = new RoomModel(new Coordinates(-73.57902321964502, 45.49699848270905), "921", "H-9", "SGW");
             SelectingToFromState.setFrom(fromRoom);
             SelectingToFromState.setTo(toRoom);
         }

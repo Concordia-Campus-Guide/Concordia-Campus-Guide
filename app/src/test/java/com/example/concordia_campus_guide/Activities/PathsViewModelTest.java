@@ -21,8 +21,8 @@ public class PathsViewModelTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         pathsViewModel = new PathsViewModel();
-        fromRoom = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8");
-        toRoom  = new RoomModel(new Coordinates(-73.57902321964502, 45.49699848270905), "921", "H-9");
+        fromRoom = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8", "SGW");
+        toRoom  = new RoomModel(new Coordinates(-73.57902321964502, 45.49699848270905), "921", "H-9", "SGW");
 
         SelectingToFromState.setTo(toRoom);
         SelectingToFromState.setFrom(fromRoom);
