@@ -17,6 +17,8 @@ import com.example.concordia_campus_guide.Models.Routes.Walk;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +27,7 @@ import java.util.List;
  */
 public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieval, Integer, DirectionsResult> {
 
-    DirectionsApiDataRetrieval dataRetrieval = null;
+    private DirectionsApiDataRetrieval dataRetrieval = null;
 
     /**
      * Parsing the JSON string data to map it to a DirectionsResult model
@@ -35,16 +37,7 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
     @Override
     protected DirectionsResult doInBackground(DirectionsApiDataRetrieval... obj) {
         this.dataRetrieval = obj[0];
-        DirectionsResult directionsResult = null;
-        try {
-            Log.d(DirectionsApiDataParser.class.getName(), "Mapping data to models");
-            Gson gson = new GsonBuilder()
-                    .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-                    .create();
-            directionsResult = gson.fromJson(dataRetrieval.data, DirectionsResult.class);
-        } catch (Exception e) {
-            Log.e(DirectionsApiDataParser.class.getName(), "Exception using Gson to map JSON to Models: " + e.toString());
-        }
+        DirectionsResult directionsResult = getDirectionsResultObj();
         return directionsResult;
     }
 
@@ -56,21 +49,36 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
      */
     @Override
     protected void onPostExecute(DirectionsResult result) {
-        dataRetrieval.caller.directionsApiCallBack(result, extractRelevantInfoFromDirectionsResultObj(result));
+        dataRetrieval.getCaller().directionsApiCallBack(result, extractRelevantInfoFromDirectionsResultObj(result));
     }
 
-    public List<Route> extractRelevantInfoFromDirectionsResultObj(DirectionsResult result) {
+    private DirectionsResult getDirectionsResultObj() {
+        DirectionsResult directionsResult = null;
+        try {
+            Log.d(DirectionsApiDataParser.class.getName(), "Mapping data to models");
+            Gson gson = new GsonBuilder()
+                    .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                    .create();
+            directionsResult = gson.fromJson(dataRetrieval.getData(), DirectionsResult.class);
+        } catch (Exception e) {
+            Log.e(DirectionsApiDataParser.class.getName(), "Exception using Gson to map JSON to Models: " + e.toString());
+        }
+
+        return directionsResult;
+    }
+
+    private List<Route> extractRelevantInfoFromDirectionsResultObj(DirectionsResult result) {
         List<Route> routeOptions = new ArrayList<>();
         for(DirectionsRoute directionsRoute: result.routes) {
-            switch(dataRetrieval.transportType) {
+            switch(dataRetrieval.getTransportType()) {
                 case ClassConstants.DRIVING:
-                    extractDurationAndSummary(routeOptions, directionsRoute, ClassConstants.DRIVING);
+                    routeOptions.add(extractDurationAndSummary(directionsRoute, ClassConstants.DRIVING));
                     break;
                 case ClassConstants.WALKING:
-                    extractDurationAndSummary(routeOptions, directionsRoute, ClassConstants.WALKING);
+                    routeOptions.add(extractDurationAndSummary(directionsRoute, ClassConstants.WALKING));
                     break;
                 case ClassConstants.TRANSIT:
-                    extractTransitInfo(routeOptions, directionsRoute);
+                    routeOptions.add(extractTransitInfo(directionsRoute));
                     break;
             }
         }
@@ -78,12 +86,13 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
     }
 
     // Helper methods
-    private void extractDurationAndSummary(List<Route> routeOptions, DirectionsRoute directionsRoute, @ClassConstants.TransportType String transportType) {
+    private Route extractDurationAndSummary(DirectionsRoute directionsRoute, @ClassConstants.TransportType String transportType) {
         Route route = new Route(directionsRoute.legs[0].duration.text, directionsRoute.summary, transportType);
-        routeOptions.add(route);
+
+        return route;
     }
 
-    private void extractTransitInfo(List<Route> routeOptions, DirectionsRoute directionsRoute) {
+    private Route extractTransitInfo(DirectionsRoute directionsRoute) {
         Route route;
 
         if(directionsRoute.legs[0].departureTime != null && directionsRoute.legs[0].arrivalTime != null)
@@ -91,15 +100,18 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
         else
             route = new Route(directionsRoute.legs[0].duration.text, ClassConstants.TRANSIT);
 
-        routeOptions.add(route);
+        route.setSteps(extractSteps(directionsRoute.legs[0].steps));
 
-        extractSteps(directionsRoute.legs[0].steps, route);
+        return route;
     }
 
-    private void extractSteps(DirectionsStep[] steps, Route route) {
-        for(DirectionsStep step: steps) {
-            route.getSteps().add(getTransportType(step));
+    private List<TransportType> extractSteps(DirectionsStep[] stepsArr) {
+        List<TransportType> steps = new ArrayList<>();
+        for(DirectionsStep step: stepsArr) {
+            steps.add(getTransportType(step));
         }
+
+        return steps;
     }
 
     private TransportType getTransportType(DirectionsStep step) {
@@ -130,5 +142,13 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
         }
 
        return null;
+    }
+
+    public DirectionsApiDataRetrieval getDataRetrieval() {
+        return dataRetrieval;
+    }
+
+    public void setDataRetrieval(DirectionsApiDataRetrieval dataRetrieval) {
+        this.dataRetrieval = dataRetrieval;
     }
 }

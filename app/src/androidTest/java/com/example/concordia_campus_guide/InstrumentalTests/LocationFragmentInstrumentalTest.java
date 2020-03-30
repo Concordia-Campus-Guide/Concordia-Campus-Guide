@@ -70,8 +70,8 @@ public class LocationFragmentInstrumentalTest {
 
     @Test
     public void getFloorPolylinesTest(){
-        RoomModel roomFrom = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8");
-        RoomModel roomTo = new RoomModel(new Coordinates(-73.57902321964502, 45.49699848270905), "927", "H-9");
+        RoomModel roomFrom = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8", "SGW");
+        RoomModel roomTo = new RoomModel(new Coordinates(-73.57902321964502, 45.49699848270905), "927", "H-9", "SGW");
         viewModel.parseWalkingPointList(appDatabase,roomFrom,roomTo);
 
         PolylineOptions polylineOptions = viewModel.getFloorPolylines("H-9");

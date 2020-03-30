@@ -26,6 +26,7 @@ public class  ClassConstants {
     public static final String WALKING = "walking";
     public static final String BICYCLING = "bicycling";
     public static final String DRIVING = "driving";
+    public static final String SHUTTLE = "shuttle";
 
     public static final String SGW_SHUTTLE_STOP = "1455 De Maisonneuve Blvd. W., SGW Campus";
     public static final String LOYOLA_SHUTTLE_STOP = "7137 Sherbrooke St. W., Loyola Campus";

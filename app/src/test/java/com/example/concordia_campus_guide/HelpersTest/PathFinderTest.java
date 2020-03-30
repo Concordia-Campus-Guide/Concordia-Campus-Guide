@@ -52,8 +52,8 @@ public class PathFinderTest {
         walkingPoint3 = new WalkingPoint(3,new Coordinates(-73.57883681,45.49731974), "H-9", new ArrayList<>(Arrays.asList(new Integer[]{2,4})),PointType.NONE,"NONE");
         walkingPoint4 = new WalkingPoint(4,new Coordinates(-73.57866548, 45.49746803), "H-9", new ArrayList<>(Arrays.asList(new Integer[]{1,3})),PointType.CLASSROOM,"921");
 
-        room1 = new RoomModel(new Coordinates(-73.57876237, 45.49729154), "823", "H-8");
-        room2 = new RoomModel(new Coordinates(-73.57883681, 445.49731974), "813", "H-8");
+        room1 = new RoomModel(new Coordinates(-73.57876237, 45.49729154), "823", "H-8", "SGW");
+        room2 = new RoomModel(new Coordinates(-73.57883681, 445.49731974), "813", "H-8", "SGW");
         when(mockAppDb.walkingPointDao()).thenReturn(mockWalkingPointDao);
         walkingPointList = new ArrayList<>();
         walkingPointList.add(walkingPoint1);

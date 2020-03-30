@@ -50,7 +50,7 @@ public class SearchActivityViewModelTest {
         when(mockAppDb.floorDao()).thenReturn(mockFloorDao);
         when(mockAppDb.roomDao()).thenReturn(mockRoomDao);
         when(mockRoomDao.getAll()).thenReturn(new ArrayList<RoomModel>(Arrays.asList(
-                new RoomModel(new Coordinates(0, 0), "111", "H-9"), new RoomModel(new Coordinates(0,0), "222", "H-8")
+                new RoomModel(new Coordinates(0, 0), "111", "H-9", "SGW"), new RoomModel(new Coordinates(0,0), "222", "H-8", "SGW")
         )));
         when(mockFloorDao.getAll()).thenReturn(new ArrayList<Floor>(Arrays.asList(
                 new Floor(new Coordinates(0,0), "H-9", 0), new Floor(new Coordinates(0,0), "H-8", 0)
@@ -114,7 +114,7 @@ public class SearchActivityViewModelTest {
 
     @Test
     public void getRoomFromDbTest(){
-        RoomModel room = new RoomModel(new Coordinates(45.458983023532845,-73.63815218210219),"102.3","VL-1");
+        RoomModel room = new RoomModel(new Coordinates(45.458983023532845,-73.63815218210219),"102.3","VL-1", "SGW");
         when(mockRoomDao.getRoomByIdAndFloorCode("102.3","VL-1")).thenReturn(room);
         assertEquals(room,mViewModel.getRoomFromDB("VL-1, 102.3"));
     }

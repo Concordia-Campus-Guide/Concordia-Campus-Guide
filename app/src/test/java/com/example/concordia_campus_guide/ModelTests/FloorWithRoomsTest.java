@@ -31,8 +31,8 @@ public class FloorWithRoomsTest {
     @Test
     public  void getAndSetRooms(){
         List <RoomModel> roomList = new ArrayList<>();
-        RoomModel room1  = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8");
-        RoomModel room2  = new RoomModel(new Coordinates(-73.57902321964502, 45.49699848270905), "821", "H-8");
+        RoomModel room1  = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8", "SGW");
+        RoomModel room2  = new RoomModel(new Coordinates(-73.57902321964502, 45.49699848270905), "821", "H-8", "SGW");
         roomList.add(room1);
         roomList.add(room2);
         floorWithRooms.setRooms(roomList);

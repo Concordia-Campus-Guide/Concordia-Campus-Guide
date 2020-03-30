@@ -16,6 +16,12 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Activities.RoutesActivity;
 import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
@@ -53,7 +59,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 
@@ -93,7 +99,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.location_fragment_fragment, container, false);
         initComponents(rootView);
-        mViewModel = ViewModelProviders.of(getActivity(), new ViewModelFactory(this.getActivity().getApplication())).get(LocationFragmentViewModel.class);
+        mViewModel = new ViewModelProvider(getActivity(), new ViewModelFactory(this.getActivity().getApplication())).get(LocationFragmentViewModel.class);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
         getLocationPermission();
@@ -392,6 +398,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
             String tag = POI_TAG + "_" + poi.getPlaceCode() + "_" + poi.getFloorCode();
             MarkerOptions markerOptions = new MarkerOptions()
+                    .title(tag)
                     .position(latLng)
                     .icon(mViewModel.getCurrentPOIIcon());
 
