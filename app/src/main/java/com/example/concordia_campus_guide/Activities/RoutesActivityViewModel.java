@@ -81,7 +81,7 @@ public class RoutesActivityViewModel extends ViewModel {
         Calendar calendar = Calendar.getInstance();
         String day = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(calendar.getTime());
         SimpleDateFormat time = new SimpleDateFormat("HH.mm");
-        shuttles = getShuttlesByDayAndTime(campuses[0], "Monday", Double.parseDouble(time.format(calendar.getTime())));
+        shuttles = getShuttlesByDayAndTime(campuses[0], day, Double.parseDouble(time.format(calendar.getTime())));
         return shuttles;
     }
 
