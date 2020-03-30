@@ -8,11 +8,6 @@ public class Car extends TransportType {
 
     private long duration; // in seconds
 
-    @VisibleForTesting
-    public Car() {
-
-    }
-
     public Car(DirectionsStep step) {
         duration = step.duration.value;
     }
