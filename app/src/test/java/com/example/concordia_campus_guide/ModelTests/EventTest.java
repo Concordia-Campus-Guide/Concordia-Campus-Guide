@@ -34,7 +34,7 @@ public class EventTest {
 
     @Test
     public void getSetLocationTest() {
-        RoomModel room = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8");
+        RoomModel room = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8", "SGW");
         event.setLocation(room);
         assertEquals(room, event.getLocation());
     }

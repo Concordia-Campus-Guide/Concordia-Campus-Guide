@@ -115,24 +115,14 @@ public class RoutesActivityOptionsTest {
         textView.check(matches(isDisplayed()));
 
         ViewInteraction viewGroup = onView(
-                allOf(withId(R.id.details),
-                        childAtPosition(
-                                allOf(withId(R.id.main),
-                                        childAtPosition(
-                                                withId(R.id.routeOverviewLayout),
-                                                0)),
-                                1),
+                allOf(EspressoHelpers.getElementFromMatchAtPosition(
+                        allOf(withId(R.id.details)), 0),
                         isDisplayed()));
         viewGroup.check(matches(isDisplayed()));
 
         ViewInteraction imageView = onView(
-                allOf(withId(R.id.mainTransportType),
-                        childAtPosition(
-                                allOf(withId(R.id.main),
-                                        childAtPosition(
-                                                withId(R.id.routeOverviewLayout),
-                                                0)),
-                                0),
+                allOf(EspressoHelpers.getElementFromMatchAtPosition(
+                        allOf(withId(R.id.mainTransportType)), 0),
                         isDisplayed()));
         imageView.check(matches(isDisplayed()));
 
@@ -148,13 +138,8 @@ public class RoutesActivityOptionsTest {
         textView2.check(matches(isDisplayed()));
 
         ViewInteraction viewGroup2 = onView(
-                allOf(withId(R.id.details),
-                        childAtPosition(
-                                allOf(withId(R.id.main),
-                                        childAtPosition(
-                                                withId(R.id.routeOverviewLayout),
-                                                0)),
-                                1),
+                allOf(EspressoHelpers.getElementFromMatchAtPosition(
+                        allOf(withId(R.id.details)), 0),
                         isDisplayed()));
         viewGroup2.check(matches(isDisplayed()));
 
@@ -177,24 +162,14 @@ public class RoutesActivityOptionsTest {
         android.os.SystemClock.sleep(1000);
 
         ViewInteraction viewGroup3 = onView(
-                allOf(withId(R.id.details),
-                        childAtPosition(
-                                allOf(withId(R.id.main),
-                                        childAtPosition(
-                                                withId(R.id.routeOverviewLayout),
-                                                0)),
-                                1),
+                allOf(EspressoHelpers.getElementFromMatchAtPosition(
+                        allOf(withId(R.id.details)), 0),
                         isDisplayed()));
         viewGroup3.check(matches(isDisplayed()));
 
         ViewInteraction imageView4 = onView(
-                allOf(withId(R.id.mainTransportType),
-                        childAtPosition(
-                                allOf(withId(R.id.main),
-                                        childAtPosition(
-                                                withId(R.id.routeOverviewLayout),
-                                                0)),
-                                0),
+                allOf(EspressoHelpers.getElementFromMatchAtPosition(
+                        allOf(withId(R.id.mainTransportType)), 0),
                         isDisplayed()));
         imageView4.check(matches(isDisplayed()));
 
@@ -231,16 +206,6 @@ public class RoutesActivityOptionsTest {
                                 0),
                         isDisplayed()));
         textView5.check(matches(isDisplayed()));
-
-        ViewInteraction imageView5 = onView(
-                allOf(withId(R.id.mainTransportType),
-                        childAtPosition(
-                                allOf(withId(R.id.main),
-                                        childAtPosition(
-                                                withId(R.id.routeOverviewLayout),
-                                                0)),
-                                0),
-                        isDisplayed()));
 
         ViewInteraction textView6 = onView(
                 allOf(EspressoHelpers.getElementFromMatchAtPosition(allOf(withText("5 mins"),

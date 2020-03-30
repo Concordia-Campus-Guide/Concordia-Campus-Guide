@@ -30,8 +30,8 @@ public class RoomModel extends Place {
     @NonNull
     private String roomCode;
 
-    public RoomModel(Coordinates centerCoordinates, @NonNull String roomCode, @NonNull String floorCode) {
-        super(centerCoordinates);
+    public RoomModel(Coordinates centerCoordinates, @NonNull String roomCode, @NonNull String floorCode, String campus) {
+        super(centerCoordinates, campus);
         this.roomCode = roomCode;
         this.floorCode = floorCode;
     }

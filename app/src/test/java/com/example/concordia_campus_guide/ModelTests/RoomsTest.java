@@ -58,7 +58,7 @@ public class RoomsTest {
 
     public JSONArray getInnerGeoJsonTest() {
         JSONArray features = new JSONArray();
-        RoomModel roomTest = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8");
+        RoomModel roomTest = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8", "SGW");
         try {
             JSONObject roomGeoJSON = roomTest.getGeoJson();
             if (roomGeoJSON != null) features.put(roomGeoJSON);
