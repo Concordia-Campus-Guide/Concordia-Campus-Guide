@@ -137,6 +137,8 @@ public class RoutesActivity extends AppCompatActivity {
         setShuttleSelect();
         if (!shuttles.isEmpty()) {
             mViewModel.adaptShuttleToRoutes(shuttles);
+        } else {
+            mViewModel.noShuttles();
         }
         setRoutesAdapter();
     }

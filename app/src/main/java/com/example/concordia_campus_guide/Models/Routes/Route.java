@@ -1,6 +1,7 @@
 package com.example.concordia_campus_guide.Models.Routes;
 
 import com.example.concordia_campus_guide.ClassConstants;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,8 @@ public class Route {
     private String arrivalTime;
     private String duration;
     private String summary;
-    private @ClassConstants.TransportType String mainTransportType;
+    private @ClassConstants.TransportType
+    String mainTransportType;
 
     // When TRANSIT is chosen
     public Route(String departureTime, String arrivalTime, String duration, String mainTransportType) {
@@ -18,6 +20,15 @@ public class Route {
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
         this.duration = duration;
+        this.summary = "";
+        this.mainTransportType = mainTransportType;
+    }
+
+    public Route(String mainTransportType) {
+        this.steps = new ArrayList<>();
+        this.departureTime = "";
+        this.arrivalTime = "";
+        this.duration = "";
         this.summary = "";
         this.mainTransportType = mainTransportType;
     }
@@ -74,6 +85,10 @@ public class Route {
 
     public String getSummary() {
         return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     public String getMainTransportType() {

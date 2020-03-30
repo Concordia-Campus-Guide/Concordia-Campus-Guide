@@ -134,4 +134,10 @@ public class RoutesActivityViewModel extends ViewModel {
     public void setTransportType(String transportType) {
         this.transportType = transportType;
     }
+
+    public void noShuttles() {
+        Route shuttleRoute = new Route("shuttle");
+        shuttleRoute.setSummary("No shuttles available at this time");
+        routeOptions.add(shuttleRoute);
+    }
 }

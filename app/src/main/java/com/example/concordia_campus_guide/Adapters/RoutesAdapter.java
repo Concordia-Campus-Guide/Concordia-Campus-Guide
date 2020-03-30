@@ -149,20 +149,26 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
     }
 
     private void setUIShuttle(Route route) {
-        mainTransportType.setImageResource(R.drawable.ic_shuttle_red);
-
         TextView summaryCampusFrom = new TextView(context);
         String[] campuses = route.getSummary().split(",");
-        summaryCampusFrom.setText(campuses[0]);
-        summaryCampusFrom.setGravity(Gravity.CENTER);
-        details.addView(summaryCampusFrom);
-        setUIArrow();
-        TextView summaryCampusTo = new TextView(context);
-        summaryCampusTo.setText(campuses[1]);
-        summaryCampusTo.setGravity(Gravity.CENTER);
-        details.addView(summaryCampusTo);
+        if (campuses.length == 1) {
+            summaryCampusFrom.setText(route.getSummary());
+            summaryCampusFrom.setGravity(Gravity.CENTER);
+            details.addView(summaryCampusFrom);
+            duration.setText("");
+        } else {
+            mainTransportType.setImageResource(R.drawable.ic_shuttle_red);
+            summaryCampusFrom.setText(campuses[0]);
+            summaryCampusFrom.setGravity(Gravity.CENTER);
+            details.addView(summaryCampusFrom);
+            setUIArrow();
+            TextView summaryCampusTo = new TextView(context);
+            summaryCampusTo.setText(campuses[1]);
+            summaryCampusTo.setGravity(Gravity.CENTER);
+            details.addView(summaryCampusTo);
+            duration.setText(route.getDuration());
+        }
 
-        duration.setText(route.getDuration());
     }
 
     private void setUIWalkInTransit(Walk walk) {
