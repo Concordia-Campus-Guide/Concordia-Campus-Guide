@@ -64,7 +64,7 @@ public class RoutesActivityViewModelTest {
         when(mockAppDb.shuttleDao().getScheduleByCampusAndDayAndTime("SGW", "Friday", Double.parseDouble(time.format(calendar.getTime())))).thenReturn(Arrays.asList(shuttle1));
     }
 
-    //
+
     @Test
     public void getSetTo() {
         Building sampleBuilding = new Building("H");
@@ -95,7 +95,6 @@ public class RoutesActivityViewModelTest {
         List<Shuttle> shuttles = new ArrayList<>();
         shuttles.add(shuttle1);
         mViewModel.adaptShuttleToRoutes(shuttles);
-        mViewModel.getShuttles();
         assertNotNull(mViewModel.getRouteOptions());
     }
 

@@ -26,6 +26,16 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [google_api_key: properties.getProperty('default.account.google_maps_key')]
         buildConfigField "String", "API_KEY", "\"" + properties.getProperty('default.account.google_maps_key') + "\""
+
+        // The following argument makes the Android Test Orchestrator run its
+        // "pm clear" command after each test invocation. This command ensures
+        // that the app's state is completely cleared between tests.
+        testInstrumentationRunnerArguments clearPackageData: 'true'
+    }
+    sourceSets {
+        test {
+            resources.srcDirs = ['src/test/res']
+        }
     }
     buildTypes {
         debug {
@@ -95,6 +105,8 @@ dependencies {
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-intents:3.0.1'
+    androidTestUtil 'com.android.support.test:orchestrator:1.0.1'
     api 'com.google.android.material:material:1.1.0-alpha06'
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
