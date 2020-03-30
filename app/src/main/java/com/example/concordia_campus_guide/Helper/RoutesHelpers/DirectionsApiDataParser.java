@@ -72,10 +72,10 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
         for(DirectionsRoute directionsRoute: result.routes) {
             switch(dataRetrieval.getTransportType()) {
                 case ClassConstants.DRIVING:
-                    extractDurationAndSummary(routeOptions, directionsRoute, ClassConstants.DRIVING);
+                    routeOptions.add(extractDurationAndSummary(directionsRoute, ClassConstants.DRIVING));
                     break;
                 case ClassConstants.WALKING:
-                    extractDurationAndSummary(routeOptions, directionsRoute, ClassConstants.WALKING);
+                    routeOptions.add(extractDurationAndSummary(directionsRoute, ClassConstants.WALKING));
                     break;
                 case ClassConstants.TRANSIT:
                     routeOptions.add(extractTransitInfo(directionsRoute));
@@ -86,9 +86,10 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
     }
 
     // Helper methods
-    private void extractDurationAndSummary(List<Route> routeOptions, DirectionsRoute directionsRoute, @ClassConstants.TransportType String transportType) {
+    private Route extractDurationAndSummary(DirectionsRoute directionsRoute, @ClassConstants.TransportType String transportType) {
         Route route = new Route(directionsRoute.legs[0].duration.text, directionsRoute.summary, transportType);
-        routeOptions.add(route);
+
+        return route;
     }
 
     private Route extractTransitInfo(DirectionsRoute directionsRoute) {

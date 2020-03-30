@@ -113,6 +113,49 @@ public class DirectionsApiDataParserTest {
     }
 
     @Test
+    public void extractDurationAndSummaryTest() {
+        // Arrange
+        Object route = null;
+
+        DirectionsRoute directionsRoute = new DirectionsRoute();
+        directionsRoute.legs = new DirectionsLeg[1];
+        directionsRoute.legs[0] = new DirectionsLeg();
+        directionsRoute.legs[0].duration = new Duration();
+        directionsRoute.legs[0].duration.text = "10 mins";
+        directionsRoute.summary = "test";
+
+        DirectionsStep d1 = new DirectionsStep();
+        d1.duration = new Duration();
+        d1.duration.value = 142;
+        d1.travelMode = TravelMode.DRIVING;
+
+        DirectionsStep[] steps = {d1};
+
+        directionsRoute.legs[0].steps = steps;
+
+        // Act
+        try{
+            Method method = directionsApiDataParser.getClass().getDeclaredMethod("extractDurationAndSummary", DirectionsRoute.class, String.class);
+            method.setAccessible(true);
+            route = method.invoke(directionsApiDataParser, directionsRoute, ClassConstants.DRIVING);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        // Assert
+        Assert.assertEquals("", ((Route) route).getDepartureTime());
+        Assert.assertEquals("", ((Route) route).getArrivalTime());
+        Assert.assertEquals("10 mins", ((Route) route).getDuration());
+        Assert.assertEquals(ClassConstants.DRIVING, ((Route) route).getMainTransportType());
+        Assert.assertEquals("test", ((Route) route).getSummary());
+        Assert.assertNull(((Route) route).getSteps());
+    }
+
+    @Test
     public void extractTransitInfo_DepartureAndArrivalNotNullTest() {
         // Arrange
         Object route = null;
