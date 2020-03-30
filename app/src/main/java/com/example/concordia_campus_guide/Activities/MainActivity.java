@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     POIFragment poiFragment;
     MainActivityViewModel mViewModel;
     private BottomSheetBehavior swipeableInfoCard;
+    private BottomSheetBehavior swipeablePOICard;
     private Notification notification;
     Toolbar myToolbar;
 
@@ -57,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
         mViewModel = new MainActivityViewModel();
         initComponents();
         setSupportActionBar(myToolbar);
-        showPOICard();
     }
 
     private void initComponents() {
@@ -66,10 +66,12 @@ public class MainActivity extends AppCompatActivity {
         myToolbar = (Toolbar) findViewById(R.id.toolbar);
         MainActivity.this.setTitle("ConUMaps");
         View infoCard = findViewById(R.id.bottom_card_scroll_view);
+        View poiCard = findViewById(R.id.explore_bottom_card_scroll_view);
         swipeableInfoCard = BottomSheetBehavior.from(infoCard);
         notification = new Notification(this,AppDatabase.getInstance(this));
         notification.checkUpCalendarEvery5Minutes();
         showPOICard();
+        swipeablePOICard = BottomSheetBehavior.from(poiCard);
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
     }
 
@@ -159,6 +161,16 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.bottom_card_frame, infoCardFragment);
         fragmentTransaction.commit();
+
+        (findViewById(R.id.bottom_card_frame)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(swipeableInfoCard.getState() != BottomSheetBehavior.STATE_EXPANDED)
+                    swipeableInfoCard.setState(BottomSheetBehavior.STATE_EXPANDED);
+                else
+                    swipeableInfoCard.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
+        });
     }
 
     public void showPOICard(){
@@ -167,6 +179,17 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.explore_bottom_card_frame, poiFragment);
         fragmentTransaction.commit();
+
+
+        (findViewById(R.id.explore_bottom_card_frame)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(swipeablePOICard.getState() != BottomSheetBehavior.STATE_EXPANDED)
+                    swipeablePOICard.setState(BottomSheetBehavior.STATE_EXPANDED);
+                else
+                    swipeablePOICard.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
+        });
     }
 
     public void resetBottomCard(){
