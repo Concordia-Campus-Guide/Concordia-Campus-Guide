@@ -62,7 +62,7 @@ public class RouteTest {
     }
 
     @Test
-    public void getSetSteps() {
+    public void getSetStepsTest() {
         // Arrange
         List<TransportType> expectedSteps = new ArrayList<>();
         Route route = new Route("20 mins", "Autoroute 15-S", "driving");
