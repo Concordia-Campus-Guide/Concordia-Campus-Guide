@@ -55,6 +55,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 
 public class LocationFragment extends Fragment implements OnFloorPickerOnClickListener {
@@ -93,7 +99,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.location_fragment_fragment, container, false);
         initComponents(rootView);
-        mViewModel = ViewModelProviders.of(getActivity(), new ViewModelFactory(this.getActivity().getApplication())).get(LocationFragmentViewModel.class);
+        mViewModel = new ViewModelProvider(getActivity(), new ViewModelFactory(this.getActivity().getApplication())).get(LocationFragmentViewModel.class);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
         getLocationPermission();

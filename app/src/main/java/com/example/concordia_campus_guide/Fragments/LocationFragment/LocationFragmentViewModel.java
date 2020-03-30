@@ -327,7 +327,7 @@ public class LocationFragmentViewModel extends ViewModel {
         return orderedList;
     }
 
-    LiveData<PriorityQueue<WalkingPoint>> getListOfPOI() {
+    public LiveData<PriorityQueue<WalkingPoint>> getListOfPOI() {
         return poiList;
     }
 
@@ -389,7 +389,7 @@ public class LocationFragmentViewModel extends ViewModel {
         }
     }
 
-    private PolylineOptions stylePolyLine(String type) {
+    public PolylineOptions stylePolyLine(String type) {
         PolylineOptions polylineOptions = new PolylineOptions().width(20);
         if (type.equals(ClassConstants.WALKING)) {
             polylineOptions.pattern(ClassConstants.WALK_PATTERN);

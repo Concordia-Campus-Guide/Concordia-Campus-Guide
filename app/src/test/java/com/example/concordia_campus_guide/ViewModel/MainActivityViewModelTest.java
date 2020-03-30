@@ -40,4 +40,5 @@ public class MainActivityViewModelTest {
         String expectedValue ="00 hours and 02 minutes";
         assertEquals(expectedValue, mainActivityViewModel.timeUntilMethod(date));
     }
+    
 }

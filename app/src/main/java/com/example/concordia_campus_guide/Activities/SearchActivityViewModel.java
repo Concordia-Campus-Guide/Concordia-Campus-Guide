@@ -46,7 +46,7 @@ public class SearchActivityViewModel extends ViewModel {
     }
 
     public List<Place> getAllPlaces(){
-        List<Place> places = new ArrayList<Place>();
+        List<Place> places = new ArrayList<>();
         places.addAll(buildings);
         places.addAll(floors);
         places.addAll(rooms);
