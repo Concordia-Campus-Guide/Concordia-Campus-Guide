@@ -10,12 +10,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.room.Room;
 
 import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragment;
 import com.example.concordia_campus_guide.Fragments.PathInfoCardFragment.PathInfoCardFragment;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsRoute;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
+import com.example.concordia_campus_guide.Models.Direction;
 import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
@@ -67,11 +69,9 @@ public class PathsActivity extends AppCompatActivity {
         fromTextView.setText(from.getDisplayName());
         toTextView.setText(to.getDisplayName());
         setBackButtonOnClickListener();
+        directionWrappers = (mViewModel.areInSameBuilding(from, to) || mViewModel.arePlacesSeparatedByATunnel(from, to)) ? new ArrayList<>() : (ArrayList<DirectionWrapper>) parseDirectionResults();
 
-        directionWrappers = !(fromIsIndoor && toIsIndoor) ? (ArrayList<DirectionWrapper>) parseDirectionResults() : new ArrayList<>();
-        if (!(fromIsIndoor && toIsIndoor)) {
-            locationFragment.drawOutdoorPaths(directionWrappers);
-        }
+        locationFragment.drawOutdoorPaths(directionWrappers);
 
         View pathInfoCard = findViewById(R.id.path_info_card);
         swipeableInfoCard = BottomSheetBehavior.from(pathInfoCard);
@@ -111,9 +111,11 @@ public class PathsActivity extends AppCompatActivity {
 
     public List<DirectionWrapper> parseDirectionResults() {
         ArrayList<DirectionWrapper> directionWrapperArrayList = new ArrayList<>();
-        DirectionsStep[] steps = directionsResult.legs[0].steps;
+        DirectionsStep[] steps = directionsResult != null && directionsResult.legs[0] != null ? directionsResult.legs[0].steps : null;
         for (DirectionsStep step : steps) {
-            directionWrapperArrayList.add(new DirectionWrapper(step));
+            DirectionWrapper directionWrapper = new DirectionWrapper();
+            directionWrapper.populateAttributesFromStep(step);
+            directionWrapperArrayList.add(directionWrapper);
         }
         return directionWrapperArrayList;
     }
@@ -130,19 +132,18 @@ public class PathsActivity extends AppCompatActivity {
 
     public void setIndoorPaths() {
         if(!fromIsIndoor && !toIsIndoor) return;
-        String floorCode;
-        Place tempFrom = from;
-        Place tempTo = to;
 
-        if(fromIsIndoor && !toIsIndoor){
-            floorCode = ((RoomModel) from).getFloorCode();
-            tempTo = new RoomModel(from.getCenterCoordinates(), floorCode.substring(0, floorCode.indexOf('-')), floorCode, from.getCampus());
+        //Outdoor -> Indoor
+        if (!fromIsIndoor) {
+            locationFragment.setIndoorPaths(mViewModel.getEntrance(to), to);
         }
-        if(toIsIndoor && !fromIsIndoor){
-            floorCode = ((RoomModel) to).getFloorCode();
-            tempFrom = new RoomModel(to.getCenterCoordinates(), floorCode.substring(0, floorCode.indexOf('-')), floorCode, to.getCampus());
+        else if(mViewModel.arePlacesSeparatedByATunnel(from, to) || mViewModel.areInSameBuilding(from, to)){
+            locationFragment.setIndoorPaths(from, to);
         }
-
-        locationFragment.setIndoorPaths(tempFrom, tempTo);
+        //[from -> from_entrance ] + outdoor directions + [to_entrance -> to]
+        else if (toIsIndoor && fromIsIndoor) {
+            locationFragment.setIndoorPaths(from, mViewModel.getEntrance(from));
+            locationFragment.setIndoorPaths(mViewModel.getEntrance(to), to);
+        }
     }
 }

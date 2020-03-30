@@ -23,6 +23,7 @@ import java.util.List;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class PathFinderTest {
@@ -79,7 +80,7 @@ public class PathFinderTest {
     @Test
     public void getWalkingPointCorrespondingToPlaceTest(){
         Building building = new Building( new Coordinates(45.4972685, -73.5789475), new ArrayList<String>(Arrays.asList("8","9")), 68, 68, 34, null, "H", null, null, null, null, null);
-        when(mockAppDb.walkingPointDao().getAllWalkingPointsFromPlaceCode(building.getBuildingCode())).thenReturn(walkingPointList);
+        when(mockAppDb.walkingPointDao().getAllWalkingPointsFromPlace(anyString(), anyString())).thenReturn(walkingPointList);
         assertEquals(pathFinder.getWalkingPointCorrespondingToPlace(building),walkingPoint1);
     }
 

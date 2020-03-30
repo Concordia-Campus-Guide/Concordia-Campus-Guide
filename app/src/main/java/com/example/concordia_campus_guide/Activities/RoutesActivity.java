@@ -23,6 +23,7 @@ import com.example.concordia_campus_guide.Helper.RoutesHelpers.DirectionsApiData
 import com.example.concordia_campus_guide.Helper.RoutesHelpers.UrlBuilder;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.Models.Coordinates;
+import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.Routes.Route;
 import com.example.concordia_campus_guide.Models.Shuttle;
 import com.example.concordia_campus_guide.R;
@@ -233,8 +234,8 @@ public class RoutesActivity extends AppCompatActivity {
     public void getAllRoutes() {
         setTransitSelect();
 
-        Coordinates fromCenterCoordinates = mViewModel.getFrom().getCenterCoordinates();
-        Coordinates toCenterCoordinates = mViewModel.getTo().getCenterCoordinates();
+        Coordinates fromCenterCoordinates = mViewModel.getEntrance(mViewModel.getFrom()).getCenterCoordinates();
+        Coordinates toCenterCoordinates = mViewModel.getEntrance(mViewModel.getTo()).getCenterCoordinates();
 
         if (fromCenterCoordinates != null && toCenterCoordinates != null) {
             LatLng from = new LatLng(fromCenterCoordinates.getLatitude(), fromCenterCoordinates.getLongitude());

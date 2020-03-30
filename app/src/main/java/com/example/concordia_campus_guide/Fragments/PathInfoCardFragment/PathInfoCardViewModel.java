@@ -38,12 +38,13 @@ public class PathInfoCardViewModel extends ViewModel {
     public List<Direction> createOutdoorDirectionsList(List<DirectionWrapper> directionsResults){
         List<Direction> directionList = new ArrayList<>();
         totalDuration = 0;
-        for (DirectionWrapper direction : directionsResults) {
-            double minute = direction.getDirection().getDuration() / 60;
-            direction.getDirection().setDuration(minute);
+        for (DirectionWrapper directionWrapper : directionsResults) {
+            Direction direction = directionWrapper.getDirection();
+            double minute = direction.getDuration() / 60;
+            direction.setDuration(Math.ceil(minute));
+            totalDuration += minute;
 
-            totalDuration += direction.getDirection().getDuration();
-            directionList.add(direction.getDirection());
+            directionList.add(direction);
         }
         return directionList;
     }

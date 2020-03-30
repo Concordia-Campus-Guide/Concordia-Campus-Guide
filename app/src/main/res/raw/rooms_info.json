@@ -1,7 +1,7 @@
 {
   "Rooms":[
     {
-      "roomCode": "VL",
+      "roomCode": "entrance",
       "floorCode": "VL-1",
       "Campus": "LOY",     
       "centerCoordinates": {
@@ -10,7 +10,7 @@
       }
     },
     {
-      "roomCode": "MB",
+      "roomCode": "entrance",
       "floorCode": "MB-1",
       "Campus": "SGW",     
       "centerCoordinates": {
@@ -19,7 +19,7 @@
       }
     },
     {
-      "roomCode": "H",
+      "roomCode": "entrance",
       "floorCode": "H-1",
       "Campus": "SGW",     
       "centerCoordinates": {

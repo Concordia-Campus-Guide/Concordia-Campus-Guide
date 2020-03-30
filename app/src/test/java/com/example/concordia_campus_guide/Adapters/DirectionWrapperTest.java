@@ -1,17 +1,26 @@
 package com.example.concordia_campus_guide.Adapters;
 
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.Duration;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.EncodedPolyline;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.LatLng;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TransitDetails;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TravelMode;
 import com.example.concordia_campus_guide.Models.Direction;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class DirectionWrapperTest {
     DirectionWrapper directionWrapper;
     Direction direction;
     EncodedPolyline polyline;
+    DirectionsStep directionsStep;
+    TransitDetails transitDetails;
 
 
     @Before
@@ -22,6 +31,18 @@ public class DirectionWrapperTest {
         polyline = new EncodedPolyline("testPoints");
         directionWrapper.setDirection(direction);
         directionWrapper.setPolyline(polyline);
+
+        directionsStep = new DirectionsStep();
+        directionsStep.startLocation = new LatLng(1,2);
+        directionsStep.endLocation = new LatLng(3,4);
+        directionsStep.travelMode = TravelMode.TRANSIT;
+        directionsStep.htmlInstructions = "test";
+        directionsStep.duration = new Duration();
+        directionsStep.polyline = polyline;
+
+        transitDetails = new TransitDetails();
+        transitDetails.numStops = 7;
+        directionsStep.transitDetails = transitDetails;
     }
 
     @Test
@@ -50,5 +71,19 @@ public class DirectionWrapperTest {
         EncodedPolyline newEncodedPolyline = new EncodedPolyline(updatedPath);
         directionWrapper.setPolyline(newEncodedPolyline);
         assertEquals("newTestPoints", directionWrapper.getPolyline().getEncodedPath());
+    }
+
+    @Test
+    public void populateAttributesFromStep() {
+        DirectionWrapper directionWrapper = new DirectionWrapper();
+        directionWrapper.populateAttributesFromStep(directionsStep);
+        assertEquals(directionWrapper.getDirection().getDescription(), directionsStep.htmlInstructions);
+    }
+
+    @Test
+    public void getTransitDetails(){
+        DirectionWrapper directionWrapper = new DirectionWrapper();
+        directionWrapper.populateAttributesFromStep(directionsStep);
+        assertEquals(transitDetails.numStops, directionWrapper.getTransitDetails().numStops);
     }
 }

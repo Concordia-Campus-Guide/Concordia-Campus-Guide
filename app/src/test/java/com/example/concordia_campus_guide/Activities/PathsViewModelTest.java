@@ -1,6 +1,7 @@
 package com.example.concordia_campus_guide.Activities;
 
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
+import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.RoomModel;
 
@@ -8,9 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.MockitoAnnotations;
 
-
-
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class PathsViewModelTest {
     private RoomModel fromRoom;
@@ -30,11 +30,27 @@ public class PathsViewModelTest {
 
     @Test
     public void getTo() {
-        assertEquals("921",toRoom.getRoomCode());
+        assertEquals(toRoom, pathsViewModel.getTo());
     }
 
     @Test
     public void getFrom() {
-        assertEquals("823", fromRoom.getRoomCode());
+        assertEquals(fromRoom, pathsViewModel.getFrom());
+    }
+
+    @Test
+    public void getEntranceTest() {
+        Building entrance = new Building("H");
+        assertEquals(entrance, pathsViewModel.getEntrance(entrance));
+    }
+
+    @Test
+    public void arePlacesSeparatedByATunnelTest() {
+        assertFalse(pathsViewModel.arePlacesSeparatedByATunnel(fromRoom, toRoom));
+    }
+
+    @Test
+    public void areInSameBuildingTest() {
+        assert (pathsViewModel.areInSameBuilding(fromRoom, toRoom));
     }
 }

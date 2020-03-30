@@ -1,7 +1,5 @@
 package com.example.concordia_campus_guide.Helper;
 
-import android.content.Context;
-
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Floor;
@@ -14,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.PriorityQueue;
 
 /**
@@ -75,7 +72,7 @@ public class PathFinder {
         List<WalkingPoint> pointList = null;
         if (place instanceof Building) {
             placeCode = ((Building) place).getBuildingCode();
-            pointList = appDatabase.walkingPointDao().getAllWalkingPointsFromPlaceCode(placeCode);
+            pointList = appDatabase.walkingPointDao().getAllWalkingPointsFromPlace(placeCode + "-1", "entrance");
         } else if (place instanceof RoomModel) {
             //placeCode is not unique for Rooms, therefore we need to fetch the Walking point by searching for both floor code and place code
             floorCode = ((RoomModel) place).getFloorCode();
