@@ -27,6 +27,7 @@ import com.example.concordia_campus_guide.Models.Shuttle;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RoutesActivity extends AppCompatActivity {
@@ -130,6 +131,7 @@ public class RoutesActivity extends AppCompatActivity {
     }
 
     public void onClickShuttle(View v) {
+        mViewModel.setRouteOptions(new ArrayList<>());
         List<Shuttle> shuttles = mViewModel.filterShuttles();
         setShuttleSelect();
         if (!shuttles.isEmpty()) {
