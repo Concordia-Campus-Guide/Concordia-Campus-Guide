@@ -205,9 +205,7 @@ public class RoutesActivity extends AppCompatActivity {
     private void exitSelectToFrom() {
         Intent exitSelectToFrom = new Intent(RoutesActivity.this,
                 MainActivity.class);
-
         SelectingToFromState.reset();
-
         startActivity(exitSelectToFrom);
     }
 
