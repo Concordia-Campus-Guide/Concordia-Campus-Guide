@@ -32,6 +32,11 @@ android {
         // that the app's state is completely cleared between tests.
         testInstrumentationRunnerArguments clearPackageData: 'true'
     }
+    sourceSets {
+        test {
+            resources.srcDirs = ['src/test/res']
+        }
+    }
     buildTypes {
         debug {
             testCoverageEnabled = true

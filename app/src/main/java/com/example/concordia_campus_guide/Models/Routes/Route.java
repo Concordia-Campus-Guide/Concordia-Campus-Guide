@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Route {
-
     private List<TransportType> steps;
     private String departureTime;
     private String arrivalTime;
@@ -45,6 +44,10 @@ public class Route {
 
     public List<TransportType> getSteps() {
         return steps;
+    }
+
+    public void setSteps(List<TransportType> steps) {
+        this.steps = steps;
     }
 
     public String getDepartureTime() {
