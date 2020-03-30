@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -184,13 +185,21 @@ public class RoutesActivity extends AppCompatActivity {
         allRoutes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                // TODO: Add shuttle route to map #51
-                if (mViewModel.getShuttles().isEmpty()) {
+                if(carButton.isSelected() || transitButton.isSelected() || walkButton.isSelected()){
                     Intent openPaths = new Intent(RoutesActivity.this,
                             PathsActivity.class);
                     DirectionsRoute directionsResult = mViewModel.getDirectionsResult().routes[i];
                     openPaths.putExtra("directionsResult", directionsResult);
                     startActivity(openPaths);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Paths view for Shuttle route has not been implemented yet.", Toast.LENGTH_SHORT).show();
+                    // TODO: Add shuttle route to map #51
+                    // Intent openPaths = new Intent(RoutesActivity.this,
+                    //         PathsActivity.class);
+                    // DirectionsRoute directionsResult = mViewModel.getDirectionsResult().routes[i];
+                    // openPaths.putExtra("directionsResult", directionsResult);
+                    // startActivity(openPaths);
                 }
             }
         });
