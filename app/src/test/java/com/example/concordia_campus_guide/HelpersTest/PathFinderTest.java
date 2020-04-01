@@ -67,10 +67,7 @@ public class PathFinderTest {
         when(mockAppDb.walkingPointDao().getAllWalkingPointsFromPlace(roomDestination.getFloorCode(), roomDestination.getRoomCode())).thenReturn(Arrays.asList(classRoomInHBuildingWalkingPoint2));
 
         pathFinder = new PathFinder(mockAppDb, roomStartingPoint, roomDestination);
-
-        walkingPointNode1 = pathFinder.new WalkingPointNode(classRoomInHBuildingWalkingPoint2, null, 22.3, 123.312);
     }
-
 
     private void settingUpWalkingPoints(){
         classRoomInHBuildingWalkingPoint1 = new WalkingPoint(1,new Coordinates(1, 1), "H-9",new ArrayList<>(Arrays.asList(new Integer[]{2,3,4})), PointType.CLASSROOM, "937");
@@ -113,7 +110,7 @@ public class PathFinderTest {
         when(mockAppDb.walkingPointDao().getAllAccessPointsOnFloor(roomStartingPoint.getFloorCode(), PointType.ELEVATOR)).thenReturn(Arrays.asList(classRoomInHBuildingWalkingPoint1));
         assertEquals(classRoomInHBuildingWalkingPoint1,pathFinder.getWalkingPointCorrespondingToPlace(roomStartingPoint));
     }
-    
+
     @Test
     public void getPathToDestinationBetweenTwoClassroomsInTheSameBuildingTest(){
         List<WalkingPoint> walkingPointsToDestination = Arrays.asList(classRoomInHBuildingWalkingPoint2, walkingPoint4, classRoomInHBuildingWalkingPoint1);
@@ -152,6 +149,7 @@ public class PathFinderTest {
     //WalkingNode Inner Class Tests:
     @Test
     public void getAndSetWalkingPointTest(){
+        walkingPointNode1 = pathFinder.new WalkingPointNode(classRoomInHBuildingWalkingPoint2, null, 22.3, 123.312);
         assertEquals(classRoomInHBuildingWalkingPoint2,walkingPointNode1.getWalkingPoint());
         walkingPointNode1.setWalkingPoint(walkingPoint2);
         assertEquals(walkingPoint2, walkingPointNode1.getWalkingPoint());
@@ -159,6 +157,7 @@ public class PathFinderTest {
 
     @Test
     public void getAndSetHeuristicTest(){
+        walkingPointNode1 = pathFinder.new WalkingPointNode(classRoomInHBuildingWalkingPoint2, null, 22.3, 123.312);
         assertEquals(22.3, walkingPointNode1.getHeuristic());
         walkingPointNode1.setHeuristic(1102.33);
         assertEquals(1102.33, walkingPointNode1.getHeuristic());
@@ -166,6 +165,7 @@ public class PathFinderTest {
 
     @Test
     public void getAndSetCostTest(){
+        walkingPointNode1 = pathFinder.new WalkingPointNode(classRoomInHBuildingWalkingPoint2, null, 22.3, 123.312);
         assertEquals(123.312, walkingPointNode1.getCost());
         walkingPointNode1.setCost(1102.33);
         assertEquals(1102.33, walkingPointNode1.getCost());
@@ -173,6 +173,7 @@ public class PathFinderTest {
 
     @Test
     public void compareWalkingPointComparatorTest(){
+        walkingPointNode1 = pathFinder.new WalkingPointNode(classRoomInHBuildingWalkingPoint2, null, 22.3, 123.312);
         PathFinder.WalkingPointComparator walkingPointComparator = pathFinder.new WalkingPointComparator();
         walkingPointNode2 = pathFinder.new WalkingPointNode(classRoomInHBuildingWalkingPoint1, walkingPointNode1, 31.3, 993.312);
         assertEquals(-1, walkingPointComparator.compare(walkingPointNode1,walkingPointNode2));
@@ -183,6 +184,7 @@ public class PathFinderTest {
 
     @Test
     public void addNearestWalkingPointsTest(){
+        walkingPointNode1 = pathFinder.new WalkingPointNode(classRoomInHBuildingWalkingPoint2, null, 22.3, 123.312);
         pathFinder.addNearestWalkingPoints(walkingPointNode1);
         assertEquals(walkingPoint4,pathFinder.getWalkingPointsToVisit().peek().getWalkingPoint());
     }

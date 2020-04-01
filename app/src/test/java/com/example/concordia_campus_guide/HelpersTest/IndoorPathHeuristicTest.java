@@ -35,7 +35,6 @@ public class IndoorPathHeuristicTest {
     private WalkingPoint walkingPoint8;
     private List<WalkingPoint> walkingPointList;
 
-
     @Mock
     AppDatabase mockAppDb;
 
@@ -45,6 +44,17 @@ public class IndoorPathHeuristicTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        settingUpWalkingPoints();
+
+        walkingPointList = Arrays.asList(walkingPoint1, walkingPoint2, walkingPoint3, walkingPoint4, walkingPoint5, walkingPoint6, walkingPoint6, walkingPoint8);
+
+        when(mockAppDb.walkingPointDao()).thenReturn(mockWalkingPointDao);
+        when(mockWalkingPointDao.getAllAccessPointsOnFloor(walkingPoint1.getFloorCode(),PointType.ELEVATOR)).thenReturn(walkingPointList);
+        when(mockWalkingPointDao.getAll()).thenReturn(walkingPointList);
+        indoorPathHeuristic = new IndoorPathHeuristic(mockAppDb);
+    }
+
+    private void settingUpWalkingPoints(){
         walkingPoint1 = new WalkingPoint(1,new Coordinates(1, 1), "H-9",new ArrayList<>(Arrays.asList(new Integer[]{2,3,4})), PointType.CLASSROOM, "937");
         walkingPoint2 = new WalkingPoint(2,new Coordinates(2,2), "H-9", new ArrayList<>(Arrays.asList(new Integer[]{1,3})),PointType.NONE,"NONE");
         walkingPoint3 = new WalkingPoint(3,new Coordinates(1,2), "H-9", new ArrayList<>(Arrays.asList(new Integer[]{2,4})),PointType.NONE,"NONE");
@@ -53,13 +63,6 @@ public class IndoorPathHeuristicTest {
         walkingPoint6 = new WalkingPoint(6,new Coordinates(2, 1), "H-8", new ArrayList<>(Arrays.asList(new Integer[]{4,7})),PointType.ELEVATOR,"elevator");
         walkingPoint7 = new WalkingPoint(7,new Coordinates(4, -1), "H-8", new ArrayList<>(Arrays.asList(new Integer[]{6})),PointType.CLASSROOM,"832");
         walkingPoint8 = new WalkingPoint(8,new Coordinates(3, 1), "MB-2", new ArrayList<>(Arrays.asList(new Integer[]{5})),PointType.CLASSROOM,"S-23");
-
-        walkingPointList = Arrays.asList(walkingPoint1, walkingPoint2, walkingPoint3, walkingPoint4, walkingPoint5, walkingPoint6, walkingPoint6, walkingPoint8);
-
-        when(mockAppDb.walkingPointDao()).thenReturn(mockWalkingPointDao);
-        when(mockWalkingPointDao.getAllAccessPointsOnFloor(walkingPoint1.getFloorCode(),PointType.ELEVATOR)).thenReturn(walkingPointList);
-        when(mockWalkingPointDao.getAll()).thenReturn(walkingPointList);
-        indoorPathHeuristic = new IndoorPathHeuristic(mockAppDb);
     }
 
     @Test
