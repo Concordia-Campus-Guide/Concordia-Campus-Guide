@@ -64,8 +64,8 @@ public class IndoorPathHeuristicTest {
 
     @Test
     public void getEuclideanDistanceTest(){
-        double expectedValue = 3.5390783547533378;
-        assertEquals(1.4142135623730951, indoorPathHeuristic.getEuclideanDistance(walkingPoint1,walkingPoint2));
+        double expectedValue = 1.4142135623730951;
+        assertEquals(expectedValue, indoorPathHeuristic.getEuclideanDistance(walkingPoint1,walkingPoint2));
     }
 
     @Test

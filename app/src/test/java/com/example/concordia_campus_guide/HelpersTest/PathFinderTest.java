@@ -93,7 +93,7 @@ public class PathFinderTest {
 
         assertEquals(ElevatorWalkingPoint,pathFinder.getWalkingPointCorrespondingToPlace(floorWithCampus));
     }
-    
+
     @Test
     public void getPathToDestinationTest(){
         List<WalkingPoint> walkingPointsToDestination = Arrays.asList(walkingPoint5, walkingPoint4, walkingPoint1);
