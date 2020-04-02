@@ -169,26 +169,18 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
     }
 
     public void drawShuttle() {
+        //From starting point to bus stop
         if (fromIsIndoor) {
             locationFragment.setIndoorPaths(from, mViewModel.getEntrance(from));
             getOutdoorDirections(mViewModel.getEntrance(from), new BusStop(from.getCampus()));
-            directionWrappers = (ArrayList<DirectionWrapper>) parseDirectionResults();
-            locationFragment.drawOutdoorPaths(directionWrappers);
         } else {
             getOutdoorDirections(from, new BusStop(from.getCampus()));
-            directionWrappers = (ArrayList<DirectionWrapper>) parseDirectionResults();
-            locationFragment.drawOutdoorPaths(directionWrappers);
         }
         drawShuttlePath();
+        //From the bus stop to the destination
+        getOutdoorDirections(new BusStop(to.getCampus()), mViewModel.getEntrance(to));
         if (toIsIndoor) {
-            getOutdoorDirections(new BusStop(to.getCampus()), mViewModel.getEntrance(to));
-            directionWrappers = (ArrayList<DirectionWrapper>) parseDirectionResults();
-            locationFragment.drawOutdoorPaths(directionWrappers);
             locationFragment.setIndoorPaths(mViewModel.getEntrance(to), to);
-        } else {
-            getOutdoorDirections(new BusStop(to.getCampus()), mViewModel.getEntrance(to));
-            directionWrappers = (ArrayList<DirectionWrapper>) parseDirectionResults();
-            locationFragment.drawOutdoorPaths(directionWrappers);
         }
     }
 
@@ -198,7 +190,11 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
     }
 
     public void directionsApiCallBack(DirectionsResult result, List<Route> routeOptions) {
-        directionsRoute = result.routes[0];
+        if(result.routes.length>0) {
+            directionsRoute = result.routes[0];
+            directionWrappers = (ArrayList<DirectionWrapper>) parseDirectionResults();
+            locationFragment.drawOutdoorPaths(directionWrappers);
+        }
     }
 
 

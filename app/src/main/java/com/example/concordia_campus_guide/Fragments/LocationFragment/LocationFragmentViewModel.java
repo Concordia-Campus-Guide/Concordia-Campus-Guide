@@ -414,6 +414,6 @@ public class LocationFragmentViewModel extends ViewModel {
 
     public void drawShuttlePath(GoogleMap mMap, String polyline) {
         List<LatLng> route = PolyUtil.decode(polyline);
-        mMap.addPolyline(new PolylineOptions().addAll(route).color(R.color.colorPrimaryDark));
+        mMap.addPolyline(new PolylineOptions().addAll(route).color(R.color.colorAppTheme).width(20));
     }
 }
