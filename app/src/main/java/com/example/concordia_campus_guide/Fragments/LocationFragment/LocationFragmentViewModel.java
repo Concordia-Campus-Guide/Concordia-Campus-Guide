@@ -10,6 +10,7 @@ import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Global.ApplicationState;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.EncodedPolyline;
 import com.example.concordia_campus_guide.Helper.PathFinder;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Coordinates;
@@ -27,6 +28,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.maps.android.PolyUtil;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 import com.google.maps.android.geojson.GeoJsonPointStyle;
@@ -408,5 +410,10 @@ public class LocationFragmentViewModel extends ViewModel {
 
     public List<WalkingPoint> getWalkingPointsList() {
         return walkingPoints;
+    }
+
+    public void drawShuttlePath(GoogleMap mMap, String polyline) {
+        List<LatLng> route = PolyUtil.decode(polyline);
+        mMap.addPolyline(new PolylineOptions().addAll(route).color(R.color.colorPrimaryDark));
     }
 }
