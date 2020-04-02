@@ -4,10 +4,6 @@ import com.example.concordia_campus_guide.ClassConstants;
 
 public class BusStop extends Place {
 
-    public BusStop(Coordinates coordinates, String campus) {
-        super(coordinates, campus);
-    }
-
     public BusStop(String campus) {
         if (campus.equals("SGW")) {
             this.setCenterCoordinates(ClassConstants.SGW_SHUTTLE_STOP);

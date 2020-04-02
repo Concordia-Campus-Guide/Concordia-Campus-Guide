@@ -197,7 +197,9 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
                     openPaths.putExtra("shuttle", false);
                     startActivity(openPaths);
                 } else {
-//                    Toast.makeText(getApplicationContext(), "Paths view for Shuttle route has not been implemented yet.", Toast.LENGTH_SHORT).show();
+                    if (mViewModel.getShuttles().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Paths view for Shuttle route is not available if no shuttles exist.", Toast.LENGTH_SHORT).show();
+                    }
                     Intent openPaths = new Intent(RoutesActivity.this,
                             PathsActivity.class);
                     // DirectionsRoute directionsResult = mViewModel.getDirectionsResult().routes[i];

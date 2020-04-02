@@ -27,6 +27,7 @@ import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.Routes.Route;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.ArrayList;
@@ -37,9 +38,6 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
     private LocationFragment locationFragment;
     private TextView fromTextView;
     private TextView toTextView;
-    private ImageButton backButton;
-    private PathInfoCardFragment pathInfoCardFragment;
-    private FragmentTransaction fragmentTransaction;
     private FragmentManager fragmentManager;
     private BottomSheetBehavior swipeableInfoCard;
     private DirectionsRoute directionsRoute;
@@ -54,21 +52,11 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.paths_activity);
-
         init();
-
         checkFromToType(from, to);
-
-        fromTextView.setText(from.getDisplayName());
-        toTextView.setText(to.getDisplayName());
-        setBackButtonOnClickListener();
-
         if (!shuttleSelected) {
             locationFragment.drawOutdoorPaths(directionWrappers);
         }
-
-        View pathInfoCard = findViewById(R.id.path_info_card);
-        swipeableInfoCard = BottomSheetBehavior.from(pathInfoCard);
         setIndoorPaths();
         showInfoCard();
     }
@@ -76,6 +64,10 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
     private void init() {
         fromTextView = findViewById(R.id.path_fromText);
         toTextView = findViewById(R.id.path_toText);
+
+        fromTextView.setText(from.getDisplayName());
+        toTextView.setText(to.getDisplayName());
+        setBackButtonOnClickListener();
 
         mViewModel = new ViewModelProvider(this).get(PathsViewModel.class);
         fragmentManager = getSupportFragmentManager();
@@ -107,7 +99,7 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
     }
 
     private void setBackButtonOnClickListener() {
-        backButton = (ImageButton) findViewById(R.id.pathsPageBackButton);
+        ImageButton backButton = (ImageButton) findViewById(R.id.pathsPageBackButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,7 +109,9 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
     }
 
     public void showInfoCard() {
-        pathInfoCardFragment = new PathInfoCardFragment();
+        View pathInfoCard = findViewById(R.id.path_info_card);
+        swipeableInfoCard = BottomSheetBehavior.from(pathInfoCard);
+        PathInfoCardFragment pathInfoCardFragment = new PathInfoCardFragment();
         // creating bundle to be able to pass the directionWrapper and the walkingPoints to the pathsActivity
         Bundle infoCardBundle = new Bundle();
         infoCardBundle.putSerializable("directionsResult", directionWrappers);
@@ -125,7 +119,7 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
             infoCardBundle.putSerializable("walkingPoints", (ArrayList<WalkingPoint>) locationFragment.getWalkingPointList());
         pathInfoCardFragment.setArguments(infoCardBundle);
         // creating fragmentTransaction to show the step-by-step card from the bottom of the screen
-        fragmentTransaction = fragmentManager.beginTransaction();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.path_info_card_frame, pathInfoCardFragment);
         fragmentTransaction.commit();
         swipeableInfoCard.setState(BottomSheetBehavior.STATE_COLLAPSED);
@@ -162,7 +156,7 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
             locationFragment.setIndoorPaths(from, to);
         }
         //[from -> from_entrance ] + outdoor directions + [to_entrance -> to]
-        else if (toIsIndoor && fromIsIndoor) {
+        else if (toIsIndoor) {
             locationFragment.setIndoorPaths(from, mViewModel.getEntrance(from));
             locationFragment.setIndoorPaths(mViewModel.getEntrance(to), to);
         }
@@ -185,12 +179,15 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
     }
 
     public void getOutdoorDirections(Place from, Place to) {
-        String url = UrlBuilder.build(from.getCenterCoordinatesLatLng(), to.getCenterCoordinatesLatLng(), ClassConstants.WALKING);
+        LatLng fromLatLong = new LatLng(from.getCenterCoordinates().getLatitude(), from.getCenterCoordinates().getLongitude());
+        LatLng toLatLong = new LatLng(to.getCenterCoordinates().getLatitude(), to.getCenterCoordinates().getLongitude());
+
+        String url = UrlBuilder.build(fromLatLong, toLatLong, ClassConstants.WALKING);
         new DirectionsApiDataRetrieval(PathsActivity.this).execute(url, ClassConstants.WALKING);
     }
 
     public void directionsApiCallBack(DirectionsResult result, List<Route> routeOptions) {
-        if(result.routes.length>0) {
+        if (result.routes.length > 0) {
             directionsRoute = result.routes[0];
             directionWrappers = (ArrayList<DirectionWrapper>) parseDirectionResults();
             locationFragment.drawOutdoorPaths(directionWrappers);
