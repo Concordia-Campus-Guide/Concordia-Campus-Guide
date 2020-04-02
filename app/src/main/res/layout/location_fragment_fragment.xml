@@ -19,7 +19,7 @@
         android:layout_alignRight="@id/topMapContainer"
         android:layout_marginRight="15dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/round_button_gray"
+        android:background="@drawable/round_button_white"
         android:elevation="20dp"
         android:minHeight="40dp"
         android:minWidth="40dp"
