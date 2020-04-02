@@ -28,20 +28,20 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class PathFinderTest {
     private WalkingPoint classRoomInHBuildingWalkingPoint1;
-    private WalkingPoint walkingPoint1;
     private WalkingPoint walkingPoint2;
     private WalkingPoint walkingPoint3;
+    private WalkingPoint walkingPoint4;
     private WalkingPoint classRoomInHBuildingWalkingPoint2;
     private WalkingPoint entranceHBuildingWalkingPoint;
     private WalkingPoint elevatorWalkingPoint;
     private WalkingPoint entranceMBBuildingWalkingPoint;
-    private WalkingPoint walkingPoint4;
+    private WalkingPoint walkingPoint9;
     private WalkingPoint classRoomInMBBuildingWalkingPoint;
     private List<WalkingPoint> walkingPointList;
     private PathFinder pathFinder;
     private RoomModel roomStartingPoint;
     private RoomModel roomDestination;
-    
+
     private PathFinder.WalkingPointNode walkingPointNode1;
     private PathFinder.WalkingPointNode walkingPointNode2;
 
@@ -59,8 +59,8 @@ public class PathFinderTest {
         roomStartingPoint = new RoomModel(new Coordinates(1, 1), "937", "H-9", "SGW");
         roomDestination = new RoomModel(new Coordinates(3, 3), "921", "H-9", "SGW");
 
-        walkingPointList = Arrays.asList(classRoomInHBuildingWalkingPoint1, walkingPoint1, walkingPoint2, walkingPoint3, classRoomInHBuildingWalkingPoint2,
-                entranceHBuildingWalkingPoint,elevatorWalkingPoint,entranceMBBuildingWalkingPoint, walkingPoint4, classRoomInMBBuildingWalkingPoint);
+        walkingPointList = Arrays.asList(classRoomInHBuildingWalkingPoint1, walkingPoint2, walkingPoint3, walkingPoint4, classRoomInHBuildingWalkingPoint2,
+                entranceHBuildingWalkingPoint,elevatorWalkingPoint,entranceMBBuildingWalkingPoint, walkingPoint9, classRoomInMBBuildingWalkingPoint);
 
         when(mockAppDb.walkingPointDao()).thenReturn(mockWalkingPointDao);
         when(mockWalkingPointDao.getAll()).thenReturn(walkingPointList);
@@ -72,14 +72,14 @@ public class PathFinderTest {
 
     private void settingUpWalkingPoints(){
         classRoomInHBuildingWalkingPoint1 = new WalkingPoint(1,new Coordinates(1, 1), "H-9",new ArrayList<>(Arrays.asList(new Integer[]{2,3,4})), PointType.CLASSROOM, "937");
-        walkingPoint1 = new WalkingPoint(2,new Coordinates(2,2), "H-9", new ArrayList<>(Arrays.asList(new Integer[]{1,3,7})),PointType.NONE,"NONE");
-        walkingPoint2 = new WalkingPoint(3,new Coordinates(2,-2.5), "H-9", new ArrayList<>(Arrays.asList(new Integer[]{2,4,5})),PointType.NONE,"NONE");
-        walkingPoint3 = new WalkingPoint(4,new Coordinates(1, 1.5), "H-9", new ArrayList<>(Arrays.asList(new Integer[]{1,3,5,6})),PointType.NONE,"NONE");
+        walkingPoint2 = new WalkingPoint(2,new Coordinates(2,2), "H-9", new ArrayList<>(Arrays.asList(new Integer[]{1,3,7})),PointType.NONE,"NONE");
+        walkingPoint3 = new WalkingPoint(3,new Coordinates(2,-2.5), "H-9", new ArrayList<>(Arrays.asList(new Integer[]{2,4,5})),PointType.NONE,"NONE");
+        walkingPoint4 = new WalkingPoint(4,new Coordinates(1, 1.5), "H-9", new ArrayList<>(Arrays.asList(new Integer[]{1,3,5,6})),PointType.NONE,"NONE");
         classRoomInHBuildingWalkingPoint2 = new WalkingPoint(5,new Coordinates(5, 5), "H-9", new ArrayList<>(Arrays.asList(new Integer[]{3,4})),PointType.CLASSROOM,"921");
         entranceHBuildingWalkingPoint = new WalkingPoint(6,new Coordinates(1.2, 2), "H-9", new ArrayList<>(Arrays.asList(new Integer[]{4,8})),PointType.ENTRANCE,"ENTRANCE");
         elevatorWalkingPoint = new WalkingPoint(7,new Coordinates(1, 3), "H-9", new ArrayList<>(Arrays.asList(new Integer[]{2})),PointType.ELEVATOR,"elevators-1");
         entranceMBBuildingWalkingPoint = new WalkingPoint(8, new Coordinates(2.4,3.2),"MB-S2",new ArrayList<>(Arrays.asList(new Integer[]{7,9})),PointType.ENTRANCE, "ENTRANCE");
-        walkingPoint4 = new WalkingPoint(9,new Coordinates(-2.4,2.2),"MB-S2",new ArrayList<>(Arrays.asList(new Integer[]{8,10})),PointType.NONE, "NONE");
+        walkingPoint9 = new WalkingPoint(9,new Coordinates(-2.4,2.2),"MB-S2",new ArrayList<>(Arrays.asList(new Integer[]{8,10})),PointType.NONE, "NONE");
         classRoomInMBBuildingWalkingPoint = new WalkingPoint(10,new Coordinates(2.45,-2.2),"MB-S2",new ArrayList<>(Arrays.asList(new Integer[]{9})),PointType.CLASSROOM, "279");
     }
 
@@ -108,13 +108,13 @@ public class PathFinderTest {
 
     @Test
     public void getWalkingPointCorrespondingToPlaceForRoomTest(){
-        when(mockAppDb.walkingPointDao().getAllAccessPointsOnFloor(roomStartingPoint.getFloorCode(), PointType.ELEVATOR)).thenReturn(Arrays.asList(classRoomInHBuildingWalkingPoint1));
+        when(mockAppDb.walkingPointDao().getAllAccessPointsOnFloor(roomStartingPoint.getFloorCode(), PointType.CLASSROOM)).thenReturn(Arrays.asList(classRoomInHBuildingWalkingPoint1));
         assertEquals(classRoomInHBuildingWalkingPoint1,pathFinder.getWalkingPointCorrespondingToPlace(roomStartingPoint));
     }
 
     @Test
     public void getPathToDestinationBetweenTwoClassroomsInTheSameBuildingTest(){
-        List<WalkingPoint> walkingPointsToDestination = Arrays.asList(classRoomInHBuildingWalkingPoint2, walkingPoint3, classRoomInHBuildingWalkingPoint1);
+        List<WalkingPoint> walkingPointsToDestination = Arrays.asList(classRoomInHBuildingWalkingPoint2, walkingPoint4, classRoomInHBuildingWalkingPoint1);
         assertEquals(walkingPointsToDestination,pathFinder.getPathToDestination());
     }
 
@@ -129,7 +129,7 @@ public class PathFinderTest {
 
         PathFinder pathFinderBetweenBuildings = new PathFinder(mockAppDb,roomInH,roomInMB);
 
-        List<WalkingPoint> walkingPointsToDestination = Arrays.asList(classRoomInMBBuildingWalkingPoint, walkingPoint4,entranceMBBuildingWalkingPoint, entranceHBuildingWalkingPoint, walkingPoint3, classRoomInHBuildingWalkingPoint1);
+        List<WalkingPoint> walkingPointsToDestination = Arrays.asList(classRoomInMBBuildingWalkingPoint, walkingPoint9,entranceMBBuildingWalkingPoint, entranceHBuildingWalkingPoint, walkingPoint4, classRoomInHBuildingWalkingPoint1);
         assertEquals(walkingPointsToDestination,pathFinderBetweenBuildings.getPathToDestination());
     }
 
@@ -152,8 +152,8 @@ public class PathFinderTest {
     public void getAndSetWalkingPointTest(){
         walkingPointNode1 = pathFinder.new WalkingPointNode(classRoomInHBuildingWalkingPoint2, null, 22.3, 123.312);
         assertEquals(classRoomInHBuildingWalkingPoint2,walkingPointNode1.getWalkingPoint());
-        walkingPointNode1.setWalkingPoint(walkingPoint1);
-        assertEquals(walkingPoint1, walkingPointNode1.getWalkingPoint());
+        walkingPointNode1.setWalkingPoint(walkingPoint2);
+        assertEquals(walkingPoint2, walkingPointNode1.getWalkingPoint());
     }
 
     @Test
@@ -187,7 +187,7 @@ public class PathFinderTest {
     public void addNearestWalkingPointsTest(){
         walkingPointNode1 = pathFinder.new WalkingPointNode(classRoomInHBuildingWalkingPoint2, null, 22.3, 123.312);
         pathFinder.addNearestWalkingPoints(walkingPointNode1);
-        assertEquals(walkingPoint3,pathFinder.getWalkingPointsToVisit().peek().getWalkingPoint());
+        assertEquals(walkingPoint4,pathFinder.getWalkingPointsToVisit().peek().getWalkingPoint());
     }
 
 
