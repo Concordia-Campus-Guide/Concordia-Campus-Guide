@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_calendar"
+            android:icon="@drawable/ic_calendar"
+            android:title="@string/calendar"/>
+        <item android:id="@+id/nav_translate"
+            android:icon="@drawable/ic_french"
+            android:title="@string/french"/>
+        <item android:id="@+id/nav_accessibility"
+            android:icon="@drawable/ic_accessibility"
+            android:title="@string/accessibility"/>
+        <item android:id="@+id/nav_staff"
+            android:icon="@drawable/ic_staff"
+            android:title="@string/staff"/>
+    </group>
+</menu>

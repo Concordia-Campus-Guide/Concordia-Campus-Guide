@@ -9,9 +9,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     LocationFragment locationFragment;
     POIFragment poiFragment;
     MainActivityViewModel mViewModel;
+    private DrawerLayout drawer;
     private BottomSheetBehavior swipeableInfoCard;
     private BottomSheetBehavior swipeablePOICard;
     private Notification notification;
@@ -73,6 +77,12 @@ public class MainActivity extends AppCompatActivity {
         showPOICard();
         swipeablePOICard = BottomSheetBehavior.from(poiCard);
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
+        drawer = findViewById(R.id.drawer_layout);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, myToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
     }
 
     public void popUp(CalendarEvent calendarEvent){
@@ -206,13 +216,16 @@ public class MainActivity extends AppCompatActivity {
      * Defines the desired behavior on backpress
      */
     @Override
-    public void onBackPressed(){
-        Fragment fragment = fragmentManager.findFragmentById(R.id.bottom_card_frame);
-        if(fragment!=null){
-            showPOICard();
-        }
-        else{
-            super.onBackPressed();
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawer(GravityCompat.START);
+        }else {
+            Fragment fragment = fragmentManager.findFragmentById(R.id.bottom_card_frame);
+            if (fragment != null) {
+                showPOICard();
+            } else {
+                super.onBackPressed();
+            }
         }
     }
 
