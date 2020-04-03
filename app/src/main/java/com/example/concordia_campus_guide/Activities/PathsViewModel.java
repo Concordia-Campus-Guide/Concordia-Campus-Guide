@@ -2,11 +2,17 @@ package com.example.concordia_campus_guide.Activities;
 
 import androidx.lifecycle.ViewModel;
 
+import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.RoomModel;
 
 public class PathsViewModel extends ViewModel {
+    private AppDatabase appDB;
+
+    public PathsViewModel(AppDatabase appDB) {
+        this.appDB = appDB;
+    }
 
     public Place getTo() {
         return SelectingToFromState.getTo();
@@ -18,11 +24,9 @@ public class PathsViewModel extends ViewModel {
 
     public Place getEntrance(Place place) {
         if (place instanceof RoomModel) {
-            String campusCode = ((RoomModel) place).getCampus();
             String floorCode = ((RoomModel) place).getFloorCode();
             String buildingCode = floorCode.substring(0, floorCode.indexOf('-')).toUpperCase();
-            //For indoor direction, no need to return the actual room from the db as the room coordinates will not be used by the PathFinder
-            return new RoomModel(place.getCenterCoordinates(), "entrance", buildingCode + "-1", campusCode);
+            return appDB.roomDao().getRoomByIdAndFloorCode("entrance", buildingCode + "-1");
         }
         return place;
     }

@@ -20,6 +20,7 @@ import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServ
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
 import com.example.concordia_campus_guide.Helper.RoutesHelpers.DirectionsApiDataRetrieval;
 import com.example.concordia_campus_guide.Helper.RoutesHelpers.UrlBuilder;
+import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.Interfaces.DirectionsApiCallbackListener;
 import com.example.concordia_campus_guide.Models.BusStop;
 import com.example.concordia_campus_guide.Models.Place;
@@ -64,7 +65,7 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
         TextView fromTextView = findViewById(R.id.path_fromText);
         TextView toTextView = findViewById(R.id.path_toText);
 
-        mViewModel = new ViewModelProvider(this).get(PathsViewModel.class);
+        mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getApplication())).get(PathsViewModel.class);
         fragmentManager = getSupportFragmentManager();
 
         from = mViewModel.getFrom();
