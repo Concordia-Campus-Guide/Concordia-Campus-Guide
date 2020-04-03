@@ -163,7 +163,7 @@ public class RoutesActivity extends AppCompatActivity {
 
         setRoutesAdapter();
     }
-    
+
     private void setRoutesAdapter() {
         // Android adapter for list view
         adapter = new RoutesAdapter(this, R.layout.list_routes, mViewModel.getRouteOptions());
