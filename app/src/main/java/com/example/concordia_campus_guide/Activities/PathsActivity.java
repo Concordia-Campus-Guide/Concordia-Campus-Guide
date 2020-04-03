@@ -36,10 +36,7 @@ import java.util.List;
 public class PathsActivity extends AppCompatActivity implements DirectionsApiCallbackListener {
     private PathsViewModel mViewModel;
     private LocationFragment locationFragment;
-    private TextView fromTextView;
-    private TextView toTextView;
     private FragmentManager fragmentManager;
-    private BottomSheetBehavior swipeableInfoCard;
     private DirectionsRoute directionsRoute;
     private ArrayList<DirectionWrapper> directionWrappers;
     private Place from;
@@ -55,15 +52,17 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
         init();
         checkFromToType(from, to);
         if (!shuttleSelected) {
-            locationFragment.drawOutdoorPaths(directionWrappers);
+            setOutdoorPaths();
+            setIndoorPaths();
+        } else {
+            setShuttlePaths();
         }
-        setIndoorPaths();
         showInfoCard();
     }
 
     private void init() {
-        fromTextView = findViewById(R.id.path_fromText);
-        toTextView = findViewById(R.id.path_toText);
+        TextView fromTextView = findViewById(R.id.path_fromText);
+        TextView toTextView = findViewById(R.id.path_toText);
 
         mViewModel = new ViewModelProvider(this).get(PathsViewModel.class);
         fragmentManager = getSupportFragmentManager();
@@ -81,15 +80,6 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
             shuttleSelected = extras.getBoolean("shuttle");
         }
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.pathLocationFragment);
-
-        if (!shuttleSelected) {
-            directionWrappers = (mViewModel.areInSameBuilding(from, to) || mViewModel.arePlacesSeparatedByATunnel(from, to)) ?
-                    new ArrayList<>() :
-                    (ArrayList<DirectionWrapper>) parseDirectionResults();
-        } else {
-            drawShuttle();
-        }
-
     }
 
     private void returnToSelectRoute() {
@@ -110,7 +100,7 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
 
     public void showInfoCard() {
         View pathInfoCard = findViewById(R.id.path_info_card);
-        swipeableInfoCard = BottomSheetBehavior.from(pathInfoCard);
+        BottomSheetBehavior swipeableInfoCard = BottomSheetBehavior.from(pathInfoCard);
         PathInfoCardFragment pathInfoCardFragment = new PathInfoCardFragment();
         // creating bundle to be able to pass the directionWrapper and the walkingPoints to the pathsActivity
         Bundle infoCardBundle = new Bundle();
@@ -147,11 +137,20 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
         toIsIndoor = to instanceof RoomModel;
     }
 
+    public void setOutdoorPaths() {
+        directionWrappers = (mViewModel.areInSameBuilding(from, to) || mViewModel.arePlacesSeparatedByATunnel(from, to)) ?
+                new ArrayList<>() :
+                (ArrayList<DirectionWrapper>) parseDirectionResults();
+        locationFragment.drawOutdoorPaths(directionWrappers);
+    }
+
     public void setIndoorPaths() {
         if (!fromIsIndoor && !toIsIndoor) return;
         //Outdoor -> Indoor
         if (!fromIsIndoor) {
             locationFragment.setIndoorPaths(mViewModel.getEntrance(to), to);
+        } else if (!toIsIndoor) {
+            locationFragment.setIndoorPaths(mViewModel.getEntrance(from), from);
         } else if (mViewModel.arePlacesSeparatedByATunnel(from, to) || mViewModel.areInSameBuilding(from, to)) {
             locationFragment.setIndoorPaths(from, to);
         }
@@ -162,7 +161,7 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
         }
     }
 
-    public void drawShuttle() {
+    public void setShuttlePaths() {
         //From starting point to bus stop
         if (fromIsIndoor) {
             locationFragment.setIndoorPaths(from, mViewModel.getEntrance(from));
@@ -186,6 +185,7 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
         new DirectionsApiDataRetrieval(PathsActivity.this).execute(url, ClassConstants.WALKING);
     }
 
+    @Override
     public void directionsApiCallBack(DirectionsResult result, List<Route> routeOptions) {
         if (result.routes.length > 0) {
             directionsRoute = result.routes[0];
@@ -193,7 +193,6 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
             locationFragment.drawOutdoorPaths(directionWrappers);
         }
     }
-
 
     public void drawShuttlePath() {
         String polyline = from.getCampus().equals("SGW") ? ClassConstants.ShuttlePolylineSGWLOY : ClassConstants.ShuttlePolylineLOYSGW;
