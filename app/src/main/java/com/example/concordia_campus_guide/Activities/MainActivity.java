@@ -114,14 +114,21 @@ public class MainActivity extends AppCompatActivity {
     private void setupSideMenuItemListeners() {
         NavigationView nav = findViewById(R.id.side_nav_view);
 
-        //TODO: need to find a way to be more dynamic
-        MenuItem switchItem = nav.getMenu().findItem(R.id.nav_calendar);
-        CompoundButton switchView = (CompoundButton) MenuItemCompat.getActionView(switchItem);
+        int[] switchIds = {R.id.nav_calendar, R.id.nav_translate, R.id.nav_staff, R.id.nav_accessibility};
 
+        for(int switchId : switchIds){
+            MenuItem switchItem = nav.getMenu().findItem(switchId);
+            CompoundButton switchView = (CompoundButton) MenuItemCompat.getActionView(switchItem);
+            setupOnChangeListenerForSwitch(switchView);
+        }
+    }
+
+    private void setupOnChangeListenerForSwitch(CompoundButton switchView) {
         switchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Toast.makeText(MainActivity.this, "changed", Toast.LENGTH_SHORT).show();
+                //TODO: us #159, add action when changed
+                Toast.makeText(MainActivity.this, isChecked+"", Toast.LENGTH_SHORT).show();
             }
         });
     }
