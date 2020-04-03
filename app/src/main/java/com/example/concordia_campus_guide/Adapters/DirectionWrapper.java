@@ -1,7 +1,5 @@
 package com.example.concordia_campus_guide.Adapters;
 
-import android.graphics.Color;
-
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.EncodedPolyline;
@@ -17,9 +15,7 @@ public class DirectionWrapper implements Serializable {
     private EncodedPolyline polyline;
     private TransitDetails transitDetails;
 
-    public DirectionWrapper(){}
-
-    public void populateAttributesFromStep(DirectionsStep directionStep){
+    public void populateAttributesFromStep(DirectionsStep directionStep) {
         // create a new direction
         this.direction = new Direction();
         this.direction.setStart(new LatLng(directionStep.startLocation.lat, directionStep.startLocation.lng));
@@ -32,12 +28,16 @@ public class DirectionWrapper implements Serializable {
         this.polyline = directionStep.polyline;
 
         //get color is of type transit
-        if(directionStep.travelMode.toString().equals(ClassConstants.TRANSIT)){
+        if (directionStep.travelMode.toString().equals(ClassConstants.TRANSIT)) {
             this.transitDetails = directionStep.transitDetails;
         }
     }
 
-    private String getTransitType(TravelMode travelMode){
+    public DirectionWrapper() {
+        // being used in tests
+    }
+
+    private String getTransitType(TravelMode travelMode) {
         return travelMode.name().toLowerCase();
     }
 

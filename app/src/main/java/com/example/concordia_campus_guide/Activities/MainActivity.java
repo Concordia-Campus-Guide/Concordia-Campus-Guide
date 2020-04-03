@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -22,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragment;
@@ -41,6 +43,7 @@ import com.example.concordia_campus_guide.Models.WalkingPoints;
 import com.example.concordia_campus_guide.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.navigation.NavigationView;
+
 import java.util.Date;
 import java.util.HashMap;
 
@@ -75,12 +78,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
 
         SharedPreferences sharedPreferences = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
-        for(CompoundButton toggleButton: toggleButtonAndCorrespondingToggleType.keySet()) {
+        for (CompoundButton toggleButton : toggleButtonAndCorrespondingToggleType.keySet()) {
             String value = sharedPreferences.getString(toggleButtonAndCorrespondingToggleType.get(toggleButton), ClassConstants.FALSE);
             toggleButton.setChecked(value.equals(ClassConstants.TRUE));
         }
@@ -89,14 +91,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    protected void onPause()
-    {
+    protected void onPause() {
         super.onPause();
 
         SharedPreferences sharedPreferences = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
         SharedPreferences.Editor myEdit = sharedPreferences.edit();
 
-        for(CompoundButton toggleButton: toggleButtonAndCorrespondingToggleType.keySet()) {
+        for (CompoundButton toggleButton : toggleButtonAndCorrespondingToggleType.keySet()) {
             String value = toggleButton.isChecked() ? ClassConstants.TRUE : ClassConstants.FALSE;
             String toggleType = toggleButtonAndCorrespondingToggleType.get(toggleButton);
             myEdit.putString(toggleType, value);
@@ -127,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void setupNotifications() {
-        notification = new Notification(this,AppDatabase.getInstance(this));
+        notification = new Notification(this, AppDatabase.getInstance(this));
         notification.checkUpCalendarEvery5Minutes();
     }
 
@@ -172,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         translationToggle = (CompoundButton) translateItem.getActionView();
         staffToggle = (CompoundButton) staffItem.getActionView();
         accessibilityToggle = (CompoundButton) accessibilityItem.getActionView();
-        
+
         setupOnChangeListenerForSwitch(staffToggle);
         setupOnChangeListenerForSwitch(translationToggle);
         setupOnChangeListenerForSwitch(accessibilityToggle);
@@ -183,35 +184,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 //TODO: US #158 and #160, add action when changed
-                Toast.makeText(MainActivity.this, isChecked+"", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, isChecked + "", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    public void popUp(CalendarEvent calendarEvent){
+    public void popUp(CalendarEvent calendarEvent) {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setCancelable(true);
         Date eventDate = new Date((Long.parseLong(calendarEvent.getStartTime())));
         long differenceInMillis = eventDate.getTime() - System.currentTimeMillis();
-        if(notification.validateCalendarEvent(calendarEvent) || !notification.roomExistsInDb(calendarEvent.getLocation())) {
+        if (notification.validateCalendarEvent(calendarEvent) || !notification.roomExistsInDb(calendarEvent.getLocation())) {
             builder.setTitle("Location Format is Wrong");
-            builder.setMessage("The location of your upcoming event hasn't been inserted correctly"+
+            builder.setMessage("The location of your upcoming event hasn't been inserted correctly" +
                     "(e.g. 'H-9, 963')");
-        }
-
-        else if(differenceInMillis>0 ){
-            builder.setTitle("Heads up... Your next class is in " +  mViewModel.displayTimeToNextClass(calendarEvent.getStartTime()));
-            builder.setMessage("You have " + calendarEvent.getTitle() + " in " + mViewModel.displayTimeToNextClass(calendarEvent.getStartTime())  + " at " +
-                    calendarEvent.getLocation() +" ! Please choose to either get directions to your class or to ignore this message");
-            setupShowMeDirectionsBtn(builder,calendarEvent.getLocation());
-        }
-        else {
+        } else if (differenceInMillis > 0) {
+            builder.setTitle("Heads up... Your next class is in " + mViewModel.displayTimeToNextClass(calendarEvent.getStartTime()));
+            builder.setMessage("You have " + calendarEvent.getTitle() + " in " + mViewModel.displayTimeToNextClass(calendarEvent.getStartTime()) + " at " +
+                    calendarEvent.getLocation() + " ! Please choose to either get directions to your class or to ignore this message");
+            setupShowMeDirectionsBtn(builder, calendarEvent.getLocation());
+        } else {
             String eventPassedBy = mViewModel.displayTimeToNextClass(calendarEvent.getStartTime());
-            eventPassedBy = eventPassedBy.replace('-',' ');
+            eventPassedBy = eventPassedBy.replace('-', ' ');
             builder.setTitle("Heads up... Your class has already started before " + eventPassedBy);
             builder.setMessage("Your " + calendarEvent.getTitle() + " has started before " + eventPassedBy + " at " +
-                    calendarEvent.getLocation() +" ! Please choose to either get directions to your class or to ignore this message");
-            setupShowMeDirectionsBtn(builder,calendarEvent.getLocation());
+                    calendarEvent.getLocation() + " ! Please choose to either get directions to your class or to ignore this message");
+            setupShowMeDirectionsBtn(builder, calendarEvent.getLocation());
         }
 
         setupCancelBtn(builder);
@@ -219,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         builder.show();
     }
 
-    private void setupCancelBtn(AlertDialog.Builder builder){
+    private void setupCancelBtn(AlertDialog.Builder builder) {
         builder.setNegativeButton("Ignore", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -228,14 +226,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-    private void setupShowMeDirectionsBtn(AlertDialog.Builder builder, String location){
+    private void setupShowMeDirectionsBtn(AlertDialog.Builder builder, String location) {
         final String locationTemp = location;
         final Activity mainActivity = this;
         builder.setPositiveButton("Show me Directions", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 RoomModel room = notification.getRoom(locationTemp);
-                StartActivityHelper.openRoutesPage(room,mainActivity);
+                StartActivityHelper.openRoutesPage(room, mainActivity);
             }
         });
     }
@@ -268,7 +266,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
      *
      * @param buildingCode: the Building code
      */
-    public void showInfoCard(String buildingCode){
+    public void showInfoCard(String buildingCode) {
         resetBottomCard();
         infoCardFragment = new InfoCardFragment(buildingCode);
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -278,7 +276,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         (findViewById(R.id.bottom_card_frame)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(swipeableInfoCard.getState() != BottomSheetBehavior.STATE_EXPANDED)
+                if (swipeableInfoCard.getState() != BottomSheetBehavior.STATE_EXPANDED)
                     swipeableInfoCard.setState(BottomSheetBehavior.STATE_EXPANDED);
                 else
                     swipeableInfoCard.setState(BottomSheetBehavior.STATE_COLLAPSED);
@@ -286,7 +284,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-    public void showPOICard(){
+    public void showPOICard() {
         resetBottomCard();
         poiFragment = new POIFragment();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -297,7 +295,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         (findViewById(R.id.explore_bottom_card_frame)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(swipeablePOICard.getState() != BottomSheetBehavior.STATE_EXPANDED)
+                if (swipeablePOICard.getState() != BottomSheetBehavior.STATE_EXPANDED)
                     swipeablePOICard.setState(BottomSheetBehavior.STATE_EXPANDED);
                 else
                     swipeablePOICard.setState(BottomSheetBehavior.STATE_COLLAPSED);
@@ -305,8 +303,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-    public void resetBottomCard(){
-        for (Fragment fragment : fragmentManager.getFragments()){
+    public void resetBottomCard() {
+        for (Fragment fragment : fragmentManager.getFragments()) {
             if (fragment instanceof InfoCardFragment) {
                 fragmentManager.beginTransaction().remove(fragment).commit();
             }
@@ -320,9 +318,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
      */
     @Override
     public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)){
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        }else {
+        } else {
             Fragment fragment = fragmentManager.findFragmentById(R.id.bottom_card_frame);
             if (fragment != null) {
                 showPOICard();
@@ -332,8 +330,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    private void setUpDb(){
-        if(!ApplicationState.getInstance(this).isDbIsSet()){
+    private void setUpDb() {
+        if (!ApplicationState.getInstance(this).isDbIsSet()) {
             //delete previous db
             getApplication().getApplicationContext().deleteDatabase(AppDatabase.DB_NAME);
 
@@ -370,7 +368,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
         SharedPreferences sharedPreferences = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
-        if (itemId == R.id.nav_calendar){
+        if (itemId == R.id.nav_calendar) {
             SharedPreferences.Editor myEdit = sharedPreferences.edit();
 
             String value = item.isEnabled() ? ClassConstants.TRUE : ClassConstants.FALSE;
