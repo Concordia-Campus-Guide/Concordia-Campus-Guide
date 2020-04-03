@@ -3,6 +3,7 @@ package com.example.concordia_campus_guide.Activities;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,20 +11,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
-import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
-
+import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragment;
 import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragment;
@@ -42,11 +41,10 @@ import com.example.concordia_campus_guide.Models.WalkingPoints;
 import com.example.concordia_campus_guide.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.navigation.NavigationView;
-
 import java.util.Date;
+import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity implements
-        NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     FragmentTransaction fragmentTransaction;
     FragmentManager fragmentManager;
@@ -60,6 +58,12 @@ public class MainActivity extends AppCompatActivity implements
     private Notification notification;
     Toolbar myToolbar;
 
+    // Side Menu Toggle Buttons
+    private CompoundButton staffToggle;
+    private CompoundButton accessibilityToggle;
+    private CompoundButton translationToggle;
+    private HashMap<CompoundButton, String> toggleButtonAndCorrespondingToggleType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +72,37 @@ public class MainActivity extends AppCompatActivity implements
         mViewModel = new MainActivityViewModel();
 
         initComponents();
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+
+        SharedPreferences sharedPreferences = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
+        for(CompoundButton toggleButton: toggleButtonAndCorrespondingToggleType.keySet()) {
+            String value = sharedPreferences.getString(toggleButtonAndCorrespondingToggleType.get(toggleButton), ClassConstants.FALSE);
+            toggleButton.setChecked(value.equals(ClassConstants.TRUE));
+        }
+
+        // TODO: US #50: add logic for calendar integration  by retrieving from the shared preferences if the user hclicked on the "calendar integration" button or not.
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+
+        SharedPreferences sharedPreferences = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
+        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+        for(CompoundButton toggleButton: toggleButtonAndCorrespondingToggleType.keySet()) {
+            String value = toggleButton.isChecked() ? ClassConstants.TRUE : ClassConstants.FALSE;
+            String toggleType = toggleButtonAndCorrespondingToggleType.get(toggleButton);
+            myEdit.putString(toggleType, value);
+        }
+
+        myEdit.commit();
     }
 
     private void initComponents() {
@@ -81,6 +116,14 @@ public class MainActivity extends AppCompatActivity implements
         setupNotifications();
         setupSwipeableCards();
         setupToolBar();
+        setUpToggleButtonsMap();
+    }
+
+    private void setUpToggleButtonsMap() {
+        toggleButtonAndCorrespondingToggleType = new HashMap();
+        toggleButtonAndCorrespondingToggleType.put(accessibilityToggle, ClassConstants.ACCESSIBILITY_TOGGLE);
+        toggleButtonAndCorrespondingToggleType.put(staffToggle, ClassConstants.STAFF_TOGGLE);
+        toggleButtonAndCorrespondingToggleType.put(translationToggle, ClassConstants.TRANSLATION_TOGGLE);
     }
 
     private void setupNotifications() {
@@ -117,26 +160,29 @@ public class MainActivity extends AppCompatActivity implements
         NavigationView navigationView = findViewById(R.id.side_nav_view);
         if (navigationView != null) {
             navigationView.setNavigationItemSelectedListener(this);
+            setupSwitchesListener(navigationView);
         }
-        setupSwitchesListener(navigationView);
-
     }
 
     private void setupSwitchesListener(NavigationView navigationView) {
-        int[] switchIds = { R.id.nav_translate, R.id.nav_staff, R.id.nav_accessibility};
+        MenuItem translateItem = navigationView.getMenu().findItem(R.id.nav_translate);
+        MenuItem staffItem = navigationView.getMenu().findItem(R.id.nav_staff);
+        MenuItem accessibilityItem = navigationView.getMenu().findItem(R.id.nav_accessibility);
 
-        for(int switchId : switchIds){
-            MenuItem switchItem = navigationView.getMenu().findItem(switchId);
-            CompoundButton switchView = (CompoundButton) MenuItemCompat.getActionView(switchItem);
-            setupOnChangeListenerForSwitch(switchView);
-        }
+        translationToggle = (CompoundButton) translateItem.getActionView();
+        staffToggle = (CompoundButton) staffItem.getActionView();
+        accessibilityToggle = (CompoundButton) accessibilityItem.getActionView();
+        
+        setupOnChangeListenerForSwitch(staffToggle);
+        setupOnChangeListenerForSwitch(translationToggle);
+        setupOnChangeListenerForSwitch(accessibilityToggle);
     }
 
     private void setupOnChangeListenerForSwitch(CompoundButton switchView) {
         switchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                //TODO: us #159, add action when changed
+                //TODO: US #158 and #160, add action when changed
                 Toast.makeText(MainActivity.this, isChecked+"", Toast.LENGTH_SHORT).show();
             }
         });
@@ -319,13 +365,18 @@ public class MainActivity extends AppCompatActivity implements
     public Location getMyCurrentLocation() {
         return this.locationFragment.getCurrentLocation();
     }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
-
+        SharedPreferences sharedPreferences = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
         if (itemId == R.id.nav_calendar){
-            //TODO: us #159 action needed
-            Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
+            SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+            String value = item.isEnabled() ? ClassConstants.TRUE : ClassConstants.FALSE;
+            myEdit.putString(ClassConstants.CALENDAR_INTEGRATION_BUTTON, value);
+
+            myEdit.commit();
         }
         return false;
     }

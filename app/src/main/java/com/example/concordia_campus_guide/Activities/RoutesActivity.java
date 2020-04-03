@@ -1,6 +1,7 @@
 package com.example.concordia_campus_guide.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -56,6 +57,35 @@ public class RoutesActivity extends AppCompatActivity {
         setFromAndTo();
         setBackButtonOnClick();
         getAllRoutes();
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+
+        // Fetching the stored data from the SharedPreference
+        SharedPreferences sharedPreferences = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
+
+        String disability = sharedPreferences.getString(ClassConstants.DISABILITY_BUTTON, ClassConstants.FALSE);
+
+        if(disability.equals(ClassConstants.TRUE))
+            disabilityButton.setSelected(true);
+        else
+            disabilityButton.setSelected(false);
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+
+        // Creating a shared pref object with a file name "UserPreferences" in private mode
+        SharedPreferences sharedPreferences = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
+        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+        String disabilityBooleanValue = disabilityButton.isSelected() ? ClassConstants.TRUE : ClassConstants.FALSE;
+        myEdit.putString(ClassConstants.DISABILITY_BUTTON, disabilityBooleanValue);
+        myEdit.commit();
     }
 
     private void initComponent() {

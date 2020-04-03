@@ -16,10 +16,24 @@ import com.google.android.gms.maps.model.PatternItem;
 public class  ClassConstants {
     public static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     public static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
+    public static final String TRUE = "true";
+    public static final String FALSE = "false";
+    public static final String DISABILITY_BUTTON = "disability_button";
+    public static final String CALENDAR_INTEGRATION_BUTTON = "calendar_integration_button";
+    public static final String SHARED_PREFERENCES = "UserPreferences";
+
+    // Toggle buttons constants
+    @Retention(RetentionPolicy.SOURCE)
+    @StringDef({ACCESSIBILITY_TOGGLE, TRANSLATION_TOGGLE, STAFF_TOGGLE})
+    public @interface ToggleType {}
+
+    public static final String ACCESSIBILITY_TOGGLE = "accessibility_toggle";
+    public static final String TRANSLATION_TOGGLE = "translation_toggle";
+    public static final String STAFF_TOGGLE = "staff_toggle";
 
     // Transport types constants
     @Retention(RetentionPolicy.SOURCE)
-    @StringDef({TRANSIT, WALKING, BICYCLING, DRIVING})
+    @StringDef({TRANSIT, WALKING, BICYCLING, DRIVING, SHUTTLE})
     public @interface TransportType {}
 
     public static final String TRANSIT = "transit";
