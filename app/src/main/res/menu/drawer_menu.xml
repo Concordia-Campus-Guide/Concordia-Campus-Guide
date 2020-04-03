@@ -7,18 +7,21 @@
     <group android:checkableBehavior="single">
         <item android:id="@+id/nav_calendar"
             android:icon="@drawable/ic_calendar"
-            android:title="@string/calendar"
-            app:actionLayout="@layout/widget_switch"/>
+            android:iconTint="@color/sideMenuItemColor"
+            android:title="@string/calendar" />
         <item android:id="@+id/nav_translate"
             android:icon="@drawable/ic_french"
+            android:iconTint="@color/sideMenuItemColor"
             android:title="@string/french"
             app:actionLayout="@layout/widget_switch"/>
         <item android:id="@+id/nav_accessibility"
             android:icon="@drawable/ic_accessibility"
+            android:iconTint="@color/sideMenuItemColor"
             android:title="@string/accessibility"
             app:actionLayout="@layout/widget_switch"/>
         <item android:id="@+id/nav_staff"
             android:icon="@drawable/ic_staff"
+            android:iconTint="@color/sideMenuItemColor"
             android:title="@string/staff"
             app:actionLayout="@layout/widget_switch"/>
     </group>

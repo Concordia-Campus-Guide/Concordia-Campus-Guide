@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,7 +45,8 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements
+        NavigationView.OnNavigationItemSelectedListener {
 
     FragmentTransaction fragmentTransaction;
     FragmentManager fragmentManager;
@@ -112,12 +114,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupSideMenuItemListeners() {
-        NavigationView nav = findViewById(R.id.side_nav_view);
+        NavigationView navigationView = findViewById(R.id.side_nav_view);
+        if (navigationView != null) {
+            navigationView.setNavigationItemSelectedListener(this);
+        }
+        setupSwitchesListener(navigationView);
 
-        int[] switchIds = {R.id.nav_calendar, R.id.nav_translate, R.id.nav_staff, R.id.nav_accessibility};
+    }
+
+    private void setupSwitchesListener(NavigationView navigationView) {
+        int[] switchIds = { R.id.nav_translate, R.id.nav_staff, R.id.nav_accessibility};
 
         for(int switchId : switchIds){
-            MenuItem switchItem = nav.getMenu().findItem(switchId);
+            MenuItem switchItem = navigationView.getMenu().findItem(switchId);
             CompoundButton switchView = (CompoundButton) MenuItemCompat.getActionView(switchItem);
             setupOnChangeListenerForSwitch(switchView);
         }
@@ -309,5 +318,15 @@ public class MainActivity extends AppCompatActivity {
 
     public Location getMyCurrentLocation() {
         return this.locationFragment.getCurrentLocation();
+    }
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.nav_calendar){
+            //TODO: us #159 action needed
+            Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
+        }
+        return false;
     }
 }
