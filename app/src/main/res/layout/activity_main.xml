@@ -94,7 +94,9 @@
         android:id="@+id/side_nav_view"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/drawer_menu"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        app:itemIconTint="@color/sideMenuItemColor"
+        app:itemTextColor="@color/fadedBlack"/>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

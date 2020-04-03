@@ -15,6 +15,7 @@
     <color name="divider">#DEBCC0</color>
     <color name="backgroundGrey">#E5E5E5</color>
     <color name="sideMenuItemColor">#979797</color>
+    <color name="fadedBlack">#212121</color>
 
     <!-- These are strings and not colors because I'm using them for string equality checks-->
     <string name="subwayBlue">#0074b9</string>
