@@ -8,10 +8,17 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.core.view.MenuItemCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -34,10 +41,12 @@ import com.example.concordia_campus_guide.Models.Shuttles;
 import com.example.concordia_campus_guide.Models.WalkingPoints;
 import com.example.concordia_campus_guide.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements
+        NavigationView.OnNavigationItemSelectedListener {
 
     FragmentTransaction fragmentTransaction;
     FragmentManager fragmentManager;
@@ -45,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     LocationFragment locationFragment;
     POIFragment poiFragment;
     MainActivityViewModel mViewModel;
+    private DrawerLayout drawer;
     private BottomSheetBehavior swipeableInfoCard;
     private BottomSheetBehavior swipeablePOICard;
     private Notification notification;
@@ -56,23 +66,80 @@ public class MainActivity extends AppCompatActivity {
         setUpDb();
         setContentView(R.layout.activity_main);
         mViewModel = new MainActivityViewModel();
+
         initComponents();
-        setSupportActionBar(myToolbar);
     }
 
     private void initComponents() {
+        MainActivity.this.setTitle("ConUMaps");
+
+        locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
+
         mViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
         fragmentManager = getSupportFragmentManager();
-        myToolbar = (Toolbar) findViewById(R.id.toolbar);
-        MainActivity.this.setTitle("ConUMaps");
+
+        setupNotifications();
+        setupSwipeableCards();
+        setupToolBar();
+    }
+
+    private void setupNotifications() {
+        notification = new Notification(this,AppDatabase.getInstance(this));
+        notification.checkUpCalendarEvery5Minutes();
+    }
+
+    private void setupSwipeableCards() {
         View infoCard = findViewById(R.id.bottom_card_scroll_view);
         View poiCard = findViewById(R.id.explore_bottom_card_scroll_view);
         swipeableInfoCard = BottomSheetBehavior.from(infoCard);
-        notification = new Notification(this,AppDatabase.getInstance(this));
-        notification.checkUpCalendarEvery5Minutes();
-        showPOICard();
         swipeablePOICard = BottomSheetBehavior.from(poiCard);
-        locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
+        showPOICard();
+    }
+
+    private void setupToolBar() {
+        myToolbar = (Toolbar) findViewById(R.id.toolbar);
+        drawer = findViewById(R.id.drawer_layout);
+        setSupportActionBar(myToolbar);
+        setupDrawerToggle();
+    }
+
+    private void setupDrawerToggle() {
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, myToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.whiteBackgroundColor));
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        setupSideMenuItemListeners();
+
+    }
+
+    private void setupSideMenuItemListeners() {
+        NavigationView navigationView = findViewById(R.id.side_nav_view);
+        if (navigationView != null) {
+            navigationView.setNavigationItemSelectedListener(this);
+        }
+        setupSwitchesListener(navigationView);
+
+    }
+
+    private void setupSwitchesListener(NavigationView navigationView) {
+        int[] switchIds = { R.id.nav_translate, R.id.nav_staff, R.id.nav_accessibility};
+
+        for(int switchId : switchIds){
+            MenuItem switchItem = navigationView.getMenu().findItem(switchId);
+            CompoundButton switchView = (CompoundButton) MenuItemCompat.getActionView(switchItem);
+            setupOnChangeListenerForSwitch(switchView);
+        }
+    }
+
+    private void setupOnChangeListenerForSwitch(CompoundButton switchView) {
+        switchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                //TODO: us #159, add action when changed
+                Toast.makeText(MainActivity.this, isChecked+"", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void popUp(CalendarEvent calendarEvent){
@@ -206,13 +273,16 @@ public class MainActivity extends AppCompatActivity {
      * Defines the desired behavior on backpress
      */
     @Override
-    public void onBackPressed(){
-        Fragment fragment = fragmentManager.findFragmentById(R.id.bottom_card_frame);
-        if(fragment!=null){
-            showPOICard();
-        }
-        else{
-            super.onBackPressed();
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawer(GravityCompat.START);
+        }else {
+            Fragment fragment = fragmentManager.findFragmentById(R.id.bottom_card_frame);
+            if (fragment != null) {
+                showPOICard();
+            } else {
+                super.onBackPressed();
+            }
         }
     }
 
@@ -248,5 +318,15 @@ public class MainActivity extends AppCompatActivity {
 
     public Location getMyCurrentLocation() {
         return this.locationFragment.getCurrentLocation();
+    }
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.nav_calendar){
+            //TODO: us #159 action needed
+            Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
+        }
+        return false;
     }
 }
