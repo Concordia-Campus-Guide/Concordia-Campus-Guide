@@ -16,6 +16,10 @@ import com.google.android.gms.maps.model.PatternItem;
 public class  ClassConstants {
     public static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     public static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
+    public static final String TRUE = "true";
+    public static final String FALSE = "false";
+    public static final String DISABILITY_BUTTON = "disability_button";
+    public static final String SHARED_PREFERENCES = "UserPreferences";
 
     // Transport types constants
     @Retention(RetentionPolicy.SOURCE)

@@ -54,6 +54,7 @@ public class RoutesActivityViewModel extends ViewModel {
             String buildingCode = floorCode.substring(0, floorCode.indexOf("-")).toUpperCase();
             return appDB.roomDao().getRoomByIdAndFloorCode("entrance", buildingCode + "-1");
         }
+
         return place;
     }
 
