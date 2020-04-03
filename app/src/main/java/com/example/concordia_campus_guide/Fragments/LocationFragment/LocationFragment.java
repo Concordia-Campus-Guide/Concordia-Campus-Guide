@@ -20,7 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Activities.RoutesActivity;
@@ -29,7 +29,6 @@ import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.EncodedPolyline;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.Models.Building;
@@ -55,12 +54,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 
@@ -115,6 +108,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         super.onActivityCreated(savedInstanceState);
         setupPOIListListener();
     }
+
     /**
      * @param rootView is the object that contains the parts displayed on the fragment
      */
@@ -364,7 +358,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
         Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
 
-        SelectingToFromState.setFrom(myCurrentLocation != null? new MyCurrentPlace(myCurrentLocation.getLatitude(), myCurrentLocation.getLongitude()): new MyCurrentPlace());
+        SelectingToFromState.setFrom(myCurrentLocation != null ? new MyCurrentPlace(myCurrentLocation.getLatitude(), myCurrentLocation.getLongitude()) : new MyCurrentPlace());
 
         Place placeToGo = getPlaceToGo(marker);
 
@@ -474,14 +468,14 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     public void onFloorPickerOnClick(int position, View view) {
         String floorSelected = currentFloorPickerAdapter.getFloorsAvailable().get(position);
         String buildingSelected = currentFloorPickerAdapter.getBuildingCode();
-        mViewModel.setFloorPlan(buildingsGroundOverlays.get(currentFloorPickerAdapter.getBuildingCode()), buildingSelected, floorSelected , getContext(), mMap);
+        mViewModel.setFloorPlan(buildingsGroundOverlays.get(currentFloorPickerAdapter.getBuildingCode()), buildingSelected, floorSelected, getContext(), mMap);
         setVisiblePOIMarkers(floorSelected, buildingSelected);
     }
 
     private void setVisiblePOIMarkers(String floorSelected, String buildingSelected) {
-        for(Marker marker : poiMarkers){
+        for (Marker marker : poiMarkers) {
             String floorCode = marker.getTag().toString().split("_")[2];
-            marker.setVisible(floorCode.equalsIgnoreCase(buildingSelected+"-"+floorSelected));
+            marker.setVisible(floorCode.equalsIgnoreCase(buildingSelected + "-" + floorSelected));
         }
     }
 

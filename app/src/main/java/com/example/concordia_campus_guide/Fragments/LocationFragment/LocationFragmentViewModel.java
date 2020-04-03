@@ -6,11 +6,14 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.location.Location;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+
 import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Global.ApplicationState;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.EncodedPolyline;
 import com.example.concordia_campus_guide.Helper.PathFinder;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Coordinates;
@@ -47,10 +50,6 @@ import java.util.PriorityQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
-
 import static java.lang.Double.parseDouble;
 
 public class LocationFragmentViewModel extends ViewModel {
@@ -65,8 +64,6 @@ public class LocationFragmentViewModel extends ViewModel {
     public static final Logger LOGGER = Logger.getLogger("LocationFragmentViewModel");
     public static final String FLOORS_AVAILABLE = "floorsAvailable";
 
-
-    private PolylineOptions displayedPolylineOption;
     private Polyline currentlyDisplayedLine;
     private HashMap<String, List<WalkingPoint>> walkingPointsMap = new HashMap<>();
     private List<WalkingPoint> walkingPoints;
@@ -204,8 +201,8 @@ public class LocationFragmentViewModel extends ViewModel {
      * @param context       the context of the LocationFragment
      * @return it will BitmapDescriptor object to use it as an icon for the marker on the map.
      */
-    public BitmapDescriptor styleMarker(String buildingLabel, Context context){
-        return getCustomSizedIcon("BuildingLabels/" + buildingLabel.toLowerCase()+".png", context, 150, 150);
+    public BitmapDescriptor styleMarker(String buildingLabel, Context context) {
+        return getCustomSizedIcon("BuildingLabels/" + buildingLabel.toLowerCase() + ".png", context, 150, 150);
     }
 
     /**
@@ -239,8 +236,8 @@ public class LocationFragmentViewModel extends ViewModel {
      * @return Int of drawable resource's bitmap representation
      */
     public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, Context context, GoogleMap mMap) {
-        String fileName = buildingCode.toLowerCase()+"_"+floor.toLowerCase();
-        groundOverlay.setImage(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+fileName+".png"));
+        String fileName = buildingCode.toLowerCase() + "_" + floor.toLowerCase();
+        groundOverlay.setImage(BitmapDescriptorFactory.fromAsset("buildings_floorplans/" + fileName + ".png"));
         setFloorMarkers(buildingCode, floor, context, mMap);
     }
 
@@ -255,7 +252,7 @@ public class LocationFragmentViewModel extends ViewModel {
         if (currentlyDisplayedLine != null) {
             currentlyDisplayedLine.remove();
         }
-        displayedPolylineOption = getFloorPolylines(buildingCode + "-" + floor);
+        PolylineOptions displayedPolylineOption = getFloorPolylines(buildingCode + "-" + floor);
         currentlyDisplayedLine = mMap.addPolyline(displayedPolylineOption);
     }
 
@@ -308,8 +305,8 @@ public class LocationFragmentViewModel extends ViewModel {
             if (currentLocation == null) {
                 //This building has inverted lat/lng in order to us th geojsons.
                 Building hallBuilding = appDatabase.buildingDao().getBuildingByBuildingCode("H");
-                Double currentLat = hallBuilding != null? hallBuilding.getCenterCoordinates().getLatitude() : 0;
-                Double currentLng = hallBuilding != null? hallBuilding.getCenterCoordinates().getLongitude(): 0;
+                Double currentLat = hallBuilding != null ? hallBuilding.getCenterCoordinates().getLatitude() : 0;
+                Double currentLng = hallBuilding != null ? hallBuilding.getCenterCoordinates().getLongitude() : 0;
 
                 //Current location should be inversed: lat->lng and lng->lat
                 currentCoordinates = new Coordinates(currentLng, currentLat);
@@ -382,7 +379,7 @@ public class LocationFragmentViewModel extends ViewModel {
     public void drawOutdoorPath(List<DirectionWrapper> outdoorDirections, GoogleMap map) {
         for (DirectionWrapper directionWrapper : outdoorDirections) {
             int color = 0;
-            if(directionWrapper.getTransitDetails() != null){
+            if (directionWrapper.getTransitDetails() != null) {
                 color = Color.parseColor(directionWrapper.getTransitDetails().line.color);
             }
             PolylineOptions polylineOptions = stylePolyLine(directionWrapper.getDirection().getTransportType(), color);
