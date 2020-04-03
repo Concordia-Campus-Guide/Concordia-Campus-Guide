@@ -13,6 +13,7 @@ import androidx.test.rule.GrantPermissionRule;
 import androidx.test.runner.AndroidJUnit4;
 import androidx.test.uiautomator.UiDevice;
 
+import com.example.concordia_campus_guide.EspressoHelpers;
 import com.example.concordia_campus_guide.R;
 
 import org.hamcrest.Description;
@@ -62,8 +63,10 @@ public class RoutesDirectionsHappyPathTest {
 
     @Test
     public void routesDirectionsHappyPathTest() {
-                //wait for gps
+        //wait for gps
         android.os.SystemClock.sleep(4000);
+
+        EspressoHelpers.cancelNotificationIfExists();
 
         ViewInteraction materialButtonX = onView(
                 allOf(withId(android.R.id.button2), withText("Ignore"),
@@ -80,7 +83,7 @@ public class RoutesDirectionsHappyPathTest {
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.toolbar),
-                                        1),
+                                        2),
                                 0),
                         isDisplayed()));
         actionMenuItemView.perform(click());

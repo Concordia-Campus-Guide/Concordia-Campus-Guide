@@ -2,7 +2,6 @@ package com.example.concordia_campus_guide.Fragments.LocationFragment;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.location.Location;
@@ -20,10 +19,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.concordia_campus_guide.Activities.MainActivity;
-import com.example.concordia_campus_guide.Activities.RoutesActivity;
 import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
 import com.example.concordia_campus_guide.ClassConstants;
@@ -33,7 +31,6 @@ import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServ
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.Models.Building;
-import com.example.concordia_campus_guide.Models.MyCurrentPlace;
 import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
@@ -56,12 +53,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 
@@ -112,7 +103,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         setupClickListeners();
         updateLocationEvery5Seconds();
 
-        roomIcon = mViewModel.getCustomSizedIcon("class_markers/marker.png", getContext(), 40, 40);
+        roomIcon = mViewModel.getCustomSizedIcon("class_markers/marker.png", getContext(), 30, 30);
 
         return rootView;
     }
@@ -347,10 +338,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     public boolean setupBuildingMarkerClickListener(GoogleMap map) {
         map.setOnMarkerClickListener(marker -> {
             if (marker.getTag() != null) {
-                if (marker.getTag() != null && marker.getTag().toString().contains(POI_TAG)) {
-                    sendToSearchView(marker);
-                }
-                else if (marker.getTag() != null && marker.getTag().toString().contains(ROOM_TAG)) {
+                if (marker.getTag() != null && (marker.getTag().toString().contains(ROOM_TAG) || marker.getTag().toString().contains(POI_TAG))) {
                     String roomCode = marker.getTag().toString().split("_")[1];
                     String floorCode = marker.getTag().toString().split("_")[2];
                     onRoomClick(roomCode, floorCode);
@@ -370,36 +358,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     private void onRoomClick(String roomCode, String floorCode){
         if (getActivity() instanceof MainActivity)
-            ((MainActivity) getActivity()).showRoomCard(mViewModel.getRoomByRoomCodeAndFloorCode(roomCode, floorCode));
-    }
-
-    private void sendToSearchView(Marker marker) {
-        Intent openSearch = new Intent(getActivity(),
-                RoutesActivity.class);
-
-        settingInitialAndDestination(marker);
-
-        startActivity(openSearch);
-    }
-
-    private void settingInitialAndDestination(Marker marker) {
-
-        SelectingToFromState.setQuickSelectToTrue();
-        SelectingToFromState.setMyCurrentLocation(getCurrentLocation());
-
-        Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
-
-        SelectingToFromState.setFrom(myCurrentLocation != null? new MyCurrentPlace(myCurrentLocation.getLatitude(), myCurrentLocation.getLongitude()): new MyCurrentPlace());
-
-        Place placeToGo = getPlaceToGo(marker);
-
-        SelectingToFromState.setTo(placeToGo);
-    }
-
-    private Place getPlaceToGo(Marker marker) {
-        String placeCode = marker.getTag().toString().split("_")[1];
-        String floorCode = marker.getTag().toString().split("_")[2];
-        return AppDatabase.getInstance(getContext()).roomDao().getRoomByIdAndFloorCode(placeCode, floorCode);
+            ((MainActivity) getActivity()).showPlaceSmallCard(mViewModel.getRoomByRoomCodeAndFloorCode(roomCode, floorCode));
     }
 
     private void setupRoomMarkers(){
@@ -451,8 +410,9 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             MarkerOptions markerOptions = new MarkerOptions()
                     .position(latLng)
                     .icon(roomIcon)
-                    .alpha((float) 0.5)
-                    .visible(true);
+                    .alpha(0.2f)
+                    .visible(true)
+                    .title(room.getRoomCode());
 
             Marker marker = mMap.addMarker(markerOptions);
             marker.setTag(tag);

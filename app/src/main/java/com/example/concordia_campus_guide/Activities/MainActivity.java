@@ -289,7 +289,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-    public void showRoomCard(RoomModel room){
+    public void showPlaceSmallCard(RoomModel room){
         resetBottomCard();
         smallInfoCardFragment = new SmallInfoCardFragment(room);
         fragmentTransaction = fragmentManager.beginTransaction();

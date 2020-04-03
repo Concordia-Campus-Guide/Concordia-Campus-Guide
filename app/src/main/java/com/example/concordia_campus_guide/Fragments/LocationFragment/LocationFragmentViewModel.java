@@ -191,7 +191,6 @@ public class LocationFragmentViewModel extends ViewModel {
                         .flat(true)
                         .anchor(0.5f, 0.5f)
                         .alpha(0.90f)
-                        //This line should be included whenever we test the UI for the marker:
                         .title(buildingLabel)
         );
         marker.setTag(buildingLabel);
