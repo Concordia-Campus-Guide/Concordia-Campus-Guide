@@ -94,4 +94,10 @@
     <string name="action_settings">Settings</string>
     <string name="point_of_interest_explore">Explore</string>
     <string name="warning_msg">No routes available.</string>
+    <string name="french">French</string>
+    <string name="calendar">Google Calendar</string>
+    <string name="accessibility">Accessibility</string>
+    <string name="staff">Staff</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
