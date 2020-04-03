@@ -23,7 +23,6 @@ import com.example.concordia_campus_guide.Helper.RoutesHelpers.DirectionsApiData
 import com.example.concordia_campus_guide.Helper.RoutesHelpers.UrlBuilder;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.Models.Coordinates;
-import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.Routes.Route;
 import com.example.concordia_campus_guide.Models.Shuttle;
 import com.example.concordia_campus_guide.R;
@@ -104,38 +103,36 @@ public class RoutesActivity extends AppCompatActivity {
     public void onClickTransit(View v) {
         mViewModel.setTransportType(ClassConstants.TRANSIT);
         getAllRoutes();
-        setTransitSelect();
-    }
-
-    private void setTransitSelect() {
-        transitButton.setSelected(true);
-        shuttleButton.setSelected(false);
-        walkButton.setSelected(false);
-        carButton.setSelected(false);
+        selectCorrectTransportButton(v);
     }
 
     public void onClickCar(View v) {
         mViewModel.setTransportType(ClassConstants.DRIVING);
         getAllRoutes();
-        setCarSelect();
+        selectCorrectTransportButton(v);
     }
 
-    private void setCarSelect() {
+    public void onClickWalk(View v) {
+        mViewModel.setTransportType(ClassConstants.WALKING);
+        getAllRoutes();
+        selectCorrectTransportButton(v);
+    }
+
+    private void selectCorrectTransportButton(View v) {
         transitButton.setSelected(false);
         shuttleButton.setSelected(false);
         walkButton.setSelected(false);
-        carButton.setSelected(true);
-    }
-
-    // TODO: #180
-    public void onClickDisability(View v) {
-        disabilityButton.setSelected(!disabilityButton.isSelected());
+        carButton.setSelected(false);
+        if(v == null)
+            transitButton.setSelected(true);
+        else
+            v.setSelected(true);
     }
 
     public void onClickShuttle(View v) {
         mViewModel.setRouteOptions(new ArrayList<>());
         List<Shuttle> shuttles = mViewModel.filterShuttles();
-        setShuttleSelect();
+        selectCorrectTransportButton(v);
         if (!shuttles.isEmpty()) {
             mViewModel.adaptShuttleToRoutes(shuttles);
         } else {
@@ -144,24 +141,9 @@ public class RoutesActivity extends AppCompatActivity {
         setRoutesAdapter();
     }
 
-    private void setShuttleSelect() {
-        transitButton.setSelected(false);
-        shuttleButton.setSelected(true);
-        walkButton.setSelected(false);
-        carButton.setSelected(false);
-    }
-
-    public void onClickWalk(View v) {
-        mViewModel.setTransportType(ClassConstants.WALKING);
-        getAllRoutes();
-        setWalkSelect();
-    }
-
-    private void setWalkSelect() {
-        transitButton.setSelected(false);
-        shuttleButton.setSelected(false);
-        walkButton.setSelected(true);
-        carButton.setSelected(false);
+    // TODO: #180
+    public void onClickDisability(View v) {
+        v.setSelected(!disabilityButton.isSelected());
     }
 
     @Override
@@ -181,8 +163,7 @@ public class RoutesActivity extends AppCompatActivity {
 
         setRoutesAdapter();
     }
-
-
+    
     private void setRoutesAdapter() {
         // Android adapter for list view
         adapter = new RoutesAdapter(this, R.layout.list_routes, mViewModel.getRouteOptions());
@@ -232,7 +213,7 @@ public class RoutesActivity extends AppCompatActivity {
      * Calls the google Maps Directions API
      */
     public void getAllRoutes() {
-        setTransitSelect();
+        selectCorrectTransportButton(null);
 
         Coordinates fromCenterCoordinates = mViewModel.getEntrance(mViewModel.getFrom()).getCenterCoordinates();
         Coordinates toCenterCoordinates = mViewModel.getEntrance(mViewModel.getTo()).getCenterCoordinates();
