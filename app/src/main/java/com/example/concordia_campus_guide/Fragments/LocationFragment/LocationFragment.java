@@ -29,6 +29,7 @@ import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
+import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.EncodedPolyline;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.Models.Building;
@@ -319,6 +320,11 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     public void drawOutdoorPaths(final List<DirectionWrapper> outdoorDirections) {
         mMapView.getMapAsync(googleMap -> mViewModel.drawOutdoorPath(outdoorDirections, googleMap));
     }
+
+    public void setShuttlePaths(String polyline) {
+        mMapView.getMapAsync(googleMap -> mViewModel.drawShuttlePath(googleMap, polyline));
+    }
+
 
     /**
      * The purpose of this method is handle the onclick marker
