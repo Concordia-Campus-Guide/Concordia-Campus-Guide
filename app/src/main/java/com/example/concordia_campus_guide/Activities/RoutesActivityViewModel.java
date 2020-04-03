@@ -99,7 +99,7 @@ public class RoutesActivityViewModel extends ViewModel {
     }
 
     public List<Shuttle> getShuttlesByDayAndTime(String campus, String day, Double time) {
-        return appDB.shuttleDao().getScheduleByCampusAndDayAndTime(campus, day, 7.05);
+        return appDB.shuttleDao().getScheduleByCampusAndDayAndTime(campus, day, time);
     }
 
     public List<Route> adaptShuttleToRoutes(List<Shuttle> shuttles) {
