@@ -65,12 +65,15 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
         fromTextView = findViewById(R.id.path_fromText);
         toTextView = findViewById(R.id.path_toText);
 
+        mViewModel = new ViewModelProvider(this).get(PathsViewModel.class);
+        fragmentManager = getSupportFragmentManager();
+
+        from = mViewModel.getFrom();
+        to = mViewModel.getTo();
+
         fromTextView.setText(from.getDisplayName());
         toTextView.setText(to.getDisplayName());
         setBackButtonOnClickListener();
-
-        mViewModel = new ViewModelProvider(this).get(PathsViewModel.class);
-        fragmentManager = getSupportFragmentManager();
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -78,9 +81,6 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
             shuttleSelected = extras.getBoolean("shuttle");
         }
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.pathLocationFragment);
-
-        from = mViewModel.getFrom();
-        to = mViewModel.getTo();
 
         if (!shuttleSelected) {
             directionWrappers = (mViewModel.areInSameBuilding(from, to) || mViewModel.arePlacesSeparatedByATunnel(from, to)) ?

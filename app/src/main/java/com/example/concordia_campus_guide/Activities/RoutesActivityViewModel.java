@@ -51,7 +51,7 @@ public class RoutesActivityViewModel extends ViewModel {
     public Place getEntrance(Place place) {
         if (place instanceof RoomModel) {
             String floorCode = ((RoomModel) place).getFloorCode();
-            String buildingCode = floorCode.substring(0, floorCode.indexOf("-")).toUpperCase();
+            String buildingCode = floorCode.substring(0, floorCode.indexOf('-')).toUpperCase();
             return appDB.roomDao().getRoomByIdAndFloorCode("entrance", buildingCode + "-1");
         }
         return place;
@@ -99,7 +99,7 @@ public class RoutesActivityViewModel extends ViewModel {
     }
 
     public List<Shuttle> getShuttlesByDayAndTime(String campus, String day, Double time) {
-        return appDB.shuttleDao().getScheduleByCampusAndDayAndTime(campus, day, time);
+        return appDB.shuttleDao().getScheduleByCampusAndDayAndTime(campus, day, 7.05);
     }
 
     public List<Route> adaptShuttleToRoutes(List<Shuttle> shuttles) {
