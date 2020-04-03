@@ -8,12 +8,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
+import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -37,6 +40,7 @@ import com.example.concordia_campus_guide.Models.Shuttles;
 import com.example.concordia_campus_guide.Models.WalkingPoints;
 import com.example.concordia_campus_guide.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.Date;
 
@@ -60,29 +64,66 @@ public class MainActivity extends AppCompatActivity {
         setUpDb();
         setContentView(R.layout.activity_main);
         mViewModel = new MainActivityViewModel();
+
         initComponents();
-        setSupportActionBar(myToolbar);
     }
 
     private void initComponents() {
+        MainActivity.this.setTitle("ConUMaps");
+
+        locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
+
         mViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
         fragmentManager = getSupportFragmentManager();
-        myToolbar = (Toolbar) findViewById(R.id.toolbar);
-        MainActivity.this.setTitle("ConUMaps");
+
+        setupNotifications();
+        setupSwipeableCards();
+        setupToolBar();
+    }
+
+    private void setupNotifications() {
+        notification = new Notification(this,AppDatabase.getInstance(this));
+        notification.checkUpCalendarEvery5Minutes();
+    }
+
+    private void setupSwipeableCards() {
         View infoCard = findViewById(R.id.bottom_card_scroll_view);
         View poiCard = findViewById(R.id.explore_bottom_card_scroll_view);
         swipeableInfoCard = BottomSheetBehavior.from(infoCard);
-        notification = new Notification(this,AppDatabase.getInstance(this));
-        notification.checkUpCalendarEvery5Minutes();
-        showPOICard();
         swipeablePOICard = BottomSheetBehavior.from(poiCard);
-        locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
-        drawer = findViewById(R.id.drawer_layout);
+        showPOICard();
+    }
 
+    private void setupToolBar() {
+        myToolbar = (Toolbar) findViewById(R.id.toolbar);
+        drawer = findViewById(R.id.drawer_layout);
+        setSupportActionBar(myToolbar);
+        setupDrawerToggle();
+    }
+
+    private void setupDrawerToggle() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, myToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.whiteBackgroundColor));
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        setupSideMenuItemListeners();
+
+    }
+
+    private void setupSideMenuItemListeners() {
+        NavigationView nav = findViewById(R.id.side_nav_view);
+
+        //TODO: need to find a way to be more dynamic
+        MenuItem switchItem = nav.getMenu().findItem(R.id.nav_calendar);
+        CompoundButton switchView = (CompoundButton) MenuItemCompat.getActionView(switchItem);
+
+        switchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Toast.makeText(MainActivity.this, "changed", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void popUp(CalendarEvent calendarEvent){

@@ -41,58 +41,57 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:id="@+id/bottom_card_coordinator_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#48B9B6B8"
-            android:gravity="bottom|center_horizontal">
-
-            <androidx.core.widget.NestedScrollView
-                android:id="@+id/explore_bottom_card_scroll_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/rounded_corners"
-                app:behavior_hideable="false"
-                app:behavior_peekHeight="70dp"
-                app:layout_behavior="@string/bottom_sheet_behavior">
-
-                <FrameLayout
-                    android:id="@+id/explore_bottom_card_frame"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </androidx.core.widget.NestedScrollView>
-
-            <androidx.core.widget.NestedScrollView
-                android:id="@+id/bottom_card_scroll_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/rounded_corners"
-                app:behavior_hideable="true"
-                app:behavior_peekHeight="140dp"
-                app:layout_behavior="@string/bottom_sheet_behavior">
-
-                <FrameLayout
-                    android:id="@+id/bottom_card_frame"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </androidx.core.widget.NestedScrollView>
-
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </LinearLayout>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/bottom_card_coordinator_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#48B9B6B8"
+        android:gravity="bottom|center_horizontal">
 
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/explore_bottom_card_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/rounded_corners"
+            app:behavior_hideable="false"
+            app:behavior_peekHeight="70dp"
+            app:layout_behavior="@string/bottom_sheet_behavior">
+
+            <FrameLayout
+                android:id="@+id/explore_bottom_card_frame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/bottom_card_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/rounded_corners"
+            app:behavior_hideable="true"
+            app:behavior_peekHeight="140dp"
+            app:layout_behavior="@string/bottom_sheet_behavior">
+
+            <FrameLayout
+                android:id="@+id/bottom_card_frame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:id="@+id/nav_view"
+        android:id="@+id/side_nav_view"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/drawer_menu"
         tools:ignore="MissingConstraints" />

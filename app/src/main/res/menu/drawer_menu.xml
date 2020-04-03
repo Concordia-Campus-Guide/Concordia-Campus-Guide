@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
         <item android:id="@+id/nav_calendar"
             android:icon="@drawable/ic_calendar"
-            android:title="@string/calendar"/>
+            android:title="@string/calendar"
+            app:actionLayout="@layout/widget_switch"/>
         <item android:id="@+id/nav_translate"
             android:icon="@drawable/ic_french"
-            android:title="@string/french"/>
+            android:title="@string/french"
+            app:actionLayout="@layout/widget_switch"/>
         <item android:id="@+id/nav_accessibility"
             android:icon="@drawable/ic_accessibility"
-            android:title="@string/accessibility"/>
+            android:title="@string/accessibility"
+            app:actionLayout="@layout/widget_switch"/>
         <item android:id="@+id/nav_staff"
             android:icon="@drawable/ic_staff"
-            android:title="@string/staff"/>
+            android:title="@string/staff"
+            app:actionLayout="@layout/widget_switch"/>
     </group>
 </menu>
