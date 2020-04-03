@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Concordia-Campus-Guide</string>
+    <string name="title_activity_maps">Carte</string>
+    <string name="title_activity_routes">RoutesActivity</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="point_of_interest_explore">Explorer</string>
+    <string name="warning_msg">Aucun itinéraire disponible</string>
+    <string name="french">Français</string>
+    <string name="calendar">calendrier google</string>
+    <string name="accessibility">Accessibilité</string>
+    <string name="staff">Personnel(le)</string>
+    <string name="navigation_drawer_open">Ouvrir le tiroir de navigation</string>
+    <string name="navigation_drawer_close">Fermer le tiroir de navigation</string>
+    <string name="my_location">Ma position: </string>
+    <string name="no_shuttle">Pas de navettes disponibles pour le moment</string>
+    <string name="departments">Départements</string>
+    <string name="services">Services</string>
+    <string name="indoor_map">Carte intérieure</string>
+    <string name="directions">Directions</string>
+    <string name="no_classes_today">Pas de cours aujourd\'hui</string>
+    <string name="sgw">SGW</string>
+    <string name="loyola">Loyola</string>
+    <string name="show_on_map">Montrer sur la carte</string>
+    <string name="next_class">Next class</string>
+    <string name="from_location">à partir de</string>
+    <string name="to_destination">à</string>
+
+
+</resources>

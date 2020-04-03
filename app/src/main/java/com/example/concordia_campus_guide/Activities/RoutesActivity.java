@@ -107,8 +107,8 @@ public class RoutesActivity extends AppCompatActivity {
     }
 
     private void setFromAndTo() {
-        this.fromText.setText(mViewModel.getFrom().getDisplayName());
-        this.toText.setText(mViewModel.getTo().getDisplayName());
+        this.fromText.setText(getResources().getString(R.string.my_location) +mViewModel.getFrom().getDisplayName());
+        this.toText.setText(getResources().getString(R.string.my_location) +mViewModel.getTo().getDisplayName());
     }
 
     private void setToolbar() {
@@ -169,7 +169,7 @@ public class RoutesActivity extends AppCompatActivity {
         if (!shuttles.isEmpty()) {
             mViewModel.adaptShuttleToRoutes(shuttles);
         } else {
-            mViewModel.noShuttles();
+            mViewModel.noShuttles(this);
         }
         setRoutesAdapter();
     }

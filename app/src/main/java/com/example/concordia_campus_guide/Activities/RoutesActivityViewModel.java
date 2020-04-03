@@ -1,5 +1,7 @@
 package com.example.concordia_campus_guide.Activities;
 
+import android.content.Context;
+
 import androidx.lifecycle.ViewModel;
 
 import com.example.concordia_campus_guide.ClassConstants;
@@ -10,6 +12,7 @@ import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.Routes.Route;
 import com.example.concordia_campus_guide.Models.Shuttle;
+import com.example.concordia_campus_guide.R;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -145,9 +148,9 @@ public class RoutesActivityViewModel extends ViewModel {
         this.transportType = transportType;
     }
 
-    public void noShuttles() {
+    public void noShuttles(Context context) {
         Route shuttleRoute = new Route("shuttle");
-        shuttleRoute.setSummary("No shuttles available at this time");
+        shuttleRoute.setSummary(context.getResources().getString(R.string.no_shuttle));
         routeOptions.add(shuttleRoute);
     }
 }

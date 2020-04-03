@@ -1,10 +1,14 @@
 package com.example.concordia_campus_guide.Activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,6 +47,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.navigation.NavigationView;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -67,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        updateResources(this, "fr");
         setUpDb();
         setContentView(R.layout.activity_main);
         mViewModel = new MainActivityViewModel();
@@ -382,5 +388,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             myEdit.commit();
         }
         return false;
+    }
+
+    private static void updateResources(Context context, String language) {
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+
+        Resources resources = context.getResources();
+
+        Configuration configuration = resources.getConfiguration();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            configuration.setLocale(locale);
+        } else {
+            configuration.locale = locale;
+        }
+
+        resources.updateConfiguration(configuration, resources.getDisplayMetrics());
     }
 }

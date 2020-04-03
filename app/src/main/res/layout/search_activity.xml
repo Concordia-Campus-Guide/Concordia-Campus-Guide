@@ -70,7 +70,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="15dp"
-            android:text="Show on Map"
+            android:text="@string/show_on_map"
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/imageView4"
             app:layout_constraintStart_toEndOf="@+id/imageView3" />
@@ -91,7 +91,7 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Next class"
+        android:text="@string/next_class"
         android:textSize="24sp"
         app:layout_constraintTop_toBottomOf="@id/constraintLayout2" />
 
@@ -131,7 +131,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:padding="15dp"
-            android:text="No classes today"
+            android:text="@string/no_classes_today"
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
