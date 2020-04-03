@@ -87,6 +87,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             else
                 toggleButton.setChecked(false);
         }
+
+        // TODO: US #50: add logic for calendar integration  by retrieving from the shared preferences if the user hclicked on the "calendar integration" button or not.
     }
 
     @Override
@@ -117,10 +119,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setupNotifications();
         setupSwipeableCards();
         setupToolBar();
-        setUpToggleButtons();
+        setUpToggleButtonsMap();
     }
 
-    private void setUpToggleButtons() {
+    private void setUpToggleButtonsMap() {
         toggleButtonAndCorrespondingToggleType = new HashMap();
         toggleButtonAndCorrespondingToggleType.put(accessibilityToggle, ClassConstants.ACCESSIBILITY_TOGGLE);
         toggleButtonAndCorrespondingToggleType.put(staffToggle, ClassConstants.STAFF_TOGGLE);
@@ -163,7 +165,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.setNavigationItemSelectedListener(this);
             setupSwitchesListener(navigationView);
         }
-
     }
 
     private void setupSwitchesListener(NavigationView navigationView) {
@@ -373,8 +374,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int itemId = item.getItemId();
         SharedPreferences sharedPreferences = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
         if (itemId == R.id.nav_calendar){
-            Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
-
             SharedPreferences.Editor myEdit = sharedPreferences.edit();
 
             String value = item.isEnabled() ? ClassConstants.TRUE : ClassConstants.FALSE;
@@ -382,7 +381,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             myEdit.commit();
         }
-        
         return false;
     }
 }
