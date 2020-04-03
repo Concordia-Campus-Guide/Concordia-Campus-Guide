@@ -82,10 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SharedPreferences sharedPreferences = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
         for(CompoundButton toggleButton: toggleButtonAndCorrespondingToggleType.keySet()) {
             String value = sharedPreferences.getString(toggleButtonAndCorrespondingToggleType.get(toggleButton), ClassConstants.FALSE);
-            if(value.equals(ClassConstants.TRUE))
-                toggleButton.setChecked(true);
-            else
-                toggleButton.setChecked(false);
+            toggleButton.setChecked(value.equals(ClassConstants.TRUE));
         }
 
         // TODO: US #50: add logic for calendar integration  by retrieving from the shared preferences if the user hclicked on the "calendar integration" button or not.
@@ -169,15 +166,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void setupSwitchesListener(NavigationView navigationView) {
         MenuItem translateItem = navigationView.getMenu().findItem(R.id.nav_translate);
-        translationToggle = (CompoundButton) translateItem.getActionView();
-        setupOnChangeListenerForSwitch(translationToggle);
-
         MenuItem staffItem = navigationView.getMenu().findItem(R.id.nav_staff);
-        staffToggle = (CompoundButton) staffItem.getActionView();
-        setupOnChangeListenerForSwitch(staffToggle);
-
         MenuItem accessibilityItem = navigationView.getMenu().findItem(R.id.nav_accessibility);
+
+        translationToggle = (CompoundButton) translateItem.getActionView();
+        staffToggle = (CompoundButton) staffItem.getActionView();
         accessibilityToggle = (CompoundButton) accessibilityItem.getActionView();
+        
+        setupOnChangeListenerForSwitch(staffToggle);
+        setupOnChangeListenerForSwitch(translationToggle);
         setupOnChangeListenerForSwitch(accessibilityToggle);
     }
 
