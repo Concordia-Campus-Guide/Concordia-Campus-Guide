@@ -66,8 +66,8 @@ public class PathsActivity extends AppCompatActivity {
         to = mViewModel.getTo();
         checkFromToType(from, to);
 
-        fromTextView.setText(getResources().getString(R.string.my_location) + from.getDisplayName());
-        toTextView.setText(getResources().getString(R.string.my_location) + to.getDisplayName());
+        fromTextView.setText(from.getDisplayName());
+        toTextView.setText(to.getDisplayName());
         setBackButtonOnClickListener();
         directionWrappers = (mViewModel.areInSameBuilding(from, to) || mViewModel.arePlacesSeparatedByATunnel(from, to)) ? new ArrayList<>() : (ArrayList<DirectionWrapper>) parseDirectionResults();
 

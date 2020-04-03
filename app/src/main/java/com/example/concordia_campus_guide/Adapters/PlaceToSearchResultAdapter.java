@@ -63,7 +63,7 @@ public class PlaceToSearchResultAdapter extends ArrayAdapter<Place> implements F
 
         Place item = getItem(position);
         if (item!= null) {
-            viewHolder.itemView.setText(getContext().getResources().getString(R.string.my_location) +item.getDisplayName());
+            viewHolder.itemView.setText(item.getDisplayName());
             viewHolder.imageView.setImageResource(getIcon(item));
         }
 
