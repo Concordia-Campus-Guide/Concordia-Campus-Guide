@@ -69,10 +69,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private CompoundButton translationToggle;
     private HashMap<CompoundButton, String> toggleButtonAndCorrespondingToggleType;
 
+    public static final int TRANSLATION_TOGGLE_ID = 2131230978;
+    public static final int ACCESSIBILITY_TOGGLE_ID = 2131230975;
+    public static final int STAFF_TOGGLE_ID = 2131230977;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        updateResources(this, "fr");
         setUpDb();
         setContentView(R.layout.activity_main);
         mViewModel = new MainActivityViewModel();
@@ -191,8 +194,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                //TODO: US #158 and #160, add action when changed
                 Toast.makeText(MainActivity.this, isChecked+"", Toast.LENGTH_SHORT).show();
+                switch(buttonView.getId()){
+                    case TRANSLATION_TOGGLE_ID:
+                        updateResources(MainActivity.this, isChecked);
+                        break;
+//                        TODO: US #160, add action when changed
+//                    case ACCESSIBILITY_TOGGLE_ID:
+//                        break;
+//                    case STAFF_TOGGLE_ID:
+//                        break;
+
+                }
             }
         });
     }
@@ -390,8 +403,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return false;
     }
 
-    private static void updateResources(Context context, String language) {
-        Locale locale = new Locale(language);
+    private static void updateResources(Context context, Boolean frenchIsChecked) {
+        Locale locale = new Locale(frenchIsChecked? "fr" : "en");
         Locale.setDefault(locale);
 
         Resources resources = context.getResources();

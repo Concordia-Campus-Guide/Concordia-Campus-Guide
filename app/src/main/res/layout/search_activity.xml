@@ -23,7 +23,7 @@
             android:layout_height="35dp"
             android:background="@null"
             android:ems="10"
-            android:hint="Search here"
+            android:hint="@string/search_here"
             android:inputType="textPersonName"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -13,11 +13,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.concordia_campus_guide.Interfaces.OnPOIClickListener;
+import com.example.concordia_campus_guide.Models.PoiType;
 import com.example.concordia_campus_guide.R;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Locale;
+
+import static android.content.Context.MODE_PRIVATE;
 
 class PointOfInterestGvAdapter extends BaseAdapter {
     private Context context;
@@ -53,7 +57,8 @@ class PointOfInterestGvAdapter extends BaseAdapter {
         ImageView serviceIv = view.findViewById(R.id.serviceIv);
 
         serviceIv.setImageBitmap(getBitmapFromAssets("point_of_interest_icons/poi_"+services.get(position).toLowerCase()+".png"));
-        serviceTxt.setText(services.get(position).replace("_", " "));
+        serviceTxt.setText(setPOIServiceText(services.get(position).toLowerCase()));
+
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +69,29 @@ class PointOfInterestGvAdapter extends BaseAdapter {
 
         return view;
     }
+
+    private String setPOIServiceText(String serviceText) {
+        // TODO: extract the hard-coded strings and add to res
+        if( Locale.getDefault().getLanguage() == "fr"){
+            if(serviceText.contains(PoiType.ELEVATOR.toLowerCase())){
+                return "ASCENCEURS";
+            }
+            if(serviceText.contains(PoiType.LOUNGES.toLowerCase())){
+                return "SALONS";
+            }
+            if(serviceText.contains(PoiType.STAIRS.toLowerCase())){
+                return "ESCALIERS";
+            }
+            if(serviceText.contains(PoiType.WASHROOM.toLowerCase())){
+                return "TOILETTES";
+            }
+            if(serviceText.contains(PoiType.WATER_FOUNTAINS.toLowerCase())){
+                return "FONTAINES D\'EAU";
+            }
+        }
+        return serviceText;
+    }
+
     private Bitmap getBitmapFromAssets(String fileName){
         AssetManager assetManager = context.getAssets();
         InputStream inputStream = null;

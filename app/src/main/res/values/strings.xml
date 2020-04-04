@@ -24,4 +24,5 @@
     <string name="next_class">Next class</string>
     <string name="from_location">From</string>
     <string name="to_destination">To</string>
+    <string name="search_here">Search here</string>
 </resources>

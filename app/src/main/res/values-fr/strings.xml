@@ -24,6 +24,7 @@
     <string name="next_class">Prochain Cours</string>
     <string name="from_location">à partir de</string>
     <string name="to_destination">à</string>
+    <string name="search_here">Rechercher ici</string>
 
 
 </resources>
