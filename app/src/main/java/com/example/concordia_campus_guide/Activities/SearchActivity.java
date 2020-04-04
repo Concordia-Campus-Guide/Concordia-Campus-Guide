@@ -60,6 +60,10 @@ public class SearchActivity extends AppCompatActivity {
     private void setPlaceToSearchResultAdapter(){
         // Android adapter for list view
         adapter = new PlaceToSearchResultAdapter(this, R.layout.list_item_layout, mViewModel.getAllPlaces());
+        Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
+        if(myCurrentLocation != null){
+            adapter.insert(new MyCurrentPlace(myCurrentLocation.getLatitude(), myCurrentLocation.getLongitude()),0);
+        }
         searchResults.setAdapter(adapter);
     }
 
