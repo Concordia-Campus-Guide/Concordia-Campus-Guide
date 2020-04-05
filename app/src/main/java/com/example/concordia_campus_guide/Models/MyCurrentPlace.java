@@ -6,7 +6,7 @@ public class MyCurrentPlace extends Place {
 
     public MyCurrentPlace(Double latitude, Double longitude){
         this.setCenterCoordinates(new Coordinates(latitude, longitude));
-        this.displayName = "My location: " + latitude.toString() + ", " + longitude.toString();
+        this.displayName = "My Current Location";
     }
 
     public MyCurrentPlace(){}

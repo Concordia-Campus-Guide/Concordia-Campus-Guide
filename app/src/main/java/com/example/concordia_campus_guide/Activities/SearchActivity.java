@@ -52,7 +52,7 @@ public class SearchActivity extends AppCompatActivity {
         searchText = findViewById(R.id.searchText);
         nextClassText = findViewById(R.id.next_class_text);
         nextClassArrow = findViewById(R.id.next_class_arrow);
-        nextClassRow = findViewById(R.id.view_container);
+        nextClassRow = findViewById(R.id.next_class_row_container);
         calendarViewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
         mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getApplication())).get(SearchActivityViewModel.class);
     }

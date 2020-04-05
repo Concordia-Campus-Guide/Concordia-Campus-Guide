@@ -78,7 +78,7 @@ public class CalendarSuggestionTest {
         textView.check(matches(isDisplayed()));
 
         ViewInteraction view = onView(
-                allOf(withId(R.id.view_container),
+                allOf(withId(R.id.next_class_row_container),
                         childAtPosition(
                                 allOf(withId(R.id.next_class_row),
                                         childAtPosition(
