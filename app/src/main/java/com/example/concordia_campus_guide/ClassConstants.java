@@ -56,4 +56,11 @@ public class  ClassConstants {
 
     //EV centerCoordinates
     public static final LatLng initialZoomLocation = new LatLng(45.495638 ,-73.578258);
+
+    //SGW building label string used as campus center
+    public static final String sgwCenterBuildingLabel = "EV";
+
+    //Loyola building label string used as campus center
+    public static final String loyolaCenterBuildingLabel = "CC";
+
 }
