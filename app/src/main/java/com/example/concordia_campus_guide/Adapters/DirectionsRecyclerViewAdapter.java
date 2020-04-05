@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.concordia_campus_guide.Models.Direction;
+import com.example.concordia_campus_guide.Models.PathInfoCard;
 import com.example.concordia_campus_guide.R;
 
 import java.text.DecimalFormat;
@@ -17,11 +18,11 @@ import java.util.List;
 public class DirectionsRecyclerViewAdapter extends RecyclerView.Adapter<DirectionsRecyclerViewAdapter.ViewHolder> {
 
     private static DecimalFormat df2 = new DecimalFormat("#.##");
-    private List<Direction> mData;
+    private List<PathInfoCard> mData;
     private LayoutInflater mInflater;
 
     // data is passed into the constructor
-    public DirectionsRecyclerViewAdapter(Context context, List<Direction> data) {
+    public DirectionsRecyclerViewAdapter(Context context, List<PathInfoCard> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }

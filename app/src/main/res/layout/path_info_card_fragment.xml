@@ -19,26 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/paths_image_buttons"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/imageButton_walker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="#00FFFFFF"
-                android:src="@drawable/ic_directions_walk_red"
-                android:tint="@color/colorAppTheme" />
-
-            <TextView
-                android:id="@+id/next_arrow"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text=">" />
-
-        </LinearLayout>
+            android:orientation="horizontal"/>
 
         <LinearLayout
             android:id="@+id/time_text"
