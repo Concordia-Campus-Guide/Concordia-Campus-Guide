@@ -62,7 +62,7 @@ public class LocationFragmentViewModel extends ViewModel {
     private Location currentLocation;
 
     //EV centerCoordinates
-    private LatLng initialZoomLocation = new LatLng(45.495638 ,-73.578258);
+    private LatLng initialZoomLocation = ClassConstants.initialZoomLocation;
 
     public static final Logger LOGGER = Logger.getLogger("LocationFragmentViewModel");
     public static final String FLOORS_AVAILABLE = "floorsAvailable";
