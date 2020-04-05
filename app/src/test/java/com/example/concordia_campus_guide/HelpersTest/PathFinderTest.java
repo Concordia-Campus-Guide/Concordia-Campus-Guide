@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
@@ -136,7 +137,7 @@ public class PathFinderTest {
 
     @Test
     public void populateWalkingPointMapTest(){
-        HashMap<Integer, PathFinder.WalkingPointNode> hashMap = pathFinder.populateWalkingPointMap(walkingPointList);
+        Map<Integer, PathFinder.WalkingPointNode> hashMap = pathFinder.populateWalkingPointMap(walkingPointList);
         for(int i =0; i<walkingPointList.size(); i++){
             assertEquals(walkingPointList.get(i).getId(),hashMap.get(i+1).getWalkingPoint().getId());
             assertEquals(walkingPointList.get(i).getFloorCode(),hashMap.get(i+1).getWalkingPoint().getFloorCode());

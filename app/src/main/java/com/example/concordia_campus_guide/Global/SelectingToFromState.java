@@ -10,9 +10,9 @@ public class SelectingToFromState {
     private static Place to;
     private static Location myCurrentLocation;
 
-    private static boolean QuickSelect = true;
-    private static boolean SelectTo = false;
-    private static boolean SelectFrom = false;
+    private static boolean quickSelect = true;
+    private static boolean selectTo = false;
+    private static boolean selectFrom = false;
 
     public static Place getFrom() {
         return from;
@@ -39,33 +39,33 @@ public class SelectingToFromState {
     }
 
     public static boolean isQuickSelect() {
-        return QuickSelect;
+        return quickSelect;
     }
 
     public static void setQuickSelectToTrue() {
-        SelectFrom = false;
-        SelectTo = false;
-        QuickSelect = true;
+        selectFrom = false;
+        selectTo = false;
+        quickSelect = true;
     }
 
     public static boolean isSelectTo() {
-        return SelectTo;
+        return selectTo;
     }
 
     public static void setSelectToToTrue() {
-        QuickSelect = false;
-        SelectFrom = false;
-        SelectTo = true;
+        quickSelect = false;
+        selectFrom = false;
+        selectTo = true;
     }
 
     public static boolean isSelectFrom() {
-        return SelectFrom;
+        return selectFrom;
     }
 
     public static void setSelectFromToTrue() {
-        QuickSelect = false;
-        SelectTo = false;
-        SelectFrom = true;
+        quickSelect = false;
+        selectTo = false;
+        selectFrom = true;
     }
 
     public static void reset(){

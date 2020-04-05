@@ -97,6 +97,8 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
             case ClassConstants.SHUTTLE:
                 setUIShuttle(route);
                 break;
+            default:
+                break;
         }
 
         setBottomLayout(route);

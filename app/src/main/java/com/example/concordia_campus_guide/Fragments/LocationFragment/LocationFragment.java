@@ -112,6 +112,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         super.onActivityCreated(savedInstanceState);
         setupPOIListListener();
     }
+
     /**
      * @param rootView is the object that contains the parts displayed on the fragment
      */
@@ -504,9 +505,9 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     }
 
     private void setVisiblePOIMarkers(String floorSelected, String buildingSelected) {
-        for(Marker marker : poiMarkers){
+        for (Marker marker : poiMarkers) {
             String floorCode = marker.getTag().toString().split("_")[2];
-            marker.setVisible(floorCode.equalsIgnoreCase(buildingSelected+"-"+floorSelected));
+            marker.setVisible(floorCode.equalsIgnoreCase(buildingSelected + "-" + floorSelected));
         }
     }
 

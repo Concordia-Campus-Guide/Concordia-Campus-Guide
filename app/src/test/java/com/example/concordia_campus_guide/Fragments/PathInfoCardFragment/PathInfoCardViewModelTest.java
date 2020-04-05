@@ -20,7 +20,6 @@ public class PathInfoCardViewModelTest {
     @Before
     public void init(){
         pathInfoCardViewModel = new PathInfoCardViewModel();
-
     }
 
     @Test
