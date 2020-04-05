@@ -46,6 +46,8 @@ public class ExplorePOICardTest {
 
     @Test
     public void explorePOICardTest() {
+        EspressoHelpers.cancelNotificationIfExists();
+
         android.os.SystemClock.sleep(500);
 
         ViewInteraction textView3 = onView(

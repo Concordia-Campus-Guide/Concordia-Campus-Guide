@@ -29,7 +29,6 @@ import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
@@ -65,15 +64,7 @@ public class RoutesActivityOptionsTest {
         //wait for gps
         android.os.SystemClock.sleep(4000);
 
-        ViewInteraction materialButtonX = onView(
-                allOf(withId(android.R.id.button2), withText("Ignore"),
-                        isDisplayed()));
-        try{
-            materialButtonX.perform(scrollTo(), click());
-        }
-        catch(Exception e){
-            //ignore maybe the popup was cancelled by other test
-        }
+        EspressoHelpers.cancelNotificationIfExists();
 
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.SGWBtn), withText("SGW"),
@@ -243,16 +234,9 @@ public class RoutesActivityOptionsTest {
         textView8.check(matches(isDisplayed()));
 
         ViewInteraction textView9 = onView(
-                allOf(withId(R.id.duration), withText("4 mins"),
-                        childAtPosition(
-                                allOf(withId(R.id.main),
-                                        childAtPosition(
-                                                withId(R.id.routeOverviewLayout),
-                                                0)),
-                                2),
+                allOf(EspressoHelpers.getElementFromMatchAtPosition(allOf(withId(R.id.duration), withText("4 mins")), 0),
                         isDisplayed()));
-
-        textView9.check(matches(isDisplayed()));
+        textView9.check(matches(withText("4 mins")));
 
         android.os.SystemClock.sleep(1000);
 
