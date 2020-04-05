@@ -11,6 +11,7 @@
     <string name="staff">Personnel(le)</string>
     <string name="navigation_drawer_open">Ouvrir le tiroir de navigation</string>
     <string name="navigation_drawer_close">Fermer le tiroir de navigation</string>
+    <string name="small_info_card_directions_button">Directions</string>
     <string name="my_location">Ma position: </string>
     <string name="no_shuttle">Pas de navettes disponibles pour le moment</string>
     <string name="departments">Départements</string>

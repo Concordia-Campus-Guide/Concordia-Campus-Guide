@@ -57,6 +57,8 @@ public class InfoCardHallTest {
 
     @Test
     public void infoCardHallTest() {
+        EspressoHelpers.cancelNotificationIfExists();
+
         android.os.SystemClock.sleep(1000);
 
         ViewInteraction materialButton = onView(

@@ -23,8 +23,8 @@ import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServ
 import com.example.concordia_campus_guide.Helper.RoutesHelpers.DirectionsApiDataRetrieval;
 import com.example.concordia_campus_guide.Helper.RoutesHelpers.UrlBuilder;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
+import com.example.concordia_campus_guide.Interfaces.DirectionsApiCallbackListener;
 import com.example.concordia_campus_guide.Models.Coordinates;
-import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.Routes.Route;
 import com.example.concordia_campus_guide.Models.Shuttle;
 import com.example.concordia_campus_guide.R;
@@ -33,7 +33,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoutesActivity extends AppCompatActivity {
+public class RoutesActivity extends AppCompatActivity implements DirectionsApiCallbackListener {
 
     RoutesActivityViewModel mViewModel;
     TextView fromText;
@@ -165,12 +165,12 @@ public class RoutesActivity extends AppCompatActivity {
     public void onClickShuttle(View v) {
         mViewModel.setRouteOptions(new ArrayList<>());
         List<Shuttle> shuttles = mViewModel.filterShuttles();
-        setShuttleSelect();
         if (!shuttles.isEmpty()) {
             mViewModel.adaptShuttleToRoutes(shuttles);
         } else {
             mViewModel.noShuttles(this);
         }
+        setShuttleSelect();
         setRoutesAdapter();
     }
 
@@ -212,7 +212,6 @@ public class RoutesActivity extends AppCompatActivity {
         setRoutesAdapter();
     }
 
-
     private void setRoutesAdapter() {
         // Android adapter for list view
         adapter = new RoutesAdapter(this, R.layout.list_routes, mViewModel.getRouteOptions());
@@ -220,26 +219,26 @@ public class RoutesActivity extends AppCompatActivity {
         allRoutes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if(carButton.isSelected() || transitButton.isSelected() || walkButton.isSelected()){
+                if (carButton.isSelected() || transitButton.isSelected() || walkButton.isSelected()) {
                     Intent openPaths = new Intent(RoutesActivity.this,
                             PathsActivity.class);
                     DirectionsRoute directionsResult = mViewModel.getDirectionsResult().routes[i];
                     openPaths.putExtra("directionsResult", directionsResult);
+                    openPaths.putExtra("shuttle", false);
                     startActivity(openPaths);
-                }
-                else{
-                    Toast.makeText(getApplicationContext(), "Paths view for Shuttle route has not been implemented yet.", Toast.LENGTH_SHORT).show();
-                    // TODO: Add shuttle route to map #51
-                    // Intent openPaths = new Intent(RoutesActivity.this,
-                    //         PathsActivity.class);
-                    // DirectionsRoute directionsResult = mViewModel.getDirectionsResult().routes[i];
-                    // openPaths.putExtra("directionsResult", directionsResult);
-                    // startActivity(openPaths);
+                } else {
+                    if (mViewModel.getShuttles() == null) {
+                    Toast.makeText(getApplicationContext(), "Paths view for Shuttle route is not available if no shuttles exist.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Intent openPaths = new Intent(RoutesActivity.this,
+                                PathsActivity.class);
+                        openPaths.putExtra("shuttle", true);
+                        startActivity(openPaths);
+                    }
                 }
             }
         });
     }
-
 
     private void setBackButtonOnClick() {
         ImageButton backButton = this.findViewById(R.id.routesPageBackButton);
