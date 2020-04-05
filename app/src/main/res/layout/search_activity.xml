@@ -47,7 +47,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
+        android:id="@+id/current_location_suggestion"
         android:layout_width="411dp"
         android:layout_height="60dp"
         android:backgroundTint="@color/backgroundGrey"
@@ -93,7 +93,7 @@
         android:layout_height="wrap_content"
         android:text="Next class"
         android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/constraintLayout2" />
+        app:layout_constraintTop_toBottomOf="@id/current_location_suggestion" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/next_class_row"

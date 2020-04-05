@@ -12,6 +12,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.concordia_campus_guide.Adapters.PlaceToSearchResultAdapter;
@@ -30,6 +32,7 @@ public class SearchActivity extends AppCompatActivity {
     View nextClassRow;
     TextView nextClassText;
     ImageView nextClassArrow;
+    View currentLocationElement;
     SearchActivityViewModel mViewModel;
     CalendarViewModel calendarViewModel;
 
@@ -53,6 +56,7 @@ public class SearchActivity extends AppCompatActivity {
         nextClassText = findViewById(R.id.next_class_text);
         nextClassArrow = findViewById(R.id.next_class_arrow);
         nextClassRow = findViewById(R.id.view_container);
+        currentLocationElement = findViewById(R.id.current_location_suggestion);
         calendarViewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
         mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getApplication())).get(SearchActivityViewModel.class);
     }
@@ -85,6 +89,8 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void setOnClickListeners(){
+        setCurrentLocationOnClick();
+
         searchText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean onFocus) {
@@ -125,6 +131,16 @@ public class SearchActivity extends AppCompatActivity {
                     });
                 }
             }
+        }
+    }
+
+    public void setCurrentLocationOnClick(){
+        Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
+        if(myCurrentLocation!=null){
+            openRoutesPage(new MyCurrentPlace(myCurrentLocation.getLatitude(), myCurrentLocation.getLongitude()));
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "The application cannot access your current location.", Toast.LENGTH_SHORT).show();
         }
     }
 
