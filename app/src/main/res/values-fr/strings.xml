@@ -21,9 +21,20 @@
     <string name="sgw">SGW</string>
     <string name="loyola">Loyola</string>
     <string name="show_on_map">Montrer sur la carte</string>
-    <string name="next_class">Next class</string>
+    <string name="next_class">Prochain cours</string>
     <string name="from_location">à partir de</string>
     <string name="to_destination">à</string>
-
+    <string name="calendar_text_header">Attention ... Votre prochain cours est dans </string>
+    <string name="calendar_text_header_late">Attention ... Votre cours a déjà commencé avant </string>
+    <string name="calendar_text_end"> ! Veuillez choisir d\'obtenir l\'itinéraire pour votre classe ou d\'ignorer ce message</string>
+    <string name="you_have">Vous avez </string>
+    <string name="at"> à </string>
+    <string name="in"> dans </string>
+    <string name="show_me_direction">Montrez-moi l\'itinéraire</string>
+    <string name="ignore">Ignorer</string>
+    <string name="your">Votre </string>
+    <string name="already_started"> a commencé avant </string>
+    <string name="location_format_wrong">Le format de l\'emplacement est incorrect</string>
+    <string name="location_format_wrong_description">L\'emplacement de votre prochain événement n\'a pas été correctement inséré (par exemple, 'H-9, 963')</string>
 
 </resources>

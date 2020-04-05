@@ -24,4 +24,16 @@
     <string name="next_class">Next class</string>
     <string name="from_location">From</string>
     <string name="to_destination">To</string>
+    <string name="calendar_text_header">Heads up... Your next class is in </string>
+    <string name="calendar_text_end"> ! Please choose to either get directions to your class or to ignore this message</string>
+    <string name="calendar_text_header_late">Heads up... Your class has already started before </string>
+    <string name="you_have">You have </string>
+    <string name="at">at </string>
+    <string name="in"> in </string>
+    <string name="show_me_direction">Show me Directions</string>
+    <string name="ignore">Ignore</string>
+    <string name="your">Your </string>
+    <string name="already_started"> has started before </string>
+    <string name="location_format_wrong">Location Format is Wrong</string>
+    <string name="location_format_wrong_description">The location of your upcoming event hasn\'t been inserted correctly (e.g. 'H-9, 963')</string>
 </resources>

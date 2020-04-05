@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 toggleButton.setChecked(false);
         }
 
-        // TODO: US #50: add logic for calendar integration  by retrieving from the shared preferences if the user hclicked on the "calendar integration" button or not.
+        // TODO: US #50: add logic for calendar integration  by retrieving from the shared preferences if the user clicked on the "calendar integration" button or not.
     }
 
     @Override
@@ -203,23 +203,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Date eventDate = new Date((Long.parseLong(calendarEvent.getStartTime())));
         long differenceInMillis = eventDate.getTime() - System.currentTimeMillis();
         if(notification.validateCalendarEvent(calendarEvent) || !notification.roomExistsInDb(calendarEvent.getLocation())) {
-            builder.setTitle("Location Format is Wrong");
-            builder.setMessage("The location of your upcoming event hasn't been inserted correctly"+
-                    "(e.g. 'H-9, 963')");
+            builder.setTitle(getResources().getString(R.string.location_format_wrong));
+            builder.setMessage(getResources().getString(R.string.location_format_wrong_description));
         }
 
         else if(differenceInMillis>0 ){
-            builder.setTitle("Heads up... Your next class is in " +  mViewModel.displayTimeToNextClass(calendarEvent.getStartTime()));
-            builder.setMessage("You have " + calendarEvent.getTitle() + " in " + mViewModel.displayTimeToNextClass(calendarEvent.getStartTime())  + " at " +
-                    calendarEvent.getLocation() +" ! Please choose to either get directions to your class or to ignore this message");
+            builder.setTitle(getResources().getString(R.string.calendar_text_header) +  mViewModel.displayTimeToNextClass(calendarEvent.getStartTime()));
+            builder.setMessage(getResources().getString(R.string.you_have) + calendarEvent.getTitle() + getResources().getString(R.string.in) + mViewModel.displayTimeToNextClass(calendarEvent.getStartTime())  + getResources().getString(R.string.at) +
+                    calendarEvent.getLocation() + getResources().getString(R.string.calendar_text_end));
             setupShowMeDirectionsBtn(builder,calendarEvent.getLocation());
         }
         else {
             String eventPassedBy = mViewModel.displayTimeToNextClass(calendarEvent.getStartTime());
             eventPassedBy = eventPassedBy.replace('-',' ');
-            builder.setTitle("Heads up... Your class has already started before " + eventPassedBy);
-            builder.setMessage("Your " + calendarEvent.getTitle() + " has started before " + eventPassedBy + " at " +
-                    calendarEvent.getLocation() +" ! Please choose to either get directions to your class or to ignore this message");
+            builder.setTitle(getResources().getString(R.string.calendar_text_header_late) + eventPassedBy);
+            builder.setMessage(getResources().getString(R.string.your) + calendarEvent.getTitle() + getResources().getString(R.string.already_started) + eventPassedBy + getResources().getString(R.string.at) +
+                    calendarEvent.getLocation() +getResources().getString(R.string.calendar_text_end));
             setupShowMeDirectionsBtn(builder,calendarEvent.getLocation());
         }
 
@@ -229,7 +228,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void setupCancelBtn(AlertDialog.Builder builder){
-        builder.setNegativeButton("Ignore", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getResources().getString(R.string.ignore), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -240,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void setupShowMeDirectionsBtn(AlertDialog.Builder builder, String location){
         final String locationTemp = location;
         final Activity mainActivity = this;
-        builder.setPositiveButton("Show me Directions", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getResources().getString(R.string.show_me_direction), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 RoomModel room = notification.getRoom(locationTemp);
