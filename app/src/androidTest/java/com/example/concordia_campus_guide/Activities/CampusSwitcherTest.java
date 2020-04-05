@@ -15,6 +15,7 @@ import androidx.test.uiautomator.UiObject;
 import androidx.test.uiautomator.UiObjectNotFoundException;
 import androidx.test.uiautomator.UiSelector;
 
+import com.example.concordia_campus_guide.EspressoHelpers;
 import com.example.concordia_campus_guide.R;
 
 import org.hamcrest.Description;
@@ -55,6 +56,8 @@ public class CampusSwitcherTest {
 
     @Test
     public void campusSwitcherTest() throws UiObjectNotFoundException {
+        EspressoHelpers.cancelNotificationIfExists();
+
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.loyolaBtn), withText("Loyola"),
                         childAtPosition(

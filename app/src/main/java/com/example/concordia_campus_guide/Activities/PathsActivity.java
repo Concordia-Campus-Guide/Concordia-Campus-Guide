@@ -81,6 +81,8 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
             shuttleSelected = extras.getBoolean("shuttle");
         }
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.pathLocationFragment);
+
+        locationFragment.setDifferentInitialView(new LatLng(from.getCenterCoordinates().getLatitude(), from.getCenterCoordinates().getLongitude()));
     }
 
     private void returnToSelectRoute() {

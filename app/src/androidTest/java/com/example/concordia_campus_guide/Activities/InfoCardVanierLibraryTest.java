@@ -57,6 +57,8 @@ public class InfoCardVanierLibraryTest {
 
     @Test
     public void infoCardVanierLibraryTest() {
+        EspressoHelpers.cancelNotificationIfExists();
+
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.loyolaBtn), withText("Loyola"),
                         childAtPosition(

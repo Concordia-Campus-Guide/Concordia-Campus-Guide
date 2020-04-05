@@ -16,6 +16,7 @@ import androidx.test.uiautomator.UiObject;
 import androidx.test.uiautomator.UiObjectNotFoundException;
 import androidx.test.uiautomator.UiSelector;
 
+import com.example.concordia_campus_guide.EspressoHelpers;
 import com.example.concordia_campus_guide.R;
 
 import org.hamcrest.Description;
@@ -61,6 +62,8 @@ public class FloorPickerAndMarkersHallTest {
 
     @Test
     public void floorPickerAndMarkersHallTest() {
+        EspressoHelpers.cancelNotificationIfExists();
+
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.SGWBtn), withText("SGW"),
                         childAtPosition(
@@ -134,6 +137,27 @@ public class FloorPickerAndMarkersHallTest {
 
         android.os.SystemClock.sleep(1000);
 
+        ViewInteraction textView = onView(
+                allOf(withId(R.id.info_card_title), withText("H-9 963"),
+                        childAtPosition(
+                                allOf(withId(R.id.infocardLinearLayout),
+                                        childAtPosition(
+                                                withId(R.id.bottom_card_frame),
+                                                0)),
+                                0),
+                        isDisplayed()));
+        textView.check(matches(withText("H-9 963")));
+
+        button = onView(
+                allOf(withId(R.id.directions),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.infocardLinearLayout),
+                                        1),
+                                0),
+                        isDisplayed()));
+        button.check(matches(isDisplayed()));
+
         marker2 = device.findObject(new UiSelector().descriptionContains("983"));
         try {
             marker2.click();
@@ -142,6 +166,27 @@ public class FloorPickerAndMarkersHallTest {
         }
 
         android.os.SystemClock.sleep(1000);
+
+        textView = onView(
+                allOf(withId(R.id.info_card_title), withText("H-9 983"),
+                        childAtPosition(
+                                allOf(withId(R.id.infocardLinearLayout),
+                                        childAtPosition(
+                                                withId(R.id.bottom_card_frame),
+                                                0)),
+                                0),
+                        isDisplayed()));
+        textView.check(matches(withText("H-9 983")));
+
+        button = onView(
+                allOf(withId(R.id.directions),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.infocardLinearLayout),
+                                        1),
+                                0),
+                        isDisplayed()));
+        button.check(matches(isDisplayed()));
 
         DataInteraction button5 = onData(anything())
                 .inAdapterView(allOf(withId(R.id.FloorPickerGv),
@@ -162,6 +207,27 @@ public class FloorPickerAndMarkersHallTest {
 
         android.os.SystemClock.sleep(1000);
 
+        textView = onView(
+                allOf(withId(R.id.info_card_title), withText("H-8 853"),
+                        childAtPosition(
+                                allOf(withId(R.id.infocardLinearLayout),
+                                        childAtPosition(
+                                                withId(R.id.bottom_card_frame),
+                                                0)),
+                                0),
+                        isDisplayed()));
+        textView.check(matches(withText("H-8 853")));
+
+        button = onView(
+                allOf(withId(R.id.directions),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.infocardLinearLayout),
+                                        1),
+                                0),
+                        isDisplayed()));
+        button.check(matches(isDisplayed()));
+
         marker2 = device.findObject(new UiSelector().descriptionContains("822"));
         try {
             marker2.click();
@@ -171,6 +237,27 @@ public class FloorPickerAndMarkersHallTest {
 
         android.os.SystemClock.sleep(1000);
 
+        textView = onView(
+                allOf(withId(R.id.info_card_title), withText("H-8 822"),
+                        childAtPosition(
+                                allOf(withId(R.id.infocardLinearLayout),
+                                        childAtPosition(
+                                                withId(R.id.bottom_card_frame),
+                                                0)),
+                                0),
+                        isDisplayed()));
+        textView.check(matches(withText("H-8 822")));
+
+        button = onView(
+                allOf(withId(R.id.directions),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.infocardLinearLayout),
+                                        1),
+                                0),
+                        isDisplayed()));
+        button.check(matches(isDisplayed()));
+
         marker2 = device.findObject(new UiSelector().descriptionContains("womens-1"));
         try {
             marker2.click();
@@ -179,6 +266,27 @@ public class FloorPickerAndMarkersHallTest {
         }
 
         android.os.SystemClock.sleep(1000);
+
+        textView = onView(
+                allOf(withId(R.id.info_card_title), withText("H-8 womens-1"),
+                        childAtPosition(
+                                allOf(withId(R.id.infocardLinearLayout),
+                                        childAtPosition(
+                                                withId(R.id.bottom_card_frame),
+                                                0)),
+                                0),
+                        isDisplayed()));
+        textView.check(matches(withText("H-8 womens-1")));
+
+        button = onView(
+                allOf(withId(R.id.directions),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.infocardLinearLayout),
+                                        1),
+                                0),
+                        isDisplayed()));
+        button.check(matches(isDisplayed()));
 
         ViewInteraction view5 = onView(
                 allOf(childAtPosition(

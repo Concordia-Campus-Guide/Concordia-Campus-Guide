@@ -14,6 +14,7 @@ import androidx.test.rule.GrantPermissionRule;
 import androidx.test.runner.AndroidJUnit4;
 import androidx.test.uiautomator.UiDevice;
 
+import com.example.concordia_campus_guide.EspressoHelpers;
 import com.example.concordia_campus_guide.R;
 
 import org.hamcrest.Description;
@@ -63,12 +64,14 @@ public class ST8SelectIndoorDestinationAndOriginTest {
 
     @Test
     public void routesActivityOptionsTest() {
+        EspressoHelpers.cancelNotificationIfExists();
+
         ViewInteraction textView = onView(
                 allOf(withId(R.id.search), withContentDescription("Icon"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.toolbar),
-                                        1),
+                                        2),
                                 0),
                         isDisplayed()));
         textView.check(matches(withText("")));
@@ -78,7 +81,7 @@ public class ST8SelectIndoorDestinationAndOriginTest {
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.toolbar),
-                                        1),
+                                        2),
                                 0),
                         isDisplayed()));
         actionMenuItemView.perform(click());

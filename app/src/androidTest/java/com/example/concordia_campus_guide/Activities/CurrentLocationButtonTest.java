@@ -11,6 +11,7 @@ import androidx.test.rule.ActivityTestRule;
 import androidx.test.rule.GrantPermissionRule;
 import androidx.test.runner.AndroidJUnit4;
 
+import com.example.concordia_campus_guide.EspressoHelpers;
 import com.example.concordia_campus_guide.R;
 
 import org.hamcrest.Description;
@@ -42,6 +43,8 @@ public class CurrentLocationButtonTest {
 
     @Test
     public void currentLocationButtonTest() {
+        EspressoHelpers.cancelNotificationIfExists();
+
         ViewInteraction imageButton = onView(
                 allOf(withId(R.id.myLocation),
                         isDisplayed()));
