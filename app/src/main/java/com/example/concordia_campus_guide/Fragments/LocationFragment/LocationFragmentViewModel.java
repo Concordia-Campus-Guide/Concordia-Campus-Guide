@@ -14,7 +14,6 @@ import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Global.ApplicationState;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.EncodedPolyline;
 import com.example.concordia_campus_guide.Helper.PathFinder;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Coordinates;
@@ -413,9 +412,5 @@ public class LocationFragmentViewModel extends ViewModel {
     public void drawShuttlePath(GoogleMap mMap, String polyline) {
         List<LatLng> route = PolyUtil.decode(polyline);
         mMap.addPolyline(new PolylineOptions().addAll(route).color(R.color.colorAppTheme).width(20));
-    }
-    
-    public BitmapDescriptor getRoomIcon() {
-        return roomIcon;
     }
 }
