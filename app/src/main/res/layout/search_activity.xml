@@ -50,8 +50,8 @@
         android:id="@+id/current_location_suggestion"
         android:layout_width="411dp"
         android:layout_height="60dp"
-        android:backgroundTint="@color/backgroundGrey"
         app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/whiteBackgroundColor"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
         <ImageView
@@ -62,6 +62,7 @@
             android:layout_weight="1"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/ic_place_white"
+            android:tint="@color/colorPrimary"
             tools:layout_editor_absoluteY="0dp" />
 
         <TextView
@@ -70,7 +71,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="15dp"
-            android:text="Show on Map"
+            android:text="@string/search_activity_current_location_suggestion"
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/imageView4"
             app:layout_constraintStart_toEndOf="@+id/imageView3" />
@@ -82,6 +83,7 @@
             android:layout_marginEnd="24dp"
             android:layout_weight="1"
             app:layout_constraintEnd_toEndOf="parent"
+            android:tint="@color/colorPrimary"
             app:srcCompat="@drawable/arrow_right"
             tools:layout_editor_absoluteY="16dp" />
 
@@ -93,12 +95,14 @@
         android:layout_height="wrap_content"
         android:text="Next class"
         android:textSize="24sp"
+        android:background="@color/whiteBackgroundColor"
         app:layout_constraintTop_toBottomOf="@id/current_location_suggestion" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/next_class_row"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:background="@color/whiteBackgroundColor"
         app:layout_constraintTop_toBottomOf="@id/textView2">
 
         <View
@@ -146,8 +150,8 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="24dp"
             android:layout_weight="1"
-            android:tint="@color/whiteBackgroundColor"
             app:layout_constraintEnd_toEndOf="parent"
+            android:tint="@color/colorPrimary"
             app:srcCompat="@drawable/arrow_right"
             tools:layout_editor_absoluteY="3dp" />
 
