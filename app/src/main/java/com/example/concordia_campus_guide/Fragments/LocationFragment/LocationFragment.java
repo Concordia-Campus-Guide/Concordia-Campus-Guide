@@ -26,6 +26,7 @@ import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
+import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.Models.Building;
@@ -173,7 +174,10 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
                 .addOnSuccessListener(getActivity(), location -> {
                     if (location != null) {
                         mMap.setMyLocationEnabled(true);
-                        zoomInLocation(new LatLng(location.getLatitude(), location.getLongitude()));
+                        if (getActivity() instanceof MainActivity)
+                            zoomInLocation(new LatLng(location.getLatitude(), location.getLongitude()));
+                        else
+                            zoomInLocation(mViewModel.getInitialZoomLocation());
                     } else {
                         zoomInLocation(mViewModel.getInitialZoomLocation());
                     }
@@ -572,4 +576,11 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     public List<WalkingPoint> getWalkingPointList() {
         return mViewModel.getWalkingPointsList();
     }
+
+    public void setDifferentInitialView(LatLng latLng){
+        mViewModel.setInitialZoomLocation(latLng);
+    }
+
+
+
 }

@@ -61,6 +61,9 @@ public class LocationFragmentViewModel extends ViewModel {
     private BitmapDescriptor currentPOIIcon;
     private Location currentLocation;
 
+    //EV centerCoordinates
+    private LatLng initialZoomLocation = ClassConstants.initialZoomLocation;
+
     public static final Logger LOGGER = Logger.getLogger("LocationFragmentViewModel");
     public static final String FLOORS_AVAILABLE = "floorsAvailable";
 
@@ -255,7 +258,11 @@ public class LocationFragmentViewModel extends ViewModel {
     }
 
     public LatLng getInitialZoomLocation() {
-        return buildings.get("EV").getCenterCoordinatesLatLng();
+        return initialZoomLocation;
+    }
+
+    public void setInitialZoomLocation(LatLng latLng){
+        initialZoomLocation = latLng;
     }
 
     public LatLng getLoyolaZoomLocation() {
