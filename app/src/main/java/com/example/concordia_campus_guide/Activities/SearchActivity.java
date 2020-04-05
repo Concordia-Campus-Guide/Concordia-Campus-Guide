@@ -135,13 +135,18 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void setCurrentLocationOnClick(){
-        Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
-        if(myCurrentLocation!=null){
-            openRoutesPage(new MyCurrentPlace(myCurrentLocation.getLatitude(), myCurrentLocation.getLongitude()));
-        }
-        else{
-            Toast.makeText(getApplicationContext(), "The application cannot access your current location.", Toast.LENGTH_SHORT).show();
-        }
+        currentLocationElement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
+                if(myCurrentLocation!=null){
+                    openRoutesPage(new MyCurrentPlace(myCurrentLocation.getLatitude(), myCurrentLocation.getLongitude()));
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "The application cannot access your current location.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     public void openRoutesPage(Place place){
