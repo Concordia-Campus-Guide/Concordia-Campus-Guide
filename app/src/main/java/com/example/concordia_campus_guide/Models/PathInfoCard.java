@@ -4,6 +4,7 @@ import java.io.Serializable;
 public class PathInfoCard implements Serializable {
     private String type;
     private double duration;
+    private String description;
 
     public double getDuration() {
         return duration;
@@ -20,8 +21,6 @@ public class PathInfoCard implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    private String description;
 
     public PathInfoCard(String type, double duration, String description) {
         this.type = type;

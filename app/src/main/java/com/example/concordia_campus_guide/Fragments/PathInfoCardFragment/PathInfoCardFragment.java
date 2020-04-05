@@ -63,7 +63,7 @@ public class PathInfoCardFragment extends Fragment {
 
     public void drawIndoorOutdoorInfo() {
         LinearLayout layout = getView().findViewById(R.id.paths_image_buttons);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT, 1);
         for (int i = 0; i < directionsResults.size(); i++) {
             totalDuration += directionsResults.get(i).getDuration();
             int icon = pathInfoCardViewModel.getIcon(directionsResults.get(i).getType().toUpperCase());
@@ -87,8 +87,8 @@ public class PathInfoCardFragment extends Fragment {
     public void setDividerTextView(LinearLayout layout, LinearLayout.LayoutParams layoutParams) {
         TextView divider = new TextView(getContext());
         divider.setText(">");
-        divider.setGravity(Gravity.CENTER);
         divider.setLayoutParams(layoutParams);
+        divider.setGravity(Gravity.CENTER);
         layout.addView(divider);
     }
 
