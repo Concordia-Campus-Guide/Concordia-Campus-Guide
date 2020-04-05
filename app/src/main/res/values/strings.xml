@@ -100,4 +100,5 @@
     <string name="staff">Staff</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="small_info_card_directions_button">Directions</string>
 </resources>

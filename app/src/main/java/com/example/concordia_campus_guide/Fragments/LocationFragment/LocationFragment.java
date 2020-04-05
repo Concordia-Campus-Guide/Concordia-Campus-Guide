@@ -26,8 +26,6 @@ import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Global.SelectingToFromState;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.EncodedPolyline;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.Models.Building;
@@ -159,8 +157,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
 
     public void deselectAll(){
-        removeAllRoomsFromMap();
-        removeAllPOIFromMap();
+        removeMarkersFromMap(poiMarkers);
+        removeMarkersFromMap(roomMarkers);
         mFloorPickerGv.setVisibility(View.GONE);
     }
 
@@ -392,14 +390,9 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         });
     }
 
-    private void removeAllRoomsFromMap(){
-        for (Marker marker : roomMarkers) marker.remove();
-        roomMarkers.clear();
-    }
-
-    private void removeAllPOIFromMap(){
-        for (Marker marker : poiMarkers) marker.remove();
-        poiMarkers.clear();
+    private void removeMarkersFromMap(List<Marker> markers){
+        for(Marker marker: markers) marker.remove();
+        markers.clear();
     }
 
     private void addRoomToMap(RoomModel room){
