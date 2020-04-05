@@ -72,7 +72,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        updateResources(this, "fr");
         setUpDb();
         setContentView(R.layout.activity_main);
         mViewModel = new MainActivityViewModel();
@@ -191,8 +190,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                //TODO: US #158 and #160, add action when changed
                 Toast.makeText(MainActivity.this, isChecked+"", Toast.LENGTH_SHORT).show();
+                switch(buttonView.getId()){
+                    case R.id.nav_translate:
+                        updateResources(MainActivity.this, isChecked? "fr" : "en");
+
+                }
             }
         });
     }

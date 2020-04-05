@@ -35,5 +35,12 @@
     <string name="your">Your </string>
     <string name="already_started"> has started before </string>
     <string name="location_format_wrong">Location Format is Wrong</string>
-    <string name="location_format_wrong_description">The location of your upcoming event hasn\'t been inserted correctly (e.g. 'H-9, 963')</string>
+    <string name="location_format_wrong_description">The location of your upcoming event hasn\'t been inserted correctly (e.g. \'H-9, 963\')</string>
+    <string name="search_here">Search here</string>
+    <string name="lounges">Lounges</string>
+    <string name="washroom">Washroom</string>
+    <string name="water_fountains">Water Fountain</string>
+    <string name="stairs">Stairs</string>
+    <string name="elevator">Elevator</string>
+
 </resources>

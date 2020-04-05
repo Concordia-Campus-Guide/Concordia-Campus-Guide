@@ -21,7 +21,7 @@
     <string name="sgw">SGW</string>
     <string name="loyola">Loyola</string>
     <string name="show_on_map">Montrer sur la carte</string>
-    <string name="next_class">Prochain cours</string>
+    <string name="next_class">Prochain Cours</string>
     <string name="from_location">à partir de</string>
     <string name="to_destination">à</string>
     <string name="calendar_text_header">Attention ... Votre prochain cours est dans </string>
@@ -35,6 +35,12 @@
     <string name="your">Votre </string>
     <string name="already_started"> a commencé avant </string>
     <string name="location_format_wrong">Le format de l\'emplacement est incorrect</string>
-    <string name="location_format_wrong_description">L\'emplacement de votre prochain événement n\'a pas été correctement inséré (par exemple, 'H-9, 963')</string>
+    <string name="location_format_wrong_description">L\'emplacement de votre prochain événement n\'a pas été correctement inséré (par exemple, \'H-9, 963\')</string>
+    <string name="search_here">Rechercher ici</string>
+    <string name="lounges">Lounge</string>
+    <string name="washroom">Toilette</string>
+    <string name="water_fountains">Fontaine d\'eau</string>
+    <string name="stairs">Escalier</string>
+    <string name="elevator">Ascenseur</string>
 
 </resources>
