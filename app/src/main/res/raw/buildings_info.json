@@ -109,8 +109,28 @@
         "Engineering and Computer Science Association"
       ],
       "centerCoordinates":{
-        "longitude":-73.579588,
-        "latitude":45.497856
+        "longitude":-73.579514,
+        "latitude":45.497862
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.497883,
+            "longitude": -73.579384
+          },
+          {
+            "latitude": 45.497917,
+            "longitude": -73.579453
+          },
+          {
+            "latitude": 45.497741,
+            "longitude": -73.579636
+          },
+          {
+            "latitude": 45.497705,
+            "longitude": -73.57956
+          }
+        ]
       }
     },
     {
@@ -248,6 +268,26 @@
       "centerCoordinates":{
         "longitude":-73.579925,
         "latitude":45.497467
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.497407,
+            "longitude": -73.580016
+          },
+          {
+            "latitude": 45.497585,
+            "longitude": -73.579839
+          },
+          {
+            "latitude": 45.497546,
+            "longitude": -73.57976
+          },
+          {
+            "latitude": 45.497366,
+            "longitude": -73.579933
+          }
+        ]
       }
     },
     {
@@ -351,8 +391,44 @@
         "Concordia Continuing Education"
       ],
       "centerCoordinates":{
-        "longitude":-73.579007,
-        "latitude":45.494259
+        "longitude":-73.579288,
+        "latitude":45.494244
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.494471,
+            "longitude": -73.579282
+          },
+          {
+            "latitude": 45.4941639,
+            "longitude": -73.5796579
+          },
+          {
+            "latitude": 45.4939839,
+            "longitude": -73.5793525
+          },
+          {
+            "latitude": 45.4939785,
+            "longitude": -73.5793243
+          },
+          {
+            "latitude": 45.49399,
+            "longitude": -73.5792874
+          },
+          {
+            "latitude": 45.4940112,
+            "longitude": -73.5792472
+          },
+          {
+            "latitude": 45.4940328,
+            "longitude": -73.5792106
+          },
+          {
+            "latitude": 45.49426,
+            "longitude": -73.578942
+          }
+        ]
       }
     },
     {
@@ -367,8 +443,28 @@
 
       ],
       "centerCoordinates":{
-        "longitude":-73.579409,
-        "latitude":45.497827
+        "longitude":-73.579386,
+        "latitude":45.497765
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.497849,
+            "longitude": -73.579311
+          },
+          {
+            "latitude": 45.497811,
+            "longitude": -73.579232
+          },
+          {
+            "latitude": 45.497707,
+            "longitude": -73.579342
+          },
+          {
+            "latitude": 45.497742,
+            "longitude": -73.579412
+          }
+        ]
       }
     },
     {
@@ -423,8 +519,36 @@
 
       ],
       "centerCoordinates":{
-        "longitude":-73.579555,
-        "latitude":45.496944
+        "longitude":-73.579658,
+        "latitude":45.496788
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.496932,
+            "longitude": -73.579553
+          },
+          {
+            "latitude": 45.496892,
+            "longitude": -73.57947
+          },
+          {
+            "latitude": 45.496788,
+            "longitude": -73.579574
+          },
+          {
+            "latitude": 45.496803,
+            "longitude": -73.579607
+          },
+          {
+            "latitude": 45.496676,
+            "longitude": -73.579734
+          },
+          {
+            "latitude": 45.4967,
+            "longitude": -73.579784
+          }
+        ]
       }
     },
     {
@@ -441,6 +565,34 @@
       "centerCoordinates":{
         "longitude":-73.57999,
         "latitude":45.496428
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.496262,
+            "longitude": -73.580352
+          },
+          {
+            "latitude": 45.496162,
+            "longitude": -73.58007
+          },
+          {
+            "latitude": 45.496249,
+            "longitude": -73.579973
+          },
+          {
+            "latitude": 45.496217,
+            "longitude": -73.579906
+          },
+          {
+            "latitude": 45.496523,
+            "longitude": -73.579633
+          },
+          {
+            "latitude": 45.496679,
+            "longitude": -73.579971
+          }
+        ]
       }
     },
     {
@@ -565,8 +717,28 @@
 
       ],
       "centerCoordinates":{
-        "longitude":-73.579468,
-        "latitude":45.496874
+        "longitude":-73.579488,
+        "latitude":45.496807
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.4967752,
+            "longitude": -73.5795838
+          },
+          {
+            "latitude": 45.4968697,
+            "longitude": -73.5794846
+          },
+          {
+            "latitude": 45.4968302,
+            "longitude": -73.5794031
+          },
+          {
+            "latitude": 45.4967329,
+            "longitude": -73.5794996
+          }
+        ]
       }
     },
     {
@@ -753,6 +925,42 @@
       "centerCoordinates":{
         "longitude":-73.57787,
         "latitude":45.494123
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.494343,
+            "longitude": -73.5777361
+          },
+          {
+            "latitude": 45.4942826,
+            "longitude": -73.5776241
+          },
+          {
+            "latitude": 45.494053,
+            "longitude": -73.577868
+          },
+          {
+            "latitude": 45.4940739,
+            "longitude": -73.5779064
+          },
+          {
+            "latitude": 45.4937893,
+            "longitude": -73.5782534
+          },
+          {
+            "latitude": 45.4938474,
+            "longitude": -73.5783523
+          },
+          {
+            "latitude": 45.4941332,
+            "longitude": -73.5780087
+          },
+          {
+            "latitude": 45.4941191,
+            "longitude": -73.5779832
+          }
+        ]
       }
     },
     {
@@ -869,8 +1077,244 @@
         "Summer Accommodation"
       ],
       "centerCoordinates": {
-        "longitude":-73.577003,
-        "latitude":45.493622
+        "longitude":-73.576697,
+        "latitude":45.493460
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.4939738,
+            "longitude": -73.5775544
+          },
+          {
+            "latitude": 45.4941223,
+            "longitude": -73.5774115
+          },
+          {
+            "latitude": 45.4940937,
+            "longitude": -73.5773472
+          },
+          {
+            "latitude": 45.4943891,
+            "longitude": -73.5770535
+          },
+          {
+            "latitude": 45.4940168,
+            "longitude": -73.5762786
+          },
+          {
+            "latitude": 45.494125,
+            "longitude": -73.576179
+          },
+          {
+            "latitude": 45.4940352,
+            "longitude": -73.5759927
+          },
+          {
+            "latitude": 45.4939317,
+            "longitude": -73.5760902
+          },
+          {
+            "latitude": 45.4937141,
+            "longitude": -73.5756366
+          },
+          {
+            "latitude": 45.4935703,
+            "longitude": -73.5757818
+          },
+          {
+            "latitude": 45.4937921,
+            "longitude": -73.5762421
+          },
+          {
+            "latitude": 45.4934915,
+            "longitude": -73.5765355
+          },
+          {
+            "latitude": 45.4934697,
+            "longitude": -73.5764972
+          },
+          {
+            "latitude": 45.4933409,
+            "longitude": -73.576621
+          },
+          {
+            "latitude": 45.4933637,
+            "longitude": -73.5766689
+          },
+          {
+            "latitude": 45.4930245,
+            "longitude": -73.5770028
+          },
+          {
+            "latitude": 45.4929392,
+            "longitude": -73.5768275
+          },
+          {
+            "latitude": 45.4929479,
+            "longitude": -73.5767896
+          },
+          {
+            "latitude": 45.4929247,
+            "longitude": -73.5767447
+          },
+          {
+            "latitude": 45.4928988,
+            "longitude": -73.5767383
+          },
+          {
+            "latitude": 45.4927319,
+            "longitude": -73.5763933
+          },
+          {
+            "latitude": 45.4925937,
+            "longitude": -73.5765301
+          },
+          {
+            "latitude": 45.4926142,
+            "longitude": -73.576575
+          },
+          {
+            "latitude": 45.4926071,
+            "longitude": -73.5765824
+          },
+          {
+            "latitude": 45.4927467,
+            "longitude": -73.5768647
+          },
+          {
+            "latitude": 45.492727,
+            "longitude": -73.5768704
+          },
+          {
+            "latitude": 45.4926769,
+            "longitude": -73.5769204
+          },
+          {
+            "latitude": 45.492678,
+            "longitude": -73.576965
+          },
+          {
+            "latitude": 45.4927103,
+            "longitude": -73.5770303
+          },
+          {
+            "latitude": 45.4927728,
+            "longitude": -73.5769686
+          },
+          {
+            "latitude": 45.4927933,
+            "longitude": -73.5769747
+          },
+          {
+            "latitude": 45.4928095,
+            "longitude": -73.5769576
+          },
+          {
+            "latitude": 45.492895,
+            "longitude": -73.577139
+          },
+          {
+            "latitude": 45.4928398,
+            "longitude": -73.577196
+          },
+          {
+            "latitude": 45.4929247,
+            "longitude": -73.5773757
+          },
+          {
+            "latitude": 45.4929931,
+            "longitude": -73.577311
+          },
+          {
+            "latitude": 45.4930885,
+            "longitude": -73.5775088
+          },
+          {
+            "latitude": 45.4931982,
+            "longitude": -73.5773978
+          },
+          {
+            "latitude": 45.4931085,
+            "longitude": -73.5772111
+          },
+          {
+            "latitude": 45.4933642,
+            "longitude": -73.5769579
+          },
+          {
+            "latitude": 45.4933526,
+            "longitude": -73.5769334
+          },
+          {
+            "latitude": 45.4934394,
+            "longitude": -73.576849
+          },
+          {
+            "latitude": 45.4934781,
+            "longitude": -73.5769311
+          },
+          {
+            "latitude": 45.4934509,
+            "longitude": -73.5769609
+          },
+          {
+            "latitude": 45.4935291,
+            "longitude": -73.5771256
+          },
+          {
+            "latitude": 45.4935747,
+            "longitude": -73.5770803
+          },
+          {
+            "latitude": 45.4936018,
+            "longitude": -73.5771286
+          },
+          {
+            "latitude": 45.4935797,
+            "longitude": -73.5771494
+          },
+          {
+            "latitude": 45.4936337,
+            "longitude": -73.5772637
+          },
+          {
+            "latitude": 45.4937477,
+            "longitude": -73.577152
+          },
+          {
+            "latitude": 45.4936716,
+            "longitude": -73.5769945
+          },
+          {
+            "latitude": 45.4937268,
+            "longitude": -73.5769408
+          },
+          {
+            "latitude": 45.4936669,
+            "longitude": -73.5768201
+          },
+          {
+            "latitude": 45.4936119,
+            "longitude": -73.5768714
+          },
+          {
+            "latitude": 45.4935494,
+            "longitude": -73.576745
+          },
+          {
+            "latitude": 45.4938958,
+            "longitude": -73.5764047
+          },
+          {
+            "latitude": 45.4941919,
+            "longitude": -73.5770156
+          },
+          {
+            "latitude": 45.4938678,
+            "longitude": -73.5773411
+          }
+        ]
       }
     },
     {
@@ -885,8 +1329,48 @@
 
       ],
       "centerCoordinates": {
-        "longitude":-73.581409,
-        "latitude":45.496673
+        "longitude":-73.581159,
+        "latitude":45.496571
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.496578,
+            "longitude": -73.581437
+          },
+          {
+            "latitude": 45.496415,
+            "longitude": -73.580943
+          },
+          {
+            "latitude": 45.496487,
+            "longitude": -73.580874
+          },
+          {
+            "latitude": 45.496477,
+            "longitude": -73.580845
+          },
+          {
+            "latitude": 45.496518,
+            "longitude": -73.580804
+          },
+          {
+            "latitude": 45.496653,
+            "longitude": -73.581172
+          },
+          {
+            "latitude": 45.496711,
+            "longitude": -73.581128
+          },
+          {
+            "latitude": 45.496785,
+            "longitude": -73.581302
+          },
+          {
+            "latitude": 45.4966265,
+            "longitude": -73.5814486
+          }
+        ]
       }
     },
     {
@@ -1168,8 +1652,44 @@
 
       ],
       "centerCoordinates":{
-        "longitude":-73.579531,
-        "latitude":45.497777
+        "longitude":-73.579424,
+        "latitude":45.497834
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.497883,
+            "longitude": -73.579384
+          },
+          {
+            "latitude": 45.497849,
+            "longitude": -73.579311
+          },
+          {
+            "latitude": 45.497754,
+            "longitude": -73.579401
+          },
+          {
+            "latitude": 45.497772,
+            "longitude": -73.579439
+          },
+          {
+            "latitude": 45.497697,
+            "longitude": -73.57951
+          },
+          {
+            "latitude": 45.497686,
+            "longitude": -73.579487
+          },
+          {
+            "latitude": 45.497597,
+            "longitude": -73.579572
+          },
+          {
+            "latitude": 45.497627,
+            "longitude": -73.579635
+          }
+        ]
       }
     },
     {
@@ -1278,6 +1798,26 @@
       "centerCoordinates":{
         "longitude":-73.577312,
         "latitude":45.496697
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.496859,
+            "longitude": -73.577171
+          },
+          {
+            "latitude": 45.496564,
+            "longitude": -73.577471
+          },
+          {
+            "latitude": 45.496522,
+            "longitude": -73.577387
+          },
+          {
+            "latitude": 45.496818,
+            "longitude": -73.577087
+          }
+        ]
       }
     },
     {
@@ -1292,8 +1832,28 @@
         "IT Services"
       ],
       "centerCoordinates":{
-        "longitude":-73.57949,
-        "latitude":45.496192
+        "longitude":-73.579406,
+        "latitude":45.496305
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.496180,
+            "longitude": -73.579456
+          },
+          {
+            "latitude": 45.496391,
+            "longitude": -73.579278
+          },
+          {
+            "latitude": 45.496460,
+            "longitude": -73.579455
+          },
+          {
+            "latitude": 45.496255,
+            "longitude": -73.579650
+          }
+        ]
       }
     },
     {
@@ -1310,6 +1870,26 @@
       "centerCoordinates":{
         "longitude":-73.579777,
         "latitude":45.497368
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.497325,
+            "longitude": -73.579851
+          },
+          {
+            "latitude": 45.49729,
+            "longitude": -73.579781
+          },
+          {
+            "latitude": 45.49739,
+            "longitude": -73.579681
+          },
+          {
+            "latitude": 45.497426,
+            "longitude": -73.579752
+          }
+        ]
       }
     },
     {
@@ -1391,8 +1971,36 @@
         "Concordia University  Continuing Education Part-time Faculty Union (CUCEPTFU)"
       ],
       "centerCoordinates":{
-        "longitude":-73.579261,
-        "latitude":45.497807
+        "longitude":-73.579282,
+        "latitude":45.497751
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.497811,
+            "longitude": -73.579233
+          },
+          {
+            "latitude": 45.497779,
+            "longitude": -73.579167
+          },
+          {
+            "latitude": 45.497682,
+            "longitude": -73.57926
+          },
+          {
+            "latitude": 45.497695,
+            "longitude": -73.579285
+          },
+          {
+            "latitude": 45.497623,
+            "longitude": -73.579354
+          },
+          {
+            "latitude": 45.497648,
+            "longitude": -73.579403
+          }
+        ]
       }
     },
     {
@@ -1407,8 +2015,28 @@
         "Simone de Beauvoir Institute"
       ],
       "centerCoordinates":{
-        "longitude":-73.579506,
-        "latitude":45.497963
+        "longitude":-73.579574,
+        "latitude":45.497906
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.497963,
+            "longitude": -73.579537
+          },
+          {
+            "latitude": 45.497785,
+            "longitude": -73.579704
+          },
+          {
+            "latitude": 45.497748,
+            "longitude": -73.579629
+          },
+          {
+            "latitude": 45.49792,
+            "longitude": -73.57946
+          }
+        ]
       }
     },
     {
@@ -1423,8 +2051,28 @@
 
       ],
       "centerCoordinates":{
-        "longitude":-73.579113,
-        "latitude":45.496745
+        "longitude":-73.579199,
+        "latitude":45.496666
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.496723,
+            "longitude": -73.579171
+          },
+          {
+            "latitude": 45.496677,
+            "longitude": -73.579081
+          },
+          {
+            "latitude": 45.496582,
+            "longitude": -73.579177
+          },
+          {
+            "latitude": 45.496629,
+            "longitude": -73.579267
+          }
+        ]
       }
     },
     {
@@ -1495,8 +2143,28 @@
 
       ],
       "centerCoordinates":{
-        "longitude":-73.57979,
-        "latitude":45.497066
+        "longitude":-73.579815,
+        "latitude":45.496968
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.497018,
+            "longitude": -73.579829
+          },
+          {
+            "latitude": 45.496979,
+            "longitude": -73.579749
+          },
+          {
+            "latitude": 45.496895,
+            "longitude": -73.579833
+          },
+          {
+            "latitude": 45.496933,
+            "longitude": -73.579914
+          }
+        ]
       }
     },
     {
@@ -1639,6 +2307,26 @@
       "centerCoordinates":{
         "longitude":-73.579094,
         "latitude":45.496648
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.496676,
+            "longitude": -73.579082
+          },
+          {
+            "latitude": 45.496646,
+            "longitude": -73.579023
+          },
+          {
+            "latitude": 45.496553,
+            "longitude": -73.57912
+          },
+          {
+            "latitude": 45.496582,
+            "longitude": -73.579177
+          }
+        ]
       }
     },
     {
@@ -1697,8 +2385,28 @@
 
       ],
       "centerCoordinates":{
-        "longitude":-73.579389,
-        "latitude":45.496826
+        "longitude":-73.579398,
+        "latitude":45.496780
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.496838,
+            "longitude": -73.5794
+          },
+          {
+            "latitude": 45.496803,
+            "longitude": -73.579329
+          },
+          {
+            "latitude": 45.496711,
+            "longitude": -73.579421
+          },
+          {
+            "latitude": 45.496746,
+            "longitude": -73.579492
+          }
+        ]
       }
     },
     {
@@ -1819,8 +2527,28 @@
 
       ],
       "centerCoordinates":{
-        "longitude":-73.579259,
-        "latitude":45.496796
+        "longitude":-73.579391,
+        "latitude":45.496671
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.496799,
+            "longitude": -73.579333
+          },
+          {
+            "latitude": 45.49676,
+            "longitude": -73.579254
+          },
+          {
+            "latitude": 45.496613,
+            "longitude": -73.5794
+          },
+          {
+            "latitude": 45.496652,
+            "longitude": -73.57948
+          }
+        ]
       }
     },
     {
@@ -1837,6 +2565,34 @@
       "centerCoordinates":{
         "longitude":-73.579851,
         "latitude":45.497423
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.497366,
+            "longitude": -73.579933
+          },
+          {
+            "latitude": 45.497325,
+            "longitude": -73.579851
+          },
+          {
+            "latitude": 45.497426,
+            "longitude": -73.579752
+          },
+          {
+            "latitude": 45.497437,
+            "longitude": -73.579773
+          },
+          {
+            "latitude": 45.49746,
+            "longitude": -73.579752
+          },
+          {
+            "latitude": 45.497491,
+            "longitude": -73.579815
+          }
+        ]
       }
     },
     {
@@ -1853,6 +2609,74 @@
       "centerCoordinates":{
         "longitude":-73.58609,
         "latitude":45.4966
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.496438,
+            "longitude": -73.586207
+          },
+          {
+            "latitude": 45.496468,
+            "longitude": -73.585738
+          },
+          {
+            "latitude": 45.496493,
+            "longitude": -73.585739
+          },
+          {
+            "latitude": 45.496511,
+            "longitude": -73.585779
+          },
+          {
+            "latitude": 45.49651,
+            "longitude": -73.585792
+          },
+          {
+            "latitude": 45.496554,
+            "longitude": -73.585792
+          },
+          {
+            "latitude": 45.496574,
+            "longitude": -73.585836
+          },
+          {
+            "latitude": 45.496582,
+            "longitude": -73.58583
+          },
+          {
+            "latitude": 45.496659,
+            "longitude": -73.586008
+          },
+          {
+            "latitude": 45.496652,
+            "longitude": -73.586014
+          },
+          {
+            "latitude": 45.496684,
+            "longitude": -73.586088
+          },
+          {
+            "latitude": 45.496538,
+            "longitude": -73.586212
+          },
+          {
+            "latitude": 45.496519,
+            "longitude": -73.586168
+          },
+          {
+            "latitude": 45.496521,
+            "longitude": -73.586136
+          },
+          {
+            "latitude": 45.496506,
+            "longitude": -73.586136
+          },
+          {
+            "latitude": 45.496501,
+            "longitude": -73.586208
+          }
+        ]
       }
     },
     {
@@ -2118,8 +2942,28 @@
         "Graduate Students Asociation"
       ],
       "centerCoordinates":{
-        "longitude":-73.57927,
-        "latitude":45.49671
+        "longitude":-73.579271,
+        "latitude":45.496690
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.496752,
+            "longitude": -73.579261
+          },
+          {
+            "latitude": 45.496712,
+            "longitude": -73.579184
+          },
+          {
+            "latitude": 45.496626,
+            "longitude": -73.579262
+          },
+          {
+            "latitude": 45.496668,
+            "longitude": -73.579345
+          }
+        ]
       }
     },
     {
@@ -2192,6 +3036,42 @@
       "centerCoordinates":{
         "longitude":-73.578375,
         "latitude":45.495103
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.495128,
+            "longitude": -73.578501
+          },
+          {
+            "latitude": 45.49519,
+            "longitude": -73.578428
+          },
+          {
+            "latitude": 45.495038,
+            "longitude": -73.578074
+          },
+          {
+            "latitude": 45.494944,
+            "longitude": -73.578178
+          },
+          {
+            "latitude": 45.495025,
+            "longitude": -73.578324
+          },
+          {
+            "latitude": 45.495043,
+            "longitude": -73.5783
+          },
+          {
+            "latitude": 45.495066,
+            "longitude": -73.578342
+          },
+          {
+            "latitude": 45.495048,
+            "longitude": -73.578365
+          }
+        ]
       }
     },
     {
@@ -2207,8 +3087,28 @@
         "Centre for Gender Advocacy"
       ],
       "centerCoordinates":{
-        "longitude":-73.579907,
-        "latitude":45.497101
+        "longitude":-73.579975,
+        "latitude":45.497006
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.497089,
+            "longitude": -73.579918
+          },
+          {
+            "latitude": 45.497049,
+            "longitude": -73.579834
+          },
+          {
+            "latitude": 45.496946,
+            "longitude": -73.579938
+          },
+          {
+            "latitude": 45.496985,
+            "longitude": -73.580019
+          }
+        ]
       }
     },
     {
@@ -2229,6 +3129,34 @@
       "centerCoordinates":{
         "longitude":-73.573795,
         "latitude":45.495543
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.495403,
+            "longitude": -73.573766
+          },
+          {
+            "latitude": 45.495668,
+            "longitude": -73.573509
+          },
+          {
+            "latitude": 45.495817,
+            "longitude": -73.573811
+          },
+          {
+            "latitude": 45.49607,
+            "longitude": -73.573559
+          },
+          {
+            "latitude": 45.496187,
+            "longitude": -73.573796
+          },
+          {
+            "latitude": 45.49567,
+            "longitude": -73.57431
+          }
+        ]
       }
     },
     {
@@ -2346,12 +3274,35 @@
       "Departments":[
 
       ],
+      "height": 68,
+      "width": 68,
+      "bearing": 34,
       "Services":[
         "Concordia International"
       ],
       "centerCoordinates":{
-        "longitude":-73.579593,
-        "latitude":45.49694
+        "longitude":-73.579655,
+        "latitude":45.496886
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.496949,
+            "longitude": -73.579666
+          },
+          {
+            "latitude": 45.496907,
+            "longitude": -73.579579
+          },
+          {
+            "latitude": 45.496815,
+            "longitude": -73.579671
+          },
+          {
+            "latitude": 45.496857,
+            "longitude": -73.579758
+          }
+        ]
       }
     },
     {
@@ -2359,16 +3310,42 @@
       "BuildingCode":"Z",
       "Building_Long_Name":"Z Annex",
       "Address":"2090 Mackay Street",
-      "Departments":[
-
-      ],
+      "Departments":[],
       "Services":[
         "Multi-Faith and Spirituality Centre",
         "Sustainable Concordia"
       ],
       "centerCoordinates":{
-        "longitude":-73.579705,
-        "latitude":45.496981
+        "longitude":-73.579729,
+        "latitude":45.496919
+      },
+      "cornerCoordinates":{
+        "listOfCoordinates":[
+          {
+            "latitude": 45.496986,
+            "longitude": -73.579742
+          },
+          {
+            "latitude": 45.496949,
+            "longitude": -73.579666
+          },
+          {
+            "latitude": 45.496851,
+            "longitude": -73.579764
+          },
+          {
+            "latitude": 45.496875,
+            "longitude": -73.579813
+          },
+          {
+            "latitude": 45.496898,
+            "longitude": -73.57979
+          },
+          {
+            "latitude": 45.49691,
+            "longitude": -73.579817
+          }
+        ]
       }
     }
   ]

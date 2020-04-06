@@ -3,7 +3,10 @@ package com.example.concordia_campus_guide.Fragments.LocationFragment;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.location.Location;
 
 import androidx.lifecycle.LiveData;
@@ -187,7 +190,7 @@ public class LocationFragmentViewModel extends ViewModel {
         Marker marker = map.addMarker(
                 new MarkerOptions()
                         .position(centerPos)
-                        .icon(styleMarker(buildingLabel, context))
+                        .icon(BitmapDescriptorFactory.fromBitmap(createBitmapMarkerIcon(buildingLabel)))
                         .flat(true)
                         .anchor(0.5f, 0.5f)
                         .alpha(0.90f)
@@ -197,14 +200,27 @@ public class LocationFragmentViewModel extends ViewModel {
     }
 
     /**
-     * The purpose of this method is setup the style of the marker.
+     * The purpose of this method is to create the marker
      *
-     * @param buildingLabel the label of the building
-     * @param context       the context of the LocationFragment
+     * @param label the label of the building
      * @return it will BitmapDescriptor object to use it as an icon for the marker on the map.
      */
-    public BitmapDescriptor styleMarker(String buildingLabel, Context context) {
-        return getCustomSizedIcon("BuildingLabels/" + buildingLabel.toLowerCase() + ".png", context, 150, 150);
+    public Bitmap createBitmapMarkerIcon(String label){
+        int width = 160;
+        int height = 130;
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+
+        Paint paint = new Paint();
+        paint.setColor(Color.WHITE);
+        paint.setAntiAlias(true);
+        paint.setTextSize(100.f);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+        paint.setShadowLayer(6, 0, 0, Color.BLACK);
+        paint.setTextAlign(Paint.Align.CENTER);
+        canvas.drawText(label, width/2f, height/1.2f, paint);
+
+        return bitmap;
     }
 
     /**
@@ -264,11 +280,11 @@ public class LocationFragmentViewModel extends ViewModel {
     }
 
     public LatLng getLoyolaZoomLocation() {
-        return buildings.get("VL").getCenterCoordinatesLatLng();
+        return buildings.get(ClassConstants.loyolaCenterBuildingLabel).getCenterCoordinatesLatLng();
     }
 
     public LatLng getSGWZoomLocation() {
-        return buildings.get("H").getCenterCoordinatesLatLng();
+        return buildings.get(ClassConstants.sgwCenterBuildingLabel).getCenterCoordinatesLatLng();
     }
 
     public void parseWalkingPointList(AppDatabase appDatabase, RoomModel from, RoomModel to) {
