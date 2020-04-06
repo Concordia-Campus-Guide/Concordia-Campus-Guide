@@ -1,6 +1,7 @@
 package com.example.concordia_campus_guide.Adapters;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,7 @@ public class DirectionsRecyclerViewAdapter extends RecyclerView.Adapter<Directio
     public void onBindViewHolder(ViewHolder holder, int position) {
         String description = mData.get(position).getDescription();
         String duration = String.valueOf(df2.format(mData.get(position).getDuration()))+"min";
-        holder.directionInstruction.setText(description);
+        holder.directionInstruction.setText(Html.fromHtml(description));
         holder.duration.setText(duration);
     }
 
