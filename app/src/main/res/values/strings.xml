@@ -44,5 +44,13 @@
     <string name="stairs">Stairs</string>
     <string name="elevator">Elevator</string>
     <string name="select_location">Select Location</string>
+    <string name="hours">hours</string>
+    <string name="and">and</string>
+    <string name="incorrect_format_event">Event is incorrectly formatted</string>
+    <string name="location_not_found">Location not found</string>
+    <string name="leave_classroom">Leave classroom</string>
+    <string name="walk_towards_elevator">Walk towards elevator</string>
+    <string name="enter_building">Enter building</string>
+    <string name="walk_towards_staff_elevator">Walk towards staff elevator</string>
 
 </resources>

@@ -271,7 +271,7 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
             LatLng to = new LatLng(toCenterCoordinates.getLatitude(), toCenterCoordinates.getLongitude());
             String transportType = mViewModel.getTransportType();
 
-            String url = UrlBuilder.build(from, to, transportType);
+            String url = UrlBuilder.build(from, to, transportType,  getBaseContext().getResources().getConfiguration().getLocales().get(0));
             new DirectionsApiDataRetrieval(RoutesActivity.this).execute(url, transportType);
         }
     }
