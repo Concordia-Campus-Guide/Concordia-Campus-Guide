@@ -1,22 +1,17 @@
 package com.example.concordia_campus_guide.Activities;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.location.Location;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -28,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragment;
@@ -49,6 +45,7 @@ import com.example.concordia_campus_guide.Models.WalkingPoints;
 import com.example.concordia_campus_guide.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.navigation.NavigationView;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -199,7 +196,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void switchLanguage(boolean isChecked) {
-        LocaleHelper.setLocale(this, isChecked? "fr" : "en");
+        Locale current = getBaseContext().getResources().getConfiguration().getLocales().get(0);
+        Configuration newConfig = new Configuration();
+        newConfig.locale = isChecked? Locale.FRENCH : Locale.ENGLISH;
+        // this check is required to ensure that we recreate only if the language set is different
+        // otherwise it enters an infinite loop
+        if(!current.equals(newConfig.locale)){
+            LocaleHelper.setLocale(this, newConfig.locale.toString());
+            recreate();
+        }
     }
 
     public void popUp(CalendarEvent calendarEvent){
