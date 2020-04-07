@@ -43,5 +43,6 @@
     <string name="water_fountains">Water Fountain</string>
     <string name="stairs">Stairs</string>
     <string name="elevator">Elevator</string>
+    <string name="select_location">Select Location</string>
 
 </resources>
