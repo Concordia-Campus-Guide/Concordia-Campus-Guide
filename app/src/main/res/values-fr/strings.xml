@@ -48,5 +48,9 @@
     <string name="and">et</string>
     <string name="incorrect_format_event">Événement n\'est pas formaté correctement</string>
     <string name="location_not_found">Emplacement introuvable</string>
+    <string name="leave_classroom">Quitter la salle de cours</string>
+    <string name="walk_towards_elevator">Marcher vers les ascenseurs</string>
+    <string name="enter_building">Entrer dans le bâtiment</string>
+    <string name="walk_towards_staff_elevator">Marcher vers les ascenseurs du personnel</string>
 
 </resources>

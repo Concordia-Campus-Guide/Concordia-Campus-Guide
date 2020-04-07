@@ -152,7 +152,7 @@ public class PathInfoCardFragment extends Fragment {
         long timeTakenInMinutes;
         String description = "";
         if (startWalkingPoint.getPointType() == PointType.CLASSROOM) {
-            description = "Leave classroom";
+            description = getString(R.string.leave_classroom);
             timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
             addIndoorDirection(startWalkingPoint.getCoordinate().getLatLng(), endWalkingPoint.getCoordinate().getLatLng(), description, distanceBetweenPoints, timeTakenInMinutes);
             distanceBetweenPoints = 0;
@@ -161,7 +161,7 @@ public class PathInfoCardFragment extends Fragment {
         switch (pt) {
             case ELEVATOR:
                 if (startWalkingPoint.getPointType() != PointType.ELEVATOR) {
-                    description = "Walk towards elevator";
+                    description = getString(R.string.walk_towards_elevator);
                     timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
                     addIndoorDirection(startWalkingPoint.getCoordinate().getLatLng(), endWalkingPoint.getCoordinate().getLatLng(), description, distanceBetweenPoints, timeTakenInMinutes);
                     distanceBetweenPoints = 0;
@@ -171,14 +171,14 @@ public class PathInfoCardFragment extends Fragment {
                 }
                 break;
             case ENTRANCE:
-                description = "Enter building";
+                description = getString(R.string.enter_building);
                 timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
                 addIndoorDirection(startWalkingPoint.getCoordinate().getLatLng(), endWalkingPoint.getCoordinate().getLatLng(), description, distanceBetweenPoints, timeTakenInMinutes);
                 distanceBetweenPoints = 0;
                 break;
             case STAFF_ELEVATOR:
                 if (startWalkingPoint.getPointType() != PointType.STAFF_ELEVATOR) {
-                    description = "Walk towards staff elevator";
+                    description = getString(R.string.walk_towards_staff_elevator);
                     timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
                     addIndoorDirection(startWalkingPoint.getCoordinate().getLatLng(), endWalkingPoint.getCoordinate().getLatLng(), description, distanceBetweenPoints, timeTakenInMinutes);
                     distanceBetweenPoints = 0;
