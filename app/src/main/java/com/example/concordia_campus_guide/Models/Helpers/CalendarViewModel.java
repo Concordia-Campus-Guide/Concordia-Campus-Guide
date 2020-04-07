@@ -18,6 +18,7 @@ import androidx.lifecycle.AndroidViewModel;
 
 import com.example.concordia_campus_guide.Activities.SearchActivity;
 import com.example.concordia_campus_guide.Models.CalendarEvent;
+import com.example.concordia_campus_guide.R;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -58,12 +59,12 @@ public class CalendarViewModel extends AndroidViewModel {
     public String getNextClassString(CalendarEvent event){
         String nextClassString = "";
         if(incorrectlyFormatted(event.getLocation())){
-            return "Event is incorrectly formatted";
+            return context.getResources().getString(R.string.incorrect_format_event);
         }
         if(event != null){
             Date eventDate = new Date((Long.parseLong(event.getStartTime())));
             String timeUntil = getTimeUntilString(eventDate.getTime(), System.currentTimeMillis());
-            nextClassString = event.getTitle() +  " in " + timeUntil;
+            nextClassString = event.getTitle() + " " + context.getResources().getString(R.string.in) + " " + timeUntil;
         }
         return  nextClassString;
     }
@@ -113,8 +114,10 @@ public class CalendarViewModel extends AndroidViewModel {
     public String getTimeUntilString(long eventTime, long currentTime){
         long differenceInMillis = eventTime - currentTime;
 
-        String timeUntil = String.format("%02d hours and %02d minutes",
+        String timeUntil = String.format("%02d %s %s %02d minutes",
                 TimeUnit.MILLISECONDS.toHours(differenceInMillis),
+                context.getResources().getString(R.string.hours),
+                context.getResources().getString(R.string.and),
                 TimeUnit.MILLISECONDS.toMinutes(differenceInMillis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(differenceInMillis)));
 
         return timeUntil;

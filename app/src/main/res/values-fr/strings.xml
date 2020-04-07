@@ -38,10 +38,15 @@
     <string name="location_format_wrong">Le format de l\'emplacement est incorrect</string>
     <string name="location_format_wrong_description">L\'emplacement de votre prochain événement n\'a pas été correctement inséré (par exemple, \'H-9, 963\')</string>
     <string name="search_here">Rechercher ici</string>
+    <string name="select_location">Select location</string>
     <string name="lounges">Lounge</string>
     <string name="washroom">Toilette</string>
     <string name="water_fountains">Fontaine d\'eau</string>
     <string name="stairs">Escalier</string>
     <string name="elevator">Ascenseur</string>
+    <string name="hours">hours</string>
+    <string name="and">et</string>
+    <string name="incorrect_format_event">Événement n\'est pas formaté correctement</string>
+    <string name="location_not_found">Emplacement introuvable</string>
 
 </resources>

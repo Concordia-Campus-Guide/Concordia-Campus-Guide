@@ -38,10 +38,15 @@
     <string name="location_format_wrong">Location Format is Wrong</string>
     <string name="location_format_wrong_description">The location of your upcoming event hasn\'t been inserted correctly (e.g. \'H-9, 963\')</string>
     <string name="search_here">Search here</string>
+    <string name="select_location">Select location</string>
     <string name="lounges">Lounges</string>
     <string name="washroom">Washroom</string>
     <string name="water_fountains">Water Fountain</string>
     <string name="stairs">Stairs</string>
     <string name="elevator">Elevator</string>
+    <string name="hours">hours</string>
+    <string name="and">and</string>
+    <string name="incorrect_format_event">Event is incorrectly formatted</string>
+    <string name="location_not_found">Location not found</string>
 
 </resources>
