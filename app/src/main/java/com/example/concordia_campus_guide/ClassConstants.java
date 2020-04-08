@@ -69,4 +69,10 @@ public class  ClassConstants {
     //Loyola building label string used as campus center
     public static final String loyolaCenterBuildingLabel = "CC";
 
+
+
+    public static final String LOCATION_FRAGMENT_TAG = "LocationFragment";
+    public static final String POI_TAG = "POI";
+    public static final String ROOM_TAG = "ROOM";
+
 }
