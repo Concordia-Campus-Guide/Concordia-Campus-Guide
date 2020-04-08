@@ -13,8 +13,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.ClassConstants;
-import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragment;
-import com.example.concordia_campus_guide.Fragments.PathInfoCardFragment.PathInfoCardFragment;
+import com.example.concordia_campus_guide.Fragments.LocationFragment;
+import com.example.concordia_campus_guide.Fragments.PathInfoCardFragment;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsResult;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsRoute;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
@@ -28,6 +28,7 @@ import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.Routes.Route;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
+import com.example.concordia_campus_guide.ViewModels.PathsViewModel;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 

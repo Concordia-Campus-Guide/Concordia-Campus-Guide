@@ -24,6 +24,7 @@ import com.example.concordia_campus_guide.Models.Helpers.CalendarViewModel;
 import com.example.concordia_campus_guide.Models.MyCurrentPlace;
 import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.R;
+import com.example.concordia_campus_guide.ViewModels.SearchActivityViewModel;
 
 public class SearchActivity extends AppCompatActivity {
 

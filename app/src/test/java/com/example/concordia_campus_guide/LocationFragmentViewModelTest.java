@@ -4,7 +4,7 @@ import android.graphics.Color;
 
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Database.Daos.WalkingPointDao;
-import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel;
+import com.example.concordia_campus_guide.ViewModels.LocationFragmentViewModel;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.WalkingPoint;

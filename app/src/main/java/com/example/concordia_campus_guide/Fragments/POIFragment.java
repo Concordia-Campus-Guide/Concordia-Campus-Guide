@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.Fragments.POIFragment;
+package com.example.concordia_campus_guide.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.concordia_campus_guide.Adapters.PointOfInterestVPAdapter;
-import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel;
+import com.example.concordia_campus_guide.ViewModels.LocationFragmentViewModel;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.Interfaces.OnPOIClickListener;
 import com.example.concordia_campus_guide.Models.PoiType;

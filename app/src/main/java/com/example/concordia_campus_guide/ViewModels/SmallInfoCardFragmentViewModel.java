@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.Fragments.SmallInfoCardFragment;
+package com.example.concordia_campus_guide.ViewModels;
 
 import androidx.lifecycle.ViewModel;
 
@@ -7,7 +7,7 @@ import com.example.concordia_campus_guide.Models.Place;
 
 public class SmallInfoCardFragmentViewModel extends ViewModel {
 
-    Place place;
+    private Place place;
     AppDatabase appDb;
 
     public SmallInfoCardFragmentViewModel(AppDatabase appDb) {

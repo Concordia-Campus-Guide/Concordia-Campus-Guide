@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.Fragments.SmallInfoCardFragment;
+package com.example.concordia_campus_guide.Fragments;
 
 import android.content.Intent;
 import android.location.Location;
@@ -21,6 +21,7 @@ import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.Models.MyCurrentPlace;
 import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.R;
+import com.example.concordia_campus_guide.ViewModels.SmallInfoCardFragmentViewModel;
 
 public class SmallInfoCardFragment extends Fragment {
 
@@ -63,7 +64,7 @@ public class SmallInfoCardFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getActivity().getApplication())).get(com.example.concordia_campus_guide.Fragments.SmallInfoCardFragment.SmallInfoCardFragmentViewModel.class);
+        mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getActivity().getApplication())).get(SmallInfoCardFragmentViewModel.class);
         mViewModel.setPlace(this.place);
         setInfoCard();
         setOnClickListeners();
@@ -98,7 +99,7 @@ public class SmallInfoCardFragment extends Fragment {
         else{
             SelectingToFromState.setFrom(new MyCurrentPlace());
         }
-        SelectingToFromState.setTo(mViewModel.place);
+        SelectingToFromState.setTo(mViewModel.getPlace());
 
         startActivity(openRoutes);
     }
