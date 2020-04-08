@@ -2,24 +2,35 @@ package com.example.concordia_campus_guide.Models.Helpers;
 
 import android.Manifest;
 import android.app.Application;
+import android.content.ContentResolver;
 import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Instances;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.AndroidViewModel;
+
 import com.example.concordia_campus_guide.Models.CalendarEvent;
+import com.example.concordia_campus_guide.R;
+
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class CalendarViewModel extends AndroidViewModel {
     Context context;
+
+    public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
 
     public CalendarViewModel(@NonNull Application application){
         super(application);
@@ -27,11 +38,13 @@ public class CalendarViewModel extends AndroidViewModel {
     }
 
     // The indices for the projection array above.
-    private static final int PROJECTION_TITLE_INDEX = 0;
-    private static final int PROJECTION_LOCATION_INDEX = 1;
-    private static final int PROJECTION_START_INDEX = 2;
+    private static final int PROJECTION_ID_INDEX = 0;
+    private static final int PROJECTION_TITLE_INDEX = 1;
+    private static final int PROJECTION_LOCATION_INDEX = 2;
+    private static final int PROJECTION_START_INDEX = 3;
 
     protected static final String[] INSTANCE_PROJECTION = new String[] {
+            Instances.EVENT_ID,
             Instances.TITLE,
             Instances.EVENT_LOCATION,
             Instances.DTSTART
@@ -39,26 +52,35 @@ public class CalendarViewModel extends AndroidViewModel {
 
     public CalendarEvent getEvent(AppCompatActivity activity) {
 
-        if (!hasReadPermission()) {
-            ActivityCompat.requestPermissions(activity,
-                    new String[]{Manifest.permission.READ_CALENDAR}, 101);
-        } else {
+        List<String> listPermissionsNeeded = new ArrayList<>();
 
+        if (!hasReadPermission()) {
+            listPermissionsNeeded.add(Manifest.permission.READ_CALENDAR);
+        }
+        if(!hasWritePermission()){
+            listPermissionsNeeded.add(Manifest.permission.WRITE_CALENDAR);
+        }
+        if(!listPermissionsNeeded.isEmpty()){
+            ActivityCompat.requestPermissions(activity, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), REQUEST_ID_MULTIPLE_PERMISSIONS);
+        }
+
+        if(hasWritePermission() && hasReadPermission()){
             Cursor cursor = getCalendarCursor();
             return getCalendarEvent(cursor);
         }
+
         return null;
     }
 
     public String getNextClassString(CalendarEvent event){
         String nextClassString = "";
         if(incorrectlyFormatted(event.getLocation())){
-            return "Event is incorrectly formatted";
+            return context.getResources().getString(R.string.incorrect_format_event);
         }
 
         Date eventDate = new Date((Long.parseLong(event.getStartTime())));
         String timeUntil = getTimeUntilString(eventDate.getTime(), System.currentTimeMillis());
-        nextClassString = event.getTitle() +  " in " + timeUntil;
+        nextClassString = event.getTitle() + " " + context.getResources().getString(R.string.in) + " " + timeUntil;
 
         return  nextClassString;
     }
@@ -87,15 +109,33 @@ public class CalendarViewModel extends AndroidViewModel {
 
     public CalendarEvent getCalendarEvent(Cursor cursor) {
         while (cursor.moveToNext()) {
+           long eventID = cursor.getLong(PROJECTION_ID_INDEX);
            String eventTitle = cursor.getString(PROJECTION_TITLE_INDEX);
            String eventLocation = cursor.getString(PROJECTION_LOCATION_INDEX);
            String eventStart = cursor.getString(PROJECTION_START_INDEX);
 
            if(eventTitle.contains("Lecture: ")||eventTitle.contains("Tutorial: ") || eventTitle.contains("Lab: ")){
+               //add uri to description of event
+               addDescriptionToEvent(eventID, eventLocation);
                return new CalendarEvent(eventTitle, eventLocation, eventStart);
            }
         }
         return null;
+    }
+
+    private void addDescriptionToEvent(Long eventId, String eventLocation){
+        ContentResolver cr = context.getContentResolver();
+        ContentValues values = new ContentValues();
+
+        String roomCode = eventLocation.split(",")[1].trim();
+        String floorCode = eventLocation.split(",")[0].trim();
+        String description = "<a href=\"app://conumaps?room="+roomCode+"&floor="+floorCode+"\">Go to ConUMaps</a>";
+
+        values.put(CalendarContract.Events.DESCRIPTION, description);
+
+        Uri uri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventId);
+
+        int row = cr.update(uri, values, null, null);
     }
 
     private boolean hasReadPermission(){
@@ -103,11 +143,18 @@ public class CalendarViewModel extends AndroidViewModel {
                 == PackageManager.PERMISSION_GRANTED;
     }
 
+    private boolean hasWritePermission(){
+        return ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_CALENDAR)
+                == PackageManager.PERMISSION_GRANTED;
+    }
+
     public String getTimeUntilString(long eventTime, long currentTime){
         long differenceInMillis = eventTime - currentTime;
 
-        return String.format("%02d hours and %02d minutes",
+        return String.format("%02d %s %s %02d minutes",
                 TimeUnit.MILLISECONDS.toHours(differenceInMillis),
+                context.getResources().getString(R.string.hours),
+                context.getResources().getString(R.string.and),
                 TimeUnit.MILLISECONDS.toMinutes(differenceInMillis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(differenceInMillis)));
     }
 }

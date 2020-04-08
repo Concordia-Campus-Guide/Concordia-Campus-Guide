@@ -167,7 +167,8 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
         if (!shuttles.isEmpty()) {
             mViewModel.adaptShuttleToRoutes(shuttles);
         } else {
-            mViewModel.noShuttles();
+            String noShuttleText = getResources().getString(R.string.no_shuttle);
+            mViewModel.noShuttles(noShuttleText);
         }
         setShuttleSelect();
         setRoutesAdapter();
@@ -270,7 +271,7 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
             LatLng to = new LatLng(toCenterCoordinates.getLatitude(), toCenterCoordinates.getLongitude());
             String transportType = mViewModel.getTransportType();
 
-            String url = UrlBuilder.build(from, to, transportType);
+            String url = UrlBuilder.build(from, to, transportType,  getBaseContext().getResources().getConfiguration().getLocales().get(0));
             new DirectionsApiDataRetrieval(RoutesActivity.this).execute(url, transportType);
         }
     }

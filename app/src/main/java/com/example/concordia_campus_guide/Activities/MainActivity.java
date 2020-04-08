@@ -4,13 +4,15 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
+
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,9 +35,9 @@ import com.example.concordia_campus_guide.Fragments.POIFragment.POIFragment;
 import com.example.concordia_campus_guide.Fragments.SmallInfoCardFragment.SmallInfoCardFragment;
 import com.example.concordia_campus_guide.Global.ApplicationState;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
+import com.example.concordia_campus_guide.Helper.LocaleHelper;
 import com.example.concordia_campus_guide.Helper.CurrentLocation;
 import com.example.concordia_campus_guide.Helper.Notification;
-import com.example.concordia_campus_guide.Helper.StartActivityHelper;
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.CalendarEvent;
 import com.example.concordia_campus_guide.Models.Floors;
@@ -49,6 +51,9 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
+
+import static com.example.concordia_campus_guide.Helper.StartActivityHelper.openRoutesPage;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -81,6 +86,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mViewModel = new MainActivityViewModel();
 
         initComponents();
+        acceptOpenFromCalendarIntent();
+    }
+
+    private void acceptOpenFromCalendarIntent() {
+        Intent intent = getIntent();
+        try{
+            Uri data = intent.getData();
+            String roomCode = data.getQueryParameter("room");
+            String floorCode = data.getQueryParameter("floor");
+
+            RoomModel room = AppDatabase.getInstance(this).roomDao().getRoomByRoomCodeAndFloorCode(roomCode, floorCode);
+
+            if(room!=null){
+                SelectingToFromState.setMyCurrentLocation(getMyCurrentLocation());
+                openRoutesPage(room, this);
+            }
+        }
+        catch(Exception e){
+            //do nothing
+            //the application was opened without the calendar link
+        }
+
     }
 
     @Override
@@ -93,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             toggleButton.setChecked(value.equals(ClassConstants.TRUE));
         }
 
-        // TODO: US #50: add logic for calendar integration  by retrieving from the shared preferences if the user hclicked on the "calendar integration" button or not.
+        // TODO: US #50: add logic for calendar integration  by retrieving from the shared preferences if the user clicked on the "calendar integration" button or not.
     }
 
     @Override
@@ -190,10 +217,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                //TODO: US #158 and #160, add action when changed
-                Toast.makeText(MainActivity.this, isChecked + "", Toast.LENGTH_SHORT).show();
+                if (buttonView.getId() == R.id.nav_translate)
+                    switchLanguage(isChecked);
             }
         });
+    }
+
+    private void switchLanguage(boolean isChecked) {
+        Locale current = getBaseContext().getResources().getConfiguration().getLocales().get(0);
+        Configuration newConfig = new Configuration();
+        newConfig.locale = isChecked? Locale.FRENCH : Locale.ENGLISH;
+        // this check is required to ensure that we recreate only if the language set is different
+        // otherwise it enters an infinite loop
+        if(!current.equals(newConfig.locale)){
+            LocaleHelper.setLocale(this, newConfig.locale.toString());
+            recreate();
+        }
     }
 
     public void popUp(CalendarEvent calendarEvent) {
@@ -201,21 +240,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         builder.setCancelable(true);
         Date eventDate = new Date((Long.parseLong(calendarEvent.getStartTime())));
         long differenceInMillis = eventDate.getTime() - System.currentTimeMillis();
-        if (notification.validateCalendarEvent(calendarEvent) || !notification.roomExistsInDb(calendarEvent.getLocation())) {
-            builder.setTitle("Location Format is Wrong");
-            builder.setMessage("The location of your upcoming event hasn't been inserted correctly" +
-                    "(e.g. 'H-9, 963')");
-        } else if (differenceInMillis > 0) {
-            builder.setTitle("Heads up... Your next class is in " + mViewModel.displayTimeToNextClass(calendarEvent.getStartTime()));
-            builder.setMessage("You have " + calendarEvent.getTitle() + " in " + mViewModel.displayTimeToNextClass(calendarEvent.getStartTime()) + " at " +
-                    calendarEvent.getLocation() + " ! Please choose to either get directions to your class or to ignore this message");
+        if(notification.validateCalendarEvent(calendarEvent) || !notification.roomExistsInDb(calendarEvent.getLocation())) {
+            builder.setTitle(getResources().getString(R.string.location_format_wrong));
+            builder.setMessage(getResources().getString(R.string.location_format_wrong_description));
+        }
+
+        else if(differenceInMillis > 0 ){
+            builder.setTitle(getResources().getString(R.string.calendar_text_header) +  mViewModel.displayTimeToNextClass(calendarEvent.getStartTime()));
+            builder.setMessage(getResources().getString(R.string.you_have) + calendarEvent.getTitle() + getResources().getString(R.string.in) + mViewModel.displayTimeToNextClass(calendarEvent.getStartTime())  + getResources().getString(R.string.at) +
+                    calendarEvent.getLocation() + getResources().getString(R.string.calendar_text_end));
             setupShowMeDirectionsBtn(builder, calendarEvent.getLocation());
-        } else {
+        }
+        else {
             String eventPassedBy = mViewModel.displayTimeToNextClass(calendarEvent.getStartTime());
             eventPassedBy = eventPassedBy.replace('-', ' ');
-            builder.setTitle("Heads up... Your class has already started before " + eventPassedBy);
-            builder.setMessage("Your " + calendarEvent.getTitle() + " has started before " + eventPassedBy + " at " +
-                    calendarEvent.getLocation() + " ! Please choose to either get directions to your class or to ignore this message");
+            builder.setTitle(getResources().getString(R.string.calendar_text_header_late) + eventPassedBy);
+            builder.setMessage(getResources().getString(R.string.your) + calendarEvent.getTitle() + getResources().getString(R.string.already_started) + eventPassedBy + getResources().getString(R.string.at) +
+                    calendarEvent.getLocation() + getResources().getString(R.string.calendar_text_end));
             setupShowMeDirectionsBtn(builder, calendarEvent.getLocation());
         }
 
@@ -225,7 +266,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void setupCancelBtn(AlertDialog.Builder builder) {
-        builder.setNegativeButton("Ignore", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getResources().getString(R.string.ignore), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -236,11 +277,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void setupShowMeDirectionsBtn(AlertDialog.Builder builder, String location) {
         final String locationTemp = location;
         final Activity mainActivity = this;
-        builder.setPositiveButton("Show me Directions", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getResources().getString(R.string.show_me_direction), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 RoomModel room = notification.getRoom(locationTemp);
-                StartActivityHelper.openRoutesPage(room, mainActivity);
+                openRoutesPage(room, mainActivity);
             }
         });
     }

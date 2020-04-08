@@ -36,7 +36,7 @@
             style="@style/InfoCardButton"
             android:layout_marginEnd="15sp"
             android:drawableLeft="@drawable/ic_directions_black_24dp"
-            android:text="@string/small_info_card_directions_button"
+            android:text="@string/directions"
             app:iconPadding="5dp" />
 
     </LinearLayout>

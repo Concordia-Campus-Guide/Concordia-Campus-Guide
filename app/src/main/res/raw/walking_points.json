@@ -486,13 +486,13 @@
         "latitude": -73.5788904502987
       },
       "floorCode": "H-8",
-      "pointType": "NONE",
+      "pointType": "LOUNGES",
       "connectedPointsId": [
         54,
         422,
         408
       ],
-      "placeCode": ""
+      "placeCode": "lounge-1"
     },
     {
       "id": 38,
@@ -726,7 +726,8 @@
       "connectedPointsId": [
         53,
         37,
-        61
+        61,
+        813
       ],
       "placeCode": ""
     },
@@ -824,7 +825,8 @@
         55,
         392,
         415,
-        54
+        54,
+        806
       ],
       "placeCode": ""
     },
@@ -1029,7 +1031,8 @@
       "connectedPointsId": [
         406,
         407,
-        409
+        409,
+        812
       ],
       "placeCode": ""
     },
@@ -1217,13 +1220,13 @@
         "latitude": -73.5787798091769
       },
       "floorCode": "MB-S2",
-      "pointType": "NONE",
+      "pointType": "LOUNGES",
       "connectedPointsId": [
         89,
         93,
         94
       ],
-      "placeCode": ""
+      "placeCode": "lounge-1"
     },
     {
       "id": 93,
@@ -1500,8 +1503,8 @@
     {
       "id": 116,
       "coordinate": {
-        "longitude":45.495305,
-        "latitude":-73.578885
+        "longitude": 45.495305,
+        "latitude": -73.578885
       },
       "floorCode": "MB-S2",
       "pointType": "NONE",
@@ -1681,7 +1684,8 @@
         122,
         124,
         127,
-        129
+        129,
+        809
       ],
       "placeCode": ""
     },
@@ -2029,8 +2033,8 @@
     {
       "id": 158,
       "coordinate": {
-        "longitude": 45.49709930219645,
-        "latitude": -73.57868157327175
+        "longitude": 45.4970993021964,
+        "latitude": -73.5786815732717
       },
       "floorCode": "H-1",
       "pointType": "ENTRANCE",
@@ -2213,8 +2217,8 @@
     {
       "id": 171,
       "coordinate": {
-        "longitude": 45.49722291745215,
-        "latitude": -73.57887972146271
+        "longitude": 45.4972229174521,
+        "latitude": -73.5788797214627
       },
       "floorCode": "H-9",
       "pointType": "NONE",
@@ -2397,7 +2401,7 @@
       "connectedPointsId": [
         278
       ],
-      "placeCode": "961.10"
+      "placeCode": "961.1"
     },
     {
       "id": 187,
@@ -3117,7 +3121,8 @@
         240,
         242,
         239,
-        260
+        260,
+        803
       ],
       "placeCode": ""
     },
@@ -3133,7 +3138,8 @@
         12,
         16,
         17,
-        298
+        298,
+        802
       ],
       "placeCode": ""
     },
@@ -3471,7 +3477,8 @@
       "connectedPointsId": [
         10,
         208,
-        217
+        217,
+        804
       ],
       "placeCode": ""
     },
@@ -3624,8 +3631,8 @@
     {
       "id": 314,
       "coordinate": {
-        "longitude":45.495059611298636,
-        "latitude":-73.57882708311081
+        "longitude": 45.4950596112986,
+        "latitude": -73.5788270831108
       },
       "floorCode": "MB-1",
       "pointType": "CLASSROOM",
@@ -4289,7 +4296,8 @@
         329,
         334,
         362,
-        364
+        364,
+        808
       ],
       "placeCode": ""
     },
@@ -4642,7 +4650,8 @@
         81,
         45,
         402,
-        400
+        400,
+        805
       ],
       "placeCode": ""
     },
@@ -4658,7 +4667,8 @@
         80,
         391,
         401,
-        403
+        403,
+        805
       ],
       "placeCode": ""
     },
@@ -4862,7 +4872,8 @@
         56,
         388,
         60,
-        61
+        61,
+        806
       ],
       "placeCode": ""
     },
@@ -4908,7 +4919,8 @@
       "connectedPointsId": [
         382,
         383,
-        417
+        417,
+        807
       ],
       "placeCode": ""
     },
@@ -5166,9 +5178,9 @@
         "latitude": -73.6386038
       },
       "floorCode": "VL-1",
-      "pointType": "NONE",
+      "pointType": "LOUNGES",
       "connectedPointsId": [611,613,689],
-      "placeCode": ""
+      "placeCode": "lounge-1"
     },
     {
       "id": 613,
@@ -5266,7 +5278,13 @@
       },
       "floorCode": "VL-1",
       "pointType": "NONE",
-      "connectedPointsId": [620,622,623,625],
+      "connectedPointsId": [
+        620,
+        622,
+        623,
+        625,
+        810
+      ],
       "placeCode": ""
     },
     {
@@ -6185,7 +6203,13 @@
       },
       "floorCode": "VL-2",
       "pointType": "NONE",
-      "connectedPointsId": [705, 703, 702, 717, 718],
+      "connectedPointsId": [
+        705,
+        703,
+        702,
+        717,
+        718
+      ],
       "placeCode": ""
     },
     {
@@ -6196,7 +6220,16 @@
       },
       "floorCode": "VL-2",
       "pointType": "NONE",
-      "connectedPointsId": [702, 703, 704, 706, 713, 714, 715, 716],
+      "connectedPointsId": [
+        702,
+        703,
+        704,
+        706,
+        713,
+        714,
+        715,
+        716
+      ],
       "placeCode": ""
     },
     {
@@ -6207,7 +6240,12 @@
       },
       "floorCode": "VL-2",
       "pointType": "NONE",
-      "connectedPointsId": [707, 705, 714, 719],
+      "connectedPointsId": [
+        707,
+        705,
+        714,
+        719
+      ],
       "placeCode": ""
     },
     {
@@ -6218,7 +6256,12 @@
       },
       "floorCode": "VL-2",
       "pointType": "NONE",
-      "connectedPointsId": [706, 715, 729],
+      "connectedPointsId": [
+        706,
+        715,
+        729,
+        811
+      ],
       "placeCode": ""
     },
     {
@@ -6320,7 +6363,10 @@
       },
       "floorCode": "VL-2",
       "pointType": "CLASSROOM",
-      "connectedPointsId": [705, 722],
+      "connectedPointsId": [
+        705,
+        722
+      ],
       "placeCode": "201"
     },
     {
@@ -6331,7 +6377,11 @@
       },
       "floorCode": "VL-2",
       "pointType": "NONE",
-      "connectedPointsId": [704, 718, 723],
+      "connectedPointsId": [
+        704,
+        718,
+        723
+      ],
       "placeCode": ""
     },
     {
@@ -6342,7 +6392,11 @@
       },
       "floorCode": "VL-2",
       "pointType": "NONE",
-      "connectedPointsId": [704, 717, 724],
+      "connectedPointsId": [
+        704,
+        717,
+        724
+      ],
       "placeCode": ""
     },
     {
@@ -6353,7 +6407,11 @@
       },
       "floorCode": "VL-2",
       "pointType": "NONE",
-      "connectedPointsId": [706, 725, 720],
+      "connectedPointsId": [
+        706,
+        725,
+        720
+      ],
       "placeCode": ""
     },
     {
@@ -6364,7 +6422,11 @@
       },
       "floorCode": "VL-2",
       "pointType": "NONE",
-      "connectedPointsId": [719, 726, 721],
+      "connectedPointsId": [
+        719,
+        726,
+        721
+      ],
       "placeCode": ""
     },
     {
@@ -6375,7 +6437,11 @@
       },
       "floorCode": "VL-2",
       "pointType": "NONE",
-      "connectedPointsId": [722, 720, 727],
+      "connectedPointsId": [
+        722,
+        720,
+        727
+      ],
       "placeCode": ""
     },
     {
@@ -6386,7 +6452,11 @@
       },
       "floorCode": "VL-2",
       "pointType": "NONE",
-      "connectedPointsId": [721, 716, 728],
+      "connectedPointsId": [
+        721,
+        716,
+        728
+      ],
       "placeCode": ""
     },
     {
@@ -6497,6 +6567,164 @@
         600
       ],
       "placeCode": "shuttle"
+    },
+    {
+      "id": 802,
+      "coordinate": {
+        "longitude": 45.4970917818679,
+        "latitude": -73.5788528993725
+      },
+      "floorCode": "H-9",
+      "pointType": "WATER_FOUNTAINS",
+      "connectedPointsId": [
+        264
+      ],
+      "placeCode": "water-1"
+    },
+    {
+      "id": 803,
+      "coordinate": {
+        "longitude": 45.4972544087476,
+        "latitude": -73.5786923021078
+      },
+      "floorCode": "H-9",
+      "pointType": "WATER_FOUNTAINS",
+      "connectedPointsId": [
+        261
+      ],
+      "placeCode": "water-2"
+    },
+    {
+      "id": 804,
+      "coordinate": {
+        "longitude": 45.497229732734,
+        "latitude": -73.5791771113872
+      },
+      "floorCode": "H-9",
+      "pointType": "WATER_FOUNTAINS",
+      "connectedPointsId": [
+        299
+      ],
+      "placeCode": "water-3"
+    },
+    {
+      "id": 805,
+      "coordinate": {
+        "longitude": 45.4975075135206,
+        "latitude": -73.5790450125932
+      },
+      "floorCode": "H-8",
+      "pointType": "WATER_FOUNTAINS",
+      "connectedPointsId": [
+        401,
+        402
+      ],
+      "placeCode": "water-1"
+    },
+    {
+      "id": 806,
+      "coordinate": {
+        "longitude": 45.4970908418268,
+        "latitude": -73.5788451880216
+      },
+      "floorCode": "H-8",
+      "pointType": "WATER_FOUNTAINS",
+      "connectedPointsId": [
+        61,
+        415
+      ],
+      "placeCode": "water-2"
+    },
+    {
+      "id": 807,
+      "coordinate": {
+        "longitude": 45.4972863700445,
+        "latitude": -73.5786574333906
+      },
+      "floorCode": "H-8",
+      "pointType": "WATER_FOUNTAINS",
+      "connectedPointsId": [
+        419
+      ],
+      "placeCode": "water-3"
+    },
+    {
+      "id": 808,
+      "coordinate": {
+        "longitude": 45.4952878140544,
+        "latitude": -73.5791854932904
+      },
+      "floorCode": "MB-1",
+      "pointType": "WATER_FOUNTAINS",
+      "connectedPointsId": [
+        363
+      ],
+      "placeCode": "water-1"
+    },
+    {
+      "id": 809,
+      "coordinate": {
+        "longitude": 45.4953186013791,
+        "latitude": -73.5791462659835
+      },
+      "floorCode": "MB-S2",
+      "pointType": "WATER_FOUNTAINS",
+      "connectedPointsId": [
+        128
+      ],
+      "placeCode": "water-1"
+    },
+    {
+      "id": 810,
+      "coordinate": {
+        "longitude": 45.4590493412296,
+        "latitude": -73.6386212334036
+      },
+      "floorCode": "VL-1",
+      "pointType": "WATER_FOUNTAINS",
+      "connectedPointsId": [
+        621
+      ],
+      "placeCode": "water-1"
+    },
+    {
+      "id": 811,
+      "coordinate": {
+        "longitude": 45.4590516929196,
+        "latitude": -73.6386272683739
+      },
+      "floorCode": "VL-2",
+      "pointType": "WATER_FOUNTAINS",
+      "connectedPointsId": [
+        707
+      ],
+      "placeCode": "water-1"
+    },
+    {
+      "id": 812,
+      "coordinate": {
+        "longitude": 45.49737332348097,
+        "latitude": -73.5792351141572
+      },
+      "floorCode": "H-8",
+      "pointType": "LOUNGES",
+      "connectedPointsId": [
+        76
+      ],
+      "placeCode": "lounge-3"
+    },
+    {
+      "id": 813,
+      "coordinate": {
+        "longitude": 45.4971310285712,
+        "latitude": -73.5787355527281
+      },
+      "floorCode": "H-8",
+      "pointType": "LOUNGES",
+      "connectedPointsId": [
+        54
+      ],
+      "placeCode": "lounge-2"
     }
   ]
 }
