@@ -12,13 +12,15 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+
 import com.example.concordia_campus_guide.Adapters.PlaceToSearchResultAdapter;
-import com.example.concordia_campus_guide.Models.Helpers.CalendarViewModel;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
-import com.example.concordia_campus_guide.Models.CalendarEvent;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
+import com.example.concordia_campus_guide.Models.CalendarEvent;
+import com.example.concordia_campus_guide.Models.Helpers.CalendarViewModel;
 import com.example.concordia_campus_guide.Models.MyCurrentPlace;
 import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.R;
@@ -57,38 +59,41 @@ public class SearchActivity extends AppCompatActivity {
         mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getApplication())).get(SearchActivityViewModel.class);
     }
 
-    private void setPlaceToSearchResultAdapter(){
+    private void setPlaceToSearchResultAdapter() {
         // Android adapter for list view
         adapter = new PlaceToSearchResultAdapter(this, R.layout.list_item_layout, mViewModel.getAllPlaces());
         searchResults.setAdapter(adapter);
     }
 
-    private void setEvents(){
+    private void setEvents() {
         setBackButtonOnClick();
         setTextListener();
         setOnClickListeners();
     }
 
-    private void setTextListener(){
+    private void setTextListener() {
         //search results filtering according to search text
-        searchText.addTextChangedListener(new TextWatcher(){
+        searchText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2){}
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2){
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 (SearchActivity.this).adapter.getFilter().filter(charSequence);
             }
+
             @Override
-            public void afterTextChanged(Editable editable){ }
+            public void afterTextChanged(Editable editable) {
+            }
         });
     }
 
-    private void setOnClickListeners(){
+    private void setOnClickListeners() {
         searchText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean onFocus) {
-                if(onFocus){
+                if (onFocus) {
                     searchResults.setVisibility(View.VISIBLE);
                 }
             }
@@ -106,16 +111,16 @@ public class SearchActivity extends AppCompatActivity {
         final String eventString;
         final String eventLocation;
 
-        if(calendarEvent != null){
+        if (calendarEvent != null) {
             eventString = calendarViewModel.getNextClassString((calendarEvent));
             nextClassText.setText(eventString);
             eventLocation = calendarEvent.getLocation();
             Place place = mViewModel.getRoomFromDB(eventLocation);
 
-            if(!eventString.equals("Event is incorrectly formatted")){
-                if(place == null){
+            if (!eventString.equals("Event is incorrectly formatted")) {
+                if (place == null) {
                     nextClassText.setText("Location not found");
-                }else {
+                } else {
                     nextClassArrow.setVisibility(View.VISIBLE);
                     nextClassRow.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -128,23 +133,22 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
-    public void openRoutesPage(Place place){
+    public void openRoutesPage(Place place) {
         Intent openRoutes = new Intent(SearchActivity.this, RoutesActivity.class);
 
-        if(SelectingToFromState.isQuickSelect()){
+        if (SelectingToFromState.isQuickSelect()) {
             SelectingToFromState.setTo(place);
-            if(SelectingToFromState.getMyCurrentLocation() != null){
+            if (SelectingToFromState.getMyCurrentLocation() != null) {
                 Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
                 SelectingToFromState.setFrom(new MyCurrentPlace(myCurrentLocation.getLatitude(), myCurrentLocation.getLongitude()));
-            }
-            else{
+            } else {
                 SelectingToFromState.setFrom(new MyCurrentPlace());
             }
         }
-        if(SelectingToFromState.isSelectFrom()){
+        if (SelectingToFromState.isSelectFrom()) {
             SelectingToFromState.setFrom(place);
         }
-        if(SelectingToFromState.isSelectTo()){
+        if (SelectingToFromState.isSelectTo()) {
             SelectingToFromState.setTo(place);
         }
 
@@ -152,7 +156,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 
-    private void setBackButtonOnClick(){
+    private void setBackButtonOnClick() {
         ImageButton backButton = this.findViewById(R.id.back);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

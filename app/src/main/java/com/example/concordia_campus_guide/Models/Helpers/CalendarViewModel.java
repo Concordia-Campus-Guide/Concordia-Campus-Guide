@@ -9,19 +9,14 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Instances;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.AndroidViewModel;
-
-import com.example.concordia_campus_guide.Activities.SearchActivity;
 import com.example.concordia_campus_guide.Models.CalendarEvent;
-
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Pattern;
 
 public class CalendarViewModel extends AndroidViewModel {
     Context context;
@@ -36,7 +31,7 @@ public class CalendarViewModel extends AndroidViewModel {
     private static final int PROJECTION_LOCATION_INDEX = 1;
     private static final int PROJECTION_START_INDEX = 2;
 
-    public static final String[] INSTANCE_PROJECTION = new String[] {
+    protected static final String[] INSTANCE_PROJECTION = new String[] {
             Instances.TITLE,
             Instances.EVENT_LOCATION,
             Instances.DTSTART
@@ -60,11 +55,11 @@ public class CalendarViewModel extends AndroidViewModel {
         if(incorrectlyFormatted(event.getLocation())){
             return "Event is incorrectly formatted";
         }
-        if(event != null){
-            Date eventDate = new Date((Long.parseLong(event.getStartTime())));
-            String timeUntil = getTimeUntilString(eventDate.getTime(), System.currentTimeMillis());
-            nextClassString = event.getTitle() +  " in " + timeUntil;
-        }
+
+        Date eventDate = new Date((Long.parseLong(event.getStartTime())));
+        String timeUntil = getTimeUntilString(eventDate.getTime(), System.currentTimeMillis());
+        nextClassString = event.getTitle() +  " in " + timeUntil;
+
         return  nextClassString;
     }
 
@@ -81,15 +76,13 @@ public class CalendarViewModel extends AndroidViewModel {
         ContentUris.appendId(eventsUriBuilder, startTime);
         ContentUris.appendId(eventsUriBuilder, endTime);
         Uri eventsUri = eventsUriBuilder.build();
-        Cursor cursor = context.getContentResolver().query(
+        return context.getContentResolver().query(
                 eventsUri,
                 INSTANCE_PROJECTION,
                 null,
                 null,
                 Instances.BEGIN + " ASC"
         );
-
-        return cursor;
     }
 
     public CalendarEvent getCalendarEvent(Cursor cursor) {
@@ -113,10 +106,8 @@ public class CalendarViewModel extends AndroidViewModel {
     public String getTimeUntilString(long eventTime, long currentTime){
         long differenceInMillis = eventTime - currentTime;
 
-        String timeUntil = String.format("%02d hours and %02d minutes",
+        return String.format("%02d hours and %02d minutes",
                 TimeUnit.MILLISECONDS.toHours(differenceInMillis),
                 TimeUnit.MILLISECONDS.toMinutes(differenceInMillis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(differenceInMillis)));
-
-        return timeUntil;
     }
 }

@@ -21,7 +21,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.concordia_campus_guide.Adapters.DirectionsRecyclerViewAdapter;
 import com.example.concordia_campus_guide.Models.PathInfoCard;
+import com.example.concordia_campus_guide.ClassConstants;
+import com.example.concordia_campus_guide.Models.Direction;
+import com.example.concordia_campus_guide.Models.PointType;
+import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.io.Serializable;
 import java.util.ArrayList;

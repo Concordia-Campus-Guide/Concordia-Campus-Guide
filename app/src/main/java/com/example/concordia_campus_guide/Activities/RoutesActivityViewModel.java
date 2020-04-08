@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsResult;
-import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.Routes.Route;
@@ -58,7 +57,9 @@ public class RoutesActivityViewModel extends ViewModel {
         return place;
     }
 
-    public Place getFrom(){ return from; }
+    public Place getFrom() {
+        return from;
+    }
 
     public void setFrom(Place from) {
         this.from = from;

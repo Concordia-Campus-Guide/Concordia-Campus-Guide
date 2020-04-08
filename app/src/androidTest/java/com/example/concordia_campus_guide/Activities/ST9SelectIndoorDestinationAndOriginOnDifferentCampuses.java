@@ -17,6 +17,7 @@ import androidx.test.uiautomator.UiObject;
 import androidx.test.uiautomator.UiObjectNotFoundException;
 import androidx.test.uiautomator.UiSelector;
 
+import com.example.concordia_campus_guide.EspressoHelpers;
 import com.example.concordia_campus_guide.R;
 
 import org.hamcrest.Description;
@@ -66,12 +67,14 @@ public class ST9SelectIndoorDestinationAndOriginOnDifferentCampuses {
 
     @Test
     public void routesActivityOptionsTest() {
+        EspressoHelpers.cancelNotificationIfExists();
+
         ViewInteraction textView = onView(
                 allOf(withId(R.id.search), withContentDescription("Icon"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.toolbar),
-                                        1),
+                                        2),
                                 0),
                         isDisplayed()));
         textView.check(matches(withText("")));
@@ -81,7 +84,7 @@ public class ST9SelectIndoorDestinationAndOriginOnDifferentCampuses {
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.toolbar),
-                                        1),
+                                        2),
                                 0),
                         isDisplayed()));
         actionMenuItemView.perform(click());

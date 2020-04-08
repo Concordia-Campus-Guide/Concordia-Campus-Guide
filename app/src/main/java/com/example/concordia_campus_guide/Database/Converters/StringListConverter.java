@@ -2,6 +2,7 @@ package com.example.concordia_campus_guide.Database.Converters;
 
 import android.os.Build;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,6 +27,6 @@ public class StringListConverter  {
         if (string !=null){
             return Arrays.asList(string.split(SPLIT_CHAR));
         }
-        return null;
+        return new ArrayList<>();
     }
 }

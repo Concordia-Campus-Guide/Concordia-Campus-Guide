@@ -3,14 +3,20 @@ package com.example.concordia_campus_guide.Fragments.LocationFragment;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.location.Location;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Global.ApplicationState;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.EncodedPolyline;
 import com.example.concordia_campus_guide.Helper.PathFinder;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Coordinates;
@@ -31,7 +37,6 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.PolyUtil;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
-import com.google.maps.android.geojson.GeoJsonPointStyle;
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 
 import org.json.JSONObject;
@@ -47,10 +52,6 @@ import java.util.PriorityQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
-
 import static java.lang.Double.parseDouble;
 
 public class LocationFragmentViewModel extends ViewModel {
@@ -59,14 +60,16 @@ public class LocationFragmentViewModel extends ViewModel {
     private Map<String, Building> buildings = new HashMap<>();
     private AppDatabase appDatabase;
     private MutableLiveData<PriorityQueue<WalkingPoint>> poiList = new MutableLiveData<>();
+    private MutableLiveData<List<RoomModel>> roomList = new MutableLiveData<>();
     private BitmapDescriptor currentPOIIcon;
     private Location currentLocation;
+
+    //EV centerCoordinates
+    private LatLng initialZoomLocation = ClassConstants.initialZoomLocation;
 
     public static final Logger LOGGER = Logger.getLogger("LocationFragmentViewModel");
     public static final String FLOORS_AVAILABLE = "floorsAvailable";
 
-
-    private PolylineOptions displayedPolylineOption;
     private Polyline currentlyDisplayedLine;
     private HashMap<String, List<WalkingPoint>> walkingPointsMap = new HashMap<>();
     private List<WalkingPoint> walkingPoints;
@@ -187,25 +190,37 @@ public class LocationFragmentViewModel extends ViewModel {
         Marker marker = map.addMarker(
                 new MarkerOptions()
                         .position(centerPos)
-                        .icon(styleMarker(buildingLabel, context))
+                        .icon(BitmapDescriptorFactory.fromBitmap(createBitmapMarkerIcon(buildingLabel)))
                         .flat(true)
                         .anchor(0.5f, 0.5f)
                         .alpha(0.90f)
-                        //This line should be included whenever we test the UI for the marker:
                         .title(buildingLabel)
         );
         marker.setTag(buildingLabel);
     }
 
     /**
-     * The purpose of this method is setup the style of the marker.
+     * The purpose of this method is to create the marker
      *
-     * @param buildingLabel the label of the building
-     * @param context       the context of the LocationFragment
+     * @param label the label of the building
      * @return it will BitmapDescriptor object to use it as an icon for the marker on the map.
      */
-    public BitmapDescriptor styleMarker(String buildingLabel, Context context){
-        return getCustomSizedIcon("BuildingLabels/" + buildingLabel.toLowerCase()+".png", context, 150, 150);
+    public Bitmap createBitmapMarkerIcon(String label){
+        int width = 160;
+        int height = 130;
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+
+        Paint paint = new Paint();
+        paint.setColor(Color.WHITE);
+        paint.setAntiAlias(true);
+        paint.setTextSize(100.f);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+        paint.setShadowLayer(6, 0, 0, Color.BLACK);
+        paint.setTextAlign(Paint.Align.CENTER);
+        canvas.drawText(label, width/2f, height/1.2f, paint);
+
+        return bitmap;
     }
 
     /**
@@ -222,44 +237,29 @@ public class LocationFragmentViewModel extends ViewModel {
         return geoJsonPolygonStyle;
     }
 
-    private void setPointStyle(GeoJsonLayer layer) {
-        for (GeoJsonFeature feature : layer.getFeatures()) {
-            GeoJsonPointStyle geoJsonPointStyle = new GeoJsonPointStyle();
-            geoJsonPointStyle.setVisible(true);
-            geoJsonPointStyle.setAlpha(0.2f);
-            geoJsonPointStyle.setIcon(BitmapDescriptorFactory.fromAsset("class_markers/marker.png"));
-            String code = feature.getProperty("roomCode");
-            geoJsonPointStyle.setTitle(code);
-            feature.setPointStyle(geoJsonPointStyle);
-        }
-    }
-
     /**
      * @param buildingCode it represents which building we will be covering
      * @return Int of drawable resource's bitmap representation
      */
-    public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, Context context, GoogleMap mMap) {
+    public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, GoogleMap mMap) {
         String fileName = buildingCode.toLowerCase()+"_"+floor.toLowerCase();
         groundOverlay.setImage(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+fileName+".png"));
-        setFloorMarkers(buildingCode, floor, context, mMap);
+        setFloorMarkers(buildingCode, floor, mMap);
     }
 
-    public void setFloorMarkers(String buildingCode, String floor, Context context, GoogleMap mMap) {
+    public void setFloorMarkers(String buildingCode, String floor, GoogleMap mMap) {
         if (floorLayer != null) {
             floorLayer.removeLayerFromMap();
         }
-        JSONObject geoJson = ApplicationState.getInstance(context).getRooms().getGeoJson(buildingCode + "-" + floor);
-        floorLayer = initMarkersLayer(mMap, geoJson);
-        setPointStyle(floorLayer);
-        floorLayer.addLayerToMap();
+        setListOfRooms(buildingCode+"-"+floor);
         if (currentlyDisplayedLine != null) {
             currentlyDisplayedLine.remove();
         }
-        displayedPolylineOption = getFloorPolylines(buildingCode + "-" + floor);
+        PolylineOptions displayedPolylineOption = getFloorPolylines(buildingCode + "-" + floor);
         currentlyDisplayedLine = mMap.addPolyline(displayedPolylineOption);
     }
 
-    public Building getBuildingFromeCode(String buildingCode) {
+    public Building getBuildingFromCode(String buildingCode) {
         return buildings.get(buildingCode);
     }
 
@@ -272,15 +272,19 @@ public class LocationFragmentViewModel extends ViewModel {
     }
 
     public LatLng getInitialZoomLocation() {
-        return buildings.get("EV").getCenterCoordinatesLatLng();
+        return initialZoomLocation;
+    }
+
+    public void setInitialZoomLocation(LatLng latLng){
+        initialZoomLocation = latLng;
     }
 
     public LatLng getLoyolaZoomLocation() {
-        return buildings.get("VL").getCenterCoordinatesLatLng();
+        return buildings.get(ClassConstants.loyolaCenterBuildingLabel).getCenterCoordinatesLatLng();
     }
 
     public LatLng getSGWZoomLocation() {
-        return buildings.get("H").getCenterCoordinatesLatLng();
+        return buildings.get(ClassConstants.sgwCenterBuildingLabel).getCenterCoordinatesLatLng();
     }
 
     public void parseWalkingPointList(AppDatabase appDatabase, RoomModel from, RoomModel to) {
@@ -293,6 +297,11 @@ public class LocationFragmentViewModel extends ViewModel {
             floorWalkingPointList.add(wp);
             walkingPointsMap.put(wp.getFloorCode(), floorWalkingPointList);
         }
+    }
+
+    public void setListOfRooms(String floorCode) {
+        List<RoomModel> allRoomsOnFloor = appDatabase.roomDao().getAllRoomsByFloorCode(floorCode);
+        this.roomList.postValue(allRoomsOnFloor);
     }
 
     public void setListOfPOI(@PoiType String poiType, Context context) {
@@ -308,8 +317,8 @@ public class LocationFragmentViewModel extends ViewModel {
             if (currentLocation == null) {
                 //This building has inverted lat/lng in order to us th geojsons.
                 Building hallBuilding = appDatabase.buildingDao().getBuildingByBuildingCode("H");
-                Double currentLat = hallBuilding != null? hallBuilding.getCenterCoordinates().getLatitude() : 0;
-                Double currentLng = hallBuilding != null? hallBuilding.getCenterCoordinates().getLongitude(): 0;
+                Double currentLat = hallBuilding != null ? hallBuilding.getCenterCoordinates().getLatitude() : 0;
+                Double currentLng = hallBuilding != null ? hallBuilding.getCenterCoordinates().getLongitude() : 0;
 
                 //Current location should be inversed: lat->lng and lng->lat
                 currentCoordinates = new Coordinates(currentLng, currentLat);
@@ -329,7 +338,12 @@ public class LocationFragmentViewModel extends ViewModel {
         return orderedList;
     }
 
-    public LiveData<PriorityQueue<WalkingPoint>> getListOfPOI() {
+
+    LiveData<List<RoomModel>> getListOfRoom() {
+        return roomList;
+    }
+
+    LiveData<PriorityQueue<WalkingPoint>> getListOfPOI() {
         return poiList;
     }
 
@@ -345,7 +359,7 @@ public class LocationFragmentViewModel extends ViewModel {
         this.currentLocation = currentLocation;
     }
 
-    private BitmapDescriptor getCustomSizedIcon(String filename, Context context, int height, int width) {
+    public BitmapDescriptor getCustomSizedIcon(String filename, Context context, int height, int width) {
         InputStream deckFile = null;
         BitmapDescriptor smallMarkerIcon = null;
         try {
@@ -382,7 +396,7 @@ public class LocationFragmentViewModel extends ViewModel {
     public void drawOutdoorPath(List<DirectionWrapper> outdoorDirections, GoogleMap map) {
         for (DirectionWrapper directionWrapper : outdoorDirections) {
             int color = 0;
-            if(directionWrapper.getTransitDetails() != null){
+            if (directionWrapper.getTransitDetails() != null) {
                 color = Color.parseColor(directionWrapper.getTransitDetails().line.color);
             }
             PolylineOptions polylineOptions = stylePolyLine(directionWrapper.getDirection().getTransportType(), color);
@@ -406,6 +420,10 @@ public class LocationFragmentViewModel extends ViewModel {
             polylineOptions.color(Color.rgb(147, 35, 57));
         }
         return polylineOptions;
+    }
+
+    public RoomModel getRoomByRoomCodeAndFloorCode(String roomCode, String floorCode){
+        return appDatabase.roomDao().getRoomByRoomCodeAndFloorCode(roomCode, floorCode);
     }
 
     public List<WalkingPoint> getWalkingPointsList() {

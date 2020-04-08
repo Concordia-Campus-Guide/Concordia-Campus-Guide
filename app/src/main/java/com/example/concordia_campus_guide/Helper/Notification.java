@@ -15,59 +15,61 @@ public class Notification {
     private CalendarEvent previousCalendarEvent;
     private NotificationStatus notifyUser;
 
-    public Notification(MainActivity mainActivity, AppDatabase appDatabase){
-        this.mainActivity =  mainActivity;
-        this.appDatabase  = appDatabase;
-        this.previousCalendarEvent = new CalendarEvent("","","");
+    public Notification(MainActivity mainActivity, AppDatabase appDatabase) {
+        this.mainActivity = mainActivity;
+        this.appDatabase = appDatabase;
+        this.previousCalendarEvent = new CalendarEvent("", "", "");
         notifyUser = NotificationStatus.getInstance();
     }
 
     public void checkUpCalendarEvery5Minutes() {
         final Handler handler = new Handler();
-        handler.postDelayed(new Runnable(){
+        handler.postDelayed(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 CalendarEvent calendarEvent = getNextClassCalendar();
-                if(calendarEvent  != null && notifyUser.getNotifyUser()){
-                    if(!calendarEvent.getTitle().equalsIgnoreCase(previousCalendarEvent.getTitle())){
-                        notifyUser.setNotifyUser(false);
-                        previousCalendarEvent = calendarEvent;
-                        mainActivity.popUp(calendarEvent);
-                    }
+                if (calendarEvent != null && notifyUser.getNotifyUser() && !calendarEvent.getTitle().equalsIgnoreCase(previousCalendarEvent.getTitle())) {
+                    notifyUser.setNotifyUser(false);
+                    previousCalendarEvent = calendarEvent;
+                    mainActivity.popUp(calendarEvent);
                 }
                 handler.postDelayed(this, 3000);
             }
         }, 3000);
     }
 
-    public boolean validateCalendarEvent(CalendarEvent calendarEvent){
+    public boolean validateCalendarEvent(CalendarEvent calendarEvent) {
         CalendarViewModel calendarViewModel = new CalendarViewModel(mainActivity.getApplication());
         return calendarViewModel.incorrectlyFormatted(calendarEvent.getLocation());
     }
 
-    public CalendarEvent getNextClassCalendar(){
+    public CalendarEvent getNextClassCalendar() {
         CalendarViewModel calendarViewModel = new CalendarViewModel(mainActivity.getApplication());
-        return  calendarViewModel.getEvent(mainActivity);
+        return calendarViewModel.getEvent(mainActivity);
     }
 
-    public RoomModel getRoom(String location){
-        if(location == null) { return null; }
+    public RoomModel getRoom(String location) {
+        if (location == null) {
+            return null;
+        }
 
         int indexOfSeparation = location.indexOf(',');
-        String floorCode = location.substring(0,indexOfSeparation);
-        String roomCode  = location.substring(indexOfSeparation+2);
+        String floorCode = location.substring(0, indexOfSeparation);
+        String roomCode = location.substring(indexOfSeparation + 2);
 
-        return appDatabase.roomDao().getRoomByRoomCodeAndFloorCode(roomCode,floorCode);
+        return appDatabase.roomDao().getRoomByRoomCodeAndFloorCode(roomCode, floorCode);
     }
 
-    public boolean roomExistsInDb(String location){
-        if(location == null) { return false; }
+    public boolean roomExistsInDb(String location) {
+        if (location == null) {
+            return false;
+        }
 
         int indexOfSeparation = location.indexOf(',');
-        String floorCode = location.substring(0,indexOfSeparation);
-        String roomCode  = location.substring(indexOfSeparation+2);
+        String floorCode = location.substring(0, indexOfSeparation);
+        String roomCode = location.substring(indexOfSeparation + 2);
 
-        RoomModel room = appDatabase.roomDao().getRoomByRoomCodeAndFloorCode(roomCode,floorCode);
+        RoomModel room = appDatabase.roomDao().getRoomByRoomCodeAndFloorCode(roomCode, floorCode);
 
         return room != null;
     }

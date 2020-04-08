@@ -32,6 +32,7 @@ import org.junit.runner.RunWith;
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -65,6 +66,8 @@ public class ExplorePOIClickTest {
 
     @Test
     public void explorePOIClickTest() {
+        EspressoHelpers.cancelNotificationIfExists();
+
         ViewInteraction frameLayout = onView(
                 allOf(withId(R.id.explore_bottom_card_frame),
                         childAtPosition(
@@ -134,13 +137,27 @@ public class ExplorePOIClickTest {
         android.os.SystemClock.sleep(1000);
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.toText), withText("H-00 elevators-1"),
+                allOf(withId(R.id.info_card_title), withText("H-1 elevators-1"),
+                        childAtPosition(
+                                allOf(withId(R.id.infocardLinearLayout),
+                                        childAtPosition(
+                                                withId(R.id.bottom_card_frame),
+                                                0)),
+                                0),
+                        isDisplayed()));
+        textView.check(matches(withText("H-1 elevators-1")));
+
+        ViewInteraction button = onView(
+                allOf(withId(R.id.directions),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(R.id.app_bar),
-                                        0),
-                                4),
+                                        withId(R.id.infocardLinearLayout),
+                                        1),
+                                0),
                         isDisplayed()));
+        button.check(matches(isDisplayed()));
+
+        button.perform(click());
 
         android.os.SystemClock.sleep(1000);
 
