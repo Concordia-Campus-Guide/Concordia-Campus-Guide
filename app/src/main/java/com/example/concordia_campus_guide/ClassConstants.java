@@ -68,4 +68,10 @@ public class  ClassConstants {
 
     public static final int EARTH_RADIUS_KM = 6371;
 
+
+
+    public static final String LOCATION_FRAGMENT_TAG = "LocationFragment";
+    public static final String POI_TAG = "POI";
+    public static final String ROOM_TAG = "ROOM";
+
 }

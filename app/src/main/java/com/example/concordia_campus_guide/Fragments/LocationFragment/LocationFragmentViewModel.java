@@ -17,6 +17,7 @@ import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Global.ApplicationState;
+import com.example.concordia_campus_guide.Helper.DrawPolygons;
 import com.example.concordia_campus_guide.Helper.FloorPlan;
 import com.example.concordia_campus_guide.Helper.PathFinder;
 import com.example.concordia_campus_guide.Models.Building;
@@ -57,7 +58,6 @@ import static java.lang.Double.parseDouble;
 
 public class LocationFragmentViewModel extends ViewModel {
 
-//    private GeoJsonLayer floorLayer;
     private Map<String, Building> buildings = new HashMap<>();
     private AppDatabase appDatabase;
     private MutableLiveData<PriorityQueue<WalkingPoint>> poiList = new MutableLiveData<>();
@@ -66,13 +66,14 @@ public class LocationFragmentViewModel extends ViewModel {
     private Location currentLocation;
 
     private FloorPlan floorPlan;
+    private DrawPolygons drawPolygons;
+    private Polyline currentlyDisplayedLine;
 
     //EV centerCoordinates
     private LatLng initialZoomLocation = ClassConstants.initialZoomLocation;
 
     public static final Logger LOGGER = Logger.getLogger("LocationFragmentViewModel");
 
-    private Polyline currentlyDisplayedLine;
     private HashMap<String, List<WalkingPoint>> walkingPointsMap = new HashMap<>();
     private List<WalkingPoint> walkingPoints;
 
@@ -95,6 +96,7 @@ public class LocationFragmentViewModel extends ViewModel {
      * @return It will return the layer to the LocationFragmentView to display on the map
      */
     public GeoJsonLayer loadPolygons(GoogleMap map, Context applicationContext) {
+        drawPolygons = new DrawPolygons();
         GeoJsonLayer layer = initLayer(map, applicationContext);
         setPolygonStyle(layer, map, applicationContext);
         return layer;
@@ -139,14 +141,8 @@ public class LocationFragmentViewModel extends ViewModel {
     }
 
     public Building getBuildingFromGeoJsonFeature(GeoJsonFeature feature) {
-        Coordinates centerPos = getCenterPositionBuildingFromGeoJsonFeature(feature);
-
-        List<String> floorsAvailable = getFloorsFromBuildingFromGeoJsonFeature(feature);
-        float buildingWidth = (feature.getProperty("width") != null) ? Float.parseFloat(feature.getProperty("width")) : -1;
-        float buildingHeight = (feature.getProperty("height") != null) ? Float.parseFloat(feature.getProperty("height")) : -1;
-        float buildingBearing = (feature.getProperty("bearing") != null) ? Float.parseFloat(feature.getProperty("bearing")) : -1;
-        String buildingCode = feature.getProperty("code");
-        return new Building(centerPos, floorsAvailable, buildingWidth, buildingHeight, buildingBearing, null, buildingCode, null, null, null, null, null);
+        drawPolygons = new DrawPolygons();
+        return drawPolygons.getBuildingFromGeoJsonFeature(feature);
     }
 
     public Coordinates getCenterPositionBuildingFromGeoJsonFeature(GeoJsonFeature feature) {
@@ -245,7 +241,7 @@ public class LocationFragmentViewModel extends ViewModel {
      */
     public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, GoogleMap mMap) {
         floorPlan = new FloorPlan(appDatabase);
-        floorPlan.setFloorPlan(groundOverlay,buildingCode,floor,mMap);
+        floorPlan.setFloorPlan(groundOverlay,buildingCode,floor,mMap,walkingPointsMap);
     }
 
     public Building getBuildingFromCode(String buildingCode) {
@@ -276,7 +272,7 @@ public class LocationFragmentViewModel extends ViewModel {
         return buildings.get(ClassConstants.sgwCenterBuildingLabel).getCenterCoordinatesLatLng();
     }
 
-    
+
     public void setListOfPOI(@PoiType String poiType, Context context) {
         List<WalkingPoint> allPOI = appDatabase.walkingPointDao().getAllPointsForPointType(poiType);
         setCurrentPOIIcon(poiType, context);
@@ -328,9 +324,6 @@ public class LocationFragmentViewModel extends ViewModel {
         return currentPOIIcon;
     }
 
-    void setCurrentLocation(Location currentLocation) {
-        this.currentLocation = currentLocation;
-    }
 
     public BitmapDescriptor getCustomSizedIcon(String filename, Context context, int height, int width) {
         InputStream deckFile = null;

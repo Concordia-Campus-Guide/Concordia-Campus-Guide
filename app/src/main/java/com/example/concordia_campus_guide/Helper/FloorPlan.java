@@ -36,13 +36,13 @@ public class FloorPlan {
      * @param buildingCode it represents which building we will be covering
      * @return Int of drawable resource's bitmap representation
      */
-    public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, GoogleMap mMap) {
+    public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, GoogleMap mMap, HashMap<String, List<WalkingPoint>> walkingPointsMap) {
         String fileName = buildingCode.toLowerCase()+"_"+floor.toLowerCase();
         groundOverlay.setImage(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+fileName+".png"));
-        setFloorMarkers(buildingCode, floor, mMap);
+        setFloorMarkers(buildingCode, floor, mMap,walkingPointsMap);
     }
 
-    public void setFloorMarkers(String buildingCode, String floor, GoogleMap mMap) {
+    public void setFloorMarkers(String buildingCode, String floor, GoogleMap mMap, HashMap<String, List<WalkingPoint>> walkingPointsMap) {
         if (floorLayer != null) {
             floorLayer.removeLayerFromMap();
         }
@@ -50,11 +50,11 @@ public class FloorPlan {
         if (currentlyDisplayedLine != null) {
             currentlyDisplayedLine.remove();
         }
-        PolylineOptions displayedPolylineOption = getFloorPolylines(buildingCode + "-" + floor);
+        PolylineOptions displayedPolylineOption = getFloorPolylines(buildingCode + "-" + floor, walkingPointsMap);
         currentlyDisplayedLine = mMap.addPolyline(displayedPolylineOption);
     }
 
-    public PolylineOptions getFloorPolylines(String floorCode) {
+    public PolylineOptions getFloorPolylines(String floorCode, HashMap<String, List<WalkingPoint>> walkingPointsMap) {
         // previously drawindoorpaths
         List<WalkingPoint> floorWalkingPoints = walkingPointsMap.get(floorCode);
         PolylineOptions option = new PolylineOptions();

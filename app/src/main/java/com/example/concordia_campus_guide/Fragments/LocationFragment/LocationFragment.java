@@ -64,12 +64,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private CurrentLocation currentLocationClass;
     private CurrentLocationPermissionRequest currentLocationPermissionRequest;
 
-    private static final String TAG = "LocationFragment";
-    private static final String POI_TAG = "POI";
-    private static final String ROOM_TAG = "ROOM";
-
-   // private BitmapDescriptor roomIcon;
-
     private HashMap<String, GroundOverlay> buildingsGroundOverlays;
     private FloorPickerAdapter currentFloorPickerAdapter;
     private List<Marker> poiMarkers;
@@ -140,7 +134,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
         } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
+            Log.e(ClassConstants.LOCATION_FRAGMENT_TAG, e.getMessage());
         }
         mMapView.getMapAsync(googleMap -> {
             setMapStyle(googleMap);
@@ -336,7 +330,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     public boolean setupBuildingMarkerClickListener(GoogleMap map) {
         map.setOnMarkerClickListener(marker -> {
             if (marker.getTag() != null) {
-                if (marker.getTag() != null && (marker.getTag().toString().contains(ROOM_TAG) || marker.getTag().toString().contains(POI_TAG))) {
+                if (marker.getTag() != null && (marker.getTag().toString().contains(ClassConstants.ROOM_TAG) || marker.getTag().toString().contains(ClassConstants.POI_TAG))) {
                     String roomCode = marker.getTag().toString().split("_")[1];
                     String floorCode = marker.getTag().toString().split("_")[2];
                     onRoomClick(roomCode, floorCode);
@@ -402,7 +396,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         if(room != null){
             LatLng latLng = new LatLng(room.getCenterCoordinates().getLatitude(), room.getCenterCoordinates().getLongitude());
 
-            String tag = ROOM_TAG + "_" + room.getRoomCode() +"_" + room.getFloorCode();
+            String tag = ClassConstants.ROOM_TAG + "_" + room.getRoomCode() +"_" + room.getFloorCode();
             MarkerOptions markerOptions = new MarkerOptions()
                     .position(latLng)
                     .icon(roomIcon)
@@ -425,7 +419,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             if (position == 1)
                 zoomInLocation(latLng);
 
-            String tag = POI_TAG + "_" + poi.getPlaceCode() + "_" + poi.getFloorCode();
+            String tag = ClassConstants.POI_TAG + "_" + poi.getPlaceCode() + "_" + poi.getFloorCode();
             MarkerOptions markerOptions = new MarkerOptions()
                     .title(tag)
                     .position(latLng)
@@ -469,7 +463,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     }
 
     private void classRoomCoordinateTool(GoogleMap map) {
-        map.setOnMapClickListener(latLng -> Log.i(TAG, "\"coordinates\" : [" + latLng.longitude + ", " + latLng.latitude + "]"));
+        map.setOnMapClickListener(latLng -> Log.i(ClassConstants.LOCATION_FRAGMENT_TAG, "\"coordinates\" : [" + latLng.longitude + ", " + latLng.latitude + "]"));
     }
 
 
