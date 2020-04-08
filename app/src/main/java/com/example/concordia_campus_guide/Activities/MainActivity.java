@@ -5,8 +5,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,7 +34,6 @@ import com.example.concordia_campus_guide.Fragments.SmallInfoCardFragment.SmallI
 import com.example.concordia_campus_guide.Global.ApplicationState;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.Helper.Notification;
-import com.example.concordia_campus_guide.Helper.StartActivityHelper;
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.CalendarEvent;
 import com.example.concordia_campus_guide.Models.Floors;
@@ -48,6 +47,8 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.Date;
 import java.util.HashMap;
+
+import static com.example.concordia_campus_guide.Helper.StartActivityHelper.openRoutesPage;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -78,6 +79,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mViewModel = new MainActivityViewModel();
 
         initComponents();
+        acceptOpenFromCalendarIntent();
+    }
+
+    private void acceptOpenFromCalendarIntent() {
+        Intent intent = getIntent();
+        try{
+            Uri data = intent.getData();
+            String roomCode = data.getQueryParameter("room");
+            String floorCode = data.getQueryParameter("floor");
+
+            RoomModel room = AppDatabase.getInstance(this).roomDao().getRoomByRoomCodeAndFloorCode(roomCode, floorCode);
+
+            if(room!=null){
+                SelectingToFromState.setMyCurrentLocation(getMyCurrentLocation());
+                openRoutesPage(room, this);
+            }
+        }
+        catch(Exception e){
+            //do nothing
+            //the application was opened without the calendar link
+        }
+
     }
 
     @Override
@@ -236,7 +259,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 RoomModel room = notification.getRoom(locationTemp);
-                StartActivityHelper.openRoutesPage(room, mainActivity);
+                openRoutesPage(room, mainActivity);
             }
         });
     }
