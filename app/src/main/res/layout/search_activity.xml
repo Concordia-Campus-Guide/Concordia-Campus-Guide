@@ -47,12 +47,69 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/spacing_above_next_class"
+        android:id="@+id/spacing_above_current_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="7sp"
         android:background="@color/colorPrimaryLight"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"/>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/current_location_row"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/whiteBackgroundColor"
+        app:layout_constraintTop_toBottomOf="@id/constraintLayout">
+
+        <View
+            android:id="@+id/current_location_row_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/current_location_row"
+            app:layout_constraintEnd_toEndOf="@+id/current_location_row"
+            app:layout_constraintStart_toStartOf="@+id/current_location_row"
+            app:layout_constraintTop_toTopOf="@+id/current_location_row" />
+
+        <ImageView
+            android:id="@+id/current_location_icon"
+            android:layout_width="59dp"
+            android:layout_height="63dp"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:tint="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="@+id/current_location_row_container"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_my_location_24dp" />
+
+        <TextView
+            android:id="@+id/current_location_text"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:padding="15dp"
+            android:textSize="20sp"
+            android:text="My Location"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/current_location_icon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/spacing_above_next_class"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="7sp"
+        android:background="@color/colorPrimaryLight"
+        app:layout_constraintTop_toBottomOf="@+id/current_location_row"/>
 
     <TextView
         android:id="@+id/next_class_title"
@@ -60,15 +117,22 @@
         android:layout_height="wrap_content"
         android:text="Next class"
         android:textSize="24sp"
+        android:paddingStart="5dp"
         android:background="@color/whiteBackgroundColor"
         app:layout_constraintTop_toBottomOf="@+id/spacing_above_next_class"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/next_class_row"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="70dp"
         android:background="@color/whiteBackgroundColor"
         app:layout_constraintTop_toBottomOf="@id/next_class_title">
+
+        <LinearLayout android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/border"
+            tools:ignore="MissingConstraints"></LinearLayout>
 
         <View
             android:id="@+id/next_class_row_container"
@@ -122,14 +186,6 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/spacing_above_today"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="7sp"
-        android:background="@color/colorPrimaryLight"
-        app:layout_constraintTop_toBottomOf="@+id/next_class_row"/>
 
     <ListView
         android:id="@+id/searchResults"

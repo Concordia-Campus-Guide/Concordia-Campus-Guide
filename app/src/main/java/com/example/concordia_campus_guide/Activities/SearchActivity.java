@@ -28,6 +28,7 @@ public class SearchActivity extends AppCompatActivity {
     ListView searchResults;
     EditText searchText;
     View nextClassRow;
+    View currentLocationRow;
     TextView nextClassText;
     ImageView nextClassArrow;
     SearchActivityViewModel mViewModel;
@@ -53,6 +54,7 @@ public class SearchActivity extends AppCompatActivity {
         nextClassText = findViewById(R.id.next_class_text);
         nextClassArrow = findViewById(R.id.next_class_arrow);
         nextClassRow = findViewById(R.id.next_class_row_container);
+        currentLocationRow = findViewById(R.id.current_location_row_container);
         calendarViewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
         mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getApplication())).get(SearchActivityViewModel.class);
     }
@@ -60,10 +62,6 @@ public class SearchActivity extends AppCompatActivity {
     private void setPlaceToSearchResultAdapter(){
         // Android adapter for list view
         adapter = new PlaceToSearchResultAdapter(this, R.layout.list_item_layout, mViewModel.getAllPlaces());
-        Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
-        if(myCurrentLocation != null){
-            adapter.insert(new MyCurrentPlace(myCurrentLocation.getLatitude(), myCurrentLocation.getLongitude()),0);
-        }
         searchResults.setAdapter(adapter);
     }
 
@@ -103,6 +101,16 @@ public class SearchActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Place place = adapter.getItem(position);
                 openRoutesPage(place);
+            }
+        });
+
+        currentLocationRow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
+                if(myCurrentLocation != null){
+                    openRoutesPage(new MyCurrentPlace(myCurrentLocation.getLatitude(), myCurrentLocation.getLongitude()));
+                }
             }
         });
 
