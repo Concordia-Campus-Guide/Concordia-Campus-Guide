@@ -167,7 +167,8 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
         if (!shuttles.isEmpty()) {
             mViewModel.adaptShuttleToRoutes(shuttles);
         } else {
-            mViewModel.noShuttles(this);
+            String noShuttleText = getResources().getString(R.string.no_shuttle);
+            mViewModel.noShuttles(noShuttleText);
         }
         setShuttleSelect();
         setRoutesAdapter();

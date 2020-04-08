@@ -59,7 +59,7 @@ public class SearchActivity extends AppCompatActivity {
         nextClassRow = findViewById(R.id.view_container);
         calendarViewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
         mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getApplication())).get(SearchActivityViewModel.class);
-        populateNextClassString();
+        setupNextClassString();
     }
 
     private void setPlaceToSearchResultAdapter() {
@@ -123,7 +123,7 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
-    private void populateNextClassString() {
+    private void setupNextClassString() {
         final CalendarEvent calendarEvent = calendarViewModel.getEvent(this);
         final String eventString;
         final String eventLocation;
@@ -131,21 +131,30 @@ public class SearchActivity extends AppCompatActivity {
         if(calendarEvent != null){
             eventLocation = calendarEvent.getLocation();
             Place place = mViewModel.getRoomFromDB(eventLocation);
-            if(place == null){
-                nextClassText.setText(getResources().getString(R.string.location_not_found));
-                shouldSetNextClassClickListener = false;
-            }else{
-                eventString = calendarViewModel.getNextClassString((calendarEvent));
-                nextClassText.setText(eventString);
-                // double check this value
-                if(eventString.equals(getResources().getString(R.string.incorrect_format_event))){
-                    shouldSetNextClassClickListener = false;
-                }
-                else{
-                    shouldSetNextClassClickListener = true;
-                    nextClassPlace = place;
-                }
-            }
+
+            if(place == null)
+                populateNextClassStringForNullPlace();
+            else
+                populateNextClassString(calendarEvent, place);
+        }
+    }
+
+    private void populateNextClassStringForNullPlace() {
+        nextClassText.setText(getResources().getString(R.string.location_not_found));
+        shouldSetNextClassClickListener = false;
+    }
+
+    private void populateNextClassString(CalendarEvent calendarEvent, Place place) {
+        String eventString;
+        eventString = calendarViewModel.getNextClassString((calendarEvent));
+        nextClassText.setText(eventString);
+
+        if(eventString.equals(getResources().getString(R.string.incorrect_format_event))){
+            shouldSetNextClassClickListener = false;
+        }
+        else{
+            shouldSetNextClassClickListener = true;
+            nextClassPlace = place;
         }
     }
 

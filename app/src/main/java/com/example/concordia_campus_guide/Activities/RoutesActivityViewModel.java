@@ -149,9 +149,9 @@ public class RoutesActivityViewModel extends ViewModel {
         this.transportType = transportType;
     }
 
-    public void noShuttles(Context context) {
+    public void noShuttles(String noShuttleText) {
         Route shuttleRoute = new Route("shuttle");
-        shuttleRoute.setSummary(context.getResources().getString(R.string.no_shuttle));
+        shuttleRoute.setSummary(noShuttleText);
         routeOptions.add(shuttleRoute);
     }
 }
