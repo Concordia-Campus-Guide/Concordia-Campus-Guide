@@ -1,6 +1,5 @@
 package com.example.concordia_campus_guide.Models;
 
-//TODO: Make sure these strings correspond exactly to the PointTypes
 public @interface PoiType {
 String ELEVATOR = "ELEVATOR";
 String LOUNGES = "LOUNGES";
