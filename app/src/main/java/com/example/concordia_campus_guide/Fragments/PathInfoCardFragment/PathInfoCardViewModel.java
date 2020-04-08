@@ -19,7 +19,8 @@ public class PathInfoCardViewModel extends ViewModel {
             case "ELEVATOR":
                 return R.drawable.ic_elevator_white;
             case "CLASSROOM":
-                return R.drawable.walk_selection;
+            case "WALKING":
+                return R.drawable.ic_directions_walk_red;
             case "ENTRANCE":
                 return R.drawable.ic_exit_to_app_24px_1;
             case "STAFF_ELEVATOR":
@@ -32,8 +33,6 @@ public class PathInfoCardViewModel extends ViewModel {
                 return R.drawable.ic_directions_car_red;
             case "BICYCLING":
                 return R.drawable.ic_directions_bike_black_24dp;
-            case "WALKING":
-                return R.drawable.ic_directions_walk_red;
             case "SHUTTLE":
                 return R.drawable.ic_shuttle_red;
             default:

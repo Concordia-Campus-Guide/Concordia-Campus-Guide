@@ -2,6 +2,7 @@ package com.example.concordia_campus_guide.Fragments.PathInfoCardFragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,32 +48,45 @@ public class PathInfoCardFragment extends Fragment {
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        Serializable temporaryDirectionsResults = getArguments().getSerializable("directionsResult");
-        directionsResults = (ArrayList<PathInfoCard>) temporaryDirectionsResults;
+        updateDirectionResults();
         pathInfoCardViewModel = new ViewModelProvider(this).get(PathInfoCardViewModel.class);
         return view;
+    }
+
+    private void updateDirectionResults() {
+        Serializable temporaryDirectionsResults = getArguments().getSerializable("directionsResult");
+        directionsResults = (ArrayList<PathInfoCard>) temporaryDirectionsResults;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         totalDuration = 0;
-        drawIndoorOutdoorInfo();
-        setStartAndEndTime();
+        //wait sufficient time for the google outdoor direction api callback
+        (new Handler()).postDelayed(this::drawIndoorOutdoorInfo, 2500);
     }
 
     public void drawIndoorOutdoorInfo() {
         LinearLayout layout = getView().findViewById(R.id.paths_image_buttons);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT, 1);
+        String type = "";
         for (int i = 0; i < directionsResults.size(); i++) {
             totalDuration += directionsResults.get(i).getDuration();
-            int icon = pathInfoCardViewModel.getIcon(directionsResults.get(i).getType().toUpperCase());
-            createImageButton(layout, layoutParams, icon);
-            if (i != directionsResults.size() - 1) {
-                setDividerTextView(layout, layoutParams);
+            if(!directionsResults.get(i).getType().equals(type)){
+                type = directionsResults.get(i).getType();
+                if (i!=0) {
+                    setDividerTextView(layout, layoutParams);
+                }
+                makeIcon(layout, layoutParams, type);
             }
         }
+        setStartAndEndTime();
         setRecyclerView();
+    }
+
+    private void makeIcon(LinearLayout layout, LinearLayout.LayoutParams layoutParams, String type) {
+        int icon = pathInfoCardViewModel.getIcon(type.toUpperCase());
+        createImageButton(layout, layoutParams, icon);
     }
 
     public void createImageButton(LinearLayout layout, LinearLayout.LayoutParams layoutParams, int imageId) {
@@ -108,6 +122,7 @@ public class PathInfoCardFragment extends Fragment {
     }
 
     public void setRecyclerView() {
+        updateDirectionResults();
         // specify an adapter for recycler view
         RecyclerView.Adapter mAdapter = new DirectionsRecyclerViewAdapter(getContext(), directionsResults);
         recyclerView.setAdapter(mAdapter);

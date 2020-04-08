@@ -101,54 +101,61 @@ public class PathsViewModel extends ViewModel {
                 infoCardList.add(infoCardTypes);
                 distanceBetweenPoints = 0;
             }
-            PointType pt = endWalkingPoint.getPointType();
-            switch (pt) {
-                case ELEVATOR:
-                    if (startWalkingPoint.getPointType() != PointType.ELEVATOR) {
-                        description = "Walk towards elevator";
-                        timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
-                        infoCardTypes = new PathInfoCard("Elevator", timeTakenInMinutes, description);
-                        infoCardList.add(infoCardTypes);
-                        distanceBetweenPoints = 0;
-                    }
-                    break;
-                case ENTRANCE:
-                    description = "Walk towards building entrance";
+            addIndoorDescriptionToList(startWalkingPoint, endWalkingPoint);
+        }
+    }
+
+    private void addIndoorDescriptionToList(WalkingPoint startWalkingPoint, WalkingPoint endWalkingPoint) {
+        String description;
+        long timeTakenInMinutes;
+        PathInfoCard infoCardTypes;
+        PointType pt = endWalkingPoint.getPointType();
+        switch (pt) {
+            case ELEVATOR:
+                if (startWalkingPoint.getPointType() != PointType.ELEVATOR) {
+                    description = "Walk towards elevator";
                     timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
-                    infoCardTypes = new PathInfoCard("Entrance", timeTakenInMinutes, description);
+                    infoCardTypes = new PathInfoCard("Elevator", timeTakenInMinutes, description);
                     infoCardList.add(infoCardTypes);
                     distanceBetweenPoints = 0;
-                    break;
-                case STAFF_ELEVATOR:
-                    if (startWalkingPoint.getPointType() != PointType.STAFF_ELEVATOR) {
-                        description = "Walk towards staff elevator";
-                        timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
-                        infoCardTypes = new PathInfoCard("Staff_Elevator", timeTakenInMinutes, description);
-                        infoCardList.add(infoCardTypes);
-                        distanceBetweenPoints = 0;
-                    }
-                    break;
-                case STAIRS:
-                    if (startWalkingPoint.getPointType() != PointType.STAIRS) {
-                        description = "Walk towards stairs";
-                        timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
-                        infoCardTypes = new PathInfoCard("Stairs", timeTakenInMinutes, description);
-                        infoCardList.add(infoCardTypes);
-                        distanceBetweenPoints = 0;
-                    }
-                    break;
-                case CLASSROOM:
-                    if (startWalkingPoint.getPointType() != PointType.CLASSROOM) {
-                        description = "Walk towards classroom " + endWalkingPoint.getFloorCode();
-                        timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
-                        infoCardTypes = new PathInfoCard("Classroom", timeTakenInMinutes, description);
-                        infoCardList.add(infoCardTypes);
-                        distanceBetweenPoints = 0;
-                    }
-                    break;
-                default:
-                    break;
-            }
+                }
+                break;
+            case ENTRANCE:
+                description = "Walk towards building entrance";
+                timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
+                infoCardTypes = new PathInfoCard("Entrance", timeTakenInMinutes, description);
+                infoCardList.add(infoCardTypes);
+                distanceBetweenPoints = 0;
+                break;
+            case STAFF_ELEVATOR:
+                if (startWalkingPoint.getPointType() != PointType.STAFF_ELEVATOR) {
+                    description = "Walk towards staff elevator";
+                    timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
+                    infoCardTypes = new PathInfoCard("Staff_Elevator", timeTakenInMinutes, description);
+                    infoCardList.add(infoCardTypes);
+                    distanceBetweenPoints = 0;
+                }
+                break;
+            case STAIRS:
+                if (startWalkingPoint.getPointType() != PointType.STAIRS) {
+                    description = "Walk towards stairs";
+                    timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
+                    infoCardTypes = new PathInfoCard("Stairs", timeTakenInMinutes, description);
+                    infoCardList.add(infoCardTypes);
+                    distanceBetweenPoints = 0;
+                }
+                break;
+            case CLASSROOM:
+                if (startWalkingPoint.getPointType() != PointType.CLASSROOM) {
+                    description = "Walk towards classroom " + endWalkingPoint.getFloorCode();
+                    timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
+                    infoCardTypes = new PathInfoCard("Classroom", timeTakenInMinutes, description);
+                    infoCardList.add(infoCardTypes);
+                    distanceBetweenPoints = 0;
+                }
+                break;
+            default:
+                break;
         }
     }
 

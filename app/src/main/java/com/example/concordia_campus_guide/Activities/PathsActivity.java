@@ -65,6 +65,7 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
 
         mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getApplication())).get(PathsViewModel.class);
         fragmentManager = getSupportFragmentManager();
+        directionWrappers = new ArrayList<>();
 
         from = mViewModel.getFrom();
         to = mViewModel.getTo();
@@ -167,7 +168,7 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
             mViewModel.adaptIndoorDirectionsToInfoCardList(locationFragment.getWalkingPointList());
         }
         //[from -> from_entrance ] + outdoor directions + [to_entrance -> to]
-        else if (toIsIndoor) {
+        else {
             locationFragment.setIndoorPaths(from, mViewModel.getEntrance(from));
             mViewModel.adaptIndoorDirectionsToInfoCardList(locationFragment.getWalkingPointList());
             setOutdoorPaths();
@@ -192,10 +193,12 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
         mViewModel.adaptShuttleToInfoCardList();
         //From the bus stop to the destination
         getOutdoorDirections(new BusStop(to.getCampus()), mViewModel.getEntrance(to));
-        if (toIsIndoor) {
+        //wait sufficient time for the google outdoor direction api callback
+        new android.os.Handler().postDelayed(() -> {
+            if (toIsIndoor) {
             locationFragment.setIndoorPaths(mViewModel.getEntrance(to), to);
             mViewModel.adaptIndoorDirectionsToInfoCardList(locationFragment.getWalkingPointList());
-        }
+        }}, 2000);
     }
 
     public void getOutdoorDirections(Place from, Place to) {
@@ -209,8 +212,8 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
     @Override
     public void directionsApiCallBack(DirectionsResult result, List<Route> routeOptions) {
         if (result.routes.length > 0) {
-            directionsRoute = result.routes[0];
-            directionWrappers = (ArrayList<DirectionWrapper>) parseDirectionResults();
+            directionsRoute =  result.routes[0];
+            directionWrappers.addAll(parseDirectionResults());
             locationFragment.drawOutdoorPaths(directionWrappers);
             mViewModel.adaptOutdoorDirectionsToInfoCardList(directionWrappers);
         }
