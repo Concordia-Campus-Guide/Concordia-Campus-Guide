@@ -17,10 +17,10 @@ public class StartActivityHelper {
             SelectingToFromState.setTo(place);
             if(SelectingToFromState.getMyCurrentLocation() != null){
                 Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
-                SelectingToFromState.setFrom(new MyCurrentPlace(myCurrentLocation.getLatitude(), myCurrentLocation.getLongitude()));
+                SelectingToFromState.setFrom(new MyCurrentPlace(activity.getBaseContext(), myCurrentLocation.getLongitude(), myCurrentLocation.getLatitude()));
             }
             else{
-                SelectingToFromState.setFrom(new MyCurrentPlace());
+                SelectingToFromState.setFrom(new MyCurrentPlace(activity.getBaseContext()));
             }
         }
         if(SelectingToFromState.isSelectFrom()){

@@ -1,14 +1,20 @@
 package com.example.concordia_campus_guide.Models;
 
-public class MyCurrentPlace extends Place {
-    String displayName = "Select location";
+import android.content.Context;
 
-    public MyCurrentPlace(Double latitude, Double longitude){
+import com.example.concordia_campus_guide.R;
+
+public class MyCurrentPlace extends Place {
+    String displayName = "";
+
+    public MyCurrentPlace(Context context, Double longitude, Double latitude){
         this.setCenterCoordinates(new Coordinates(latitude, longitude));
-        this.displayName = "My Current Location";
+        this.displayName = context.getResources().getString(R.string.my_current_location);
     }
 
-    public MyCurrentPlace(){}
+    public MyCurrentPlace(Context context){
+        this.displayName = context.getResources().getString(R.string.select_location);
+    }
 
     public String getDisplayName(){
         return this.displayName;

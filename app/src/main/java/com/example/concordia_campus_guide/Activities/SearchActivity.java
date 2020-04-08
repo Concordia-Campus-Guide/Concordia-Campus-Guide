@@ -117,7 +117,7 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
                 if(myCurrentLocation != null){
-                    openRoutesPage(new MyCurrentPlace(myCurrentLocation.getLatitude(), myCurrentLocation.getLongitude()));
+                    openRoutesPage(new MyCurrentPlace(getApplicationContext(), myCurrentLocation.getLongitude(), myCurrentLocation.getLatitude()));
                 }
             }
         });
@@ -177,9 +177,9 @@ public class SearchActivity extends AppCompatActivity {
             SelectingToFromState.setTo(place);
             if (SelectingToFromState.getMyCurrentLocation() != null) {
                 Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
-                SelectingToFromState.setFrom(new MyCurrentPlace(myCurrentLocation.getLatitude(), myCurrentLocation.getLongitude()));
+                SelectingToFromState.setFrom(new MyCurrentPlace(getApplicationContext(), myCurrentLocation.getLongitude(), myCurrentLocation.getLatitude()));
             } else {
-                SelectingToFromState.setFrom(new MyCurrentPlace());
+                SelectingToFromState.setFrom(new MyCurrentPlace(getApplicationContext()));
             }
         }
         if (SelectingToFromState.isSelectFrom()) {
