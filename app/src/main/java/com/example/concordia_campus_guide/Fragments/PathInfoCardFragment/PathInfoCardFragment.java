@@ -35,7 +35,6 @@ import java.util.Date;
 import java.util.List;
 
 public class PathInfoCardFragment extends Fragment {
-    private PathInfoCardViewModel pathInfoCardViewModel;
     private RecyclerView recyclerView;
     List<PathInfoCard> directionsResults;
     private double totalDuration;
@@ -54,7 +53,6 @@ public class PathInfoCardFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         updateDirectionResults();
-        pathInfoCardViewModel = new ViewModelProvider(this).get(PathInfoCardViewModel.class);
         return view;
     }
 
@@ -90,7 +88,7 @@ public class PathInfoCardFragment extends Fragment {
     }
 
     private void makeIcon(LinearLayout layout, LinearLayout.LayoutParams layoutParams, String type) {
-        int icon = pathInfoCardViewModel.getIcon(type.toUpperCase());
+        int icon = this.getResources().getIdentifier("ic_directions_"+type.toLowerCase(),"drawable", this.getActivity().getPackageName());
         createImageButton(layout, layoutParams, icon);
     }
 

@@ -3,6 +3,7 @@ package com.example.concordia_campus_guide.Activities;
 import androidx.lifecycle.ViewModel;
 
 import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
+import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.Models.PathInfoCard;
@@ -85,73 +86,47 @@ public class PathsViewModel extends ViewModel {
             WalkingPoint startWalkingPoint = walkingPointList.get(i);
             WalkingPoint endWalkingPoint = walkingPointList.get(i + 1);
             distanceBetweenPoints += getDistanceFromLatLonInKm(startWalkingPoint.getCoordinate().getLatitude(), startWalkingPoint.getCoordinate().getLongitude(), endWalkingPoint.getCoordinate().getLatitude(), startWalkingPoint.getCoordinate().getLongitude());
-            long timeTakenInMinutes;
-            String description = "";
-            PathInfoCard infoCardTypes;
             if (startWalkingPoint.getPointType() == PointType.CLASSROOM) {
-                description = "Leave classroom";
-                timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
-                infoCardTypes = new PathInfoCard("Classroom", timeTakenInMinutes, description);
-                infoCardList.add(infoCardTypes);
-                distanceBetweenPoints = 0;
+                addCardToList("Leave classroom", "Classroom");
             } else if (startWalkingPoint.getPointType() == PointType.ENTRANCE) {
-                description = "Walk towards entrance";
-                timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
-                infoCardTypes = new PathInfoCard("ENTRANCE", timeTakenInMinutes, description);
-                infoCardList.add(infoCardTypes);
-                distanceBetweenPoints = 0;
+                addCardToList("Walk towards entrance", "Entrance");
             }
             addIndoorDescriptionToList(startWalkingPoint, endWalkingPoint);
         }
     }
 
+    private void addCardToList(String description, String type) {
+        PathInfoCard pathInfoCard;
+        long timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
+        pathInfoCard = new PathInfoCard(type, timeTakenInMinutes, description);
+        infoCardList.add(pathInfoCard);
+        distanceBetweenPoints = 0;
+    }
+
     private void addIndoorDescriptionToList(WalkingPoint startWalkingPoint, WalkingPoint endWalkingPoint) {
-        String description;
-        long timeTakenInMinutes;
-        PathInfoCard infoCardTypes;
         PointType pt = endWalkingPoint.getPointType();
         switch (pt) {
             case ELEVATOR:
                 if (startWalkingPoint.getPointType() != PointType.ELEVATOR) {
-                    description = "Walk towards elevator";
-                    timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
-                    infoCardTypes = new PathInfoCard("Elevator", timeTakenInMinutes, description);
-                    infoCardList.add(infoCardTypes);
-                    distanceBetweenPoints = 0;
+                    addCardToList("Walk towards elevator", "Elevator");
                 }
                 break;
             case ENTRANCE:
-                description = "Walk towards building entrance";
-                timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
-                infoCardTypes = new PathInfoCard("Entrance", timeTakenInMinutes, description);
-                infoCardList.add(infoCardTypes);
-                distanceBetweenPoints = 0;
+                addCardToList("Walk towards building entrance", "Entrance");
                 break;
             case STAFF_ELEVATOR:
                 if (startWalkingPoint.getPointType() != PointType.STAFF_ELEVATOR) {
-                    description = "Walk towards staff elevator";
-                    timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
-                    infoCardTypes = new PathInfoCard("Staff_Elevator", timeTakenInMinutes, description);
-                    infoCardList.add(infoCardTypes);
-                    distanceBetweenPoints = 0;
+                    addCardToList("Walk towards staff elevator", "Staff_Elevator");
                 }
                 break;
             case STAIRS:
                 if (startWalkingPoint.getPointType() != PointType.STAIRS) {
-                    description = "Walk towards stairs";
-                    timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
-                    infoCardTypes = new PathInfoCard("Stairs", timeTakenInMinutes, description);
-                    infoCardList.add(infoCardTypes);
-                    distanceBetweenPoints = 0;
+                    addCardToList("Walk towards stairs", "Stairs");
                 }
                 break;
             case CLASSROOM:
                 if (startWalkingPoint.getPointType() != PointType.CLASSROOM) {
-                    description = "Walk towards classroom " + endWalkingPoint.getFloorCode();
-                    timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
-                    infoCardTypes = new PathInfoCard("Classroom", timeTakenInMinutes, description);
-                    infoCardList.add(infoCardTypes);
-                    distanceBetweenPoints = 0;
+                    addCardToList("Walk towards classroom " + endWalkingPoint.getFloorCode(), "Classroom");
                 }
                 break;
             default:
@@ -169,7 +144,7 @@ public class PathsViewModel extends ViewModel {
     }
 
     public double getDistanceFromLatLonInKm(double lat1, double lon1, double lat2, double lon2) {
-        double earthRadius = 6371; // Radius of the earth in km
+        double earthRadius = ClassConstants.EARTH_RADIUS_KM; // Radius of the earth in km
         double dLat = deg2rad(lat2 - lat1);  // deg2rad below
         double dLon = deg2rad(lon2 - lon1);
         double angle =

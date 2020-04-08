@@ -44,6 +44,9 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
     private boolean fromIsIndoor = false;
     private boolean toIsIndoor = false;
     boolean shuttleSelected;
+    int counter = 1;
+    boolean firstCallCompleted = false;
+    boolean secondCallCompleted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -192,15 +195,8 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
             getOutdoorDirections(from, new BusStop(from.getCampus()));
         }
         drawShuttlePath();
-        mViewModel.adaptShuttleToInfoCardList();
         //From the bus stop to the destination
         getOutdoorDirections(new BusStop(to.getCampus()), mViewModel.getEntrance(to));
-        //wait sufficient time for the google outdoor direction api callback
-        new android.os.Handler().postDelayed(() -> {
-            if (toIsIndoor) {
-            locationFragment.setIndoorPaths(mViewModel.getEntrance(to), to);
-            mViewModel.adaptIndoorDirectionsToInfoCardList(locationFragment.getWalkingPointList());
-        }}, 2000);
     }
 
     public void getOutdoorDirections(Place from, Place to) {
@@ -214,11 +210,18 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
     @Override
     public void directionsApiCallBack(DirectionsResult result, List<Route> routeOptions) {
         if (result.routes.length > 0) {
-            directionsRoute =  result.routes[0];
-            directionWrappers.addAll(parseDirectionResults());
+            directionsRoute = result.routes[0];
+            directionWrappers = (ArrayList<DirectionWrapper>) parseDirectionResults();
             locationFragment.drawOutdoorPaths(directionWrappers);
             mViewModel.adaptOutdoorDirectionsToInfoCardList(directionWrappers);
         }
+        if(counter < 2) {
+            mViewModel.adaptShuttleToInfoCardList();
+        } else if (toIsIndoor) {
+            locationFragment.setIndoorPaths(mViewModel.getEntrance(to), to);
+            mViewModel.adaptIndoorDirectionsToInfoCardList(locationFragment.getWalkingPointList());
+        }
+        counter += 1;
     }
 
     public void drawShuttlePath() {
