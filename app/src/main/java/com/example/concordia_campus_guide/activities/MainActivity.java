@@ -70,7 +70,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Notification notification;
     Toolbar myToolbar;
 
-    private CalendarViewModel calendarViewModel;
+    private CurrentLocation currentLocation;
+
     // Side Menu Toggle Buttons
     private CompoundButton staffToggle;
     private CompoundButton accessibilityToggle;
@@ -139,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void initComponents() {
         MainActivity.this.setTitle("ConUMaps");
 
+        currentLocation = new CurrentLocation(this);
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
         calendarViewModel = new CalendarViewModel(getApplication());
         mViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
@@ -403,7 +405,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public Location getMyCurrentLocation() {
-        return this.locationFragment.getCurrentLocation();
+        return currentLocation.getCurrentLocation();
     }
 
     @Override
