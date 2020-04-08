@@ -12,16 +12,17 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 
 /**
  * Usage Example:
- Double[] src = {-73.5791637, 45.49526596};
- Double[] trg = {-73.57908558, 45.49735711};
- RoomModel room1 = new RoomModel(src, "437", "MB-S2");
- RoomModel room2 = new RoomModel(trg, "838", "H-8");
- PathFinder finder = new PathFinder(getContext(), room1, room2);
- List<WalkingPoint> solution = finder.getPathToDestination();
+ * Double[] src = {-73.5791637, 45.49526596};
+ * Double[] trg = {-73.57908558, 45.49735711};
+ * RoomModel room1 = new RoomModel(src, "437", "MB-S2");
+ * RoomModel room2 = new RoomModel(trg, "838", "H-8");
+ * PathFinder finder = new PathFinder(getContext(), room1, room2);
+ * List<WalkingPoint> solution = finder.getPathToDestination();
  */
 public class PathFinder {
 
@@ -46,18 +47,19 @@ public class PathFinder {
         this.appDatabase = appDatabase;
 
         final List<WalkingPoint> walkingPoints = appDatabase.walkingPointDao().getAll();
-        walkingPointNodesMap = populateWalkingPointMap(walkingPoints);
+        walkingPointNodesMap = (HashMap<Integer, WalkingPointNode>) populateWalkingPointMap(walkingPoints);
 
         this.initialPoint = getWalkingPointCorrespondingToPlace(source);
         this.destinationPoint = getWalkingPointCorrespondingToPlace(destination);
     }
 
     /**
-     *  This method's purpose is to populate our map (graph) with all the walking points in the map.
+     * This method's purpose is to populate our map (graph) with all the walking points in the map.
+     *
      * @param walkingPoints
      * @return
      */
-    public HashMap<Integer, WalkingPointNode> populateWalkingPointMap(final List<WalkingPoint> walkingPoints) {
+    public Map<Integer, WalkingPointNode> populateWalkingPointMap(final List<WalkingPoint> walkingPoints) {
         this.walkingPointNodesMap = new HashMap<>();
         for (final WalkingPoint walkingPoint : walkingPoints) {
             walkingPointNodesMap.put(walkingPoint.getId(), new WalkingPointNode(walkingPoint, null, 0, 0));
@@ -83,7 +85,7 @@ public class PathFinder {
             pointList = appDatabase.walkingPointDao().getAllAccessPointsOnFloor(floorCode, PointType.ELEVATOR);
         }
 
-        if(pointList != null && !pointList.isEmpty())
+        if (pointList != null && !pointList.isEmpty())
             return pointList.get(0);
 
         return null;
@@ -91,6 +93,7 @@ public class PathFinder {
 
     /**
      * This method's purpose is to find a solution path from a point A to a point B. It will use a priorityQueue to get the best next point to visit at each moment. If the point was already visited, it will skip it.
+     *
      * @return
      */
     public List<WalkingPoint> getPathToDestination() {
@@ -106,7 +109,6 @@ public class PathFinder {
                 walkingPointsVisited.put(currentLocation, currentLocation.getCost());
 
             if (isGoal(currentLocation.getWalkingPoint())) {
-                List<WalkingPoint> walk = getSolutionPath(currentLocation);
                 return getSolutionPath(currentLocation);
             }
             addNearestWalkingPoints(currentLocation);
@@ -129,6 +131,7 @@ public class PathFinder {
 
     /**
      * This method will take care of setting the solution path once a solution has been found.
+     *
      * @param goalNode
      * @return
      */
@@ -145,6 +148,7 @@ public class PathFinder {
     /**
      * This method's purpose is to add the reachable points from a walkingPoint. If one of these points is already in the open list (nodes to visit list) with a higher cost,
      * we will update it. Same if it was in the closed list(visited nodes list), we will update the cost only, in this class.
+     *
      * @param currentNode
      */
     public void addNearestWalkingPoints(final WalkingPointNode currentNode) {

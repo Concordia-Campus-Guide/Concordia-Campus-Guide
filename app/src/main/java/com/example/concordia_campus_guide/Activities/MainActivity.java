@@ -7,10 +7,13 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
+
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -82,12 +85,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
 
         SharedPreferences sharedPreferences = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
-        for(CompoundButton toggleButton: toggleButtonAndCorrespondingToggleType.keySet()) {
+        for (CompoundButton toggleButton : toggleButtonAndCorrespondingToggleType.keySet()) {
             String value = sharedPreferences.getString(toggleButtonAndCorrespondingToggleType.get(toggleButton), ClassConstants.FALSE);
             toggleButton.setChecked(value.equals(ClassConstants.TRUE));
         }
@@ -96,14 +98,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    protected void onPause()
-    {
+    protected void onPause() {
         super.onPause();
 
         SharedPreferences sharedPreferences = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
         SharedPreferences.Editor myEdit = sharedPreferences.edit();
 
-        for(CompoundButton toggleButton: toggleButtonAndCorrespondingToggleType.keySet()) {
+        for (CompoundButton toggleButton : toggleButtonAndCorrespondingToggleType.keySet()) {
             String value = toggleButton.isChecked() ? ClassConstants.TRUE : ClassConstants.FALSE;
             String toggleType = toggleButtonAndCorrespondingToggleType.get(toggleButton);
             myEdit.putString(toggleType, value);
@@ -134,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void setupNotifications() {
-        notification = new Notification(this,AppDatabase.getInstance(this));
+        notification = new Notification(this, AppDatabase.getInstance(this));
         notification.checkUpCalendarEvery5Minutes();
     }
 
@@ -179,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         translationToggle = (CompoundButton) translateItem.getActionView();
         staffToggle = (CompoundButton) staffItem.getActionView();
         accessibilityToggle = (CompoundButton) accessibilityItem.getActionView();
-        
+
         setupOnChangeListenerForSwitch(staffToggle);
         setupOnChangeListenerForSwitch(translationToggle);
         setupOnChangeListenerForSwitch(accessibilityToggle);
@@ -207,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    public void popUp(CalendarEvent calendarEvent){
+    public void popUp(CalendarEvent calendarEvent) {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setCancelable(true);
         Date eventDate = new Date((Long.parseLong(calendarEvent.getStartTime())));
@@ -217,19 +218,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             builder.setMessage(getResources().getString(R.string.location_format_wrong_description));
         }
 
-        else if(differenceInMillis>0 ){
+        else if(differenceInMillis > 0 ){
             builder.setTitle(getResources().getString(R.string.calendar_text_header) +  mViewModel.displayTimeToNextClass(calendarEvent.getStartTime()));
             builder.setMessage(getResources().getString(R.string.you_have) + calendarEvent.getTitle() + getResources().getString(R.string.in) + mViewModel.displayTimeToNextClass(calendarEvent.getStartTime())  + getResources().getString(R.string.at) +
                     calendarEvent.getLocation() + getResources().getString(R.string.calendar_text_end));
-            setupShowMeDirectionsBtn(builder,calendarEvent.getLocation());
+            setupShowMeDirectionsBtn(builder, calendarEvent.getLocation());
         }
         else {
             String eventPassedBy = mViewModel.displayTimeToNextClass(calendarEvent.getStartTime());
-            eventPassedBy = eventPassedBy.replace('-',' ');
+            eventPassedBy = eventPassedBy.replace('-', ' ');
             builder.setTitle(getResources().getString(R.string.calendar_text_header_late) + eventPassedBy);
             builder.setMessage(getResources().getString(R.string.your) + calendarEvent.getTitle() + getResources().getString(R.string.already_started) + eventPassedBy + getResources().getString(R.string.at) +
-                    calendarEvent.getLocation() +getResources().getString(R.string.calendar_text_end));
-            setupShowMeDirectionsBtn(builder,calendarEvent.getLocation());
+                    calendarEvent.getLocation() + getResources().getString(R.string.calendar_text_end));
+            setupShowMeDirectionsBtn(builder, calendarEvent.getLocation());
         }
 
         setupCancelBtn(builder);
@@ -237,7 +238,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         builder.show();
     }
 
-    private void setupCancelBtn(AlertDialog.Builder builder){
+    private void setupCancelBtn(AlertDialog.Builder builder) {
         builder.setNegativeButton(getResources().getString(R.string.ignore), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -246,14 +247,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-    private void setupShowMeDirectionsBtn(AlertDialog.Builder builder, String location){
+    private void setupShowMeDirectionsBtn(AlertDialog.Builder builder, String location) {
         final String locationTemp = location;
         final Activity mainActivity = this;
         builder.setPositiveButton(getResources().getString(R.string.show_me_direction), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 RoomModel room = notification.getRoom(locationTemp);
-                StartActivityHelper.openRoutesPage(room,mainActivity);
+                StartActivityHelper.openRoutesPage(room, mainActivity);
             }
         });
     }
@@ -286,7 +287,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
      *
      * @param buildingCode: the Building code
      */
-    public void showInfoCard(String buildingCode){
+    public void showInfoCard(String buildingCode) {
         resetBottomCard();
         infoCardFragment = new InfoCardFragment(buildingCode);
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -296,7 +297,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         (findViewById(R.id.bottom_card_frame)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(swipeableInfoCard.getState() != BottomSheetBehavior.STATE_EXPANDED)
+                if (swipeableInfoCard.getState() != BottomSheetBehavior.STATE_EXPANDED)
                     swipeableInfoCard.setState(BottomSheetBehavior.STATE_EXPANDED);
                 else
                     swipeableInfoCard.setState(BottomSheetBehavior.STATE_COLLAPSED);
@@ -312,7 +313,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.commit();
     }
 
-    public void showPOICard(){
+    public void showPOICard() {
         resetBottomCard();
         poiFragment = new POIFragment();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -323,7 +324,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         (findViewById(R.id.explore_bottom_card_frame)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(swipeablePOICard.getState() != BottomSheetBehavior.STATE_EXPANDED)
+                if (swipeablePOICard.getState() != BottomSheetBehavior.STATE_EXPANDED)
                     swipeablePOICard.setState(BottomSheetBehavior.STATE_EXPANDED);
                 else
                     swipeablePOICard.setState(BottomSheetBehavior.STATE_COLLAPSED);
@@ -346,9 +347,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
      */
     @Override
     public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)){
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        }else {
+        } else {
             Fragment fragment = fragmentManager.findFragmentById(R.id.bottom_card_frame);
             if (fragment != null) {
                 showPOICard();
@@ -361,8 +362,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         locationFragment.deselectAll();
     }
 
-    private void setUpDb(){
-        if(!ApplicationState.getInstance(this).isDbIsSet()){
+    private void setUpDb() {
+        if (!ApplicationState.getInstance(this).isDbIsSet()) {
             //delete previous db
             getApplication().getApplicationContext().deleteDatabase(AppDatabase.DB_NAME);
 
@@ -399,7 +400,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
         SharedPreferences sharedPreferences = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
-        if (itemId == R.id.nav_calendar){
+        if (itemId == R.id.nav_calendar) {
             SharedPreferences.Editor myEdit = sharedPreferences.edit();
 
             String value = item.isEnabled() ? ClassConstants.TRUE : ClassConstants.FALSE;

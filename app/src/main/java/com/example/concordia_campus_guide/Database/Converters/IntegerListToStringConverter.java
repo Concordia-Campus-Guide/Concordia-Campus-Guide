@@ -30,6 +30,6 @@ public class IntegerListToStringConverter {
             }
             return listOfIds;
         }
-        return null;
+        return new ArrayList<>();
     }
 }

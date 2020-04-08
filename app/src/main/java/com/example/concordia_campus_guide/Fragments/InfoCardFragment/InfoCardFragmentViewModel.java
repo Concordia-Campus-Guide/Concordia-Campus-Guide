@@ -19,7 +19,9 @@ public class InfoCardFragmentViewModel extends ViewModel {
         return (Building) place;
     }
 
-    public void setBuilding(String buildingCode){ this.place = (Place) appDb.buildingDao().getBuildingByBuildingCode(buildingCode); }
+    public void setBuilding(String buildingCode) {
+        this.place = appDb.buildingDao().getBuildingByBuildingCode(buildingCode);
+    }
 
     public void setPlace(Place place) {
         this.place = place;
