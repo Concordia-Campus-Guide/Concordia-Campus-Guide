@@ -12,6 +12,7 @@ import androidx.test.filters.LargeTest;
 import androidx.test.rule.GrantPermissionRule;
 import androidx.test.runner.AndroidJUnit4;
 
+import com.example.concordia_campus_guide.EspressoHelpers;
 import com.example.concordia_campus_guide.R;
 
 import org.hamcrest.Description;
@@ -53,12 +54,14 @@ public class SearchActivityTest {
 
     @Test
     public void searchActivityTest() {
+        EspressoHelpers.cancelNotificationIfExists();
+
         ViewInteraction textView = onView(
                 allOf(withId(R.id.search), withContentDescription("Icon"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.toolbar),
-                                        1),
+                                        2),
                                 0),
                         isDisplayed()));
         textView.check(matches(withText("")));
@@ -68,7 +71,7 @@ public class SearchActivityTest {
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.toolbar),
-                                        1),
+                                        2),
                                 0),
                         isDisplayed()));
         actionMenuItemView.perform(click());

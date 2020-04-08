@@ -2,17 +2,18 @@ package com.example.concordia_campus_guide;
 
 import android.Manifest;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.util.Arrays;
-import java.util.List;
-
 import androidx.annotation.StringDef;
 
 import com.example.concordia_campus_guide.Models.Coordinates;
 import com.google.android.gms.maps.model.Dash;
 import com.google.android.gms.maps.model.Gap;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PatternItem;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.util.Arrays;
+import java.util.List;
 
 public class  ClassConstants {
     public static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
@@ -52,5 +53,14 @@ public class  ClassConstants {
 
     //Polyline styling
     public static final List<PatternItem> WALK_PATTERN = Arrays.asList(new Gap(20), new Dash(20));
+
+    //EV centerCoordinates
+    public static final LatLng initialZoomLocation = new LatLng(45.495638 ,-73.578258);
+
+    //SGW building label string used as campus center
+    public static final String sgwCenterBuildingLabel = "EV";
+
+    //Loyola building label string used as campus center
+    public static final String loyolaCenterBuildingLabel = "CC";
 
 }

@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CoordinatesListConverter {
@@ -22,18 +23,16 @@ public class CoordinatesListConverter {
         }
         Gson gson = new Gson();
         Type type = new TypeToken<List<Coordinates>>() {}.getType();
-        String json = gson.toJson(listOfCoordinates, type);
-        return json;
+        return gson.toJson(listOfCoordinates, type);
     }
 
     @TypeConverter
     public List<Coordinates> convertToEntityAttribute(String listOfCoordinatesString) {
         if (listOfCoordinatesString == null){
-            return null;
+            return new ArrayList<>();
         }
         Gson gson = new Gson();
         Type type = new TypeToken<List<Coordinates>>() {}.getType();
-        List<Coordinates> listOfCoordinates = gson.fromJson(listOfCoordinatesString, type);
-        return listOfCoordinates;
+        return gson.fromJson(listOfCoordinatesString, type);
     }
 }

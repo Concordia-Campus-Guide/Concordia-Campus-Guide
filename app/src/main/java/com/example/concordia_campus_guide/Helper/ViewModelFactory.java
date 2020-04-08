@@ -11,6 +11,7 @@ import com.example.concordia_campus_guide.Activities.SearchActivityViewModel;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragmentViewModel;
 import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel;
+import com.example.concordia_campus_guide.Fragments.SmallInfoCardFragment.SmallInfoCardFragmentViewModel;
 
 public class ViewModelFactory implements ViewModelProvider.Factory {
 
@@ -35,6 +36,8 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
             return (T) new LocationFragmentViewModel(appDb);
         } else if (modelClass == PathsViewModel.class) {
             return (T) new PathsViewModel(appDb);
+        } else if(modelClass == SmallInfoCardFragmentViewModel.class){
+            return (T) new SmallInfoCardFragmentViewModel(appDb);
         }
         return null;
     }

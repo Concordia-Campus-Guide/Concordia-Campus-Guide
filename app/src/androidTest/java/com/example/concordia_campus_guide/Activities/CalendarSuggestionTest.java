@@ -11,6 +11,7 @@ import androidx.test.rule.ActivityTestRule;
 import androidx.test.rule.GrantPermissionRule;
 import androidx.test.runner.AndroidJUnit4;
 
+import com.example.concordia_campus_guide.EspressoHelpers;
 import com.example.concordia_campus_guide.R;
 
 import org.hamcrest.Description;
@@ -22,7 +23,6 @@ import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
@@ -50,22 +50,14 @@ public class CalendarSuggestionTest {
     public void calendarSuggestionTest() {
         android.os.SystemClock.sleep(5000);
 
-        ViewInteraction materialButton = onView(
-                allOf(withId(android.R.id.button2), withText("Ignore"),
-                    isDisplayed()));
-        try{
-            materialButton.perform(scrollTo(), click());
-        }
-        catch(Exception e){
-            //ignore maybe the popup was cancelled by other test
-        }
+        EspressoHelpers.cancelNotificationIfExists();
 
         ViewInteraction actionMenuItemView = onView(
                 allOf(withId(R.id.search), withContentDescription("Icon"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.toolbar),
-                                        1),
+                                        2),
                                 0),
                         isDisplayed()));
         actionMenuItemView.perform(click());

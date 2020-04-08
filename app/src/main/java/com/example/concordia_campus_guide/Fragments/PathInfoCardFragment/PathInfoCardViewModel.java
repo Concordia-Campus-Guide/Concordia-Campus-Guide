@@ -13,7 +13,9 @@ import java.util.List;
 public class PathInfoCardViewModel extends ViewModel {
     private double totalDuration;
 
-    public PathInfoCardViewModel(){}
+    public PathInfoCardViewModel(){
+        // used in tests
+    }
 
     public double getTotalDuration(){
         return this.totalDuration;

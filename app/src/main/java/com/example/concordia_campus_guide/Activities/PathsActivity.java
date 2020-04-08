@@ -81,6 +81,8 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
             shuttleSelected = extras.getBoolean("shuttle");
         }
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.pathLocationFragment);
+
+        locationFragment.setDifferentInitialView(new LatLng(from.getCenterCoordinates().getLatitude(), from.getCenterCoordinates().getLongitude()));
     }
 
     private void returnToSelectRoute() {
@@ -182,7 +184,7 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
         LatLng fromLatLong = new LatLng(from.getCenterCoordinates().getLatitude(), from.getCenterCoordinates().getLongitude());
         LatLng toLatLong = new LatLng(to.getCenterCoordinates().getLatitude(), to.getCenterCoordinates().getLongitude());
 
-        String url = UrlBuilder.build(fromLatLong, toLatLong, ClassConstants.WALKING);
+        String url = UrlBuilder.build(fromLatLong, toLatLong, ClassConstants.WALKING, getBaseContext().getResources().getConfiguration().getLocales().get(0));
         new DirectionsApiDataRetrieval(PathsActivity.this).execute(url, ClassConstants.WALKING);
     }
 

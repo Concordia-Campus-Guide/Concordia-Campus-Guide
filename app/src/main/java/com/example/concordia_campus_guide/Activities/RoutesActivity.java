@@ -60,8 +60,7 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
     }
 
     @Override
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
 
         // Fetching the stored data from the SharedPreference
@@ -69,15 +68,15 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
 
         String disability = sharedPreferences.getString(ClassConstants.DISABILITY_BUTTON, ClassConstants.FALSE);
 
-        if(disability.equals(ClassConstants.TRUE))
+        if (disability.equals(ClassConstants.TRUE)) {
             disabilityButton.setSelected(true);
-        else
+        } else {
             disabilityButton.setSelected(false);
+        }
     }
 
     @Override
-    protected void onPause()
-    {
+    protected void onPause() {
         super.onPause();
 
         // Creating a shared pref object with a file name "UserPreferences" in private mode
@@ -168,7 +167,8 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
         if (!shuttles.isEmpty()) {
             mViewModel.adaptShuttleToRoutes(shuttles);
         } else {
-            mViewModel.noShuttles();
+            String noShuttleText = getResources().getString(R.string.no_shuttle);
+            mViewModel.noShuttles(noShuttleText);
         }
         setShuttleSelect();
         setRoutesAdapter();
@@ -228,7 +228,7 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
                     startActivity(openPaths);
                 } else {
                     if (mViewModel.getShuttles() == null) {
-                    Toast.makeText(getApplicationContext(), "Paths view for Shuttle route is not available if no shuttles exist.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Paths view for Shuttle route is not available if no shuttles exist.", Toast.LENGTH_SHORT).show();
                     } else {
                         Intent openPaths = new Intent(RoutesActivity.this,
                                 PathsActivity.class);
@@ -271,7 +271,7 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
             LatLng to = new LatLng(toCenterCoordinates.getLatitude(), toCenterCoordinates.getLongitude());
             String transportType = mViewModel.getTransportType();
 
-            String url = UrlBuilder.build(from, to, transportType);
+            String url = UrlBuilder.build(from, to, transportType,  getBaseContext().getResources().getConfiguration().getLocales().get(0));
             new DirectionsApiDataRetrieval(RoutesActivity.this).execute(url, transportType);
         }
     }

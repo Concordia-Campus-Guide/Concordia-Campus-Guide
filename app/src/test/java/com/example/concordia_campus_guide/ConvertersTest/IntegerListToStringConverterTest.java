@@ -53,6 +53,6 @@ public class IntegerListToStringConverterTest{
 
     @Test
     public void convertStringToListOfIntegerNullTest(){
-        assertNull("convertStringToListOfInteger: ", integerListToStringConverter.convertToEntityAttribute(null));
+        assertEquals(new ArrayList<>(), integerListToStringConverter.convertToEntityAttribute(null));
     }
 }

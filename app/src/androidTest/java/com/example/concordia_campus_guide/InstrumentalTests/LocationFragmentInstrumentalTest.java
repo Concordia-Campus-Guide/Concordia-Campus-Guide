@@ -1,40 +1,29 @@
 package com.example.concordia_campus_guide.InstrumentalTests;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.graphics.Bitmap;
 
-import com.example.concordia_campus_guide.Activities.MainActivity;
-import com.example.concordia_campus_guide.ClassConstants;
-import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel;
-import com.example.concordia_campus_guide.Helper.PathFinder;
-import com.example.concordia_campus_guide.Models.Coordinates;
-import com.example.concordia_campus_guide.Models.PointType;
-import com.example.concordia_campus_guide.Models.RoomModel;
-import com.example.concordia_campus_guide.Models.WalkingPoint;
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.PatternItem;
-import com.google.android.gms.maps.model.Polyline;
-import com.google.android.gms.maps.model.PolylineOptions;
-
-import org.junit.Rule;
-import org.junit.Test;
-
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertNotNull;
-import static junit.framework.TestCase.assertTrue;
-
-import androidx.lifecycle.LiveData;
-import androidx.room.Database;
 import androidx.test.filters.SmallTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.rule.GrantPermissionRule;
 import androidx.test.runner.AndroidJUnit4;
+
+import com.example.concordia_campus_guide.Activities.MainActivity;
+import com.example.concordia_campus_guide.Database.AppDatabase;
+import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel;
+import com.example.concordia_campus_guide.Models.Coordinates;
+import com.example.concordia_campus_guide.Models.RoomModel;
+import com.google.android.gms.maps.model.PolylineOptions;
+
 import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.List;
-import java.util.PriorityQueue;
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertNotNull;
+import static junit.framework.TestCase.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
 @SmallTest
@@ -61,11 +50,15 @@ public class LocationFragmentInstrumentalTest {
     }
 
     @Test
-    public void styleMarker(){
-        BitmapDescriptor bitmap1 = viewModel.styleMarker("EV",appContext);
-        BitmapDescriptor bitmap2 = viewModel.styleMarker("EV",appContext);
+    public void createMarkerIcon(){
+        Bitmap bitmap1 = viewModel.createBitmapMarkerIcon("EV");
+        Bitmap bitmap2 = viewModel.createBitmapMarkerIcon("EV");
+        Bitmap bitmap3 = viewModel.createBitmapMarkerIcon("H");
         assertNotNull(bitmap1);
         assertNotNull(bitmap2);
+        assertNotNull(bitmap3);
+        assertTrue(bitmap1.sameAs(bitmap2));
+        assertFalse(bitmap1.sameAs(bitmap3));
     }
 
     @Test
@@ -73,7 +66,6 @@ public class LocationFragmentInstrumentalTest {
         RoomModel roomFrom = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8", "SGW");
         RoomModel roomTo = new RoomModel(new Coordinates(-73.57902321964502, 45.49699848270905), "927", "H-9", "SGW");
         viewModel.parseWalkingPointList(appDatabase,roomFrom,roomTo);
-
         PolylineOptions polylineOptions = viewModel.getFloorPolylines("H-9");
         assertEquals(10.0f,polylineOptions.getWidth());
         assertTrue(polylineOptions.isVisible());

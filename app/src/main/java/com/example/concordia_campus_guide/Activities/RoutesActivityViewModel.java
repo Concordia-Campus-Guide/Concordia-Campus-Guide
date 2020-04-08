@@ -1,15 +1,17 @@
 package com.example.concordia_campus_guide.Activities;
 
+import android.content.Context;
+
 import androidx.lifecycle.ViewModel;
 
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsResult;
-import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.Routes.Route;
 import com.example.concordia_campus_guide.Models.Shuttle;
+import com.example.concordia_campus_guide.R;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -58,7 +60,9 @@ public class RoutesActivityViewModel extends ViewModel {
         return place;
     }
 
-    public Place getFrom(){ return from; }
+    public Place getFrom() {
+        return from;
+    }
 
     public void setFrom(Place from) {
         this.from = from;
@@ -145,9 +149,9 @@ public class RoutesActivityViewModel extends ViewModel {
         this.transportType = transportType;
     }
 
-    public void noShuttles() {
+    public void noShuttles(String noShuttleText) {
         Route shuttleRoute = new Route("shuttle");
-        shuttleRoute.setSummary("No shuttles available at this time");
+        shuttleRoute.setSummary(noShuttleText);
         routeOptions.add(shuttleRoute);
     }
 }

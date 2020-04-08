@@ -21,14 +21,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.Adapters.DirectionsRecyclerViewAdapter;
 import com.example.concordia_campus_guide.ClassConstants;
-import com.google.android.gms.maps.model.LatLng;
 import com.example.concordia_campus_guide.Models.Direction;
 import com.example.concordia_campus_guide.Models.PointType;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.io.Serializable;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -90,9 +89,9 @@ public class PathInfoCardFragment extends Fragment {
                 populateIndoorDirectionsList();
             }
         } else if (walkingPointList != null) {
-                populateIndoorDirectionsList();
+            populateIndoorDirectionsList();
         } else if (directionsResults != null) {
-                populateOutdoorDirectionsList();
+            populateOutdoorDirectionsList();
         }
     }
 
@@ -152,7 +151,7 @@ public class PathInfoCardFragment extends Fragment {
         long timeTakenInMinutes;
         String description = "";
         if (startWalkingPoint.getPointType() == PointType.CLASSROOM) {
-            description = "Leave classroom";
+            description = getString(R.string.leave_classroom);
             timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
             addIndoorDirection(startWalkingPoint.getCoordinate().getLatLng(), endWalkingPoint.getCoordinate().getLatLng(), description, distanceBetweenPoints, timeTakenInMinutes);
             distanceBetweenPoints = 0;
@@ -161,7 +160,7 @@ public class PathInfoCardFragment extends Fragment {
         switch (pt) {
             case ELEVATOR:
                 if (startWalkingPoint.getPointType() != PointType.ELEVATOR) {
-                    description = "Walk towards elevator";
+                    description = getString(R.string.walk_towards_elevator);
                     timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
                     addIndoorDirection(startWalkingPoint.getCoordinate().getLatLng(), endWalkingPoint.getCoordinate().getLatLng(), description, distanceBetweenPoints, timeTakenInMinutes);
                     distanceBetweenPoints = 0;
@@ -171,14 +170,14 @@ public class PathInfoCardFragment extends Fragment {
                 }
                 break;
             case ENTRANCE:
-                description = "Enter building";
+                description = getString(R.string.enter_building);
                 timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
                 addIndoorDirection(startWalkingPoint.getCoordinate().getLatLng(), endWalkingPoint.getCoordinate().getLatLng(), description, distanceBetweenPoints, timeTakenInMinutes);
                 distanceBetweenPoints = 0;
                 break;
             case STAFF_ELEVATOR:
                 if (startWalkingPoint.getPointType() != PointType.STAFF_ELEVATOR) {
-                    description = "Walk towards staff elevator";
+                    description = getString(R.string.walk_towards_staff_elevator);
                     timeTakenInMinutes = (long) (distanceBetweenPoints * 60 / 5);
                     addIndoorDirection(startWalkingPoint.getCoordinate().getLatLng(), endWalkingPoint.getCoordinate().getLatLng(), description, distanceBetweenPoints, timeTakenInMinutes);
                     distanceBetweenPoints = 0;
@@ -204,11 +203,9 @@ public class PathInfoCardFragment extends Fragment {
     }
 
     public void addIndoorDirection(LatLng startLatLng, LatLng endLatLng, String description, double distance, double minutes) {
-        directionList.add(pathInfoCardViewModel.createIndoorDirection(startLatLng,endLatLng,description,distance,minutes));
+        directionList.add(pathInfoCardViewModel.createIndoorDirection(startLatLng, endLatLng, description, distance, minutes));
     }
-
-
-
+    
     public void populateOutdoorDirectionsList() {
         directionList = pathInfoCardViewModel.createOutdoorDirectionsList(directionsResults);
         totalDuration += pathInfoCardViewModel.getTotalDuration();

@@ -40,7 +40,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="TextView"
+            android:text=""
             android:textSize="15dp" />
     </LinearLayout>
 
@@ -58,7 +58,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
-            android:text="TextView"
+            android:text=""
             android:textSize="16dp" />
     </LinearLayout>
 </LinearLayout>

@@ -53,9 +53,8 @@ public class LocationFragmentViewModelTest  {
     }
 
     private void setupBuildings() {
-        buildings.put("H", new Building(new Coordinates(45.4972685, -73.5789475), new ArrayList<String>(Arrays.asList("8","9")), 68, 68, 34, null, "H", null, null, null, null, null));
         buildings.put("EV", new Building(new Coordinates(45.495638, -73.578258), new ArrayList<String>(Arrays.asList("8","9")), 68, 68, 34, null, "H", null, null, null, null, null));
-        buildings.put("VL", new Building(new Coordinates(45.45909, -73.63844), new ArrayList<String>(Arrays.asList("8","9")), 80, 45, 210, null, "VL", null, null, null, null, null));
+        buildings.put("CC", new Building(new Coordinates(45.45821918855051, -73.64035427570343), new ArrayList<String>(Arrays.asList("8","9")), 80, 45, 210, null, "VL", null, null, null, null, null));
         viewModel.setBuildings(buildings);
     }
 
@@ -86,15 +85,15 @@ public class LocationFragmentViewModelTest  {
     }
     @Test
     public void getSGWZoomLocationTest(){
-        assertEquals(new LatLng( 45.4972685, -73.5789475), viewModel.getSGWZoomLocation());
+        assertEquals(new LatLng( 45.495638, -73.578258), viewModel.getSGWZoomLocation());
     }
     @Test
     public void getLoyolaZoomLocationTest(){
-        assertEquals(new LatLng( 45.45909, -73.63844), viewModel.getLoyolaZoomLocation());
+        assertEquals(new LatLng( 45.45821918855051, -73.64035427570343), viewModel.getLoyolaZoomLocation());
     }
     @Test
     public void getBuildingFromCodeTest(){
-        assertEquals(buildings.get("EV"), viewModel.getBuildingFromeCode("EV"));
+        assertEquals(buildings.get("EV"), viewModel.getBuildingFromCode("EV"));
     }
 
 }
