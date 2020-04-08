@@ -17,6 +17,7 @@ import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Global.ApplicationState;
+import com.example.concordia_campus_guide.Helper.FloorPlan;
 import com.example.concordia_campus_guide.Helper.PathFinder;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Coordinates;
@@ -56,7 +57,7 @@ import static java.lang.Double.parseDouble;
 
 public class LocationFragmentViewModel extends ViewModel {
 
-    private GeoJsonLayer floorLayer;
+//    private GeoJsonLayer floorLayer;
     private Map<String, Building> buildings = new HashMap<>();
     private AppDatabase appDatabase;
     private MutableLiveData<PriorityQueue<WalkingPoint>> poiList = new MutableLiveData<>();
@@ -64,11 +65,12 @@ public class LocationFragmentViewModel extends ViewModel {
     private BitmapDescriptor currentPOIIcon;
     private Location currentLocation;
 
+    private FloorPlan floorPlan;
+
     //EV centerCoordinates
     private LatLng initialZoomLocation = ClassConstants.initialZoomLocation;
 
     public static final Logger LOGGER = Logger.getLogger("LocationFragmentViewModel");
-    public static final String FLOORS_AVAILABLE = "floorsAvailable";
 
     private Polyline currentlyDisplayedLine;
     private HashMap<String, List<WalkingPoint>> walkingPointsMap = new HashMap<>();
@@ -155,8 +157,8 @@ public class LocationFragmentViewModel extends ViewModel {
     public List<String> getFloorsFromBuildingFromGeoJsonFeature(GeoJsonFeature feature) {
         List<String> floorsAvailable = null;
 
-        if (feature.getProperty(FLOORS_AVAILABLE) != null)
-            floorsAvailable = Arrays.asList(feature.getProperty(FLOORS_AVAILABLE).split(","));
+        if (feature.getProperty(ClassConstants.FLOORS_AVAILABLE) != null)
+            floorsAvailable = Arrays.asList(feature.getProperty(ClassConstants.FLOORS_AVAILABLE).split(","));
 
         return floorsAvailable;
     }
@@ -170,7 +172,7 @@ public class LocationFragmentViewModel extends ViewModel {
             feature.setPolygonStyle(getPolygonStyle());
             Building building = getBuildingFromGeoJsonFeature(feature);
             buildings.put(feature.getProperty("code"), building);
-            if (feature.getProperty(FLOORS_AVAILABLE) != null)
+            if (feature.getProperty(ClassConstants.FLOORS_AVAILABLE) != null)
                 setBuildingGroundOverlayOptions(building);
 
             String[] coordinates = feature.getProperty("center").split(", ");
@@ -242,21 +244,8 @@ public class LocationFragmentViewModel extends ViewModel {
      * @return Int of drawable resource's bitmap representation
      */
     public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, GoogleMap mMap) {
-        String fileName = buildingCode.toLowerCase()+"_"+floor.toLowerCase();
-        groundOverlay.setImage(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+fileName+".png"));
-        setFloorMarkers(buildingCode, floor, mMap);
-    }
-
-    public void setFloorMarkers(String buildingCode, String floor, GoogleMap mMap) {
-        if (floorLayer != null) {
-            floorLayer.removeLayerFromMap();
-        }
-        setListOfRooms(buildingCode+"-"+floor);
-        if (currentlyDisplayedLine != null) {
-            currentlyDisplayedLine.remove();
-        }
-        PolylineOptions displayedPolylineOption = getFloorPolylines(buildingCode + "-" + floor);
-        currentlyDisplayedLine = mMap.addPolyline(displayedPolylineOption);
+        floorPlan = new FloorPlan(appDatabase);
+        floorPlan.setFloorPlan(groundOverlay,buildingCode,floor,mMap);
     }
 
     public Building getBuildingFromCode(String buildingCode) {
@@ -287,23 +276,7 @@ public class LocationFragmentViewModel extends ViewModel {
         return buildings.get(ClassConstants.sgwCenterBuildingLabel).getCenterCoordinatesLatLng();
     }
 
-    public void parseWalkingPointList(AppDatabase appDatabase, RoomModel from, RoomModel to) {
-        PathFinder pf = new PathFinder(appDatabase, from, to);
-        walkingPoints = pf.getPathToDestination();
-
-        List<WalkingPoint> floorWalkingPointList;
-        for (WalkingPoint wp : walkingPoints) {
-            floorWalkingPointList = walkingPointsMap.getOrDefault(wp.getFloorCode(), new ArrayList<WalkingPoint>());
-            floorWalkingPointList.add(wp);
-            walkingPointsMap.put(wp.getFloorCode(), floorWalkingPointList);
-        }
-    }
-
-    public void setListOfRooms(String floorCode) {
-        List<RoomModel> allRoomsOnFloor = appDatabase.roomDao().getAllRoomsByFloorCode(floorCode);
-        this.roomList.postValue(allRoomsOnFloor);
-    }
-
+    
     public void setListOfPOI(@PoiType String poiType, Context context) {
         List<WalkingPoint> allPOI = appDatabase.walkingPointDao().getAllPointsForPointType(poiType);
         setCurrentPOIIcon(poiType, context);
@@ -340,7 +313,7 @@ public class LocationFragmentViewModel extends ViewModel {
 
 
     LiveData<List<RoomModel>> getListOfRoom() {
-        return roomList;
+        return floorPlan.getListOfRoom();
     }
 
     LiveData<PriorityQueue<WalkingPoint>> getListOfPOI() {
@@ -372,25 +345,6 @@ public class LocationFragmentViewModel extends ViewModel {
             LOGGER.log(Level.WARNING, e.getMessage(), e);
         }
         return smallMarkerIcon;
-    }
-
-    public PolylineOptions getFloorPolylines(String floorCode) {
-        // previously drawindoorpaths
-        List<WalkingPoint> floorWalkingPoints = walkingPointsMap.get(floorCode);
-        PolylineOptions option = new PolylineOptions();
-        if (floorWalkingPoints == null) {
-            return option;
-        }
-        for (int i = 0; i < floorWalkingPoints.size() - 1; i++) {
-            LatLng point1 = floorWalkingPoints.get(i).getCoordinate().getLatLng();
-            LatLng point2 = floorWalkingPoints.get(i + 1).getCoordinate().getLatLng();
-            option.add(point1, point2);
-        }
-        return option
-                .width(10)
-                .pattern(ClassConstants.WALK_PATTERN)
-                .color(Color.rgb(147, 35, 57))
-                .visible(true);
     }
 
     public void drawOutdoorPath(List<DirectionWrapper> outdoorDirections, GoogleMap map) {
@@ -428,6 +382,18 @@ public class LocationFragmentViewModel extends ViewModel {
 
     public List<WalkingPoint> getWalkingPointsList() {
         return walkingPoints;
+    }
+
+    public void parseWalkingPointList(AppDatabase appDatabase, RoomModel from, RoomModel to) {
+        PathFinder pf = new PathFinder(appDatabase, from, to);
+        walkingPoints = pf.getPathToDestination();
+
+        List<WalkingPoint> floorWalkingPointList;
+        for (WalkingPoint wp : walkingPoints) {
+            floorWalkingPointList = walkingPointsMap.getOrDefault(wp.getFloorCode(), new ArrayList<WalkingPoint>());
+            floorWalkingPointList.add(wp);
+            walkingPointsMap.put(wp.getFloorCode(), floorWalkingPointList);
+        }
     }
 
     public void drawShuttlePath(GoogleMap mMap, String polyline) {

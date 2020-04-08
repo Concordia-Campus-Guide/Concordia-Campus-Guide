@@ -33,6 +33,7 @@ import com.example.concordia_campus_guide.Fragments.POIFragment.POIFragment;
 import com.example.concordia_campus_guide.Fragments.SmallInfoCardFragment.SmallInfoCardFragment;
 import com.example.concordia_campus_guide.Global.ApplicationState;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
+import com.example.concordia_campus_guide.Helper.CurrentLocation;
 import com.example.concordia_campus_guide.Helper.Notification;
 import com.example.concordia_campus_guide.Helper.StartActivityHelper;
 import com.example.concordia_campus_guide.Models.Buildings;
@@ -63,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private BottomSheetBehavior swipeablePOICard;
     private Notification notification;
     Toolbar myToolbar;
+
+    private CurrentLocation currentLocation;
 
     // Side Menu Toggle Buttons
     private CompoundButton staffToggle;
@@ -112,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void initComponents() {
         MainActivity.this.setTitle("ConUMaps");
 
+        currentLocation = new CurrentLocation(this);
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
 
         mViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
@@ -375,7 +379,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public Location getMyCurrentLocation() {
-        return this.locationFragment.getCurrentLocation();
+        return currentLocation.getCurrentLocation();
     }
 
     @Override
