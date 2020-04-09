@@ -56,22 +56,14 @@ public class POIFragment extends Fragment {
         }
         PointOfInterestVPAdapter poiViewPagerAdapter = new PointOfInterestVPAdapter(getContext(), services, getOnClickListener());
         poiVP.setAdapter(poiViewPagerAdapter);
-        new TabLayoutMediator(tabLayout, poiVP, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                //empty, if removed would crash the app since the function cannot be null
-            }
+        new TabLayoutMediator(tabLayout, poiVP, (tab, position) -> {
+            //empty, if removed would crash the app since the function cannot be null
         }
         ).attach();
     }
 
     private OnPOIClickListener getOnClickListener() {
-        return new OnPOIClickListener() {
-            @Override
-            public void onClick(@PoiType String pointType, View view) {
-                mViewModel.setListOfPOI(pointType, getContext());
-            }
-        };
+        return (pointType, view) -> mViewModel.setListOfPOI(pointType, getContext());
     }
 
     @Override
