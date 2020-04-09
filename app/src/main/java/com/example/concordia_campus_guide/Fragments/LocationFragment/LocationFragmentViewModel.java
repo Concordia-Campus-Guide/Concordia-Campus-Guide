@@ -65,7 +65,7 @@ public class LocationFragmentViewModel extends ViewModel {
     private Location currentLocation;
 
     //EV centerCoordinates
-    private LatLng initialZoomLocation = ClassConstants.initialZoomLocation;
+    private LatLng initialZoomLocation = ClassConstants.INITIAL_ZOOM_LOCATION;
 
     public static final Logger LOGGER = Logger.getLogger("LocationFragmentViewModel");
     public static final String FLOORS_AVAILABLE = "floorsAvailable";
@@ -280,11 +280,11 @@ public class LocationFragmentViewModel extends ViewModel {
     }
 
     public LatLng getLoyolaZoomLocation() {
-        return buildings.get(ClassConstants.loyolaCenterBuildingLabel).getCenterCoordinatesLatLng();
+        return buildings.get(ClassConstants.LOYOLA_CENTER_BUILDING_LABEL).getCenterCoordinatesLatLng();
     }
 
     public LatLng getSGWZoomLocation() {
-        return buildings.get(ClassConstants.sgwCenterBuildingLabel).getCenterCoordinatesLatLng();
+        return buildings.get(ClassConstants.SGW_CENTER_BUILDING_LABEL).getCenterCoordinatesLatLng();
     }
 
     public void parseWalkingPointList(AppDatabase appDatabase, RoomModel from, RoomModel to) {

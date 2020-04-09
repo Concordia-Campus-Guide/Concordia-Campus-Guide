@@ -3,7 +3,6 @@ package com.example.concordia_campus_guide.InstrumentalTests;
 import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Activities.RoutesActivityViewModel;
 import com.example.concordia_campus_guide.Activities.SearchActivityViewModel;
-import com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragment;
 import com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragmentViewModel;
 import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;

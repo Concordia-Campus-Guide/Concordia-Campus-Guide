@@ -198,7 +198,7 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
     }
 
     public void drawShuttlePath() {
-        String polyline = from.getCampus().equals("SGW") ? ClassConstants.ShuttlePolylineSGWLOY : ClassConstants.ShuttlePolylineLOYSGW;
+        String polyline = from.getCampus().equals("SGW") ? ClassConstants.SHUTTLE_POLYLINE_SGW_LOY : ClassConstants.SHUTTLE_POLYLINE_LOY_SGW;
         locationFragment.setShuttlePaths(polyline);
     }
 }

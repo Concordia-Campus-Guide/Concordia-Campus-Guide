@@ -122,11 +122,7 @@ public class InfoCardFragment extends Fragment {
     }
 
     private void setOnClickListeners(){
-        this.directionsBt.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                onClickDirections(v);
-            }
-        });
+        this.directionsBt.setOnClickListener(v -> onClickDirections(v));
     }
 
     public void onClickDirections(View v){

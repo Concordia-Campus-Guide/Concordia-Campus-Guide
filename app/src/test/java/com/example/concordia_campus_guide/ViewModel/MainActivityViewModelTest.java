@@ -4,11 +4,9 @@ import com.example.concordia_campus_guide.Activities.MainActivityViewModel;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.MockitoAnnotations;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class MainActivityViewModelTest {
     private MainActivityViewModel mainActivityViewModel;

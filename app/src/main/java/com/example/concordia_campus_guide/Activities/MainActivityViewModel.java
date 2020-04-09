@@ -1,7 +1,7 @@
 package com.example.concordia_campus_guide.Activities;
 
+import android.annotation.SuppressLint;
 import androidx.lifecycle.ViewModel;
-
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -23,6 +23,7 @@ public class MainActivityViewModel extends ViewModel {
         }
     }
 
+    @SuppressLint("DefaultLocale")
     public String timeUntilMethod(long differenceInMillis) {
         return String.format("%02d hours and %02d minutes",
                 TimeUnit.MILLISECONDS.toHours(differenceInMillis),
