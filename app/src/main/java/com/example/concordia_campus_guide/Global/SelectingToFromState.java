@@ -14,6 +14,8 @@ public class SelectingToFromState {
     private static boolean selectTo = false;
     private static boolean selectFrom = false;
 
+    private SelectingToFromState() {}
+
     public static Place getFrom() {
         return from;
     }

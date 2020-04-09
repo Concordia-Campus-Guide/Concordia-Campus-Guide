@@ -65,7 +65,7 @@ public class LocationFragmentViewModel extends ViewModel {
     private Location currentLocation;
 
     //EV centerCoordinates
-    private LatLng initialZoomLocation = ClassConstants.initialZoomLocation;
+    private LatLng initialZoomLocation = ClassConstants.INITIAL_ZOOM_LOCATION;
 
     public static final Logger LOGGER = Logger.getLogger("LocationFragmentViewModel");
     public static final String FLOORS_AVAILABLE = "floorsAvailable";
@@ -94,7 +94,7 @@ public class LocationFragmentViewModel extends ViewModel {
      */
     public GeoJsonLayer loadPolygons(GoogleMap map, Context applicationContext) {
         GeoJsonLayer layer = initLayer(map, applicationContext);
-        setPolygonStyle(layer, map, applicationContext);
+        setPolygonStyle(layer, map);
         return layer;
     }
 
@@ -165,7 +165,7 @@ public class LocationFragmentViewModel extends ViewModel {
      * @param layer the GeoJson layer containing features to style.
      * @param map   the google map where layer will be displayed and markers will be added.
      */
-    public void setPolygonStyle(GeoJsonLayer layer, GoogleMap map, Context context) {
+    public void setPolygonStyle(GeoJsonLayer layer, GoogleMap map) {
         for (GeoJsonFeature feature : layer.getFeatures()) {
             feature.setPolygonStyle(getPolygonStyle());
             Building building = getBuildingFromGeoJsonFeature(feature);
@@ -175,7 +175,7 @@ public class LocationFragmentViewModel extends ViewModel {
 
             String[] coordinates = feature.getProperty("center").split(", ");
             LatLng centerPos = new LatLng(parseDouble(coordinates[1]), parseDouble(coordinates[0]));
-            addBuildingMarker(map, centerPos, feature.getProperty("code"), context);
+            addBuildingMarker(map, centerPos, feature.getProperty("code"));
         }
     }
 
@@ -186,7 +186,7 @@ public class LocationFragmentViewModel extends ViewModel {
      * @param centerPos     is the latitude and longitude of the building's center
      * @param buildingLabel is the Building on which the method will add a marker
      */
-    public void addBuildingMarker(GoogleMap map, LatLng centerPos, String buildingLabel, Context context) {
+    public void addBuildingMarker(GoogleMap map, LatLng centerPos, String buildingLabel) {
         Marker marker = map.addMarker(
                 new MarkerOptions()
                         .position(centerPos)
@@ -280,11 +280,11 @@ public class LocationFragmentViewModel extends ViewModel {
     }
 
     public LatLng getLoyolaZoomLocation() {
-        return buildings.get(ClassConstants.loyolaCenterBuildingLabel).getCenterCoordinatesLatLng();
+        return buildings.get(ClassConstants.LOYOLA_CENTER_BUILDING_LABEL).getCenterCoordinatesLatLng();
     }
 
     public LatLng getSGWZoomLocation() {
-        return buildings.get(ClassConstants.sgwCenterBuildingLabel).getCenterCoordinatesLatLng();
+        return buildings.get(ClassConstants.SGW_CENTER_BUILDING_LABEL).getCenterCoordinatesLatLng();
     }
 
     public void parseWalkingPointList(AppDatabase appDatabase, RoomModel from, RoomModel to) {
