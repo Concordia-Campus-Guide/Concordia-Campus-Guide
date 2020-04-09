@@ -1,23 +1,18 @@
 package com.example.concordia_campus_guide.InstrumentalTests;
 
 import com.example.concordia_campus_guide.Activities.MainActivity;
-import com.example.concordia_campus_guide.Activities.RoutesActivityViewModel;
-import com.example.concordia_campus_guide.Activities.SearchActivityViewModel;
-import com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragmentViewModel;
-import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel;
+import com.example.concordia_campus_guide.ViewModels.RoutesActivityViewModel;
+import com.example.concordia_campus_guide.ViewModels.SearchActivityViewModel;
+import com.example.concordia_campus_guide.ViewModels.InfoCardFragmentViewModel;
+import com.example.concordia_campus_guide.ViewModels.LocationFragmentViewModel;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
-
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 @RunWith(AndroidJUnit4.class)
 public class ViewModelFactoryInstrumentalTest {

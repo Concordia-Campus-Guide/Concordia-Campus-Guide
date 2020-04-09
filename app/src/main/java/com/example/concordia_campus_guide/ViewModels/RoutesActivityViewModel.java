@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.Activities;
+package com.example.concordia_campus_guide.ViewModels;
 
 import androidx.lifecycle.ViewModel;
 
@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 
-import static com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel.LOGGER;
+import static com.example.concordia_campus_guide.ViewModels.LocationFragmentViewModel.LOGGER;
 
 public class RoutesActivityViewModel extends ViewModel {
 

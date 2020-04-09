@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.Fragments.LocationFragment;
+package com.example.concordia_campus_guide.ViewModels;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -339,11 +339,11 @@ public class LocationFragmentViewModel extends ViewModel {
     }
 
 
-    LiveData<List<RoomModel>> getListOfRoom() {
+    public LiveData<List<RoomModel>> getListOfRoom() {
         return roomList;
     }
 
-    LiveData<PriorityQueue<WalkingPoint>> getListOfPOI() {
+    public LiveData<PriorityQueue<WalkingPoint>> getListOfPOI() {
         return poiList;
     }
 
@@ -351,11 +351,11 @@ public class LocationFragmentViewModel extends ViewModel {
         currentPOIIcon = getCustomSizedIcon("point_of_interest_icons/poi_" + poiType.toLowerCase() + ".png", context, 60, 60);
     }
 
-    BitmapDescriptor getCurrentPOIIcon() {
+    public BitmapDescriptor getCurrentPOIIcon() {
         return currentPOIIcon;
     }
 
-    void setCurrentLocation(Location currentLocation) {
+    public void setCurrentLocation(Location currentLocation) {
         this.currentLocation = currentLocation;
     }
 

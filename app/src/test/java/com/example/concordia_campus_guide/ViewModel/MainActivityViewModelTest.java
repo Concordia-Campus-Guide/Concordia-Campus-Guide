@@ -1,6 +1,6 @@
 package com.example.concordia_campus_guide.ViewModel;
 
-import com.example.concordia_campus_guide.Activities.MainActivityViewModel;
+import com.example.concordia_campus_guide.ViewModels.MainActivityViewModel;
 
 import org.junit.Before;
 import org.junit.Test;
