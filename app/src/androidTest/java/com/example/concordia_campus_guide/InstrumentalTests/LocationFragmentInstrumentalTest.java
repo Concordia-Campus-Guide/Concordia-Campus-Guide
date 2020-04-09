@@ -10,7 +10,7 @@ import androidx.test.runner.AndroidJUnit4;
 
 import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel;
+import com.example.concordia_campus_guide.ViewModels.LocationFragmentViewModel;
 import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.google.android.gms.maps.model.PolylineOptions;

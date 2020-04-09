@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.Fragments.PathInfoCardFragment;
+package com.example.concordia_campus_guide.ViewModels;
 
 import androidx.lifecycle.ViewModel;
 

@@ -1,7 +1,8 @@
-package com.example.concordia_campus_guide.Fragments.PathInfoCardFragment;
+package com.example.concordia_campus_guide.Fragments.PathInfoCardFragmentTest;
 
 import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.Models.Direction;
+import com.example.concordia_campus_guide.ViewModels.PathInfoCardViewModel;
 
 import org.junit.Before;
 import org.junit.Test;

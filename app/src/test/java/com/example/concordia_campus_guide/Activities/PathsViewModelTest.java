@@ -5,6 +5,7 @@ import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.RoomModel;
+import com.example.concordia_campus_guide.ViewModels.PathsViewModel;
 
 import org.junit.Before;
 import org.junit.Test;
