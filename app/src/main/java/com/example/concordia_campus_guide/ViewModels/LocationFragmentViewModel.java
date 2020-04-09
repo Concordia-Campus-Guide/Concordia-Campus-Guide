@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.Fragments.LocationFragment;
+package com.example.concordia_campus_guide.ViewModels;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -73,7 +73,7 @@ public class LocationFragmentViewModel extends ViewModel {
     private ManipulateWalkingPoints manipulateWalkingPoints;
 
     //EV centerCoordinates
-    private LatLng initialZoomLocation = ClassConstants.initialZoomLocation;
+    private LatLng initialZoomLocation = ClassConstants.INITIAL_ZOOM_LOCATION;
 
     public static final Logger LOGGER = Logger.getLogger("LocationFragmentViewModel");
 

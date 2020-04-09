@@ -9,9 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Models.Routes.Bus;
 import com.example.concordia_campus_guide.Models.Routes.Route;
@@ -21,7 +19,6 @@ import com.example.concordia_campus_guide.Models.Routes.TransportType;
 import com.example.concordia_campus_guide.Models.Routes.Walk;
 import com.example.concordia_campus_guide.R;
 import com.google.android.flexbox.FlexboxLayout;
-
 import java.util.List;
 
 /**
@@ -105,7 +102,7 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
     }
 
     private void setUIWalk(Route route) {
-        mainTransportType.setImageResource(R.drawable.ic_directions_walk_red);
+        mainTransportType.setImageResource(R.drawable.ic_directions_walking);
 
         TextView summary = new TextView(context);
         summary.setText(route.getSummary());
@@ -116,7 +113,7 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
     }
 
     private void setUIDriving(Route route) {
-        mainTransportType.setImageResource(R.drawable.ic_directions_car_red);
+        mainTransportType.setImageResource(R.drawable.ic_directions_driving);
 
         TextView summary = new TextView(context);
         summary.setText(route.getSummary());
@@ -159,7 +156,7 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
             details.addView(summaryCampusFrom);
             duration.setText("");
         } else {
-            mainTransportType.setImageResource(R.drawable.ic_shuttle_red);
+            mainTransportType.setImageResource(R.drawable.ic_directions_shuttle);
             summaryCampusFrom.setText(campuses[0]);
             summaryCampusFrom.setGravity(Gravity.CENTER);
             details.addView(summaryCampusFrom);
@@ -175,7 +172,7 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
 
     private void setUIWalkInTransit(Walk walk) {
         ImageView walkIcon = new ImageView(context);
-        walkIcon.setImageResource(R.drawable.ic_directions_walk_red);
+        walkIcon.setImageResource(R.drawable.ic_directions_walking);
 
         TextView durationWalk = new TextView(context);
         durationWalk.setText(walk.getDuration());

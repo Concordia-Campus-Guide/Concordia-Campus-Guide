@@ -28,6 +28,7 @@ import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.Routes.Route;
 import com.example.concordia_campus_guide.Models.Shuttle;
 import com.example.concordia_campus_guide.R;
+import com.example.concordia_campus_guide.ViewModels.RoutesActivityViewModel;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
@@ -68,11 +69,7 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
 
         String disability = sharedPreferences.getString(ClassConstants.DISABILITY_BUTTON, ClassConstants.FALSE);
 
-        if (disability.equals(ClassConstants.TRUE)) {
-            disabilityButton.setSelected(true);
-        } else {
-            disabilityButton.setSelected(false);
-        }
+        disabilityButton.setSelected(disability.equals(ClassConstants.TRUE));
     }
 
     @Override

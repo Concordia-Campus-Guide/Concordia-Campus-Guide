@@ -4,12 +4,13 @@ import android.graphics.Color;
 
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Database.Daos.WalkingPointDao;
-import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel;
+import com.example.concordia_campus_guide.ViewModels.LocationFragmentViewModel;
 import com.example.concordia_campus_guide.Helper.BuildingsAndTheirCode;
 import com.example.concordia_campus_guide.Helper.DrawPolygons;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
+import com.example.concordia_campus_guide.ViewModels.LocationFragmentViewModel;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 
@@ -88,11 +89,11 @@ public class LocationFragmentViewModelTest  {
     }
     @Test
     public void getSGWZoomLocationTest(){
-        assertEquals(new LatLng( 45.495638, -73.578258), viewModel.getZoomLocation(ClassConstants.sgwCenterBuildingLabel));
+        assertEquals(new LatLng( 45.495638, -73.578258), viewModel.getZoomLocation(ClassConstants.SGW_CENTER_BUILDING_LABEL));
     }
     @Test
     public void getLoyolaZoomLocationTest(){
-        assertEquals(new LatLng( 45.45821918855051, -73.64035427570343), viewModel.getZoomLocation(ClassConstants.loyolaCenterBuildingLabel));
+        assertEquals(new LatLng( 45.45821918855051, -73.64035427570343), viewModel.getZoomLocation(ClassConstants.LOYOLA_CENTER_BUILDING_LABEL));
     }
     @Test
     public void getBuildingFromCodeTest(){

@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.Fragments.POIFragment;
+package com.example.concordia_campus_guide.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.concordia_campus_guide.Adapters.PointOfInterestVPAdapter;
-import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel;
+import com.example.concordia_campus_guide.ViewModels.LocationFragmentViewModel;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.Interfaces.OnPOIClickListener;
 import com.example.concordia_campus_guide.Models.PoiType;
@@ -56,22 +56,14 @@ public class POIFragment extends Fragment {
         }
         PointOfInterestVPAdapter poiViewPagerAdapter = new PointOfInterestVPAdapter(getContext(), services, getOnClickListener());
         poiVP.setAdapter(poiViewPagerAdapter);
-        new TabLayoutMediator(tabLayout, poiVP, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                //empty, if removed would crash the app since the function cannot be null
-            }
+        new TabLayoutMediator(tabLayout, poiVP, (tab, position) -> {
+            //empty, if removed would crash the app since the function cannot be null
         }
         ).attach();
     }
 
     private OnPOIClickListener getOnClickListener() {
-        return new OnPOIClickListener() {
-            @Override
-            public void onClick(@PoiType String pointType, View view) {
-                mViewModel.setListOfPOI(pointType, getContext());
-            }
-        };
+        return (pointType, view) -> mViewModel.setListOfPOI(pointType, getContext());
     }
 
     @Override

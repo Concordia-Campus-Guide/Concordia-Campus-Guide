@@ -33,7 +33,7 @@
 
         <fragment
             android:id="@+id/locationFragment"
-            android:name="com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragment"
+            android:name="com.example.concordia_campus_guide.Fragments.LocationFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"

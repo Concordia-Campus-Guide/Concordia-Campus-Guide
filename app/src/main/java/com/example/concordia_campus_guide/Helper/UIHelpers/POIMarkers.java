@@ -1,17 +1,7 @@
 package com.example.concordia_campus_guide.Helper.UIHelpers;
 
-import android.app.Application;
-import android.content.ContentValues;
-import android.content.Context;
-
 import com.example.concordia_campus_guide.ClassConstants;
-import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel;
-import com.example.concordia_campus_guide.Global.ApplicationState;
-import com.example.concordia_campus_guide.Helper.CurrentLocation;
-import com.example.concordia_campus_guide.Helper.POIIcon;
-import com.example.concordia_campus_guide.Models.PoiType;
-import com.example.concordia_campus_guide.Models.RoomModel;
+import com.example.concordia_campus_guide.ViewModels.LocationFragmentViewModel;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -34,7 +24,7 @@ public class POIMarkers {
         poiMarkers = new ArrayList<>();
     }
 
-    public void addPOItoMap(WalkingPoint poi, int position, LocationFragmentViewModel locationFragmentViewModel,GoogleMap googleMap) {
+    public void addPOItoMap(WalkingPoint poi, int position, LocationFragmentViewModel locationFragmentViewModel, GoogleMap googleMap) {
         if (poi != null) {
 
             LatLng latLng = new LatLng(poi.getCoordinate().getLongitude(), poi.getCoordinate().getLatitude());

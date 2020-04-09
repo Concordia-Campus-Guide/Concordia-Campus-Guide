@@ -3,8 +3,9 @@ package com.example.concordia_campus_guide.Helper.UIHelpers;
 import android.content.Context;
 
 import com.example.concordia_campus_guide.ClassConstants;
-import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel;
+import com.example.concordia_campus_guide.ViewModels.LocationFragmentViewModel;
 import com.example.concordia_campus_guide.Models.RoomModel;
+import com.example.concordia_campus_guide.ViewModels.LocationFragmentViewModel;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.LatLng;

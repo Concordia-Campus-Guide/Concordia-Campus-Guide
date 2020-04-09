@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.Fragments.InfoCardFragment;
+package com.example.concordia_campus_guide.Fragments;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -22,6 +22,7 @@ import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.Models.MyCurrentPlace;
 import com.example.concordia_campus_guide.R;
+import com.example.concordia_campus_guide.ViewModels.InfoCardFragmentViewModel;
 
 import java.io.InputStream;
 
@@ -79,7 +80,7 @@ public class InfoCardFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getActivity().getApplication())).get(com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragmentViewModel.class);
+        mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getActivity().getApplication())).get(InfoCardFragmentViewModel.class);
         mViewModel.setBuilding(this.buildingCode);
         setInfoCard();
         setOnClickListeners();
@@ -122,11 +123,7 @@ public class InfoCardFragment extends Fragment {
     }
 
     private void setOnClickListeners(){
-        this.directionsBt.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                onClickDirections(v);
-            }
-        });
+        this.directionsBt.setOnClickListener(v -> onClickDirections(v));
     }
 
     public void onClickDirections(View v){

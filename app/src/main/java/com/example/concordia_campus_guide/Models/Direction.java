@@ -2,15 +2,11 @@ package com.example.concordia_campus_guide.Models;
 
 import com.example.concordia_campus_guide.ClassConstants;
 import com.google.android.gms.maps.model.LatLng;
-
 import java.io.Serializable;
-import java.util.Date;
 
 public class Direction implements Serializable {
     private transient LatLng start;
     private transient LatLng end;
-    private Date startTime;
-    private Date endTime;
     private String transportType;
     private String description;
     private double duration;

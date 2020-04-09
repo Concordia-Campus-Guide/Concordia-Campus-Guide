@@ -2,7 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:state_selected="true"
-        android:drawable="@drawable/ic_shuttle_red" />
+        android:drawable="@drawable/ic_directions_shuttle" />
     <item
         android:drawable="@drawable/ic_shuttle_white" />
 </selector>

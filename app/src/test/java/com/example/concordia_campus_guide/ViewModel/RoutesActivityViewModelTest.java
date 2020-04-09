@@ -1,6 +1,6 @@
 package com.example.concordia_campus_guide.ViewModel;
 
-import com.example.concordia_campus_guide.Activities.RoutesActivityViewModel;
+import com.example.concordia_campus_guide.ViewModels.RoutesActivityViewModel;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Database.Daos.ShuttleDao;

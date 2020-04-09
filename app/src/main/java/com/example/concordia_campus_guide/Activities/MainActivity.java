@@ -1,7 +1,6 @@
 package com.example.concordia_campus_guide.Activities;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -12,27 +11,25 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
-
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragment;
-import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragment;
-import com.example.concordia_campus_guide.Fragments.POIFragment.POIFragment;
-import com.example.concordia_campus_guide.Fragments.SmallInfoCardFragment.SmallInfoCardFragment;
+import com.example.concordia_campus_guide.Fragments.InfoCardFragment;
+import com.example.concordia_campus_guide.Fragments.LocationFragment;
+import com.example.concordia_campus_guide.Fragments.POIFragment;
+import com.example.concordia_campus_guide.Fragments.SmallInfoCardFragment;
 import com.example.concordia_campus_guide.Global.ApplicationState;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.Helper.LocaleHelper;
@@ -41,17 +38,19 @@ import com.example.concordia_campus_guide.Helper.Notification;
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.CalendarEvent;
 import com.example.concordia_campus_guide.Models.Floors;
+import com.example.concordia_campus_guide.Models.Helpers.CalendarViewModel;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.Rooms;
 import com.example.concordia_campus_guide.Models.Shuttles;
 import com.example.concordia_campus_guide.Models.WalkingPoints;
 import com.example.concordia_campus_guide.R;
+import com.example.concordia_campus_guide.ViewModels.MainActivityViewModel;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.navigation.NavigationView;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import static com.example.concordia_campus_guide.Helper.StartActivityHelper.openRoutesPage;
 
@@ -71,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Toolbar myToolbar;
 
     private CurrentLocation currentLocation;
+    private CalendarViewModel calendarViewModel;
 
     // Side Menu Toggle Buttons
     private CompoundButton staffToggle;
@@ -115,12 +115,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onResume();
 
         SharedPreferences sharedPreferences = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
-        for (CompoundButton toggleButton : toggleButtonAndCorrespondingToggleType.keySet()) {
-            String value = sharedPreferences.getString(toggleButtonAndCorrespondingToggleType.get(toggleButton), ClassConstants.FALSE);
-            toggleButton.setChecked(value.equals(ClassConstants.TRUE));
+        for (Map.Entry<CompoundButton, String> entry : toggleButtonAndCorrespondingToggleType.entrySet()) {
+            String value = sharedPreferences.getString(entry.getValue(), ClassConstants.FALSE);
+            entry.getKey().setChecked(value.equals(ClassConstants.TRUE));
         }
-
-        // TODO: US #50: add logic for calendar integration  by retrieving from the shared preferences if the user clicked on the "calendar integration" button or not.
     }
 
     @Override
@@ -130,9 +128,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SharedPreferences sharedPreferences = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
         SharedPreferences.Editor myEdit = sharedPreferences.edit();
 
-        for (CompoundButton toggleButton : toggleButtonAndCorrespondingToggleType.keySet()) {
-            String value = toggleButton.isChecked() ? ClassConstants.TRUE : ClassConstants.FALSE;
-            String toggleType = toggleButtonAndCorrespondingToggleType.get(toggleButton);
+        for (Map.Entry<CompoundButton, String> entry: toggleButtonAndCorrespondingToggleType.entrySet()) {
+            String value = entry.getKey().isChecked() ? ClassConstants.TRUE : ClassConstants.FALSE;
+            String toggleType = entry.getValue();
             myEdit.putString(toggleType, value);
         }
 
@@ -144,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         currentLocation = new CurrentLocation(this);
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
+        calendarViewModel = new CalendarViewModel(getApplication());
         mViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
         fragmentManager = getSupportFragmentManager();
         currentLocation.updateLocationEvery5Seconds();
@@ -182,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void setupDrawerToggle() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, myToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.whiteBackgroundColor));
+        toggle.getDrawerArrowDrawable().setColor(ContextCompat.getColor(this, R.color.whiteBackgroundColor));
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -213,12 +212,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void setupOnChangeListenerForSwitch(CompoundButton switchView) {
-        switchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (buttonView.getId() == R.id.nav_translate)
-                    switchLanguage(isChecked);
-            }
+        switchView.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (buttonView.getId() == R.id.nav_translate)
+                switchLanguage(isChecked);
         });
     }
 
@@ -265,23 +261,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void setupCancelBtn(AlertDialog.Builder builder) {
-        builder.setNegativeButton(getResources().getString(R.string.ignore), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
+        builder.setNegativeButton(getResources().getString(R.string.ignore), (dialog, which) -> dialog.cancel());
     }
 
     private void setupShowMeDirectionsBtn(AlertDialog.Builder builder, String location) {
         final String locationTemp = location;
         final Activity mainActivity = this;
-        builder.setPositiveButton(getResources().getString(R.string.show_me_direction), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                RoomModel room = notification.getRoom(locationTemp);
-                openRoutesPage(room, mainActivity);
-            }
+        builder.setPositiveButton(getResources().getString(R.string.show_me_direction), (dialog, which) -> {
+            RoomModel room = notification.getRoom(locationTemp);
+            openRoutesPage(room, mainActivity);
         });
     }
 
@@ -296,8 +284,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.search) {
-            Intent openSearch = new Intent(MainActivity.this,
-                    SearchActivity.class);
+            Intent openSearch = new Intent(MainActivity.this, SearchActivity.class);
 
             SelectingToFromState.setMyCurrentLocation(getMyCurrentLocation());
 
@@ -384,7 +371,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
 
-        LocationFragment locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
         locationFragment.deselectAll();
     }
 
@@ -426,14 +412,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
-        SharedPreferences sharedPreferences = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
         if (itemId == R.id.nav_calendar) {
-            SharedPreferences.Editor myEdit = sharedPreferences.edit();
-
-            String value = item.isEnabled() ? ClassConstants.TRUE : ClassConstants.FALSE;
-            myEdit.putString(ClassConstants.CALENDAR_INTEGRATION_BUTTON, value);
-
-            myEdit.commit();
+            if(!calendarViewModel.hasReadPermission() && !calendarViewModel.hasWritePermission()){
+                calendarViewModel.askForPermission(this);
+            }
+            else {
+                Toast.makeText(MainActivity.this, "You have already given permission", Toast.LENGTH_SHORT).show();
+            }
         }
         return false;
     }

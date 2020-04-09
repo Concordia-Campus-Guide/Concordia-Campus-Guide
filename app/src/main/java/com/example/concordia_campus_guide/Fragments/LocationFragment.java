@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.Fragments.LocationFragment;
+package com.example.concordia_campus_guide.Fragments;
 
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
@@ -33,6 +33,9 @@ import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
+import com.example.concordia_campus_guide.ViewModels.LocationFragmentViewModel;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -297,7 +300,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         loyolaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                zoomInLocation(mViewModel.getZoomLocation(ClassConstants.loyolaCenterBuildingLabel));
+                zoomInLocation(mViewModel.getZoomLocation(ClassConstants.LOYOLA_CENTER_BUILDING_LABEL));
             }
         });
     }
@@ -309,7 +312,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         sgwBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                zoomInLocation(mViewModel.getZoomLocation(ClassConstants.sgwCenterBuildingLabel));
+                zoomInLocation(mViewModel.getZoomLocation(ClassConstants.SGW_CENTER_BUILDING_LABEL));
             }
         });
     }

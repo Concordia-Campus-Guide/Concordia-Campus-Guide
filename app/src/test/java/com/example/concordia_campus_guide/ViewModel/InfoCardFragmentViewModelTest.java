@@ -2,7 +2,7 @@ package com.example.concordia_campus_guide.ViewModel;
 
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Database.Daos.BuildingDao;
-import com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragmentViewModel;
+import com.example.concordia_campus_guide.ViewModels.InfoCardFragmentViewModel;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Place;
 

@@ -4,5 +4,5 @@
         android:state_selected="true"
         android:drawable="@drawable/ic_directions_bus_red" />
     <item
-        android:drawable="@drawable/ic_directions_bus_black_24dp" />
+        android:drawable="@drawable/ic_directions_transit" />
 </selector>

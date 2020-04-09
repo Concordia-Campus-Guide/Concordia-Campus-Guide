@@ -5,7 +5,8 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 
 import com.example.concordia_campus_guide.ClassConstants;
-import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragment;
+import com.example.concordia_campus_guide.Fragments.LocationFragment;
+import com.example.concordia_campus_guide.Fragments.LocationFragment;
 
 import androidx.core.app.ActivityCompat;
 
