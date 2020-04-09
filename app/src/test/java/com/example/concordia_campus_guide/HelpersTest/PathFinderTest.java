@@ -115,7 +115,7 @@ public class PathFinderTest {
 
     @Test
     public void getPathToDestinationBetweenTwoClassroomsInTheSameBuildingTest(){
-        List<WalkingPoint> walkingPointsToDestination = Arrays.asList(classRoomInHBuildingWalkingPoint2, walkingPoint4, classRoomInHBuildingWalkingPoint1);
+        List<WalkingPoint> walkingPointsToDestination = Arrays.asList(classRoomInHBuildingWalkingPoint1, walkingPoint4, classRoomInHBuildingWalkingPoint2);
         assertEquals(walkingPointsToDestination,pathFinder.getPathToDestination());
     }
 
@@ -129,8 +129,7 @@ public class PathFinderTest {
         when(mockAppDb.walkingPointDao().getAllAccessPointsOnFloor(classRoomInHBuildingWalkingPoint1.getFloorCode(), PointType.ENTRANCE)).thenReturn(Arrays.asList(entranceHBuildingWalkingPoint));
 
         PathFinder pathFinderBetweenBuildings = new PathFinder(mockAppDb,roomInH,roomInMB);
-
-        List<WalkingPoint> walkingPointsToDestination = Arrays.asList(classRoomInMBBuildingWalkingPoint, walkingPoint9,entranceMBBuildingWalkingPoint, entranceHBuildingWalkingPoint, walkingPoint4, classRoomInHBuildingWalkingPoint1);
+        List<WalkingPoint> walkingPointsToDestination = Arrays.asList(classRoomInHBuildingWalkingPoint1, walkingPoint4, entranceHBuildingWalkingPoint, entranceMBBuildingWalkingPoint, walkingPoint9, classRoomInMBBuildingWalkingPoint);
         assertEquals(walkingPointsToDestination,pathFinderBetweenBuildings.getPathToDestination());
     }
 

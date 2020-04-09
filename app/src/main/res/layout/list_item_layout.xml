@@ -25,7 +25,7 @@
         android:layout_marginBottom="8dp"
         android:layout_weight="12"
         android:orientation="vertical"
-        android:text="TextView"
+        android:text=""
         android:textStyle="bold" />
 
 </LinearLayout>

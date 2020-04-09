@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.Fragments.LocationFragment;
+package com.example.concordia_campus_guide.Fragments;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -33,6 +33,7 @@ import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
+import com.example.concordia_campus_guide.ViewModels.LocationFragmentViewModel;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;

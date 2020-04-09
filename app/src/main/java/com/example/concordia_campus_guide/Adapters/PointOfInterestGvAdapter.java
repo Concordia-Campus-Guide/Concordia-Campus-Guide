@@ -53,7 +53,9 @@ class PointOfInterestGvAdapter extends BaseAdapter {
         ImageView serviceIv = view.findViewById(R.id.serviceIv);
 
         serviceIv.setImageBitmap(getBitmapFromAssets("point_of_interest_icons/poi_"+services.get(position).toLowerCase()+".png"));
-        serviceTxt.setText(services.get(position).replace("_", " "));
+
+        int serviceTextId = context.getResources().getIdentifier(services.get(position).toLowerCase(), "string", context.getPackageName());
+        serviceTxt.setText(context.getResources().getString(serviceTextId));
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +66,7 @@ class PointOfInterestGvAdapter extends BaseAdapter {
 
         return view;
     }
+
     private Bitmap getBitmapFromAssets(String fileName){
         AssetManager assetManager = context.getAssets();
         InputStream inputStream = null;

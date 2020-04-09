@@ -9,6 +9,7 @@ import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -142,6 +143,7 @@ public class PathFinder {
             goalNode = goalNode.parent;
         } while (goalNode != null);
 
+        Collections.reverse(solutionPath);
         return solutionPath;
     }
 

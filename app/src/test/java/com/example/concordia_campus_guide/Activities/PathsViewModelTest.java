@@ -9,6 +9,7 @@ import com.example.concordia_campus_guide.Models.Direction;
 import com.example.concordia_campus_guide.Models.PointType;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
+import com.example.concordia_campus_guide.ViewModels.PathsViewModel;
 
 import org.junit.Before;
 import org.junit.Test;

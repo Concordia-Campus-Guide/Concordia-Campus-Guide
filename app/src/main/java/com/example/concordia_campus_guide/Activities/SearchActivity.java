@@ -24,6 +24,7 @@ import com.example.concordia_campus_guide.Models.Helpers.CalendarViewModel;
 import com.example.concordia_campus_guide.Models.MyCurrentPlace;
 import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.R;
+import com.example.concordia_campus_guide.ViewModels.SearchActivityViewModel;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -36,6 +37,8 @@ public class SearchActivity extends AppCompatActivity {
     CalendarViewModel calendarViewModel;
 
     private PlaceToSearchResultAdapter adapter;
+    private Boolean shouldSetNextClassClickListener = false;
+    private Place nextClassPlace;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,7 @@ public class SearchActivity extends AppCompatActivity {
         nextClassRow = findViewById(R.id.view_container);
         calendarViewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
         mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getApplication())).get(SearchActivityViewModel.class);
+        setupNextClassString();
     }
 
     private void setPlaceToSearchResultAdapter() {
@@ -107,29 +111,51 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+        if(shouldSetNextClassClickListener){
+            nextClassArrow.setVisibility(View.VISIBLE);
+            nextClassRow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Place place = nextClassPlace;
+                    openRoutesPage(place);
+                }
+            });
+        }
+
+    }
+
+    private void setupNextClassString() {
         final CalendarEvent calendarEvent = calendarViewModel.getEvent(this);
         final String eventString;
         final String eventLocation;
 
-        if (calendarEvent != null) {
-            eventString = calendarViewModel.getNextClassString((calendarEvent));
-            nextClassText.setText(eventString);
+        if(calendarEvent != null){
             eventLocation = calendarEvent.getLocation();
             Place place = mViewModel.getRoomFromDB(eventLocation);
 
-            if (!eventString.equals("Event is incorrectly formatted")) {
-                if (place == null) {
-                    nextClassText.setText("Location not found");
-                } else {
-                    nextClassArrow.setVisibility(View.VISIBLE);
-                    nextClassRow.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            openRoutesPage(place);
-                        }
-                    });
-                }
-            }
+            if(place == null)
+                populateNextClassStringForNullPlace();
+            else
+                populateNextClassString(calendarEvent, place);
+        }
+    }
+
+    private void populateNextClassStringForNullPlace() {
+        nextClassText.setText(getResources().getString(R.string.location_not_found));
+        shouldSetNextClassClickListener = false;
+    }
+
+    private void populateNextClassString(CalendarEvent calendarEvent, Place place) {
+        String eventString;
+        eventString = calendarViewModel.getNextClassString((calendarEvent));
+        nextClassText.setText(eventString);
+
+        if(eventString.equals(getResources().getString(R.string.incorrect_format_event))){
+            shouldSetNextClassClickListener = false;
+        }
+        else{
+            shouldSetNextClassClickListener = true;
+            nextClassPlace = place;
         }
     }
 

@@ -8,16 +8,18 @@ import com.google.android.gms.maps.model.LatLng;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Locale;
+
 public class UrlBuilderTest {
 
     @Test
     public void buildTest() {
         // Arrange
-        String expectedUrl = "https://maps.googleapis.com/maps/api/directions/" + "json" + "?" + "origin=45.525407,-73.677126&destination=45.497361,-73.579033&mode=driving&alternatives=true"
+        String expectedUrl = "https://maps.googleapis.com/maps/api/directions/" + "json" + "?" + "origin=45.525407,-73.677126&destination=45.497361,-73.579033&mode=driving&alternatives=true&language=en"
                 + "&key=" + BuildConfig.API_KEY;
 
         // Act
-        String actualUrl = UrlBuilder.build(new LatLng(45.525407, -73.677126), new LatLng(45.497361, -73.579033), ClassConstants.DRIVING);
+        String actualUrl = UrlBuilder.build(new LatLng(45.525407, -73.677126), new LatLng(45.497361, -73.579033), ClassConstants.DRIVING, Locale.ENGLISH);
 
         // Assert
         Assert.assertEquals(UrlBuilder.class.toString(), expectedUrl, actualUrl);

@@ -62,7 +62,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:padding="8dp"
-                android:text="Name"
+                android:text="@string/from_location"
                 android:textColor="@android:color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.771"
@@ -79,7 +79,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:padding="8dp"
-                android:text="Name"
+                android:text="@string/to_destination"
                 android:textColor="@android:color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.771"
@@ -92,7 +92,7 @@
 
     <fragment
         android:id="@+id/pathLocationFragment"
-        android:name="com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragment"
+        android:name="com.example.concordia_campus_guide.Fragments.LocationFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
