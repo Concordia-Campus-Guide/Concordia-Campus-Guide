@@ -37,9 +37,9 @@ public class PathInfoCardFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.path_info_card_fragment, container, false);
+    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container,
+            @Nullable final Bundle savedInstanceState) {
+        final View view = inflater.inflate(R.layout.path_info_card_fragment, container, false);
 
         initComponents(view);
         updateDirectionResults();
@@ -47,31 +47,32 @@ public class PathInfoCardFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated(@Nullable final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //wait sufficient time for the google outdoor direction api callback
+        // wait sufficient time for the google outdoor direction api callback
         (new Handler()).postDelayed(this::drawIndoorOutdoorInfo, 2500);
     }
 
-    private void initComponents(View view) {
+    private void initComponents(final View view) {
         mDestinationRv = view.findViewById(R.id.directions_recycle_view);
         setupDestinationRv(view);
     }
 
-    private void setupDestinationRv(View view) {
+    private void setupDestinationRv(final View view) {
         mDestinationRv.setHasFixedSize(false);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         mDestinationRv.setLayoutManager(layoutManager);
     }
 
     private void updateDirectionResults() {
-        Serializable temporaryDirectionsResults = getArguments().getSerializable("directionsResult");
+        final Serializable temporaryDirectionsResults = getArguments().getSerializable("directionsResult");
         mDirectionsResults = (ArrayList<PathInfoCard>) temporaryDirectionsResults;
     }
 
     public void drawIndoorOutdoorInfo() {
-        LinearLayout layout = getView().findViewById(R.id.paths_image_buttons);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT, 1);
+        final LinearLayout layout = getView().findViewById(R.id.paths_image_buttons);
+        final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT, 1);
         String directionResultType = "";
 
         for (int i = 0; i < mDirectionsResults.size(); i++) {
@@ -89,13 +90,16 @@ public class PathInfoCardFragment extends Fragment {
         setRecyclerView();
     }
 
-    private void setupDirectionIcon(LinearLayout layout, LinearLayout.LayoutParams layoutParams, String type) {
-        int directionIcon = this.getResources().getIdentifier("ic_directions_" + type.toLowerCase(), "drawable", this.getActivity().getPackageName());
+    private void setupDirectionIcon(final LinearLayout layout, final LinearLayout.LayoutParams layoutParams,
+            final String type) {
+        final int directionIcon = this.getResources().getIdentifier("ic_directions_" + type.toLowerCase(), "drawable",
+                this.getActivity().getPackageName());
         createDirectionImageButton(layout, layoutParams, directionIcon);
     }
 
-    public void createDirectionImageButton(LinearLayout layout, LinearLayout.LayoutParams layoutParams, int imageId) {
-        ImageButton btn = new ImageButton(getContext());
+    public void createDirectionImageButton(final LinearLayout layout, final LinearLayout.LayoutParams layoutParams,
+            final int imageId) {
+        final ImageButton btn = new ImageButton(getContext());
         btn.setLayoutParams(layoutParams);
         btn.setImageResource(imageId);
         btn.setColorFilter(R.color.colorAppTheme);
@@ -103,8 +107,8 @@ public class PathInfoCardFragment extends Fragment {
         layout.addView(btn);
     }
 
-    public void setDividerTextView(LinearLayout layout, LinearLayout.LayoutParams layoutParams) {
-        TextView divider = new TextView(getContext());
+    public void setDividerTextView(final LinearLayout layout, final LinearLayout.LayoutParams layoutParams) {
+        final TextView divider = new TextView(getContext());
         divider.setText(">");
         divider.setLayoutParams(layoutParams);
         divider.setGravity(Gravity.CENTER);
@@ -112,7 +116,7 @@ public class PathInfoCardFragment extends Fragment {
     }
 
     public void setStartAndEndTime() {
-        TextView totalDurationTv = getView().findViewById(R.id.total_time);
+        final TextView totalDurationTv = getView().findViewById(R.id.total_time);
 
         totalDurationTv.setText(Math.ceil(totalDuration) + getResources().getString(R.string.minutes));
 
@@ -122,31 +126,34 @@ public class PathInfoCardFragment extends Fragment {
     }
 
     private void setupArrivalTimeTv() {
-        TextView endTimeTextView = getView().findViewById(R.id.arrival_time);
+        final TextView endTimeTextView = getView().findViewById(R.id.arrival_time);
 
-        Calendar arrivalCalendar = Calendar.getInstance();
+        final Calendar arrivalCalendar = Calendar.getInstance();
         arrivalCalendar.setTime(new Date());
         arrivalCalendar.add(Calendar.MINUTE, (int) totalDuration);
 
-        endTimeTextView.setText(String.format("%02d:%02d", arrivalCalendar.get(Calendar.HOUR_OF_DAY), arrivalCalendar.get(Calendar.MINUTE)));
+        endTimeTextView.setText(String.format("%02d:%02d", arrivalCalendar.get(Calendar.HOUR_OF_DAY),
+                arrivalCalendar.get(Calendar.MINUTE)));
     }
 
     private void setupStartTimeTv() {
-        TextView startTimeTextView = (TextView) getView().findViewById(R.id.start_time);
+        final TextView startTimeTextView = (TextView) getView().findViewById(R.id.start_time);
 
-        Calendar calendar = Calendar.getInstance();
+        final Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
 
-        startTimeTextView.setText(String.format("%02d:%02d", calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE)));
+        startTimeTextView
+                .setText(String.format("%02d:%02d", calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE)));
     }
 
     public void setRecyclerView() {
         updateDirectionResults();
 
-        RecyclerView.Adapter destinationRvAdapter = new DirectionsRecyclerViewAdapter(getContext(), mDirectionsResults);
+        final RecyclerView.Adapter destinationRvAdapter = new DirectionsRecyclerViewAdapter(getContext(),
+                mDirectionsResults);
 
         mDestinationRv.setAdapter(destinationRvAdapter);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
+        final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
                 mDestinationRv.getContext(),
                 DividerItemDecoration.VERTICAL);
         mDestinationRv.addItemDecoration(dividerItemDecoration);

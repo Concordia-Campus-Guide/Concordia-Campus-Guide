@@ -30,24 +30,24 @@ public class SmallInfoCardFragment extends Fragment {
     private TextView infoCardTitle;
 
     private Button directionsBt;
-    private Place place;
+    private final Place place;
 
-    public SmallInfoCardFragment(Place place){
+    public SmallInfoCardFragment(final Place place) {
         this.place = place;
     }
 
     /**
      * Defines the view and initializes text views of the view
      *
-     * @param inflater: the LayoutInflater as specified in Android docs
-     * @param container: the ViewGroup as specified in Android docs
+     * @param inflater:           the LayoutInflater as specified in Android docs
+     * @param container:          the ViewGroup as specified in Android docs
      * @param savedInstanceState: the Bundle as specified in Android docs
      *
      */
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.small_info_card_fragment, container, false);
+    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container,
+            @Nullable final Bundle savedInstanceState) {
+        final View view = inflater.inflate(R.layout.small_info_card_fragment, container, false);
 
         directionsBt = view.findViewById(R.id.directions);
         infoCardTitle = view.findViewById(R.id.info_card_title);
@@ -55,44 +55,45 @@ public class SmallInfoCardFragment extends Fragment {
     }
 
     /**
-     * Defines the behavior expected after the activity is created, such as initialization of
-     * the view
+     * Defines the behavior expected after the activity is created, such as
+     * initialization of the view
      *
      * @param savedInstanceState: the Bundle as specified in Android docs
      *
      */
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState){
+    public void onActivityCreated(@Nullable final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getActivity().getApplication())).get(SmallInfoCardFragmentViewModel.class);
+        mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getActivity().getApplication()))
+                .get(SmallInfoCardFragmentViewModel.class);
         mViewModel.setPlace(this.place);
         setInfoCard();
         setOnClickListeners();
     }
 
     /**
-     * Initializes specifics of info card view such as building name, address, building image,
-     * services, departements
+     * Initializes specifics of info card view such as building name, address,
+     * building image, services, departements
      */
-    private void setInfoCard(){
+    private void setInfoCard() {
         infoCardTitle.setText(place.getDisplayName());
     }
 
-    private void setOnClickListeners(){
-        this.directionsBt.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+    private void setOnClickListeners() {
+        this.directionsBt.setOnClickListener(new View.OnClickListener() {
+            public void onClick(final View v) {
                 onClickDirections(v);
             }
         });
     }
 
-    public void onClickDirections(View v){
-        Intent openRoutes = new Intent(getActivity(), RoutesActivity.class);
+    public void onClickDirections(final View v) {
+        final Intent openRoutes = new Intent(getActivity(), RoutesActivity.class);
 
         SelectingToFromState.setQuickSelectToTrue();
         SelectingToFromState.setMyCurrentLocation(((MainActivity) getActivity()).getMyCurrentLocation());
 
-        Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
+        final Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
         if(myCurrentLocation != null){
             SelectingToFromState.setFrom(new MyCurrentPlace(myCurrentLocation.getLatitude(), myCurrentLocation.getLongitude()));
         }
