@@ -24,6 +24,7 @@ public class Shuttle {
     private Double time;
 
     public Shuttle() {
+        // do nothing
     }
 
     public int getShuttleId() {

@@ -1,7 +1,5 @@
 package com.example.concordia_campus_guide.Models.Routes;
 
-import androidx.annotation.VisibleForTesting;
-
 import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
 
 public class Car extends TransportType {

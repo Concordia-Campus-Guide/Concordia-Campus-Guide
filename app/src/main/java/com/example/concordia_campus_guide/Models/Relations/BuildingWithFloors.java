@@ -13,7 +13,9 @@ public class BuildingWithFloors {
     @Embedded
     private Building building;
 
-    public BuildingWithFloors() {}
+    public BuildingWithFloors() {
+        // do nothing
+    }
 
     @Relation(
             parentColumn = "building_code",

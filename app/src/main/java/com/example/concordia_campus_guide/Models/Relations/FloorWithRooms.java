@@ -14,6 +14,7 @@ public class FloorWithRooms {
     private Floor floor;
 
     public FloorWithRooms() {
+        // do nothing
     }
 
     @Relation(
