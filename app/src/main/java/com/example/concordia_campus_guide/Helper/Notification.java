@@ -33,9 +33,9 @@ public class Notification {
                     previousCalendarEvent = calendarEvent;
                     mainActivity.popUp(calendarEvent);
                 }
-                handler.postDelayed(this, 3000);
+                handler.postDelayed(this, 6000);
             }
-        }, 3000);
+        }, 6000);
     }
 
     public boolean validateCalendarEvent(CalendarEvent calendarEvent) {
