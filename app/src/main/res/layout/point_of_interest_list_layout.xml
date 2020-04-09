@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.example.concordia_campus_guide.customViews.POIGridView
+    <com.example.concordia_campus_guide.custom_views.POIGridView
         android:id="@+id/poiGv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

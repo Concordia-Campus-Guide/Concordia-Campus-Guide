@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.customViews;
+package com.example.concordia_campus_guide.custom_views;
 
 import android.util.AttributeSet;
 import android.widget.GridView;
