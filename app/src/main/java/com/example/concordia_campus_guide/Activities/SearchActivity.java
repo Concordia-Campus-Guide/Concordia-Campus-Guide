@@ -117,7 +117,7 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
                 if(myCurrentLocation != null){
-                    openRoutesPage(new MyCurrentPlace(getApplicationContext(), myCurrentLocation.getLongitude(), myCurrentLocation.getLatitude()));
+                    openRoutesPage(new MyCurrentPlace(SearchActivity.this, myCurrentLocation.getLongitude(), myCurrentLocation.getLatitude()));
                 }
             }
         });
@@ -158,7 +158,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private void populateNextClassString(CalendarEvent calendarEvent, Place place) {
         String eventString;
-        eventString = calendarViewModel.getNextClassString((calendarEvent));
+        eventString = calendarViewModel.getNextClassString(SearchActivity.this, (calendarEvent));
         nextClassText.setText(eventString);
 
         if(eventString.equals(getResources().getString(R.string.incorrect_format_event))){
@@ -177,9 +177,9 @@ public class SearchActivity extends AppCompatActivity {
             SelectingToFromState.setTo(place);
             if (SelectingToFromState.getMyCurrentLocation() != null) {
                 Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
-                SelectingToFromState.setFrom(new MyCurrentPlace(getApplicationContext(), myCurrentLocation.getLongitude(), myCurrentLocation.getLatitude()));
+                SelectingToFromState.setFrom(new MyCurrentPlace(SearchActivity.this, myCurrentLocation.getLongitude(), myCurrentLocation.getLatitude()));
             } else {
-                SelectingToFromState.setFrom(new MyCurrentPlace(getApplicationContext()));
+                SelectingToFromState.setFrom(new MyCurrentPlace(SearchActivity.this));
             }
         }
         if (SelectingToFromState.isSelectFrom()) {

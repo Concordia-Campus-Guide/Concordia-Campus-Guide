@@ -72,14 +72,14 @@ public class CalendarViewModel extends AndroidViewModel {
         return null;
     }
 
-    public String getNextClassString(CalendarEvent event){
+    public String getNextClassString(Context context, CalendarEvent event){
         String nextClassString = "";
         if(incorrectlyFormatted(event.getLocation())){
             return context.getResources().getString(R.string.incorrect_format_event);
         }
 
         Date eventDate = new Date((Long.parseLong(event.getStartTime())));
-        String timeUntil = getTimeUntilString(eventDate.getTime(), System.currentTimeMillis());
+        String timeUntil = getTimeUntilString(context, eventDate.getTime(), System.currentTimeMillis());
         nextClassString = event.getTitle() + " " + context.getResources().getString(R.string.in) + " " + timeUntil;
 
         return  nextClassString;
@@ -148,7 +148,7 @@ public class CalendarViewModel extends AndroidViewModel {
                 == PackageManager.PERMISSION_GRANTED;
     }
 
-    public String getTimeUntilString(long eventTime, long currentTime){
+    public String getTimeUntilString(Context context, long eventTime, long currentTime){
         long differenceInMillis = eventTime - currentTime;
 
         return String.format("%02d %s %s %02d minutes",
