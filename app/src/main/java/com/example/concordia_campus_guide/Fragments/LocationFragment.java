@@ -460,7 +460,9 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     private void zoomInLocation(LatLng center) {
         float zoomLevel = 16.5f;
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(center, zoomLevel));
+        if(mMap != null){
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(center, zoomLevel));
+        }
     }
 
     /**

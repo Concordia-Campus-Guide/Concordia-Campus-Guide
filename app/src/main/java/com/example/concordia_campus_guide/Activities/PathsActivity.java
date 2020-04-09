@@ -26,7 +26,6 @@ import com.example.concordia_campus_guide.Models.BusStop;
 import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.Routes.Route;
-import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
 import com.example.concordia_campus_guide.ViewModels.PathsViewModel;
 import com.google.android.gms.maps.model.LatLng;
@@ -46,6 +45,9 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
     private boolean fromIsIndoor = false;
     private boolean toIsIndoor = false;
     boolean shuttleSelected;
+    int counter = 1;
+    boolean firstCallCompleted = false;
+    boolean secondCallCompleted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +56,7 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
         init();
         checkFromToType(from, to);
         if (!shuttleSelected) {
-            setOutdoorPaths();
-            setIndoorPaths();
+            setPaths();
         } else {
             setShuttlePaths();
         }
@@ -68,6 +69,7 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
 
         mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getApplication())).get(PathsViewModel.class);
         fragmentManager = getSupportFragmentManager();
+        directionWrappers = new ArrayList<>();
 
         from = mViewModel.getFrom();
         to = mViewModel.getTo();
@@ -108,9 +110,7 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
         PathInfoCardFragment pathInfoCardFragment = new PathInfoCardFragment();
         // creating bundle to be able to pass the directionWrapper and the walkingPoints to the pathsActivity
         Bundle infoCardBundle = new Bundle();
-        infoCardBundle.putSerializable("directionsResult", directionWrappers);
-        if (fromIsIndoor || toIsIndoor)
-            infoCardBundle.putSerializable("walkingPoints", (ArrayList<WalkingPoint>) locationFragment.getWalkingPointList());
+        infoCardBundle.putSerializable("directionsResult", mViewModel.getInfoCardList());
         pathInfoCardFragment.setArguments(infoCardBundle);
         // creating fragmentTransaction to show the step-by-step card from the bottom of the screen
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -145,40 +145,59 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
         directionWrappers = (mViewModel.areInSameBuilding(from, to) || mViewModel.arePlacesSeparatedByATunnel(from, to)) ?
                 new ArrayList<>() :
                 (ArrayList<DirectionWrapper>) parseDirectionResults();
+
         locationFragment.drawOutdoorPaths(directionWrappers);
+        mViewModel.adaptOutdoorDirectionsToInfoCardList(directionWrappers);
     }
 
-    public void setIndoorPaths() {
-        if (!fromIsIndoor && !toIsIndoor) return;
+    public void setPaths() {
+        // Outdoor
+        if (!fromIsIndoor && !toIsIndoor) {
+            setOutdoorPaths();
+            return;
+        }
         //Outdoor -> Indoor
         if (!fromIsIndoor) {
+            setOutdoorPaths();
             locationFragment.setIndoorPaths(mViewModel.getEntrance(to), to);
-        } else if (!toIsIndoor) {
-            locationFragment.setIndoorPaths(mViewModel.getEntrance(from), from);
-        } else if (mViewModel.arePlacesSeparatedByATunnel(from, to) || mViewModel.areInSameBuilding(from, to)) {
+            mViewModel.adaptIndoorDirectionsToInfoCardList(locationFragment.getWalkingPointList());
+        }
+        // Indoor -> Outdoor
+        else if (!toIsIndoor) {
+            locationFragment.setIndoorPaths(from, mViewModel.getEntrance(from));
+            mViewModel.adaptIndoorDirectionsToInfoCardList(locationFragment.getWalkingPointList());
+            setOutdoorPaths();
+        }
+        // Same Building || tunnel
+        else if (mViewModel.arePlacesSeparatedByATunnel(from, to) || mViewModel.areInSameBuilding(from, to)) {
             locationFragment.setIndoorPaths(from, to);
+            mViewModel.adaptIndoorDirectionsToInfoCardList(locationFragment.getWalkingPointList());
         }
         //[from -> from_entrance ] + outdoor directions + [to_entrance -> to]
-        else if (toIsIndoor) {
+        else {
             locationFragment.setIndoorPaths(from, mViewModel.getEntrance(from));
+            mViewModel.adaptIndoorDirectionsToInfoCardList(locationFragment.getWalkingPointList());
+            setOutdoorPaths();
             locationFragment.setIndoorPaths(mViewModel.getEntrance(to), to);
+            mViewModel.adaptIndoorDirectionsToInfoCardList(locationFragment.getWalkingPointList());
         }
     }
 
     public void setShuttlePaths() {
         //From starting point to bus stop
+        // Indoor -> Entrance
         if (fromIsIndoor) {
             locationFragment.setIndoorPaths(from, mViewModel.getEntrance(from));
+            mViewModel.adaptIndoorDirectionsToInfoCardList(locationFragment.getWalkingPointList());
             getOutdoorDirections(mViewModel.getEntrance(from), new BusStop(from.getCampus()));
-        } else {
+        }
+        // Outdoor directions to bus stop
+        else {
             getOutdoorDirections(from, new BusStop(from.getCampus()));
         }
         drawShuttlePath();
         //From the bus stop to the destination
         getOutdoorDirections(new BusStop(to.getCampus()), mViewModel.getEntrance(to));
-        if (toIsIndoor) {
-            locationFragment.setIndoorPaths(mViewModel.getEntrance(to), to);
-        }
     }
 
     public void getOutdoorDirections(Place from, Place to) {
@@ -195,11 +214,19 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
             directionsRoute = result.routes[0];
             directionWrappers = (ArrayList<DirectionWrapper>) parseDirectionResults();
             locationFragment.drawOutdoorPaths(directionWrappers);
+            mViewModel.adaptOutdoorDirectionsToInfoCardList(directionWrappers);
         }
+        if (counter < 2) {
+            mViewModel.adaptShuttleToInfoCardList();
+        } else if (toIsIndoor) {
+            locationFragment.setIndoorPaths(mViewModel.getEntrance(to), to);
+            mViewModel.adaptIndoorDirectionsToInfoCardList(locationFragment.getWalkingPointList());
+        }
+        counter += 1;
     }
 
     public void drawShuttlePath() {
-        String polyline = from.getCampus().equals("SGW") ? ClassConstants.ShuttlePolylineSGWLOY : ClassConstants.ShuttlePolylineLOYSGW;
+        String polyline = from.getCampus().equals("SGW") ? ClassConstants.SHUTTLE_POLYLINE_SGW_LOY : ClassConstants.SHUTTLE_POLYLINE_LOY_SGW;
         locationFragment.setShuttlePaths(polyline);
     }
 }

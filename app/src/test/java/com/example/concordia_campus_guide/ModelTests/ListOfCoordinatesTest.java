@@ -34,13 +34,6 @@ public class ListOfCoordinatesTest {
     }
 
     @Test
-    public void toListDoubleTest(){
-    }
-
-//      assertEquals(testingList.get(0).getLatitude(), testingList.get(1).getLatitude());
-//        assertEquals(testingList.get(0).getLongitude(), testingList.get(1).getLongitude());
-
-    @Test
     public void getAndSetCoordinatesTest(){
         assertEquals(coordinates.getListOfCoordinates(), null);
         coordinates.setListOfCoordinates(testingList);

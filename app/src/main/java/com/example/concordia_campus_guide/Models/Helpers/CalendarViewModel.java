@@ -1,6 +1,7 @@
 package com.example.concordia_campus_guide.Models.Helpers;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.ContentResolver;
 import android.content.ContentUris;
@@ -12,19 +13,14 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Instances;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.AndroidViewModel;
-
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Models.CalendarEvent;
 import com.example.concordia_campus_guide.R;
-
-
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -134,7 +130,7 @@ public class CalendarViewModel extends AndroidViewModel {
 
         Uri uri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventId);
 
-        int row = cr.update(uri, values, null, null);
+        cr.update(uri, values, null, null);
     }
 
     public boolean hasReadPermission(){
@@ -147,6 +143,7 @@ public class CalendarViewModel extends AndroidViewModel {
                 == PERMISSION_GRANTED;
     }
 
+    @SuppressLint("DefaultLocale")
     public String getTimeUntilString(Context context, long eventTime, long currentTime){
         long differenceInMillis = eventTime - currentTime;
 

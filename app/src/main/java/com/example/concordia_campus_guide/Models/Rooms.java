@@ -1,12 +1,9 @@
 package com.example.concordia_campus_guide.Models;
 
 import android.util.Log;
-
 import java.util.ArrayList;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.List;
 
 public class Rooms {

@@ -15,13 +15,11 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class SelectingToFromStateTest {
-        private SelectingToFromState selectingToFromState;
         private RoomModel fromRoom;
         private RoomModel toRoom;
 
         @Before
         public void init(){
-            selectingToFromState = new SelectingToFromState();
             fromRoom = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8", "SGW");
             toRoom  = new RoomModel(new Coordinates(-73.57902321964502, 45.49699848270905), "921", "H-9", "SGW");
             SelectingToFromState.setFrom(fromRoom);
