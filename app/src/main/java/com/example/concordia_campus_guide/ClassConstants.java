@@ -23,6 +23,7 @@ public class  ClassConstants {
     public static final String DISABILITY_BUTTON = "disability_button";
     public static final String CALENDAR_INTEGRATION_BUTTON = "calendar_integration_button";
     public static final String SHARED_PREFERENCES = "UserPreferences";
+    public static final String IGNORE ="ignore";
 
     // Toggle buttons constants
     @Retention(RetentionPolicy.SOURCE)
@@ -62,5 +63,7 @@ public class  ClassConstants {
 
     //Loyola building label string used as campus center
     public static final String LOYOLA_CENTER_BUILDING_LABEL = "CC";
+
+    public static final int EARTH_RADIUS_KM = 6371;
 
 }

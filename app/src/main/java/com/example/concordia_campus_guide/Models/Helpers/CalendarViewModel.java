@@ -7,6 +7,7 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -19,6 +20,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.AndroidViewModel;
 
+import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Models.CalendarEvent;
 import com.example.concordia_campus_guide.R;
 
@@ -27,6 +29,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import static android.content.Context.MODE_PRIVATE;
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 public class CalendarViewModel extends AndroidViewModel {
     Context context;
@@ -52,24 +57,18 @@ public class CalendarViewModel extends AndroidViewModel {
     };
 
     public CalendarEvent getEvent(AppCompatActivity activity) {
-
-        List<String> listPermissionsNeeded = new ArrayList<>();
-
-        if (!hasReadPermission()) {
-            listPermissionsNeeded.add(Manifest.permission.READ_CALENDAR);
-        }
-        if(!hasWritePermission()){
-            listPermissionsNeeded.add(Manifest.permission.WRITE_CALENDAR);
-        }
-        if(!listPermissionsNeeded.isEmpty()){
-            ActivityCompat.requestPermissions(activity, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), REQUEST_ID_MULTIPLE_PERMISSIONS);
+        SharedPreferences sharedPreferences = activity.getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        if (!hasReadPermission() && !hasWritePermission() && !sharedPreferences.getBoolean(String.valueOf(R.string.ignore),false)) {
+            askForPermission(activity);
+            editor.putBoolean(String.valueOf(R.string.ignore),true);
+            editor.commit();
         }
 
         if(hasWritePermission() && hasReadPermission()){
             Cursor cursor = getCalendarCursor();
             return getCalendarEvent(cursor);
         }
-
         return null;
     }
 
@@ -139,14 +138,14 @@ public class CalendarViewModel extends AndroidViewModel {
         cr.update(uri, values, null, null);
     }
 
-    private boolean hasReadPermission(){
+    public boolean hasReadPermission(){
         return ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CALENDAR)
-                == PackageManager.PERMISSION_GRANTED;
+                == PERMISSION_GRANTED;
     }
 
-    private boolean hasWritePermission(){
+    public boolean hasWritePermission(){
         return ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_CALENDAR)
-                == PackageManager.PERMISSION_GRANTED;
+                == PERMISSION_GRANTED;
     }
 
     @SuppressLint("DefaultLocale")
@@ -158,5 +157,13 @@ public class CalendarViewModel extends AndroidViewModel {
                 context.getResources().getString(R.string.hours),
                 context.getResources().getString(R.string.and),
                 TimeUnit.MILLISECONDS.toMinutes(differenceInMillis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(differenceInMillis)));
+    }
+
+
+    public void askForPermission(AppCompatActivity activity){
+        if (!hasReadPermission() && !hasWritePermission()) {
+            ActivityCompat.requestPermissions(activity,
+                    new String[]{Manifest.permission.WRITE_CALENDAR,Manifest.permission.READ_CALENDAR}, 101);
+        }
     }
 }

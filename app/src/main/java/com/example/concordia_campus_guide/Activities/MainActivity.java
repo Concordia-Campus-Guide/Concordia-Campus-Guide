@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -36,6 +37,7 @@ import com.example.concordia_campus_guide.Helper.Notification;
 import com.example.concordia_campus_guide.Models.Buildings;
 import com.example.concordia_campus_guide.Models.CalendarEvent;
 import com.example.concordia_campus_guide.Models.Floors;
+import com.example.concordia_campus_guide.Models.Helpers.CalendarViewModel;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.Rooms;
 import com.example.concordia_campus_guide.Models.Shuttles;
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Notification notification;
     Toolbar myToolbar;
 
+    private CalendarViewModel calendarViewModel;
     // Side Menu Toggle Buttons
     private CompoundButton staffToggle;
     private CompoundButton accessibilityToggle;
@@ -135,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         MainActivity.this.setTitle("ConUMaps");
 
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
-
+        calendarViewModel = new CalendarViewModel(getApplication());
         mViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
         fragmentManager = getSupportFragmentManager();
 
@@ -404,14 +407,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
-        SharedPreferences sharedPreferences = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
         if (itemId == R.id.nav_calendar) {
-            SharedPreferences.Editor myEdit = sharedPreferences.edit();
-
-            String value = item.isEnabled() ? ClassConstants.TRUE : ClassConstants.FALSE;
-            myEdit.putString(ClassConstants.CALENDAR_INTEGRATION_BUTTON, value);
-
-            myEdit.commit();
+            if(!calendarViewModel.hasReadPermission() && !calendarViewModel.hasWritePermission()){
+                calendarViewModel.askForPermission(this);
+            }
+            else {
+                Toast.makeText(MainActivity.this, "You have already given permission", Toast.LENGTH_SHORT).show();
+            }
         }
         return false;
     }
