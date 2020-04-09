@@ -8,11 +8,10 @@ import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragment;
 
 import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
 
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 
-public class CurrentLocationPermissionRequest extends Fragment {
+public class CurrentLocationPermissionRequest {
 
     /**
      * The purpose of this application is to ask the user for their permission
