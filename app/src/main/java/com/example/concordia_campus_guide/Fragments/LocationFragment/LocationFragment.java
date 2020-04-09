@@ -2,7 +2,6 @@ package com.example.concordia_campus_guide.Fragments.LocationFragment;
 
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
-import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +24,8 @@ import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Helper.CurrentLocation;
 import com.example.concordia_campus_guide.Helper.CurrentLocationPermissionRequest;
 import com.example.concordia_campus_guide.Helper.DrawDirectionsPolyLines;
+import com.example.concordia_campus_guide.Helper.UIHelpers.POIMarkers;
+import com.example.concordia_campus_guide.Helper.UIHelpers.RoomMarkers;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.Models.Building;
@@ -36,15 +37,12 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.geojson.GeoJsonLayer;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,13 +60,13 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private GeoJsonLayer mLayer;
     private GridView mFloorPickerGv;
 
-    private CurrentLocation currentLocationClass;
+    private CurrentLocation currentLocation;
     private CurrentLocationPermissionRequest currentLocationPermissionRequest;
 
     private HashMap<String, GroundOverlay> buildingsGroundOverlays;
     private FloorPickerAdapter currentFloorPickerAdapter;
-    private List<Marker> poiMarkers;
-    private List<Marker> roomMarkers;
+    private POIMarkers poiMarkers;
+    private RoomMarkers roomMarkers;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -80,7 +78,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         mMapView.onResume();
         currentLocationPermissionRequest.getLocationPermission(this);
         setupClickListeners();
-        currentLocationClass.updateLocationEvery5Seconds();
+        currentLocation.updateLocationEvery5Seconds();
         return rootView;
     }
 
@@ -100,11 +98,13 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         myLocationBtn = rootView.findViewById(R.id.myLocation);
         mFloorPickerGv = rootView.findViewById(R.id.FloorPickerGv);
         mFloorPickerGv.setVisibility(View.GONE);
-        buildingsGroundOverlays = new HashMap<>();
-        poiMarkers = new ArrayList<>();
-        roomMarkers = new ArrayList<>();
 
-        currentLocationClass= new CurrentLocation(getContext());
+        buildingsGroundOverlays = new HashMap<>();
+
+        poiMarkers = new POIMarkers();
+        roomMarkers = new RoomMarkers();
+
+        currentLocation = new CurrentLocation(getContext());
         currentLocationPermissionRequest= new CurrentLocationPermissionRequest();
     }
 
@@ -138,9 +138,14 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
 
     public void deselectAll(){
-        removeMarkersFromMap(poiMarkers);
-        removeMarkersFromMap(roomMarkers);
+        removeMarkersFromMap(poiMarkers.getPoiMarkers());
+        removeMarkersFromMap(roomMarkers.getRoomMarkers());
         mFloorPickerGv.setVisibility(View.GONE);
+    }
+
+    private void removeMarkersFromMap(List<Marker> markers){
+        for(Marker marker: markers) marker.remove();
+        markers.clear();
     }
 
     private void setFirstLocationToDisplay() {
@@ -150,7 +155,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     @SuppressLint("MissingPermission")
     private void setFirstLocationToDisplayOnSuccess() {
-        currentLocationClass.getFusedLocationProviderClient().getLastLocation()
+        currentLocation.getFusedLocationProviderClient().getLastLocation()
                 .addOnSuccessListener(getActivity(), location -> {
                     if (location != null) {
                         mMap.setMyLocationEnabled(true);
@@ -166,7 +171,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     @SuppressLint("MissingPermission")
     private void setFirstLocationToDisplayOnFailure() {
-        currentLocationClass.getFusedLocationProviderClient().getLastLocation().addOnFailureListener(getActivity(), e -> zoomInLocation(mViewModel.getInitialZoomLocation()));
+        currentLocation.getFusedLocationProviderClient().getLastLocation().addOnFailureListener(getActivity(), e -> zoomInLocation(mViewModel.getInitialZoomLocation()));
     }
 
 
@@ -269,7 +274,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         return true;
     }
 
-
     private void setupClickListeners() {
         setupLoyolaBtnClickListener();
         setupSGWBtnClickListener();
@@ -293,7 +297,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         loyolaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                zoomInLocation(mViewModel.getLoyolaZoomLocation());
+                zoomInLocation(mViewModel.getZoomLocation(ClassConstants.loyolaCenterBuildingLabel));
             }
         });
     }
@@ -305,12 +309,10 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         sgwBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                zoomInLocation(mViewModel.getSGWZoomLocation());
+                zoomInLocation(mViewModel.getZoomLocation(ClassConstants.sgwCenterBuildingLabel));
             }
         });
     }
-
-
 
     @SuppressLint("MissingPermission")
     private void popUpRequestPermission() {
@@ -328,10 +330,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
             initMap();
         }
     }
-
-
-
-
 
     /**
      * The purpose of this method is handle the onclick polygon
@@ -370,18 +368,15 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         mMapView.getMapAsync(googleMap -> mViewModel.drawShuttlePath(googleMap, polyline));
     }
 
-
-
-
     private void setupRoomMarkers(){
         mViewModel.getListOfRoom().observe(getViewLifecycleOwner(), roomList -> {
 
-            for (Marker marker : roomMarkers) marker.remove();
-            roomMarkers.clear();
+            for (Marker marker : roomMarkers.getRoomMarkers()) marker.remove();
+            roomMarkers.getRoomMarkers().clear();
 
             for(RoomModel roomModel: roomList){
                 if(roomModel != null){
-                    addRoomToMap(roomModel);
+                    roomMarkers.addRoomToMap(roomModel,mViewModel,mMap,getContext());
                 }
             }
         });
@@ -395,82 +390,19 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private void setupPOIListListener() {
         mViewModel.getListOfPOI().observe(getViewLifecycleOwner(), priorityQueue -> {
 
-            for (Marker marker : poiMarkers) marker.remove();
-            poiMarkers.clear();
+            for (Marker marker : poiMarkers.getPoiMarkers()) marker.remove();
+            poiMarkers.getPoiMarkers().clear();
 
             int position = 1;
             do {
                 WalkingPoint polled = priorityQueue.poll();
                 if (polled != null) {
-                    addPOItoMap(polled, position);
+                    poiMarkers.addPOItoMap(polled, position,mViewModel,mMap);
                 }
                 position++;
             } while (position <= 10);
         });
     }
-
-    private void removeMarkersFromMap(List<Marker> markers){
-        for(Marker marker: markers) marker.remove();
-        markers.clear();
-    }
-
-    private void addRoomToMap(RoomModel room){
-        BitmapDescriptor roomIcon = mViewModel.getCustomSizedIcon("class_markers/marker.png", getContext(), 30, 30);
-        if(room != null){
-            LatLng latLng = new LatLng(room.getCenterCoordinates().getLatitude(), room.getCenterCoordinates().getLongitude());
-
-            String tag = ClassConstants.ROOM_TAG + "_" + room.getRoomCode() +"_" + room.getFloorCode();
-            MarkerOptions markerOptions = new MarkerOptions()
-                    .position(latLng)
-                    .icon(roomIcon)
-                    .alpha(0.2f)
-                    .visible(true)
-                    .title(room.getRoomCode());
-
-            Marker marker = mMap.addMarker(markerOptions);
-            marker.setTag(tag);
-
-            roomMarkers.add(marker);
-        }
-    }
-
-    private void addPOItoMap(WalkingPoint poi, int position) {
-        if (poi != null) {
-
-            LatLng latLng = new LatLng(poi.getCoordinate().getLongitude(), poi.getCoordinate().getLatitude());
-
-            if (position == 1)
-                zoomInLocation(latLng);
-
-            String tag = ClassConstants.POI_TAG + "_" + poi.getPlaceCode() + "_" + poi.getFloorCode();
-            MarkerOptions markerOptions = new MarkerOptions()
-                    .title(tag)
-                    .position(latLng)
-                    .icon(mViewModel.getCurrentPOIIcon());
-
-            Marker marker = mMap.addMarker(markerOptions);
-            marker.setTag(tag);
-
-            poiMarkers.add(marker);
-        }
-    }
-
-    private void setVisiblePOIMarkers(String floorSelected, String buildingSelected) {
-        for (Marker marker : poiMarkers) {
-            String floorCode = marker.getTag().toString().split("_")[2];
-            marker.setVisible(floorCode.equalsIgnoreCase(buildingSelected + "-" + floorSelected));
-        }
-    }
-
-
-
-
-    private void zoomInLocation(LatLng center) {
-        float zoomLevel = 16.5f;
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(center, zoomLevel));
-    }
-
-
 
 
     @Override
@@ -479,11 +411,13 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         String buildingSelected = currentFloorPickerAdapter.getBuildingCode();
         mViewModel.setFloorPlan(buildingsGroundOverlays.get(currentFloorPickerAdapter.getBuildingCode()), buildingSelected, floorSelected, mMap);
         setupRoomMarkers();
-        setVisiblePOIMarkers(floorSelected, buildingSelected);
+        poiMarkers.setVisiblePOIMarkers(floorSelected, buildingSelected);
     }
 
-
-
+    private void zoomInLocation(LatLng center) {
+        float zoomLevel = 16.5f;
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(center, zoomLevel));
+    }
 
     @Override
     public void onResume() {
@@ -516,7 +450,4 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     public void setDifferentInitialView(LatLng latLng){
         mViewModel.setInitialZoomLocation(latLng);
     }
-
-
-
 }

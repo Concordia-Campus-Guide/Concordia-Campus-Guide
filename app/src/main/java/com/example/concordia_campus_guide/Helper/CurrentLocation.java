@@ -13,32 +13,30 @@ import androidx.fragment.app.Fragment;
 
 public class CurrentLocation extends Fragment {
     private Location currentLocation;
+    private FusedLocationProviderClient fusedLocationProviderClient;
+
 
     public FusedLocationProviderClient getFusedLocationProviderClient() {
         return fusedLocationProviderClient;
     }
-
-    public void setFusedLocationProviderClient(FusedLocationProviderClient fusedLocationProviderClient) {
-        this.fusedLocationProviderClient = fusedLocationProviderClient;
-    }
-
-    private FusedLocationProviderClient fusedLocationProviderClient;
 
     public CurrentLocation(Context context){
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
         currentLocation = null;
     }
 
-
     public void setCurrentLocation(Location location) {
         this.currentLocation = location;
     }
 
     public Location getCurrentLocation() {
+        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location -> {
+            if (location != null) {
+                setCurrentLocation(location);
+            }
+        });
         return currentLocation;
     }
-
-
 
     public void updateLocationEvery5Seconds() {
         final Handler handler = new Handler();
@@ -48,13 +46,12 @@ public class CurrentLocation extends Fragment {
             public void run() {
                 fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location -> {
                     if (location != null) {
-                        //LocationFragment.this.setCurrentLocation(location);
                         setCurrentLocation(location);
                     }
                 });
-                handler.postDelayed(this, 5000);
+                handler.postDelayed(this, 2000);
             }
-        }, 5000);
+        }, 2000);
     }
 
 }

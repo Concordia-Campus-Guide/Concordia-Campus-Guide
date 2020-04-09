@@ -1,11 +1,10 @@
-//package com.example.concordia_campus_guide.Helper;
+//package com.example.concordia_campus_guide.Helper.UIHelpers;
 //
 //import android.annotation.SuppressLint;
 //import android.content.Context;
 //import android.content.res.Resources;
 //import android.util.Log;
 //
-//import com.example.concordia_campus_guide.Activities.MainActivity;
 //import com.example.concordia_campus_guide.ClassConstants;
 //import com.example.concordia_campus_guide.Models.Building;
 //import com.example.concordia_campus_guide.R;
@@ -24,7 +23,6 @@
 //    MapView mMapView;
 //
 //    public MapSetup(Context context){
-//
 //        this.context = context;
 //    }
 //
@@ -54,7 +52,7 @@
 //     *
 //     */
 //    @SuppressLint("MissingPermission")
-//    private void uiSettingsForMap() {
+//    private void uiSettingsForMap(GoogleMap googleMap) {
 //        if (ClassConstants.MY_LOCATION_PERMISSION_GRANTED) {
 //            mMap.setMyLocationEnabled(true);
 //        }
@@ -66,9 +64,9 @@
 //    }
 //
 //
-//    private void setMapStyle() {
+//    private void setMapStyle(GoogleMap googleMap) {
 //        try {
-//            mMap.setMapStyle(
+//            googleMap.setMapStyle(
 //                    MapStyleOptions.loadRawResourceStyle(
 //                            context, getMapStyle()));
 //        } catch (Resources.NotFoundException e) {

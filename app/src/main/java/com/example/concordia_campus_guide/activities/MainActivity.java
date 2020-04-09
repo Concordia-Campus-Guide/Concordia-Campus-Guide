@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         calendarViewModel = new CalendarViewModel(getApplication());
         mViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
         fragmentManager = getSupportFragmentManager();
-
+        currentLocation.updateLocationEvery5Seconds();
         setupNotifications();
         setupSwipeableCards();
         setupToolBar();
@@ -405,6 +405,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public Location getMyCurrentLocation() {
+        Location location = currentLocation.getCurrentLocation();
         return currentLocation.getCurrentLocation();
     }
 

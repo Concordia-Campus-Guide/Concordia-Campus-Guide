@@ -14,18 +14,6 @@ import static androidx.core.content.ContextCompat.checkSelfPermission;
 
 public class CurrentLocationPermissionRequest extends Fragment {
 
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        if (requestCode == ClassConstants.LOCATION_PERMISSION_REQUEST_CODE) {
-//            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                ClassConstants.MY_LOCATION_PERMISSION_GRANTED = (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED);
-//               // setFirstLocationToDisplayOnSuccess();
-//            } else {
-//               // setFirstLocationToDisplayOnSuccess();
-//            }
-//        }
-//    }
-
     /**
      * The purpose of this application is to ask the user for their permission
      * of using their current location.
