@@ -6,16 +6,13 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.example.concordia_campus_guide.Adapters.PlaceToSearchResultAdapter;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
@@ -80,6 +77,7 @@ public class SearchActivity extends AppCompatActivity {
         searchText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // do nothing
             }
 
             @Override
@@ -89,36 +87,28 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                // do nothing
             }
         });
     }
 
     private void setOnClickListeners() {
-        searchText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean onFocus) {
-                if (onFocus) {
-                    searchResults.setVisibility(View.VISIBLE);
-                }
+        searchText.setOnFocusChangeListener((view, onFocus) -> {
+            if (onFocus) {
+                searchResults.setVisibility(View.VISIBLE);
             }
         });
 
-        searchResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Place place = adapter.getItem(position);
-                openRoutesPage(place);
-            }
+        searchResults.setOnItemClickListener((parent, view, position, id) -> {
+            Place place = adapter.getItem(position);
+            openRoutesPage(place);
         });
 
-        if(shouldSetNextClassClickListener){
+        if(Boolean.TRUE.equals(shouldSetNextClassClickListener)){
             nextClassArrow.setVisibility(View.VISIBLE);
-            nextClassRow.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Place place = nextClassPlace;
-                    openRoutesPage(place);
-                }
+            nextClassRow.setOnClickListener(view -> {
+                Place place = nextClassPlace;
+                openRoutesPage(place);
             });
         }
 
@@ -126,7 +116,6 @@ public class SearchActivity extends AppCompatActivity {
 
     private void setupNextClassString() {
         final CalendarEvent calendarEvent = calendarViewModel.getEvent(this);
-        final String eventString;
         final String eventLocation;
 
         if(calendarEvent != null){

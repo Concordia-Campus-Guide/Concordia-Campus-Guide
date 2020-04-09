@@ -246,40 +246,6 @@ public class DirectionsApiDataParserTest {
 
     }
 
-    @Ignore
-    public void extractStepsTest() {
-        // Arrange
-        List<TransportType> listOfTransportType = null;
-
-        DirectionsStep d1 = new DirectionsStep();
-        d1.travelMode = TravelMode.TRANSIT;
-        d1.transitDetails = new TransitDetails();
-        d1.transitDetails.line = new TransitLine();
-        d1.transitDetails.line.vehicle = new Vehicle();
-        d1.transitDetails.line.vehicle.name = "bus";
-        d1.transitDetails.line.shortName = "128";
-
-        DirectionsStep[] steps = new DirectionsStep[1];
-        steps[0] = d1;
-
-        // Act
-        try{
-            Method method = directionsApiDataParser.getClass().getDeclaredMethod("extractSteps", DirectionsStep[].class);
-            method.setAccessible(true);
-            listOfTransportType = ((List<TransportType>) method.invoke(directionsApiDataParser, steps));
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-
-        // Assert
-        Assert.assertEquals(1, ((List<TransportType>) listOfTransportType).size());
-        Assert.assertEquals(d1, ((List<TransportType>) listOfTransportType).get(0));
-    }
-
     @Test
     public void getTransportType_CarTest() {
         // Arrange

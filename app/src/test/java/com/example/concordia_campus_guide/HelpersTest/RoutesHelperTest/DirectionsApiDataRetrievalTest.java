@@ -4,7 +4,6 @@ import com.example.concordia_campus_guide.Activities.RoutesActivity;
 import com.example.concordia_campus_guide.BuildConfig;
 import com.example.concordia_campus_guide.Helper.RoutesHelpers.DirectionsApiDataRetrieval;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

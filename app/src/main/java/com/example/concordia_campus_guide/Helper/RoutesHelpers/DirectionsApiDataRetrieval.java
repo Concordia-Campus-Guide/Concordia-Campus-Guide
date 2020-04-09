@@ -1,14 +1,8 @@
 package com.example.concordia_campus_guide.Helper.RoutesHelpers;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
-
-import androidx.annotation.VisibleForTesting;
-
-import com.example.concordia_campus_guide.Activities.RoutesActivity;
 import com.example.concordia_campus_guide.Interfaces.DirectionsApiCallbackListener;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,14 +29,14 @@ public class DirectionsApiDataRetrieval extends AsyncTask<String, Void, String> 
      */
     @Override
     protected String doInBackground(String... strings) {
-        String data = "";
+        String dataFromApi = "";
         try {
-            data = getDataFromGMapsDirectionsApi(strings[0]);
+            dataFromApi = getDataFromGMapsDirectionsApi(strings[0]);
             this.transportType = strings[1];
         } catch (Exception e) {
             Log.e(DirectionsApiDataRetrieval.class.getName(), e.toString());
         }
-        return data;
+        return dataFromApi;
     }
 
     /**
@@ -65,7 +59,7 @@ public class DirectionsApiDataRetrieval extends AsyncTask<String, Void, String> 
      *
      */
     private String getDataFromGMapsDirectionsApi(String strUrl) throws IOException {
-        String data = "";
+        String dataFromApi = "";
         URL url = new URL(strUrl);
 
         // Creating an http connection to communicate with url
@@ -84,16 +78,16 @@ public class DirectionsApiDataRetrieval extends AsyncTask<String, Void, String> 
             while ((line = br.readLine()) != null) {
                 sb.append(line);
             }
-            data = sb.toString();
-            Log.d(DirectionsApiDataRetrieval.class.getName(), "Downloaded URL: " + data);
+            dataFromApi = sb.toString();
+            Log.d(DirectionsApiDataRetrieval.class.getName(), "Downloaded URL: " + dataFromApi);
         } catch (Exception e) {
-            Log.e(DirectionsApiDataRetrieval.class.getName(), "Exception fetching the data from the Google MAps Directions API: " + e.toString());
+            Log.e(DirectionsApiDataRetrieval.class.getName(), "Exception fetching the dataFromApi from the Google MAps Directions API: " + e.toString());
         } finally {
             iStream.close();
             urlConnection.disconnect();
         }
 
-        return data;
+        return dataFromApi;
     }
 
     public DirectionsApiCallbackListener getCaller() {

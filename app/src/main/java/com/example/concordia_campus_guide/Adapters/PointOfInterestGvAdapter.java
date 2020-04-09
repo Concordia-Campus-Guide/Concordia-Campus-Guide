@@ -57,12 +57,7 @@ class PointOfInterestGvAdapter extends BaseAdapter {
         int serviceTextId = context.getResources().getIdentifier(services.get(position).toLowerCase(), "string", context.getPackageName());
         serviceTxt.setText(context.getResources().getString(serviceTextId));
 
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onClickListener.onClick(services.get(position), view);
-            }
-        });
+        view.setOnClickListener(view1 -> onClickListener.onClick(services.get(position), view1));
 
         return view;
     }

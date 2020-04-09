@@ -8,7 +8,6 @@ import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
 import com.example.concordia_campus_guide.Activities.MainActivity;
-import com.example.concordia_campus_guide.Models.CalendarEvent;
 import com.example.concordia_campus_guide.Models.Helpers.CalendarViewModel;
 
 import org.junit.Before;
@@ -38,28 +37,10 @@ public class CalendarViewModelInstrumentalTest {
     }
 
     @Test
-    public void getNextClassString() {
-        //TODO: Find a way to getCurrentTime because it is used in methods
-    }
-
-    @Test
-    public void incorrectlyFormatted() {
+    public void incorrectlyFormattedTest() {
         String  incorrectFormat= "H-912";
         String correctFormat = "H-9, 963";
         assertTrue(mViewModel.incorrectlyFormatted(incorrectFormat));
         assertFalse(mViewModel.incorrectlyFormatted(correctFormat));
-    }
-
-    @Test
-    public void getTimeUntilString(){
-        //TODO: Find a way to getCurrentTime because it is used in methods
-    }
-
-    public CalendarEvent getCalendarEvent(){
-        String title = "Lecture: SOEN 357";
-        String location = "H-9, 963";
-        String startTime = "1585098000000";
-        CalendarEvent calendarEvent = new CalendarEvent(title, location, startTime);
-        return calendarEvent;
     }
 }

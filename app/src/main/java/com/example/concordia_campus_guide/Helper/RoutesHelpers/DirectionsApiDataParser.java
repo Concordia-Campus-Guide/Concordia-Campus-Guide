@@ -17,8 +17,6 @@ import com.example.concordia_campus_guide.Models.Routes.Walk;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,8 +35,7 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
     @Override
     protected DirectionsResult doInBackground(DirectionsApiDataRetrieval... obj) {
         this.dataRetrieval = obj[0];
-        DirectionsResult directionsResult = getDirectionsResultObj();
-        return directionsResult;
+        return getDirectionsResultObj();
     }
 
     /**
@@ -80,6 +77,8 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
                 case ClassConstants.TRANSIT:
                     routeOptions.add(extractTransitInfo(directionsRoute));
                     break;
+                default:
+                    break;
             }
         }
         return routeOptions;
@@ -87,9 +86,7 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
 
     // Helper methods
     private Route extractDurationAndSummary(DirectionsRoute directionsRoute, @ClassConstants.TransportType String transportType) {
-        Route route = new Route(directionsRoute.legs[0].duration.text, directionsRoute.summary, transportType);
-
-        return route;
+        return new Route(directionsRoute.legs[0].duration.text, directionsRoute.summary, transportType);
     }
 
     private Route extractTransitInfo(DirectionsRoute directionsRoute) {
@@ -123,6 +120,7 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
             case WALKING:
                 return new Walk(step);
             case BICYCLING:
+            case UNKNOWN:
                 return null;
             case TRANSIT:
                 return getTransitType(step);
