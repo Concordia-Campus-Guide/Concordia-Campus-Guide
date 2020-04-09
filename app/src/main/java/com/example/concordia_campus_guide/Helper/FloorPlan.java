@@ -59,7 +59,6 @@ public class FloorPlan {
         }
         PolylineOptions displayedPolylineOption = getFloorPolylines(buildingCode + "-" + floor, walkingPointsMap);
         currentlyDisplayedLine = mMap.addPolyline(displayedPolylineOption);
-        String x = "asd";
     }
 
     public PolylineOptions getFloorPolylines(String floorCode, HashMap<String, List<WalkingPoint>> walkingPointsMap) {

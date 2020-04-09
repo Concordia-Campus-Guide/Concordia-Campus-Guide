@@ -11,6 +11,9 @@ import androidx.test.runner.AndroidJUnit4;
 import com.example.concordia_campus_guide.Activities.MainActivity;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel;
+import com.example.concordia_campus_guide.Helper.DrawDirectionsPolyLines;
+import com.example.concordia_campus_guide.Helper.DrawPolygons;
+import com.example.concordia_campus_guide.Helper.POIIcon;
 import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -51,9 +54,10 @@ public class LocationFragmentInstrumentalTest {
 
     @Test
     public void createMarkerIcon(){
-        Bitmap bitmap1 = viewModel.createBitmapMarkerIcon("EV");
-        Bitmap bitmap2 = viewModel.createBitmapMarkerIcon("EV");
-        Bitmap bitmap3 = viewModel.createBitmapMarkerIcon("H");
+        DrawPolygons drawPolygons = new DrawPolygons();
+        Bitmap bitmap1 = drawPolygons.createBitmapMarkerIcon("EV");
+        Bitmap bitmap2 = drawPolygons.createBitmapMarkerIcon("EV");
+        Bitmap bitmap3 = drawPolygons.createBitmapMarkerIcon("H");
         assertNotNull(bitmap1);
         assertNotNull(bitmap2);
         assertNotNull(bitmap3);
@@ -66,7 +70,7 @@ public class LocationFragmentInstrumentalTest {
         RoomModel roomFrom = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8", "SGW");
         RoomModel roomTo = new RoomModel(new Coordinates(-73.57902321964502, 45.49699848270905), "927", "H-9", "SGW");
         viewModel.parseWalkingPointList(appDatabase,roomFrom,roomTo);
-        PolylineOptions polylineOptions = viewModel.getFloorPolylines("H-9");
+        PolylineOptions polylineOptions = viewModel.getFloorPlan().getFloorPolylines("H-9",viewModel.getWalkingPointsMap());
         assertEquals(10.0f,polylineOptions.getWidth());
         assertTrue(polylineOptions.isVisible());
         assertEquals("[Gap: length=20.0]",polylineOptions.getPattern().get(0).toString());
@@ -75,7 +79,8 @@ public class LocationFragmentInstrumentalTest {
 
     @Test
     public void stylePolyLineTest(){
-        PolylineOptions polylineOptions = viewModel.stylePolyLine("walking", 0);
+        DrawDirectionsPolyLines drawDirectionsPolyLines = new DrawDirectionsPolyLines();
+        PolylineOptions polylineOptions = drawDirectionsPolyLines.stylePolyLine("walking", 0);
         assertEquals("[Gap: length=20.0]",polylineOptions.getPattern().get(0).toString());
         assertEquals(-7134407,polylineOptions.getColor());
     }

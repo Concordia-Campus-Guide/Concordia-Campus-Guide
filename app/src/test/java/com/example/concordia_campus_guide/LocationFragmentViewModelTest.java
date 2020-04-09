@@ -5,6 +5,8 @@ import android.graphics.Color;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Database.Daos.WalkingPointDao;
 import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel;
+import com.example.concordia_campus_guide.Helper.BuildingsAndTheirCode;
+import com.example.concordia_campus_guide.Helper.DrawPolygons;
 import com.example.concordia_campus_guide.Models.Building;
 import com.example.concordia_campus_guide.Models.Coordinates;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
@@ -39,7 +41,7 @@ public class LocationFragmentViewModelTest  {
     @Mock
     WalkingPointDao mockWalkingPointDao;
 
-    private HashMap<String, Building> buildings;
+    private BuildingsAndTheirCode buildings;
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
@@ -48,19 +50,20 @@ public class LocationFragmentViewModelTest  {
         //TODO: Create test data to test the POI generation
         when(mockWalkingPointDao.getAllWalkingPointsFromPlaceCode(Mockito.anyString())).thenReturn(new ArrayList<WalkingPoint>());
         viewModel = new LocationFragmentViewModel(mockAppDb);
-        buildings = new HashMap<>();
+        buildings = new BuildingsAndTheirCode();
         setupBuildings();
     }
 
     private void setupBuildings() {
-        buildings.put("EV", new Building(new Coordinates(45.495638, -73.578258), new ArrayList<String>(Arrays.asList("8","9")), 68, 68, 34, null, "H", null, null, null, null, null));
-        buildings.put("CC", new Building(new Coordinates(45.45821918855051, -73.64035427570343), new ArrayList<String>(Arrays.asList("8","9")), 80, 45, 210, null, "VL", null, null, null, null, null));
-        viewModel.setBuildings(buildings);
+        buildings.getBuildings().put("EV", new Building(new Coordinates(45.495638, -73.578258), new ArrayList<String>(Arrays.asList("8","9")), 68, 68, 34, null, "H", null, null, null, null, null));
+        buildings.getBuildings().put("CC", new Building(new Coordinates(45.45821918855051, -73.64035427570343), new ArrayList<String>(Arrays.asList("8","9")), 80, 45, 210, null, "VL", null, null, null, null, null));
+        viewModel.setBuildings(buildings.getBuildings());
     }
 
     @Test
     public void getPolygonStyleTest(){
-        GeoJsonPolygonStyle  geoJsonPolygonStyle = viewModel.getPolygonStyle();
+        DrawPolygons drawPolygons = new DrawPolygons();
+        GeoJsonPolygonStyle  geoJsonPolygonStyle = drawPolygons.getPolygonStyle();
         assertEquals(geoJsonPolygonStyle.getFillColor(), Color.argb(51, 18, 125, 159));
         assertEquals(Color.argb(255, 18, 125, 159), geoJsonPolygonStyle.getStrokeColor());
         assertEquals(6.0f, geoJsonPolygonStyle.getStrokeWidth());
@@ -76,8 +79,8 @@ public class LocationFragmentViewModelTest  {
         temp.put("H", new Building(new Coordinates(45.4972685, -73.5789475), new ArrayList<String>(Arrays.asList("8","9")), 68, 68, 34, null, "H", null, null, null, null, null));
         viewModel.setBuildings(temp);
         assertEquals(temp, viewModel.getBuildings());
-        viewModel.setBuildings(buildings);
-        assertEquals(buildings, viewModel.getBuildings());
+        viewModel.setBuildings(buildings.getBuildings());
+        assertEquals(buildings.getBuildings(), viewModel.getBuildings());
     }
     @Test
     public void getInitialZoomLocationTest(){
@@ -85,15 +88,15 @@ public class LocationFragmentViewModelTest  {
     }
     @Test
     public void getSGWZoomLocationTest(){
-        assertEquals(new LatLng( 45.495638, -73.578258), viewModel.getSGWZoomLocation());
+        assertEquals(new LatLng( 45.495638, -73.578258), viewModel.getZoomLocation(ClassConstants.sgwCenterBuildingLabel));
     }
     @Test
     public void getLoyolaZoomLocationTest(){
-        assertEquals(new LatLng( 45.45821918855051, -73.64035427570343), viewModel.getLoyolaZoomLocation());
+        assertEquals(new LatLng( 45.45821918855051, -73.64035427570343), viewModel.getZoomLocation(ClassConstants.loyolaCenterBuildingLabel));
     }
     @Test
     public void getBuildingFromCodeTest(){
-        assertEquals(buildings.get("EV"), viewModel.getBuildingFromCode("EV"));
+        assertEquals(buildings.getBuildingFromCode("EV"), viewModel.getBuildingFromCode("EV"));
     }
 
 }

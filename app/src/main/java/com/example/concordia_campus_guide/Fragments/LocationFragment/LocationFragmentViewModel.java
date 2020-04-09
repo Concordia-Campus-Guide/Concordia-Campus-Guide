@@ -79,6 +79,13 @@ public class LocationFragmentViewModel extends ViewModel {
 
     private HashMap<String, List<WalkingPoint>> walkingPointsMap = new HashMap<>();
 
+    public FloorPlan getFloorPlan() {
+        return floorPlan;
+    }
+    public  HashMap<String, List<WalkingPoint>> getWalkingPointsMap(){
+        return walkingPointsMap;
+    }
+
     public LocationFragmentViewModel(AppDatabase appDb) {
         this.appDatabase = appDb;
         this.poiIcon = new POIIcon();
@@ -124,6 +131,7 @@ public class LocationFragmentViewModel extends ViewModel {
     public Map<String, Building> getBuildings() {
         return buildingsAndTheirCode.getBuildings();
     }
+    public void setBuildings(Map<String, Building> buildings){ buildingsAndTheirCode.setBuildings(buildings);}
 
 
 
