@@ -1,7 +1,7 @@
 package com.example.concordia_campus_guide.ConvertersTest;
 
-import com.example.concordia_campus_guide.Database.Converters.CoordinatesListConverter;
-import com.example.concordia_campus_guide.Models.Coordinates;
+import com.example.concordia_campus_guide.database.Converters.CoordinatesListConverter;
+import com.example.concordia_campus_guide.models.Coordinates;
 
 import org.junit.Before;
 import org.junit.Test;

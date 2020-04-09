@@ -1,14 +1,14 @@
 package com.example.concordia_campus_guide.HelpersTest;
 
-import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Database.Daos.WalkingPointDao;
-import com.example.concordia_campus_guide.Helper.PathFinder;
-import com.example.concordia_campus_guide.Models.Building;
-import com.example.concordia_campus_guide.Models.Coordinates;
-import com.example.concordia_campus_guide.Models.Floor;
-import com.example.concordia_campus_guide.Models.PointType;
-import com.example.concordia_campus_guide.Models.RoomModel;
-import com.example.concordia_campus_guide.Models.WalkingPoint;
+import com.example.concordia_campus_guide.database.AppDatabase;
+import com.example.concordia_campus_guide.database.Daos.WalkingPointDao;
+import com.example.concordia_campus_guide.helper.PathFinder;
+import com.example.concordia_campus_guide.models.Building;
+import com.example.concordia_campus_guide.models.Coordinates;
+import com.example.concordia_campus_guide.models.Floor;
+import com.example.concordia_campus_guide.models.PointType;
+import com.example.concordia_campus_guide.models.RoomModel;
+import com.example.concordia_campus_guide.models.WalkingPoint;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +19,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

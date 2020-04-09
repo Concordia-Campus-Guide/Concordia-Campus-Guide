@@ -1,8 +1,8 @@
 package com.example.concordia_campus_guide.ConvertersTest;
 
-import com.example.concordia_campus_guide.Database.Converters.StringListConverter;
-import com.example.concordia_campus_guide.Models.Building;
-import com.example.concordia_campus_guide.Models.Coordinates;
+import com.example.concordia_campus_guide.database.Converters.StringListConverter;
+import com.example.concordia_campus_guide.models.Building;
+import com.example.concordia_campus_guide.models.Coordinates;
 
 import org.junit.Before;
 import org.junit.Test;

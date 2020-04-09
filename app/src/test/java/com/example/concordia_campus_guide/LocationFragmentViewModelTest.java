@@ -2,12 +2,12 @@ package com.example.concordia_campus_guide;
 
 import android.graphics.Color;
 
-import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Database.Daos.WalkingPointDao;
-import com.example.concordia_campus_guide.ViewModels.LocationFragmentViewModel;
-import com.example.concordia_campus_guide.Models.Building;
-import com.example.concordia_campus_guide.Models.Coordinates;
-import com.example.concordia_campus_guide.Models.WalkingPoint;
+import com.example.concordia_campus_guide.database.AppDatabase;
+import com.example.concordia_campus_guide.database.Daos.WalkingPointDao;
+import com.example.concordia_campus_guide.viewModels.LocationFragmentViewModel;
+import com.example.concordia_campus_guide.models.Building;
+import com.example.concordia_campus_guide.models.Coordinates;
+import com.example.concordia_campus_guide.models.WalkingPoint;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 

@@ -1,10 +1,10 @@
 package com.example.concordia_campus_guide.ViewModel;
 
-import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Database.Daos.BuildingDao;
-import com.example.concordia_campus_guide.ViewModels.InfoCardFragmentViewModel;
-import com.example.concordia_campus_guide.Models.Building;
-import com.example.concordia_campus_guide.Models.Place;
+import com.example.concordia_campus_guide.database.AppDatabase;
+import com.example.concordia_campus_guide.database.Daos.BuildingDao;
+import com.example.concordia_campus_guide.viewModels.InfoCardFragmentViewModel;
+import com.example.concordia_campus_guide.models.Building;
+import com.example.concordia_campus_guide.models.Place;
 
 import org.junit.Before;
 import org.junit.Test;

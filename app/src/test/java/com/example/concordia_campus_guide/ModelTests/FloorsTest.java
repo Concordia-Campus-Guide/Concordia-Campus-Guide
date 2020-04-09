@@ -1,7 +1,7 @@
 package com.example.concordia_campus_guide.ModelTests;
 
 import com.example.concordia_campus_guide.ModelTests.TestUtils.TestUtils;
-import com.example.concordia_campus_guide.Models.Place;
+import com.example.concordia_campus_guide.models.Place;
 
 import org.junit.Before;
 import org.junit.Test;

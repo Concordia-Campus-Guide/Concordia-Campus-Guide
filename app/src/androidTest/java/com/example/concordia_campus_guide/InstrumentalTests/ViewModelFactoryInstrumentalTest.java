@@ -1,11 +1,11 @@
 package com.example.concordia_campus_guide.InstrumentalTests;
 
-import com.example.concordia_campus_guide.Activities.MainActivity;
-import com.example.concordia_campus_guide.ViewModels.RoutesActivityViewModel;
-import com.example.concordia_campus_guide.ViewModels.SearchActivityViewModel;
-import com.example.concordia_campus_guide.ViewModels.InfoCardFragmentViewModel;
-import com.example.concordia_campus_guide.ViewModels.LocationFragmentViewModel;
-import com.example.concordia_campus_guide.Helper.ViewModelFactory;
+import com.example.concordia_campus_guide.activities.MainActivity;
+import com.example.concordia_campus_guide.viewModels.RoutesActivityViewModel;
+import com.example.concordia_campus_guide.viewModels.SearchActivityViewModel;
+import com.example.concordia_campus_guide.viewModels.InfoCardFragmentViewModel;
+import com.example.concordia_campus_guide.viewModels.LocationFragmentViewModel;
+import com.example.concordia_campus_guide.helper.ViewModelFactory;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

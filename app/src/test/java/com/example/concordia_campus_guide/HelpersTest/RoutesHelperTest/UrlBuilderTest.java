@@ -2,7 +2,7 @@ package com.example.concordia_campus_guide.HelpersTest.RoutesHelperTest;
 
 import com.example.concordia_campus_guide.BuildConfig;
 import com.example.concordia_campus_guide.ClassConstants;
-import com.example.concordia_campus_guide.Helper.RoutesHelpers.UrlBuilder;
+import com.example.concordia_campus_guide.helper.RoutesHelpers.UrlBuilder;
 import com.google.android.gms.maps.model.LatLng;
 
 import org.junit.Assert;

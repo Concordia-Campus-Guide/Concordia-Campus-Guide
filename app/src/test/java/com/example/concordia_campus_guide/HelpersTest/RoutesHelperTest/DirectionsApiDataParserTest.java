@@ -1,29 +1,27 @@
 package com.example.concordia_campus_guide.HelpersTest.RoutesHelperTest;
 
-import com.example.concordia_campus_guide.Activities.RoutesActivity;
+import com.example.concordia_campus_guide.activities.RoutesActivity;
 import com.example.concordia_campus_guide.ClassConstants;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsLeg;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsRoute;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.Duration;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TransitDetails;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TransitLine;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TravelMode;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.Vehicle;
-import com.example.concordia_campus_guide.Helper.RoutesHelpers.DirectionsApiDataParser;
-import com.example.concordia_campus_guide.Helper.RoutesHelpers.DirectionsApiDataRetrieval;
-import com.example.concordia_campus_guide.Models.Routes.Bus;
-import com.example.concordia_campus_guide.Models.Routes.Car;
-import com.example.concordia_campus_guide.Models.Routes.Route;
-import com.example.concordia_campus_guide.Models.Routes.Subway;
-import com.example.concordia_campus_guide.Models.Routes.Train;
-import com.example.concordia_campus_guide.Models.Routes.TransportType;
-import com.example.concordia_campus_guide.Models.Routes.Walk;
-import com.example.concordia_campus_guide.Models.Time;
+import com.example.concordia_campus_guide.googleMapsServicesTools.GoogleMapsServicesModels.DirectionsLeg;
+import com.example.concordia_campus_guide.googleMapsServicesTools.GoogleMapsServicesModels.DirectionsRoute;
+import com.example.concordia_campus_guide.googleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
+import com.example.concordia_campus_guide.googleMapsServicesTools.GoogleMapsServicesModels.Duration;
+import com.example.concordia_campus_guide.googleMapsServicesTools.GoogleMapsServicesModels.TransitDetails;
+import com.example.concordia_campus_guide.googleMapsServicesTools.GoogleMapsServicesModels.TransitLine;
+import com.example.concordia_campus_guide.googleMapsServicesTools.GoogleMapsServicesModels.TravelMode;
+import com.example.concordia_campus_guide.googleMapsServicesTools.GoogleMapsServicesModels.Vehicle;
+import com.example.concordia_campus_guide.helper.RoutesHelpers.DirectionsApiDataParser;
+import com.example.concordia_campus_guide.helper.RoutesHelpers.DirectionsApiDataRetrieval;
+import com.example.concordia_campus_guide.models.Routes.Bus;
+import com.example.concordia_campus_guide.models.Routes.Car;
+import com.example.concordia_campus_guide.models.Routes.Route;
+import com.example.concordia_campus_guide.models.Routes.Subway;
+import com.example.concordia_campus_guide.models.Routes.Train;
+import com.example.concordia_campus_guide.models.Routes.Walk;
+import com.example.concordia_campus_guide.models.Time;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 
@@ -33,7 +31,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.List;
 
 public class DirectionsApiDataParserTest {
     private DirectionsApiDataParser directionsApiDataParser;

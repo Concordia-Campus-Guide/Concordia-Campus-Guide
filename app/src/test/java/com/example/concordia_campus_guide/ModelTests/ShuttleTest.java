@@ -1,7 +1,7 @@
 package com.example.concordia_campus_guide.ModelTests;
 
-import com.example.concordia_campus_guide.Models.Shuttle;
-import com.example.concordia_campus_guide.Models.Shuttles;
+import com.example.concordia_campus_guide.models.Shuttle;
+import com.example.concordia_campus_guide.models.Shuttles;
 
 import org.junit.Before;
 import org.junit.Test;
