@@ -13,8 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -29,10 +27,10 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragment;
-import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragment;
-import com.example.concordia_campus_guide.Fragments.POIFragment.POIFragment;
-import com.example.concordia_campus_guide.Fragments.SmallInfoCardFragment.SmallInfoCardFragment;
+import com.example.concordia_campus_guide.Fragments.InfoCardFragment;
+import com.example.concordia_campus_guide.Fragments.LocationFragment;
+import com.example.concordia_campus_guide.Fragments.POIFragment;
+import com.example.concordia_campus_guide.Fragments.SmallInfoCardFragment;
 import com.example.concordia_campus_guide.Global.ApplicationState;
 import com.example.concordia_campus_guide.Global.SelectingToFromState;
 import com.example.concordia_campus_guide.Helper.LocaleHelper;
@@ -45,6 +43,7 @@ import com.example.concordia_campus_guide.Models.Rooms;
 import com.example.concordia_campus_guide.Models.Shuttles;
 import com.example.concordia_campus_guide.Models.WalkingPoints;
 import com.example.concordia_campus_guide.R;
+import com.example.concordia_campus_guide.ViewModels.MainActivityViewModel;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.navigation.NavigationView;
 

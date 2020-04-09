@@ -5,13 +5,13 @@ import android.app.Application;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.concordia_campus_guide.Activities.PathsViewModel;
-import com.example.concordia_campus_guide.Activities.RoutesActivityViewModel;
-import com.example.concordia_campus_guide.Activities.SearchActivityViewModel;
+import com.example.concordia_campus_guide.ViewModels.PathsViewModel;
+import com.example.concordia_campus_guide.ViewModels.RoutesActivityViewModel;
+import com.example.concordia_campus_guide.ViewModels.SearchActivityViewModel;
 import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Fragments.InfoCardFragment.InfoCardFragmentViewModel;
-import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel;
-import com.example.concordia_campus_guide.Fragments.SmallInfoCardFragment.SmallInfoCardFragmentViewModel;
+import com.example.concordia_campus_guide.ViewModels.InfoCardFragmentViewModel;
+import com.example.concordia_campus_guide.ViewModels.LocationFragmentViewModel;
+import com.example.concordia_campus_guide.ViewModels.SmallInfoCardFragmentViewModel;
 
 public class ViewModelFactory implements ViewModelProvider.Factory {
 

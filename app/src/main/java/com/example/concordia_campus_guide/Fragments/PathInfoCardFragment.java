@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.Fragments.PathInfoCardFragment;
+package com.example.concordia_campus_guide.Fragments;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -25,6 +25,7 @@ import com.example.concordia_campus_guide.Models.Direction;
 import com.example.concordia_campus_guide.Models.PointType;
 import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
+import com.example.concordia_campus_guide.ViewModels.PathInfoCardViewModel;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.Serializable;

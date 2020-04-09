@@ -1,6 +1,4 @@
-package com.example.concordia_campus_guide.Activities;
-
-import android.content.Context;
+package com.example.concordia_campus_guide.ViewModels;
 
 import androidx.lifecycle.ViewModel;
 
@@ -11,7 +9,6 @@ import com.example.concordia_campus_guide.Models.Place;
 import com.example.concordia_campus_guide.Models.RoomModel;
 import com.example.concordia_campus_guide.Models.Routes.Route;
 import com.example.concordia_campus_guide.Models.Shuttle;
-import com.example.concordia_campus_guide.R;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -25,7 +22,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 
-import static com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel.LOGGER;
+import static com.example.concordia_campus_guide.ViewModels.LocationFragmentViewModel.LOGGER;
 
 public class RoutesActivityViewModel extends ViewModel {
 

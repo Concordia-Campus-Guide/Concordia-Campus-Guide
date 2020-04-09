@@ -92,7 +92,7 @@
 
     <fragment
         android:id="@+id/pathLocationFragment"
-        android:name="com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragment"
+        android:name="com.example.concordia_campus_guide.Fragments.LocationFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
