@@ -21,9 +21,12 @@ import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 
+import org.json.JSONObject;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static java.lang.Double.parseDouble;
@@ -39,9 +42,32 @@ public class DrawPolygons {
      * @param applicationContext is the Context of the LocationFragmentView page
      * @return It will return the layer to the LocationFragmentView to display on the map
      */
-    public void loadPolygons(GeoJsonLayer layer, GoogleMap map, Context applicationContext, Map<String, Building> buildings) {
+    public GeoJsonLayer loadPolygons(GoogleMap map, Context applicationContext, Map<String, Building> buildings) {
+        GeoJsonLayer layer = initLayer(map, applicationContext);
         setPolygonStyle(layer, map, applicationContext,buildings);
+        return layer;
     }
+
+    /**
+     * The purpose of this method is to initiate the layer
+     *
+     * @param map                is the map used in our application.
+     * @param applicationContext is the Context of the LocationFragmentView page
+     * @return the initiated layer or it will throw an exception if it didn't find the
+     * GeoJson File
+     */
+    private GeoJsonLayer initLayer(GoogleMap map, Context applicationContext) {
+        GeoJsonLayer layer = null;
+
+        try {
+            JSONObject geoJsonLayer = ApplicationState.getInstance(applicationContext).getBuildings().getGeoJson();
+            layer = new GeoJsonLayer(map, geoJsonLayer);
+        } catch (Exception e) {
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
+        }
+        return layer;
+    }
+
 
     /**
      * @param layer the GeoJson layer containing features to style.

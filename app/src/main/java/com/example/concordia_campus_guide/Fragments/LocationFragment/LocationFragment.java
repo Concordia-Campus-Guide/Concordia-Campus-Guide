@@ -24,6 +24,7 @@ import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Helper.CurrentLocation;
 import com.example.concordia_campus_guide.Helper.CurrentLocationPermissionRequest;
+import com.example.concordia_campus_guide.Helper.DrawDirectionsPolyLines;
 import com.example.concordia_campus_guide.Helper.ViewModelFactory;
 import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.Models.Building;
@@ -361,7 +362,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     }
 
     public void drawOutdoorPaths(final List<DirectionWrapper> outdoorDirections) {
-        mMapView.getMapAsync(googleMap -> mViewModel.drawOutdoorPath(outdoorDirections, googleMap));
+        DrawDirectionsPolyLines drawDirectionsPolyLines = new DrawDirectionsPolyLines();
+        mMapView.getMapAsync(googleMap -> drawDirectionsPolyLines.drawOutdoorPath(outdoorDirections, googleMap));
     }
 
     public void setShuttlePaths(String polyline) {
@@ -389,8 +391,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         if (getActivity() instanceof MainActivity)
             ((MainActivity) getActivity()).showPlaceSmallCard(mViewModel.getRoomByRoomCodeAndFloorCode(roomCode, floorCode));
     }
-
-
 
     private void setupPOIListListener() {
         mViewModel.getListOfPOI().observe(getViewLifecycleOwner(), priorityQueue -> {
