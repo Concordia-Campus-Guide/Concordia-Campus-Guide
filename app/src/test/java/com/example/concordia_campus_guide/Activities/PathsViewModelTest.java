@@ -43,12 +43,12 @@ public class PathsViewModelTest {
     }
 
     @Test
-    public void getTo() {
+    public void getToTest() {
         assertEquals(toRoom, pathsViewModel.getTo());
     }
 
     @Test
-    public void getFrom() {
+    public void getFromTest() {
         assertEquals(fromRoom, pathsViewModel.getFrom());
     }
 
@@ -69,38 +69,38 @@ public class PathsViewModelTest {
     }
 
     @Test
-    public void deg2rad() {
+    public void deg2radTest() {
         assertEquals(0,pathsViewModel.deg2rad(0),0.001);
         assertEquals(0.017453292519943295,pathsViewModel.deg2rad(1),0.001);
         assertEquals(Math.PI,pathsViewModel.deg2rad(180),0.001);
     }
 
     @Test
-    public void getDistanceFromLatLonInKm() {
+    public void getDistanceFromLatLonInKmTest() {
         assertEquals(0.43287270110863557, pathsViewModel.getDistanceFromLatLonInKm(45.4972685,-73.5789475,45.493622,-73.577003 ), 0.001);
     }
 
     @Test
-    public void adaptOutdoorDirectionsToInfoCardList() {
-        List<DirectionWrapper> directionWrappers = getListOfDirectionWrappers();
+    public void adaptOutdoorDirectionsToInfoCardListTest() {
+        List<DirectionWrapper> directionWrappers = getListOfDirectionWrappersTest();
         pathsViewModel.adaptOutdoorDirectionsToInfoCardList(directionWrappers);
         assertEquals(directionWrappers.size(), pathsViewModel.getInfoCardList().size());
     }
 
     @Test
-    public void adaptIndoorDirectionsToInfoCardList() {
-        List<WalkingPoint> walkingPointList = getWalkingPointList();
+    public void adaptIndoorDirectionsToInfoCardListTest() {
+        List<WalkingPoint> walkingPointList = getWalkingPointListTest();
         pathsViewModel.adaptIndoorDirectionsToInfoCardList(walkingPointList);
         assertEquals(walkingPointList.size(), pathsViewModel.getInfoCardList().size());
     }
 
     @Test
-    public void adaptShuttleToInfoCardList(){
+    public void adaptShuttleToInfoCardListTest(){
         pathsViewModel.adaptShuttleToInfoCardList();
         assertEquals("SHUTTLE", pathsViewModel.getInfoCardList().get(0).getType());
     }
 
-    public static DirectionWrapper getDirectionWrapper1(){
+    public static DirectionWrapper getDirectionWrapper1Test(){
         DirectionWrapper directionWrapper1 = new DirectionWrapper();
         Direction direction1 = new Direction();
         direction1.setDuration(60.0);
@@ -110,7 +110,7 @@ public class PathsViewModelTest {
         return directionWrapper1;
     }
 
-    public static DirectionWrapper getDirectionWrapper2(){
+    public static DirectionWrapper getDirectionWrapper2Test(){
         DirectionWrapper directionWrapper2 = new DirectionWrapper();
         Direction direction1 = new Direction();
         direction1.setDuration(120.0);
@@ -120,8 +120,8 @@ public class PathsViewModelTest {
         return directionWrapper2;
     }
 
-    public static List<DirectionWrapper> getListOfDirectionWrappers(){
-        return new ArrayList<>(Arrays.asList(getDirectionWrapper1(), getDirectionWrapper2()));
+    public static List<DirectionWrapper> getListOfDirectionWrappersTest(){
+        return new ArrayList<>(Arrays.asList(getDirectionWrapper1Test(), getDirectionWrapper2Test()));
     }
 
     public static com.google.android.gms.maps.model.LatLng getLatLng1(){
@@ -134,7 +134,7 @@ public class PathsViewModelTest {
         return new com.google.android.gms.maps.model.LatLng(45.49699848270905,-73.57902321964502);
     }
 
-    public List<WalkingPoint> getWalkingPointList(){
+    public List<WalkingPoint> getWalkingPointListTest(){
         List<WalkingPoint> walkingPointList = new ArrayList<>();
         walkingPointList.add(new WalkingPoint(new Coordinates(10,20),"test",new ArrayList<Integer>(), PointType.CLASSROOM, "test"));
         walkingPointList.add(new WalkingPoint(new Coordinates(10,30),"test",new ArrayList<Integer>(), PointType.ELEVATOR, "test"));
