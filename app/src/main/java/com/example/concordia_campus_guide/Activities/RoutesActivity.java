@@ -69,11 +69,7 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
 
         String disability = sharedPreferences.getString(ClassConstants.DISABILITY_BUTTON, ClassConstants.FALSE);
 
-        if (disability.equals(ClassConstants.TRUE)) {
-            disabilityButton.setSelected(true);
-        } else {
-            disabilityButton.setSelected(false);
-        }
+        disabilityButton.setSelected(disability.equals(ClassConstants.TRUE));
     }
 
     @Override
