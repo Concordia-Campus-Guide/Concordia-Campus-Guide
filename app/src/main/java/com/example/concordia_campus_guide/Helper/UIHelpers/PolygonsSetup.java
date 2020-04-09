@@ -1,6 +1,4 @@
-//package com.example.concordia_campus_guide.Helper;
-//
-//import android.util.Log;
+//package com.example.concordia_campus_guide.Helper.UIHelpers;
 //
 //import com.example.concordia_campus_guide.Activities.MainActivity;
 //import com.example.concordia_campus_guide.ClassConstants;
@@ -8,8 +6,7 @@
 //import com.google.android.gms.maps.GoogleMap;
 //import com.google.maps.android.geojson.GeoJsonLayer;
 //
-//public class SetupPolygonsUI {
-//
+//public class PolygonsSetup {
 //    private GeoJsonLayer mLayer;
 //    /**
 //     * The purpose of this method is display the polygon on the map and
@@ -36,10 +33,23 @@
 //            }
 //        });
 //    }
-//    private void classRoomCoordinateTool(GoogleMap map) {
-//        map.setOnMapClickListener(latLng -> Log.i(ClassConstants.LOCATION_FRAGMENT_TAG, "\"coordinates\" : [" + latLng.longitude + ", " + latLng.latitude + "]"));
-//    }
 //
+//
+//    /**
+//     * The purpose of this method is handle the onclick polygon
+//     * and to open the info card according to the clicked building.
+//     */
+//    public void setupPolygonClickListener() {
+//        mLayer.setOnFeatureClickListener(geoJsonFeature -> {
+//            if (geoJsonFeature != null) {
+//                Building building = mViewModel.getBuildingFromGeoJsonFeature(geoJsonFeature);
+//                onBuildingClick(building);
+//                String buildingCode = geoJsonFeature.getProperty("code");
+//                if (getActivity() instanceof MainActivity)
+//                    ((MainActivity) getActivity()).showInfoCard(buildingCode);
+//            }
+//        });
+//    }
 //
 //
 //    /**
@@ -66,5 +76,6 @@
 //        });
 //        return true;
 //    }
+//
 //
 //}

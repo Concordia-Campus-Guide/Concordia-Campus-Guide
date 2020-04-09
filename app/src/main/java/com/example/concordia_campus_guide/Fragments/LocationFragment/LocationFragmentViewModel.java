@@ -17,6 +17,7 @@ import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.Database.AppDatabase;
 import com.example.concordia_campus_guide.Global.ApplicationState;
+import com.example.concordia_campus_guide.Helper.BuildingsAndTheirCode;
 import com.example.concordia_campus_guide.Helper.CurrentLocation;
 import com.example.concordia_campus_guide.Helper.DrawPolygons;
 import com.example.concordia_campus_guide.Helper.FloorPlan;
@@ -61,11 +62,11 @@ import static java.lang.Double.parseDouble;
 
 public class LocationFragmentViewModel extends ViewModel {
 
-    private Map<String, Building> buildings = new HashMap<>();
     private AppDatabase appDatabase;
     private MutableLiveData<PriorityQueue<WalkingPoint>> poiList = new MutableLiveData<>();
     private FloorPlan floorPlan;
     private DrawPolygons drawPolygons;
+    private BuildingsAndTheirCode buildingsAndTheirCode;
 
     private CurrentLocation currentLocation;
     private POIIcon poiIcon;
@@ -83,6 +84,7 @@ public class LocationFragmentViewModel extends ViewModel {
         this.poiIcon = new POIIcon();
         this.floorPlan = new FloorPlan(appDatabase);
         this.manipulateWalkingPoints = new ManipulateWalkingPoints();
+        this.buildingsAndTheirCode = new BuildingsAndTheirCode();
     }
 
     /**
@@ -94,7 +96,7 @@ public class LocationFragmentViewModel extends ViewModel {
      */
     public GeoJsonLayer loadPolygons(GoogleMap map, Context applicationContext) {
         drawPolygons = new DrawPolygons();
-        return drawPolygons.loadPolygons(map,applicationContext,buildings);
+        return drawPolygons.loadPolygons(map,applicationContext,buildingsAndTheirCode.getBuildings());
     }
 
     public Building getBuildingFromGeoJsonFeature(GeoJsonFeature feature) {
@@ -110,17 +112,20 @@ public class LocationFragmentViewModel extends ViewModel {
         floorPlan.setFloorPlan(groundOverlay,buildingCode,floor,mMap,walkingPointsMap);
     }
 
+
+    public LatLng getZoomLocation(String location) {
+        return buildingsAndTheirCode.getZoomLocation(location);
+    }
+
     public Building getBuildingFromCode(String buildingCode) {
-        return buildings.get(buildingCode);
+        return buildingsAndTheirCode.getBuildings().get(buildingCode);
     }
 
     public Map<String, Building> getBuildings() {
-        return buildings;
+        return buildingsAndTheirCode.getBuildings();
     }
 
-    public void setBuildings(Map<String, Building> buildings) {
-        this.buildings = buildings;
-    }
+
 
     public LatLng getInitialZoomLocation() {
         return initialZoomLocation;
@@ -129,15 +134,6 @@ public class LocationFragmentViewModel extends ViewModel {
     public void setInitialZoomLocation(LatLng latLng){
         initialZoomLocation = latLng;
     }
-
-    public LatLng getLoyolaZoomLocation() {
-        return buildings.get(ClassConstants.loyolaCenterBuildingLabel).getCenterCoordinatesLatLng();
-    }
-
-    public LatLng getSGWZoomLocation() {
-        return buildings.get(ClassConstants.sgwCenterBuildingLabel).getCenterCoordinatesLatLng();
-    }
-
 
     public void setListOfPOI(@PoiType String poiType, Context context) {
         List<WalkingPoint> allPOI = appDatabase.walkingPointDao().getAllPointsForPointType(poiType);
@@ -154,11 +150,11 @@ public class LocationFragmentViewModel extends ViewModel {
         return poiIcon.getCurrentPOIIcon();
     }
 
-    LiveData<List<RoomModel>> getListOfRoom() {
+    public LiveData<List<RoomModel>> getListOfRoom() {
         return floorPlan.getRoomsInAFloor().getListOfRoom();
     }
 
-    LiveData<PriorityQueue<WalkingPoint>> getListOfPOI() {
+    public LiveData<PriorityQueue<WalkingPoint>> getListOfPOI() {
         return poiList;
     }
 

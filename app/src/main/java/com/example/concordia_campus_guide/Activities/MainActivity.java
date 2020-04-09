@@ -144,10 +144,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         currentLocation = new CurrentLocation(this);
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
-
         mViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
         fragmentManager = getSupportFragmentManager();
-
+        currentLocation.updateLocationEvery5Seconds();
         setupNotifications();
         setupSwipeableCards();
         setupToolBar();
@@ -420,6 +419,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public Location getMyCurrentLocation() {
+        Location location = currentLocation.getCurrentLocation();
         return currentLocation.getCurrentLocation();
     }
 
