@@ -37,7 +37,7 @@ import com.example.concordia_campus_guide.helper.Notification;
 import com.example.concordia_campus_guide.models.Buildings;
 import com.example.concordia_campus_guide.models.CalendarEvent;
 import com.example.concordia_campus_guide.models.Floors;
-import com.example.concordia_campus_guide.models.Helpers.CalendarViewModel;
+import com.example.concordia_campus_guide.models.helpers.CalendarViewModel;
 import com.example.concordia_campus_guide.models.RoomModel;
 import com.example.concordia_campus_guide.models.Rooms;
 import com.example.concordia_campus_guide.models.Shuttles;

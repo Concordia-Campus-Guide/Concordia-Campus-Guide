@@ -9,8 +9,8 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
-import com.example.concordia_campus_guide.database.Converters.EnumToStringConverter;
-import com.example.concordia_campus_guide.database.Converters.IntegerListToStringConverter;
+import com.example.concordia_campus_guide.database.converters.EnumToStringConverter;
+import com.example.concordia_campus_guide.database.converters.IntegerListToStringConverter;
 
 import java.io.Serializable;
 import java.util.List;

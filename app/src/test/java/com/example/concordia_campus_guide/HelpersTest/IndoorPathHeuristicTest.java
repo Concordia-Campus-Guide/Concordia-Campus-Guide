@@ -1,7 +1,7 @@
 package com.example.concordia_campus_guide.HelpersTest;
 
 import com.example.concordia_campus_guide.database.AppDatabase;
-import com.example.concordia_campus_guide.database.Daos.WalkingPointDao;
+import com.example.concordia_campus_guide.database.daos.WalkingPointDao;
 import com.example.concordia_campus_guide.helper.IndoorPathHeuristic;
 import com.example.concordia_campus_guide.models.Coordinates;
 import com.example.concordia_campus_guide.models.PointType;

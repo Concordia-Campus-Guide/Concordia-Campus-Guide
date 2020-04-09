@@ -6,7 +6,7 @@ import com.example.concordia_campus_guide.activities.MainActivity;
 import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.global.NotificationStatus;
 import com.example.concordia_campus_guide.models.CalendarEvent;
-import com.example.concordia_campus_guide.models.Helpers.CalendarViewModel;
+import com.example.concordia_campus_guide.models.helpers.CalendarViewModel;
 import com.example.concordia_campus_guide.models.RoomModel;
 
 public class Notification {

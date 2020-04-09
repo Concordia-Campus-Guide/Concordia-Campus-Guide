@@ -4,7 +4,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
-import com.example.concordia_campus_guide.database.Converters.StringListConverter;
+import com.example.concordia_campus_guide.database.converters.StringListConverter;
 
 import java.util.List;
 

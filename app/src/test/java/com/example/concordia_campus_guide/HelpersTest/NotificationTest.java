@@ -2,7 +2,7 @@ package com.example.concordia_campus_guide.HelpersTest;
 
 import com.example.concordia_campus_guide.activities.MainActivity;
 import com.example.concordia_campus_guide.database.AppDatabase;
-import com.example.concordia_campus_guide.database.Daos.RoomDao;
+import com.example.concordia_campus_guide.database.daos.RoomDao;
 import com.example.concordia_campus_guide.helper.Notification;
 import com.example.concordia_campus_guide.models.Coordinates;
 import com.example.concordia_campus_guide.models.RoomModel;

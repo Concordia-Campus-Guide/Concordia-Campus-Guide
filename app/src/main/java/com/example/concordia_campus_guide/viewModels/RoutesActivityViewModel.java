@@ -4,10 +4,10 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.database.AppDatabase;
-import com.example.concordia_campus_guide.googleMapsServicesTools.GoogleMapsServicesModels.DirectionsResult;
+import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.DirectionsResult;
 import com.example.concordia_campus_guide.models.Place;
 import com.example.concordia_campus_guide.models.RoomModel;
-import com.example.concordia_campus_guide.models.Routes.Route;
+import com.example.concordia_campus_guide.models.routes.Route;
 import com.example.concordia_campus_guide.models.Shuttle;
 
 import java.math.BigDecimal;

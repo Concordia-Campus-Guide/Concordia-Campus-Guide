@@ -3,7 +3,7 @@ package com.example.concordia_campus_guide;
 import android.graphics.Color;
 
 import com.example.concordia_campus_guide.database.AppDatabase;
-import com.example.concordia_campus_guide.database.Daos.WalkingPointDao;
+import com.example.concordia_campus_guide.database.daos.WalkingPointDao;
 import com.example.concordia_campus_guide.viewModels.LocationFragmentViewModel;
 import com.example.concordia_campus_guide.models.Building;
 import com.example.concordia_campus_guide.models.Coordinates;

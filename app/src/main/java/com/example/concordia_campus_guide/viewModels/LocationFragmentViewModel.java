@@ -400,7 +400,7 @@ public class LocationFragmentViewModel extends ViewModel {
                 color = Color.parseColor(directionWrapper.getTransitDetails().line.color);
             }
             PolylineOptions polylineOptions = stylePolyLine(directionWrapper.getDirection().getTransportType(), color);
-            List<com.example.concordia_campus_guide.googleMapsServicesTools.GoogleMapsServicesModels.LatLng> polyline = directionWrapper.getPolyline().decodePath();
+            List<com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.LatLng> polyline = directionWrapper.getPolyline().decodePath();
 
             for (int i = 0; i < polyline.size(); i++) {
                 polylineOptions.add(new LatLng(polyline.get(i).lat, polyline.get(i).lng));

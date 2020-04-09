@@ -1,6 +1,6 @@
 package com.example.concordia_campus_guide.ConvertersTest;
 
-import com.example.concordia_campus_guide.database.Converters.IntegerListToStringConverter;
+import com.example.concordia_campus_guide.database.converters.IntegerListToStringConverter;
 
 import org.junit.Before;
 import org.junit.Test;

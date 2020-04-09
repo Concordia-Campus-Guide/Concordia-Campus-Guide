@@ -72,10 +72,10 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'crea
         html.enabled = true
     }
 
-    def fileFilter = ['**/R.class', '**/*Activity.*', '**/Adapters/**', '**/Interfaces/**', '**/ClassConstants.*',
-                      '**/TransitType.*', '**/Language.*', '**/R$*.class', '**/PointType.*', '**/Daos/**','**/*Fragment.*',
-                      '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*', '**/InfoCardFragment.*', '**/GoogleMapsServicesTools/**', '**/AppDatabase_Impl*','**/LocationFragment.*',
-                      '**/POIGridView.*','**/PathInfoCardFragment.*','**/Global/User.*']
+    def fileFilter = ['**/R.class', '**/*Activity.*', '**/adapters/**', '**/interfaces/**', '**/ClassConstants.*',
+                      '**/TransitType.*', '**/Language.*', '**/R$*.class', '**/PointType.*', '**/daos/**','**/*Fragment.*',
+                      '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*', '**/InfoCardFragment.*', '**/googleMapsServicesTools/**', '**/AppDatabase_Impl*','**/LocationFragment.*',
+                      '**/POIGridView.*','**/PathInfoCardFragment.*','**/global/User.*']
     def debugTree = fileTree(dir: "$project.buildDir/intermediates/javac/debug", excludes: fileFilter)
     def mainSrc = "$project.projectDir/src/main/java"
 

@@ -11,8 +11,8 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.TypeConverters;
 
-import com.example.concordia_campus_guide.database.Converters.CoordinatesListConverter;
-import com.example.concordia_campus_guide.database.Converters.StringListConverter;
+import com.example.concordia_campus_guide.database.converters.CoordinatesListConverter;
+import com.example.concordia_campus_guide.database.converters.StringListConverter;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 
 import org.json.JSONArray;

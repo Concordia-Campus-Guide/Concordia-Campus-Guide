@@ -2,7 +2,7 @@ package com.example.concordia_campus_guide.ModelTests;
 
 import com.example.concordia_campus_guide.models.Coordinates;
 import com.example.concordia_campus_guide.models.Floor;
-import com.example.concordia_campus_guide.models.Relations.FloorWithRooms;
+import com.example.concordia_campus_guide.models.relations.FloorWithRooms;
 import com.example.concordia_campus_guide.models.RoomModel;
 
 import org.junit.Before;

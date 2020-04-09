@@ -17,7 +17,7 @@ import com.example.concordia_campus_guide.adapters.PlaceToSearchResultAdapter;
 import com.example.concordia_campus_guide.global.SelectingToFromState;
 import com.example.concordia_campus_guide.helper.ViewModelFactory;
 import com.example.concordia_campus_guide.models.CalendarEvent;
-import com.example.concordia_campus_guide.models.Helpers.CalendarViewModel;
+import com.example.concordia_campus_guide.models.helpers.CalendarViewModel;
 import com.example.concordia_campus_guide.models.MyCurrentPlace;
 import com.example.concordia_campus_guide.models.Place;
 import com.example.concordia_campus_guide.R;

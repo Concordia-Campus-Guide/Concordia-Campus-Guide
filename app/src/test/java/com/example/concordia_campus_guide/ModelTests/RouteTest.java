@@ -1,7 +1,7 @@
 package com.example.concordia_campus_guide.ModelTests;
 
-import com.example.concordia_campus_guide.models.Routes.Route;
-import com.example.concordia_campus_guide.models.Routes.TransportType;
+import com.example.concordia_campus_guide.models.routes.Route;
+import com.example.concordia_campus_guide.models.routes.TransportType;
 import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;

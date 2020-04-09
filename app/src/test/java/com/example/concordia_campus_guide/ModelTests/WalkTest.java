@@ -1,7 +1,7 @@
 package com.example.concordia_campus_guide.ModelTests;
-import com.example.concordia_campus_guide.googleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
-import com.example.concordia_campus_guide.googleMapsServicesTools.GoogleMapsServicesModels.Duration;
-import com.example.concordia_campus_guide.models.Routes.Walk;
+import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.DirectionsStep;
+import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.Duration;
+import com.example.concordia_campus_guide.models.routes.Walk;
 
 
 import org.junit.Test;

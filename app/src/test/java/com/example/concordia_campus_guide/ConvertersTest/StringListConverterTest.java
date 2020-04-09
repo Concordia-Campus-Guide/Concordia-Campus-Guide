@@ -1,6 +1,6 @@
 package com.example.concordia_campus_guide.ConvertersTest;
 
-import com.example.concordia_campus_guide.database.Converters.StringListConverter;
+import com.example.concordia_campus_guide.database.converters.StringListConverter;
 import com.example.concordia_campus_guide.models.Building;
 import com.example.concordia_campus_guide.models.Coordinates;
 

@@ -8,7 +8,7 @@ import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
 import com.example.concordia_campus_guide.activities.MainActivity;
-import com.example.concordia_campus_guide.models.Helpers.CalendarViewModel;
+import com.example.concordia_campus_guide.models.helpers.CalendarViewModel;
 
 import org.junit.Before;
 import org.junit.Rule;

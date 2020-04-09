@@ -4,9 +4,9 @@ import android.location.Location;
 
 import com.example.concordia_campus_guide.viewModels.SearchActivityViewModel;
 import com.example.concordia_campus_guide.database.AppDatabase;
-import com.example.concordia_campus_guide.database.Daos.BuildingDao;
-import com.example.concordia_campus_guide.database.Daos.FloorDao;
-import com.example.concordia_campus_guide.database.Daos.RoomDao;
+import com.example.concordia_campus_guide.database.daos.BuildingDao;
+import com.example.concordia_campus_guide.database.daos.FloorDao;
+import com.example.concordia_campus_guide.database.daos.RoomDao;
 import com.example.concordia_campus_guide.models.Building;
 import com.example.concordia_campus_guide.models.Coordinates;
 import com.example.concordia_campus_guide.models.Floor;

@@ -1,11 +1,11 @@
 package com.example.concordia_campus_guide.adapters;
 
-import com.example.concordia_campus_guide.googleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
-import com.example.concordia_campus_guide.googleMapsServicesTools.GoogleMapsServicesModels.Duration;
-import com.example.concordia_campus_guide.googleMapsServicesTools.GoogleMapsServicesModels.EncodedPolyline;
-import com.example.concordia_campus_guide.googleMapsServicesTools.GoogleMapsServicesModels.LatLng;
-import com.example.concordia_campus_guide.googleMapsServicesTools.GoogleMapsServicesModels.TransitDetails;
-import com.example.concordia_campus_guide.googleMapsServicesTools.GoogleMapsServicesModels.TravelMode;
+import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.DirectionsStep;
+import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.Duration;
+import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.EncodedPolyline;
+import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.LatLng;
+import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.TransitDetails;
+import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.TravelMode;
 import com.example.concordia_campus_guide.models.Direction;
 
 import org.junit.Before;

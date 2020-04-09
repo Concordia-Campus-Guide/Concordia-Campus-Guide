@@ -7,12 +7,12 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-import com.example.concordia_campus_guide.database.Converters.StringListConverter;
-import com.example.concordia_campus_guide.database.Daos.BuildingDao;
-import com.example.concordia_campus_guide.database.Daos.FloorDao;
-import com.example.concordia_campus_guide.database.Daos.RoomDao;
-import com.example.concordia_campus_guide.database.Daos.ShuttleDao;
-import com.example.concordia_campus_guide.database.Daos.WalkingPointDao;
+import com.example.concordia_campus_guide.database.converters.StringListConverter;
+import com.example.concordia_campus_guide.database.daos.BuildingDao;
+import com.example.concordia_campus_guide.database.daos.FloorDao;
+import com.example.concordia_campus_guide.database.daos.RoomDao;
+import com.example.concordia_campus_guide.database.daos.ShuttleDao;
+import com.example.concordia_campus_guide.database.daos.WalkingPointDao;
 import com.example.concordia_campus_guide.models.Building;
 import com.example.concordia_campus_guide.models.Floor;
 import com.example.concordia_campus_guide.models.RoomModel;
