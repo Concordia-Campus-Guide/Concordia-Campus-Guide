@@ -35,57 +35,67 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PathsActivity extends AppCompatActivity implements DirectionsApiCallbackListener {
+
     private PathsViewModel mViewModel;
     private LocationFragment locationFragment;
     private FragmentManager fragmentManager;
     private DirectionsRoute directionsRoute;
     private ArrayList<DirectionWrapper> directionWrappers;
-    private Place from;
-    private Place to;
-    private boolean fromIsIndoor = false;
-    private boolean toIsIndoor = false;
-    boolean shuttleSelected;
+    private Place initialLocation;
+    private Place destinationLocation;
+
+    private boolean shuttleSelected;
     int counter = 1;
-    boolean firstCallCompleted = false;
-    boolean secondCallCompleted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.paths_activity);
-        init();
-        checkFromToType(from, to);
+
+        initComponents();
+        setPath();
+        setupInfoCard();
+    }
+
+    private void setPath() {
         if (!shuttleSelected) {
             setPaths();
         } else {
             setShuttlePaths();
         }
-        showInfoCard();
     }
 
-    private void init() {
-        TextView fromTextView = findViewById(R.id.path_fromText);
-        TextView toTextView = findViewById(R.id.path_toText);
+    private void initComponents() {
 
-        mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getApplication())).get(PathsViewModel.class);
-        fragmentManager = getSupportFragmentManager();
         directionWrappers = new ArrayList<>();
+        fragmentManager = getSupportFragmentManager();
+        mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getApplication())).get(PathsViewModel.class);
+        locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.pathLocationFragment);
 
-        from = mViewModel.getFrom();
-        to = mViewModel.getTo();
-
-        fromTextView.setText(from.getDisplayName());
-        toTextView.setText(to.getDisplayName());
+        setupFromToHeaderInfoTv();
+        getBundleInformation();
         setBackButtonOnClickListener();
 
+        locationFragment.setDifferentInitialView(new LatLng(initialLocation.getCenterCoordinates().getLatitude(), initialLocation.getCenterCoordinates().getLongitude()));
+    }
+
+    private void getBundleInformation() {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             directionsRoute = (DirectionsRoute) extras.getSerializable("directionsResult");
             shuttleSelected = extras.getBoolean("shuttle");
         }
-        locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.pathLocationFragment);
+    }
 
-        locationFragment.setDifferentInitialView(new LatLng(from.getCenterCoordinates().getLatitude(), from.getCenterCoordinates().getLongitude()));
+    private void setupFromToHeaderInfoTv() {
+        TextView initialLocationTv = findViewById(R.id.path_fromText);
+        TextView destinationTv = findViewById(R.id.path_toText);
+
+        initialLocation = mViewModel.getInitialLocation();
+        destinationLocation = mViewModel.getDestination();
+
+        initialLocationTv.setText(initialLocation.getDisplayName());
+        destinationTv.setText(destinationLocation.getDisplayName());
     }
 
     private void returnToSelectRoute() {
@@ -95,28 +105,26 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
     }
 
     private void setBackButtonOnClickListener() {
-        ImageButton backButton = (ImageButton) findViewById(R.id.pathsPageBackButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                returnToSelectRoute();
-            }
-        });
+        ImageButton backButton = findViewById(R.id.pathsPageBackButton);
+        backButton.setOnClickListener(view -> returnToSelectRoute());
     }
 
-    public void showInfoCard() {
+    public void setupInfoCard() {
         View pathInfoCard = findViewById(R.id.path_info_card);
-        BottomSheetBehavior swipeableInfoCard = BottomSheetBehavior.from(pathInfoCard);
+        BottomSheetBehavior swipeablePathCard = BottomSheetBehavior.from(pathInfoCard);
         PathInfoCardFragment pathInfoCardFragment = new PathInfoCardFragment();
+
         // creating bundle to be able to pass the directionWrapper and the walkingPoints to the pathsActivity
         Bundle infoCardBundle = new Bundle();
         infoCardBundle.putSerializable("directionsResult", mViewModel.getInfoCardList());
+
         pathInfoCardFragment.setArguments(infoCardBundle);
+
         // creating fragmentTransaction to show the step-by-step card from the bottom of the screen
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.path_info_card_frame, pathInfoCardFragment);
         fragmentTransaction.commit();
-        swipeableInfoCard.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        swipeablePathCard.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
     public List<DirectionWrapper> parseDirectionResults() {
@@ -130,19 +138,16 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
         return directionWrapperArrayList;
     }
 
-    /**
-     * checks if from and to are indoor places and stores in a boolean array {from, to}
-     *
-     * @param from
-     * @param to
-     */
-    public void checkFromToType(Place from, Place to) {
-        fromIsIndoor = from instanceof RoomModel;
-        toIsIndoor = to instanceof RoomModel;
+    public boolean isInitialIndoor(Place initialLocation){
+        return initialLocation instanceof RoomModel;
+    }
+
+    public boolean isDestinationIndoor(Place destinationLocation){
+        return destinationLocation instanceof RoomModel;
     }
 
     public void setOutdoorPaths() {
-        directionWrappers = (mViewModel.areInSameBuilding(from, to) || mViewModel.arePlacesSeparatedByATunnel(from, to)) ?
+        directionWrappers = (mViewModel.areInSameBuilding(initialLocation, destinationLocation) || mViewModel.arePlacesSeparatedByATunnel(initialLocation, destinationLocation)) ?
                 new ArrayList<>() :
                 (ArrayList<DirectionWrapper>) parseDirectionResults();
 
@@ -150,54 +155,57 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
         mViewModel.adaptOutdoorDirectionsToInfoCardList(directionWrappers);
     }
 
+    public boolean isPathOutdoor(){
+        return !isInitialIndoor(initialLocation) && !isDestinationIndoor(destinationLocation);
+    }
+
     public void setPaths() {
-        // Outdoor
-        if (!fromIsIndoor && !toIsIndoor) {
+
+        if (isPathOutdoor()) {
             setOutdoorPaths();
             return;
         }
         //Outdoor -> Indoor
-        if (!fromIsIndoor) {
+        if (!isInitialIndoor(initialLocation)) {
+            setOutdoorToIndoorpath();
+        } else if (!isDestinationIndoor(destinationLocation)) {
+            setupIndoorPaths(initialLocation, mViewModel.getEntrance(initialLocation));
             setOutdoorPaths();
-            locationFragment.setIndoorPaths(mViewModel.getEntrance(to), to);
-            mViewModel.adaptIndoorDirectionsToInfoCardList(locationFragment.getWalkingPointList());
+        } else if (isSharedBuilding()) {
+            setupIndoorPaths(initialLocation, destinationLocation);
+        } else {
+            //[from -> from_entrance ] + outdoor directions + [to_entrance -> to]
+            setupIndoorPaths(initialLocation, mViewModel.getEntrance(initialLocation));
+            setOutdoorToIndoorpath();
         }
-        // Indoor -> Outdoor
-        else if (!toIsIndoor) {
-            locationFragment.setIndoorPaths(from, mViewModel.getEntrance(from));
-            mViewModel.adaptIndoorDirectionsToInfoCardList(locationFragment.getWalkingPointList());
-            setOutdoorPaths();
-        }
-        // Same Building || tunnel
-        else if (mViewModel.arePlacesSeparatedByATunnel(from, to) || mViewModel.areInSameBuilding(from, to)) {
-            locationFragment.setIndoorPaths(from, to);
-            mViewModel.adaptIndoorDirectionsToInfoCardList(locationFragment.getWalkingPointList());
-        }
-        //[from -> from_entrance ] + outdoor directions + [to_entrance -> to]
-        else {
-            locationFragment.setIndoorPaths(from, mViewModel.getEntrance(from));
-            mViewModel.adaptIndoorDirectionsToInfoCardList(locationFragment.getWalkingPointList());
-            setOutdoorPaths();
-            locationFragment.setIndoorPaths(mViewModel.getEntrance(to), to);
-            mViewModel.adaptIndoorDirectionsToInfoCardList(locationFragment.getWalkingPointList());
-        }
+    }
+
+    private boolean isSharedBuilding(){
+        return mViewModel.arePlacesSeparatedByATunnel(initialLocation, destinationLocation) || mViewModel.areInSameBuilding(initialLocation, destinationLocation);
+    }
+    private void setupIndoorPaths(Place initialLocation, Place entrance) {
+        locationFragment.setIndoorPaths(initialLocation, entrance);
+        mViewModel.adaptIndoorDirectionsToInfoCardList(locationFragment.getWalkingPointList());
+    }
+
+    private void setOutdoorToIndoorpath() {
+        setOutdoorPaths();
+        setupIndoorPaths(mViewModel.getEntrance(destinationLocation), destinationLocation);
     }
 
     public void setShuttlePaths() {
         //From starting point to bus stop
         // Indoor -> Entrance
-        if (fromIsIndoor) {
-            locationFragment.setIndoorPaths(from, mViewModel.getEntrance(from));
-            mViewModel.adaptIndoorDirectionsToInfoCardList(locationFragment.getWalkingPointList());
-            getOutdoorDirections(mViewModel.getEntrance(from), new BusStop(from.getCampus()));
-        }
-        // Outdoor directions to bus stop
-        else {
-            getOutdoorDirections(from, new BusStop(from.getCampus()));
+        if (isInitialIndoor(initialLocation)) {
+            setupIndoorPaths(initialLocation, mViewModel.getEntrance(initialLocation));
+            getOutdoorDirections(mViewModel.getEntrance(initialLocation), new BusStop(initialLocation.getCampus()));
+        } else {
+            // Outdoor directions to bus stop
+            getOutdoorDirections(initialLocation, new BusStop(initialLocation.getCampus()));
         }
         drawShuttlePath();
         //From the bus stop to the destination
-        getOutdoorDirections(new BusStop(to.getCampus()), mViewModel.getEntrance(to));
+        getOutdoorDirections(new BusStop(destinationLocation.getCampus()), mViewModel.getEntrance(destinationLocation));
     }
 
     public void getOutdoorDirections(Place from, Place to) {
@@ -218,15 +226,14 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
         }
         if (counter < 2) {
             mViewModel.adaptShuttleToInfoCardList();
-        } else if (toIsIndoor) {
-            locationFragment.setIndoorPaths(mViewModel.getEntrance(to), to);
-            mViewModel.adaptIndoorDirectionsToInfoCardList(locationFragment.getWalkingPointList());
+        } else if (isDestinationIndoor(destinationLocation)) {
+            setupIndoorPaths(mViewModel.getEntrance(destinationLocation), destinationLocation);
         }
         counter += 1;
     }
 
     public void drawShuttlePath() {
-        String polyline = from.getCampus().equals("SGW") ? ClassConstants.ShuttlePolylineSGWLOY : ClassConstants.ShuttlePolylineLOYSGW;
+        String polyline = initialLocation.getCampus().equals("SGW") ? ClassConstants.ShuttlePolylineSGWLOY : ClassConstants.ShuttlePolylineLOYSGW;
         locationFragment.setShuttlePaths(polyline);
     }
 }

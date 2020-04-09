@@ -44,12 +44,12 @@ public class PathsViewModelTest {
 
     @Test
     public void getToTest() {
-        assertEquals(toRoom, pathsViewModel.getTo());
+        assertEquals(toRoom, pathsViewModel.getDestination());
     }
 
     @Test
     public void getFromTest() {
-        assertEquals(fromRoom, pathsViewModel.getFrom());
+        assertEquals(fromRoom, pathsViewModel.getInitialLocation());
     }
 
     @Test

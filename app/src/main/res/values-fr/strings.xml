@@ -52,5 +52,6 @@
     <string name="walk_towards_elevator">Marcher vers les ascenseurs</string>
     <string name="enter_building">Entrer dans le bâtiment</string>
     <string name="walk_towards_staff_elevator">Marcher vers les ascenseurs du personnel</string>
+    <string name="minutes">min</string>
 
 </resources>

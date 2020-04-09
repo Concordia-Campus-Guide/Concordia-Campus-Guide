@@ -30,11 +30,11 @@ public class PathsViewModel extends ViewModel {
         return infoCardList;
     }
 
-    public Place getTo() {
+    public Place getDestination() {
         return SelectingToFromState.getTo();
     }
 
-    public Place getFrom() {
+    public Place getInitialLocation() {
         return SelectingToFromState.getFrom();
     }
 
