@@ -216,7 +216,7 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
             locationFragment.drawOutdoorPaths(directionWrappers);
             mViewModel.adaptOutdoorDirectionsToInfoCardList(directionWrappers);
         }
-        if(counter < 2) {
+        if (counter < 2) {
             mViewModel.adaptShuttleToInfoCardList();
         } else if (toIsIndoor) {
             locationFragment.setIndoorPaths(mViewModel.getEntrance(to), to);

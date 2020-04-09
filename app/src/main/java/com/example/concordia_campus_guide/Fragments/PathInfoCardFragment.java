@@ -14,20 +14,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.concordia_campus_guide.Adapters.DirectionsRecyclerViewAdapter;
 import com.example.concordia_campus_guide.Models.PathInfoCard;
-import com.example.concordia_campus_guide.ClassConstants;
-import com.example.concordia_campus_guide.Models.Direction;
-import com.example.concordia_campus_guide.Models.PointType;
-import com.example.concordia_campus_guide.Models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
-import com.example.concordia_campus_guide.ViewModels.PathInfoCardViewModel;
-import com.google.android.gms.maps.model.LatLng;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -76,9 +69,9 @@ public class PathInfoCardFragment extends Fragment {
         String type = "";
         for (int i = 0; i < directionsResults.size(); i++) {
             totalDuration += directionsResults.get(i).getDuration();
-            if(!directionsResults.get(i).getType().equals(type)){
+            if (!directionsResults.get(i).getType().equals(type)) {
                 type = directionsResults.get(i).getType();
-                if (i!=0) {
+                if (i != 0) {
                     setDividerTextView(layout, layoutParams);
                 }
                 makeIcon(layout, layoutParams, type);
@@ -89,7 +82,7 @@ public class PathInfoCardFragment extends Fragment {
     }
 
     private void makeIcon(LinearLayout layout, LinearLayout.LayoutParams layoutParams, String type) {
-        int icon = this.getResources().getIdentifier("ic_directions_"+type.toLowerCase(),"drawable", this.getActivity().getPackageName());
+        int icon = this.getResources().getIdentifier("ic_directions_" + type.toLowerCase(), "drawable", this.getActivity().getPackageName());
         createImageButton(layout, layoutParams, icon);
     }
 

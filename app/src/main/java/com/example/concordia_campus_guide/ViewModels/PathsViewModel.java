@@ -126,7 +126,7 @@ public class PathsViewModel extends ViewModel {
                 break;
             case CLASSROOM:
                 if (startWalkingPoint.getPointType() != PointType.CLASSROOM) {
-                    addCardToList("Walk towards classroom " + endWalkingPoint.getFloorCode(), "Classroom");
+                    addCardToList("Walk towards classroom " + endWalkingPoint.getPlaceCode(), "Classroom");
                 }
                 break;
             default:
