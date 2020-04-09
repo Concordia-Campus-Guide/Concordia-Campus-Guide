@@ -77,7 +77,6 @@ public class SearchActivity extends AppCompatActivity {
         searchText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                throw new UnsupportedOperationException();
             }
 
             @Override
@@ -87,7 +86,6 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                throw new UnsupportedOperationException();
             }
         });
     }
