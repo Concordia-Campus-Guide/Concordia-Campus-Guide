@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.viewModels;
+package com.example.concordia_campus_guide.view_models;
 
 import android.content.Context;
 import android.graphics.Bitmap;

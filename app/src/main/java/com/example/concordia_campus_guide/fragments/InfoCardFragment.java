@@ -22,7 +22,7 @@ import com.example.concordia_campus_guide.global.SelectingToFromState;
 import com.example.concordia_campus_guide.helper.ViewModelFactory;
 import com.example.concordia_campus_guide.models.MyCurrentPlace;
 import com.example.concordia_campus_guide.R;
-import com.example.concordia_campus_guide.viewModels.InfoCardFragmentViewModel;
+import com.example.concordia_campus_guide.view_models.InfoCardFragmentViewModel;
 
 import java.io.InputStream;
 

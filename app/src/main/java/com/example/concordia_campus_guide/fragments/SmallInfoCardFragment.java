@@ -21,7 +21,7 @@ import com.example.concordia_campus_guide.helper.ViewModelFactory;
 import com.example.concordia_campus_guide.models.MyCurrentPlace;
 import com.example.concordia_campus_guide.models.Place;
 import com.example.concordia_campus_guide.R;
-import com.example.concordia_campus_guide.viewModels.SmallInfoCardFragmentViewModel;
+import com.example.concordia_campus_guide.view_models.SmallInfoCardFragmentViewModel;
 
 public class SmallInfoCardFragment extends Fragment {
 

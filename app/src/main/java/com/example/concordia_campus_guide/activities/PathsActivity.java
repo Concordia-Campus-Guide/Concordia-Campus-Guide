@@ -27,7 +27,7 @@ import com.example.concordia_campus_guide.models.Place;
 import com.example.concordia_campus_guide.models.RoomModel;
 import com.example.concordia_campus_guide.models.routes.Route;
 import com.example.concordia_campus_guide.R;
-import com.example.concordia_campus_guide.viewModels.PathsViewModel;
+import com.example.concordia_campus_guide.view_models.PathsViewModel;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 

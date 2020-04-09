@@ -43,7 +43,7 @@ import com.example.concordia_campus_guide.models.Rooms;
 import com.example.concordia_campus_guide.models.Shuttles;
 import com.example.concordia_campus_guide.models.WalkingPoints;
 import com.example.concordia_campus_guide.R;
-import com.example.concordia_campus_guide.viewModels.MainActivityViewModel;
+import com.example.concordia_campus_guide.view_models.MainActivityViewModel;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.navigation.NavigationView;
 import java.util.Date;

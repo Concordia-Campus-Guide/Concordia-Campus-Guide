@@ -33,7 +33,7 @@ import com.example.concordia_campus_guide.models.Place;
 import com.example.concordia_campus_guide.models.RoomModel;
 import com.example.concordia_campus_guide.models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
-import com.example.concordia_campus_guide.viewModels.LocationFragmentViewModel;
+import com.example.concordia_campus_guide.view_models.LocationFragmentViewModel;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;

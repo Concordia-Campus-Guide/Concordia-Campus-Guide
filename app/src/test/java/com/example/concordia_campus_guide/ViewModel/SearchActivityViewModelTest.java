@@ -2,7 +2,7 @@ package com.example.concordia_campus_guide.ViewModel;
 
 import android.location.Location;
 
-import com.example.concordia_campus_guide.viewModels.SearchActivityViewModel;
+import com.example.concordia_campus_guide.view_models.SearchActivityViewModel;
 import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.database.daos.BuildingDao;
 import com.example.concordia_campus_guide.database.daos.FloorDao;

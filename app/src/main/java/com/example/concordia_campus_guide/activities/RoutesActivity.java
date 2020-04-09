@@ -28,7 +28,7 @@ import com.example.concordia_campus_guide.models.Coordinates;
 import com.example.concordia_campus_guide.models.routes.Route;
 import com.example.concordia_campus_guide.models.Shuttle;
 import com.example.concordia_campus_guide.R;
-import com.example.concordia_campus_guide.viewModels.RoutesActivityViewModel;
+import com.example.concordia_campus_guide.view_models.RoutesActivityViewModel;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;

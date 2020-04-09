@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.viewModels;
+package com.example.concordia_campus_guide.view_models;
 
 import android.annotation.SuppressLint;
 import androidx.lifecycle.ViewModel;
