@@ -1,7 +1,7 @@
 package com.example.concordia_campus_guide.ModelTests;
 
 
-import com.example.concordia_campus_guide.Models.BusStop;
+import com.example.concordia_campus_guide.models.BusStop;
 
 import org.junit.Before;
 import org.junit.Test;

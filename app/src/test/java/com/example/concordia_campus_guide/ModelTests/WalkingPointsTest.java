@@ -1,9 +1,9 @@
 package com.example.concordia_campus_guide.ModelTests;
 
-import com.example.concordia_campus_guide.Models.Coordinates;
-import com.example.concordia_campus_guide.Models.PointType;
-import com.example.concordia_campus_guide.Models.WalkingPoint;
-import com.example.concordia_campus_guide.Models.WalkingPoints;
+import com.example.concordia_campus_guide.models.Coordinates;
+import com.example.concordia_campus_guide.models.PointType;
+import com.example.concordia_campus_guide.models.WalkingPoint;
+import com.example.concordia_campus_guide.models.WalkingPoints;
 
 import org.junit.Before;
 import org.junit.Test;

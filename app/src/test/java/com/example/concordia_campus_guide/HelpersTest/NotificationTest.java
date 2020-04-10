@@ -1,11 +1,11 @@
 package com.example.concordia_campus_guide.HelpersTest;
 
-import com.example.concordia_campus_guide.Activities.MainActivity;
-import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Database.Daos.RoomDao;
-import com.example.concordia_campus_guide.Helper.Notification;
-import com.example.concordia_campus_guide.Models.Coordinates;
-import com.example.concordia_campus_guide.Models.RoomModel;
+import com.example.concordia_campus_guide.activities.MainActivity;
+import com.example.concordia_campus_guide.database.AppDatabase;
+import com.example.concordia_campus_guide.database.daos.RoomDao;
+import com.example.concordia_campus_guide.helper.Notification;
+import com.example.concordia_campus_guide.models.Coordinates;
+import com.example.concordia_campus_guide.models.RoomModel;
 
 import org.junit.Before;
 import org.junit.Test;

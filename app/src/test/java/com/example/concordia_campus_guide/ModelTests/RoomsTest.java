@@ -1,9 +1,9 @@
 package com.example.concordia_campus_guide.ModelTests;
 
 import com.example.concordia_campus_guide.ModelTests.TestUtils.TestUtils;
-import com.example.concordia_campus_guide.Models.Coordinates;
-import com.example.concordia_campus_guide.Models.Place;
-import com.example.concordia_campus_guide.Models.RoomModel;
+import com.example.concordia_campus_guide.models.Coordinates;
+import com.example.concordia_campus_guide.models.Place;
+import com.example.concordia_campus_guide.models.RoomModel;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

@@ -2,15 +2,15 @@ package com.example.concordia_campus_guide.ViewModel;
 
 import android.location.Location;
 
-import com.example.concordia_campus_guide.ViewModels.SearchActivityViewModel;
-import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Database.Daos.BuildingDao;
-import com.example.concordia_campus_guide.Database.Daos.FloorDao;
-import com.example.concordia_campus_guide.Database.Daos.RoomDao;
-import com.example.concordia_campus_guide.Models.Building;
-import com.example.concordia_campus_guide.Models.Coordinates;
-import com.example.concordia_campus_guide.Models.Floor;
-import com.example.concordia_campus_guide.Models.RoomModel;
+import com.example.concordia_campus_guide.view_models.SearchActivityViewModel;
+import com.example.concordia_campus_guide.database.AppDatabase;
+import com.example.concordia_campus_guide.database.daos.BuildingDao;
+import com.example.concordia_campus_guide.database.daos.FloorDao;
+import com.example.concordia_campus_guide.database.daos.RoomDao;
+import com.example.concordia_campus_guide.models.Building;
+import com.example.concordia_campus_guide.models.Coordinates;
+import com.example.concordia_campus_guide.models.Floor;
+import com.example.concordia_campus_guide.models.RoomModel;
 
 import org.junit.Before;
 import org.junit.Test;
