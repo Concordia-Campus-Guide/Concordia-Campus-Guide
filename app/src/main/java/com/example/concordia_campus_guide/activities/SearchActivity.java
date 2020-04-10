@@ -23,6 +23,8 @@ import com.example.concordia_campus_guide.models.Place;
 import com.example.concordia_campus_guide.R;
 import com.example.concordia_campus_guide.view_models.SearchActivityViewModel;
 
+import static com.example.concordia_campus_guide.helper.StartActivityHelper.openRoutesPage;
+
 public class SearchActivity extends AppCompatActivity {
 
     ListView searchResults;
@@ -103,13 +105,13 @@ public class SearchActivity extends AppCompatActivity {
 
         searchResults.setOnItemClickListener((parent, view, position, id) -> {
             Place place = adapter.getItem(position);
-            openRoutesPage(place);
+            openRoutesPage(place, this);
         });
 
         currentLocationRow.setOnClickListener(view -> {
             Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
             if(myCurrentLocation != null){
-                openRoutesPage(new MyCurrentPlace(SearchActivity.this, myCurrentLocation.getLongitude(), myCurrentLocation.getLatitude()));
+                openRoutesPage(new MyCurrentPlace(SearchActivity.this, myCurrentLocation.getLongitude(), myCurrentLocation.getLatitude()), this);
             }
         });
 
@@ -117,7 +119,7 @@ public class SearchActivity extends AppCompatActivity {
             nextClassArrow.setVisibility(View.VISIBLE);
             nextClassRow.setOnClickListener(view -> {
                 Place place = nextClassPlace;
-                openRoutesPage(place);
+                openRoutesPage(place, this);
             });
         }
 
@@ -157,29 +159,6 @@ public class SearchActivity extends AppCompatActivity {
             nextClassPlace = place;
         }
     }
-
-    public void openRoutesPage(Place place) {
-        Intent openRoutes = new Intent(SearchActivity.this, RoutesActivity.class);
-
-        if (SelectingToFromState.isQuickSelect()) {
-            SelectingToFromState.setTo(place);
-            if (SelectingToFromState.getMyCurrentLocation() != null) {
-                Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
-                SelectingToFromState.setFrom(new MyCurrentPlace(SearchActivity.this, myCurrentLocation.getLongitude(), myCurrentLocation.getLatitude()));
-            } else {
-                SelectingToFromState.setFrom(new MyCurrentPlace(SearchActivity.this));
-            }
-        }
-        if (SelectingToFromState.isSelectFrom()) {
-            SelectingToFromState.setFrom(place);
-        }
-        if (SelectingToFromState.isSelectTo()) {
-            SelectingToFromState.setTo(place);
-        }
-
-        startActivity(openRoutes);
-    }
-
 
     private void setBackButtonOnClick() {
         ImageButton backButton = this.findViewById(R.id.back);
