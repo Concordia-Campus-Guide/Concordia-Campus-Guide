@@ -94,7 +94,7 @@ public class SearchActivityTest {
         editText.check(matches(isDisplayed()));
 
         ViewInteraction textView3 = onView(
-                allOf(withId(R.id.textView2), withText("Next class"),
+                allOf(withId(R.id.next_class_title), withText("Next class"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),

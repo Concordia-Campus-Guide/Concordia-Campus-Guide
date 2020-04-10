@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -28,6 +29,7 @@ public class SearchActivity extends AppCompatActivity {
     ListView searchResults;
     EditText searchText;
     View nextClassRow;
+    View currentLocationRow;
     TextView nextClassText;
     ImageView nextClassArrow;
     SearchActivityViewModel mViewModel;
@@ -54,7 +56,8 @@ public class SearchActivity extends AppCompatActivity {
         searchText = findViewById(R.id.searchText);
         nextClassText = findViewById(R.id.next_class_text);
         nextClassArrow = findViewById(R.id.next_class_arrow);
-        nextClassRow = findViewById(R.id.view_container);
+        nextClassRow = findViewById(R.id.next_class_row_container);
+        currentLocationRow = findViewById(R.id.current_location_row_container);
         calendarViewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
         mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getApplication())).get(SearchActivityViewModel.class);
         setupNextClassString();
@@ -104,6 +107,16 @@ public class SearchActivity extends AppCompatActivity {
             openRoutesPage(place);
         });
 
+        currentLocationRow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
+                if(myCurrentLocation != null){
+                    openRoutesPage(new MyCurrentPlace(SearchActivity.this, myCurrentLocation.getLongitude(), myCurrentLocation.getLatitude()));
+                }
+            }
+        });
+
         if(Boolean.TRUE.equals(shouldSetNextClassClickListener)){
             nextClassArrow.setVisibility(View.VISIBLE);
             nextClassRow.setOnClickListener(view -> {
@@ -116,6 +129,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private void setupNextClassString() {
         final CalendarEvent calendarEvent = calendarViewModel.getEvent(this);
+        final String eventString;
         final String eventLocation;
 
         if(calendarEvent != null){
@@ -136,7 +150,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private void populateNextClassString(CalendarEvent calendarEvent, Place place) {
         String eventString;
-        eventString = calendarViewModel.getNextClassString((calendarEvent));
+        eventString = calendarViewModel.getNextClassString(SearchActivity.this, (calendarEvent));
         nextClassText.setText(eventString);
 
         if(eventString.equals(getResources().getString(R.string.incorrect_format_event))){
@@ -155,9 +169,9 @@ public class SearchActivity extends AppCompatActivity {
             SelectingToFromState.setTo(place);
             if (SelectingToFromState.getMyCurrentLocation() != null) {
                 Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
-                SelectingToFromState.setFrom(new MyCurrentPlace(myCurrentLocation.getLatitude(), myCurrentLocation.getLongitude()));
+                SelectingToFromState.setFrom(new MyCurrentPlace(SearchActivity.this, myCurrentLocation.getLongitude(), myCurrentLocation.getLatitude()));
             } else {
-                SelectingToFromState.setFrom(new MyCurrentPlace());
+                SelectingToFromState.setFrom(new MyCurrentPlace(SearchActivity.this));
             }
         }
         if (SelectingToFromState.isSelectFrom()) {

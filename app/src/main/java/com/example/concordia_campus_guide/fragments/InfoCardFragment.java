@@ -133,10 +133,10 @@ public class InfoCardFragment extends Fragment {
         SelectingToFromState.setMyCurrentLocation(((MainActivity) getActivity()).getMyCurrentLocation());
         Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
         if(myCurrentLocation != null){
-            SelectingToFromState.setFrom(new MyCurrentPlace(myCurrentLocation.getLatitude(), myCurrentLocation.getLongitude()));
+            SelectingToFromState.setFrom(new MyCurrentPlace(getContext(), myCurrentLocation.getLongitude(), myCurrentLocation.getLatitude()));
         }
         else{
-            SelectingToFromState.setFrom(new MyCurrentPlace());
+            SelectingToFromState.setFrom(new MyCurrentPlace(getContext()));
         }
         SelectingToFromState.setTo(mViewModel.getBuilding());
 

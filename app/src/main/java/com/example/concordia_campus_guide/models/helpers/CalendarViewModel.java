@@ -8,6 +8,7 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CalendarContract;
@@ -21,6 +22,7 @@ import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.models.CalendarEvent;
 import com.example.concordia_campus_guide.R;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -65,14 +67,14 @@ public class CalendarViewModel extends AndroidViewModel {
         return null;
     }
 
-    public String getNextClassString(CalendarEvent event){
+    public String getNextClassString(Context context, CalendarEvent event){
         String nextClassString = "";
         if(incorrectlyFormatted(event.getLocation())){
             return context.getResources().getString(R.string.incorrect_format_event);
         }
 
         Date eventDate = new Date((Long.parseLong(event.getStartTime())));
-        String timeUntil = getTimeUntilString(eventDate.getTime(), System.currentTimeMillis());
+        String timeUntil = getTimeUntilString(context, eventDate.getTime(), System.currentTimeMillis());
         nextClassString = event.getTitle() + " " + context.getResources().getString(R.string.in) + " " + timeUntil;
 
         return  nextClassString;
@@ -142,7 +144,7 @@ public class CalendarViewModel extends AndroidViewModel {
     }
 
     @SuppressLint("DefaultLocale")
-    public String getTimeUntilString(long eventTime, long currentTime){
+    public String getTimeUntilString(Context context, long eventTime, long currentTime){
         long differenceInMillis = eventTime - currentTime;
 
         return String.format("%02d %s %s %02d minutes",
