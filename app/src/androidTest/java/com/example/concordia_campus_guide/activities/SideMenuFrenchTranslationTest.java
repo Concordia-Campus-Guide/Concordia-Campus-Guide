@@ -22,6 +22,7 @@ import androidx.test.rule.GrantPermissionRule;
 import androidx.test.runner.AndroidJUnit4;
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -34,7 +35,7 @@ import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class SideMenuAndFrenchTest {
+public class SideMenuFrenchTranslationTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
@@ -48,7 +49,8 @@ public class SideMenuAndFrenchTest {
                     "android.permission.READ_CALENDAR");
 
     @Test
-    public void sideMenuAndFrenchTest() {
+    public void sideMenuFrenchTranslationTest() {
+
         ViewInteraction appCompatImageButton = onView(
                 allOf(withContentDescription("Open navigation drawer"),
                         childAtPosition(
@@ -60,15 +62,77 @@ public class SideMenuAndFrenchTest {
                         isDisplayed()));
         appCompatImageButton.perform(click());
 
-        ViewInteraction navigationMenuItemView = onView(
-                allOf(childAtPosition(
-                        allOf(withId(R.id.design_navigation_view),
-                                childAtPosition(
-                                        withId(R.id.side_nav_view),
-                                        0)),
-                        1),
+
+        pressBack();
+
+        ViewInteraction frameLayout = onView(
+                allOf(withId(R.id.info_card_title),
                         isDisplayed()));
-        navigationMenuItemView.perform(click());
+        frameLayout.perform(click());
+
+
+
+        ViewInteraction textView = onView(
+                allOf(withId(R.id.serviceTv), withText("Elevator"),
+                        childAtPosition(
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class),
+                                        0),
+                                1),
+                        isDisplayed()));
+        textView.check(matches(withText("Elevator")));
+
+        ViewInteraction textView2 = onView(
+                allOf(withId(R.id.serviceTv), withText("Lounges"),
+                        childAtPosition(
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class),
+                                        0),
+                                1),
+                        isDisplayed()));
+        textView2.check(matches(withText("Lounges")));
+
+        ViewInteraction textView3 = onView(
+                allOf(withId(R.id.serviceTv), withText("Stairs"),
+                        childAtPosition(
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class),
+                                        0),
+                                1),
+                        isDisplayed()));
+        textView3.check(matches(withText("Stairs")));
+
+        ViewInteraction textView4 = onView(
+                allOf(withId(R.id.serviceTv), withText("Washroom"),
+                        childAtPosition(
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class),
+                                        0),
+                                1),
+                        isDisplayed()));
+        textView4.check(matches(withText("Washroom")));
+
+        ViewInteraction frameLayout2 = onView(
+                allOf(withId(R.id.explore_bottom_card_frame),
+                        childAtPosition(
+                                allOf(withId(R.id.explore_bottom_card_scroll_view),
+                                        childAtPosition(
+                                                withId(R.id.bottom_card_coordinator_layout),
+                                                0)),
+                                0),
+                        isDisplayed()));
+        frameLayout2.perform(click());
+
+        ViewInteraction appCompatImageButton2 = onView(
+                allOf(withContentDescription("Open navigation drawer"),
+                        childAtPosition(
+                                allOf(withId(R.id.toolbar),
+                                        childAtPosition(
+                                                withId(R.id.appBarLayout),
+                                                0)),
+                                1),
+                        isDisplayed()));
+        appCompatImageButton2.perform(click());
 
         ViewInteraction switch_ = onView(
                 allOf(withId(R.id.nav_translate),
@@ -81,51 +145,13 @@ public class SideMenuAndFrenchTest {
                         isDisplayed()));
         switch_.perform(click());
 
-        ViewInteraction switch_2 = onView(
-                allOf(withId(R.id.nav_accessibility),
-                        childAtPosition(
-                                allOf(withId(R.id.design_menu_item_action_area),
-                                        childAtPosition(
-                                                withClassName(is("com.google.android.material.internal.NavigationMenuItemView")),
-                                                1)),
-                                0),
-                        isDisplayed()));
-        switch_2.perform(click());
+        pressBack();
 
-        ViewInteraction switch_3 = onView(
-                allOf(withId(R.id.nav_staff),
-                        childAtPosition(
-                                allOf(withId(R.id.design_menu_item_action_area),
-                                        childAtPosition(
-                                                withClassName(is("com.google.android.material.internal.NavigationMenuItemView")),
-                                                1)),
-                                0),
+        ViewInteraction frameLayout3 = onView(
+                allOf(withId(R.id.info_card_title),
                         isDisplayed()));
-        switch_3.perform(click());
 
-        ViewInteraction frameLayout = onView(
-                allOf(withId(R.id.explore_bottom_card_frame),
-                        childAtPosition(
-                                allOf(withId(R.id.explore_bottom_card_scroll_view),
-                                        childAtPosition(
-                                                withId(R.id.bottom_card_coordinator_layout),
-                                                0)),
-                                0),
-                        isDisplayed()));
-        frameLayout.perform(click());
-
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.info_card_title), withText("Explorer"),
-                        childAtPosition(
-                                allOf(withId(R.id.poiLinearLayout),
-                                        childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
-                                                0)),
-                                0),
-                        isDisplayed()));
-        textView.check(matches(withText("Explorer")));
-
-        ViewInteraction textView2 = onView(
+        ViewInteraction textView5 = onView(
                 allOf(withId(R.id.serviceTv), withText("Ascenseur"),
                         childAtPosition(
                                 childAtPosition(
@@ -133,9 +159,9 @@ public class SideMenuAndFrenchTest {
                                         0),
                                 1),
                         isDisplayed()));
-        textView2.check(matches(withText("Ascenseur")));
+        textView5.check(matches(withText("Ascenseur")));
 
-        ViewInteraction textView3 = onView(
+        ViewInteraction textView6 = onView(
                 allOf(withId(R.id.serviceTv), withText("Salons"),
                         childAtPosition(
                                 childAtPosition(
@@ -143,9 +169,9 @@ public class SideMenuAndFrenchTest {
                                         0),
                                 1),
                         isDisplayed()));
-        textView3.check(matches(withText("Salons")));
+        textView6.check(matches(withText("Salons")));
 
-        ViewInteraction textView4 = onView(
+        ViewInteraction textView7 = onView(
                 allOf(withId(R.id.serviceTv), withText("Escalier"),
                         childAtPosition(
                                 childAtPosition(
@@ -153,7 +179,17 @@ public class SideMenuAndFrenchTest {
                                         0),
                                 1),
                         isDisplayed()));
-        textView4.check(matches(withText("Escalier")));
+        textView7.check(matches(withText("Escalier")));
+
+        ViewInteraction textView8 = onView(
+                allOf(withId(R.id.serviceTv), withText("Toilette"),
+                        childAtPosition(
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class),
+                                        0),
+                                1),
+                        isDisplayed()));
+        textView8.check(matches(withText("Toilette")));
     }
 
     private static Matcher<View> childAtPosition(
