@@ -23,7 +23,7 @@ public interface WalkingPointDao {
     List<WalkingPoint> getAllWalkingPointsFromPlaceCode(String placeCode);
 
     @Query("SELECT * FROM walkingPoints WHERE  floor_code =:floorCode AND place_code =:placeCode")
-    List<WalkingPoint> getAllWalkingPointsFromPlace(String floorCode, String placeCode);
+    WalkingPoint getWalkingPoint(String floorCode, String placeCode);
 
     @Query("SELECT * FROM walkingPoints WHERE floor_code =:floorCode AND point_type=:pointType")
     List<WalkingPoint> getAllAccessPointsOnFloor(String floorCode, @PointType String pointType);
