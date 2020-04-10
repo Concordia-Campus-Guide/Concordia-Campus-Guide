@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.Models;
+package com.example.concordia_campus_guide.models;
 
 public @interface PoiType {
 String ELEVATOR = "ELEVATOR";

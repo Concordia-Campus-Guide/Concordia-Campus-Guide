@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.Fragments;
+package com.example.concordia_campus_guide.fragments;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;

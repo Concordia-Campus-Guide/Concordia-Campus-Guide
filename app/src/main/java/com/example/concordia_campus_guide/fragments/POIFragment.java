@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.Fragments;
+package com.example.concordia_campus_guide.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

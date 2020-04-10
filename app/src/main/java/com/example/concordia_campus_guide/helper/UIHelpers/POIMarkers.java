@@ -1,8 +1,8 @@
-package com.example.concordia_campus_guide.Helper.UIHelpers;
+package com.example.concordia_campus_guide.helper.UIHelpers;
 
 import com.example.concordia_campus_guide.ClassConstants;
-import com.example.concordia_campus_guide.ViewModels.LocationFragmentViewModel;
-import com.example.concordia_campus_guide.Models.WalkingPoint;
+import com.example.concordia_campus_guide.view_models.LocationFragmentViewModel;
+import com.example.concordia_campus_guide.models.WalkingPoint;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;

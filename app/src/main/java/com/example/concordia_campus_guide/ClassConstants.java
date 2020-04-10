@@ -22,6 +22,8 @@ public class  ClassConstants {
     public static final String CALENDAR_INTEGRATION_BUTTON = "calendar_integration_button";
     public static final String SHARED_PREFERENCES = "UserPreferences";
     public static final String IGNORE ="ignore";
+    public static boolean MY_LOCATION_PERMISSION_GRANTED = false;
+
 
     // Toggle buttons constants
     @Retention(RetentionPolicy.SOURCE)

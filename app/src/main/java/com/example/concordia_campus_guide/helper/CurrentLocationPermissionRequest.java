@@ -1,12 +1,11 @@
-package com.example.concordia_campus_guide.Helper;
+package com.example.concordia_campus_guide.helper;
 
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 
 import com.example.concordia_campus_guide.ClassConstants;
-import com.example.concordia_campus_guide.Fragments.LocationFragment;
-import com.example.concordia_campus_guide.Fragments.LocationFragment;
+import com.example.concordia_campus_guide.fragments.LocationFragment;
 
 import androidx.core.app.ActivityCompat;
 

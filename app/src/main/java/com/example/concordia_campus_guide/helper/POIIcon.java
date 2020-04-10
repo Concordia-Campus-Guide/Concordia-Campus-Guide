@@ -1,14 +1,14 @@
-package com.example.concordia_campus_guide.Helper;
+package com.example.concordia_campus_guide.helper;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Models.Building;
-import com.example.concordia_campus_guide.Models.Coordinates;
-import com.example.concordia_campus_guide.Models.PoiType;
-import com.example.concordia_campus_guide.Models.WalkingPoint;
+import com.example.concordia_campus_guide.database.AppDatabase;
+import com.example.concordia_campus_guide.models.Building;
+import com.example.concordia_campus_guide.models.Coordinates;
+import com.example.concordia_campus_guide.models.PoiType;
+import com.example.concordia_campus_guide.models.WalkingPoint;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 
@@ -24,7 +24,7 @@ public class POIIcon {
     private BitmapDescriptor currentPOIIcon;
     private static final Logger LOGGER = Logger.getLogger("POIIcon");
 
-    public void setCurrentPOIIcon(PoiType String poiType, Context context) {
+    public void setCurrentPOIIcon(@PoiType String poiType, Context context) {
         currentPOIIcon = getCustomSizedIcon("point_of_interest_icons/poi_" + poiType.toLowerCase() + ".png", context, 60, 60);
     }
 

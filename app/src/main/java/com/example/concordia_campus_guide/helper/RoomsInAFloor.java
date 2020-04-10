@@ -1,7 +1,7 @@
-package com.example.concordia_campus_guide.Helper;
+package com.example.concordia_campus_guide.helper;
 
-import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Models.RoomModel;
+import com.example.concordia_campus_guide.database.AppDatabase;
+import com.example.concordia_campus_guide.models.RoomModel;
 
 import java.util.List;
 

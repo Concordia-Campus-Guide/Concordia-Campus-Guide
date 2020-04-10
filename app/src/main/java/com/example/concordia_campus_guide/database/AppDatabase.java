@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.Database;
+package com.example.concordia_campus_guide.database;
 
 import android.content.Context;
 

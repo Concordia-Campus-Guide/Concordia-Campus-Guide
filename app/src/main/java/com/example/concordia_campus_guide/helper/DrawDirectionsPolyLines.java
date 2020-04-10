@@ -1,8 +1,8 @@
-package com.example.concordia_campus_guide.Helper;
+package com.example.concordia_campus_guide.helper;
 
 import android.graphics.Color;
 
-import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
+import com.example.concordia_campus_guide.adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
@@ -19,7 +19,7 @@ public class DrawDirectionsPolyLines {
                 color = Color.parseColor(directionWrapper.getTransitDetails().line.color);
             }
             PolylineOptions polylineOptions = stylePolyLine(directionWrapper.getDirection().getTransportType(), color);
-            List<com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.LatLng> polyline = directionWrapper.getPolyline().decodePath();
+            List<LatLng> polyline = directionWrapper.getPolyline().decodePath();
 
             for (int i = 0; i < polyline.size(); i++) {
                 polylineOptions.add(new LatLng(polyline.get(i).lat, polyline.get(i).lng));

@@ -1,10 +1,10 @@
-package com.example.concordia_campus_guide.Helper;
+package com.example.concordia_campus_guide.helper;
 
 import android.graphics.Color;
 
 import com.example.concordia_campus_guide.ClassConstants;
-import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Models.WalkingPoint;
+import com.example.concordia_campus_guide.database.AppDatabase;
+import com.example.concordia_campus_guide.models.WalkingPoint;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.GroundOverlay;
@@ -34,8 +34,6 @@ public class FloorPlan {
         this.appDatabase = appDB;
         roomsInAFloor = new RoomsInAFloor();
     }
-
-
 
     /**
      * @param buildingCode it represents which building we will be covering
@@ -79,8 +77,4 @@ public class FloorPlan {
                 .color(Color.rgb(147, 35, 57))
                 .visible(true);
     }
-
-
-
-
 }

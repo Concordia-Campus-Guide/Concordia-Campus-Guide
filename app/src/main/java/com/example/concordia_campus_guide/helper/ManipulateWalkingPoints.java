@@ -1,8 +1,10 @@
-package com.example.concordia_campus_guide.Helper;
+package com.example.concordia_campus_guide.helper;
 
-import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Models.RoomModel;
-import com.example.concordia_campus_guide.Models.WalkingPoint;
+import android.content.SharedPreferences;
+
+import com.example.concordia_campus_guide.database.AppDatabase;
+import com.example.concordia_campus_guide.models.RoomModel;
+import com.example.concordia_campus_guide.models.WalkingPoint;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,8 +17,8 @@ public class ManipulateWalkingPoints {
         return walkingPoints;
     }
 
-    public void parseWalkingPointList(AppDatabase appDatabase, RoomModel from, RoomModel to, HashMap<String, List<WalkingPoint>> walkingPointsMap) {
-        PathFinder pf = new PathFinder(appDatabase, from, to);
+    public void parseWalkingPointList(AppDatabase appDatabase,SharedPreferences sharedPreferences, RoomModel from, RoomModel to, HashMap<String, List<WalkingPoint>> walkingPointsMap) {
+        PathFinder pf = new PathFinder(appDatabase,sharedPreferences, from, to);
         walkingPoints = pf.getPathToDestination();
 
         List<WalkingPoint> floorWalkingPointList;

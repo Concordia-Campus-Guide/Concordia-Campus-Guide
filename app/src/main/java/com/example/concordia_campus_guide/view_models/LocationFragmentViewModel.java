@@ -20,24 +20,17 @@ import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.global.ApplicationState;
 import com.example.concordia_campus_guide.helper.PathFinder;
 import com.example.concordia_campus_guide.models.Building;
-import com.example.concordia_campus_guide.models.Coordinates;
 import com.example.concordia_campus_guide.models.PoiType;
 import com.example.concordia_campus_guide.models.RoomModel;
 import com.example.concordia_campus_guide.models.WalkingPoint;
-import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Global.ApplicationState;
-import com.example.concordia_campus_guide.Helper.BuildingsAndTheirCode;
-import com.example.concordia_campus_guide.Helper.CurrentLocation;
-import com.example.concordia_campus_guide.Helper.DrawPolygons;
-import com.example.concordia_campus_guide.Helper.FloorPlan;
-import com.example.concordia_campus_guide.Helper.ManipulateWalkingPoints;
-import com.example.concordia_campus_guide.Helper.POIIcon;
-import com.example.concordia_campus_guide.Helper.PathFinder;
-import com.example.concordia_campus_guide.Models.Building;
-import com.example.concordia_campus_guide.Models.Coordinates;
-import com.example.concordia_campus_guide.Models.PoiType;
-import com.example.concordia_campus_guide.Models.RoomModel;
-import com.example.concordia_campus_guide.Models.WalkingPoint;
+import com.example.concordia_campus_guide.database.AppDatabase;
+import com.example.concordia_campus_guide.global.ApplicationState;
+import com.example.concordia_campus_guide.helper.BuildingsAndTheirCode;
+import com.example.concordia_campus_guide.helper.CurrentLocation;
+import com.example.concordia_campus_guide.helper.DrawPolygons;
+import com.example.concordia_campus_guide.helper.FloorPlan;
+import com.example.concordia_campus_guide.helper.ManipulateWalkingPoints;
+import com.example.concordia_campus_guide.helper.POIIcon;
 import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
@@ -159,6 +152,18 @@ public class LocationFragmentViewModel extends ViewModel {
     }
 
 
+    public RoomModel getRoomByRoomCodeAndFloorCode(String roomCode, String floorCode){
+        return appDatabase.roomDao().getRoomByRoomCodeAndFloorCode(roomCode, floorCode);
+    }
+
+    public void parseWalkingPointList(AppDatabase appDatabase, SharedPreferences sharedPreferences, RoomModel from, RoomModel to){
+        manipulateWalkingPoints.parseWalkingPointList(appDatabase,sharedPreferences, from, to, walkingPointsMap);
+    }
+
+    public List<WalkingPoint> getWalkingPointsList(){
+       return manipulateWalkingPoints.getWalkingPointsList();
+    }
+
     public BitmapDescriptor getCustomSizedIcon(String filename, Context context, int height, int width) {
         return poiIcon.getCustomSizedIcon(filename,context,height,width);
     }
@@ -174,94 +179,6 @@ public class LocationFragmentViewModel extends ViewModel {
     public LiveData<PriorityQueue<WalkingPoint>> getListOfPOI() {
         return poiList;
     }
-
-    private void setCurrentPOIIcon(@PoiType String poiType, Context context) {
-        currentPOIIcon = getCustomSizedIcon("point_of_interest_icons/poi_" + poiType.toLowerCase() + ".png", context, 60, 60);
-    }
-
-    public BitmapDescriptor getCurrentPOIIcon() {
-        return currentPOIIcon;
-    }
-
-    public void setCurrentLocation(Location currentLocation) {
-        this.currentLocation = currentLocation;
-    }
-
-    public BitmapDescriptor getCustomSizedIcon(String filename, Context context, int height, int width) {
-        InputStream deckFile = null;
-        BitmapDescriptor smallMarkerIcon = null;
-        try {
-            deckFile = context.getAssets().open(filename);
-            Bitmap b = BitmapFactory.decodeStream(deckFile);
-            Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
-            smallMarkerIcon = BitmapDescriptorFactory.fromBitmap(smallMarker);
-            deckFile.close();
-        } catch (IOException e) {
-            LOGGER.log(Level.WARNING, e.getMessage(), e);
-        }
-        return smallMarkerIcon;
-    }
-
-    public PolylineOptions getFloorPolylines(String floorCode) {
-        // previously drawindoorpaths
-        List<WalkingPoint> floorWalkingPoints = walkingPointsMap.get(floorCode);
-        PolylineOptions option = new PolylineOptions();
-        if (floorWalkingPoints == null) {
-            return option;
-        }
-        for (int i = 0; i < floorWalkingPoints.size() - 1; i++) {
-            LatLng point1 = floorWalkingPoints.get(i).getCoordinate().getLatLng();
-            LatLng point2 = floorWalkingPoints.get(i + 1).getCoordinate().getLatLng();
-            option.add(point1, point2);
-        }
-        return option
-                .width(10)
-                .pattern(ClassConstants.WALK_PATTERN)
-                .color(Color.rgb(147, 35, 57))
-                .visible(true);
-    }
-
-    public void drawOutdoorPath(List<DirectionWrapper> outdoorDirections, GoogleMap map) {
-        for (DirectionWrapper directionWrapper : outdoorDirections) {
-            int color = 0;
-            if (directionWrapper.getTransitDetails() != null) {
-                color = Color.parseColor(directionWrapper.getTransitDetails().line.color);
-            }
-            PolylineOptions polylineOptions = stylePolyLine(directionWrapper.getDirection().getTransportType(), color);
-            List<com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.LatLng> polyline = directionWrapper.getPolyline().decodePath();
-
-            for (int i = 0; i < polyline.size(); i++) {
-                polylineOptions.add(new LatLng(polyline.get(i).lat, polyline.get(i).lng));
-            }
-            map.addPolyline(polylineOptions);
-        }
-    }
-
-    public PolylineOptions stylePolyLine(String type, int color) {
-        PolylineOptions polylineOptions = new PolylineOptions().width(20);
-        if (type.equals(ClassConstants.WALKING)) {
-            polylineOptions.pattern(ClassConstants.WALK_PATTERN);
-        }
-        if (color != 0) {
-            polylineOptions.color(color);
-        } else {
-            polylineOptions.color(Color.rgb(147, 35, 57));
-        }
-        return polylineOptions;
-    }
-
-    public RoomModel getRoomByRoomCodeAndFloorCode(String roomCode, String floorCode){
-        return appDatabase.roomDao().getRoomByRoomCodeAndFloorCode(roomCode, floorCode);
-    }
-
-    public void parseWalkingPointList(AppDatabase appDatabase, RoomModel from, RoomModel to){
-        manipulateWalkingPoints.parseWalkingPointList(appDatabase, from, to, walkingPointsMap);
-    }
-
-    public List<WalkingPoint> getWalkingPointsList(){
-       return manipulateWalkingPoints.getWalkingPointsList();
-    }
-
 
 
     public void drawShuttlePath(GoogleMap mMap, String polyline) {
