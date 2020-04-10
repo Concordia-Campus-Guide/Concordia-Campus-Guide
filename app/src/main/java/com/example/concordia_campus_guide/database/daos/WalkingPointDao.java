@@ -1,16 +1,15 @@
 package com.example.concordia_campus_guide.database.daos;
 
-import com.example.concordia_campus_guide.database.converters.EnumToStringConverter;
-import com.example.concordia_campus_guide.models.PoiType;
-import com.example.concordia_campus_guide.models.PointType;
-import com.example.concordia_campus_guide.models.WalkingPoint;
-import java.util.List;
-
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.TypeConverters;
+
+import com.example.concordia_campus_guide.models.PoiType;
+import com.example.concordia_campus_guide.models.PointType;
+import com.example.concordia_campus_guide.models.WalkingPoint;
+
+import java.util.List;
 
 @Dao
 public interface WalkingPointDao {
@@ -26,9 +25,8 @@ public interface WalkingPointDao {
     @Query("SELECT * FROM walkingPoints WHERE  floor_code =:floorCode AND place_code =:placeCode")
     List<WalkingPoint> getAllWalkingPointsFromPlace(String floorCode, String placeCode);
 
-    @TypeConverters(EnumToStringConverter.class)
     @Query("SELECT * FROM walkingPoints WHERE floor_code =:floorCode AND point_type=:pointType")
-    List<WalkingPoint> getAllAccessPointsOnFloor(String floorCode, PointType pointType);
+    List<WalkingPoint> getAllAccessPointsOnFloor(String floorCode, @PointType String pointType);
 
     @Query("SELECT * FROM walkingPoints WHERE point_type=:pointType")
     List<WalkingPoint> getAllPointsForPointType(@PoiType String pointType);

@@ -9,7 +9,6 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
-import com.example.concordia_campus_guide.database.converters.EnumToStringConverter;
 import com.example.concordia_campus_guide.database.converters.IntegerListToStringConverter;
 
 import java.io.Serializable;
@@ -46,14 +45,13 @@ public  class WalkingPoint implements Serializable {
     private List<Integer> connectedPointsId;
 
     @ColumnInfo(name = "point_type")
-    @TypeConverters(EnumToStringConverter.class)
-    private PointType pointType;
+    private @PointType String pointType;
 
     @ColumnInfo(name = "place_code")
     private String placeCode;
 
 
-    public WalkingPoint(@NonNull Coordinates coordinate, @NonNull String floorCode, List<Integer> connectedPointsId, PointType pointType, String placeCode) {
+    public WalkingPoint(@NonNull Coordinates coordinate, @NonNull String floorCode, List<Integer> connectedPointsId, @PointType String pointType, String placeCode) {
         this.coordinate = coordinate;
         this.floorCode = floorCode;
         this.connectedPointsId = connectedPointsId;
@@ -62,7 +60,7 @@ public  class WalkingPoint implements Serializable {
     }
 
     @Ignore
-    public WalkingPoint(@NonNull int id,@NonNull Coordinates coordinate, @NonNull String floorCode, List<Integer> connectedPointsId, PointType pointType, String placeCode) {
+    public WalkingPoint(@NonNull int id,@NonNull Coordinates coordinate, @NonNull String floorCode, List<Integer> connectedPointsId, @PointType String pointType, String placeCode) {
         this.id = id;
         this.coordinate = coordinate;
         this.floorCode = floorCode;
@@ -106,11 +104,11 @@ public  class WalkingPoint implements Serializable {
 
     public void setConnectedPointsId(List<Integer> connectedPointsId) { this.connectedPointsId = connectedPointsId; }
 
-    public PointType getPointType() {
+    public @PointType String getPointType() {
         return pointType;
     }
 
-    public void setPointType(PointType pointType) {
+    public void setPointType(@PointType String pointType) {
         this.pointType = pointType;
     }
 
