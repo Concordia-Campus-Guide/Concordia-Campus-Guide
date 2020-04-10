@@ -1,6 +1,7 @@
 package com.example.concordia_campus_guide.InstrumentalTests;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 
 import androidx.test.filters.SmallTest;
@@ -8,11 +9,13 @@ import androidx.test.rule.ActivityTestRule;
 import androidx.test.rule.GrantPermissionRule;
 import androidx.test.runner.AndroidJUnit4;
 
+import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.activities.MainActivity;
 import com.example.concordia_campus_guide.database.AppDatabase;
-import com.example.concordia_campus_guide.view_models.LocationFragmentViewModel;
+import com.example.concordia_campus_guide.helper.DirectionsPolyLinesDrawer;
 import com.example.concordia_campus_guide.models.Coordinates;
 import com.example.concordia_campus_guide.models.RoomModel;
+import com.example.concordia_campus_guide.view_models.LocationFragmentViewModel;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import org.junit.Before;
@@ -24,6 +27,8 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
+
+import com.example.concordia_campus_guide.helper.PolygonsDrawer;
 
 @RunWith(AndroidJUnit4.class)
 @SmallTest
@@ -51,9 +56,10 @@ public class LocationFragmentInstrumentalTest {
 
     @Test
     public void createMarkerIcon(){
-        Bitmap bitmap1 = viewModel.createBitmapMarkerIcon("EV");
-        Bitmap bitmap2 = viewModel.createBitmapMarkerIcon("EV");
-        Bitmap bitmap3 = viewModel.createBitmapMarkerIcon("H");
+        PolygonsDrawer polygonsDrawer = new PolygonsDrawer();
+        Bitmap bitmap1 = polygonsDrawer.createBitmapMarkerIcon("EV");
+        Bitmap bitmap2 = polygonsDrawer.createBitmapMarkerIcon("EV");
+        Bitmap bitmap3 = polygonsDrawer.createBitmapMarkerIcon("H");
         assertNotNull(bitmap1);
         assertNotNull(bitmap2);
         assertNotNull(bitmap3);
@@ -65,8 +71,9 @@ public class LocationFragmentInstrumentalTest {
     public void getFloorPolylinesTest(){
         RoomModel roomFrom = new RoomModel(new Coordinates(-73.57907921075821, 45.49702057370776), "823", "H-8", "SGW");
         RoomModel roomTo = new RoomModel(new Coordinates(-73.57902321964502, 45.49699848270905), "927", "H-9", "SGW");
-        viewModel.parseWalkingPointList(appDatabase,roomFrom,roomTo);
-        PolylineOptions polylineOptions = viewModel.getFloorPolylines("H-9");
+        SharedPreferences preferences = appContext.getSharedPreferences(ClassConstants.SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        viewModel.parseWalkingPointList(appDatabase,preferences,roomFrom,roomTo);
+        PolylineOptions polylineOptions = viewModel.getFloorPlan().getFloorPolylines("H-9",viewModel.getWalkingPointsMap());
         assertEquals(10.0f,polylineOptions.getWidth());
         assertTrue(polylineOptions.isVisible());
         assertEquals("[Gap: length=20.0]",polylineOptions.getPattern().get(0).toString());
@@ -75,14 +82,10 @@ public class LocationFragmentInstrumentalTest {
 
     @Test
     public void stylePolyLineTest(){
-        PolylineOptions polylineOptions = viewModel.stylePolyLine("walking", 0);
+        DirectionsPolyLinesDrawer directionsPolyLinesDrawer = new DirectionsPolyLinesDrawer();
+        PolylineOptions polylineOptions = directionsPolyLinesDrawer.stylePolyLine("walking", 0);
         assertEquals("[Gap: length=20.0]",polylineOptions.getPattern().get(0).toString());
         assertEquals(-7134407,polylineOptions.getColor());
     }
-
-
-
-
-
 }
 
