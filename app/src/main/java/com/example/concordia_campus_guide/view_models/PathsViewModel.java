@@ -6,6 +6,7 @@ import com.example.concordia_campus_guide.adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.global.SelectingToFromState;
+import com.example.concordia_campus_guide.models.Building;
 import com.example.concordia_campus_guide.models.PathInfoCard;
 import com.example.concordia_campus_guide.models.Place;
 import com.example.concordia_campus_guide.models.PointType;
@@ -41,8 +42,9 @@ public class PathsViewModel extends ViewModel {
     public Place getEntrance(Place place) {
         if (place instanceof RoomModel) {
             String floorCode = ((RoomModel) place).getFloorCode();
-            String buildingCode = floorCode.substring(0, floorCode.indexOf('-')).toUpperCase();
-            return appDB.roomDao().getRoomByIdAndFloorCode("entrance", buildingCode + "-1");
+            Building building = appDB.buildingDao().getBuildingByBuildingCode(floorCode.substring(0, floorCode.indexOf('-')).toUpperCase());
+            String entranceFloor = building.getBuildingCode() + "-" + building.getEntranceFloor();
+            return appDB.roomDao().getRoomByIdAndFloorCode("entrance", entranceFloor);
         }
         return place;
     }

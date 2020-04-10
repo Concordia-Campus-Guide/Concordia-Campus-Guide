@@ -82,8 +82,8 @@ public class PathFinder {
 
         List<WalkingPoint> pointList = null;
         if (place instanceof Building) {
-            placeCode = ((Building) place).getBuildingCode();
-            pointList = appDatabase.walkingPointDao().getAllWalkingPointsFromPlace(placeCode + "-1", "entrance");
+            String entranceFloor = ((Building) place).getBuildingCode() + "-" + ((Building) place).getEntranceFloor();
+            pointList = appDatabase.walkingPointDao().getAllWalkingPointsFromPlace(entranceFloor, "entrance");
         } else if (place instanceof RoomModel) {
             //placeCode is not unique for Rooms, therefore we need to fetch the Walking point by searching for both floor code and place code
             floorCode = ((RoomModel) place).getFloorCode();
