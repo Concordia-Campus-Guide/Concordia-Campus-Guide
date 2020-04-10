@@ -3,13 +3,13 @@ package com.example.concordia_campus_guide.helper;
 import android.content.SharedPreferences;
 
 import com.example.concordia_campus_guide.ClassConstants;
-import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Models.Building;
-import com.example.concordia_campus_guide.Models.Floor;
-import com.example.concordia_campus_guide.Models.Place;
-import com.example.concordia_campus_guide.Models.PointType;
-import com.example.concordia_campus_guide.Models.RoomModel;
-import com.example.concordia_campus_guide.Models.WalkingPoint;
+import com.example.concordia_campus_guide.database.AppDatabase;
+import com.example.concordia_campus_guide.models.Building;
+import com.example.concordia_campus_guide.models.Floor;
+import com.example.concordia_campus_guide.models.Place;
+import com.example.concordia_campus_guide.models.PointType;
+import com.example.concordia_campus_guide.models.RoomModel;
+import com.example.concordia_campus_guide.models.WalkingPoint;
 
 import java.util.ArrayList;
 import java.util.Collections;
