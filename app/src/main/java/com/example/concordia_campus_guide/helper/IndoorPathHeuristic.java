@@ -40,7 +40,6 @@ public class IndoorPathHeuristic {
                             + getEuclideanDistance(accessPoint, destinationPoint);
             }
 
-            // TODO #160: Make sure to change the heuristic to reflect the distance to the nearest accessible point type
             accessPoint = getNearestAccessPointForFloor(currentPoint, PointType.ELEVATOR);
 
             // If the accessibility is not reduced, return the nearest access point that is accessible by everyone
