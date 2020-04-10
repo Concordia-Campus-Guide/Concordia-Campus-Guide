@@ -17,7 +17,7 @@ import java.util.List;
 
 public class PathsViewModel extends ViewModel {
 
-    double distanceBetweenPoints;
+    private double distanceBetweenPoints;
     private AppDatabase appDB;
     private ArrayList<PathInfoCard> infoCardList;
 
@@ -86,9 +86,9 @@ public class PathsViewModel extends ViewModel {
             WalkingPoint startWalkingPoint = walkingPointList.get(i);
             WalkingPoint endWalkingPoint = walkingPointList.get(i + 1);
             distanceBetweenPoints += getDistanceFromLatLonInKm(startWalkingPoint.getCoordinate().getLatitude(), startWalkingPoint.getCoordinate().getLongitude(), endWalkingPoint.getCoordinate().getLatitude(), startWalkingPoint.getCoordinate().getLongitude());
-            if (startWalkingPoint.getPointType() == PointType.CLASSROOM) {
+            if (startWalkingPoint.getPointType().equals(PointType.CLASSROOM)) {
                 addCardToList("Leave classroom", "Classroom");
-            } else if (startWalkingPoint.getPointType() == PointType.ENTRANCE) {
+            } else if (startWalkingPoint.getPointType().equals(PointType.ENTRANCE)) {
                 addCardToList("Walk towards entrance", "Entrance");
             }
             addIndoorDescriptionToList(startWalkingPoint, endWalkingPoint);
@@ -104,28 +104,28 @@ public class PathsViewModel extends ViewModel {
     }
 
     private void addIndoorDescriptionToList(WalkingPoint startWalkingPoint, WalkingPoint endWalkingPoint) {
-        PointType pt = endWalkingPoint.getPointType();
+        @PointType String pt = endWalkingPoint.getPointType();
         switch (pt) {
-            case ELEVATOR:
-                if (startWalkingPoint.getPointType() != PointType.ELEVATOR) {
+            case PointType.ELEVATOR:
+                if (!startWalkingPoint.getPointType().equals(PointType.ELEVATOR)) {
                     addCardToList("Walk towards elevator", "Elevator");
                 }
                 break;
-            case ENTRANCE:
+            case PointType.ENTRANCE:
                 addCardToList("Walk towards building entrance", "Entrance");
                 break;
-            case STAFF_ELEVATOR:
-                if (startWalkingPoint.getPointType() != PointType.STAFF_ELEVATOR) {
+            case PointType.STAFF_ELEVATOR:
+                if (!startWalkingPoint.getPointType().equals(PointType.STAFF_ELEVATOR)) {
                     addCardToList("Walk towards staff elevator", "Staff_Elevator");
                 }
                 break;
-            case STAIRS:
-                if (startWalkingPoint.getPointType() != PointType.STAIRS) {
+            case PointType.STAIRS:
+                if (!startWalkingPoint.getPointType().equals(PointType.STAIRS)) {
                     addCardToList("Walk towards stairs", "Stairs");
                 }
                 break;
-            case CLASSROOM:
-                if (startWalkingPoint.getPointType() != PointType.CLASSROOM) {
+            case PointType.CLASSROOM:
+                if (!startWalkingPoint.getPointType().equals(PointType.CLASSROOM)) {
                     addCardToList("Walk towards classroom " + endWalkingPoint.getPlaceCode(), "Classroom");
                 }
                 break;

@@ -70,7 +70,7 @@ public class IndoorPathHeuristic {
      * @param accessPointType
      * @return
      */
-    public WalkingPoint getNearestAccessPointForFloor(final WalkingPoint currentPoint, PointType accessPointType) {
+    public WalkingPoint getNearestAccessPointForFloor(final WalkingPoint currentPoint, @PointType String accessPointType) {
         final List<WalkingPoint> accessPtList = appDatabase.walkingPointDao()
                 .getAllAccessPointsOnFloor(currentPoint.getFloorCode(), accessPointType);
         return getClosestPointToCurrentPointFromList(currentPoint, accessPtList);

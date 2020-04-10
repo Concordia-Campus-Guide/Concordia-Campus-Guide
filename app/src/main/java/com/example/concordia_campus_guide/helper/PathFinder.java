@@ -126,13 +126,12 @@ public class PathFinder {
     }
 
     private boolean isWalkingPointAccessible(WalkingPoint point){
-        // TODO: #147 Use string def instead of an enum
-        String pointType = point.getPointType().name();
+        String pointType = point.getPointType();
         switch (pointType){
-            case "STAIRS":
+            case PointType.STAIRS:
                 return !isReducedAccessiblity;
-            case "STAFF_ELEVATOR":
-            case "STAFF_WASHROOM":
+            case PointType.STAFF_ELEVATOR:
+            case PointType.STAFF_WASHROOM:
                 return isStaffAccessiblity;
             default:
                 return true;

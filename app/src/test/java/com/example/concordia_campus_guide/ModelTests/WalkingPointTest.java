@@ -61,7 +61,7 @@ public class WalkingPointTest {
     }
     @Test
     public void getAndSetPointTypeTest() {
-        PointType pointType = walkingPoint.getPointType();
+        @PointType String pointType = walkingPoint.getPointType();
         walkingPoint.setPointType(PointType.ELEVATOR);
         assertEquals(walkingPoint.getPointType(), PointType.ELEVATOR);
         walkingPoint.setPointType(pointType);
