@@ -3,7 +3,6 @@ package com.example.concordia_campus_guide.view_models;
 import androidx.lifecycle.ViewModel;
 
 import com.example.concordia_campus_guide.adapters.DirectionWrapper;
-import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.global.SelectingToFromState;
 import com.example.concordia_campus_guide.models.Building;
@@ -17,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PathsViewModel extends ViewModel {
+
+    public static final int EARTH_RADIUS_KM = 6371;
 
     private double distanceBetweenPoints;
     private AppDatabase appDB;
@@ -35,8 +36,16 @@ public class PathsViewModel extends ViewModel {
         return SelectingToFromState.getTo();
     }
 
+    public String getDestinationLocationDisplayName(){
+        return getDestination().getDisplayName();
+    }
+
     public Place getInitialLocation() {
         return SelectingToFromState.getFrom();
+    }
+
+    public String getInitialLocationDisplayName(){
+        return getInitialLocation().getDisplayName();
     }
 
     public Place getEntrance(Place place) {
@@ -87,7 +96,7 @@ public class PathsViewModel extends ViewModel {
         for (int i = 0; i < walkingPointList.size() - 1; i++) {
             WalkingPoint startWalkingPoint = walkingPointList.get(i);
             WalkingPoint endWalkingPoint = walkingPointList.get(i + 1);
-            distanceBetweenPoints += getDistanceFromLatLonInKm(startWalkingPoint.getCoordinate().getLatitude(), startWalkingPoint.getCoordinate().getLongitude(), endWalkingPoint.getCoordinate().getLatitude(), startWalkingPoint.getCoordinate().getLongitude());
+            distanceBetweenPoints += getDistanceFromLatLonInKm(startWalkingPoint.getLatitude(), startWalkingPoint.getLongitude(), endWalkingPoint.getLatitude(), startWalkingPoint.getLongitude());
             if (startWalkingPoint.getPointType().equals(PointType.CLASSROOM)) {
                 addCardToList("Leave classroom", "Classroom");
             } else if (startWalkingPoint.getPointType().equals(PointType.ENTRANCE)) {
@@ -146,7 +155,7 @@ public class PathsViewModel extends ViewModel {
     }
 
     public double getDistanceFromLatLonInKm(double lat1, double lon1, double lat2, double lon2) {
-        double earthRadius = ClassConstants.EARTH_RADIUS_KM; // Radius of the earth in km
+        double earthRadius = EARTH_RADIUS_KM; // Radius of the earth in km
         double dLat = deg2rad(lat2 - lat1);  // deg2rad below
         double dLon = deg2rad(lon2 - lon1);
         double angle =

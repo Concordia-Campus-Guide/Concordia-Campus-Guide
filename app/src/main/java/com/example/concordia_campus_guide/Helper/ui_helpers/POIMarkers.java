@@ -27,7 +27,7 @@ public class POIMarkers {
     public void addPOItoMap(WalkingPoint poi, int position, LocationFragmentViewModel locationFragmentViewModel,GoogleMap googleMap) {
         if (poi != null) {
 
-            LatLng latLng = new LatLng(poi.getCoordinate().getLongitude(), poi.getCoordinate().getLatitude());
+            LatLng latLng = new LatLng(poi.getLongitude(), poi.getLatitude());
 
             if (position == 1)
                 zoomInLocation(latLng,googleMap);

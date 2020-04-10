@@ -30,10 +30,6 @@ public class Coordinates implements Serializable {
         return super.hashCode();
     }
 
-    public List<Double> toListDouble(){
-        return new ArrayList<>(Arrays.asList(latitude, longitude));
-    }
-
     public List<Double> toListDoubleLongLat(){
         return new ArrayList<>(Arrays.asList(longitude, latitude));
     }

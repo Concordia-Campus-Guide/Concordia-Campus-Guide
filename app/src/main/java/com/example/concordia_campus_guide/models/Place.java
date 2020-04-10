@@ -38,6 +38,14 @@ public abstract class Place {
         return centerCoordinates;
     }
 
+    public double getLatitude(){
+        return centerCoordinates.getLatitude();
+    }
+
+    public double getLongitude(){
+        return centerCoordinates.getLongitude();
+    }
+
     public LatLng getCenterCoordinatesLatLng() {
         return new LatLng(centerCoordinates.latitude, centerCoordinates.longitude);
     }

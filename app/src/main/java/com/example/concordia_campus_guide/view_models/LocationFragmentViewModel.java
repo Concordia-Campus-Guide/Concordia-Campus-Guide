@@ -92,21 +92,19 @@ public class LocationFragmentViewModel extends ViewModel {
         floorPlan.setFloorPlan(groundOverlay,buildingCode,floor,mMap,walkingPointsMap);
     }
 
-
     public LatLng getZoomLocation(String location) {
         return buildingCodeMap.getZoomLocation(location);
     }
 
     public Building getBuildingFromCode(String buildingCode) {
-        return buildingCodeMap.getBuildings().get(buildingCode);
+        return buildingCodeMap.getBuildingFromCode(buildingCode);
     }
 
     public Map<String, Building> getBuildings() {
         return buildingCodeMap.getBuildings();
     }
+
     public void setBuildings(Map<String, Building> buildings){ buildingCodeMap.setBuildings(buildings);}
-
-
 
     public LatLng getInitialZoomLocation() {
         return initialZoomLocation;
@@ -150,8 +148,6 @@ public class LocationFragmentViewModel extends ViewModel {
     public List<WalkingPoint> getWalkingPointsList(){
        return manipulateWalkingPoints.getWalkingPointsList();
     }
-
-
 
     public void drawShuttlePath(GoogleMap mMap, String polyline) {
         List<LatLng> route = PolyUtil.decode(polyline);
