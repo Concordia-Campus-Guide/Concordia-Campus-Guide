@@ -1,7 +1,7 @@
 package com.example.concordia_campus_guide.ConvertersTest;
 
-import com.example.concordia_campus_guide.Database.Converters.EnumToStringConverter;
-import com.example.concordia_campus_guide.Models.PointType;
+import com.example.concordia_campus_guide.database.converters.EnumToStringConverter;
+import com.example.concordia_campus_guide.models.PointType;
 
 import org.junit.Before;
 import org.junit.Test;

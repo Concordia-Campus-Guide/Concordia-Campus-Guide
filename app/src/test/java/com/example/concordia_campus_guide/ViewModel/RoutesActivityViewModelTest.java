@@ -1,15 +1,15 @@
 package com.example.concordia_campus_guide.ViewModel;
 
-import com.example.concordia_campus_guide.ViewModels.RoutesActivityViewModel;
+import com.example.concordia_campus_guide.view_models.RoutesActivityViewModel;
 import com.example.concordia_campus_guide.ClassConstants;
-import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Database.Daos.ShuttleDao;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsResult;
+import com.example.concordia_campus_guide.database.AppDatabase;
+import com.example.concordia_campus_guide.database.daos.ShuttleDao;
+import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.DirectionsResult;
 import com.example.concordia_campus_guide.ModelTests.TestUtils.TestUtils;
 import com.example.concordia_campus_guide.ModelTests.TestUtils.TestUtilsRoutes;
-import com.example.concordia_campus_guide.Models.Building;
-import com.example.concordia_campus_guide.Models.Routes.Route;
-import com.example.concordia_campus_guide.Models.Shuttle;
+import com.example.concordia_campus_guide.models.Building;
+import com.example.concordia_campus_guide.models.routes.Route;
+import com.example.concordia_campus_guide.models.Shuttle;
 
 import org.junit.Before;
 import org.junit.Test;

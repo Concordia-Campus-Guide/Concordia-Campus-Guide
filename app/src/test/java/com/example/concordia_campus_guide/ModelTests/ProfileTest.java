@@ -1,7 +1,7 @@
 package com.example.concordia_campus_guide.ModelTests;
 
-import com.example.concordia_campus_guide.Models.Language;
-import com.example.concordia_campus_guide.Models.Profile;
+import com.example.concordia_campus_guide.models.Language;
+import com.example.concordia_campus_guide.models.Profile;
 
 import org.junit.Before;
 import org.junit.Test;
