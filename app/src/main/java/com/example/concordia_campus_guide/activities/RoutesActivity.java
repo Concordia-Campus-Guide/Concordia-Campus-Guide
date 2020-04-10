@@ -152,7 +152,6 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
         carButton.setSelected(true);
     }
 
-    // TODO: #180
     public void onClickDisability(View v) {
         disabilityButton.setSelected(!disabilityButton.isSelected());
     }

@@ -96,8 +96,8 @@ public class PathFinderTest {
     @Test
     public void getWalkingPointCorrespondingToPlaceForBuildingTest(){
         Building building = new Building( new Coordinates(45.49739588, -73.5787094), new ArrayList<String>(Arrays.asList("8","9")), 68, 68, 34, null, "H", null, null, null, null, null);
-
-        when(mockAppDb.walkingPointDao().getAllWalkingPointsFromPlace(building.getBuildingCode()+"-1", "entrance")).thenReturn(Arrays.asList(entranceHBuildingWalkingPoint));
+        String entranceFloor = building.getBuildingCode() + "-" + building.getEntranceFloor();
+        when(mockAppDb.walkingPointDao().getAllWalkingPointsFromPlace(entranceFloor, "entrance")).thenReturn(Arrays.asList(entranceHBuildingWalkingPoint));
 
         assertEquals(entranceHBuildingWalkingPoint,pathFinder.getWalkingPointCorrespondingToPlace(building));
     }

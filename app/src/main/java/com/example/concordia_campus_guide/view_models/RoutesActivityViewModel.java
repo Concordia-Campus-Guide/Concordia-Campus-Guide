@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.DirectionsResult;
+import com.example.concordia_campus_guide.models.Building;
 import com.example.concordia_campus_guide.models.Place;
 import com.example.concordia_campus_guide.models.RoomModel;
 import com.example.concordia_campus_guide.models.routes.Route;
@@ -50,8 +51,9 @@ public class RoutesActivityViewModel extends ViewModel {
     public Place getEntrance(Place place) {
         if (place instanceof RoomModel) {
             String floorCode = ((RoomModel) place).getFloorCode();
-            String buildingCode = floorCode.substring(0, floorCode.indexOf('-')).toUpperCase();
-            return appDB.roomDao().getRoomByIdAndFloorCode("entrance", buildingCode + "-1");
+            Building building = appDB.buildingDao().getBuildingByBuildingCode(floorCode.substring(0, floorCode.indexOf('-')).toUpperCase());
+            String entranceFloor = building.getBuildingCode() + "-" + building.getEntranceFloor();
+            return appDB.roomDao().getRoomByIdAndFloorCode("entrance", entranceFloor);
         }
 
         return place;
