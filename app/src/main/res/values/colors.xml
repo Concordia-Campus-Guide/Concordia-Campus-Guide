@@ -18,9 +18,9 @@
     <color name="fadedBlack">#212121</color>
 
     <!-- These are strings and not colors because I'm using them for string equality checks-->
-    <string name="subwayBlue">#0074b9</string>
-    <string name="subwayOrange">#f27f2f</string>
-    <string name="subwayYellow">#f2d101</string>
-    <string name="subwayGreen">#00a556</string>
+    <string name="subwayBlue" translatable="false">#0074b9</string>
+    <string name="subwayOrange" translatable="false">#f27f2f</string>
+    <string name="subwayYellow" translatable="false">#f2d101</string>
+    <string name="subwayGreen" translatable="false">#00a556</string>
 
 </resources>
