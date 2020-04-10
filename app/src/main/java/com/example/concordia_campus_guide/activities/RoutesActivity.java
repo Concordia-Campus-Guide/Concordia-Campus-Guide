@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,8 +19,8 @@ import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.global.SelectingToFromState;
 import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.DirectionsResult;
 import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.DirectionsRoute;
-import com.example.concordia_campus_guide.helper.routesHelpers.DirectionsApiDataRetrieval;
-import com.example.concordia_campus_guide.helper.routesHelpers.UrlBuilder;
+import com.example.concordia_campus_guide.helper.routes_helpers.DirectionsApiDataRetrieval;
+import com.example.concordia_campus_guide.helper.routes_helpers.UrlBuilder;
 import com.example.concordia_campus_guide.helper.ViewModelFactory;
 import com.example.concordia_campus_guide.interfaces.DirectionsApiCallbackListener;
 import com.example.concordia_campus_guide.models.Coordinates;
@@ -213,25 +212,22 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
         // Android adapter for list view
         adapter = new RoutesAdapter(this, R.layout.list_routes, mViewModel.getRouteOptions());
         allRoutes.setAdapter(adapter);
-        allRoutes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (carButton.isSelected() || transitButton.isSelected() || walkButton.isSelected()) {
+        allRoutes.setOnItemClickListener((adapterView, view, i, l) -> {
+            if (carButton.isSelected() || transitButton.isSelected() || walkButton.isSelected()) {
+                Intent openPaths = new Intent(RoutesActivity.this,
+                        PathsActivity.class);
+                DirectionsRoute directionsResult = mViewModel.getDirectionsResult().routes[i];
+                openPaths.putExtra("directionsResult", directionsResult);
+                openPaths.putExtra("shuttle", false);
+                startActivity(openPaths);
+            } else {
+                if (mViewModel.getShuttles() == null) {
+                    Toast.makeText(getApplicationContext(), "Paths view for Shuttle route is not available if no shuttles exist.", Toast.LENGTH_SHORT).show();
+                } else {
                     Intent openPaths = new Intent(RoutesActivity.this,
                             PathsActivity.class);
-                    DirectionsRoute directionsResult = mViewModel.getDirectionsResult().routes[i];
-                    openPaths.putExtra("directionsResult", directionsResult);
-                    openPaths.putExtra("shuttle", false);
+                    openPaths.putExtra("shuttle", true);
                     startActivity(openPaths);
-                } else {
-                    if (mViewModel.getShuttles() == null) {
-                        Toast.makeText(getApplicationContext(), "Paths view for Shuttle route is not available if no shuttles exist.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Intent openPaths = new Intent(RoutesActivity.this,
-                                PathsActivity.class);
-                        openPaths.putExtra("shuttle", true);
-                        startActivity(openPaths);
-                    }
                 }
             }
         });

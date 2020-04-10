@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -107,13 +106,10 @@ public class SearchActivity extends AppCompatActivity {
             openRoutesPage(place);
         });
 
-        currentLocationRow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
-                if(myCurrentLocation != null){
-                    openRoutesPage(new MyCurrentPlace(SearchActivity.this, myCurrentLocation.getLongitude(), myCurrentLocation.getLatitude()));
-                }
+        currentLocationRow.setOnClickListener(view -> {
+            Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
+            if(myCurrentLocation != null){
+                openRoutesPage(new MyCurrentPlace(SearchActivity.this, myCurrentLocation.getLongitude(), myCurrentLocation.getLatitude()));
             }
         });
 
@@ -187,11 +183,6 @@ public class SearchActivity extends AppCompatActivity {
 
     private void setBackButtonOnClick() {
         ImageButton backButton = this.findViewById(R.id.back);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        backButton.setOnClickListener(v -> finish());
     }
 }

@@ -191,12 +191,9 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     }
 
     private void setCurrentLocationBtn() {
-        myLocationBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mFloorPickerGv.setVisibility(View.GONE);
-                popUpRequestPermission();
-            }
+        myLocationBtn.setOnClickListener(v -> {
+            mFloorPickerGv.setVisibility(View.GONE);
+            popUpRequestPermission();
         });
     }
 
@@ -251,24 +248,14 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
      * The purpose of this method is to handle the "on click" of Loyala button
      */
     private void setupLoyolaBtnClickListener() {
-        loyolaBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                zoomInLocation(mViewModel.getLoyolaZoomLocation());
-            }
-        });
+        loyolaBtn.setOnClickListener(view -> zoomInLocation(mViewModel.getLoyolaZoomLocation()));
     }
 
     /**
      * The purpose of this method is to handle the "on click" of SGW button
      */
     private void setupSGWBtnClickListener() {
-        sgwBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                zoomInLocation(mViewModel.getSGWZoomLocation());
-            }
-        });
+        sgwBtn.setOnClickListener(view -> zoomInLocation(mViewModel.getSGWZoomLocation()));
     }
 
     /**

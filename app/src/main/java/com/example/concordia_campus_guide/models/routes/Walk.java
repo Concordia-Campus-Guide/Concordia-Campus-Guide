@@ -2,7 +2,7 @@ package com.example.concordia_campus_guide.models.routes;
 
 import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.DirectionsStep;
 
-public class Walk extends TransportType {
+public class Walk implements TransportType {
     private String duration;
 
     public Walk(DirectionsStep step) {

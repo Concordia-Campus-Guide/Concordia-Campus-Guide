@@ -8,7 +8,6 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CalendarContract;
@@ -22,11 +21,15 @@ import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.models.CalendarEvent;
 import com.example.concordia_campus_guide.R;
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static android.content.Context.MODE_PRIVATE;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+import static android.provider.CalendarContract.Events.DESCRIPTION;
+import static android.provider.CalendarContract.Instances.DTSTART;
+import static android.provider.CalendarContract.Instances.EVENT_ID;
+import static android.provider.CalendarContract.Instances.EVENT_LOCATION;
+import static android.provider.CalendarContract.Instances.TITLE;
 
 public class CalendarViewModel extends AndroidViewModel {
     Context context;
@@ -45,10 +48,10 @@ public class CalendarViewModel extends AndroidViewModel {
     private static final int PROJECTION_START_INDEX = 3;
 
     protected static final String[] INSTANCE_PROJECTION = new String[] {
-            Instances.EVENT_ID,
-            Instances.TITLE,
-            Instances.EVENT_LOCATION,
-            Instances.DTSTART
+            EVENT_ID,
+            TITLE,
+            EVENT_LOCATION,
+            DTSTART
     };
 
     public CalendarEvent getEvent(AppCompatActivity activity) {
@@ -126,7 +129,7 @@ public class CalendarViewModel extends AndroidViewModel {
         String floorCode = eventLocation.split(",")[0].trim();
         String description = "<a href=\"app://conumaps?room="+roomCode+"&floor="+floorCode+"\">Go to ConUMaps</a>";
 
-        values.put(CalendarContract.Events.DESCRIPTION, description);
+        values.put(DESCRIPTION, description);
 
         Uri uri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventId);
 
