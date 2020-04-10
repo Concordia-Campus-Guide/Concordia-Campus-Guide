@@ -45,6 +45,10 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
     private Place initialLocation;
     private Place destinationLocation;
 
+    // Encoded polyline for shuttle path
+    public static final String SHUTTLE_POLYLINE_SGW_LOY = "icutGlxa`MpCzBj@VNDv@T~BkHzC_JrAgEz@x@tJlJ`DvC~@|@`AtAf@_A\\u@l@_@ZIZAb@F\\N`@^tChEjHlL`A`BvDfHV`@FDTDdA~Bz@|An@jA|FnKfPfZ~ClFn@jA`@r@d@n@lBxBx@h@t@t@Zr@VXp@f@j@TbAXnAd@fCdAdAb@\\Xx@rAZb@Z\\v@r@x@t@x@nAn@zAZr@vBzCJLJBbD|ErApBJ\\@N?Jv@Zj@n@hDnFx@rAnApERZp@dBRb@vBjDfBrCVn@Rn@Nx@jBpJXpAZx@n@~AhAjCDh@Z|@Pt@Fb@?h@CtAEfA@h@Fr@f@jA`AvB~BfDHJPFr@zArAfDRf@Pr@^jBXrBnBfPj@rDb@fBNf@^bAPb@@Xb@hAQ\\sBjGuBhGeDnJI\\HPtDzInDhIzClHpBtEZj@lA`Dv@`BNXnAdBJTdDdE";
+    public static final String SHUTTLE_POLYLINE_LOY_SGW = "armtGrmm`MtCjDbBpBhAnAp@l@`C`BnDjCvAqFj@gBvAeG|A}DLM{@kEy@uEoAuFa@iAsAaCq@kAY[a@iAIoAhBrA~@l@dCzAbBfAxDtBTDx@B~@Cf@Kb@Sx@k@R[HY?]EMi@_A_@u@yBgE[m@uAqBsAuBuEoHu@eA{AcCK[EKC]?OLOd@u@Va@DO@MAQEMgDsFsBkDQWkAaBkBeCqDmFWSOEeAuByA{Cc@}@cCyFuAyD_BwEiHsWu@eCs@cCSu@CCWo@_BmF{D_MiDeKwC}IeBoEiBmE}@cB{BkDy@aAs@y@_@c@c@[}BcB}@aAkCcBsCoAa@Q[_@m@q@_@]_@Sa@S_C}@_D}@{IeCiCw@eBq@oAs@qA{@{AoAwAyA[a@m@u@_@q@yAmCyAqCwCmEoAyBaLaTsHoN}BsDAa@_@y@wCqFo@mAeAsBW_@SWk@_@a@QaAc@]Uc@k@yDuFsBkCi@m@QO]Se@Is@@u@TSJc@Z[\\SVsBgBiF_FaIsHoCiCKXcAbCcCxGyBnFgB~EpAfA";
+
     private boolean shuttleSelected;
     int counter = 1;
 
@@ -77,8 +81,8 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
         getBundleInformation();
         setBackButtonOnClickListener();
 
-        locationFragment.setDifferentInitialView(new LatLng(initialLocation.getCenterCoordinates().getLatitude(),
-                initialLocation.getCenterCoordinates().getLongitude()));
+        locationFragment.setDifferentInitialView(new LatLng(initialLocation.getLatitude(),
+                initialLocation.getLongitude()));
     }
 
     private void getBundleInformation() {
@@ -93,11 +97,8 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
         final TextView initialLocationTv = findViewById(R.id.path_fromText);
         final TextView destinationTv = findViewById(R.id.path_toText);
 
-        initialLocation = mViewModel.getInitialLocation();
-        destinationLocation = mViewModel.getDestination();
-
-        initialLocationTv.setText(initialLocation.getDisplayName());
-        destinationTv.setText(destinationLocation.getDisplayName());
+        initialLocationTv.setText(mViewModel.getInitialLocationDisplayName());
+        destinationTv.setText(mViewModel.getDestinationLocationDisplayName());
     }
 
     private void returnToSelectRoute() {
@@ -216,10 +217,10 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
     }
 
     public void getOutdoorDirections(final Place from, final Place to) {
-        final LatLng fromLatLong = new LatLng(from.getCenterCoordinates().getLatitude(),
-                from.getCenterCoordinates().getLongitude());
-        final LatLng toLatLong = new LatLng(to.getCenterCoordinates().getLatitude(),
-                to.getCenterCoordinates().getLongitude());
+        final LatLng fromLatLong = new LatLng(from.getLatitude(),
+                from.getLongitude());
+        final LatLng toLatLong = new LatLng(to.getLatitude(),
+                to.getLongitude());
 
         final String url = UrlBuilder.build(fromLatLong, toLatLong, ClassConstants.WALKING,
                 getBaseContext().getResources().getConfiguration().getLocales().get(0));
@@ -243,8 +244,8 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
     }
 
     public void drawShuttlePath() {
-        final String polyline = initialLocation.getCampus().equals("SGW") ? ClassConstants.SHUTTLE_POLYLINE_SGW_LOY
-                : ClassConstants.SHUTTLE_POLYLINE_LOY_SGW;
+        final String polyline = initialLocation.getCampus().equals("SGW") ? SHUTTLE_POLYLINE_SGW_LOY
+                : SHUTTLE_POLYLINE_LOY_SGW;
         locationFragment.setShuttlePaths(polyline);
     }
 }
