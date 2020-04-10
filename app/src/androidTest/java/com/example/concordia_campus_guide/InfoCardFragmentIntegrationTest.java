@@ -4,7 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
-import com.example.concordia_campus_guide.Activities.MainActivity;
+import com.example.concordia_campus_guide.activities.MainActivity;
 
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.rule.ActivityTestRule;

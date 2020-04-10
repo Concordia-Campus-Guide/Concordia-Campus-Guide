@@ -1,15 +1,6 @@
 package com.example.concordia_campus_guide.ModelTests.TestUtils;
 
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.Distance;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.Duration;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TransitDetails;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TransitLine;
-import com.example.concordia_campus_guide.Models.Direction;
-import com.example.concordia_campus_guide.Models.Routes.Route;
-import com.example.concordia_campus_guide.Models.Routes.Walk;
-import com.example.concordia_campus_guide.Models.Shuttle;
-import com.google.android.gms.maps.model.LatLng;
+import com.example.concordia_campus_guide.models.Shuttle;
 
 import java.util.Arrays;
 

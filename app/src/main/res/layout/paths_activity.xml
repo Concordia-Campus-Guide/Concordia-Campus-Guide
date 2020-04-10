@@ -5,7 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.PathsActivity">
+    tools:context=".activities.PathsActivity">
 
 
     <com.google.android.material.appbar.AppBarLayout
@@ -92,7 +92,7 @@
 
     <fragment
         android:id="@+id/pathLocationFragment"
-        android:name="com.example.concordia_campus_guide.Fragments.LocationFragment"
+        android:name="com.example.concordia_campus_guide.fragments.LocationFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

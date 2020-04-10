@@ -1,7 +1,7 @@
 package com.example.concordia_campus_guide;
 
-import com.example.concordia_campus_guide.Models.WalkingPoint;
-import com.example.concordia_campus_guide.Models.WalkingPoints;
+import com.example.concordia_campus_guide.models.WalkingPoint;
+import com.example.concordia_campus_guide.models.WalkingPoints;
 import com.google.gson.Gson;
 
 import java.io.IOException;
