@@ -8,9 +8,9 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 
 import com.example.concordia_campus_guide.ClassConstants;
-import com.example.concordia_campus_guide.Global.ApplicationState;
-import com.example.concordia_campus_guide.Models.Building;
-import com.example.concordia_campus_guide.Models.Coordinates;
+import com.example.concordia_campus_guide.global.ApplicationState;
+import com.example.concordia_campus_guide.models.Building;
+import com.example.concordia_campus_guide.models.Coordinates;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
@@ -105,7 +105,6 @@ public class DrawPolygons {
         return new Building(centerPos, floorsAvailable, buildingWidth, buildingHeight, buildingBearing, null, buildingCode, null, null, null, null, null);
     }
 
-
     public List<String> getFloorsFromBuildingFromGeoJsonFeature(GeoJsonFeature feature) {
         List<String> floorsAvailable = null;
 
@@ -114,7 +113,6 @@ public class DrawPolygons {
 
         return floorsAvailable;
     }
-
 
     public Coordinates getCenterPositionBuildingFromGeoJsonFeature(GeoJsonFeature feature) {
         String[] coordinatesString = feature.getProperty("center").split(", ");
@@ -134,7 +132,6 @@ public class DrawPolygons {
         geoJsonPolygonStyle.setStrokeWidth(6);
         return geoJsonPolygonStyle;
     }
-
 
     /**
      * The purpose of this method is to add a marker on the specified building.
@@ -179,5 +176,4 @@ public class DrawPolygons {
 
         return bitmap;
     }
-
 }

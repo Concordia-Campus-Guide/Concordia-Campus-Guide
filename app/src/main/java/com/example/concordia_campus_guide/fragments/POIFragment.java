@@ -12,11 +12,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.concordia_campus_guide.adapters.PointOfInterestVPAdapter;
-import com.example.concordia_campus_guide.view_models.LocationFragmentViewModel;
 import com.example.concordia_campus_guide.helper.ViewModelFactory;
 import com.example.concordia_campus_guide.interfaces.OnPOIClickListener;
 import com.example.concordia_campus_guide.models.PoiType;
 import com.example.concordia_campus_guide.R;
+import com.example.concordia_campus_guide.view_models.LocationFragmentViewModel;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 

@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.Helper;
+package com.example.concordia_campus_guide.helper;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

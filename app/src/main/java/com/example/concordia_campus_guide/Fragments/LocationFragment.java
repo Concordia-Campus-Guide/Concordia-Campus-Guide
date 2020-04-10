@@ -1,6 +1,7 @@
-package com.example.concordia_campus_guide.Fragments.LocationFragment;
+package com.example.concordia_campus_guide.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,23 +17,25 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.concordia_campus_guide.Activities.MainActivity;
-import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
-import com.example.concordia_campus_guide.Adapters.FloorPickerAdapter;
+import android.content.Context;
+import com.example.concordia_campus_guide.activities.MainActivity;
+import com.example.concordia_campus_guide.adapters.DirectionWrapper;
+import com.example.concordia_campus_guide.adapters.FloorPickerAdapter;
 import com.example.concordia_campus_guide.ClassConstants;
-import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Helper.CurrentLocation;
-import com.example.concordia_campus_guide.Helper.CurrentLocationPermissionRequest;
-import com.example.concordia_campus_guide.Helper.DrawDirectionsPolyLines;
-import com.example.concordia_campus_guide.Helper.UIHelpers.POIMarkers;
-import com.example.concordia_campus_guide.Helper.UIHelpers.RoomMarkers;
-import com.example.concordia_campus_guide.Helper.ViewModelFactory;
-import com.example.concordia_campus_guide.Interfaces.OnFloorPickerOnClickListener;
-import com.example.concordia_campus_guide.Models.Building;
-import com.example.concordia_campus_guide.Models.Place;
-import com.example.concordia_campus_guide.Models.RoomModel;
-import com.example.concordia_campus_guide.Models.WalkingPoint;
+import com.example.concordia_campus_guide.database.AppDatabase;
+import com.example.concordia_campus_guide.helper.CurrentLocation;
+import com.example.concordia_campus_guide.helper.CurrentLocationPermissionRequest;
+import com.example.concordia_campus_guide.helper.DrawDirectionsPolyLines;
+import com.example.concordia_campus_guide.helper.uiHelpers.POIMarkers;
+import com.example.concordia_campus_guide.helper.uiHelpers.RoomMarkers;
+import com.example.concordia_campus_guide.helper.ViewModelFactory;
+import com.example.concordia_campus_guide.interfaces.OnFloorPickerOnClickListener;
+import com.example.concordia_campus_guide.models.Building;
+import com.example.concordia_campus_guide.models.Place;
+import com.example.concordia_campus_guide.models.RoomModel;
+import com.example.concordia_campus_guide.models.WalkingPoint;
 import com.example.concordia_campus_guide.R;
+import com.example.concordia_campus_guide.view_models.LocationFragmentViewModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -297,7 +300,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         loyolaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                zoomInLocation(mViewModel.getZoomLocation(ClassConstants.loyolaCenterBuildingLabel));
+                zoomInLocation(mViewModel.getZoomLocation(ClassConstants.LOYOLA_CENTER_BUILDING_LABEL));
             }
         });
     }
@@ -309,7 +312,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         sgwBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                zoomInLocation(mViewModel.getZoomLocation(ClassConstants.sgwCenterBuildingLabel));
+                zoomInLocation(mViewModel.getZoomLocation(ClassConstants.SGW_CENTER_BUILDING_LABEL));
             }
         });
     }
@@ -356,7 +359,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     }
 
     public void setIndoorPaths(Place from, Place to) {
-        mViewModel.parseWalkingPointList(AppDatabase.getInstance(getContext()), (RoomModel) from, (RoomModel) to);
+        SharedPreferences preferences = getActivity().getSharedPreferences(ClassConstants.SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        mViewModel.parseWalkingPointList(AppDatabase.getInstance(getContext()),preferences, (RoomModel) from, (RoomModel) to);
     }
 
     public void drawOutdoorPaths(final List<DirectionWrapper> outdoorDirections) {

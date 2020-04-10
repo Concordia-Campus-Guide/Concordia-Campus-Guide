@@ -1,18 +1,12 @@
-package com.example.concordia_campus_guide.Helper.UIHelpers;
-
-import android.app.Application;
-import android.content.ContentValues;
-import android.content.Context;
+package com.example.concordia_campus_guide.helper.uiHelpers;
 
 import com.example.concordia_campus_guide.ClassConstants;
-import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Fragments.LocationFragment.LocationFragmentViewModel;
-import com.example.concordia_campus_guide.Global.ApplicationState;
-import com.example.concordia_campus_guide.Helper.CurrentLocation;
-import com.example.concordia_campus_guide.Helper.POIIcon;
-import com.example.concordia_campus_guide.Models.PoiType;
-import com.example.concordia_campus_guide.Models.RoomModel;
-import com.example.concordia_campus_guide.Models.WalkingPoint;
+import com.example.concordia_campus_guide.database.AppDatabase;
+import com.example.concordia_campus_guide.view_models.LocationFragmentViewModel;
+import com.example.concordia_campus_guide.global.ApplicationState;
+import com.example.concordia_campus_guide.models.PoiType;
+import com.example.concordia_campus_guide.models.RoomModel;
+import com.example.concordia_campus_guide.models.WalkingPoint;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;

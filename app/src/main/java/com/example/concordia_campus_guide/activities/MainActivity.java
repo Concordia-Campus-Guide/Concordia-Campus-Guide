@@ -1,7 +1,6 @@
 package com.example.concordia_campus_guide.activities;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -34,6 +33,7 @@ import com.example.concordia_campus_guide.fragments.POIFragment;
 import com.example.concordia_campus_guide.fragments.SmallInfoCardFragment;
 import com.example.concordia_campus_guide.global.ApplicationState;
 import com.example.concordia_campus_guide.global.SelectingToFromState;
+import com.example.concordia_campus_guide.helper.CurrentLocation;
 import com.example.concordia_campus_guide.helper.LocaleHelper;
 import com.example.concordia_campus_guide.helper.Notification;
 import com.example.concordia_campus_guide.models.Buildings;
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Toolbar myToolbar;
 
     private CurrentLocation currentLocation;
-
+    private CalendarViewModel calendarViewModel;
     // Side Menu Toggle Buttons
     private CompoundButton staffToggle;
     private CompoundButton accessibilityToggle;

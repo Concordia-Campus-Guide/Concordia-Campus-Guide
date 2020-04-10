@@ -4,7 +4,6 @@ import com.example.concordia_campus_guide.activities.MainActivity;
 import com.example.concordia_campus_guide.view_models.RoutesActivityViewModel;
 import com.example.concordia_campus_guide.view_models.SearchActivityViewModel;
 import com.example.concordia_campus_guide.view_models.InfoCardFragmentViewModel;
-import com.example.concordia_campus_guide.view_models.LocationFragmentViewModel;
 import com.example.concordia_campus_guide.helper.ViewModelFactory;
 import org.junit.Before;
 import org.junit.Rule;

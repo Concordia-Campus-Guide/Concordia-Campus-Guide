@@ -1,7 +1,7 @@
 package com.example.concordia_campus_guide.Helper;
 
 import com.example.concordia_campus_guide.ClassConstants;
-import com.example.concordia_campus_guide.Models.Building;
+import com.example.concordia_campus_guide.models.Building;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.HashMap;
