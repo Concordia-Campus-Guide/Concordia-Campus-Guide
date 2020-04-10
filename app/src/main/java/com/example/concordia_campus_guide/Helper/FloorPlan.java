@@ -35,8 +35,6 @@ public class FloorPlan {
         roomsInAFloor = new RoomsInAFloor();
     }
 
-
-
     /**
      * @param buildingCode it represents which building we will be covering
      * @return Int of drawable resource's bitmap representation
@@ -79,8 +77,4 @@ public class FloorPlan {
                 .color(Color.rgb(147, 35, 57))
                 .visible(true);
     }
-
-
-
-
 }

@@ -1,13 +1,11 @@
-package com.example.concordia_campus_guide.Helper;
+package com.example.concordia_campus_guide.helper;
 
-import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.models.Building;
 import com.google.android.gms.maps.model.LatLng;
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class BuildingsAndTheirCode {
+public class BuildingCodeMap {
     private Map<String, Building> buildings = new HashMap<>();
 
     public Building getBuildingFromCode(String buildingCode) {

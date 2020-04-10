@@ -9,7 +9,6 @@ import com.example.concordia_campus_guide.models.Building;
 import com.example.concordia_campus_guide.models.Coordinates;
 import com.example.concordia_campus_guide.models.PoiType;
 import com.example.concordia_campus_guide.models.WalkingPoint;
-import com.example.concordia_campus_guide.helper.CurrentLocation;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 
@@ -53,16 +52,10 @@ public class POIIcon {
             Coordinates currentCoordinates;
 
             if (currentLocation == null) {
-
-                //This building has inverted lat/lng in order to us th geojsons.
-                Building hallBuilding = appDatabase.buildingDao().getBuildingByBuildingCode("H");
-                Double currentLat = hallBuilding != null ? hallBuilding.getCenterCoordinates().getLatitude() : 0;
-                Double currentLng = hallBuilding != null ? hallBuilding.getCenterCoordinates().getLongitude() : 0;
-
                 //Current location should be inversed: lat->lng and lng->lat
-                currentCoordinates = new Coordinates(currentLng, currentLat);
+                currentCoordinates = getCurrentCoordinates(appDatabase);
             } else {
-                currentCoordinates = new Coordinates(currentLocation.getCurrentLocation().getLatitude(), currentLocation.getCurrentLocation().getLongitude());
+                currentCoordinates = new Coordinates(currentLocation.getMyLocation().getLatitude(), currentLocation.getMyLocation().getLongitude());
             }
 
             double distanceFromP1 = p1.getCoordinate().getEuclideanDistanceFrom(currentCoordinates);
@@ -77,4 +70,12 @@ public class POIIcon {
         return orderedList;
     }
 
+
+    public Coordinates getCurrentCoordinates(AppDatabase appDatabase){
+        //This building has inverted lat/lng in order to us th geojsons.
+        Building hallBuilding = appDatabase.buildingDao().getBuildingByBuildingCode("H");
+        Double currentLat = hallBuilding != null ? hallBuilding.getCenterCoordinates().getLatitude() : 0;
+        Double currentLng = hallBuilding != null ? hallBuilding.getCenterCoordinates().getLongitude() : 0;
+        return new Coordinates(currentLng, currentLat);
+    }
 }

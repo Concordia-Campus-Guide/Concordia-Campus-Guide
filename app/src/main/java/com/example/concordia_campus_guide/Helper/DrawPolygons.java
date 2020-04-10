@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.Helper;
+package com.example.concordia_campus_guide.helper;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -83,7 +83,7 @@ public class DrawPolygons {
 
             String[] coordinates = feature.getProperty("center").split(", ");
             LatLng centerPos = new LatLng(parseDouble(coordinates[1]), parseDouble(coordinates[0]));
-            addBuildingMarker(map, centerPos, feature.getProperty("code"), context);
+            addBuildingMarker(map, centerPos, feature.getProperty("code"));
         }
     }
 
@@ -140,7 +140,7 @@ public class DrawPolygons {
      * @param centerPos     is the latitude and longitude of the building's center
      * @param buildingLabel is the Building on which the method will add a marker
      */
-    public void addBuildingMarker(GoogleMap map, LatLng centerPos, String buildingLabel, Context context) {
+    public void addBuildingMarker(GoogleMap map, LatLng centerPos, String buildingLabel) {
         Marker marker = map.addMarker(
                 new MarkerOptions()
                         .position(centerPos)

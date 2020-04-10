@@ -26,8 +26,8 @@ import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.helper.CurrentLocation;
 import com.example.concordia_campus_guide.helper.CurrentLocationPermissionRequest;
 import com.example.concordia_campus_guide.helper.DrawDirectionsPolyLines;
-import com.example.concordia_campus_guide.helper.uiHelpers.POIMarkers;
-import com.example.concordia_campus_guide.helper.uiHelpers.RoomMarkers;
+import com.example.concordia_campus_guide.helper.ui_helpers.POIMarkers;
+import com.example.concordia_campus_guide.helper.ui_helpers.RoomMarkers;
 import com.example.concordia_campus_guide.helper.ViewModelFactory;
 import com.example.concordia_campus_guide.interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.models.Building;
@@ -141,8 +141,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
 
     public void deselectAll(){
-        removeMarkersFromMap(poiMarkers.getPoiMarkers());
-        removeMarkersFromMap(roomMarkers.getRoomMarkers());
+        removeMarkersFromMap(poiMarkers.getPointsOfInterest());
+        removeMarkersFromMap(roomMarkers.getMarkers());
         mFloorPickerGv.setVisibility(View.GONE);
     }
 
@@ -375,8 +375,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private void setupRoomMarkers(){
         mViewModel.getListOfRoom().observe(getViewLifecycleOwner(), roomList -> {
 
-            for (Marker marker : roomMarkers.getRoomMarkers()) marker.remove();
-            roomMarkers.getRoomMarkers().clear();
+            for (Marker marker : roomMarkers.getMarkers()) marker.remove();
+            roomMarkers.getMarkers().clear();
 
             for(RoomModel roomModel: roomList){
                 if(roomModel != null){
@@ -394,8 +394,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     private void setupPOIListListener() {
         mViewModel.getListOfPOI().observe(getViewLifecycleOwner(), priorityQueue -> {
 
-            for (Marker marker : poiMarkers.getPoiMarkers()) marker.remove();
-            poiMarkers.getPoiMarkers().clear();
+            for (Marker marker : poiMarkers.getPointsOfInterest()) marker.remove();
+            poiMarkers.getPointsOfInterest().clear();
 
             int position = 1;
             do {

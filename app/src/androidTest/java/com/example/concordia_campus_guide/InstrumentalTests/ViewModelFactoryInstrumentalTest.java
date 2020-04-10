@@ -1,6 +1,7 @@
 package com.example.concordia_campus_guide.InstrumentalTests;
 
 import com.example.concordia_campus_guide.activities.MainActivity;
+import com.example.concordia_campus_guide.view_models.LocationFragmentViewModel;
 import com.example.concordia_campus_guide.view_models.RoutesActivityViewModel;
 import com.example.concordia_campus_guide.view_models.SearchActivityViewModel;
 import com.example.concordia_campus_guide.view_models.InfoCardFragmentViewModel;

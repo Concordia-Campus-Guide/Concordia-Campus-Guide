@@ -4,9 +4,12 @@ import android.graphics.Color;
 
 import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.database.daos.WalkingPointDao;
+import com.example.concordia_campus_guide.helper.BuildingCodeMap;
+import com.example.concordia_campus_guide.helper.DrawPolygons;
 import com.example.concordia_campus_guide.models.Building;
 import com.example.concordia_campus_guide.models.Coordinates;
 import com.example.concordia_campus_guide.models.WalkingPoint;
+import com.example.concordia_campus_guide.view_models.LocationFragmentViewModel;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 
@@ -38,7 +41,7 @@ public class LocationFragmentViewModelTest  {
     @Mock
     WalkingPointDao mockWalkingPointDao;
 
-    private BuildingsAndTheirCode buildings;
+    private BuildingCodeMap buildings;
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
@@ -47,7 +50,7 @@ public class LocationFragmentViewModelTest  {
         //TODO: Create test data to test the POI generation
         when(mockWalkingPointDao.getAllWalkingPointsFromPlaceCode(Mockito.anyString())).thenReturn(new ArrayList<WalkingPoint>());
         viewModel = new LocationFragmentViewModel(mockAppDb);
-        buildings = new BuildingsAndTheirCode();
+        buildings = new BuildingCodeMap();
         setupBuildings();
     }
 
@@ -85,11 +88,11 @@ public class LocationFragmentViewModelTest  {
     }
     @Test
     public void getSGWZoomLocationTest(){
-        assertEquals(new LatLng( 45.495638, -73.578258), viewModel.getZoomLocation(ClassConstants.sgwCenterBuildingLabel));
+        assertEquals(new LatLng( 45.495638, -73.578258), viewModel.getZoomLocation(ClassConstants.SGW_CENTER_BUILDING_LABEL));
     }
     @Test
     public void getLoyolaZoomLocationTest(){
-        assertEquals(new LatLng( 45.45821918855051, -73.64035427570343), viewModel.getZoomLocation(ClassConstants.loyolaCenterBuildingLabel));
+        assertEquals(new LatLng( 45.45821918855051, -73.64035427570343), viewModel.getZoomLocation(ClassConstants.LOYOLA_CENTER_BUILDING_LABEL));
     }
     @Test
     public void getBuildingFromCodeTest(){

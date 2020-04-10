@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.helper.uiHelpers;
+package com.example.concordia_campus_guide.helper.ui_helpers;
 
 import android.content.Context;
 
@@ -16,14 +16,14 @@ import java.util.List;
 
 public class RoomMarkers {
 
-    private List<Marker> roomMarkers;
+    private List<Marker> markers;
 
-    public List<Marker> getRoomMarkers() {
-        return roomMarkers;
+    public List<Marker> getMarkers() {
+        return markers;
     }
 
     public RoomMarkers(){
-        roomMarkers = new ArrayList<>();
+        markers = new ArrayList<>();
     }
 
     public void addRoomToMap(RoomModel room, LocationFragmentViewModel locationFragmentViewModel, GoogleMap googleMap, Context context){
@@ -41,7 +41,7 @@ public class RoomMarkers {
             Marker marker = googleMap.addMarker(markerOptions);
             marker.setTag(tag);
 
-            roomMarkers.add(marker);
+            markers.add(marker);
         }
     }
 

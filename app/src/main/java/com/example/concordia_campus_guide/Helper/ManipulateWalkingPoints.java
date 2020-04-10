@@ -4,7 +4,6 @@ import android.content.SharedPreferences;
 
 import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.models.RoomModel;
-import com.example.concordia_campus_guide.helper.PathFinder;
 import com.example.concordia_campus_guide.models.WalkingPoint;
 
 import java.util.ArrayList;

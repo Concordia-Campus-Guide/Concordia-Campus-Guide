@@ -1,11 +1,7 @@
-package com.example.concordia_campus_guide.helper.uiHelpers;
+package com.example.concordia_campus_guide.helper.ui_helpers;
 
 import com.example.concordia_campus_guide.ClassConstants;
-import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.view_models.LocationFragmentViewModel;
-import com.example.concordia_campus_guide.global.ApplicationState;
-import com.example.concordia_campus_guide.models.PoiType;
-import com.example.concordia_campus_guide.models.RoomModel;
 import com.example.concordia_campus_guide.models.WalkingPoint;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -18,14 +14,14 @@ import java.util.List;
 
 
 public class POIMarkers {
-    private List<Marker> poiMarkers;
+    private List<Marker> pointsOfInterest;
 
-    public List<Marker> getPoiMarkers() {
-        return poiMarkers;
+    public List<Marker> getPointsOfInterest() {
+        return pointsOfInterest;
     }
 
     public POIMarkers(){
-        poiMarkers = new ArrayList<>();
+        pointsOfInterest = new ArrayList<>();
     }
 
     public void addPOItoMap(WalkingPoint poi, int position, LocationFragmentViewModel locationFragmentViewModel,GoogleMap googleMap) {
@@ -45,12 +41,12 @@ public class POIMarkers {
             Marker marker = googleMap.addMarker(markerOptions);
             marker.setTag(tag);
 
-            poiMarkers.add(marker);
+            pointsOfInterest.add(marker);
         }
     }
 
     public void setVisiblePOIMarkers(String floorSelected, String buildingSelected) {
-        for (Marker marker : poiMarkers) {
+        for (Marker marker : pointsOfInterest) {
             String floorCode = marker.getTag().toString().split("_")[2];
             marker.setVisible(floorCode.equalsIgnoreCase(buildingSelected + "-" + floorSelected));
         }

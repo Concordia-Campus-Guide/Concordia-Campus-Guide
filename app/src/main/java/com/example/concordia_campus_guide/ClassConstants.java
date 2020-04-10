@@ -46,7 +46,6 @@ public class  ClassConstants {
 
     public static final String FLOORS_AVAILABLE = "floorsAvailable";
 
-
     public static final Coordinates SGW_SHUTTLE_STOP = new Coordinates( 45.497025978950774, -73.57849985361099);
     public static final Coordinates LOYOLA_SHUTTLE_STOP = new Coordinates(45.4584776424937, -73.638241700828);
 
@@ -68,10 +67,7 @@ public class  ClassConstants {
 
     public static final int EARTH_RADIUS_KM = 6371;
 
-
-
     public static final String LOCATION_FRAGMENT_TAG = "LocationFragment";
     public static final String POI_TAG = "POI";
     public static final String ROOM_TAG = "ROOM";
-
 }

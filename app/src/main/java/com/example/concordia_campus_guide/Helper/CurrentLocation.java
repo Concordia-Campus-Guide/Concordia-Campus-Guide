@@ -5,15 +5,12 @@ import android.content.Context;
 import android.location.Location;
 import android.os.Handler;
 
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 
-
 public class CurrentLocation {
-    private Location currentLocation;
+    private Location myLocation;
     private FusedLocationProviderClient fusedLocationProviderClient;
-
 
     public FusedLocationProviderClient getFusedLocationProviderClient() {
         return fusedLocationProviderClient;
@@ -21,20 +18,20 @@ public class CurrentLocation {
 
     public CurrentLocation(Context context){
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
-        currentLocation = null;
+        myLocation = null;
     }
 
-    public void setCurrentLocation(Location location) {
-        this.currentLocation = location;
+    public void setMyLocation(Location location) {
+        this.myLocation = location;
     }
 
-    public Location getCurrentLocation() {
+    public Location getMyLocation() {
         fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location -> {
             if (location != null) {
-                setCurrentLocation(location);
+                setMyLocation(location);
             }
         });
-        return currentLocation;
+        return myLocation;
     }
 
     public void updateLocationEvery5Seconds() {
@@ -45,7 +42,7 @@ public class CurrentLocation {
             public void run() {
                 fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location -> {
                     if (location != null) {
-                        setCurrentLocation(location);
+                        setMyLocation(location);
                     }
                 });
                 handler.postDelayed(this, 2000);

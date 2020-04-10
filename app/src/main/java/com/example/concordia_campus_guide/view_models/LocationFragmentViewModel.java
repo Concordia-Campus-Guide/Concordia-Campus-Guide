@@ -6,13 +6,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.concordia_campus_guide.adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.database.AppDatabase;
-import com.example.concordia_campus_guide.global.ApplicationState;
-import com.example.concordia_campus_guide.Helper.BuildingsAndTheirCode;
+import com.example.concordia_campus_guide.helper.BuildingCodeMap;
 import com.example.concordia_campus_guide.helper.CurrentLocation;
-import com.example.concordia_campus_guide.Helper.DrawPolygons;
+import com.example.concordia_campus_guide.helper.DrawPolygons;
 import com.example.concordia_campus_guide.helper.FloorPlan;
 import com.example.concordia_campus_guide.helper.ManipulateWalkingPoints;
 import com.example.concordia_campus_guide.helper.POIIcon;
@@ -41,7 +39,7 @@ public class LocationFragmentViewModel extends ViewModel {
     private MutableLiveData<PriorityQueue<WalkingPoint>> poiList = new MutableLiveData<>();
     private FloorPlan floorPlan;
     private DrawPolygons drawPolygons;
-    private BuildingsAndTheirCode buildingsAndTheirCode;
+    private BuildingCodeMap buildingCodeMap;
 
     private CurrentLocation currentLocation;
     private POIIcon poiIcon;
@@ -66,7 +64,7 @@ public class LocationFragmentViewModel extends ViewModel {
         this.poiIcon = new POIIcon();
         this.floorPlan = new FloorPlan(appDatabase);
         this.manipulateWalkingPoints = new ManipulateWalkingPoints();
-        this.buildingsAndTheirCode = new BuildingsAndTheirCode();
+        this.buildingCodeMap = new BuildingCodeMap();
     }
 
     /**
@@ -78,7 +76,7 @@ public class LocationFragmentViewModel extends ViewModel {
      */
     public GeoJsonLayer loadPolygons(GoogleMap map, Context applicationContext) {
         drawPolygons = new DrawPolygons();
-        return drawPolygons.loadPolygons(map,applicationContext,buildingsAndTheirCode.getBuildings());
+        return drawPolygons.loadPolygons(map,applicationContext, buildingCodeMap.getBuildings());
     }
 
     public Building getBuildingFromGeoJsonFeature(GeoJsonFeature feature) {
@@ -96,17 +94,17 @@ public class LocationFragmentViewModel extends ViewModel {
 
 
     public LatLng getZoomLocation(String location) {
-        return buildingsAndTheirCode.getZoomLocation(location);
+        return buildingCodeMap.getZoomLocation(location);
     }
 
     public Building getBuildingFromCode(String buildingCode) {
-        return buildingsAndTheirCode.getBuildings().get(buildingCode);
+        return buildingCodeMap.getBuildings().get(buildingCode);
     }
 
     public Map<String, Building> getBuildings() {
-        return buildingsAndTheirCode.getBuildings();
+        return buildingCodeMap.getBuildings();
     }
-    public void setBuildings(Map<String, Building> buildings){ buildingsAndTheirCode.setBuildings(buildings);}
+    public void setBuildings(Map<String, Building> buildings){ buildingCodeMap.setBuildings(buildings);}
 
 
 

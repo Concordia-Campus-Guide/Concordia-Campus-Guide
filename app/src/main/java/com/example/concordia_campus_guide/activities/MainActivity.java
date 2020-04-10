@@ -405,8 +405,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public Location getMyCurrentLocation() {
-        Location location = currentLocation.getCurrentLocation();
-        return currentLocation.getCurrentLocation();
+        return currentLocation.getMyLocation();
     }
 
     @Override
