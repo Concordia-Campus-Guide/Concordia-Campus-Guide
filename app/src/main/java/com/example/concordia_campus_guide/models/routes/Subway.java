@@ -2,7 +2,7 @@ package com.example.concordia_campus_guide.models.routes;
 
 import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.DirectionsStep;
 
-public class Subway extends TransportType {
+public class Subway implements TransportType {
     private String color;
 
     public Subway(DirectionsStep step) {

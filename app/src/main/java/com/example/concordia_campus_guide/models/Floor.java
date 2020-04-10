@@ -74,7 +74,7 @@ public class Floor extends Place {
     }
 
     public String getDisplayName(){
-        return floorCode;
+        return getFloorCode();
     }
 }
 

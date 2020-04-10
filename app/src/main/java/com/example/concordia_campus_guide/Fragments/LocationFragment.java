@@ -177,8 +177,6 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         currentLocation.getFusedLocationProviderClient().getLastLocation().addOnFailureListener(getActivity(), e -> zoomInLocation(mViewModel.getInitialZoomLocation()));
     }
 
-
-
     /**
      * The purpose of this method is to figure the style of the map to display
      */
@@ -297,24 +295,14 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
      * The purpose of this method is to handle the "on click" of Loyala button
      */
     private void setupLoyolaBtnClickListener() {
-        loyolaBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                zoomInLocation(mViewModel.getZoomLocation(ClassConstants.LOYOLA_CENTER_BUILDING_LABEL));
-            }
-        });
+        loyolaBtn.setOnClickListener(view -> zoomInLocation(mViewModel.getZoomLocation(ClassConstants.LOYOLA_CENTER_BUILDING_LABEL)));
     }
 
     /**
      * The purpose of this method is to handle the "on click" of SGW button
      */
     private void setupSGWBtnClickListener() {
-        sgwBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                zoomInLocation(mViewModel.getZoomLocation(ClassConstants.SGW_CENTER_BUILDING_LABEL));
-            }
-        });
+        sgwBtn.setOnClickListener(view -> zoomInLocation(mViewModel.getZoomLocation(ClassConstants.SGW_CENTER_BUILDING_LABEL)));
     }
 
     @SuppressLint("MissingPermission")

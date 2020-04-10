@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,6 +27,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class PathInfoCardFragment extends Fragment {
     private RecyclerView mDestinationRv;
@@ -55,10 +59,10 @@ public class PathInfoCardFragment extends Fragment {
 
     private void initComponents(final View view) {
         mDestinationRv = view.findViewById(R.id.directions_recycle_view);
-        setupDestinationRv(view);
+        setupDestinationRv();
     }
 
-    private void setupDestinationRv(final View view) {
+    private void setupDestinationRv() {
         mDestinationRv.setHasFixedSize(false);
         final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         mDestinationRv.setLayoutManager(layoutManager);
@@ -72,7 +76,7 @@ public class PathInfoCardFragment extends Fragment {
     public void drawIndoorOutdoorInfo() {
         final LinearLayout layout = getView().findViewById(R.id.paths_image_buttons);
         final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT, 1);
+                WRAP_CONTENT, MATCH_PARENT, 1);
         String directionResultType = "";
 
         for (int i = 0; i < mDirectionsResults.size(); i++) {
@@ -103,7 +107,7 @@ public class PathInfoCardFragment extends Fragment {
         btn.setLayoutParams(layoutParams);
         btn.setImageResource(imageId);
         btn.setColorFilter(R.color.colorAppTheme);
-        btn.setBackgroundColor(getResources().getColor(R.color.toolbarIconColor));
+        btn.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.toolbarIconColor));
         layout.addView(btn);
     }
 
