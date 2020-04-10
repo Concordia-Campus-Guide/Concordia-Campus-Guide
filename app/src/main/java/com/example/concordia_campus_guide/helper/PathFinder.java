@@ -80,24 +80,22 @@ public class PathFinder {
         String placeCode;
         String floorCode;
 
-        List<WalkingPoint> pointList = null;
+        WalkingPoint point = null;
         if (place instanceof Building) {
             String entranceFloor = ((Building) place).getBuildingCode() + "-" + ((Building) place).getEntranceFloor();
-            pointList = appDatabase.walkingPointDao().getAllWalkingPointsFromPlace(entranceFloor, "entrance");
+            point = appDatabase.walkingPointDao().getWalkingPoint(entranceFloor, "entrance");
         } else if (place instanceof RoomModel) {
             //placeCode is not unique for Rooms, therefore we need to fetch the Walking point by searching for both floor code and place code
             floorCode = ((RoomModel) place).getFloorCode();
             placeCode = ((RoomModel) place).getRoomCode();
-            pointList = appDatabase.walkingPointDao().getAllWalkingPointsFromPlace(floorCode, placeCode);
+            point = appDatabase.walkingPointDao().getWalkingPoint(floorCode, placeCode);
         } else if (place instanceof Floor) {
             floorCode = ((Floor) place).getFloorCode();
-            pointList = appDatabase.walkingPointDao().getAllAccessPointsOnFloor(floorCode, PointType.ELEVATOR);
+            List<WalkingPoint> allElevators = appDatabase.walkingPointDao().getAllAccessPointsOnFloor(floorCode, PointType.ELEVATOR);
+            point = allElevators != null && !allElevators.isEmpty()? allElevators.get(0):null;
         }
 
-        if (pointList != null && !pointList.isEmpty())
-            return pointList.get(0);
-
-        return null;
+        return point;
     }
 
     /**
