@@ -13,6 +13,7 @@
     <string name="navigation_drawer_close">Fermer le tiroir de navigation</string>
     <string name="small_info_card_directions_button">Directions</string>
     <string name="my_location">Ma position: </string>
+    <string name="my_current_location">Mon emplacement</string>
     <string name="no_shuttle">Pas de navettes disponibles pour le moment</string>
     <string name="departments">Départements</string>
     <string name="services">Services</string>
@@ -38,7 +39,7 @@
     <string name="location_format_wrong">Le format de l\'emplacement est incorrect</string>
     <string name="location_format_wrong_description">L\'emplacement de votre prochain événement n\'a pas été correctement inséré (par exemple, \'H-9, 963\')</string>
     <string name="search_here">Rechercher ici</string>
-    <string name="lounges">Lounge</string>
+    <string name="lounges">Salons</string>
     <string name="washroom">Toilette</string>
     <string name="water_fountains">Fontaine d\'eau</string>
     <string name="stairs">Escalier</string>
@@ -52,5 +53,6 @@
     <string name="walk_towards_elevator">Marcher vers les ascenseurs</string>
     <string name="enter_building">Entrer dans le bâtiment</string>
     <string name="walk_towards_staff_elevator">Marcher vers les ascenseurs du personnel</string>
+    <string name="minutes">min</string>
 
 </resources>

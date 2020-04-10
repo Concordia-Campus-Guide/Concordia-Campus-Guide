@@ -1,14 +1,16 @@
 package com.example.concordia_campus_guide.HelpersTest;
 
-import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Database.Daos.WalkingPointDao;
-import com.example.concordia_campus_guide.Helper.PathFinder;
-import com.example.concordia_campus_guide.Models.Building;
-import com.example.concordia_campus_guide.Models.Coordinates;
-import com.example.concordia_campus_guide.Models.Floor;
-import com.example.concordia_campus_guide.Models.PointType;
-import com.example.concordia_campus_guide.Models.RoomModel;
-import com.example.concordia_campus_guide.Models.WalkingPoint;
+import android.content.SharedPreferences;
+
+import com.example.concordia_campus_guide.database.AppDatabase;
+import com.example.concordia_campus_guide.database.daos.WalkingPointDao;
+import com.example.concordia_campus_guide.helper.PathFinder;
+import com.example.concordia_campus_guide.models.Building;
+import com.example.concordia_campus_guide.models.Coordinates;
+import com.example.concordia_campus_guide.models.Floor;
+import com.example.concordia_campus_guide.models.PointType;
+import com.example.concordia_campus_guide.models.RoomModel;
+import com.example.concordia_campus_guide.models.WalkingPoint;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +21,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -52,6 +53,9 @@ public class PathFinderTest {
     @Mock
     WalkingPointDao mockWalkingPointDao;
 
+    @Mock
+    SharedPreferences sharedPreferences;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -68,7 +72,7 @@ public class PathFinderTest {
         when(mockAppDb.walkingPointDao().getAllWalkingPointsFromPlace(roomStartingPoint.getFloorCode(), roomStartingPoint.getRoomCode())).thenReturn(Arrays.asList(classRoomInHBuildingWalkingPoint1));
         when(mockAppDb.walkingPointDao().getAllWalkingPointsFromPlace(roomDestination.getFloorCode(), roomDestination.getRoomCode())).thenReturn(Arrays.asList(classRoomInHBuildingWalkingPoint2));
 
-        pathFinder = new PathFinder(mockAppDb, roomStartingPoint, roomDestination);
+        pathFinder = new PathFinder(mockAppDb, sharedPreferences, roomStartingPoint, roomDestination);
     }
 
     private void settingUpWalkingPoints(){
@@ -128,7 +132,7 @@ public class PathFinderTest {
         when(mockAppDb.walkingPointDao().getAllWalkingPointsFromPlace(roomInMB.getFloorCode(), roomInMB.getRoomCode())).thenReturn(Arrays.asList(classRoomInMBBuildingWalkingPoint));
         when(mockAppDb.walkingPointDao().getAllAccessPointsOnFloor(classRoomInHBuildingWalkingPoint1.getFloorCode(), PointType.ENTRANCE)).thenReturn(Arrays.asList(entranceHBuildingWalkingPoint));
 
-        PathFinder pathFinderBetweenBuildings = new PathFinder(mockAppDb,roomInH,roomInMB);
+        PathFinder pathFinderBetweenBuildings = new PathFinder(mockAppDb, sharedPreferences, roomInH,roomInMB);
         List<WalkingPoint> walkingPointsToDestination = Arrays.asList(classRoomInHBuildingWalkingPoint1, walkingPoint4, entranceHBuildingWalkingPoint, entranceMBBuildingWalkingPoint, walkingPoint9, classRoomInMBBuildingWalkingPoint);
         assertEquals(walkingPointsToDestination,pathFinderBetweenBuildings.getPathToDestination());
     }

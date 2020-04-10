@@ -1,6 +1,6 @@
 package com.example.concordia_campus_guide.ModelTests;
 
-import com.example.concordia_campus_guide.Models.CalendarEvent;
+import com.example.concordia_campus_guide.models.CalendarEvent;
 
 import org.junit.Before;
 import org.junit.Test;

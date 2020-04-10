@@ -1,16 +1,14 @@
 package com.example.concordia_campus_guide.ModelTests.TestUtils;
 
-import com.example.concordia_campus_guide.Adapters.DirectionWrapper;
-import com.example.concordia_campus_guide.Models.Building;
-import com.example.concordia_campus_guide.Models.Buildings;
-import com.example.concordia_campus_guide.Models.Coordinates;
-import com.example.concordia_campus_guide.Models.Direction;
-import com.example.concordia_campus_guide.Models.Floor;
-import com.example.concordia_campus_guide.Models.Floors;
-import com.example.concordia_campus_guide.Models.ListOfCoordinates;
-import com.example.concordia_campus_guide.Models.RoomModel;
-import com.example.concordia_campus_guide.Models.Rooms;
-import com.example.concordia_campus_guide.Models.Shuttle;
+import com.example.concordia_campus_guide.models.Building;
+import com.example.concordia_campus_guide.models.Buildings;
+import com.example.concordia_campus_guide.models.Coordinates;
+import com.example.concordia_campus_guide.models.Floor;
+import com.example.concordia_campus_guide.models.Floors;
+import com.example.concordia_campus_guide.models.ListOfCoordinates;
+import com.example.concordia_campus_guide.models.RoomModel;
+import com.example.concordia_campus_guide.models.Rooms;
+import com.example.concordia_campus_guide.models.Shuttle;
 
 import java.util.ArrayList;
 import java.util.Arrays;

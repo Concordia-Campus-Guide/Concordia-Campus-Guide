@@ -1,12 +1,9 @@
 package com.example.concordia_campus_guide.ModelTests;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.DirectionsStep;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TransitDetails;
-import com.example.concordia_campus_guide.GoogleMapsServicesTools.GoogleMapsServicesModels.TransitLine;
-import com.example.concordia_campus_guide.ModelTests.TestUtils.TestUtils;
-import com.example.concordia_campus_guide.ModelTests.TestUtils.TestUtilsRoutes;
-import com.example.concordia_campus_guide.Models.Routes.Bus;
+import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.DirectionsStep;
+import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.TransitDetails;
+import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.TransitLine;
+import com.example.concordia_campus_guide.models.routes.Bus;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;

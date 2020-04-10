@@ -1,11 +1,11 @@
 package com.example.concordia_campus_guide.HelpersTest;
 
-import com.example.concordia_campus_guide.Database.AppDatabase;
-import com.example.concordia_campus_guide.Database.Daos.WalkingPointDao;
-import com.example.concordia_campus_guide.Helper.IndoorPathHeuristic;
-import com.example.concordia_campus_guide.Models.Coordinates;
-import com.example.concordia_campus_guide.Models.PointType;
-import com.example.concordia_campus_guide.Models.WalkingPoint;
+import com.example.concordia_campus_guide.database.AppDatabase;
+import com.example.concordia_campus_guide.database.daos.WalkingPointDao;
+import com.example.concordia_campus_guide.helper.IndoorPathHeuristic;
+import com.example.concordia_campus_guide.models.Coordinates;
+import com.example.concordia_campus_guide.models.PointType;
+import com.example.concordia_campus_guide.models.WalkingPoint;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -56,7 +56,7 @@ public class IndoorPathHeuristicTest {
         when(mockAppDb.walkingPointDao()).thenReturn(mockWalkingPointDao);
         when(mockWalkingPointDao.getAllAccessPointsOnFloor(classRoomInHBuildingWalkingPoint1.getFloorCode(),PointType.ENTRANCE)).thenReturn(Arrays.asList(classRoomInHBuildingWalkingPoint1));
         when(mockWalkingPointDao.getAll()).thenReturn(walkingPointList);
-        indoorPathHeuristic = new IndoorPathHeuristic(mockAppDb);
+        indoorPathHeuristic = new IndoorPathHeuristic(mockAppDb, false, false);
     }
 
     private void settingUpWalkingPoints(){

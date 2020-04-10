@@ -4,7 +4,7 @@ import android.Manifest;
 
 import androidx.annotation.StringDef;
 
-import com.example.concordia_campus_guide.Models.Coordinates;
+import com.example.concordia_campus_guide.models.Coordinates;
 import com.google.android.gms.maps.model.Dash;
 import com.google.android.gms.maps.model.Gap;
 import com.google.android.gms.maps.model.LatLng;
@@ -18,11 +18,6 @@ import java.util.List;
 public class  ClassConstants {
     public static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     public static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-
-    public static boolean MY_LOCATION_PERMISSION_GRANTED = false;
-
-    public static final String TRUE = "true";
-    public static final String FALSE = "false";
     public static final String DISABILITY_BUTTON = "disability_button";
     public static final String CALENDAR_INTEGRATION_BUTTON = "calendar_integration_button";
     public static final String SHARED_PREFERENCES = "UserPreferences";
