@@ -2,7 +2,7 @@ package com.example.concordia_campus_guide.models.routes;
 
 import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.DirectionsStep;
 
-public class Bus extends TransportType {
+public class Bus implements TransportType {
 
     private String busNumber;
 

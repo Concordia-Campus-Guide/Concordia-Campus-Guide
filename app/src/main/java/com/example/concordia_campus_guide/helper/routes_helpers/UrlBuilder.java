@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.helper.routesHelpers;
+package com.example.concordia_campus_guide.helper.routes_helpers;
 
 import com.example.concordia_campus_guide.BuildConfig;
 import com.example.concordia_campus_guide.ClassConstants;

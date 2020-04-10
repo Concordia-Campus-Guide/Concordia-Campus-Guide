@@ -123,10 +123,10 @@ public class InfoCardFragment extends Fragment {
     }
 
     private void setOnClickListeners(){
-        this.directionsBt.setOnClickListener(v -> onClickDirections(v));
+        this.directionsBt.setOnClickListener(v -> onClickDirections());
     }
 
-    public void onClickDirections(View v){
+    public void onClickDirections(){
         Intent openRoutes = new Intent(getActivity(), RoutesActivity.class);
 
         SelectingToFromState.setQuickSelectToTrue();

@@ -10,8 +10,8 @@ import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServ
 import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.TransitLine;
 import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.TravelMode;
 import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.Vehicle;
-import com.example.concordia_campus_guide.helper.routesHelpers.DirectionsApiDataParser;
-import com.example.concordia_campus_guide.helper.routesHelpers.DirectionsApiDataRetrieval;
+import com.example.concordia_campus_guide.helper.routes_helpers.DirectionsApiDataParser;
+import com.example.concordia_campus_guide.helper.routes_helpers.DirectionsApiDataRetrieval;
 import com.example.concordia_campus_guide.models.routes.Bus;
 import com.example.concordia_campus_guide.models.routes.Car;
 import com.example.concordia_campus_guide.models.routes.Route;

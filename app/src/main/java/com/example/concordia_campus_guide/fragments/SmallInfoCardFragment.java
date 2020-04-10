@@ -80,14 +80,10 @@ public class SmallInfoCardFragment extends Fragment {
     }
 
     private void setOnClickListeners() {
-        this.directionsBt.setOnClickListener(new View.OnClickListener() {
-            public void onClick(final View v) {
-                onClickDirections(v);
-            }
-        });
+        this.directionsBt.setOnClickListener(v -> onClickDirections());
     }
 
-    public void onClickDirections(final View v) {
+    public void onClickDirections() {
         final Intent openRoutes = new Intent(getActivity(), RoutesActivity.class);
 
         SelectingToFromState.setQuickSelectToTrue();

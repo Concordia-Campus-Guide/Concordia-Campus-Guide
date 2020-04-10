@@ -2,7 +2,7 @@ package com.example.concordia_campus_guide.models.routes;
 
 import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.DirectionsStep;
 
-public class Car extends TransportType {
+public class Car implements TransportType {
 
     private long duration; // in seconds
 

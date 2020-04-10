@@ -2,7 +2,7 @@ package com.example.concordia_campus_guide.HelpersTest.RoutesHelperTest;
 
 import com.example.concordia_campus_guide.activities.RoutesActivity;
 import com.example.concordia_campus_guide.BuildConfig;
-import com.example.concordia_campus_guide.helper.routesHelpers.DirectionsApiDataRetrieval;
+import com.example.concordia_campus_guide.helper.routes_helpers.DirectionsApiDataRetrieval;
 
 import org.junit.Before;
 import org.junit.Test;
