@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.activities;
+package com.example.concordia_campus_guide.Activities;
 
 
 import android.content.ComponentName;
@@ -14,10 +14,13 @@ import androidx.test.runner.AndroidJUnit4;
 
 import com.example.concordia_campus_guide.EspressoHelpers;
 import com.example.concordia_campus_guide.R;
+import com.example.concordia_campus_guide.activities.MainActivity;
+import com.example.concordia_campus_guide.activities.SearchActivity;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,6 +53,7 @@ public class SearchActivityTest {
             GrantPermissionRule.grant(
                     "android.permission.ACCESS_FINE_LOCATION",
                     "android.permission.ACCESS_COARSE_LOCATION",
+                    "android.permission.WRITE_CALENDAR",
                     "android.permission.READ_CALENDAR");
 
     @Test
@@ -83,9 +87,14 @@ public class SearchActivityTest {
         android.os.SystemClock.sleep(1000);
 
         ViewInteraction textView2 = onView(
-                allOf(withId(R.id.next_class_text),
+                allOf(withId(R.id.next_class_title), withText("Next class"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                4),
                         isDisplayed()));
-        textView2.check(matches(isDisplayed()));
+        textView2.check(matches(withText("Next class")));
 
         ViewInteraction editText = onView(
                 allOf(withId(R.id.searchText),
@@ -93,15 +102,15 @@ public class SearchActivityTest {
 
         editText.check(matches(isDisplayed()));
 
-        ViewInteraction textView3 = onView(
-                allOf(withId(R.id.next_class_title), withText("Next class"),
-                        childAtPosition(
+        ViewInteraction linearLayout = onView(
+                allOf(childAtPosition(
+                        allOf(withId(R.id.next_class_row),
                                 childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
+                                        IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class),
+                                        5)),
+                        0),
                         isDisplayed()));
-        textView3.check(matches(isDisplayed()));
+        linearLayout.check(matches(isDisplayed()));
 
         editText.perform(click());
 

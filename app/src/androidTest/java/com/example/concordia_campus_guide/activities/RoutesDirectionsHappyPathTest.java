@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.activities;
+package com.example.concordia_campus_guide.Activities;
 
 
 import android.view.View;
@@ -15,6 +15,7 @@ import androidx.test.uiautomator.UiDevice;
 
 import com.example.concordia_campus_guide.EspressoHelpers;
 import com.example.concordia_campus_guide.R;
+import com.example.concordia_campus_guide.activities.MainActivity;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -59,6 +60,7 @@ public class RoutesDirectionsHappyPathTest {
             GrantPermissionRule.grant(
                     "android.permission.ACCESS_FINE_LOCATION",
                     "android.permission.ACCESS_COARSE_LOCATION",
+                    "android.permission.WRITE_CALENDAR",
                     "android.permission.READ_CALENDAR");
 
     @Test
@@ -112,7 +114,7 @@ public class RoutesDirectionsHappyPathTest {
                 .inAdapterView(allOf(withId(R.id.searchResults),
                         childAtPosition(
                                 withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
-                                4)))
+                                6)))
                 .atPosition(0);
         linearLayout.perform(click());
 
@@ -155,7 +157,7 @@ public class RoutesDirectionsHappyPathTest {
                 .inAdapterView(allOf(withId(R.id.searchResults),
                         childAtPosition(
                                 withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
-                                4)))
+                                6)))
                 .atPosition(1);
         linearLayout2.perform(click());
 

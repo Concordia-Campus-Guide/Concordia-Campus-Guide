@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.activities;
+package com.example.concordia_campus_guide.Activities;
 
 
 import android.content.ComponentName;
@@ -19,6 +19,8 @@ import androidx.test.uiautomator.UiSelector;
 
 import com.example.concordia_campus_guide.EspressoHelpers;
 import com.example.concordia_campus_guide.R;
+import com.example.concordia_campus_guide.activities.MainActivity;
+import com.example.concordia_campus_guide.activities.RoutesActivity;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -62,6 +64,7 @@ public class ExplorePOIClickTest {
             GrantPermissionRule.grant(
                     "android.permission.ACCESS_FINE_LOCATION",
                     "android.permission.ACCESS_COARSE_LOCATION",
+                    "android.permission.WRITE_CALENDAR",
                     "android.permission.READ_CALENDAR");
 
     @Test
@@ -137,7 +140,7 @@ public class ExplorePOIClickTest {
         android.os.SystemClock.sleep(1000);
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.info_card_title), withText("H-1 elevators-1"),
+                allOf(withId(R.id.info_card_title), withText("H-00 elevators-1"),
                         childAtPosition(
                                 allOf(withId(R.id.infocardLinearLayout),
                                         childAtPosition(
@@ -145,7 +148,7 @@ public class ExplorePOIClickTest {
                                                 0)),
                                 0),
                         isDisplayed()));
-        textView.check(matches(withText("H-1 elevators-1")));
+        textView.check(matches(withText("H-00 elevators-1")));
 
         ViewInteraction button = onView(
                 allOf(withId(R.id.directions),
