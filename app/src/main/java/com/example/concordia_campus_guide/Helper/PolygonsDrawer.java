@@ -31,7 +31,7 @@ import java.util.logging.Logger;
 
 import static java.lang.Double.parseDouble;
 
-public class DrawPolygons {
+public class PolygonsDrawer {
 
     public static final Logger LOGGER = Logger.getLogger("DrawPolygons");
 

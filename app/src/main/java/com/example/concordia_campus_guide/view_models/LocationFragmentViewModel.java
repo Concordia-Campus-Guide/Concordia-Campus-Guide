@@ -10,7 +10,7 @@ import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.helper.BuildingCodeMap;
 import com.example.concordia_campus_guide.helper.CurrentLocation;
-import com.example.concordia_campus_guide.helper.DrawPolygons;
+import com.example.concordia_campus_guide.helper.PolygonsDrawer;
 import com.example.concordia_campus_guide.helper.FloorPlan;
 import com.example.concordia_campus_guide.helper.ManipulateWalkingPoints;
 import com.example.concordia_campus_guide.helper.POIIcon;
@@ -38,7 +38,7 @@ public class LocationFragmentViewModel extends ViewModel {
     private AppDatabase appDatabase;
     private MutableLiveData<PriorityQueue<WalkingPoint>> poiList = new MutableLiveData<>();
     private FloorPlan floorPlan;
-    private DrawPolygons drawPolygons;
+    private PolygonsDrawer polygonsDrawer;
     private BuildingCodeMap buildingCodeMap;
 
     private CurrentLocation currentLocation;
@@ -75,13 +75,13 @@ public class LocationFragmentViewModel extends ViewModel {
      * @return It will return the layer to the LocationFragmentView to display on the map
      */
     public GeoJsonLayer loadPolygons(GoogleMap map, Context applicationContext) {
-        drawPolygons = new DrawPolygons();
-        return drawPolygons.loadPolygons(map,applicationContext, buildingCodeMap.getBuildings());
+        polygonsDrawer = new PolygonsDrawer();
+        return polygonsDrawer.loadPolygons(map,applicationContext, buildingCodeMap.getBuildings());
     }
 
     public Building getBuildingFromGeoJsonFeature(GeoJsonFeature feature) {
-        drawPolygons = new DrawPolygons();
-        return drawPolygons.getBuildingFromGeoJsonFeature(feature);
+        polygonsDrawer = new PolygonsDrawer();
+        return polygonsDrawer.getBuildingFromGeoJsonFeature(feature);
     }
 
     /**

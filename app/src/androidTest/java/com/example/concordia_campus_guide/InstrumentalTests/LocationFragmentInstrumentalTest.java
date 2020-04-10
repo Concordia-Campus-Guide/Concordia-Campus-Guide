@@ -12,7 +12,7 @@ import androidx.test.runner.AndroidJUnit4;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.activities.MainActivity;
 import com.example.concordia_campus_guide.database.AppDatabase;
-import com.example.concordia_campus_guide.helper.DrawDirectionsPolyLines;
+import com.example.concordia_campus_guide.helper.DirectionsPolyLinesDrawer;
 import com.example.concordia_campus_guide.models.Coordinates;
 import com.example.concordia_campus_guide.models.RoomModel;
 import com.example.concordia_campus_guide.view_models.LocationFragmentViewModel;
@@ -28,7 +28,7 @@ import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
 
-import com.example.concordia_campus_guide.helper.DrawPolygons;
+import com.example.concordia_campus_guide.helper.PolygonsDrawer;
 
 @RunWith(AndroidJUnit4.class)
 @SmallTest
@@ -56,10 +56,10 @@ public class LocationFragmentInstrumentalTest {
 
     @Test
     public void createMarkerIcon(){
-        DrawPolygons drawPolygons = new DrawPolygons();
-        Bitmap bitmap1 = drawPolygons.createBitmapMarkerIcon("EV");
-        Bitmap bitmap2 = drawPolygons.createBitmapMarkerIcon("EV");
-        Bitmap bitmap3 = drawPolygons.createBitmapMarkerIcon("H");
+        PolygonsDrawer polygonsDrawer = new PolygonsDrawer();
+        Bitmap bitmap1 = polygonsDrawer.createBitmapMarkerIcon("EV");
+        Bitmap bitmap2 = polygonsDrawer.createBitmapMarkerIcon("EV");
+        Bitmap bitmap3 = polygonsDrawer.createBitmapMarkerIcon("H");
         assertNotNull(bitmap1);
         assertNotNull(bitmap2);
         assertNotNull(bitmap3);
@@ -82,8 +82,8 @@ public class LocationFragmentInstrumentalTest {
 
     @Test
     public void stylePolyLineTest(){
-        DrawDirectionsPolyLines drawDirectionsPolyLines = new DrawDirectionsPolyLines();
-        PolylineOptions polylineOptions = drawDirectionsPolyLines.stylePolyLine("walking", 0);
+        DirectionsPolyLinesDrawer directionsPolyLinesDrawer = new DirectionsPolyLinesDrawer();
+        PolylineOptions polylineOptions = directionsPolyLinesDrawer.stylePolyLine("walking", 0);
         assertEquals("[Gap: length=20.0]",polylineOptions.getPattern().get(0).toString());
         assertEquals(-7134407,polylineOptions.getColor());
     }

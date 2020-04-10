@@ -10,7 +10,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.List;
 
-public class DrawDirectionsPolyLines {
+public class DirectionsPolyLinesDrawer {
 
     public void drawOutdoorPath(List<DirectionWrapper> outdoorDirections, GoogleMap map) {
         for (DirectionWrapper directionWrapper : outdoorDirections) {

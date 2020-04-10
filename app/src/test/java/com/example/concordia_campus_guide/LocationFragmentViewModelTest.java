@@ -5,7 +5,7 @@ import android.graphics.Color;
 import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.database.daos.WalkingPointDao;
 import com.example.concordia_campus_guide.helper.BuildingCodeMap;
-import com.example.concordia_campus_guide.helper.DrawPolygons;
+import com.example.concordia_campus_guide.helper.PolygonsDrawer;
 import com.example.concordia_campus_guide.models.Building;
 import com.example.concordia_campus_guide.models.Coordinates;
 import com.example.concordia_campus_guide.models.WalkingPoint;
@@ -62,8 +62,8 @@ public class LocationFragmentViewModelTest  {
 
     @Test
     public void getPolygonStyleTest(){
-        DrawPolygons drawPolygons = new DrawPolygons();
-        GeoJsonPolygonStyle  geoJsonPolygonStyle = drawPolygons.getPolygonStyle();
+        PolygonsDrawer polygonsDrawer = new PolygonsDrawer();
+        GeoJsonPolygonStyle  geoJsonPolygonStyle = polygonsDrawer.getPolygonStyle();
         assertEquals(geoJsonPolygonStyle.getFillColor(), Color.argb(51, 18, 125, 159));
         assertEquals(Color.argb(255, 18, 125, 159), geoJsonPolygonStyle.getStrokeColor());
         assertEquals(6.0f, geoJsonPolygonStyle.getStrokeWidth());

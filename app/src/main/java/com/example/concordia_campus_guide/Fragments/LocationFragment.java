@@ -25,7 +25,7 @@ import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.helper.CurrentLocation;
 import com.example.concordia_campus_guide.helper.CurrentLocationPermissionRequest;
-import com.example.concordia_campus_guide.helper.DrawDirectionsPolyLines;
+import com.example.concordia_campus_guide.helper.DirectionsPolyLinesDrawer;
 import com.example.concordia_campus_guide.helper.ui_helpers.POIMarkers;
 import com.example.concordia_campus_guide.helper.ui_helpers.RoomMarkers;
 import com.example.concordia_campus_guide.helper.ViewModelFactory;
@@ -352,8 +352,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     }
 
     public void drawOutdoorPaths(final List<DirectionWrapper> outdoorDirections) {
-        DrawDirectionsPolyLines drawDirectionsPolyLines = new DrawDirectionsPolyLines();
-        mMapView.getMapAsync(googleMap -> drawDirectionsPolyLines.drawOutdoorPath(outdoorDirections, googleMap));
+        DirectionsPolyLinesDrawer directionsPolyLinesDrawer = new DirectionsPolyLinesDrawer();
+        mMapView.getMapAsync(googleMap -> directionsPolyLinesDrawer.drawOutdoorPath(outdoorDirections, googleMap));
     }
 
     public void setShuttlePaths(String polyline) {
