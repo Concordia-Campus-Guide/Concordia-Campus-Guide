@@ -56,7 +56,7 @@ public class IndoorPathHeuristicTest {
         when(mockAppDb.walkingPointDao()).thenReturn(mockWalkingPointDao);
         when(mockWalkingPointDao.getAllAccessPointsOnFloor(classRoomInHBuildingWalkingPoint1.getFloorCode(),PointType.ENTRANCE)).thenReturn(Arrays.asList(classRoomInHBuildingWalkingPoint1));
         when(mockWalkingPointDao.getAll()).thenReturn(walkingPointList);
-        indoorPathHeuristic = new IndoorPathHeuristic(mockAppDb);
+        indoorPathHeuristic = new IndoorPathHeuristic(mockAppDb, false, false);
     }
 
     private void settingUpWalkingPoints(){

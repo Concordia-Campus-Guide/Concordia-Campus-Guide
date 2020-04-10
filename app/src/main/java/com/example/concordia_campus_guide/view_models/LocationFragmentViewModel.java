@@ -1,6 +1,7 @@
 package com.example.concordia_campus_guide.view_models;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -287,8 +288,8 @@ public class LocationFragmentViewModel extends ViewModel {
         return buildings.get(ClassConstants.SGW_CENTER_BUILDING_LABEL).getCenterCoordinatesLatLng();
     }
 
-    public void parseWalkingPointList(AppDatabase appDatabase, RoomModel from, RoomModel to) {
-        PathFinder pf = new PathFinder(appDatabase, from, to);
+    public void parseWalkingPointList(AppDatabase appDatabase, SharedPreferences preferences, RoomModel from, RoomModel to) {
+        PathFinder pf = new PathFinder(appDatabase, preferences, from, to);
         walkingPoints = pf.getPathToDestination();
 
         List<WalkingPoint> floorWalkingPointList;

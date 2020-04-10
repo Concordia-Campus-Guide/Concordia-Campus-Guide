@@ -115,8 +115,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         SharedPreferences sharedPreferences = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
         for (Map.Entry<CompoundButton, String> entry : toggleButtonAndCorrespondingToggleType.entrySet()) {
-            String value = sharedPreferences.getString(entry.getValue(), ClassConstants.FALSE);
-            entry.getKey().setChecked(value.equals(ClassConstants.TRUE));
+            boolean value = sharedPreferences.getBoolean(entry.getValue(), false);
+            entry.getKey().setChecked(value);
         }
     }
 
@@ -128,9 +128,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SharedPreferences.Editor myEdit = sharedPreferences.edit();
 
         for (Map.Entry<CompoundButton, String> entry: toggleButtonAndCorrespondingToggleType.entrySet()) {
-            String value = entry.getKey().isChecked() ? ClassConstants.TRUE : ClassConstants.FALSE;
+            boolean value = entry.getKey().isChecked();
             String toggleType = entry.getValue();
-            myEdit.putString(toggleType, value);
+            myEdit.putBoolean(toggleType, value);
         }
 
         myEdit.commit();

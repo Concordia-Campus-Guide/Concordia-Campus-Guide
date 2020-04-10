@@ -1,5 +1,7 @@
 package com.example.concordia_campus_guide.HelpersTest;
 
+import android.content.SharedPreferences;
+
 import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.database.daos.WalkingPointDao;
 import com.example.concordia_campus_guide.helper.PathFinder;
@@ -51,6 +53,9 @@ public class PathFinderTest {
     @Mock
     WalkingPointDao mockWalkingPointDao;
 
+    @Mock
+    SharedPreferences sharedPreferences;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -67,7 +72,7 @@ public class PathFinderTest {
         when(mockAppDb.walkingPointDao().getAllWalkingPointsFromPlace(roomStartingPoint.getFloorCode(), roomStartingPoint.getRoomCode())).thenReturn(Arrays.asList(classRoomInHBuildingWalkingPoint1));
         when(mockAppDb.walkingPointDao().getAllWalkingPointsFromPlace(roomDestination.getFloorCode(), roomDestination.getRoomCode())).thenReturn(Arrays.asList(classRoomInHBuildingWalkingPoint2));
 
-        pathFinder = new PathFinder(mockAppDb, roomStartingPoint, roomDestination);
+        pathFinder = new PathFinder(mockAppDb, sharedPreferences, roomStartingPoint, roomDestination);
     }
 
     private void settingUpWalkingPoints(){
@@ -127,7 +132,7 @@ public class PathFinderTest {
         when(mockAppDb.walkingPointDao().getAllWalkingPointsFromPlace(roomInMB.getFloorCode(), roomInMB.getRoomCode())).thenReturn(Arrays.asList(classRoomInMBBuildingWalkingPoint));
         when(mockAppDb.walkingPointDao().getAllAccessPointsOnFloor(classRoomInHBuildingWalkingPoint1.getFloorCode(), PointType.ENTRANCE)).thenReturn(Arrays.asList(entranceHBuildingWalkingPoint));
 
-        PathFinder pathFinderBetweenBuildings = new PathFinder(mockAppDb,roomInH,roomInMB);
+        PathFinder pathFinderBetweenBuildings = new PathFinder(mockAppDb, sharedPreferences, roomInH,roomInMB);
         List<WalkingPoint> walkingPointsToDestination = Arrays.asList(classRoomInHBuildingWalkingPoint1, walkingPoint4, entranceHBuildingWalkingPoint, entranceMBBuildingWalkingPoint, walkingPoint9, classRoomInMBBuildingWalkingPoint);
         assertEquals(walkingPointsToDestination,pathFinderBetweenBuildings.getPathToDestination());
     }

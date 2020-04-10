@@ -2,6 +2,8 @@ package com.example.concordia_campus_guide.fragments;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.location.Location;
@@ -322,7 +324,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     }
 
     public void setIndoorPaths(Place from, Place to) {
-        mViewModel.parseWalkingPointList(AppDatabase.getInstance(getContext()), (RoomModel) from, (RoomModel) to);
+        SharedPreferences preferences = getActivity().getSharedPreferences(ClassConstants.SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        mViewModel.parseWalkingPointList(AppDatabase.getInstance(getContext()), preferences, (RoomModel) from, (RoomModel) to);
     }
 
     public void drawOutdoorPaths(final List<DirectionWrapper> outdoorDirections) {
