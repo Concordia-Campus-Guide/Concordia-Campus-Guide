@@ -22,6 +22,7 @@ import com.example.concordia_campus_guide.models.Time;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 
@@ -110,7 +111,7 @@ public class DirectionsApiDataParserTest {
     }
 
     @Test
-    public void extractDurationAndSummaryTest() {
+    public void getDrivingRouteTest() {
         // Arrange
         Object route = null;
 
@@ -132,9 +133,9 @@ public class DirectionsApiDataParserTest {
 
         // Act
         try{
-            Method method = directionsApiDataParser.getClass().getDeclaredMethod("extractDurationAndSummary", DirectionsRoute.class, String.class);
+            Method method = directionsApiDataParser.getClass().getDeclaredMethod("getDrivingRoute", DirectionsRoute.class);
             method.setAccessible(true);
-            route = method.invoke(directionsApiDataParser, directionsRoute, ClassConstants.DRIVING);
+            route = method.invoke(directionsApiDataParser, directionsRoute);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -153,7 +154,50 @@ public class DirectionsApiDataParserTest {
     }
 
     @Test
-    public void extractTransitInfo_DepartureAndArrivalNotNullTest() {
+    public void getWalkingRouteTest() {
+        // Arrange
+        Object route = null;
+
+        DirectionsRoute directionsRoute = new DirectionsRoute();
+        directionsRoute.legs = new DirectionsLeg[1];
+        directionsRoute.legs[0] = new DirectionsLeg();
+        directionsRoute.legs[0].duration = new Duration();
+        directionsRoute.legs[0].duration.text = "10 mins";
+        directionsRoute.summary = "test";
+
+        DirectionsStep d1 = new DirectionsStep();
+        d1.duration = new Duration();
+        d1.duration.value = 142;
+        d1.travelMode = TravelMode.WALKING;
+
+        DirectionsStep[] steps = {d1};
+
+        directionsRoute.legs[0].steps = steps;
+
+        // Act
+        try{
+            Method method = directionsApiDataParser.getClass().getDeclaredMethod("getWalkingRoute", DirectionsRoute.class);
+            method.setAccessible(true);
+            route = method.invoke(directionsApiDataParser, directionsRoute);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        // Assert
+        Assert.assertEquals("", ((Route) route).getDepartureTime());
+        Assert.assertEquals("", ((Route) route).getArrivalTime());
+        Assert.assertEquals("10 mins", ((Route) route).getDuration());
+        Assert.assertEquals(ClassConstants.WALKING, ((Route) route).getMainTransportType());
+        Assert.assertEquals("test", ((Route) route).getSummary());
+        Assert.assertNull(((Route) route).getSteps());
+    }
+
+    @Test
+    public void getTransitRouteTest() {
         // Arrange
         Object route = null;
 
@@ -180,7 +224,7 @@ public class DirectionsApiDataParserTest {
 
         // Act
         try{
-            Method method = directionsApiDataParser.getClass().getDeclaredMethod("extractTransitInfo", DirectionsRoute.class);
+            Method method = directionsApiDataParser.getClass().getDeclaredMethod("getTransitRoute", DirectionsRoute.class);
             method.setAccessible(true);
             route = method.invoke(directionsApiDataParser, directionsRoute);
         } catch (NoSuchMethodException e) {
@@ -201,7 +245,7 @@ public class DirectionsApiDataParserTest {
     }
 
     @Test
-    public void extractTransitInfo_DepartureAndArrivalNullTest() {
+    public void getTransitRoute_DepartureAndArrivalNullTest() {
         // Arrange
         Object route = null;
 
@@ -222,7 +266,7 @@ public class DirectionsApiDataParserTest {
 
         // Act
         try{
-            Method method = directionsApiDataParser.getClass().getDeclaredMethod("extractTransitInfo", DirectionsRoute.class);
+            Method method = directionsApiDataParser.getClass().getDeclaredMethod("getTransitRoute", DirectionsRoute.class);
             method.setAccessible(true);
             route = method.invoke(directionsApiDataParser, directionsRoute);
         } catch (NoSuchMethodException e) {
