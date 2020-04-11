@@ -1,5 +1,6 @@
 package com.example.concordia_campus_guide.ModelTests;
 
+import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.models.routes.Route;
 import com.example.concordia_campus_guide.models.routes.TransportType;
 import org.junit.Test;
@@ -13,7 +14,7 @@ public class RouteTest {
     @Test
     public void getDepartureTimeTest() {
         // Arrange
-        Route route = new Route("4:23pm", "4:33pm", "10 min", "transit");
+        Route route = new Route(null, "4:23pm", "4:33pm", "10 min", "transit", ClassConstants.TRANSIT);
         String expectedDepartureTime = "4:23pm";
 
         // Act & Arrange
@@ -24,7 +25,7 @@ public class RouteTest {
     @Test
     public void getArrivalTimeTest() {
         // Arrange
-        Route route = new Route("4:23pm", "4:33pm", "10 min", "transit");
+        Route route = new Route(null, "4:23pm", "4:33pm", "10 min", "transit", "");
         String expectedArrivalTime = "4:33pm";
 
         // Act & Arrange
@@ -34,7 +35,7 @@ public class RouteTest {
     @Test
     public void getDurationTest() {
         // Arrange
-        Route route = new Route("1 hour 20 min", "transit");
+        Route route = new Route(null,"", "", "1 hour 20 min", "transit", "");
         String expectedDuration = "1 hour 20 min";
 
         // Act & Arrange
@@ -44,7 +45,7 @@ public class RouteTest {
     @Test
     public void getSummaryTest() {
         // Arrange
-        Route route = new Route("1 day 20 hours", "I-80 E", "driving");
+        Route route = new Route(null,"", "", "1 hour 20 min", "I-80 E", "");
         String expectedSummary = "I-80 E";
 
         // Act & Arrange
@@ -54,7 +55,7 @@ public class RouteTest {
     @Test
     public void getMainTransportTypeTest() {
         // Arrange
-        Route route = new Route("1 day 20 hours", "I-80 E", "driving");
+        Route route = new Route(null,"", "", "1 hour 20 min", "I-80 E", "driving");
         String expectedMainTransportType = "driving";
 
         // Act & Arrange
@@ -62,42 +63,12 @@ public class RouteTest {
     }
 
     @Test
-    public void getSetStepsTest() {
+    public void getStepsTest() {
         // Arrange
         List<TransportType> expectedSteps = new ArrayList<>();
-        Route route = new Route("20 mins", "Autoroute 15-S", "driving");
-        route.setSteps(expectedSteps);
+        Route route = new Route(expectedSteps,"", "", "1 hour 20 min", "I-80 E", "driving");
 
         // Act & Assert
         assertEquals(expectedSteps, route.getSteps());
-    }
-
-    @Test
-    public void getStepsNullTest() {
-        // Arrange
-        Route route = new Route("20 mins", "Autoroute 15-S", "driving");
-
-        // Act & Assert
-        assertNull(route.getSteps());
-    }
-
-    @Test
-    public void getStepsNonNullWith4ArgsCstorTest() {
-        // Arrange
-        Route route = new Route("4:23pm", "4:33pm", "10 min", "transit");
-        List<TransportType> expectedSteps = new ArrayList<>();
-
-        // Act & Assert
-        assertEquals(expectedSteps.size(), route.getSteps().size());
-    }
-
-    @Test
-    public void getStepsNonNullWith2ArgsCstorTest() {
-        // Arrange
-        Route route = new Route("20 mins", "transit");
-        List<TransportType> expectedSteps = new ArrayList<>();
-
-        // Act & Assert
-        assertEquals(expectedSteps.size(), route.getSteps().size());
     }
 }
