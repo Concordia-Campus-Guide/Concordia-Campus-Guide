@@ -13,6 +13,7 @@ import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.activities.MainActivity;
 import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.helper.DirectionsPolyLinesDrawer;
+import com.example.concordia_campus_guide.helper.PolygonsDrawer;
 import com.example.concordia_campus_guide.models.Coordinates;
 import com.example.concordia_campus_guide.models.RoomModel;
 import com.example.concordia_campus_guide.view_models.LocationFragmentViewModel;
@@ -27,8 +28,6 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
-
-import com.example.concordia_campus_guide.helper.PolygonsDrawer;
 
 @RunWith(AndroidJUnit4.class)
 @SmallTest
@@ -45,6 +44,7 @@ public class LocationFragmentInstrumentalTest {
             GrantPermissionRule.grant(
                     "android.permission.ACCESS_FINE_LOCATION",
                     "android.permission.ACCESS_COARSE_LOCATION",
+                    "android.permission.WRITE_CALENDAR",
                     "android.permission.READ_CALENDAR");
 
     @Before
