@@ -18,8 +18,7 @@ import java.util.List;
 public class  ClassConstants {
     public static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     public static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-    public static final String TRUE = "true";
-    public static final String FALSE = "false";
+    public static boolean MY_LOCATION_PERMISSION_GRANTED = false;
     public static final String DISABILITY_BUTTON = "disability_button";
     public static final String CALENDAR_INTEGRATION_BUTTON = "calendar_integration_button";
     public static final String SHARED_PREFERENCES = "UserPreferences";
@@ -45,6 +44,8 @@ public class  ClassConstants {
     public static final String DRIVING = "driving";
     public static final String SHUTTLE = "shuttle";
 
+    public static final String FLOORS_AVAILABLE = "floorsAvailable";
+
     public static final Coordinates SGW_SHUTTLE_STOP = new Coordinates( 45.497025978950774, -73.57849985361099);
     public static final Coordinates LOYOLA_SHUTTLE_STOP = new Coordinates(45.4584776424937, -73.638241700828);
 
@@ -66,4 +67,7 @@ public class  ClassConstants {
 
     public static final int EARTH_RADIUS_KM = 6371;
 
+    public static final String LOCATION_FRAGMENT_TAG = "LocationFragment";
+    public static final String POI_TAG = "POI";
+    public static final String ROOM_TAG = "ROOM";
 }

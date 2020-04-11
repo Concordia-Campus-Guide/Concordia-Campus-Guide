@@ -1,7 +1,6 @@
 package com.example.concordia_campus_guide.activities;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -34,6 +33,7 @@ import com.example.concordia_campus_guide.fragments.POIFragment;
 import com.example.concordia_campus_guide.fragments.SmallInfoCardFragment;
 import com.example.concordia_campus_guide.global.ApplicationState;
 import com.example.concordia_campus_guide.global.SelectingToFromState;
+import com.example.concordia_campus_guide.helper.CurrentLocation;
 import com.example.concordia_campus_guide.helper.LocaleHelper;
 import com.example.concordia_campus_guide.helper.Notification;
 import com.example.concordia_campus_guide.models.Buildings;
@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Notification notification;
     Toolbar myToolbar;
 
+    private CurrentLocation currentLocation;
     private CalendarViewModel calendarViewModel;
     // Side Menu Toggle Buttons
     private CompoundButton staffToggle;
@@ -115,8 +116,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         SharedPreferences sharedPreferences = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
         for (Map.Entry<CompoundButton, String> entry : toggleButtonAndCorrespondingToggleType.entrySet()) {
-            String value = sharedPreferences.getString(entry.getValue(), ClassConstants.FALSE);
-            entry.getKey().setChecked(value.equals(ClassConstants.TRUE));
+            boolean value = sharedPreferences.getBoolean(entry.getValue(), false);
+            entry.getKey().setChecked(value);
         }
     }
 
@@ -128,9 +129,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SharedPreferences.Editor myEdit = sharedPreferences.edit();
 
         for (Map.Entry<CompoundButton, String> entry: toggleButtonAndCorrespondingToggleType.entrySet()) {
-            String value = entry.getKey().isChecked() ? ClassConstants.TRUE : ClassConstants.FALSE;
+            boolean value = entry.getKey().isChecked();
             String toggleType = entry.getValue();
-            myEdit.putString(toggleType, value);
+            myEdit.putBoolean(toggleType, value);
         }
 
         myEdit.commit();
@@ -139,11 +140,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void initComponents() {
         MainActivity.this.setTitle("ConUMaps");
 
+        currentLocation = new CurrentLocation(this);
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
         calendarViewModel = new CalendarViewModel(getApplication());
         mViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
         fragmentManager = getSupportFragmentManager();
-
+        currentLocation.updateLocationEvery5Seconds();
         setupNotifications();
         setupSwipeableCards();
         setupToolBar();
@@ -403,7 +405,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public Location getMyCurrentLocation() {
-        return this.locationFragment.getCurrentLocation();
+        return currentLocation.getMyLocation();
     }
 
     @Override

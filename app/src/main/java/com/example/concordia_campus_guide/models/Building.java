@@ -36,6 +36,9 @@ public class Building extends Place {
     @TypeConverters(StringListConverter.class)
     private List<String> availableFloors;
 
+    @ColumnInfo(name = "entranceFloor")
+    private String entranceFloor;
+
     @ColumnInfo(name = "width")
     private float width;
 
@@ -97,6 +100,14 @@ public class Building extends Place {
 
     public void setAvailableFloors(List<String> availableFloors) {
         this.availableFloors = availableFloors;
+    }
+
+    public String getEntranceFloor() {
+        return entranceFloor;
+    }
+
+    public void setEntranceFloor(String entranceFloor) {
+        this.entranceFloor = entranceFloor;
     }
 
     public float getWidth() {

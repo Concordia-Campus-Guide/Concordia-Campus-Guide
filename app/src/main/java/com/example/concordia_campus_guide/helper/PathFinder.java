@@ -1,5 +1,8 @@
 package com.example.concordia_campus_guide.helper;
 
+import android.content.SharedPreferences;
+
+import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.models.Building;
 import com.example.concordia_campus_guide.models.Floor;
@@ -22,7 +25,7 @@ import java.util.PriorityQueue;
  * Double[] trg = {-73.57908558, 45.49735711};
  * RoomModel room1 = new RoomModel(src, "437", "MB-S2");
  * RoomModel room2 = new RoomModel(trg, "838", "H-8");
- * PathFinder finder = new PathFinder(getContext(), room1, room2);
+ * PathFinder finder = new PathFinder(AppDatabase.getInstance(getContext()), room1, room2);
  * List<WalkingPoint> solution = finder.getPathToDestination();
  */
 public class PathFinder {
@@ -40,12 +43,17 @@ public class PathFinder {
     private final WalkingPoint destinationPoint;
     private final IndoorPathHeuristic indoorPathHeuristic;
     private final AppDatabase appDatabase;
+    private boolean isStaffAccessiblity;
+    private boolean isReducedAccessiblity;
 
-    public PathFinder(final AppDatabase appDatabase, final Place source, final Place destination) {
+    public PathFinder(final AppDatabase appDatabase, SharedPreferences accessibilityPreferences, final Place source, final Place destination) {
         this.walkingPointsToVisit = new PriorityQueue<>(new WalkingPointComparator());
         this.walkingPointsVisited = new HashMap<>();
-        this.indoorPathHeuristic = new IndoorPathHeuristic(appDatabase);
+
+        this.isStaffAccessiblity = accessibilityPreferences.getBoolean(ClassConstants.STAFF_TOGGLE, false);
+        this.isReducedAccessiblity = accessibilityPreferences.getBoolean(ClassConstants.ACCESSIBILITY_TOGGLE, false) || accessibilityPreferences.getBoolean(ClassConstants.DISABILITY_BUTTON, false);
         this.appDatabase = appDatabase;
+        this.indoorPathHeuristic = new IndoorPathHeuristic(appDatabase, isStaffAccessiblity, isReducedAccessiblity);
 
         final List<WalkingPoint> walkingPoints = appDatabase.walkingPointDao().getAll();
         walkingPointNodesMap = (HashMap<Integer, WalkingPointNode>) populateWalkingPointMap(walkingPoints);
@@ -72,24 +80,22 @@ public class PathFinder {
         String placeCode;
         String floorCode;
 
-        List<WalkingPoint> pointList = null;
+        WalkingPoint point = null;
         if (place instanceof Building) {
-            placeCode = ((Building) place).getBuildingCode();
-            pointList = appDatabase.walkingPointDao().getAllWalkingPointsFromPlace(placeCode + "-1", "entrance");
+            String entranceFloor = ((Building) place).getBuildingCode() + "-" + ((Building) place).getEntranceFloor();
+            point = appDatabase.walkingPointDao().getWalkingPoint(entranceFloor, "entrance");
         } else if (place instanceof RoomModel) {
             //placeCode is not unique for Rooms, therefore we need to fetch the Walking point by searching for both floor code and place code
             floorCode = ((RoomModel) place).getFloorCode();
             placeCode = ((RoomModel) place).getRoomCode();
-            pointList = appDatabase.walkingPointDao().getAllWalkingPointsFromPlace(floorCode, placeCode);
+            point = appDatabase.walkingPointDao().getWalkingPoint(floorCode, placeCode);
         } else if (place instanceof Floor) {
             floorCode = ((Floor) place).getFloorCode();
-            pointList = appDatabase.walkingPointDao().getAllAccessPointsOnFloor(floorCode, PointType.ELEVATOR);
+            List<WalkingPoint> allElevators = appDatabase.walkingPointDao().getAllAccessPointsOnFloor(floorCode, PointType.ELEVATOR);
+            point = allElevators != null && !allElevators.isEmpty()? allElevators.get(0):null;
         }
 
-        if (pointList != null && !pointList.isEmpty())
-            return pointList.get(0);
-
-        return null;
+        return point;
     }
 
     /**
@@ -104,7 +110,7 @@ public class PathFinder {
         while (!walkingPointsToVisit.isEmpty()) {
             final WalkingPointNode currentLocation = walkingPointsToVisit.poll();
 
-            if (walkingPointsVisited.containsKey(currentLocation))
+            if (walkingPointsVisited.containsKey(currentLocation) || !isWalkingPointAccessible(currentLocation.getWalkingPoint()))
                 continue;
             else
                 walkingPointsVisited.put(currentLocation, currentLocation.getCost());
@@ -115,6 +121,19 @@ public class PathFinder {
             addNearestWalkingPoints(currentLocation);
         }
         return new ArrayList<>();
+    }
+
+    private boolean isWalkingPointAccessible(WalkingPoint point){
+        String pointType = point.getPointType();
+        switch (pointType){
+            case PointType.STAIRS:
+                return !isReducedAccessiblity;
+            case PointType.STAFF_ELEVATOR:
+            case PointType.STAFF_WASHROOM:
+                return isStaffAccessiblity;
+            default:
+                return true;
+        }
     }
 
     /**

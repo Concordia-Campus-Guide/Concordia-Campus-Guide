@@ -1410,6 +1410,7 @@
         "8",
         "9"
       ],
+      "entranceFloor": "1",
       "cornerCoordinates":{
         "listOfCoordinates":[
           {
@@ -1925,6 +1926,7 @@
         "S2",
         "1"
       ],
+      "entranceFloor": "1",
       "cornerCoordinates":{
         "listOfCoordinates":[
           {
@@ -3221,6 +3223,7 @@
         "1",
         "2"
       ],
+      "entranceFloor": "1",
       "cornerCoordinates":{
         "listOfCoordinates":[
           {
