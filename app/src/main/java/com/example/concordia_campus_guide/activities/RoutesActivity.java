@@ -214,12 +214,16 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
         allRoutes.setAdapter(adapter);
         allRoutes.setOnItemClickListener((adapterView, view, i, l) -> {
             if (carButton.isSelected() || transitButton.isSelected() || walkButton.isSelected()) {
-                Intent openPaths = new Intent(RoutesActivity.this,
-                        PathsActivity.class);
-                DirectionsRoute directionsResult = mViewModel.getDirectionsResult().routes[i];
-                openPaths.putExtra("directionsResult", directionsResult);
-                openPaths.putExtra("shuttle", false);
-                startActivity(openPaths);
+                if (mViewModel.getRouteOptions().get(0).getDuration().equals("")) {
+                    Toast.makeText(getApplicationContext(), "Paths view is not available.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent openPaths = new Intent(RoutesActivity.this,
+                            PathsActivity.class);
+                    DirectionsRoute directionsResult = mViewModel.getDirectionsResult().routes[i];
+                    openPaths.putExtra("directionsResult", directionsResult);
+                    openPaths.putExtra("shuttle", false);
+                    startActivity(openPaths);
+                }
             } else {
                 if (mViewModel.getShuttles() == null) {
                     Toast.makeText(getApplicationContext(), "Paths view for Shuttle route is not available if no shuttles exist.", Toast.LENGTH_SHORT).show();
