@@ -9,6 +9,8 @@ import com.example.concordia_campus_guide.models.Building;
 import com.example.concordia_campus_guide.models.Floor;
 import com.example.concordia_campus_guide.models.Place;
 import com.example.concordia_campus_guide.models.RoomModel;
+import com.example.concordia_campus_guide.models.helpers.RouteBuilder;
+import com.example.concordia_campus_guide.models.helpers.RouteBuilderDirector;
 import com.example.concordia_campus_guide.models.routes.Route;
 import com.example.concordia_campus_guide.models.Shuttle;
 
@@ -36,6 +38,7 @@ public class RoutesActivityViewModel extends ViewModel {
     private List<Shuttle> shuttles;
     private DirectionsResult directionsResult;
     private List<Route> routeOptions;
+    private RouteBuilderDirector director = new RouteBuilderDirector();
 
     public RoutesActivityViewModel(AppDatabase appDB) {
         this.appDB = appDB;
@@ -124,8 +127,10 @@ public class RoutesActivityViewModel extends ViewModel {
             }
             String campusFrom = shuttle.getCampus();
             String campusTo = campusFrom.compareTo("SGW") == 0 ? "LOY" : "SGW";
-            Route shuttleRoute = new Route(departureTime, arrivalDateString, "25 mins", campusFrom + "," + campusTo, "shuttle");
-            routeOptions.add(shuttleRoute);
+
+            RouteBuilder routeBuilder = new RouteBuilder();
+            director.constructShuttleRoute(routeBuilder, departureTime, arrivalDateString, "25 mins", campusFrom + "," + campusTo);
+            routeOptions.add(routeBuilder.getRoute());
         }
         return routeOptions;
     }
@@ -147,8 +152,9 @@ public class RoutesActivityViewModel extends ViewModel {
     }
 
     public void noShuttles(String noShuttleText) {
-        Route shuttleRoute = new Route("shuttle");
-        shuttleRoute.setSummary(noShuttleText);
+        RouteBuilder routeBuilder = new RouteBuilder();
+        director.constructShuttleRouteWithSummaryOnly(routeBuilder, noShuttleText);
+        Route shuttleRoute = routeBuilder.getRoute();
         routeOptions.add(shuttleRoute);
     }
 }

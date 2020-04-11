@@ -4,8 +4,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
-import com.example.concordia_campus_guide.activities.MainActivity;
-
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.rule.GrantPermissionRule;
@@ -14,6 +12,8 @@ import androidx.test.uiautomator.UiDevice;
 import androidx.test.uiautomator.UiObject;
 import androidx.test.uiautomator.UiObjectNotFoundException;
 import androidx.test.uiautomator.UiSelector;
+
+import com.example.concordia_campus_guide.activities.MainActivity;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -45,6 +45,7 @@ public class InfoCardFragmentIntegrationTest {
             GrantPermissionRule.grant(
                     "android.permission.ACCESS_FINE_LOCATION",
                     "android.permission.ACCESS_COARSE_LOCATION",
+                    "android.permission.WRITE_CALENDAR",
                     "android.permission.READ_CALENDAR");
 
     @Before
