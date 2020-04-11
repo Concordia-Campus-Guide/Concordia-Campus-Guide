@@ -15,12 +15,14 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import androidx.test.espresso.ViewAssertion;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.rule.GrantPermissionRule;
 import androidx.test.runner.AndroidJUnit4;
 
+import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -51,145 +53,41 @@ public class SideMenuFrenchTranslationTest {
     @Test
     public void sideMenuFrenchTranslationTest() {
 
-        ViewInteraction appCompatImageButton = onView(
-                allOf(withContentDescription("Open navigation drawer"),
-                        childAtPosition(
-                                allOf(withId(R.id.toolbar),
-                                        childAtPosition(
-                                                withId(R.id.appBarLayout),
-                                                0)),
-                                1),
-                        isDisplayed()));
-        appCompatImageButton.perform(click());
+        onView(allOf(withId(R.id.info_card_title), withText(R.string.point_of_interest_explore))).perform(click());
 
+        onView(withIndex(withId(R.id.serviceTv), 0)).check(matches(withText("Elevator")));
+        onView(withIndex(withId(R.id.serviceTv), 1)).check(matches(withText("Lounges")));
+        onView(withIndex(withId(R.id.serviceTv), 2)).check(matches(withText("Stairs")));
+        onView(withIndex(withId(R.id.serviceTv), 3)).check(matches(withText("Washroom")));
 
-        pressBack();
+        onView(withContentDescription(R.string.navigation_drawer_open)).perform(click());
 
-        ViewInteraction frameLayout = onView(
-                allOf(withId(R.id.info_card_title),
-                        isDisplayed()));
-        frameLayout.perform(click());
+        onView(withText(R.string.calendar)).check(matches(isDisplayed()));
+        onView(withText(R.string.french)).check(matches(isDisplayed()));
+        onView(withText(R.string.staff)).check(matches(isDisplayed()));
+        onView(withText(R.string.accessibility)).check(matches(isDisplayed()));
 
-
-
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.serviceTv), withText("Elevator"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class),
-                                        0),
-                                1),
-                        isDisplayed()));
-        textView.check(matches(withText("Elevator")));
-
-        ViewInteraction textView2 = onView(
-                allOf(withId(R.id.serviceTv), withText("Lounges"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class),
-                                        0),
-                                1),
-                        isDisplayed()));
-        textView2.check(matches(withText("Lounges")));
-
-        ViewInteraction textView3 = onView(
-                allOf(withId(R.id.serviceTv), withText("Stairs"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class),
-                                        0),
-                                1),
-                        isDisplayed()));
-        textView3.check(matches(withText("Stairs")));
-
-        ViewInteraction textView4 = onView(
-                allOf(withId(R.id.serviceTv), withText("Washroom"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class),
-                                        0),
-                                1),
-                        isDisplayed()));
-        textView4.check(matches(withText("Washroom")));
-
-        ViewInteraction frameLayout2 = onView(
-                allOf(withId(R.id.explore_bottom_card_frame),
-                        childAtPosition(
-                                allOf(withId(R.id.explore_bottom_card_scroll_view),
-                                        childAtPosition(
-                                                withId(R.id.bottom_card_coordinator_layout),
-                                                0)),
-                                0),
-                        isDisplayed()));
-        frameLayout2.perform(click());
-
-        ViewInteraction appCompatImageButton2 = onView(
-                allOf(withContentDescription("Open navigation drawer"),
-                        childAtPosition(
-                                allOf(withId(R.id.toolbar),
-                                        childAtPosition(
-                                                withId(R.id.appBarLayout),
-                                                0)),
-                                1),
-                        isDisplayed()));
-        appCompatImageButton2.perform(click());
 
         ViewInteraction switch_ = onView(
                 allOf(withId(R.id.nav_translate),
-                        childAtPosition(
-                                allOf(withId(R.id.design_menu_item_action_area),
-                                        childAtPosition(
-                                                withClassName(is("com.google.android.material.internal.NavigationMenuItemView")),
-                                                1)),
-                                0),
                         isDisplayed()));
         switch_.perform(click());
 
         pressBack();
 
-        ViewInteraction frameLayout3 = onView(
-                allOf(withId(R.id.info_card_title),
-                        isDisplayed()));
+        onView(withIndex(withId(R.id.serviceTv), 0)).check(matches(withText("Ascenseur")));
+        onView(withIndex(withId(R.id.serviceTv), 1)).check(matches(withText("Salons")));
+        onView(withIndex(withId(R.id.serviceTv), 2)).check(matches(withText("Escalier")));
+        onView(withIndex(withId(R.id.serviceTv), 3)).check(matches(withText("Toilette")));
 
-        ViewInteraction textView5 = onView(
-                allOf(withId(R.id.serviceTv), withText("Ascenseur"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class),
-                                        0),
-                                1),
-                        isDisplayed()));
-        textView5.check(matches(withText("Ascenseur")));
+        onView(withContentDescription(R.string.navigation_drawer_open)).perform(click());
 
-        ViewInteraction textView6 = onView(
-                allOf(withId(R.id.serviceTv), withText("Salons"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class),
-                                        0),
-                                1),
+        ViewInteraction switch_2 = onView(
+                allOf(withId(R.id.nav_translate),
                         isDisplayed()));
-        textView6.check(matches(withText("Salons")));
+        switch_2.perform(click());
 
-        ViewInteraction textView7 = onView(
-                allOf(withId(R.id.serviceTv), withText("Escalier"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class),
-                                        0),
-                                1),
-                        isDisplayed()));
-        textView7.check(matches(withText("Escalier")));
-
-        ViewInteraction textView8 = onView(
-                allOf(withId(R.id.serviceTv), withText("Toilette"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class),
-                                        0),
-                                1),
-                        isDisplayed()));
-        textView8.check(matches(withText("Toilette")));
+        pressBack();
     }
 
     private static Matcher<View> childAtPosition(
@@ -207,6 +105,24 @@ public class SideMenuFrenchTranslationTest {
                 ViewParent parent = view.getParent();
                 return parent instanceof ViewGroup && parentMatcher.matches(parent)
                         && view.equals(((ViewGroup) parent).getChildAt(position));
+            }
+        };
+    }
+
+    public static Matcher<View> withIndex(final Matcher<View> matcher, final int index) {
+        return new TypeSafeMatcher<View>() {
+            int currentIndex = 0;
+
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("with index: ");
+                description.appendValue(index);
+                matcher.describeTo(description);
+            }
+
+            @Override
+            public boolean matchesSafely(View view) {
+                return matcher.matches(view) && currentIndex++ == index;
             }
         };
     }
