@@ -6,6 +6,7 @@ import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.DirectionsResult;
 import com.example.concordia_campus_guide.models.Building;
+import com.example.concordia_campus_guide.models.Floor;
 import com.example.concordia_campus_guide.models.Place;
 import com.example.concordia_campus_guide.models.RoomModel;
 import com.example.concordia_campus_guide.models.helpers.RouteBuilder;
@@ -52,14 +53,11 @@ public class RoutesActivityViewModel extends ViewModel {
     }
 
     public Place getEntrance(Place place) {
-        if (place instanceof RoomModel) {
-            String floorCode = ((RoomModel) place).getFloorCode();
-            Building building = appDB.buildingDao().getBuildingByBuildingCode(floorCode.substring(0, floorCode.indexOf('-')).toUpperCase());
-            String entranceFloor = building.getBuildingCode() + "-" + building.getEntranceFloor();
-            return appDB.roomDao().getRoomByIdAndFloorCode("entrance", entranceFloor);
-        }
-
-        return place;
+        if (!(place instanceof RoomModel || place instanceof Floor)) return place;
+        String floorCode = place instanceof RoomModel? ((RoomModel) place).getFloorCode() : ((Floor) place).getFloorCode();
+        Building building = appDB.buildingDao().getBuildingByBuildingCode(floorCode.substring(0, floorCode.indexOf('-')).toUpperCase());
+        String entranceFloor = building.getBuildingCode() + "-" + building.getEntranceFloor();
+        return appDB.roomDao().getRoomByIdAndFloorCode("entrance", entranceFloor);
     }
 
     public Place getFrom() {
