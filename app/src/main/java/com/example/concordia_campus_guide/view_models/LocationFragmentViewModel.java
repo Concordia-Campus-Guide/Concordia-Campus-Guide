@@ -2,23 +2,23 @@ package com.example.concordia_campus_guide.view_models;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.concordia_campus_guide.ClassConstants;
+import com.example.concordia_campus_guide.R;
 import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.helper.BuildingCodeMap;
 import com.example.concordia_campus_guide.helper.CurrentLocation;
-import com.example.concordia_campus_guide.helper.PolygonsDrawer;
 import com.example.concordia_campus_guide.helper.FloorPlan;
 import com.example.concordia_campus_guide.helper.ManipulateWalkingPoints;
 import com.example.concordia_campus_guide.helper.POIIcon;
+import com.example.concordia_campus_guide.helper.PolygonsDrawer;
 import com.example.concordia_campus_guide.models.Building;
 import com.example.concordia_campus_guide.models.PoiType;
 import com.example.concordia_campus_guide.models.RoomModel;
 import com.example.concordia_campus_guide.models.WalkingPoint;
-import com.example.concordia_campus_guide.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.GroundOverlay;
@@ -27,6 +27,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.PolyUtil;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +47,7 @@ public class LocationFragmentViewModel extends ViewModel {
     private ManipulateWalkingPoints manipulateWalkingPoints;
 
     //EV centerCoordinates
-    private LatLng initialZoomLocation = ClassConstants.INITIAL_ZOOM_LOCATION;
+    private LatLng initialZoomLocation = new LatLng(45.495638 ,-73.578258);
 
     public static final Logger LOGGER = Logger.getLogger("LocationFragmentViewModel");
 
