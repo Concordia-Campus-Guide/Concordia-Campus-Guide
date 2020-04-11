@@ -1,12 +1,9 @@
 package com.example.concordia_campus_guide;
 
-import android.Manifest;
-
 import androidx.annotation.StringDef;
 
 import com.google.android.gms.maps.model.Dash;
 import com.google.android.gms.maps.model.Gap;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PatternItem;
 
 import java.lang.annotation.Retention;
@@ -15,8 +12,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class  ClassConstants {
-    public static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
-    public static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     public static boolean MY_LOCATION_PERMISSION_GRANTED = false;
     public static final String DISABILITY_BUTTON = "disability_button";
     public static final String CALENDAR_INTEGRATION_BUTTON = "calendar_integration_button";
@@ -47,9 +42,6 @@ public class  ClassConstants {
 
     //Polyline styling
     public static final List<PatternItem> WALK_PATTERN = Arrays.asList(new Gap(20), new Dash(20));
-
-    //EV centerCoordinates
-    public static final LatLng INITIAL_ZOOM_LOCATION = new LatLng(45.495638 ,-73.578258);
 
     //SGW building label string used as campus center
     public static final String SGW_CENTER_BUILDING_LABEL = "EV";
