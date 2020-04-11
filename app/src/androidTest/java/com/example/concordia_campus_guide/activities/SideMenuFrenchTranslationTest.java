@@ -53,31 +53,44 @@ public class SideMenuFrenchTranslationTest {
     @Test
     public void sideMenuFrenchTranslationTest() {
 
+        verifyEnglishExploreCard();
+
+        openSideMenuAndVerify();
+
+        onView(allOf(withId(R.id.nav_translate), isDisplayed())).perform(click());
+
+        pressBack();
+
+        verifyFrenchExploreCard();
+
+        // go back to original
+
+        onView(withContentDescription(R.string.navigation_drawer_open)).perform(click());
+
+        onView(allOf(withId(R.id.nav_translate), isDisplayed())).perform(click());
+
+        pressBack();
+    }
+
+    private void verifyFrenchExploreCard() {
+        String[] frenchServicesTextExpected = {"Ascenseur", "Salons", "Escalier", "Toilette"};
+        verifyExploreCard(frenchServicesTextExpected);
+    }
+
+    private void verifyEnglishExploreCard() {
         onView(allOf(withId(R.id.info_card_title), withText(R.string.point_of_interest_explore))).perform(click());
 
         String[] englishServicesTextExpected = {"Elevator", "Lounges", "Stairs", "Washroom"};
         verifyExploreCard(englishServicesTextExpected);
+    }
 
+    private void openSideMenuAndVerify() {
         onView(withContentDescription(R.string.navigation_drawer_open)).perform(click());
 
         onView(withText(R.string.calendar)).check(matches(isDisplayed()));
         onView(withText(R.string.french)).check(matches(isDisplayed()));
         onView(withText(R.string.staff)).check(matches(isDisplayed()));
         onView(withText(R.string.accessibility)).check(matches(isDisplayed()));
-
-
-        onView(allOf(withId(R.id.nav_translate), isDisplayed())).perform(click());
-
-        pressBack();
-
-        String[] frenchServicesTextExpected = {"Ascenseur", "Salons", "Escalier", "Toilette"};
-        verifyExploreCard(frenchServicesTextExpected);
-
-        onView(withContentDescription(R.string.navigation_drawer_open)).perform(click());
-
-        onView(allOf(withId(R.id.nav_translate), isDisplayed())).perform(click());
-
-        pressBack();
     }
 
     public void verifyExploreCard(String[] servicesTextExpected){
@@ -85,6 +98,7 @@ public class SideMenuFrenchTranslationTest {
             onView(withIndex(withId(R.id.serviceTv), i)).check(matches(withText(servicesTextExpected[i])));
         }
     }
+
     // very important, without this it will always fail with gridviews elemnent as they share same id
     public static Matcher<View> withIndex(final Matcher<View> matcher, final int index) {
         return new TypeSafeMatcher<View>() {
