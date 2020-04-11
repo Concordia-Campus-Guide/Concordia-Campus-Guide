@@ -55,10 +55,8 @@ public class SideMenuFrenchTranslationTest {
 
         onView(allOf(withId(R.id.info_card_title), withText(R.string.point_of_interest_explore))).perform(click());
 
-        onView(withIndex(withId(R.id.serviceTv), 0)).check(matches(withText("Elevator")));
-        onView(withIndex(withId(R.id.serviceTv), 1)).check(matches(withText("Lounges")));
-        onView(withIndex(withId(R.id.serviceTv), 2)).check(matches(withText("Stairs")));
-        onView(withIndex(withId(R.id.serviceTv), 3)).check(matches(withText("Washroom")));
+        String[] englishServicesTextExpected = {"Elevator", "Lounges", "Stairs", "Washroom"};
+        verifyExploreCard(englishServicesTextExpected);
 
         onView(withContentDescription(R.string.navigation_drawer_open)).perform(click());
 
@@ -68,47 +66,26 @@ public class SideMenuFrenchTranslationTest {
         onView(withText(R.string.accessibility)).check(matches(isDisplayed()));
 
 
-        ViewInteraction switch_ = onView(
-                allOf(withId(R.id.nav_translate),
-                        isDisplayed()));
-        switch_.perform(click());
+        onView(allOf(withId(R.id.nav_translate), isDisplayed())).perform(click());
 
         pressBack();
 
-        onView(withIndex(withId(R.id.serviceTv), 0)).check(matches(withText("Ascenseur")));
-        onView(withIndex(withId(R.id.serviceTv), 1)).check(matches(withText("Salons")));
-        onView(withIndex(withId(R.id.serviceTv), 2)).check(matches(withText("Escalier")));
-        onView(withIndex(withId(R.id.serviceTv), 3)).check(matches(withText("Toilette")));
+        String[] frenchServicesTextExpected = {"Ascenseur", "Salons", "Escalier", "Toilette"};
+        verifyExploreCard(frenchServicesTextExpected);
 
         onView(withContentDescription(R.string.navigation_drawer_open)).perform(click());
 
-        ViewInteraction switch_2 = onView(
-                allOf(withId(R.id.nav_translate),
-                        isDisplayed()));
-        switch_2.perform(click());
+        onView(allOf(withId(R.id.nav_translate), isDisplayed())).perform(click());
 
         pressBack();
     }
 
-    private static Matcher<View> childAtPosition(
-            final Matcher<View> parentMatcher, final int position) {
-
-        return new TypeSafeMatcher<View>() {
-            @Override
-            public void describeTo(Description description) {
-                description.appendText("Child at position " + position + " in parent ");
-                parentMatcher.describeTo(description);
-            }
-
-            @Override
-            public boolean matchesSafely(View view) {
-                ViewParent parent = view.getParent();
-                return parent instanceof ViewGroup && parentMatcher.matches(parent)
-                        && view.equals(((ViewGroup) parent).getChildAt(position));
-            }
-        };
+    public void verifyExploreCard(String[] servicesTextExpected){
+        for(int i =0; i < servicesTextExpected.length; i++){
+            onView(withIndex(withId(R.id.serviceTv), i)).check(matches(withText(servicesTextExpected[i])));
+        }
     }
-
+    // very important, without this it will always fail with gridviews elemnent as they share same id
     public static Matcher<View> withIndex(final Matcher<View> matcher, final int index) {
         return new TypeSafeMatcher<View>() {
             int currentIndex = 0;
