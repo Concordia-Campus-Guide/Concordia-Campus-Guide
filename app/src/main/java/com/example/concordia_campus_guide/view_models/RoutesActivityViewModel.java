@@ -1,8 +1,11 @@
 package com.example.concordia_campus_guide.view_models;
 
+import android.app.Activity;
+
 import androidx.lifecycle.ViewModel;
 
 import com.example.concordia_campus_guide.ClassConstants;
+import com.example.concordia_campus_guide.R;
 import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.DirectionsResult;
 import com.example.concordia_campus_guide.models.Building;
@@ -148,9 +151,9 @@ public class RoutesActivityViewModel extends ViewModel {
         this.transportType = transportType;
     }
 
-    public void noShuttles(String noShuttleText) {
-        Route shuttleRoute = new Route("shuttle");
-        shuttleRoute.setSummary(noShuttleText);
-        routeOptions.add(shuttleRoute);
+    public void noRoutesOptions(String noRoutes) {
+        Route noRoute = new Route(transportType);
+        noRoute.setSummary(noRoutes);
+        routeOptions.add(noRoute);
     }
 }

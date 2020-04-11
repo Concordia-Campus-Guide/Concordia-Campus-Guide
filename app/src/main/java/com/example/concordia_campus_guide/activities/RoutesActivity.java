@@ -162,8 +162,7 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
         if (!shuttles.isEmpty()) {
             mViewModel.adaptShuttleToRoutes(shuttles);
         } else {
-            String noShuttleText = getResources().getString(R.string.no_shuttle);
-            mViewModel.noShuttles(noShuttleText);
+            mViewModel.noRoutesOptions(getResources().getString(R.string.no_shuttle));
         }
         setShuttleSelect();
         setRoutesAdapter();
@@ -203,7 +202,9 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
     public void directionsApiCallBack(DirectionsResult result, List<Route> routeOptions) {
         mViewModel.setDirectionsResult(result);
         mViewModel.setRouteOptions(routeOptions);
-
+        if (result.routes.length == 0) {
+            mViewModel.noRoutesOptions(getResources().getString(R.string.no_routes));
+        }
         setRoutesAdapter();
     }
 

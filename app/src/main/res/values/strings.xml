@@ -9,11 +9,13 @@
     <string name="calendar">Google Calendar</string>
     <string name="accessibility">Accessibility</string>
     <string name="staff">Staff</string>
+    <string name="small_info_card_directions_button">Directions</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="my_location">My location: </string>
     <string name="my_current_location">My Current Location</string>
     <string name="no_shuttle">No shuttles available at this time</string>
+    <string name="no_routes">No routes available, please change the filter criteria.</string>
     <string name="departments">Departments</string>
     <string name="services">Services</string>
     <string name="indoor_map">Indoor Map</string>
