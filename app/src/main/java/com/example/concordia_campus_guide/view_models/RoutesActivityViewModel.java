@@ -1,18 +1,15 @@
 package com.example.concordia_campus_guide.view_models;
 
-import android.app.Activity;
-
 import androidx.lifecycle.ViewModel;
 
 import com.example.concordia_campus_guide.ClassConstants;
-import com.example.concordia_campus_guide.R;
 import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.DirectionsResult;
 import com.example.concordia_campus_guide.models.Building;
 import com.example.concordia_campus_guide.models.Place;
 import com.example.concordia_campus_guide.models.RoomModel;
-import com.example.concordia_campus_guide.models.routes.Route;
 import com.example.concordia_campus_guide.models.Shuttle;
+import com.example.concordia_campus_guide.models.routes.Route;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
