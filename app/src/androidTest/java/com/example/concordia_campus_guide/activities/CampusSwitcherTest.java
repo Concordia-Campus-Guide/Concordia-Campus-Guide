@@ -1,4 +1,4 @@
-package com.example.concordia_campus_guide.Activities;
+package com.example.concordia_campus_guide.activities;
 
 import android.view.View;
 import android.view.ViewGroup;
