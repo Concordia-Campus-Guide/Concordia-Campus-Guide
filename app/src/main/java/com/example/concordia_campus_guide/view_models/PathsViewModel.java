@@ -6,6 +6,7 @@ import com.example.concordia_campus_guide.adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.global.SelectingToFromState;
 import com.example.concordia_campus_guide.models.Building;
+import com.example.concordia_campus_guide.models.Floor;
 import com.example.concordia_campus_guide.models.PathInfoCard;
 import com.example.concordia_campus_guide.models.Place;
 import com.example.concordia_campus_guide.models.PointType;
@@ -49,40 +50,31 @@ public class PathsViewModel extends ViewModel {
     }
 
     public Place getEntrance(Place place) {
-        if (place instanceof RoomModel) {
-            String floorCode = ((RoomModel) place).getFloorCode();
-            Building building = appDB.buildingDao().getBuildingByBuildingCode(floorCode.substring(0, floorCode.indexOf('-')).toUpperCase());
-            String entranceFloor = building.getBuildingCode() + "-" + building.getEntranceFloor();
-            return appDB.roomDao().getRoomByIdAndFloorCode("entrance", entranceFloor);
-        }
-        return place;
+        if (!isPlaceIndoor(place)) return place;
+        String floorCode = place instanceof RoomModel ? ((RoomModel) place).getFloorCode() : ((Floor) place).getFloorCode();
+        Building building = appDB.buildingDao().getBuildingByBuildingCode(floorCode.substring(0, floorCode.indexOf('-')).toUpperCase());
+        String entranceFloor = building.getBuildingCode() + "-" + building.getEntranceFloor();
+        return appDB.roomDao().getRoomByIdAndFloorCode("entrance", entranceFloor);
     }
 
     public boolean arePlacesSeparatedByATunnel(Place from, Place to) {
-        if (from instanceof RoomModel && to instanceof RoomModel) {
-            String floorCode = ((RoomModel) from).getFloorCode();
-            String fromBuilding = floorCode.toUpperCase().substring(0, floorCode.indexOf('-'));
-
-            floorCode = ((RoomModel) to).getFloorCode();
-            String toBuilding = floorCode.toUpperCase().substring(0, floorCode.indexOf('-'));
-
-            return fromBuilding.equalsIgnoreCase("H") && toBuilding.equalsIgnoreCase("MB") ||
-                    fromBuilding.equalsIgnoreCase("MB") && toBuilding.equalsIgnoreCase("H");
-        }
-        return false;
+        return from.getCampus() != null && from.getCampus().equals(to.getCampus());
     }
 
     public boolean areInSameBuilding(Place from, Place to) {
-        if (from instanceof RoomModel && to instanceof RoomModel) {
-            String floorCode = ((RoomModel) from).getFloorCode();
-            String fromBuilding = floorCode.toUpperCase().substring(0, floorCode.indexOf('-'));
+        if (!isPlaceIndoor(from) || !isPlaceIndoor(to)) return false;
 
-            floorCode = ((RoomModel) to).getFloorCode();
-            String toBuilding = floorCode.toUpperCase().substring(0, floorCode.indexOf('-'));
+        String floorCode = from instanceof RoomModel? ((RoomModel) from).getFloorCode():  ((Floor) from).getFloorCode() ;
+        String fromBuilding = floorCode.toUpperCase().substring(0, floorCode.indexOf('-'));
 
-            return fromBuilding.equalsIgnoreCase(toBuilding);
-        }
-        return false;
+        floorCode = to instanceof RoomModel? ((RoomModel) to).getFloorCode():  ((Floor) to).getFloorCode() ;
+        String toBuilding = floorCode.toUpperCase().substring(0, floorCode.indexOf('-'));
+
+        return fromBuilding.equalsIgnoreCase(toBuilding);
+    }
+
+    public boolean isPlaceIndoor(Place place) {
+        return place instanceof Floor || place instanceof RoomModel;
     }
 
     public void adaptOutdoorDirectionsToInfoCardList(List<DirectionWrapper> directionWrappers) {

@@ -23,6 +23,7 @@ import com.example.concordia_campus_guide.helper.routes_helpers.UrlBuilder;
 import com.example.concordia_campus_guide.helper.ViewModelFactory;
 import com.example.concordia_campus_guide.interfaces.DirectionsApiCallbackListener;
 import com.example.concordia_campus_guide.models.BusStop;
+import com.example.concordia_campus_guide.models.Floor;
 import com.example.concordia_campus_guide.models.Place;
 import com.example.concordia_campus_guide.models.RoomModel;
 import com.example.concordia_campus_guide.models.routes.Route;
@@ -79,7 +80,12 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
         setupFromToHeaderInfoTv();
         getBundleInformation();
         setBackButtonOnClickListener();
-
+        initLocationFragment();
+    }
+    
+    private void initLocationFragment(){
+        initialLocation = mViewModel.getInitialLocation();
+        destinationLocation = mViewModel.getDestination();
         locationFragment.setDifferentInitialView(new LatLng(initialLocation.getLatitude(),
                 initialLocation.getLongitude()));
     }
@@ -144,11 +150,11 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
     }
 
     public boolean isInitialIndoor(final Place initialLocation) {
-        return initialLocation instanceof RoomModel;
+        return mViewModel.isPlaceIndoor(initialLocation);
     }
 
     public boolean isDestinationIndoor(final Place destinationLocation) {
-        return destinationLocation instanceof RoomModel;
+        return mViewModel.isPlaceIndoor(destinationLocation);
     }
 
     public void setOutdoorPaths() {

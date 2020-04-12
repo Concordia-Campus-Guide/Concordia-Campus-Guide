@@ -1,49 +1,84 @@
 {
   "Floors": [
     {
-      "campus": "SGW",
+      "Campus": "SGW",
       "buildingCode": "H",
       "floorCode": "H-9",
-      "altitude": 0
+      "altitude": 0,
+      "centerCoordinates":{
+        "longitude":-73.5787643864751,
+        "latitude":45.49729389034705
+      }
     },
     {
-      "campus": "SGW",
+      "Campus": "SGW",
       "buildingCode": "H",
       "floorCode": "H-8",
-      "altitude": 0
+      "altitude": 0,
+      "centerCoordinates":{
+        "longitude":-73.5787643864751,
+        "latitude":45.49729389034705
+      }
     },
     {
+      "Campus": "SGW",
       "buildingCode": "H",
       "floorCode": "H-00",
-      "altitude": 0
+      "altitude": 0,
+      "centerCoordinates":{
+        "longitude": -73.5787627100944,
+        "latitude": 45.4972934203281
+      }
     },
     {
+      "Campus": "SGW",
       "buildingCode": "H",
       "floorCode": "H-1",
-      "altitude": 0
+      "altitude": 0,
+      "centerCoordinates":{
+        "longitude": -73.5787627100944,
+        "latitude": 45.4972934203281
+      }
     },
     {
+      "Campus": "SGW",
       "buildingCode": "MB",
       "floorCode": "MB-S2",
-      "altitude": 0
+      "altitude": 0,
+      "centerCoordinates":{
+        "longitude":-73.57897996902466,
+        "latitude":45.495270187715924
+      }
     },
     {
-      "campus": "SGW",
+      "Campus": "SGW",
       "buildingCode": "MB",
       "floorCode": "MB-1",
-      "altitude": 0
+      "altitude": 0,
+      "centerCoordinates":{
+        "longitude":-73.5789906978607,
+        "latitude":45.49526266714314
+      }
     },
     {
-      "campus": "LOY",
+      "Campus": "LOY",
       "buildingCode": "VL",
       "floorCode": "VL-1",
-      "altitude": 0
+      "altitude": 0,
+      "centerCoordinates":{
+        "longitude":-73.63819777965546,
+        "latitude":45.458994311656944
+      }
     },
     {
-      "campus": "LOY",
+      "Campus": "LOY",
       "buildingCode": "VL",
       "floorCode": "VL-2",
-      "altitude": 0
+      "altitude": 0,
+      "centerCoordinates":{
+        "longitude":-73.63818168640137,
+        "latitude":45.45898678624111
+      }
     }
   ]
 }

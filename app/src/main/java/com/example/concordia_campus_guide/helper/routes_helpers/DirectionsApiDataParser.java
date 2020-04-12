@@ -7,6 +7,8 @@ import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServ
 import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.DirectionsRoute;
 import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.DirectionsStep;
 import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.TravelMode;
+import com.example.concordia_campus_guide.models.helpers.RouteBuilder;
+import com.example.concordia_campus_guide.models.helpers.RouteBuilderDirector;
 import com.example.concordia_campus_guide.models.routes.Bus;
 import com.example.concordia_campus_guide.models.routes.Car;
 import com.example.concordia_campus_guide.models.routes.Route;
@@ -26,6 +28,7 @@ import java.util.List;
 public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieval, Integer, DirectionsResult> {
 
     private DirectionsApiDataRetrieval dataRetrieval = null;
+    private RouteBuilderDirector director = new RouteBuilderDirector();
 
     /**
      * Parsing the JSON string data to map it to a DirectionsResult model
@@ -69,13 +72,13 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
         for(DirectionsRoute directionsRoute: result.routes) {
             switch(dataRetrieval.getTransportType()) {
                 case ClassConstants.DRIVING:
-                    routeOptions.add(extractDurationAndSummary(directionsRoute, ClassConstants.DRIVING));
+                    routeOptions.add(getDrivingRoute(directionsRoute));
                     break;
                 case ClassConstants.WALKING:
-                    routeOptions.add(extractDurationAndSummary(directionsRoute, ClassConstants.WALKING));
+                    routeOptions.add(getWalkingRoute(directionsRoute));
                     break;
                 case ClassConstants.TRANSIT:
-                    routeOptions.add(extractTransitInfo(directionsRoute));
+                    routeOptions.add(getTransitRoute(directionsRoute));
                     break;
                 default:
                     break;
@@ -85,21 +88,27 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
     }
 
     // Helper methods
-    private Route extractDurationAndSummary(DirectionsRoute directionsRoute, @ClassConstants.TransportType String transportType) {
-        return new Route(directionsRoute.legs[0].duration.text, directionsRoute.summary, transportType);
+    private Route getDrivingRoute(DirectionsRoute directionsRoute) {
+        RouteBuilder routeBuilder = new RouteBuilder();
+        director.constructDrivingRoute(routeBuilder, directionsRoute.legs[0].duration.text, directionsRoute.summary);
+        return routeBuilder.getRoute();
     }
 
-    private Route extractTransitInfo(DirectionsRoute directionsRoute) {
-        Route route;
+    private Route getWalkingRoute(DirectionsRoute directionsRoute) {
+        RouteBuilder routeBuilder = new RouteBuilder();
+        director.constructWalkingRoute(routeBuilder, directionsRoute.legs[0].duration.text, directionsRoute.summary);
+        return routeBuilder.getRoute();
+    }
+
+    private Route getTransitRoute(DirectionsRoute directionsRoute) {
+        RouteBuilder routeBuilder = new RouteBuilder();
 
         if(directionsRoute.legs[0].departureTime != null && directionsRoute.legs[0].arrivalTime != null)
-            route = new Route(directionsRoute.legs[0].departureTime.text, directionsRoute.legs[0].arrivalTime.text, directionsRoute.legs[0].duration.text, ClassConstants.TRANSIT);
+            director.constructTransitRoute(routeBuilder, extractSteps(directionsRoute.legs[0].steps), directionsRoute.legs[0].departureTime.text, directionsRoute.legs[0].arrivalTime.text, directionsRoute.legs[0].duration.text);
         else
-            route = new Route(directionsRoute.legs[0].duration.text, ClassConstants.TRANSIT);
+            director.constructTransitRouteWithoutArrivalOrDepartureTime(routeBuilder, extractSteps(directionsRoute.legs[0].steps), directionsRoute.legs[0].duration.text);
 
-        route.setSteps(extractSteps(directionsRoute.legs[0].steps));
-
-        return route;
+        return routeBuilder.getRoute();
     }
 
     private List<TransportType> extractSteps(DirectionsStep[] stepsArr) {

@@ -16,6 +16,7 @@ import com.example.concordia_campus_guide.helper.ManipulateWalkingPoints;
 import com.example.concordia_campus_guide.helper.POIIcon;
 import com.example.concordia_campus_guide.helper.PolygonsDrawer;
 import com.example.concordia_campus_guide.models.Building;
+import com.example.concordia_campus_guide.models.Place;
 import com.example.concordia_campus_guide.models.PoiType;
 import com.example.concordia_campus_guide.models.RoomModel;
 import com.example.concordia_campus_guide.models.WalkingPoint;
@@ -142,7 +143,7 @@ public class LocationFragmentViewModel extends ViewModel {
         return appDatabase.roomDao().getRoomByRoomCodeAndFloorCode(roomCode, floorCode);
     }
 
-    public void parseWalkingPointList(AppDatabase appDatabase, SharedPreferences sharedPreferences, RoomModel from, RoomModel to){
+    public void parseWalkingPointList(AppDatabase appDatabase, SharedPreferences sharedPreferences, Place from, Place to){
         manipulateWalkingPoints.parseWalkingPointList(appDatabase,sharedPreferences, from, to, walkingPointsMap);
     }
 

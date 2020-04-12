@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
@@ -60,7 +61,7 @@ public class PathsViewModelTest {
 
     @Test
     public void arePlacesSeparatedByATunnelTest() {
-        assertFalse(pathsViewModel.arePlacesSeparatedByATunnel(fromRoom, toRoom));
+        assertTrue(pathsViewModel.arePlacesSeparatedByATunnel(fromRoom, toRoom));
     }
 
     @Test
