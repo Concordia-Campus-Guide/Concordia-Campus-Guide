@@ -2,10 +2,13 @@ package com.example.concordia_campus_guide.InstrumentalTests;
 
 import com.example.concordia_campus_guide.activities.MainActivity;
 import com.example.concordia_campus_guide.view_models.LocationFragmentViewModel;
+import com.example.concordia_campus_guide.view_models.PathsViewModel;
 import com.example.concordia_campus_guide.view_models.RoutesActivityViewModel;
 import com.example.concordia_campus_guide.view_models.SearchActivityViewModel;
 import com.example.concordia_campus_guide.view_models.InfoCardFragmentViewModel;
 import com.example.concordia_campus_guide.helper.ViewModelFactory;
+import com.example.concordia_campus_guide.view_models.SmallInfoCardFragmentViewModel;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -32,6 +35,8 @@ public class ViewModelFactoryInstrumentalTest {
         assertNotNull(viewModelFactory.create(InfoCardFragmentViewModel.class));
         assertNotNull(viewModelFactory.create(RoutesActivityViewModel.class));
         assertNotNull(viewModelFactory.create(LocationFragmentViewModel.class));
+        assertNotNull(viewModelFactory.create(PathsViewModel.class));
+        assertNotNull(viewModelFactory.create(SmallInfoCardFragmentViewModel.class));
     }
 
 }
