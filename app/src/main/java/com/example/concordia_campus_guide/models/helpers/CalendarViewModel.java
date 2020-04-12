@@ -127,7 +127,7 @@ public class CalendarViewModel extends AndroidViewModel {
 
         String roomCode = eventLocation.split(",")[1].trim();
         String floorCode = eventLocation.split(",")[0].trim();
-        String description = "<a href=\"app://conumaps?room="+roomCode+"&floor="+floorCode+"\">Go to ConUMaps</a>";
+        String description = "<a href=\"http://conumaps?room="+roomCode+"&floor="+floorCode+"\">Go to ConUMaps</a>";
 
         values.put(DESCRIPTION, description);
 
