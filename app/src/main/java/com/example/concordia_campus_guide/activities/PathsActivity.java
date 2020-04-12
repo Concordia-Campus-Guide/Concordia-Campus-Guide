@@ -80,7 +80,12 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
         setupFromToHeaderInfoTv();
         getBundleInformation();
         setBackButtonOnClickListener();
+        initLocationFragment();
+    }
 
+    private void initLocationFragment(){
+        initialLocation = mViewModel.getInitialLocation();
+        destinationLocation = mViewModel.getDestination();
         locationFragment.setDifferentInitialView(new LatLng(initialLocation.getLatitude(),
                 initialLocation.getLongitude()));
     }
