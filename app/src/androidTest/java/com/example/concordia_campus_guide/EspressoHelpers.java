@@ -133,7 +133,7 @@ public class EspressoHelpers {
         int x1 = 470;
         int x2 = 618;
         int y1 = 989;
-        int y2 = 1139;
+        int y2 = 1120;
 
         //these are the pixel coordinates
         //this selects only the section of the hall floorplan to avoid
