@@ -10,6 +10,7 @@ import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 import com.example.concordia_campus_guide.database.converters.IntegerListToStringConverter;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.io.Serializable;
 import java.util.List;
@@ -29,7 +30,7 @@ import static androidx.room.ForeignKey.CASCADE;
 public  class WalkingPoint implements Serializable {
 
     @NonNull
-    @ColumnInfo (name = "id")
+    @ColumnInfo(name = "id")
     @PrimaryKey
     private int id;
 
@@ -60,7 +61,7 @@ public  class WalkingPoint implements Serializable {
     }
 
     @Ignore
-    public WalkingPoint(@NonNull int id,@NonNull Coordinates coordinate, @NonNull String floorCode, List<Integer> connectedPointsId, @PointType String pointType, String placeCode) {
+    public WalkingPoint(@NonNull int id, @NonNull Coordinates coordinate, @NonNull String floorCode, List<Integer> connectedPointsId, @PointType String pointType, String placeCode) {
         this.id = id;
         this.coordinate = coordinate;
         this.floorCode = floorCode;
@@ -85,6 +86,22 @@ public  class WalkingPoint implements Serializable {
     @NonNull
     public Coordinates getCoordinate() {
         return coordinate;
+    }
+
+    public double getEuclideanDistanceFrom(Coordinates coordinates){
+        return coordinate.getEuclideanDistanceFrom(coordinates);
+    }
+
+    public LatLng getLatLng(){
+        return coordinate.getLatLng();
+    }
+
+    public double getLatitude(){
+        return coordinate.getLatitude();
+    }
+
+    public double getLongitude(){
+        return coordinate.getLongitude();
     }
 
     public void setCoordinate(@NonNull Coordinates coordinate) {
