@@ -56,7 +56,7 @@ public class LocationFragmentViewModel extends ViewModel {
     public FloorPlan getFloorPlan() {
         return floorPlan;
     }
-    public  HashMap<String, List<WalkingPoint>> getWalkingPointsMap(){
+    public  Map<String, List<WalkingPoint>> getWalkingPointsMap(){
         return walkingPointsMap;
     }
 

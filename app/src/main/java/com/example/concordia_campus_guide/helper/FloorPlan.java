@@ -2,20 +2,27 @@ package com.example.concordia_campus_guide.helper;
 
 import android.graphics.Color;
 
-import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.models.WalkingPoint;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Dash;
+import com.google.android.gms.maps.model.Gap;
 import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.PatternItem;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.geojson.GeoJsonLayer;
-import java.util.HashMap;
+
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class FloorPlan {
+
+    private static final List<PatternItem> WALK_PATTERN = Arrays.asList(new Gap(20), new Dash(20));
+
     private GeoJsonLayer floorLayer;
     private Polyline currentlyDisplayedLine;
     private AppDatabase appDatabase;
@@ -39,13 +46,13 @@ public class FloorPlan {
      * @param buildingCode it represents which building we will be covering
      * @return Int of drawable resource's bitmap representation
      */
-    public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, GoogleMap mMap, HashMap<String, List<WalkingPoint>> walkingPointsMap) {
+    public void setFloorPlan(GroundOverlay groundOverlay, String buildingCode, String floor, GoogleMap mMap, Map<String, List<WalkingPoint>> walkingPointsMap) {
         String fileName = buildingCode.toLowerCase()+"_"+floor.toLowerCase();
         groundOverlay.setImage(BitmapDescriptorFactory.fromAsset("buildings_floorplans/"+fileName+".png"));
         setFloorMarkers(buildingCode, floor, mMap,walkingPointsMap);
     }
 
-    public void setFloorMarkers(String buildingCode, String floor, GoogleMap mMap, HashMap<String, List<WalkingPoint>> walkingPointsMap) {
+    public void setFloorMarkers(String buildingCode, String floor, GoogleMap mMap, Map<String, List<WalkingPoint>> walkingPointsMap) {
 
         if (floorLayer != null) {
             floorLayer.removeLayerFromMap();
@@ -59,7 +66,7 @@ public class FloorPlan {
         currentlyDisplayedLine = mMap.addPolyline(displayedPolylineOption);
     }
 
-    public PolylineOptions getFloorPolylines(String floorCode, HashMap<String, List<WalkingPoint>> walkingPointsMap) {
+    public PolylineOptions getFloorPolylines(String floorCode, Map<String, List<WalkingPoint>> walkingPointsMap) {
         // previously drawindoorpaths
         List<WalkingPoint> floorWalkingPoints = walkingPointsMap.get(floorCode);
         PolylineOptions option = new PolylineOptions();
@@ -73,7 +80,7 @@ public class FloorPlan {
         }
         return option
                 .width(10)
-                .pattern(ClassConstants.WALK_PATTERN)
+                .pattern(WALK_PATTERN)
                 .color(Color.rgb(147, 35, 57))
                 .visible(true);
     }

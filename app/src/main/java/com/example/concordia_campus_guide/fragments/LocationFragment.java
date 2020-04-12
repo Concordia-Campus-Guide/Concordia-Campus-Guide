@@ -284,12 +284,9 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     }
 
     private void setCurrentLocationBtn() {
-        myLocationBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mFloorPickerGv.setVisibility(View.GONE);
-                popUpRequestPermission();
-            }
+        myLocationBtn.setOnClickListener(v -> {
+            mFloorPickerGv.setVisibility(View.GONE);
+            popUpRequestPermission();
         });
     }
 

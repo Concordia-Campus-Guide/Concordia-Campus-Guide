@@ -49,11 +49,11 @@ public class FloorPickerAdapter extends BaseAdapter {
             button.setTextColor(ContextCompat.getColor(context, R.color.floorPickerTextColor));
             button.setLayoutParams(new GridView.LayoutParams(120, 120));
             button.setText(floorsAvailable.get(position));
-            button.setOnClickListener((View.OnClickListener) view -> {
+            button.setOnClickListener(view -> {
                 if(selectedButton != null && !selectedButton.equals((Button)view)){
                     selectedButton.setEnabled(true);
                 }
-                selectedButton = (Button)view;
+                selectedButton = (Button) view;
                 selectedButton.setEnabled(false);
                 listener.onFloorPickerOnClick(position, view);
             });
