@@ -129,10 +129,19 @@ public class EspressoHelpers {
         int threshold = 10;
         boolean isSame = true;
 
-        for (int i = 0; i < bm1.getWidth(); i++)
+        //use coordinates to reduce flakiness of screenshot testing
+        int x1 = 470;
+        int x2 = 618;
+        int y1 = 989;
+        int y2 = 1139;
+
+        //these are the pixel coordinates
+        //this selects only the section of the hall floorplan to avoid
+        //flaky rendering by google map
+        for (int i = x1; i < x2; i++)//width
         {
             //skip notifications, time and info card
-            for (int j = 50; j < bm1.getHeight()-500; j++)
+            for (int j = y1; j < y2; j++)//height
             {
                 int pixel = bm1.getPixel(i,j);
                 int redValue = Color.red(pixel);

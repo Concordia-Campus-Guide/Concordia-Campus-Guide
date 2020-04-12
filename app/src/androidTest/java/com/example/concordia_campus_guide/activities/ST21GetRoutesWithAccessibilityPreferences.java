@@ -429,6 +429,7 @@ public class ST21GetRoutesWithAccessibilityPreferences {
 
         android.os.SystemClock.sleep(1000);
 
+        //disable accessibility to not affect next tests
         ViewInteraction appCompatImageButton10 = onView(
                 allOf(withId(R.id.filterButtonDisability),
                         childAtPosition(
@@ -441,6 +442,10 @@ public class ST21GetRoutesWithAccessibilityPreferences {
         appCompatImageButton10.perform(click());
 
         android.os.SystemClock.sleep(1000);
+
+        device.pressBack();
+        android.os.SystemClock.sleep(1000);
+
     }
 
     private static Matcher<View> childAtPosition(

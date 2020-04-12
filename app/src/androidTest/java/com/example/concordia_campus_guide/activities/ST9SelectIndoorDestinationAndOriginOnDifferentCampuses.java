@@ -19,8 +19,6 @@ import androidx.test.uiautomator.UiSelector;
 
 import com.example.concordia_campus_guide.EspressoHelpers;
 import com.example.concordia_campus_guide.R;
-import com.example.concordia_campus_guide.activities.MainActivity;
-import com.example.concordia_campus_guide.activities.SearchActivity;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -246,6 +244,12 @@ public class ST9SelectIndoorDestinationAndOriginOnDifferentCampuses {
                 .atPosition(2);
         button5.perform(click());
 
+        android.os.SystemClock.sleep(1000);
+
+        device.pressBack();
+        android.os.SystemClock.sleep(1000);
+
+        device.pressBack();
         android.os.SystemClock.sleep(1000);
     }
 

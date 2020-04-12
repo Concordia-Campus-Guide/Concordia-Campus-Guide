@@ -14,8 +14,6 @@ import androidx.test.runner.AndroidJUnit4;
 
 import com.example.concordia_campus_guide.EspressoHelpers;
 import com.example.concordia_campus_guide.R;
-import com.example.concordia_campus_guide.activities.MainActivity;
-import com.example.concordia_campus_guide.activities.SearchActivity;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -199,6 +197,7 @@ public class SearchActivityTest {
         appCompatImageButton.perform(click());
 
         android.os.SystemClock.sleep(2000);
+
     }
 
     private static Matcher<View> childAtPosition(
