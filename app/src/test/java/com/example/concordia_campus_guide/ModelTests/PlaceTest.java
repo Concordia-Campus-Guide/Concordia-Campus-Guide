@@ -44,8 +44,8 @@ public class PlaceTest {
     @Test
     public void getCenterCoordinates() {
         assertEquals(centerCoordinates, placeWithCenterCoordinates.getCenterCoordinates());
-        assertEquals(centerCoordinates.getLatitude(), placeWithCenterCoordinates.getCenterCoordinates().getLatitude(), 0.001);
-        assertEquals(centerCoordinates.getLongitude(), placeWithCenterCoordinates.getCenterCoordinates().getLongitude(), 0.001);
+        assertEquals(centerCoordinates.getLatitude(), placeWithCenterCoordinates.getLatitude(), 0.001);
+        assertEquals(centerCoordinates.getLongitude(), placeWithCenterCoordinates.getLongitude(), 0.001);
     }
 
     @Test
@@ -67,13 +67,13 @@ public class PlaceTest {
     public void setCenterCoordinates() {
         Coordinates updateCenterCoordinates = new Coordinates(45.493622,-73.577003 );
         assertEquals(centerCoordinates, placeWithCenterCoordinates.getCenterCoordinates());
-        assertEquals(centerCoordinates.getLatitude(), placeWithCenterCoordinates.getCenterCoordinates().getLatitude(), 0.001);
-        assertEquals(centerCoordinates.getLongitude(), placeWithCenterCoordinates.getCenterCoordinates().getLongitude(), 0.001);
+        assertEquals(centerCoordinates.getLatitude(), placeWithCenterCoordinates.getLatitude(), 0.001);
+        assertEquals(centerCoordinates.getLongitude(), placeWithCenterCoordinates.getLongitude(), 0.001);
 
         placeWithCenterCoordinates.setCenterCoordinates(updateCenterCoordinates);
         assertEquals(updateCenterCoordinates, placeWithCenterCoordinates.getCenterCoordinates());
-        assertEquals(updateCenterCoordinates.getLatitude(), placeWithCenterCoordinates.getCenterCoordinates().getLatitude(),0.001);
-        assertEquals(updateCenterCoordinates.getLongitude(), placeWithCenterCoordinates.getCenterCoordinates().getLongitude(), 0.001);
+        assertEquals(updateCenterCoordinates.getLatitude(), placeWithCenterCoordinates.getLatitude(),0.001);
+        assertEquals(updateCenterCoordinates.getLongitude(), placeWithCenterCoordinates.getLongitude(), 0.001);
     }
 
     @Test

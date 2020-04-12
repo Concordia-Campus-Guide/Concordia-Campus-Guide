@@ -65,9 +65,7 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
 
         // Fetching the stored data from the SharedPreference
         SharedPreferences sharedPreferences = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
-
         boolean disability = sharedPreferences.getBoolean(ClassConstants.DISABILITY_BUTTON, false);
-
         disabilityButton.setSelected(disability);
     }
 
@@ -102,8 +100,8 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
     }
 
     private void setFromAndTo() {
-        this.fromText.setText(mViewModel.getFrom().getDisplayName());
-        this.toText.setText(mViewModel.getTo().getDisplayName());
+        this.fromText.setText(mViewModel.getFromDisplayName());
+        this.toText.setText(mViewModel.getToDisplayName());
     }
 
     private void setToolbar() {
@@ -192,7 +190,6 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             exitSelectToFrom();
-
             return true;
         }
 
@@ -260,8 +257,8 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
     public void getAllRoutes() {
         setTransitSelect();
 
-        Coordinates fromCenterCoordinates = mViewModel.getEntrance(mViewModel.getFrom()).getCenterCoordinates();
-        Coordinates toCenterCoordinates = mViewModel.getEntrance(mViewModel.getTo()).getCenterCoordinates();
+        Coordinates fromCenterCoordinates = mViewModel.getFromEntranceCoordinates();
+        Coordinates toCenterCoordinates = mViewModel.getToEntranceCoordinates();
 
         if (fromCenterCoordinates != null && toCenterCoordinates != null) {
             LatLng from = new LatLng(fromCenterCoordinates.getLatitude(), fromCenterCoordinates.getLongitude());
