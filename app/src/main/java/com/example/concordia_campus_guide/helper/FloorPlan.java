@@ -74,8 +74,8 @@ public class FloorPlan {
             return option;
         }
         for (int i = 0; i < floorWalkingPoints.size() - 1; i++) {
-            LatLng point1 = floorWalkingPoints.get(i).getCoordinate().getLatLng();
-            LatLng point2 = floorWalkingPoints.get(i + 1).getCoordinate().getLatLng();
+            LatLng point1 = floorWalkingPoints.get(i).getLatLng();
+            LatLng point2 = floorWalkingPoints.get(i + 1).getLatLng();
             option.add(point1, point2);
         }
         return option

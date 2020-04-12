@@ -3,6 +3,7 @@ package com.example.concordia_campus_guide.global;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.models.Buildings;
 import com.example.concordia_campus_guide.models.Floors;
 import com.example.concordia_campus_guide.models.Rooms;
@@ -123,5 +124,29 @@ public class ApplicationState {
             Shuttles fromJson = new Gson().fromJson(json, Shuttles.class);
             this.shuttles = fromJson;
         }
+    }
+
+    public void setUpDb(AppDatabase appDb){
+        //load buildings
+        Buildings buildings = this.getBuildings();
+        appDb.buildingDao().insertAll(buildings.getBuildings());
+
+        //load floors
+        Floors floors = this.getFloors();
+        appDb.floorDao().insertAll(floors.getFloors());
+
+        //load rooms
+        Rooms rooms = this.getRooms();
+        appDb.roomDao().insertAll(rooms.getRooms());
+
+        // Load shuttle schedule
+        Shuttles shuttles = this.getShuttles();
+        appDb.shuttleDao().insertAll(shuttles.getShuttles());
+
+        // Load walking points
+        WalkingPoints walkingPoints = this.getWalkingPoints();
+        appDb.walkingPointDao().insertAll(walkingPoints.getWalkingPoints());
+
+        this.setDbIsSetToTrue();
     }
 }

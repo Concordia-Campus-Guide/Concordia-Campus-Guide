@@ -25,7 +25,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+
 import com.example.concordia_campus_guide.ClassConstants;
+import com.example.concordia_campus_guide.R;
 import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.fragments.InfoCardFragment;
 import com.example.concordia_campus_guide.fragments.LocationFragment;
@@ -36,18 +38,13 @@ import com.example.concordia_campus_guide.global.SelectingToFromState;
 import com.example.concordia_campus_guide.helper.CurrentLocation;
 import com.example.concordia_campus_guide.helper.LocaleHelper;
 import com.example.concordia_campus_guide.helper.Notification;
-import com.example.concordia_campus_guide.models.Buildings;
 import com.example.concordia_campus_guide.models.CalendarEvent;
-import com.example.concordia_campus_guide.models.Floors;
-import com.example.concordia_campus_guide.models.helpers.CalendarViewModel;
 import com.example.concordia_campus_guide.models.RoomModel;
-import com.example.concordia_campus_guide.models.Rooms;
-import com.example.concordia_campus_guide.models.Shuttles;
-import com.example.concordia_campus_guide.models.WalkingPoints;
-import com.example.concordia_campus_guide.R;
+import com.example.concordia_campus_guide.models.helpers.CalendarViewModel;
 import com.example.concordia_campus_guide.view_models.MainActivityViewModel;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.navigation.NavigationView;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -57,6 +54,8 @@ import static com.example.concordia_campus_guide.helper.StartActivityHelper.open
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    AppDatabase appDb;
+    ApplicationState applicationState;
     FragmentTransaction fragmentTransaction;
     FragmentManager fragmentManager;
     InfoCardFragment infoCardFragment;
@@ -81,9 +80,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        applicationState = ApplicationState.getInstance(this);
+        appDb = AppDatabase.getInstance(this);
         setUpDb();
+
         setContentView(R.layout.activity_main);
-        mViewModel = new MainActivityViewModel();
+        mViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
 
         initComponents();
         acceptOpenFromCalendarIntent();
@@ -95,8 +97,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Uri data = intent.getData();
             String roomCode = data.getQueryParameter("room");
             String floorCode = data.getQueryParameter("floor");
-
-            RoomModel room = AppDatabase.getInstance(this).roomDao().getRoomByRoomCodeAndFloorCode(roomCode, floorCode);
+            RoomModel room = appDb.roomDao().getRoomByRoomCodeAndFloorCode(roomCode, floorCode);
 
             if(room!=null){
                 SelectingToFromState.setMyCurrentLocation(getMyCurrentLocation());
@@ -143,7 +144,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         currentLocation = new CurrentLocation(this);
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.locationFragment);
         calendarViewModel = new CalendarViewModel(getApplication());
-        mViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
         fragmentManager = getSupportFragmentManager();
         currentLocation.updateLocationEvery5Seconds();
         setupNotifications();
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void setupNotifications() {
-        notification = new Notification(this, AppDatabase.getInstance(this));
+        notification = new Notification(this, appDb);
         notification.checkUpCalendarEvery5Minutes();
     }
 
@@ -186,7 +186,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         setupSideMenuItemListeners();
-
     }
 
     private void setupSideMenuItemListeners() {
@@ -256,7 +255,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         setupCancelBtn(builder);
-
         builder.show();
     }
 
@@ -285,9 +283,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.search) {
             Intent openSearch = new Intent(MainActivity.this, SearchActivity.class);
-
             SelectingToFromState.setMyCurrentLocation(getMyCurrentLocation());
-
             startActivity(openSearch);
             return false;
         }
@@ -346,7 +342,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
         swipeableInfoCard.setState(BottomSheetBehavior.STATE_COLLAPSED);
-
     }
 
     /**
@@ -369,32 +364,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void setUpDb() {
-        if (!ApplicationState.getInstance(this).isDbIsSet()) {
+        if (!applicationState.isDbIsSet()) {
             //delete previous db
             getApplication().getApplicationContext().deleteDatabase(AppDatabase.DB_NAME);
-
-            //load buildings
-            Buildings buildings = ApplicationState.getInstance(this).getBuildings();
-            AppDatabase appDb = AppDatabase.getInstance(this);
-            appDb.buildingDao().insertAll(buildings.getBuildings());
-
-            //load floors
-            Floors floors = ApplicationState.getInstance(this).getFloors();
-            appDb.floorDao().insertAll(floors.getFloors());
-
-            //load rooms
-            Rooms rooms = ApplicationState.getInstance(this).getRooms();
-            appDb.roomDao().insertAll(rooms.getRooms());
-
-            // Load shuttle schedule
-            Shuttles shuttles = ApplicationState.getInstance(this).getShuttles();
-            appDb.shuttleDao().insertAll(shuttles.getShuttles());
-
-            // Load walking points
-            WalkingPoints walkingPoints = ApplicationState.getInstance(this).getWalkingPoints();
-            appDb.walkingPointDao().insertAll(walkingPoints.getWalkingPoints());
-
-            ApplicationState.getInstance(this).setDbIsSetToTrue();
+            applicationState.setUpDb(appDb);
         }
     }
 

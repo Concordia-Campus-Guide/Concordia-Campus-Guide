@@ -89,7 +89,7 @@ public class PolygonsDrawer {
 
     public void setBuildingGroundOverlayOptions(Building building) {
         building.setGroundOverlayOption(new GroundOverlayOptions()
-                .position(new LatLng(building.getCenterCoordinates().getLatitude(), building.getCenterCoordinates().getLongitude()), building.getWidth(), building.getHeight())
+                .position(new LatLng(building.getLatitude(), building.getLongitude()), building.getWidth(), building.getHeight())
                 .image(BitmapDescriptorFactory.fromAsset("buildings_floorplans/" + building.getBuildingCode().toLowerCase() + "_" + building.getAvailableFloors().get(building.getAvailableFloors().size() - 1).toLowerCase() + ".png"))
                 .bearing(building.getBearing()));
     }

@@ -29,7 +29,7 @@ public class RoomMarkers {
     public void addRoomToMap(RoomModel room, LocationFragmentViewModel locationFragmentViewModel, GoogleMap googleMap, Context context){
         BitmapDescriptor roomIcon = locationFragmentViewModel.getCustomSizedIcon("class_markers/marker.png", context, 30, 30);
         if(room != null){
-            LatLng latLng = new LatLng(room.getCenterCoordinates().getLatitude(), room.getCenterCoordinates().getLongitude());
+            LatLng latLng = new LatLng(room.getLatitude(), room.getLongitude());
             String tag = ClassConstants.ROOM_TAG + "_" + room.getRoomCode() +"_" + room.getFloorCode();
             MarkerOptions markerOptions = new MarkerOptions()
                     .position(latLng)

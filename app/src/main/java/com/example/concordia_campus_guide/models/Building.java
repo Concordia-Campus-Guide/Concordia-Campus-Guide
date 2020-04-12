@@ -137,7 +137,6 @@ public class Building extends Place {
         return bearing;
     }
 
-
     public void setBearing(float bearing) {
         this.bearing = bearing;
     }
