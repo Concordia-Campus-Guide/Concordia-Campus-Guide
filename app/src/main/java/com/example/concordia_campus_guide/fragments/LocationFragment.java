@@ -348,7 +348,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     public void setIndoorPaths(Place from, Place to) {
         SharedPreferences preferences = getActivity().getSharedPreferences(ClassConstants.SHARED_PREFERENCES, Context.MODE_PRIVATE);
-        mViewModel.parseWalkingPointList(AppDatabase.getInstance(getContext()),preferences, (RoomModel) from, (RoomModel) to);
+        mViewModel.parseWalkingPointList(AppDatabase.getInstance(getContext()), preferences, from, to);
     }
 
     public void drawOutdoorPaths(final List<DirectionWrapper> outdoorDirections) {

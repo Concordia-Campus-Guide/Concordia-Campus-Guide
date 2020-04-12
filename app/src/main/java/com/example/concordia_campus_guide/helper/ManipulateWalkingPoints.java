@@ -3,6 +3,7 @@ package com.example.concordia_campus_guide.helper;
 import android.content.SharedPreferences;
 
 import com.example.concordia_campus_guide.database.AppDatabase;
+import com.example.concordia_campus_guide.models.Place;
 import com.example.concordia_campus_guide.models.RoomModel;
 import com.example.concordia_campus_guide.models.WalkingPoint;
 
@@ -17,7 +18,7 @@ public class ManipulateWalkingPoints {
         return walkingPoints;
     }
 
-    public void parseWalkingPointList(AppDatabase appDatabase, SharedPreferences sharedPreferences, RoomModel from, RoomModel to, HashMap<String, List<WalkingPoint>> walkingPointsMap) {
+    public void parseWalkingPointList(AppDatabase appDatabase, SharedPreferences sharedPreferences, Place from, Place to, HashMap<String, List<WalkingPoint>> walkingPointsMap) {
         PathFinder pf = new PathFinder(appDatabase,sharedPreferences, from, to);
         walkingPoints = pf.getPathToDestination();
 

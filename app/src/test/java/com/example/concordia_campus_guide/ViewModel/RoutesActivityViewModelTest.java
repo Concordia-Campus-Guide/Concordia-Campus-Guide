@@ -110,9 +110,9 @@ public class RoutesActivityViewModelTest {
     }
 
     @Test
-    public void getSetRouteOptions() {
+    public void getRouteOptions() {
         List<Route> routes = new ArrayList();
-        Route route = new Route("1 day 20 hours", "I-80 E", "driving");
+        Route route = new Route(null, "", "", "1 day 20 hours", "I-80 E", "driving");
         routes.add(route);
 
         mViewModel.setRouteOptions(routes);
