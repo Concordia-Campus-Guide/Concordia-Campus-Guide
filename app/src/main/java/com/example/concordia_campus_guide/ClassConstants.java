@@ -2,17 +2,10 @@ package com.example.concordia_campus_guide;
 
 import androidx.annotation.StringDef;
 
-import com.google.android.gms.maps.model.Dash;
-import com.google.android.gms.maps.model.Gap;
-import com.google.android.gms.maps.model.PatternItem;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.util.Arrays;
-import java.util.List;
 
 public class  ClassConstants {
-    public static boolean MY_LOCATION_PERMISSION_GRANTED = false;
     public static final String DISABILITY_BUTTON = "disability_button";
     public static final String CALENDAR_INTEGRATION_BUTTON = "calendar_integration_button";
     public static final String SHARED_PREFERENCES = "UserPreferences";
@@ -39,9 +32,6 @@ public class  ClassConstants {
     public static final String SHUTTLE = "shuttle";
 
     public static final String FLOORS_AVAILABLE = "floorsAvailable";
-
-    //Polyline styling
-    public static final List<PatternItem> WALK_PATTERN = Arrays.asList(new Gap(20), new Dash(20));
 
     //SGW building label string used as campus center
     public static final String SGW_CENTER_BUILDING_LABEL = "EV";

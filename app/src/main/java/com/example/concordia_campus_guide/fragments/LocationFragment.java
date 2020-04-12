@@ -54,6 +54,8 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     MapView mMapView;
 
+    private static final boolean MY_LOCATION_PERMISSION_GRANTED = false;
+
     private ImageButton myLocationBtn;
     private Button loyolaBtn;
     private Button sgwBtn;
@@ -198,7 +200,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
      */
     @SuppressLint("MissingPermission")
     private void uiSettingsForMap(GoogleMap mMap) {
-        if (ClassConstants.MY_LOCATION_PERMISSION_GRANTED) {
+        if (MY_LOCATION_PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
         }
         mMap.setIndoorEnabled(false);
@@ -282,12 +284,9 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     }
 
     private void setCurrentLocationBtn() {
-        myLocationBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mFloorPickerGv.setVisibility(View.GONE);
-                popUpRequestPermission();
-            }
+        myLocationBtn.setOnClickListener(v -> {
+            mFloorPickerGv.setVisibility(View.GONE);
+            popUpRequestPermission();
         });
     }
 
@@ -307,16 +306,16 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     @SuppressLint("MissingPermission")
     private void popUpRequestPermission() {
-        if (!ClassConstants.MY_LOCATION_PERMISSION_GRANTED) {
+        if (MY_LOCATION_PERMISSION_GRANTED) {
             currentLocationPermissionRequest.getLocationPermission(this);
-            if (ClassConstants.MY_LOCATION_PERMISSION_GRANTED) {
+            if (MY_LOCATION_PERMISSION_GRANTED) {
                 mMap.setMyLocationEnabled(true);
                 initMap();
                 return;
             }
         }
 
-        if (ClassConstants.MY_LOCATION_PERMISSION_GRANTED) {
+        if (MY_LOCATION_PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
             initMap();
         }

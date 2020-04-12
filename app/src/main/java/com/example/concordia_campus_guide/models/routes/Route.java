@@ -2,7 +2,6 @@ package com.example.concordia_campus_guide.models.routes;
 
 import com.example.concordia_campus_guide.ClassConstants;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Route {

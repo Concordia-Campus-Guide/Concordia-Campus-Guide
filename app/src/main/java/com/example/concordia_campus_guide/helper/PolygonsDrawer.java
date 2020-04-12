@@ -44,7 +44,7 @@ public class PolygonsDrawer {
      */
     public GeoJsonLayer loadPolygons(GoogleMap map, Context applicationContext, Map<String, Building> buildings) {
         GeoJsonLayer layer = initLayer(map, applicationContext);
-        setPolygonStyle(layer, map, applicationContext,buildings);
+        setPolygonStyle(layer, map,buildings);
         return layer;
     }
 
@@ -73,7 +73,7 @@ public class PolygonsDrawer {
      * @param layer the GeoJson layer containing features to style.
      * @param map   the google map where layer will be displayed and markers will be added.
      */
-    public void setPolygonStyle(GeoJsonLayer layer, GoogleMap map, Context context, Map<String, Building> buildings) {
+    public void setPolygonStyle(GeoJsonLayer layer, GoogleMap map, Map<String, Building> buildings) {
         for (GeoJsonFeature feature : layer.getFeatures()) {
             feature.setPolygonStyle(getPolygonStyle());
             Building building = getBuildingFromGeoJsonFeature(feature);

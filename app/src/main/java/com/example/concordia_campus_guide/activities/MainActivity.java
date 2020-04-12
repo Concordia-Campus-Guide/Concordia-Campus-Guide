@@ -304,14 +304,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.add(R.id.bottom_card_frame, infoCardFragment);
         fragmentTransaction.commit();
 
-        (findViewById(R.id.bottom_card_frame)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (swipeableInfoCard.getState() != BottomSheetBehavior.STATE_EXPANDED)
-                    swipeableInfoCard.setState(BottomSheetBehavior.STATE_EXPANDED);
-                else
-                    swipeableInfoCard.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            }
+        (findViewById(R.id.bottom_card_frame)).setOnClickListener(view -> {
+            if (swipeableInfoCard.getState() != BottomSheetBehavior.STATE_EXPANDED)
+                swipeableInfoCard.setState(BottomSheetBehavior.STATE_EXPANDED);
+            else
+                swipeableInfoCard.setState(BottomSheetBehavior.STATE_COLLAPSED);
         });
     }
 
@@ -331,14 +328,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.commit();
 
 
-        (findViewById(R.id.explore_bottom_card_frame)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (swipeablePOICard.getState() != BottomSheetBehavior.STATE_EXPANDED)
-                    swipeablePOICard.setState(BottomSheetBehavior.STATE_EXPANDED);
-                else
-                    swipeablePOICard.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            }
+        (findViewById(R.id.explore_bottom_card_frame)).setOnClickListener(view -> {
+            if (swipeablePOICard.getState() != BottomSheetBehavior.STATE_EXPANDED)
+                swipeablePOICard.setState(BottomSheetBehavior.STATE_EXPANDED);
+            else
+                swipeablePOICard.setState(BottomSheetBehavior.STATE_COLLAPSED);
         });
     }
 

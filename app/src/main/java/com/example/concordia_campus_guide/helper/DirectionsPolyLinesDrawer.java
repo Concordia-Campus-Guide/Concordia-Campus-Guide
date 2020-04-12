@@ -5,12 +5,18 @@ import android.graphics.Color;
 import com.example.concordia_campus_guide.adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.Dash;
+import com.google.android.gms.maps.model.Gap;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.PatternItem;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class DirectionsPolyLinesDrawer {
+
+    private final List<PatternItem> WALK_PATTERN = Arrays.asList(new Gap(20), new Dash(20));
 
     public void drawOutdoorPath(List<DirectionWrapper> outdoorDirections, GoogleMap map) {
         for (DirectionWrapper directionWrapper : outdoorDirections) {
@@ -31,7 +37,7 @@ public class DirectionsPolyLinesDrawer {
     public PolylineOptions stylePolyLine(String type, int color) {
         PolylineOptions polylineOptions = new PolylineOptions().width(20);
         if (type.equals(ClassConstants.WALKING)) {
-            polylineOptions.pattern(ClassConstants.WALK_PATTERN);
+            polylineOptions.pattern(WALK_PATTERN);
         }
         if (color != 0) {
             polylineOptions.color(color);
