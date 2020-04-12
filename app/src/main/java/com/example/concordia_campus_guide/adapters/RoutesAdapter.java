@@ -105,8 +105,8 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
     }
 
     private void setUIWalk(Route route) {
-        if (!(route.getSummary().equals("Pas de routes disponible, veuillez changer les critères.") ||
-                route.getSummary().equals("No routes available, please change the filter criteria."))) {
+
+        if (!route.getSummary().equals(context.getResources().getString(R.string.no_routes))) {
             mainTransportType.setImageResource(R.drawable.ic_directions_walking);
         }
         TextView summary = new TextView(context);
@@ -118,8 +118,7 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
     }
 
     private void setUIDriving(Route route) {
-        if (!(route.getSummary().equals("Pas de routes disponible, veuillez changer les critères.") ||
-                route.getSummary().equals("No routes available, please change the filter criteria."))) {
+        if (!route.getSummary().equals(context.getResources().getString(R.string.no_routes))) {
             mainTransportType.setImageResource(R.drawable.ic_directions_driving);
         }
 
@@ -132,8 +131,7 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
     }
 
     private void setUITransit(Route route) {
-        if (route.getSummary().equals("Pas de routes disponible, veuillez changer les critères.") ||
-                route.getSummary().equals("No routes available, please change the filter criteria.")) {
+        if (route.getSummary().equals(context.getResources().getString(R.string.no_routes))) {
             TextView summary = new TextView(context);
             summary.setText(route.getSummary());
             summary.setGravity(Gravity.CENTER);
