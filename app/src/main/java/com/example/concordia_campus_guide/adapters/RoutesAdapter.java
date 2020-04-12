@@ -105,12 +105,12 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
     }
 
     private void setUIWalk(Route route) {
-
         if (!route.getSummary().equals(context.getResources().getString(R.string.no_routes))) {
             mainTransportType.setImageResource(R.drawable.ic_directions_walking);
         }
+        String summaryDescription = route.getSummary().isEmpty() ? "Walk" : route.getSummary();
         TextView summary = new TextView(context);
-        summary.setText(route.getSummary());
+        summary.setText(summaryDescription);
         summary.setGravity(Gravity.CENTER);
         details.addView(summary);
 
