@@ -51,12 +51,8 @@ public class RouteBuilderDirector {
 
     }
 
-    public void constructShuttleRouteWithSummaryOnly(RouteBuilder builder, String summary) {
-        builder.setSteps(null);
-        builder.setDepartureTime("");
-        builder.setArrivalTime("");
-        builder.setDuration("");
+    public void constructRouteWithSummaryOnly(RouteBuilder builder, String summary, String transportType) {
         builder.setSummary(summary);
-        builder.setMainTransportType(ClassConstants.SHUTTLE);
+        builder.setMainTransportType(transportType);
     }
 }

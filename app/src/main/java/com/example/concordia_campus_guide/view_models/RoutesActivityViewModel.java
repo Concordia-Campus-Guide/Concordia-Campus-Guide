@@ -1,18 +1,20 @@
 package com.example.concordia_campus_guide.view_models;
 
 import androidx.lifecycle.ViewModel;
+
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.DirectionsResult;
 import com.example.concordia_campus_guide.models.Building;
-import com.example.concordia_campus_guide.models.Floor;
 import com.example.concordia_campus_guide.models.Coordinates;
+import com.example.concordia_campus_guide.models.Floor;
 import com.example.concordia_campus_guide.models.Place;
 import com.example.concordia_campus_guide.models.RoomModel;
+import com.example.concordia_campus_guide.models.Shuttle;
 import com.example.concordia_campus_guide.models.helpers.RouteBuilder;
 import com.example.concordia_campus_guide.models.helpers.RouteBuilderDirector;
 import com.example.concordia_campus_guide.models.routes.Route;
-import com.example.concordia_campus_guide.models.Shuttle;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DateFormat;
@@ -51,31 +53,31 @@ public class RoutesActivityViewModel extends ViewModel {
         return to;
     }
 
-    public String getToDisplayName(){
+    public String getToDisplayName() {
         return getTo().getDisplayName();
     }
 
     public Place getEntrance(Place place) {
         if (!(place instanceof RoomModel || place instanceof Floor)) return place;
-        String floorCode = place instanceof RoomModel? ((RoomModel) place).getFloorCode() : ((Floor) place).getFloorCode();
+        String floorCode = place instanceof RoomModel ? ((RoomModel) place).getFloorCode() : ((Floor) place).getFloorCode();
         Building building = appDB.buildingDao().getBuildingByBuildingCode(floorCode.substring(0, floorCode.indexOf('-')).toUpperCase());
         String entranceFloor = building.getBuildingCode() + "-" + building.getEntranceFloor();
         return appDB.roomDao().getRoomByIdAndFloorCode("entrance", entranceFloor);
     }
 
-    public Coordinates getFromEntranceCoordinates(){
+    public Coordinates getFromEntranceCoordinates() {
         return this.getEntrance(this.getFrom()).getCenterCoordinates();
     }
 
-    public Coordinates getToEntranceCoordinates(){
+    public Coordinates getToEntranceCoordinates() {
         return this.getEntrance(this.getTo()).getCenterCoordinates();
     }
-    
+
     public Place getFrom() {
         return from;
     }
 
-    public String getFromDisplayName(){
+    public String getFromDisplayName() {
         return getFrom().getDisplayName();
     }
 
@@ -166,10 +168,10 @@ public class RoutesActivityViewModel extends ViewModel {
         this.transportType = transportType;
     }
 
-    public void noShuttles(String noShuttleText) {
+    public void noRoutesOptions(String noRoutes) {
         RouteBuilder routeBuilder = new RouteBuilder();
-        director.constructShuttleRouteWithSummaryOnly(routeBuilder, noShuttleText);
-        Route shuttleRoute = routeBuilder.getRoute();
-        routeOptions.add(shuttleRoute);
+        director.constructRouteWithSummaryOnly(routeBuilder, noRoutes, transportType);
+        Route noRoute = routeBuilder.getRoute();
+        routeOptions.add(noRoute);
     }
 }

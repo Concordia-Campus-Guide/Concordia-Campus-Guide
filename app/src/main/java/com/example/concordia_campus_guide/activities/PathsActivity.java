@@ -158,7 +158,7 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
     public void setOutdoorPaths() {
         directionWrappers = (mViewModel.areInSameBuilding(initialLocation, destinationLocation)
                 || mViewModel.arePlacesSeparatedByATunnel(initialLocation, destinationLocation)) ? new ArrayList<>()
-                        : (ArrayList<DirectionWrapper>) parseDirectionResults();
+                : (ArrayList<DirectionWrapper>) parseDirectionResults();
 
         locationFragment.drawOutdoorPaths(directionWrappers);
         mViewModel.adaptOutdoorDirectionsToInfoCardList(directionWrappers);

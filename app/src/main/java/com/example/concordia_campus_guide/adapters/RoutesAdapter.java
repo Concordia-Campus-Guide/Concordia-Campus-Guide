@@ -9,16 +9,19 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
+
 import com.example.concordia_campus_guide.ClassConstants;
+import com.example.concordia_campus_guide.R;
 import com.example.concordia_campus_guide.models.routes.Bus;
 import com.example.concordia_campus_guide.models.routes.Route;
 import com.example.concordia_campus_guide.models.routes.Subway;
 import com.example.concordia_campus_guide.models.routes.Train;
 import com.example.concordia_campus_guide.models.routes.TransportType;
 import com.example.concordia_campus_guide.models.routes.Walk;
-import com.example.concordia_campus_guide.R;
 import com.google.android.flexbox.FlexboxLayout;
+
 import java.util.List;
 
 /**
@@ -102,10 +105,12 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
     }
 
     private void setUIWalk(Route route) {
-        mainTransportType.setImageResource(R.drawable.ic_directions_walking);
-
+        if (!route.getSummary().equals(context.getResources().getString(R.string.no_routes))) {
+            mainTransportType.setImageResource(R.drawable.ic_directions_walking);
+        }
+        String summaryDescription = route.getSummary().isEmpty() ? "Walk" : route.getSummary();
         TextView summary = new TextView(context);
-        summary.setText(route.getSummary());
+        summary.setText(summaryDescription);
         summary.setGravity(Gravity.CENTER);
         details.addView(summary);
 
@@ -113,7 +118,9 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
     }
 
     private void setUIDriving(Route route) {
-        mainTransportType.setImageResource(R.drawable.ic_directions_driving);
+        if (!route.getSummary().equals(context.getResources().getString(R.string.no_routes))) {
+            mainTransportType.setImageResource(R.drawable.ic_directions_driving);
+        }
 
         TextView summary = new TextView(context);
         summary.setText(route.getSummary());
@@ -124,25 +131,32 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
     }
 
     private void setUITransit(Route route) {
-        mainTransportType.setImageResource(R.drawable.ic_directions_bus_red);
-        duration.setText(route.getDuration());
+        if (route.getSummary().equals(context.getResources().getString(R.string.no_routes))) {
+            TextView summary = new TextView(context);
+            summary.setText(route.getSummary());
+            summary.setGravity(Gravity.CENTER);
+            details.addView(summary);
+        } else {
+            mainTransportType.setImageResource(R.drawable.ic_directions_bus_red);
+            duration.setText(route.getDuration());
 
-        // Go through each steps in the route
-        for (int i = 0; i < route.getSteps().size(); i++) {
-            TransportType step = route.getSteps().get(i);
+            // Go through each steps in the route
+            for (int i = 0; i < route.getSteps().size(); i++) {
+                TransportType step = route.getSteps().get(i);
 
-            if (step instanceof Bus) {
-                setUIBus((Bus) step);
-            } else if (step instanceof Subway) {
-                setUISubway((Subway) step);
-            } else if (step instanceof Train) {
-                setUITrain((Train) step);
-            } else if (step instanceof Walk) {
-                setUIWalkInTransit((Walk) step);
-            }
+                if (step instanceof Bus) {
+                    setUIBus((Bus) step);
+                } else if (step instanceof Subway) {
+                    setUISubway((Subway) step);
+                } else if (step instanceof Train) {
+                    setUITrain((Train) step);
+                } else if (step instanceof Walk) {
+                    setUIWalkInTransit((Walk) step);
+                }
 
-            if (i < route.getSteps().size() - 1) {
-                setUIArrow();
+                if (i < route.getSteps().size() - 1) {
+                    setUIArrow();
+                }
             }
         }
     }
@@ -173,24 +187,22 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
     private void setUIWalkInTransit(Walk walk) {
         ImageView walkIcon = new ImageView(context);
         walkIcon.setImageResource(R.drawable.ic_directions_walking);
-
+        details.addView(walkIcon);
         TextView durationWalk = new TextView(context);
         durationWalk.setText(walk.getDuration());
         durationWalk.setGravity(Gravity.CENTER);
 
-        details.addView(walkIcon);
         details.addView(durationWalk);
     }
 
     private void setUIBus(Bus bus) {
         ImageView busIcon = new ImageView(context);
         busIcon.setImageResource(R.drawable.ic_directions_bus_red);
-
+        details.addView(busIcon);
         TextView busNumber = new TextView(context);
         busNumber.setText(bus.getBusNumber());
         busNumber.setGravity(Gravity.CENTER);
 
-        details.addView(busIcon);
         details.addView(busNumber);
     }
 
@@ -233,7 +245,7 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
     }
 
     private void setBottomLayout(Route route) {
-        if (route.getArrivalTime().isEmpty() || route.getDepartureTime().isEmpty())
+        if (route.getArrivalTime() == null || route.getDepartureTime() == null)
             bottom.setVisibility(View.GONE);
         else
             arrivalAndDepartureTime.setText(route.getDepartureTime() + " - " + route.getArrivalTime());

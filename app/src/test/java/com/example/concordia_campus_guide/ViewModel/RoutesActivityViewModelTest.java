@@ -126,4 +126,13 @@ public class RoutesActivityViewModelTest {
 
         assertEquals(result, mViewModel.getDirectionsResult());
     }
+
+    @Test
+    public void noRoutesTest() {
+        List<Route> routes = new ArrayList();
+        mViewModel.setRouteOptions(routes);
+        String noRoutes = "Test";
+        mViewModel.noRoutesOptions(noRoutes);
+        assertEquals(noRoutes, mViewModel.getRouteOptions().get(0).getSummary());
+    }
 }

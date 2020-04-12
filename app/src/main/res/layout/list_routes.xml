@@ -20,8 +20,7 @@
             android:layout_height="37dp"
             android:layout_gravity="center"
             android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_directions_bus_red" />
+            android:layout_weight="1" />
 
         <com.google.android.flexbox.FlexboxLayout
             android:id="@+id/details"

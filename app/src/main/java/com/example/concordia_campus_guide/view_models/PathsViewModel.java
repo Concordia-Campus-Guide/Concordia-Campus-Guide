@@ -2,6 +2,7 @@ package com.example.concordia_campus_guide.view_models;
 
 import androidx.lifecycle.ViewModel;
 
+import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.global.SelectingToFromState;
@@ -56,9 +57,11 @@ public class PathsViewModel extends ViewModel {
         String entranceFloor = building.getBuildingCode() + "-" + building.getEntranceFloor();
         return appDB.roomDao().getRoomByIdAndFloorCode("entrance", entranceFloor);
     }
-
+    //TODO: fix this broken function !!IMPORTANT!!
     public boolean arePlacesSeparatedByATunnel(Place from, Place to) {
-        return from.getCampus() != null && from.getCampus().equals(to.getCampus());
+        return from.getCampus() != null
+                && from.getCampus().equals("SGW")
+                && to.getCampus().equals("SGW");
     }
 
     public boolean areInSameBuilding(Place from, Place to) {

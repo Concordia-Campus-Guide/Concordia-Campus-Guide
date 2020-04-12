@@ -160,8 +160,8 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
         if (!shuttles.isEmpty()) {
             mViewModel.adaptShuttleToRoutes(shuttles);
         } else {
-            String noShuttleText = getResources().getString(R.string.no_shuttle);
-            mViewModel.noShuttles(noShuttleText);
+            mViewModel.setTransportType(ClassConstants.SHUTTLE);
+            mViewModel.noRoutesOptions(getResources().getString(R.string.no_shuttle));
         }
         setShuttleSelect();
         setRoutesAdapter();
@@ -200,7 +200,9 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
     public void directionsApiCallBack(DirectionsResult result, List<Route> routeOptions) {
         mViewModel.setDirectionsResult(result);
         mViewModel.setRouteOptions(routeOptions);
-
+        if (result.routes.length == 0) {
+            mViewModel.noRoutesOptions(getResources().getString(R.string.no_routes));
+        }
         setRoutesAdapter();
     }
 
@@ -210,14 +212,18 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
         allRoutes.setAdapter(adapter);
         allRoutes.setOnItemClickListener((adapterView, view, i, l) -> {
             if (carButton.isSelected() || transitButton.isSelected() || walkButton.isSelected()) {
-                Intent openPaths = new Intent(RoutesActivity.this,
-                        PathsActivity.class);
-                DirectionsRoute directionsResult = mViewModel.getDirectionsResult().routes[i];
-                openPaths.putExtra("directionsResult", directionsResult);
-                openPaths.putExtra("shuttle", false);
-                startActivity(openPaths);
+                if (mViewModel.getRouteOptions().get(0) == null || mViewModel.getRouteOptions().get(0).getDuration() == null) {
+                    Toast.makeText(getApplicationContext(), "Paths view is not available.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent openPaths = new Intent(RoutesActivity.this,
+                            PathsActivity.class);
+                    DirectionsRoute directionsResult = mViewModel.getDirectionsResult().routes[i];
+                    openPaths.putExtra("directionsResult", directionsResult);
+                    openPaths.putExtra("shuttle", false);
+                    startActivity(openPaths);
+                }
             } else {
-                if (mViewModel.getShuttles() == null) {
+                if (mViewModel.getShuttles() == null || mViewModel.getShuttles().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Paths view for Shuttle route is not available if no shuttles exist.", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent openPaths = new Intent(RoutesActivity.this,
