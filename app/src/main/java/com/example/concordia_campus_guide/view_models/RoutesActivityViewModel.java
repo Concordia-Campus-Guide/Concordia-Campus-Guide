@@ -170,8 +170,7 @@ public class RoutesActivityViewModel extends ViewModel {
 
     public void noRoutesOptions(String noRoutes) {
         RouteBuilder routeBuilder = new RouteBuilder();
-        routeBuilder.setMainTransportType(transportType);
-        routeBuilder.setSummary(noRoutes);
+        director.constructRouteWithSummaryOnly(routeBuilder, noRoutes, transportType);
         Route noRoute = routeBuilder.getRoute();
         routeOptions.add(noRoute);
     }
