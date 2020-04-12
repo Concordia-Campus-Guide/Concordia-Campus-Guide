@@ -1,5 +1,7 @@
 package com.example.concordia_campus_guide.models;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -50,7 +52,7 @@ public class Buildings {
             toReturn.put("features", getInnerGeoJson());
         }
         catch (Exception e){
-            e.printStackTrace();
+            Log.e("BUILDINGS ", e.getMessage());
         }
 
         return toReturn;
@@ -66,7 +68,7 @@ public class Buildings {
             }
         }
         catch (Exception e){
-            e.printStackTrace();
+            Log.e("BUILDINGS ", e.getMessage());
         }
 
         return features;

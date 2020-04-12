@@ -205,9 +205,9 @@ public class DirectionsApiDataParserTest {
         directionsRoute.legs = new DirectionsLeg[1];
         directionsRoute.legs[0] = new DirectionsLeg();
         directionsRoute.legs[0].departureTime = new Time();
-        directionsRoute.legs[0].departureTime.text = "4:23pm";
+        directionsRoute.legs[0].departureTime.setText("4:23pm");
         directionsRoute.legs[0].arrivalTime = new Time();
-        directionsRoute.legs[0].arrivalTime.text = "4:33pm";
+        directionsRoute.legs[0].arrivalTime.setText("4:33pm");
         directionsRoute.legs[0].duration = new Duration();
         directionsRoute.legs[0].duration.text = "10 mins";
 

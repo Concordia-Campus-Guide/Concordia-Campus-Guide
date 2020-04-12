@@ -104,7 +104,7 @@ public class DirectionsApiDataParser extends AsyncTask<DirectionsApiDataRetrieva
         RouteBuilder routeBuilder = new RouteBuilder();
 
         if(directionsRoute.legs[0].departureTime != null && directionsRoute.legs[0].arrivalTime != null)
-            director.constructTransitRoute(routeBuilder, extractSteps(directionsRoute.legs[0].steps), directionsRoute.legs[0].departureTime.text, directionsRoute.legs[0].arrivalTime.text, directionsRoute.legs[0].duration.text);
+            director.constructTransitRoute(routeBuilder, extractSteps(directionsRoute.legs[0].steps), directionsRoute.legs[0].departureTime.getText(), directionsRoute.legs[0].arrivalTime.getText(), directionsRoute.legs[0].duration.text);
         else
             director.constructTransitRouteWithoutArrivalOrDepartureTime(routeBuilder, extractSteps(directionsRoute.legs[0].steps), directionsRoute.legs[0].duration.text);
 
