@@ -26,7 +26,8 @@ sonarqube {
         property "sonar.sourceEncoding", "UTF-8"
         property "sonar.sources", "src/main/java"
         property 'sonar.exclusions', ['**/googleMapsServicesTools/**', "**/*googleMapsServicesTools*/**", "**/*google-maps-services-java-0.10.0*/**"]
-        property 'sonar.coverage.exclusions', ['**/googleMapsServicesTools/**', "**/*googleMapsServicesTools*/**", "**/*google-maps-services-java-0.10.0*/**", "**/activities/**", "**/adapters/**", "**/database/daos/**", "**/global/**", "**/*Fragment.*", "**/ClassConstants.*", '**/TransitType.*', '**/customViews/**']
+        property 'sonar.coverage.exclusions', ['**/googleMapsServicesTools/**', "**/*googleMapsServicesTools*/**", "**/*google-maps-services-java-0.10.0*/**", "**/activities/**", "**/adapters/**", "**/database/daos/**", "**/global/**", "**/*Fragment.*", "**/ClassConstants.*", '**/TransitType.*', '**/customViews/**',
+                                               '**/LocaleHelper.*','**/helper/DirectionsPolyLinesDrawer.*','**/helper/StartActivityHelper.*', '**/helper/ui_helpers/**',"**/activities/**","**/fragments/**"]
     }
 }
 allprojects {

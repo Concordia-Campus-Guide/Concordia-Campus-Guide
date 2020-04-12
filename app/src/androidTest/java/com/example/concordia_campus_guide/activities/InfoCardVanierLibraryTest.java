@@ -54,7 +54,7 @@ public class InfoCardVanierLibraryTest {
             GrantPermissionRule.grant(
                     "android.permission.ACCESS_FINE_LOCATION",
                     "android.permission.ACCESS_COARSE_LOCATION",
-                    "android.permission.WRITE_CALENDAR",
+                    "android.permission on.WRITE_CALENDAR",
                     "android.permission.READ_CALENDAR");
 
     @Test
