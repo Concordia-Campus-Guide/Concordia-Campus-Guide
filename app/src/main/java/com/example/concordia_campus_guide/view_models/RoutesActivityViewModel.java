@@ -9,10 +9,9 @@ import com.example.concordia_campus_guide.models.Building;
 import com.example.concordia_campus_guide.models.Floor;
 import com.example.concordia_campus_guide.models.Place;
 import com.example.concordia_campus_guide.models.RoomModel;
+import com.example.concordia_campus_guide.models.Shuttle;
 import com.example.concordia_campus_guide.models.helpers.RouteBuilder;
 import com.example.concordia_campus_guide.models.helpers.RouteBuilderDirector;
-import com.example.concordia_campus_guide.models.routes.Route;
-import com.example.concordia_campus_guide.models.Shuttle;
 import com.example.concordia_campus_guide.models.routes.Route;
 
 import java.math.BigDecimal;
@@ -55,7 +54,7 @@ public class RoutesActivityViewModel extends ViewModel {
 
     public Place getEntrance(Place place) {
         if (!(place instanceof RoomModel || place instanceof Floor)) return place;
-        String floorCode = place instanceof RoomModel? ((RoomModel) place).getFloorCode() : ((Floor) place).getFloorCode();
+        String floorCode = place instanceof RoomModel ? ((RoomModel) place).getFloorCode() : ((Floor) place).getFloorCode();
         Building building = appDB.buildingDao().getBuildingByBuildingCode(floorCode.substring(0, floorCode.indexOf('-')).toUpperCase());
         String entranceFloor = building.getBuildingCode() + "-" + building.getEntranceFloor();
         return appDB.roomDao().getRoomByIdAndFloorCode("entrance", entranceFloor);
