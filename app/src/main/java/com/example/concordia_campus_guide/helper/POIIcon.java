@@ -58,8 +58,8 @@ public class POIIcon {
                 currentCoordinates = new Coordinates(currentLocation.getMyLocation().getLatitude(), currentLocation.getMyLocation().getLongitude());
             }
 
-            double distanceFromP1 = p1.getCoordinate().getEuclideanDistanceFrom(currentCoordinates);
-            double distanceFromP2 = p2.getCoordinate().getEuclideanDistanceFrom(currentCoordinates);
+            double distanceFromP1 = p1.getEuclideanDistanceFrom(currentCoordinates);
+            double distanceFromP2 = p2.getEuclideanDistanceFrom(currentCoordinates);
 
             //Compare walking points: If p1 is closer to the current location than p2, it will have a higher position in priority queue
             if (distanceFromP1 < distanceFromP2) return -1;
@@ -74,8 +74,8 @@ public class POIIcon {
     public Coordinates getCurrentCoordinates(AppDatabase appDatabase){
         //This building has inverted lat/lng in order to us th geojsons.
         Building hallBuilding = appDatabase.buildingDao().getBuildingByBuildingCode("H");
-        Double currentLat = hallBuilding != null ? hallBuilding.getCenterCoordinates().getLatitude() : 0;
-        Double currentLng = hallBuilding != null ? hallBuilding.getCenterCoordinates().getLongitude() : 0;
+        Double currentLat = hallBuilding != null ? hallBuilding.getLatitude() : 0;
+        Double currentLng = hallBuilding != null ? hallBuilding.getLongitude() : 0;
         return new Coordinates(currentLng, currentLat);
     }
 }

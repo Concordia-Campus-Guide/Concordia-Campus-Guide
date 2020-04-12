@@ -4,14 +4,15 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 
-import com.example.concordia_campus_guide.ClassConstants;
-import com.example.concordia_campus_guide.fragments.LocationFragment;
-
 import androidx.core.app.ActivityCompat;
+
+import com.example.concordia_campus_guide.fragments.LocationFragment;
 
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 
 public class CurrentLocationPermissionRequest {
+
+    public static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
 
     /**
      * The purpose of this application is to ask the user for their permission
@@ -27,7 +28,7 @@ public class CurrentLocationPermissionRequest {
         } else {
             ActivityCompat.requestPermissions(locationFragment.getActivity(),
                     permissions,
-                    ClassConstants.LOCATION_PERMISSION_REQUEST_CODE);
+                    LOCATION_PERMISSION_REQUEST_CODE);
         }
         locationFragment.initMap();
     }
@@ -36,7 +37,7 @@ public class CurrentLocationPermissionRequest {
      * for using their current location.
      */
     private boolean requestPermission(Context context) {
-        return (checkSelfPermission(context, ClassConstants.FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
+        return (checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
     }
 
 
