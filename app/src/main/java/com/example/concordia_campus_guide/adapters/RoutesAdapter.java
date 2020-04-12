@@ -105,7 +105,7 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
     }
 
     private void setUIWalk(Route route) {
-        if (!route.getSteps().isEmpty()) {
+        if (route.getSteps() != null) {
             mainTransportType.setImageResource(R.drawable.ic_directions_walking);
         }
         TextView summary = new TextView(context);
@@ -130,7 +130,7 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
     }
 
     private void setUITransit(Route route) {
-        if (route.getSteps().isEmpty()) {
+        if (route.getSteps() == null) {
             TextView summary = new TextView(context);
             summary.setText(route.getSummary());
             summary.setGravity(Gravity.CENTER);
@@ -247,7 +247,7 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
     }
 
     private void setBottomLayout(Route route) {
-        if (route.getArrivalTime().isEmpty() || route.getDepartureTime().isEmpty())
+        if (route.getArrivalTime() == null || route.getDepartureTime() == null)
             bottom.setVisibility(View.GONE);
         else
             arrivalAndDepartureTime.setText(route.getDepartureTime() + " - " + route.getArrivalTime());

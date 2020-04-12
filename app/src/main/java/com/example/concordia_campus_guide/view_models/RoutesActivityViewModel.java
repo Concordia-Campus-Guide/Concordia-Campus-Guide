@@ -153,13 +153,10 @@ public class RoutesActivityViewModel extends ViewModel {
     }
 
     public void noRoutesOptions(String noRoutes) {
-        Route noRoute = new Route(transportType);
-        noRoute.setSummary(noRoutes);
-        routeOptions.add(noRoute);
-    public void noShuttles(String noShuttleText) {
         RouteBuilder routeBuilder = new RouteBuilder();
-        director.constructShuttleRouteWithSummaryOnly(routeBuilder, noShuttleText);
-        Route shuttleRoute = routeBuilder.getRoute();
-        routeOptions.add(shuttleRoute);
+        routeBuilder.setMainTransportType(transportType);
+        routeBuilder.setSummary(noRoutes);
+        Route noRoute = routeBuilder.getRoute();
+        routeOptions.add(noRoute);
     }
 }

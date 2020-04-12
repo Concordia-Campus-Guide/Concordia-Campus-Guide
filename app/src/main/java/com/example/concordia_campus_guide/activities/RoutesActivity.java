@@ -214,7 +214,7 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
         allRoutes.setAdapter(adapter);
         allRoutes.setOnItemClickListener((adapterView, view, i, l) -> {
             if (carButton.isSelected() || transitButton.isSelected() || walkButton.isSelected()) {
-                if (mViewModel.getRouteOptions().get(0).getDuration().equals("")) {
+                if (mViewModel.getRouteOptions().get(0) == null || mViewModel.getRouteOptions().get(0).getDuration() == null) {
                     Toast.makeText(getApplicationContext(), "Paths view is not available.", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent openPaths = new Intent(RoutesActivity.this,
