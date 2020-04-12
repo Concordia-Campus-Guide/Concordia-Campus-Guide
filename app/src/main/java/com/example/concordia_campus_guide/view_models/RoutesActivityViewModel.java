@@ -1,12 +1,13 @@
 package com.example.concordia_campus_guide.view_models;
 
 import androidx.lifecycle.ViewModel;
+
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.googleMapsServicesTools.googleMapsServicesModels.DirectionsResult;
 import com.example.concordia_campus_guide.models.Building;
-import com.example.concordia_campus_guide.models.Floor;
 import com.example.concordia_campus_guide.models.Coordinates;
+import com.example.concordia_campus_guide.models.Floor;
 import com.example.concordia_campus_guide.models.Place;
 import com.example.concordia_campus_guide.models.RoomModel;
 import com.example.concordia_campus_guide.models.Shuttle;
@@ -14,7 +15,6 @@ import com.example.concordia_campus_guide.models.helpers.RouteBuilder;
 import com.example.concordia_campus_guide.models.helpers.RouteBuilderDirector;
 import com.example.concordia_campus_guide.models.routes.Route;
 
-import com.example.concordia_campus_guide.models.Shuttle;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DateFormat;
@@ -53,7 +53,7 @@ public class RoutesActivityViewModel extends ViewModel {
         return to;
     }
 
-    public String getToDisplayName(){
+    public String getToDisplayName() {
         return getTo().getDisplayName();
     }
 
@@ -65,11 +65,11 @@ public class RoutesActivityViewModel extends ViewModel {
         return appDB.roomDao().getRoomByIdAndFloorCode("entrance", entranceFloor);
     }
 
-    public Coordinates getFromEntranceCoordinates(){
+    public Coordinates getFromEntranceCoordinates() {
         return this.getEntrance(this.getFrom()).getCenterCoordinates();
     }
 
-    public Coordinates getToEntranceCoordinates(){
+    public Coordinates getToEntranceCoordinates() {
         return this.getEntrance(this.getTo()).getCenterCoordinates();
     }
 
@@ -77,7 +77,7 @@ public class RoutesActivityViewModel extends ViewModel {
         return from;
     }
 
-    public String getFromDisplayName(){
+    public String getFromDisplayName() {
         return getFrom().getDisplayName();
     }
 

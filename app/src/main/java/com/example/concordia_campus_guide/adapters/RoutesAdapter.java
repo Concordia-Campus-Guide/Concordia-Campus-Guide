@@ -13,13 +13,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.example.concordia_campus_guide.ClassConstants;
+import com.example.concordia_campus_guide.R;
 import com.example.concordia_campus_guide.models.routes.Bus;
 import com.example.concordia_campus_guide.models.routes.Route;
 import com.example.concordia_campus_guide.models.routes.Subway;
 import com.example.concordia_campus_guide.models.routes.Train;
 import com.example.concordia_campus_guide.models.routes.TransportType;
 import com.example.concordia_campus_guide.models.routes.Walk;
-import com.example.concordia_campus_guide.R;
 import com.google.android.flexbox.FlexboxLayout;
 
 import java.util.List;
@@ -105,7 +105,8 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
     }
 
     private void setUIWalk(Route route) {
-        if (route.getSteps() != null) {
+        if (!(route.getSummary().equals("Pas de routes disponible, veuillez changer les critères.") ||
+                route.getSummary().equals("No routes available, please change the filter criteria."))) {
             mainTransportType.setImageResource(R.drawable.ic_directions_walking);
         }
         TextView summary = new TextView(context);
@@ -117,7 +118,8 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
     }
 
     private void setUIDriving(Route route) {
-        if (route.getDuration() != null) {
+        if (!(route.getSummary().equals("Pas de routes disponible, veuillez changer les critères.") ||
+                route.getSummary().equals("No routes available, please change the filter criteria."))) {
             mainTransportType.setImageResource(R.drawable.ic_directions_driving);
         }
 
@@ -130,7 +132,8 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
     }
 
     private void setUITransit(Route route) {
-        if (route.getSteps() == null) {
+        if (route.getSummary().equals("Pas de routes disponible, veuillez changer les critères.") ||
+                route.getSummary().equals("No routes available, please change the filter criteria.")) {
             TextView summary = new TextView(context);
             summary.setText(route.getSummary());
             summary.setGravity(Gravity.CENTER);
@@ -195,12 +198,9 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
     }
 
     private void setUIBus(Bus bus) {
-        if (bus.getBusNumber() != null) {
-            ImageView busIcon = new ImageView(context);
-            busIcon.setImageResource(R.drawable.ic_directions_bus_red);
-            details.addView(busIcon);
-        }
-
+        ImageView busIcon = new ImageView(context);
+        busIcon.setImageResource(R.drawable.ic_directions_bus_red);
+        details.addView(busIcon);
         TextView busNumber = new TextView(context);
         busNumber.setText(bus.getBusNumber());
         busNumber.setGravity(Gravity.CENTER);
