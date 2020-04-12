@@ -15,7 +15,6 @@ import androidx.test.uiautomator.UiDevice;
 
 import com.example.concordia_campus_guide.EspressoHelpers;
 import com.example.concordia_campus_guide.R;
-import com.example.concordia_campus_guide.activities.MainActivity;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -235,6 +234,7 @@ public class RoutesDirectionsHappyPathTest {
         android.os.SystemClock.sleep(1000);
 
         device.pressBack();
+        android.os.SystemClock.sleep(1000);
 
     }
 

@@ -282,6 +282,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.search) {
+            SelectingToFromState.reset();
             Intent openSearch = new Intent(MainActivity.this, SearchActivity.class);
             SelectingToFromState.setMyCurrentLocation(getMyCurrentLocation());
             startActivity(openSearch);
