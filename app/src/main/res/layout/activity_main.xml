@@ -46,7 +46,6 @@
         android:id="@+id/bottom_card_coordinator_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#48B9B6B8"
         android:gravity="bottom|center_horizontal">
 
         <androidx.core.widget.NestedScrollView
