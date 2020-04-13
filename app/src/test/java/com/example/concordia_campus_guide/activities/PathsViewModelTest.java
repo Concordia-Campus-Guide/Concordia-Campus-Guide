@@ -61,7 +61,7 @@ public class PathsViewModelTest {
 
     @Test
     public void arePlacesSeparatedByATunnelTest() {
-        assertTrue(pathsViewModel.arePlacesSeparatedByATunnel(fromRoom, toRoom));
+        assertFalse(pathsViewModel.arePlacesSeparatedByATunnel(fromRoom, toRoom));
     }
 
     @Test

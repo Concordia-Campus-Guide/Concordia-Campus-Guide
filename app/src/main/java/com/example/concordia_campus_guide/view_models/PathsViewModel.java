@@ -57,11 +57,19 @@ public class PathsViewModel extends ViewModel {
         String entranceFloor = building.getBuildingCode() + "-" + building.getEntranceFloor();
         return appDB.roomDao().getRoomByIdAndFloorCode("entrance", entranceFloor);
     }
-    //TODO: fix this broken function !!IMPORTANT!!
+
     public boolean arePlacesSeparatedByATunnel(Place from, Place to) {
-        return from.getCampus() != null
-                && from.getCampus().equals("SGW")
-                && to.getCampus().equals("SGW");
+        if (from instanceof RoomModel && to instanceof RoomModel) {
+            String floorCode = ((RoomModel) from).getFloorCode();
+            String fromBuilding = floorCode.toUpperCase().substring(0, floorCode.indexOf('-'));
+
+            floorCode = ((RoomModel) to).getFloorCode();
+            String toBuilding = floorCode.toUpperCase().substring(0, floorCode.indexOf('-'));
+
+            return fromBuilding.equalsIgnoreCase("H") && toBuilding.equalsIgnoreCase("MB") ||
+                    fromBuilding.equalsIgnoreCase("MB") && toBuilding.equalsIgnoreCase("H");
+        }
+        return false;
     }
 
     public boolean areInSameBuilding(Place from, Place to) {
