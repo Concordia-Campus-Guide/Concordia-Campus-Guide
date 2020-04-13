@@ -142,7 +142,7 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
         disabilityButton.setSelected(!disabilityButton.isSelected());
 
         SharedPreferences sharedPreferences = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
-        sharedPreferences2.edit().putBoolean(ClassConstants.ACCESSIBILITY_TOGGLE, disabilityButton.isSelected()).commit();
+        sharedPreferences.edit().putBoolean(ClassConstants.ACCESSIBILITY_TOGGLE, disabilityButton.isSelected()).commit();
     }
 
     public void onClickShuttle(View v) {
