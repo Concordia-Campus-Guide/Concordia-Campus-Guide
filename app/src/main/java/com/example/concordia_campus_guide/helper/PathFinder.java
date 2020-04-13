@@ -51,7 +51,7 @@ public class PathFinder {
         this.walkingPointsVisited = new HashMap<>();
 
         this.isStaffAccessiblity = accessibilityPreferences.getBoolean(ClassConstants.STAFF_TOGGLE, false);
-        this.isReducedAccessiblity = accessibilityPreferences.getBoolean(ClassConstants.ACCESSIBILITY_TOGGLE, false) || accessibilityPreferences.getBoolean(ClassConstants.DISABILITY_BUTTON, false);
+        this.isReducedAccessiblity = accessibilityPreferences.getBoolean(ClassConstants.ACCESSIBILITY_TOGGLE, false);
         this.appDatabase = appDatabase;
         this.indoorPathHeuristic = new IndoorPathHeuristic(appDatabase, isStaffAccessiblity, isReducedAccessiblity);
 

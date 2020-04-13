@@ -65,20 +65,8 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
 
         // Fetching the stored data from the SharedPreference
         SharedPreferences sharedPreferences = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
-        boolean disability = sharedPreferences.getBoolean(ClassConstants.DISABILITY_BUTTON, false);
+        boolean disability = sharedPreferences.getBoolean(ClassConstants.ACCESSIBILITY_TOGGLE, false);
         disabilityButton.setSelected(disability);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        // Creating a shared pref object with a file name "UserPreferences" in private mode
-        SharedPreferences sharedPreferences = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
-        SharedPreferences.Editor myEdit = sharedPreferences.edit();
-        boolean disability = disabilityButton.isSelected();
-        myEdit.putBoolean(ClassConstants.DISABILITY_BUTTON, disability);
-        myEdit.commit();
     }
 
     private void initComponent() {
@@ -152,6 +140,9 @@ public class RoutesActivity extends AppCompatActivity implements DirectionsApiCa
 
     public void onClickDisability(View v) {
         disabilityButton.setSelected(!disabilityButton.isSelected());
+
+        SharedPreferences sharedPreferences = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
+        sharedPreferences.edit().putBoolean(ClassConstants.ACCESSIBILITY_TOGGLE, disabilityButton.isSelected()).commit();
     }
 
     public void onClickShuttle(View v) {
