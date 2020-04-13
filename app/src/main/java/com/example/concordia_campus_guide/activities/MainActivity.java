@@ -212,8 +212,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void setupOnChangeListenerForSwitch(CompoundButton switchView) {
         switchView.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (buttonView.getId() == R.id.nav_translate)
-                switchLanguage(isChecked);
+            switch(buttonView.getId()){
+                case R.id.nav_translate:
+                    switchLanguage(isChecked);
+                    break;
+                case R.id.nav_accessibility:
+                    SharedPreferences sharedPreferences = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
+                    sharedPreferences.edit().putBoolean(ClassConstants.ACCESSIBILITY_TOGGLE, isChecked).commit();
+                    break;
+                case R.id.nav_staff:
+                    SharedPreferences sharedPreferences2 = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
+                    sharedPreferences2.edit().putBoolean(ClassConstants.STAFF_TOGGLE, isChecked).commit();
+                    break;            }
         });
     }
 

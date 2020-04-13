@@ -6,7 +6,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 public class  ClassConstants {
-    public static final String DISABILITY_BUTTON = "disability_button";
     public static final String CALENDAR_INTEGRATION_BUTTON = "calendar_integration_button";
     public static final String SHARED_PREFERENCES = "UserPreferences";
     public static final String IGNORE ="ignore";
