@@ -1,6 +1,7 @@
 package com.example.concordia_campus_guide.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -17,24 +18,23 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Context;
+import com.example.concordia_campus_guide.ClassConstants;
+import com.example.concordia_campus_guide.R;
 import com.example.concordia_campus_guide.activities.MainActivity;
 import com.example.concordia_campus_guide.adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.adapters.FloorPickerAdapter;
-import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.helper.CurrentLocation;
 import com.example.concordia_campus_guide.helper.CurrentLocationPermissionRequest;
 import com.example.concordia_campus_guide.helper.DirectionsPolyLinesDrawer;
+import com.example.concordia_campus_guide.helper.ViewModelFactory;
 import com.example.concordia_campus_guide.helper.ui_helpers.POIMarkers;
 import com.example.concordia_campus_guide.helper.ui_helpers.RoomMarkers;
-import com.example.concordia_campus_guide.helper.ViewModelFactory;
 import com.example.concordia_campus_guide.interfaces.OnFloorPickerOnClickListener;
 import com.example.concordia_campus_guide.models.Building;
 import com.example.concordia_campus_guide.models.Place;
 import com.example.concordia_campus_guide.models.RoomModel;
 import com.example.concordia_campus_guide.models.WalkingPoint;
-import com.example.concordia_campus_guide.R;
 import com.example.concordia_campus_guide.view_models.LocationFragmentViewModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -306,7 +306,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     @SuppressLint("MissingPermission")
     private void popUpRequestPermission() {
-        if (MY_LOCATION_PERMISSION_GRANTED) {
+        if (!MY_LOCATION_PERMISSION_GRANTED) {
             currentLocationPermissionRequest.getLocationPermission(this);
             if (MY_LOCATION_PERMISSION_GRANTED) {
                 mMap.setMyLocationEnabled(true);
