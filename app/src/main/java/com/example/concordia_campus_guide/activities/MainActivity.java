@@ -221,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     sharedPreferences.edit().putBoolean(ClassConstants.ACCESSIBILITY_TOGGLE, isChecked).commit();
                     break;
                 case R.id.nav_staff:
-                    SharedPreferences sharedPreferences2 = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
+                    SharedPreferences sharedPreferences = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
                     sharedPreferences2.edit().putBoolean(ClassConstants.STAFF_TOGGLE, isChecked).commit();
                     break;            }
         });
