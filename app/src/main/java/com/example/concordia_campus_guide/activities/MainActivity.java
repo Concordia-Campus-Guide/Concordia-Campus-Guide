@@ -222,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     break;
                 case R.id.nav_staff:
                     SharedPreferences sharedPreferences = getSharedPreferences(ClassConstants.SHARED_PREFERENCES, MODE_PRIVATE);
-                    sharedPreferences2.edit().putBoolean(ClassConstants.STAFF_TOGGLE, isChecked).commit();
+                    sharedPreferences.edit().putBoolean(ClassConstants.STAFF_TOGGLE, isChecked).commit();
                     break;            }
         });
     }
