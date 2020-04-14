@@ -51,8 +51,7 @@
     <string name="incorrect_format_event">Event is incorrectly formatted</string>
     <string name="location_not_found">Location not found</string>
     <string name="leave_classroom">Leave classroom</string>
-    <string name="walk_towards_elevator">Walk towards elevator</string>
     <string name="enter_building">Enter building</string>
-    <string name="walk_towards_staff_elevator">Walk towards staff elevator</string>
+    <string name="walk_towards">Walk towards </string>
     <string name="minutes">min</string>
 </resources>
