@@ -121,6 +121,10 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         setupRoomMarkers();
     }
 
+    public CurrentLocation getCurrentLocation(){
+        return currentLocation;
+    }
+
     /**
      * The purpose of this method is to init the map and fill it up with the required
      * information to display them to the user
@@ -305,7 +309,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
     }
 
     @SuppressLint("MissingPermission")
-    private void popUpRequestPermission() {
+    public void popUpRequestPermission() {
         if (!MY_LOCATION_PERMISSION_GRANTED) {
             currentLocationPermissionRequest.getLocationPermission(this);
             if (MY_LOCATION_PERMISSION_GRANTED) {

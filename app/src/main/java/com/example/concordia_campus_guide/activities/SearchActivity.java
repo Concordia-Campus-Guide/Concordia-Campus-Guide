@@ -10,10 +10,15 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.concordia_campus_guide.adapters.PlaceToSearchResultAdapter;
+import com.example.concordia_campus_guide.fragments.LocationFragment;
 import com.example.concordia_campus_guide.global.SelectingToFromState;
+import com.example.concordia_campus_guide.helper.CurrentLocation;
+import com.example.concordia_campus_guide.helper.CurrentLocationPermissionRequest;
 import com.example.concordia_campus_guide.helper.ViewModelFactory;
 import com.example.concordia_campus_guide.models.CalendarEvent;
 import com.example.concordia_campus_guide.models.helpers.CalendarViewModel;
@@ -111,6 +116,9 @@ public class SearchActivity extends AppCompatActivity {
             Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
             if(myCurrentLocation != null){
                 openRoutesPage(new MyCurrentPlace(SearchActivity.this, myCurrentLocation.getLongitude(), myCurrentLocation.getLatitude()), this);
+            }
+            else {
+                Toast.makeText(SearchActivity.this, "Your current Location is not available", Toast.LENGTH_SHORT).show();
             }
         });
 
