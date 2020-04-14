@@ -26,6 +26,7 @@ import com.example.concordia_campus_guide.models.MyCurrentPlace;
 import com.example.concordia_campus_guide.models.Place;
 import com.example.concordia_campus_guide.R;
 import com.example.concordia_campus_guide.view_models.SearchActivityViewModel;
+import com.google.android.gms.location.FusedLocationProviderClient;
 
 import static com.example.concordia_campus_guide.helper.StartActivityHelper.openRoutesPage;
 
@@ -129,7 +130,15 @@ public class SearchActivity extends AppCompatActivity {
                 openRoutesPage(place, this);
             });
         }
+    }
 
+    public Location getMyLocation(FusedLocationProviderClient fusedLocationProviderClient, CurrentLocation currentLocation) {
+        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location -> {
+            if (location != null) {
+               currentLocation.setMyLocation(location);
+            }
+        });
+        return currentLocation.getMyLocation();
     }
 
     private void setupNextClassString() {
