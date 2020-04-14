@@ -26,7 +26,6 @@ public class PathsViewModel extends ViewModel {
     private double distanceBetweenPoints;
     private AppDatabase appDB;
     private ArrayList<PathInfoCard> infoCardList;
-    private Context context;
 
     public PathsViewModel(AppDatabase appDB) {
         this.infoCardList = new ArrayList<>();
@@ -106,7 +105,7 @@ public class PathsViewModel extends ViewModel {
             if (startWalkingPoint.getPointType().equals(PointType.CLASSROOM)) {
                 addCardToList(context.getString(R.string.leave_classroom), "Classroom");
             }
-            addIndoorDescriptionToList(startWalkingPoint, endWalkingPoint);
+            addIndoorDescriptionToList(startWalkingPoint, endWalkingPoint, context);
         }
     }
 
@@ -118,7 +117,7 @@ public class PathsViewModel extends ViewModel {
         distanceBetweenPoints = 0;
     }
 
-    private void addIndoorDescriptionToList(WalkingPoint startWalkingPoint, WalkingPoint endWalkingPoint) {
+    private void addIndoorDescriptionToList(WalkingPoint startWalkingPoint, WalkingPoint endWalkingPoint, Context context) {
         @PointType String pt = endWalkingPoint.getPointType();
         switch (pt) {
             case PointType.ELEVATOR:
