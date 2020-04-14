@@ -74,7 +74,6 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
         mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getApplication())).get(PathsViewModel.class);
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.pathLocationFragment);
 
-        mViewModel.setContext(this);
         setupFromToHeaderInfoTv();
         getBundleInformation();
         setBackButtonOnClickListener();
@@ -196,7 +195,7 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
 
     private void setupIndoorPaths(final Place initialLocation, final Place entrance) {
         locationFragment.setIndoorPaths(initialLocation, entrance);
-        mViewModel.adaptIndoorDirectionsToInfoCardList(locationFragment.getWalkingPointList());
+        mViewModel.adaptIndoorDirectionsToInfoCardList(locationFragment.getWalkingPointList(), this);
     }
 
     private void setOutdoorToIndoorpath() {

@@ -33,14 +33,6 @@ public class PathsViewModel extends ViewModel {
         this.appDB = appDB;
     }
 
-    public Context getContext() {
-        return context;
-    }
-
-    public void setContext(Context context) {
-        this.context = context;
-    }
-
     public ArrayList<PathInfoCard> getInfoCardList() {
         return infoCardList;
     }
@@ -106,13 +98,13 @@ public class PathsViewModel extends ViewModel {
         }
     }
 
-    public void adaptIndoorDirectionsToInfoCardList(List<WalkingPoint> walkingPointList) {
+    public void adaptIndoorDirectionsToInfoCardList(List<WalkingPoint> walkingPointList, Context context) {
         for (int i = 0; i < walkingPointList.size() - 1; i++) {
             WalkingPoint startWalkingPoint = walkingPointList.get(i);
             WalkingPoint endWalkingPoint = walkingPointList.get(i + 1);
             distanceBetweenPoints += getDistanceFromLatLonInKm(startWalkingPoint.getLatitude(), startWalkingPoint.getLongitude(), endWalkingPoint.getLatitude(), startWalkingPoint.getLongitude());
             if (startWalkingPoint.getPointType().equals(PointType.CLASSROOM)) {
-                addCardToList(getContext().getString(R.string.leave_classroom), "Classroom");
+                addCardToList(context.getString(R.string.leave_classroom), "Classroom");
             }
             addIndoorDescriptionToList(startWalkingPoint, endWalkingPoint);
         }
@@ -131,40 +123,40 @@ public class PathsViewModel extends ViewModel {
         switch (pt) {
             case PointType.ELEVATOR:
                 if (!startWalkingPoint.getPointType().equals(PointType.ELEVATOR)) {
-                    addCardToList(getContext().getString(R.string.walk_towards_elevator), "Elevator");
+                    addCardToList(context.getString(R.string.walk_towards_elevator), "Elevator");
                 }
                 break;
             case PointType.ENTRANCE:
-                addCardToList(getContext().getString(R.string.walk_towards_building_entrance), "Entrance");
+                addCardToList(context.getString(R.string.walk_towards_building_entrance), "Entrance");
                 break;
             case PointType.STAFF_ELEVATOR:
                 if (!startWalkingPoint.getPointType().equals(PointType.STAFF_ELEVATOR)) {
-                    addCardToList(getContext().getString(R.string.walk_towards_staff_elevator), "Staff_Elevator");
+                    addCardToList(context.getString(R.string.walk_towards_staff_elevator), "Staff_Elevator");
                 }
                 break;
             case PointType.STAIRS:
                 if (!startWalkingPoint.getPointType().equals(PointType.STAIRS)) {
-                    addCardToList(getContext().getString(R.string.walk_towards_stairs), "Stairs");
+                    addCardToList(context.getString(R.string.walk_towards_stairs), "Stairs");
                 }
                 break;
             case PointType.CLASSROOM:
                 if (!startWalkingPoint.getPointType().equals(PointType.CLASSROOM)) {
-                    addCardToList(getContext().getString(R.string.walk_towards_classroom) + endWalkingPoint.getPlaceCode(), "Classroom");
+                    addCardToList(context.getString(R.string.walk_towards_classroom) + endWalkingPoint.getPlaceCode(), "Classroom");
                 }
                 break;
             case PointType.WASHROOM:
                 if (!startWalkingPoint.getPointType().equals(PointType.WASHROOM)) {
-                    addCardToList(getContext().getString(R.string.walk_towards_washroom), "washroom");
+                    addCardToList(context.getString(R.string.walk_towards_washroom), "washroom");
                 }
                 break;
             case PointType.LOUNGES:
                 if (!startWalkingPoint.getPointType().equals(PointType.LOUNGES)) {
-                    addCardToList(getContext().getString(R.string.walk_towards_lounge), "Lounges");
+                    addCardToList(context.getString(R.string.walk_towards_lounge), "Lounges");
                 }
                 break;
             case PointType.WATER_FOUNTAINS:
                 if (!startWalkingPoint.getPointType().equals(PointType.WATER_FOUNTAINS)) {
-                    addCardToList(getContext().getString(R.string.walk_towards_waterfountain), "waterfountain");
+                    addCardToList(context.getString(R.string.walk_towards_waterfountain), "waterfountain");
                 }
                 break;
             default:
