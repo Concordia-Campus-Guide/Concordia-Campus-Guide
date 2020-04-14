@@ -36,7 +36,7 @@ public class CurrentLocationPermissionRequest {
      * @return the method returns true if the user accepts to give the application permission
      * for using their current location.
      */
-    private boolean requestPermission(Context context) {
+    public boolean requestPermission(Context context) {
         return (checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
     }
 
