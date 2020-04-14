@@ -51,15 +51,8 @@
     <string name="incorrect_format_event">Événement n\'est pas formaté correctement</string>
     <string name="location_not_found">Emplacement introuvable</string>
     <string name="leave_classroom">Quitter la salle de cours</string>
-    <string name="walk_towards_elevator">Marcher vers les ascenseurs</string>
     <string name="enter_building">Entrer dans le bâtiment</string>
-    <string name="walk_towards_staff_elevator">Marcher vers les ascenseurs du personnel</string>
     <string name="minutes">min</string>
-    <string name="walk_towards_building_entrance">Marcher vers l\'entrée du bâtiment</string>
-    <string name="walk_towards_stairs">Marcher vers les escaliers</string>
-    <string name="walk_towards_classroom">Marcher vers la salle de cours</string>
-    <string name="walk_towards_washroom">Marcher vers la toilette</string>
-    <string name="walk_towards_lounge">Marcher vers le salon</string>
-    <string name="walk_towards_waterfountain">Marcher vers la fontaine d\'eau</string>
+    <string name="walk_towards">Marcher vers </string>
 
 </resources>
