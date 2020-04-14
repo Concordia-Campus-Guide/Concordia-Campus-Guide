@@ -100,8 +100,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             RoomModel room = appDb.roomDao().getRoomByRoomCodeAndFloorCode(roomCode, floorCode);
 
             if(room!=null){
-                SelectingToFromState.setMyCurrentLocation(getMyCurrentLocation());
-                openRoutesPage(room, this);
+                SelectingToFromState.setMyCurrentLocation(currentLocation.getMyLocation());
+ //               openRoutesPage(room, this);
             }
         }
         catch(Exception e){
@@ -146,6 +146,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         calendarViewModel = new CalendarViewModel(getApplication());
         fragmentManager = getSupportFragmentManager();
         currentLocation.updateLocationEvery5Seconds();
+        SelectingToFromState.setMyCurrentLocation(currentLocation.getMyLocation());
         setupNotifications();
         setupSwipeableCards();
         setupToolBar();
@@ -275,6 +276,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         final String locationTemp = location;
         final Activity mainActivity = this;
         builder.setPositiveButton(getResources().getString(R.string.show_me_direction), (dialog, which) -> {
+            SelectingToFromState.setMyCurrentLocation(currentLocation.getMyLocation());
             RoomModel room = notification.getRoom(locationTemp);
             openRoutesPage(room, mainActivity);
         });

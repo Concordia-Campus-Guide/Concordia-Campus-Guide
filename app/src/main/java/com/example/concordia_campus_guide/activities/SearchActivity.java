@@ -114,6 +114,7 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         currentLocationRow.setOnClickListener(view -> {
+
             Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
             if(myCurrentLocation != null){
                 openRoutesPage(new MyCurrentPlace(SearchActivity.this, myCurrentLocation.getLongitude(), myCurrentLocation.getLatitude()), this);
@@ -131,7 +132,7 @@ public class SearchActivity extends AppCompatActivity {
             });
         }
     }
-    
+
     private void setupNextClassString() {
         final CalendarEvent calendarEvent = calendarViewModel.getEvent(this);
         final String eventString;
