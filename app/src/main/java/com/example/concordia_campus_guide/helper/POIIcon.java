@@ -55,7 +55,7 @@ public class POIIcon {
                 //Current location should be inversed: lat->lng and lng->lat
                 currentCoordinates = getCurrentCoordinates(appDatabase);
             } else {
-                currentCoordinates = new Coordinates(currentLocation.getMyLocation().getLatitude(), currentLocation.getMyLocation().getLongitude());
+                currentCoordinates = new Coordinates(currentLocation.getMyLocation().getLongitude(), currentLocation.getMyLocation().getLatitude());
             }
 
             double distanceFromP1 = p1.getEuclideanDistanceFrom(currentCoordinates);

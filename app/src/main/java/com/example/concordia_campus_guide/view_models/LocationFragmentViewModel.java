@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.concordia_campus_guide.R;
 import com.example.concordia_campus_guide.database.AppDatabase;
+import com.example.concordia_campus_guide.global.SelectingToFromState;
 import com.example.concordia_campus_guide.helper.BuildingCodeMap;
 import com.example.concordia_campus_guide.helper.CurrentLocation;
 import com.example.concordia_campus_guide.helper.FloorPlan;
@@ -119,6 +120,8 @@ public class LocationFragmentViewModel extends ViewModel {
     public void setListOfPOI(@PoiType String poiType, Context context) {
         List<WalkingPoint> allPOI = appDatabase.walkingPointDao().getAllPointsForPointType(poiType);
         poiIcon.setCurrentPOIIcon(poiType, context);
+        currentLocation = new CurrentLocation(context);
+        currentLocation.setMyLocation(SelectingToFromState.getMyCurrentLocation());
         this.poiList.postValue(poiIcon.getPOIinOrder(appDatabase,allPOI,currentLocation));
     }
 

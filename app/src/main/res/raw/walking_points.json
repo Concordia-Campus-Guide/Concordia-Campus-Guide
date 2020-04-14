@@ -5311,8 +5311,8 @@
     {
       "id": 619,
       "coordinate": {
-        "longitude": 45.4590658,
-        "latitude": -73.6387369
+        "longitude": 45.45906580305725,
+        "latitude": -73.63864302635193
       },
       "floorCode": "VL-1",
       "pointType": "WASHROOM",
@@ -5357,8 +5357,8 @@
     {
       "id": 622,
       "coordinate": {
-        "longitude": 45.45909779,
-        "latitude": -73.63871813
+        "longitude": 45.459043226835355,
+        "latitude": -73.63866180181503
       },
       "floorCode": "VL-1",
       "pointType": "WASHROOM",
@@ -5880,7 +5880,8 @@
       "floorCode": "VL-1",
       "pointType": "NONE",
       "connectedPointsId": [
-        600
+        600,
+        660
       ],
       "placeCode": ""
     },
@@ -5916,8 +5917,8 @@
     {
       "id": 662,
       "coordinate": {
-        "longitude": 45.45909896,
-        "latitude": -73.63870338
+        "longitude": 45.45909778602276,
+        "latitude": -73.63871812820435
       },
       "floorCode": "VL-1",
       "pointType": "WASHROOM",
@@ -5929,8 +5930,8 @@
     {
       "id": 663,
       "coordinate": {
-        "longitude": 45.45908179,
-        "latitude": -73.63872383
+        "longitude": 45.4590714471113,
+        "latitude": -73.63873690366745
       },
       "floorCode": "VL-1",
       "pointType": "WASHROOM",
@@ -6566,7 +6567,8 @@
         707,
         705,
         714,
-        719
+        719,
+        817
       ],
       "placeCode": ""
     },
@@ -6582,7 +6584,8 @@
         706,
         715,
         729,
-        811
+        811,
+        816
       ],
       "placeCode": ""
     },
@@ -7098,6 +7101,32 @@
         220
       ],
       "placeCode": "927.03"
+    },
+    {
+      "id": 816,
+      "coordinate": {
+        "longitude": 45.459043226835355,
+        "latitude": -73.63866180181503
+      },
+      "floorCode": "VL-2",
+      "pointType": "WASHROOM",
+      "connectedPointsId": [
+        707
+      ],
+      "placeCode": "mens-1"
+    },
+    {
+      "id": 817,
+      "coordinate": {
+        "longitude": 45.45906580305725,
+        "latitude": -73.63864302635193
+      },
+      "floorCode": "VL-2",
+      "pointType": "WASHROOM",
+      "connectedPointsId": [
+        706
+      ],
+      "placeCode": "womens-1"
     }
   ]
 }
