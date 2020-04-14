@@ -54,7 +54,6 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.paths_activity);
-
         initComponents();
         setPath();
         setupInfoCard();
@@ -75,6 +74,7 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
         mViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getApplication())).get(PathsViewModel.class);
         locationFragment = (LocationFragment) getSupportFragmentManager().findFragmentById(R.id.pathLocationFragment);
 
+        mViewModel.setContext(this);
         setupFromToHeaderInfoTv();
         getBundleInformation();
         setBackButtonOnClickListener();

@@ -1,8 +1,10 @@
 package com.example.concordia_campus_guide.view_models;
 
+import android.content.Context;
+
 import androidx.lifecycle.ViewModel;
 
-import com.example.concordia_campus_guide.ClassConstants;
+import com.example.concordia_campus_guide.R;
 import com.example.concordia_campus_guide.adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.global.SelectingToFromState;
@@ -24,10 +26,19 @@ public class PathsViewModel extends ViewModel {
     private double distanceBetweenPoints;
     private AppDatabase appDB;
     private ArrayList<PathInfoCard> infoCardList;
+    private Context context;
 
     public PathsViewModel(AppDatabase appDB) {
         this.infoCardList = new ArrayList<>();
         this.appDB = appDB;
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 
     public ArrayList<PathInfoCard> getInfoCardList() {
@@ -38,7 +49,7 @@ public class PathsViewModel extends ViewModel {
         return SelectingToFromState.getTo();
     }
 
-    public String getDestinationLocationDisplayName(){
+    public String getDestinationLocationDisplayName() {
         return getDestination().getDisplayName();
     }
 
@@ -46,7 +57,7 @@ public class PathsViewModel extends ViewModel {
         return SelectingToFromState.getFrom();
     }
 
-    public String getInitialLocationDisplayName(){
+    public String getInitialLocationDisplayName() {
         return getInitialLocation().getDisplayName();
     }
 
@@ -75,10 +86,10 @@ public class PathsViewModel extends ViewModel {
     public boolean areInSameBuilding(Place from, Place to) {
         if (!isPlaceIndoor(from) || !isPlaceIndoor(to)) return false;
 
-        String floorCode = from instanceof RoomModel? ((RoomModel) from).getFloorCode():  ((Floor) from).getFloorCode() ;
+        String floorCode = from instanceof RoomModel ? ((RoomModel) from).getFloorCode() : ((Floor) from).getFloorCode();
         String fromBuilding = floorCode.toUpperCase().substring(0, floorCode.indexOf('-'));
 
-        floorCode = to instanceof RoomModel? ((RoomModel) to).getFloorCode():  ((Floor) to).getFloorCode() ;
+        floorCode = to instanceof RoomModel ? ((RoomModel) to).getFloorCode() : ((Floor) to).getFloorCode();
         String toBuilding = floorCode.toUpperCase().substring(0, floorCode.indexOf('-'));
 
         return fromBuilding.equalsIgnoreCase(toBuilding);
@@ -101,7 +112,7 @@ public class PathsViewModel extends ViewModel {
             WalkingPoint endWalkingPoint = walkingPointList.get(i + 1);
             distanceBetweenPoints += getDistanceFromLatLonInKm(startWalkingPoint.getLatitude(), startWalkingPoint.getLongitude(), endWalkingPoint.getLatitude(), startWalkingPoint.getLongitude());
             if (startWalkingPoint.getPointType().equals(PointType.CLASSROOM)) {
-                addCardToList("Leave classroom", "Classroom");
+                addCardToList(getContext().getString(R.string.leave_classroom), "Classroom");
             }
             addIndoorDescriptionToList(startWalkingPoint, endWalkingPoint);
         }
@@ -120,40 +131,40 @@ public class PathsViewModel extends ViewModel {
         switch (pt) {
             case PointType.ELEVATOR:
                 if (!startWalkingPoint.getPointType().equals(PointType.ELEVATOR)) {
-                    addCardToList("Walk towards elevator", "Elevator");
+                    addCardToList(getContext().getString(R.string.walk_towards_elevator), "Elevator");
                 }
                 break;
             case PointType.ENTRANCE:
-                addCardToList("Walk towards building entrance", "Entrance");
+                addCardToList(getContext().getString(R.string.walk_towards_building_entrance), "Entrance");
                 break;
             case PointType.STAFF_ELEVATOR:
                 if (!startWalkingPoint.getPointType().equals(PointType.STAFF_ELEVATOR)) {
-                    addCardToList("Walk towards staff elevator", "Staff_Elevator");
+                    addCardToList(getContext().getString(R.string.walk_towards_staff_elevator), "Staff_Elevator");
                 }
                 break;
             case PointType.STAIRS:
                 if (!startWalkingPoint.getPointType().equals(PointType.STAIRS)) {
-                    addCardToList("Walk towards stairs", "Stairs");
+                    addCardToList(getContext().getString(R.string.walk_towards_stairs), "Stairs");
                 }
                 break;
             case PointType.CLASSROOM:
                 if (!startWalkingPoint.getPointType().equals(PointType.CLASSROOM)) {
-                    addCardToList("Walk towards classroom " + endWalkingPoint.getPlaceCode(), "Classroom");
+                    addCardToList(getContext().getString(R.string.walk_towards_classroom) + endWalkingPoint.getPlaceCode(), "Classroom");
                 }
                 break;
             case PointType.WASHROOM:
                 if (!startWalkingPoint.getPointType().equals(PointType.WASHROOM)) {
-                    addCardToList("Walk towards washroom ", "washroom");
+                    addCardToList(getContext().getString(R.string.walk_towards_washroom), "washroom");
                 }
                 break;
             case PointType.LOUNGES:
                 if (!startWalkingPoint.getPointType().equals(PointType.LOUNGES)) {
-                    addCardToList("Walk towards lounge ", "Lounges");
+                    addCardToList(getContext().getString(R.string.walk_towards_lounge), "Lounges");
                 }
                 break;
             case PointType.WATER_FOUNTAINS:
                 if (!startWalkingPoint.getPointType().equals(PointType.WATER_FOUNTAINS)) {
-                    addCardToList("Walk towards water fountain ", "waterfountain");
+                    addCardToList(getContext().getString(R.string.walk_towards_waterfountain), "waterfountain");
                 }
                 break;
             default:
