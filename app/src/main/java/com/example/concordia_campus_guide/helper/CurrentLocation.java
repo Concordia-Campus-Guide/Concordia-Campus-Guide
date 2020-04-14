@@ -5,6 +5,7 @@ import android.content.Context;
 import android.location.Location;
 import android.os.Handler;
 
+import com.example.concordia_campus_guide.global.SelectingToFromState;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 
@@ -43,6 +44,7 @@ public class CurrentLocation {
                 fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location -> {
                     if (location != null) {
                         setMyLocation(location);
+                        SelectingToFromState.setMyCurrentLocation(location);
                     }
                 });
                 handler.postDelayed(this, 500);
