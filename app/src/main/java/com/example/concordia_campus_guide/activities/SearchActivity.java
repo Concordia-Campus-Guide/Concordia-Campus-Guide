@@ -10,10 +10,15 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.concordia_campus_guide.adapters.PlaceToSearchResultAdapter;
+import com.example.concordia_campus_guide.fragments.LocationFragment;
 import com.example.concordia_campus_guide.global.SelectingToFromState;
+import com.example.concordia_campus_guide.helper.CurrentLocation;
+import com.example.concordia_campus_guide.helper.CurrentLocationPermissionRequest;
 import com.example.concordia_campus_guide.helper.ViewModelFactory;
 import com.example.concordia_campus_guide.models.CalendarEvent;
 import com.example.concordia_campus_guide.models.helpers.CalendarViewModel;
@@ -21,6 +26,7 @@ import com.example.concordia_campus_guide.models.MyCurrentPlace;
 import com.example.concordia_campus_guide.models.Place;
 import com.example.concordia_campus_guide.R;
 import com.example.concordia_campus_guide.view_models.SearchActivityViewModel;
+import com.google.android.gms.location.FusedLocationProviderClient;
 
 import static com.example.concordia_campus_guide.helper.StartActivityHelper.openRoutesPage;
 
@@ -108,9 +114,13 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         currentLocationRow.setOnClickListener(view -> {
+
             Location myCurrentLocation = SelectingToFromState.getMyCurrentLocation();
             if(myCurrentLocation != null){
                 openRoutesPage(new MyCurrentPlace(SearchActivity.this, myCurrentLocation.getLongitude(), myCurrentLocation.getLatitude()), this);
+            }
+            else {
+                Toast.makeText(SearchActivity.this, "Your current Location is not available", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -121,7 +131,6 @@ public class SearchActivity extends AppCompatActivity {
                 openRoutesPage(place, this);
             });
         }
-
     }
 
     private void setupNextClassString() {

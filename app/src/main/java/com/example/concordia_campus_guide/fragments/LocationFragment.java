@@ -21,6 +21,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.concordia_campus_guide.ClassConstants;
 import com.example.concordia_campus_guide.R;
 import com.example.concordia_campus_guide.activities.MainActivity;
+import com.example.concordia_campus_guide.activities.PathsActivity;
 import com.example.concordia_campus_guide.adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.adapters.FloorPickerAdapter;
 import com.example.concordia_campus_guide.database.AppDatabase;
@@ -54,7 +55,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     MapView mMapView;
 
-    private static final boolean MY_LOCATION_PERMISSION_GRANTED = false;
+    private static boolean MY_LOCATION_PERMISSION_GRANTED = false;
 
     private ImageButton myLocationBtn;
     private Button loyolaBtn;
@@ -82,6 +83,7 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
         currentLocationPermissionRequest.getLocationPermission(this);
+        MY_LOCATION_PERMISSION_GRANTED = currentLocationPermissionRequest.requestPermission(getContext());
         setupClickListeners();
         currentLocation.updateLocationEvery5Seconds();
         return rootView;
@@ -306,21 +308,32 @@ public class LocationFragment extends Fragment implements OnFloorPickerOnClickLi
 
     @SuppressLint("MissingPermission")
     private void popUpRequestPermission() {
+        MY_LOCATION_PERMISSION_GRANTED = currentLocationPermissionRequest.requestPermission(getContext());
         if (!MY_LOCATION_PERMISSION_GRANTED) {
             currentLocationPermissionRequest.getLocationPermission(this);
             if (MY_LOCATION_PERMISSION_GRANTED) {
                 mMap.setMyLocationEnabled(true);
-                initMap();
+                displayCurrentLocation();
                 return;
             }
         }
 
         if (MY_LOCATION_PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
-            initMap();
+            displayCurrentLocation();
         }
     }
 
+    @SuppressLint("MissingPermission")
+    private void displayCurrentLocation() {
+        currentLocation.getFusedLocationProviderClient().getLastLocation()
+                .addOnSuccessListener(getActivity(), location -> {
+                    if (location != null) {
+                        mMap.setMyLocationEnabled(true);
+                        zoomInLocation(new LatLng(location.getLatitude(), location.getLongitude()));
+                    }
+                });
+    }
     /**
      * The purpose of this method is handle the onclick polygon
      * and to open the info card according to the clicked building.

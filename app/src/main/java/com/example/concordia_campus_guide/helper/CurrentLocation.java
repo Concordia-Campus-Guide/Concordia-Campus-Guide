@@ -45,9 +45,9 @@ public class CurrentLocation {
                         setMyLocation(location);
                     }
                 });
-                handler.postDelayed(this, 2000);
+                handler.postDelayed(this, 500);
             }
-        }, 2000);
+        }, 500);
     }
 
 }
