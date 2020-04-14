@@ -4540,7 +4540,6 @@
       "pointType": "STAIRS",
       "connectedPointsId": [
         410,
-        411,
         217
       ],
       "placeCode": "stairs-3"
@@ -4814,8 +4813,7 @@
       "connectedPointsId": [
         69,
         70,
-        412,
-        387
+        412
       ],
       "placeCode": ""
     },
