@@ -100,8 +100,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             RoomModel room = appDb.roomDao().getRoomByRoomCodeAndFloorCode(roomCode, floorCode);
 
             if(room!=null){
-                SelectingToFromState.setMyCurrentLocation(currentLocation.getMyLocation());
- //               openRoutesPage(room, this);
+                SelectingToFromState.setMyCurrentLocation(getMyCurrentLocation());
+                openRoutesPage(room, this);
             }
         }
         catch(Exception e){
