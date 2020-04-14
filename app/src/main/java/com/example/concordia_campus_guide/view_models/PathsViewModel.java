@@ -102,8 +102,6 @@ public class PathsViewModel extends ViewModel {
             distanceBetweenPoints += getDistanceFromLatLonInKm(startWalkingPoint.getLatitude(), startWalkingPoint.getLongitude(), endWalkingPoint.getLatitude(), startWalkingPoint.getLongitude());
             if (startWalkingPoint.getPointType().equals(PointType.CLASSROOM)) {
                 addCardToList("Leave classroom", "Classroom");
-            } else if (startWalkingPoint.getPointType().equals(PointType.ENTRANCE)) {
-                addCardToList("Walk towards entrance", "Entrance");
             }
             addIndoorDescriptionToList(startWalkingPoint, endWalkingPoint);
         }
@@ -141,6 +139,21 @@ public class PathsViewModel extends ViewModel {
             case PointType.CLASSROOM:
                 if (!startWalkingPoint.getPointType().equals(PointType.CLASSROOM)) {
                     addCardToList("Walk towards classroom " + endWalkingPoint.getPlaceCode(), "Classroom");
+                }
+                break;
+            case PointType.WASHROOM:
+                if (!startWalkingPoint.getPointType().equals(PointType.WASHROOM)) {
+                    addCardToList("Walk towards washroom ", "washroom");
+                }
+                break;
+            case PointType.LOUNGES:
+                if (!startWalkingPoint.getPointType().equals(PointType.LOUNGES)) {
+                    addCardToList("Walk towards lounge ", "Lounges");
+                }
+                break;
+            case PointType.WATER_FOUNTAINS:
+                if (!startWalkingPoint.getPointType().equals(PointType.WATER_FOUNTAINS)) {
+                    addCardToList("Walk towards water fountain ", "waterfountain");
                 }
                 break;
             default:

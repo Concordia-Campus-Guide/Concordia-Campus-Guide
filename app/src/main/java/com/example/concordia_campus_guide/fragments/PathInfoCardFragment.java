@@ -106,7 +106,7 @@ public class PathInfoCardFragment extends Fragment {
         final ImageButton btn = new ImageButton(getContext());
         btn.setLayoutParams(layoutParams);
         btn.setImageResource(imageId);
-        btn.setColorFilter(R.color.colorAppTheme);
+        btn.setColorFilter(getResources().getColor(R.color.colorAppTheme));
         btn.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.toolbarIconColor));
         layout.addView(btn);
     }
