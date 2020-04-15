@@ -168,16 +168,6 @@ public class InfoCardVanierLibraryTest {
                         isDisplayed()));
         frameLayout2.perform(click());
 
-        ViewInteraction textView5 = onView(
-                allOf(withId(R.id.info_card_title), withText("Explore"),
-                        childAtPosition(
-                                allOf(withId(R.id.poiLinearLayout),
-                                        childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
-                                                0)),
-                                0),
-                        isDisplayed()));
-        textView5.check(matches(withText("Explore")));
     }
 
     private static Matcher<View> childAtPosition(
