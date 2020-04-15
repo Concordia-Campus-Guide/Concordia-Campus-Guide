@@ -309,6 +309,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
      * @param buildingCode: the Building code
      */
     public void showInfoCard(String buildingCode) {
+        swipeablePOICard.setState(BottomSheetBehavior.STATE_COLLAPSED);
         resetBottomCard();
         infoCardFragment = new InfoCardFragment(buildingCode);
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -324,6 +325,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void showPlaceSmallCard(RoomModel room){
+        swipeablePOICard.setState(BottomSheetBehavior.STATE_COLLAPSED);
         resetBottomCard();
         smallInfoCardFragment = new SmallInfoCardFragment(room);
         fragmentTransaction = fragmentManager.beginTransaction();
