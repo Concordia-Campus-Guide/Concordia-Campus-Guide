@@ -105,16 +105,6 @@ public class InfoCardHallTest {
                         isDisplayed()));
         button2.check(matches(isDisplayed()));
 
-        ViewInteraction button3 = onView(
-                allOf(withId(R.id.indoor_map),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.infocardLinearLayout),
-                                        1),
-                                1),
-                        isDisplayed()));
-        button3.check(matches(isDisplayed()));
-
         ViewInteraction textView = onView(
                 allOf(withId(R.id.info_card_title), withText("Henry F. Hall Building"),
                         childAtPosition(
