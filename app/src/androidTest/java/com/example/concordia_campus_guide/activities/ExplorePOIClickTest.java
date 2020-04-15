@@ -130,7 +130,7 @@ public class ExplorePOIClickTest {
 
         android.os.SystemClock.sleep(1000);
 
-        UiObject marker = device.findObject(new UiSelector().descriptionContains("POI_elevators-1_H-00"));
+        UiObject marker = device.findObject(new UiSelector().descriptionContains("POI_elevators-1_H-1"));
         try {
             marker.click();
         } catch (UiObjectNotFoundException e) {
@@ -140,7 +140,7 @@ public class ExplorePOIClickTest {
         android.os.SystemClock.sleep(1000);
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.info_card_title), withText("H-00 elevators-1"),
+                allOf(withId(R.id.info_card_title), withText("H-1 elevators-1"),
                         childAtPosition(
                                 allOf(withId(R.id.infocardLinearLayout),
                                         childAtPosition(
@@ -148,7 +148,7 @@ public class ExplorePOIClickTest {
                                                 0)),
                                 0),
                         isDisplayed()));
-        textView.check(matches(withText("H-00 elevators-1")));
+        textView.check(matches(withText("H-1 elevators-1")));
 
         ViewInteraction button = onView(
                 allOf(withId(R.id.directions),
