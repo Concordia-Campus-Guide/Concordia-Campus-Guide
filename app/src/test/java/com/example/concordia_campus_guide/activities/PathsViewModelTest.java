@@ -89,13 +89,6 @@ public class PathsViewModelTest {
     }
 
     @Test
-    public void adaptIndoorDirectionsToInfoCardListTest() {
-        List<WalkingPoint> walkingPointList = getWalkingPointListTest();
-        pathsViewModel.adaptIndoorDirectionsToInfoCardList(walkingPointList);
-        assertEquals(walkingPointList.size(), pathsViewModel.getInfoCardList().size());
-    }
-
-    @Test
     public void adaptShuttleToInfoCardListTest(){
         pathsViewModel.adaptShuttleToInfoCardList();
         assertEquals("SHUTTLE", pathsViewModel.getInfoCardList().get(0).getType());

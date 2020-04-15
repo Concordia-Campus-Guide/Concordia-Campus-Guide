@@ -54,7 +54,6 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.paths_activity);
-
         initComponents();
         setPath();
         setupInfoCard();
@@ -196,7 +195,7 @@ public class PathsActivity extends AppCompatActivity implements DirectionsApiCal
 
     private void setupIndoorPaths(final Place initialLocation, final Place entrance) {
         locationFragment.setIndoorPaths(initialLocation, entrance);
-        mViewModel.adaptIndoorDirectionsToInfoCardList(locationFragment.getWalkingPointList());
+        mViewModel.adaptIndoorDirectionsToInfoCardList(locationFragment.getWalkingPointList(), this);
     }
 
     private void setOutdoorToIndoorpath() {

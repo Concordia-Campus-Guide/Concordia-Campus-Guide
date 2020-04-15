@@ -245,7 +245,7 @@ public class RoutesAdapter extends ArrayAdapter<Route> {
     }
 
     private void setBottomLayout(Route route) {
-        if (route.getArrivalTime() == null || route.getDepartureTime() == null)
+        if (route.getArrivalTime() == null || route.getArrivalTime().equals("") || route.getDepartureTime() == null || route.getDepartureTime().equals(""))
             bottom.setVisibility(View.GONE);
         else
             arrivalAndDepartureTime.setText(route.getDepartureTime() + " - " + route.getArrivalTime());

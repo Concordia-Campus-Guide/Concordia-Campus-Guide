@@ -1,8 +1,10 @@
 package com.example.concordia_campus_guide.view_models;
 
+import android.content.Context;
+
 import androidx.lifecycle.ViewModel;
 
-import com.example.concordia_campus_guide.ClassConstants;
+import com.example.concordia_campus_guide.R;
 import com.example.concordia_campus_guide.adapters.DirectionWrapper;
 import com.example.concordia_campus_guide.database.AppDatabase;
 import com.example.concordia_campus_guide.global.SelectingToFromState;
@@ -38,7 +40,7 @@ public class PathsViewModel extends ViewModel {
         return SelectingToFromState.getTo();
     }
 
-    public String getDestinationLocationDisplayName(){
+    public String getDestinationLocationDisplayName() {
         return getDestination().getDisplayName();
     }
 
@@ -46,7 +48,7 @@ public class PathsViewModel extends ViewModel {
         return SelectingToFromState.getFrom();
     }
 
-    public String getInitialLocationDisplayName(){
+    public String getInitialLocationDisplayName() {
         return getInitialLocation().getDisplayName();
     }
 
@@ -75,10 +77,10 @@ public class PathsViewModel extends ViewModel {
     public boolean areInSameBuilding(Place from, Place to) {
         if (!isPlaceIndoor(from) || !isPlaceIndoor(to)) return false;
 
-        String floorCode = from instanceof RoomModel? ((RoomModel) from).getFloorCode():  ((Floor) from).getFloorCode() ;
+        String floorCode = from instanceof RoomModel ? ((RoomModel) from).getFloorCode() : ((Floor) from).getFloorCode();
         String fromBuilding = floorCode.toUpperCase().substring(0, floorCode.indexOf('-'));
 
-        floorCode = to instanceof RoomModel? ((RoomModel) to).getFloorCode():  ((Floor) to).getFloorCode() ;
+        floorCode = to instanceof RoomModel ? ((RoomModel) to).getFloorCode() : ((Floor) to).getFloorCode();
         String toBuilding = floorCode.toUpperCase().substring(0, floorCode.indexOf('-'));
 
         return fromBuilding.equalsIgnoreCase(toBuilding);
@@ -95,17 +97,15 @@ public class PathsViewModel extends ViewModel {
         }
     }
 
-    public void adaptIndoorDirectionsToInfoCardList(List<WalkingPoint> walkingPointList) {
+    public void adaptIndoorDirectionsToInfoCardList(List<WalkingPoint> walkingPointList, Context context) {
         for (int i = 0; i < walkingPointList.size() - 1; i++) {
             WalkingPoint startWalkingPoint = walkingPointList.get(i);
             WalkingPoint endWalkingPoint = walkingPointList.get(i + 1);
             distanceBetweenPoints += getDistanceFromLatLonInKm(startWalkingPoint.getLatitude(), startWalkingPoint.getLongitude(), endWalkingPoint.getLatitude(), startWalkingPoint.getLongitude());
             if (startWalkingPoint.getPointType().equals(PointType.CLASSROOM)) {
-                addCardToList("Leave classroom", "Classroom");
-            } else if (startWalkingPoint.getPointType().equals(PointType.ENTRANCE)) {
-                addCardToList("Walk towards entrance", "Entrance");
+                addCardToList(context.getString(R.string.leave_classroom), "Classroom");
             }
-            addIndoorDescriptionToList(startWalkingPoint, endWalkingPoint);
+            addIndoorDescriptionToList(startWalkingPoint, endWalkingPoint, context);
         }
     }
 
@@ -117,30 +117,45 @@ public class PathsViewModel extends ViewModel {
         distanceBetweenPoints = 0;
     }
 
-    private void addIndoorDescriptionToList(WalkingPoint startWalkingPoint, WalkingPoint endWalkingPoint) {
+    private void addIndoorDescriptionToList(WalkingPoint startWalkingPoint, WalkingPoint endWalkingPoint, Context context) {
         @PointType String pt = endWalkingPoint.getPointType();
         switch (pt) {
             case PointType.ELEVATOR:
                 if (!startWalkingPoint.getPointType().equals(PointType.ELEVATOR)) {
-                    addCardToList("Walk towards elevator", "Elevator");
+                    addCardToList(context.getString(R.string.walk_towards) + " " + endWalkingPoint.getPlaceCode(), "Elevator");
                 }
                 break;
             case PointType.ENTRANCE:
-                addCardToList("Walk towards building entrance", "Entrance");
+                addCardToList(context.getString(R.string.walk_towards) + " " + endWalkingPoint.getPlaceCode(), "Entrance");
                 break;
             case PointType.STAFF_ELEVATOR:
                 if (!startWalkingPoint.getPointType().equals(PointType.STAFF_ELEVATOR)) {
-                    addCardToList("Walk towards staff elevator", "Staff_Elevator");
+                    addCardToList(context.getString(R.string.walk_towards) + " " + endWalkingPoint.getPlaceCode(), "Staff_Elevator");
                 }
                 break;
             case PointType.STAIRS:
                 if (!startWalkingPoint.getPointType().equals(PointType.STAIRS)) {
-                    addCardToList("Walk towards stairs", "Stairs");
+                    addCardToList(context.getString(R.string.walk_towards) + " " + endWalkingPoint.getPlaceCode(), "Stairs");
                 }
                 break;
             case PointType.CLASSROOM:
                 if (!startWalkingPoint.getPointType().equals(PointType.CLASSROOM)) {
-                    addCardToList("Walk towards classroom " + endWalkingPoint.getPlaceCode(), "Classroom");
+                    addCardToList(context.getString(R.string.walk_towards) + " " + endWalkingPoint.getPlaceCode(), "Classroom");
+                }
+                break;
+            case PointType.WASHROOM:
+                if (!startWalkingPoint.getPointType().equals(PointType.WASHROOM)) {
+                    addCardToList(context.getString(R.string.walk_towards) + " " + endWalkingPoint.getPlaceCode(), "washroom");
+                }
+                break;
+            case PointType.LOUNGES:
+                if (!startWalkingPoint.getPointType().equals(PointType.LOUNGES)) {
+                    addCardToList(context.getString(R.string.walk_towards) + " " + endWalkingPoint.getPlaceCode(), "Lounges");
+                }
+                break;
+            case PointType.WATER_FOUNTAINS:
+                if (!startWalkingPoint.getPointType().equals(PointType.WATER_FOUNTAINS)) {
+                    addCardToList(context.getString(R.string.walk_towards) + " " + endWalkingPoint.getPlaceCode(), "waterfountain");
                 }
                 break;
             default:
