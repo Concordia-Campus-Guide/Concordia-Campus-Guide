@@ -32,20 +32,12 @@
         android:orientation="horizontal">
 
         <Button
-            style="@style/InfoCardButton"
             android:id="@+id/directions"
+            style="@style/InfoCardButton"
+            android:layout_width="184dp"
             android:layout_marginEnd="15sp"
             android:drawableLeft="@drawable/ic_directions_black_24dp"
             android:text="@string/directions"
-            app:iconPadding="5dp" />
-
-        <Button
-            style="@style/InfoCardButton"
-            android:id="@+id/indoor_map"
-            android:layout_marginStart="15sp"
-            android:backgroundTint="@color/colorPrimary"
-            android:drawableLeft="@drawable/ic_layers_white"
-            android:text="@string/indoor_map"
             app:iconPadding="5dp" />
 
     </LinearLayout>
